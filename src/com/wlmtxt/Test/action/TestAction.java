@@ -8,7 +8,7 @@ public class TestAction extends ActionSupport {
 
 	private Test t;
 	private TestService testService;
-	
+
 	public TestService getTestService() {
 		return testService;
 	}
@@ -27,10 +27,11 @@ public class TestAction extends ActionSupport {
 			return SUCCESS;
 		}
 	}
-	
+
 	public Test getT() {
 		return t;
 	}
+
 	public void setT(Test t) {
 		this.t = t;
 	}

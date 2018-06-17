@@ -12,15 +12,27 @@ import com.wlmtxt.domain.DO.wlmtxt_works;
 import util.TeamUtil;
 
 public class WorksServiceImpl implements WorksService {
-	
+
 	private WorksDao worksDao;
-	
+
 	public WorksDao getWorksDao() {
 		return worksDao;
 	}
 
 	public void setWorksDao(WorksDao worksDao) {
 		this.worksDao = worksDao;
+	}
+
+	@Override
+	public boolean isLiked(String userID, String worksID) throws Exception {
+
+		wlmtxt_like like = worksDao.findLikeBy_user_id_And_like_works_id(userID, worksID);
+		if (like == null) {
+			return false;
+		} else {
+			return true;
+		}
+
 	}
 
 	@Override
@@ -84,12 +96,12 @@ public class WorksServiceImpl implements WorksService {
 		new_download_history.setDownload_history_gmt_modified(TeamUtil.getStringSecond());
 		worksDao.saveDownloadHistory(new_download_history);
 	}
-	//删除下载历史记录，即不显示在个人中心，实际的表记录未删除
+	// 删除下载历史记录，即不显示在个人中心，实际的表记录未删除
 
 	@Override
 	public void discussWorks(wlmtxt_user user, wlmtxt_discuss accpet_discuss) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
