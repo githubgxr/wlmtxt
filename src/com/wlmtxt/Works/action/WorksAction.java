@@ -107,7 +107,7 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * @throws Exception
 	 */
-	public void isLikeWorks() throws Exception {
+	public void likeWorks() throws Exception {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
 
 		worksService.likWorks(user, accept_works);
