@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/xzt.css" />
+		<link rel="stylesheet" href="../../css/xzt/grzx_grzl.css" />
+		<script type="text/javascript" src="../../js/jquery-3.1.1.min.js" ></script>
+
+	</head>
+
+	<body>
+		<div class="wlmtxt_main">
+			<div class="wlmtxt_container ">
+				<iframe style="position: fixed;top:0;left:calc( ( 100% - 960px ) / 2 ) ;" name="" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" width="200px" height="100%" src="../grzx_nav.html"></iframe>
+				<!--发布视频-->
+				<div id="grzl_main" class="main_container">
+					<!--浏览历史头部-->
+					<div class="grzl_header list_header">
+						<i class="header_line"></i>
+						<h3>个人资料</h3>
+					</div>
+					<!--主体部分-->
+					<div class="grzl_content">
+						<div class="personal-setting-container">
+							<div class="personal_info">
+								<div class="personal_pic">
+									<img src="../../img/user.jpg" />
+									<div class="update_msg">
+										<a href="#" class="category_a">更换头像</a>
+										<div class="personal_pic_alert">JPG或PNG格式，最大3MB，不支持GIF</div>
+									</div>
+								</div>
+								<div class="personal_info_details">
+									<div class="img_wrap_list">
+										<span class="highlight">昵称：</span>
+										<div class="personal_info_value highlight">熊子婷</div>
+										<input type="text" class="input_zb1 xg" placeholder="" value="熊子婷" />
+									</div>
+									<div class="img_wrap_list">
+										<span>账号：</span>
+										<div class="personal_info_value">xzt15478013</div>
+										<input type="text" class="input_zb1 xg" placeholder="" value="熊子婷" />
+									</div>
+									<div class="img_wrap_list">
+										<span>性别：</span>
+										<div class="personal_info_value">女</div>
+										<input type="text" class="input_zb1 xg" placeholder="" value="熊子婷" />
+									</div>
+									<div class="img_wrap_list">
+										<span>简介：</span>
+										<div class="personal_info_value grjj">电饭锅共同语言不广发银行gfhjgjh不傻是dfhqwerutyernvferghfnregv好腹黑如果和雕刻时光哈尔你发的光华科技覅额日而你个费迪南德克己奉公过得好快解放后扣几分</div>
+										<textarea class="textarea_pl xg" maxlength="100">电饭锅共同语言不广发银行gfhjgjh不傻是dfhqwerutyernvferghfnregv好腹黑如果和雕刻时光哈尔你发的光华科技覅额日而你个费迪南德克己奉公过得好快解放后扣几分
+										</textarea>
+									</div>
+									
+								</div>
+								<div class="operate_btns">
+									<a class="button_a update_btn">修改个人资料</a>
+									<a class="button_a check_btn">确认修改</a>
+									<a class="button_a reset_btn">取消</a>
+								</div>
+							</div>
+							<!--修改密码-->
+							<div class="update_pwd">
+								<div class="update_pwd_header">修改密码</div>
+								<div class="update_pwd_container">
+									<div class="img_wrap_list">
+										<span>旧密码：</span>
+										<input type="text" class="input_zb1 pwd" placeholder="请输入旧密码" value="" />
+									</div>
+									<div class="img_wrap_list">
+										<span>新密码：</span>
+										<input type="text" class="input_zb1 pwd" placeholder="请输入新密码" value="" />
+									</div>
+									<div class="img_wrap_list">
+										<span>确认新密码：</span>
+										<input type="text" class="input_zb1 pwd" placeholder="请确认新密码" value="" />
+									</div>
+									<a class="button_a check_pwd_btn">确认修改密码</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			/*点击修改个人资料*/
+			$(".update_btn").click(function(){
+				$(".personal_info_value").css("display","none");
+				$(".xg").css("display","block");
+				$(".reset_btn").css("display","block");
+				$(".check_btn").css("display","block");
+				$(".update_btn").css("display","none");
+			});
+			/*点击取消*/
+			$(".reset_btn").click(function(){
+				$(".personal_info_value").css("display","block");
+				$(".xg").css("display","none");
+				$(".update_btn").css("display","block");
+				$(".reset_btn").css("display","none");
+				$(".check_btn").css("display","none");
+			});
+		</script>
+	</body>
+
+</html>

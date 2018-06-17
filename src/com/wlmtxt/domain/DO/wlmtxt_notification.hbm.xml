@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-6-13 9:09:17 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.wlmtxt.domain.DO.wlmtxt_notification" table="WLMTXT_NOTIFICATION">
+        <id name="notification_id" type="java.lang.String">
+            <column name="NOTIFICATION_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="notification_user_id" type="java.lang.String">
+            <column name="NOTIFICATION_USER_ID" />
+        </property>
+        <property name="notification_type" type="java.lang.String">
+            <column name="NOTIFICATION_TYPE" />
+        </property>
+        <property name="notification_content" type="java.lang.String">
+            <column name="NOTIFICATION_CONTENT" />
+        </property>
+        <property name="notification_gmt_create" type="java.lang.String">
+            <column name="NOTIFICATION_GMT_CREATE" />
+        </property>
+        <property name="notification_gmt_modified" type="java.lang.String">
+            <column name="NOTIFICATION_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

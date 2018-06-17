@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.category_a {
+	display: inline-block;
+	cursor: pointer;
+	margin: 10px 10px;
+	color: #1cd388;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	font-size: 14px;
+	border: 1px solid #1cd388;
+	background-color: #fff;
+	border-radius: 3px;
+	text-decoration: none;
+}
+
+.category_a:hover {
+	text-decoration: none;
+}

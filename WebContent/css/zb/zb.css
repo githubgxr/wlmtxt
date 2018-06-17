@@ -1,0 +1,124 @@
+/*
+ * 用户头像
+ */
+
+.user_img {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+}
+
+.user_img_small {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+}
+img:hover{
+	cursor:pointer;
+}
+/*关注*/
+.has_focus{
+	filter: alpha(opacity=70);
+	opacity: .7;
+}
+.not_focus{
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+/*
+ * 点赞
+ */
+
+.dz_no {
+	background-color: #ffffff;
+	color: #99a2aa;
+	height: 36px;
+	font-size: 18px;
+	line-height: 36px;
+	display: inline;
+	cursor: pointer;
+}
+
+.dz_no:hover {
+	color: #1cd388;
+}
+
+.dz_yes {
+	background-color: #ffffff;
+	color: #1cd388;
+	height: 36px;
+	font-size: 18px;
+	line-height: 36px;
+	display: inline;
+	cursor: pointer;
+}
+
+
+/*
+ * 推荐的样式
+ */
+
+.tj {
+	width: 160px;
+	margin: 0 12px;
+	/* color: #bfbfbf; */
+	color:#999;
+	cursor: pointer;
+}
+
+.tj:hover {
+	color: #1cd388;
+}
+
+.tj img {
+	width: 100%;
+	height: 100px;
+}
+
+
+/*
+ * 
+ * textarea评论框
+ * 
+ * 
+ * */
+
+.textarea_pl {
+	border-width: 2px;
+	min-height: 80px;
+	max-height: 200px;
+	resize: vertical;
+	font-size: 20px;
+	overflow: hidden;
+}
+
+.textarea_pl:focus {
+	border-color: #1cd388;
+}
+
+.button_pl {
+	color: #ffffff;
+	background-color: #1cd388;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 20px;
+	height: 80px;
+	width: 80px;
+	line-height: 30px;
+	cursor: pointer;
+	border: 1px solid #1cd388;
+}
+
+.input_zb1 {
+	border-width: 2px;
+	font-size: 20px;
+}
+
+.input_zb1::-moz-placeholder {
+	color: #BFBFBF;
+}
+
+.input_zb1:hover {
+	border-color: #1cd388;
+}

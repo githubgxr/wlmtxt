@@ -1,0 +1,125 @@
+/*导航是210px宽度，总宽度960px*/
+
+* {
+	margin: 0px;
+	padding: 0px;
+	/* font-family: "微软雅黑"; */
+	
+}
+/*个人资料*/
+
+#wdfs_main {
+	width: 730px;
+	height: auto;
+}
+
+
+/*头部*/
+
+#wdfs_main .wdfs_header {
+	width: 100%;
+	height: 35px;
+	float: left;
+}
+
+#wdfs_main .wdfs_header .header_line {
+	float: left;
+}
+
+#wdfs_main .wdfs_header h3 {
+	font-size: 24px;
+	line-height: 30px;
+	color: #333;
+	float: left;
+}
+
+
+/*主体*/
+
+#wdfs_main .wdfs_content {
+	width: 100%;
+	float: left;
+	height: auto;
+	background-color: #FFFFFF;
+	margin: 20px 0;
+}
+
+.wdfs_content .user_list_container{
+	width: 700px;
+	padding: 0 15px;
+	float: left;
+}
+.wdfs_content .user_list_container .user_list_ul{
+	width: 100%;
+	float: left;
+}
+
+/*单个用户*/
+.user_list_container .user_list_ul .user_list{
+	width: 330px;
+	float: left;
+	padding: 10px;
+	
+}
+
+/*头像*/
+.user_list .user_list_img_div{
+	width: 60px;
+	padding: 20px 0;
+	float: left;
+}
+
+.user_list img{
+	width: 60px;
+	height: 60px;
+	float: left;
+}
+.user_list img:hover{
+	cursor: pointer;
+}
+/*用户信息*/
+.user_list .user_info{
+	width: 200px;
+	float: left;
+	margin:25px 0 0 20px;
+}
+
+.user_list .user_info .user_name{
+	width: 120px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	/*color: #1cd388;*/
+	color: #333333;
+	font-size: 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.user_list .user_info .user_name:hover{
+	color: #1cd388;
+	cursor: pointer;
+}
+.user_list .user_info .user_operateing{
+	width: 55px;
+	height: 30px;
+	line-height: 30px;
+	color: #1cd388;
+	font-size: 12px;
+	float: right;
+}
+.user_list .user_info .user_operateing:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+.user_list .user_info .user_grjj{
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	float: left;
+	font-size: 13px;
+	color: #BFBFBF;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

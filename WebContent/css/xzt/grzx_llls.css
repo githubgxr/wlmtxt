@@ -1,0 +1,54 @@
+/*导航是210px宽度，总宽度960px*/
+
+* {
+	margin: 0px;
+	padding: 0px;
+	/* font-size: 14px; */
+}
+
+#llls_main {
+	width: 730px;
+	height: auto;
+	
+}
+
+
+/*头部*/
+
+/*#llls_main .llls_header {
+	width: 100%;
+	height: 35px;
+	float: left;
+}*/
+
+#llls_main .llls_header .header_line {
+	float: left;
+}
+
+#llls_main .llls_header h3 {
+	font-size: 24px;
+	line-height: 30px;
+	color: #333;
+	float: left;
+}
+
+#llls_main .llls_header .button_a {
+	float: right;
+	margin: 0 14px 0 0;
+}
+
+
+/*主体*/
+
+#llls_main .llls_content {
+	width: 100%;
+	height: auto;
+	float: left;
+}
+
+
+
+#llls_list_container{
+	width: 100%;
+	overflow: hidden;
+}

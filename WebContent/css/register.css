@@ -1,0 +1,35 @@
+.register{
+	position: absolute;
+	width:450px; 
+	height:400px; 
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin:auto;
+	background-color: #eee;
+}
+.form-title{
+	font-size:xx-large;	
+	text-align: center;
+}
+pic1{
+	float: left;
+}
+#div_1{
+	padding: 8px 10px 15px 10px;
+}
+#div_2{
+	padding: 5px 10px 15px 10px;
+}
+#div_3{
+	padding: 20px 10px 15px 10px;
+}
+.checkbox{
+	padding: 5px;
+}
+.button{
+	margin-top: 20px;
+	padding: 15px;
+}
+

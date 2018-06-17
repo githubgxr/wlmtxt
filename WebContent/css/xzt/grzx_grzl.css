@@ -1,0 +1,205 @@
+/*导航是210px宽度，总宽度960px*/
+
+* {
+	margin: 0px;
+	padding: 0px;
+	/* font-family: "微软雅黑"; */
+	
+}
+/*个人资料*/
+
+#grzl_main {
+	width: 730px;
+	height: auto;
+}
+
+
+/*头部*/
+
+#grzl_main .grzl_header {
+	width: 100%;
+	height: 35px;
+	float: left;
+}
+
+#grzl_main .grzl_header .header_line {
+	float: left;
+}
+
+#grzl_main .grzl_header h3 {
+	font-size: 24px;
+	line-height: 30px;
+	color: #333;
+	float: left;
+}
+
+
+/*主体*/
+
+#grzl_main .grzl_content {
+	width: 100%;
+	float: left;
+	height: auto;
+	background-color: #FFFFFF;
+	margin: 20px;
+}
+
+#grzl_main .grzl_content .personal-setting-container {
+	width: 650px;
+	padding: 20px;
+	float: left;
+}
+
+#grzl_main .grzl_content .personal-setting-container .personal_info {
+	width: 100%;
+	float: left;
+	color: #333333;
+}
+/*头像*/
+.personal_info .personal_pic {
+	width: 100%;
+	height: 120px;
+	float: left;
+}
+
+.personal_info .personal_pic img {
+	width: 120px;
+	height: 120px;
+	float: left;
+	margin: 0 30px 0 0;
+}
+
+.personal_info .personal_pic .update_msg {
+	width: 300px;
+	height: 70px;
+	float: left;
+	margin: 50px 0 0 0;
+}
+
+.personal_info .personal_pic .update_msg .category_a {
+	padding: 0 20px;
+	margin: 0px;
+}
+
+.personal_info .personal_pic .update_msg .personal_pic_alert {
+	width: 300px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 12px;
+	color: #999999;
+	width: auto;
+}
+/*详细资料*/
+
+.personal_info .personal_info_details {
+	width: 100%;
+	float: left;
+	margin: 50px 0px 30px 0;
+	font-size: 14px;
+}
+
+.personal_info .personal_info_details .img_wrap_list {
+	width: 100%;
+	float: left;
+}
+
+ .img_wrap_list span {
+	width: 115px;
+	height: 40px;
+	text-align: right;
+	line-height: 40px;
+	float: left;
+	padding: 0 5px 0 0;
+}
+
+.personal_info .personal_info_details .img_wrap_list .highlight {
+	width: 115px;
+	font-size: 16px;
+	padding: 0px;
+}
+
+.personal_info .personal_info_details .img_wrap_list .personal_info_value {
+	width: 400px;
+	height: 40px;
+	text-align: left;
+	line-height: 40px;
+	float: left;
+	margin: 0 0 0 30px;
+}
+.personal_info .personal_info_details .img_wrap_list .grjj {
+	height: auto;
+	float: left;
+	height: 90px;
+	line-height: 30px;
+	padding: 5px 0 0 0;
+	
+}
+.personal_info .personal_info_details .img_wrap_list .textarea_xzt{
+	width: 400px;
+	float: left;
+	font-size: 14px;
+	display: none;
+		
+}
+
+ .img_wrap_list .input_xzt{
+	width: 400px;
+	float: left;
+	font-size: 14px;
+
+	display: none;
+}
+.personal_info .personal_info_details .img_wrap_list .xg{
+	margin: 5px 0 5px 30px;
+	
+}
+/*操作按钮*/
+.personal_info .operate_btns{
+	width: 500px;
+	height: 40px;
+	float: left;
+	margin: 0 0 0 60px;
+}
+ .button_a{
+	float: left;
+	height: 40px;
+	margin: 0 0 0 10px;
+	border-radius: 3px;
+	font-size: 15px;
+	line-height: 40px;
+}
+.personal_info .operate_btns .reset_btn,.check_btn{
+	display: none;
+}
+/*修改密码*/
+.update_pwd{
+	margin: 50px 0 0 0;
+	width: 650px;
+	float: left;
+}
+.update_pwd .update_pwd_header{
+	width: 100%;
+	height: 40px;
+	color: #666666;
+	font-size: 24px;
+	font-weight: 700;
+	border-bottom: 1px solid #e8e8e8;;
+}
+.update_pwd .update_pwd_container{
+	width: 100%;
+	float: left;
+	margin: 30px 0;
+	font-size: 14px;
+	color: #333333;
+}
+.update_pwd .update_pwd_container .img_wrap_list{
+	width: 100%;
+	float: left;
+}
+.update_pwd .update_pwd_container .img_wrap_list .pwd{
+	display: block;
+	margin: 5px 0 5px 30px;
+}
+.update_pwd .update_pwd_container .check_pwd_btn{
+	margin: 30px 0 0 70px;
+}

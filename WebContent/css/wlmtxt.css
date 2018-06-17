@@ -1,0 +1,403 @@
+body{
+	background-color: #F6F6F6;
+}
+
+button {
+	border: 0px; //去除button自动的底部边线
+}
+
+.button_navbar {
+	background-color: #ffffff;
+	color: #1DD388;
+	border: 0.8px solid #1DD388;
+	padding: 0px 8px;
+}
+
+.button_navbar:hover {
+	background-color: #1DD388;
+	color: #FFFFFF;
+}
+
+
+/*娉ㄥ唽鏃惰幏鍙栭獙璇佺爜*/
+
+.button_code {
+	background-color: #1DD388;
+	color: #FFFFFF;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 98px;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+}
+
+.button_titleReglogin {
+	float: left;
+	width: 130px;
+	height: 47px;
+	font-size: 1pc;
+	text-align: center;
+	background-color: #FFFFFF;
+	padding: 15px 0px 1.6px;
+}
+
+.button_titleReglogin:hover {
+	color: #1DD388;
+	border-bottom: 2px solid #1DD388;
+	cursor: default;
+}
+
+.button_sureReglogin {
+	width: 308px;
+	height: 42px;
+	line-height: 42px;
+	background-color: #1DD388;
+	color: #FFFFFF;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 20px;
+	box-shadow: 0 3px 6px 0 hsla(0, 0%, 56%, .29);
+	cursor: pointer;
+}
+
+.button_sureReglogin:hover {
+	background-color: mediumseagreen;
+}
+
+.button_keyword {
+	height: 24px;
+	line-height: 24px;
+	background-color: #e5e5e5;
+	color: #999;
+	font-size: 13px;
+	text-align: center;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: background-color 250ms ease-out;
+	padding: 5px 10px;
+}
+
+.button_keyword:hover {
+	background-color: #1DD388;
+	color: #FFFFFF;
+}
+
+.button_page {
+	background-color: #1DD388;
+	color: #FFFFFF;
+	border-radius: 2px;
+	padding: 0 9px;
+	border: 1px solid #1DD388;
+	margin-left: 10PX;
+	line-height: 30px;
+	font-weight: 400;
+}
+
+.button_pageHover {
+	line-height: 30px;
+	color: #787878;
+	border-radius: 2px;
+	border: 1px solid #e6e6e6;
+	padding: 0 9px;
+	cursor: pointer;
+	font-weight: 400;
+}
+
+.button_pageHover:hover {
+	color: #1DD388;
+	border: 1px solid #1DD388;
+}
+
+.button_saveModify {
+	width: 180px;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+	display: block;
+	text-align: center;
+	background-color: #1dd388;
+	border-radius: 3px;
+}
+
+.button_saveModify:hover {
+	background-color: mediumseagreen; //这里不确定,不知道该如何吸这个颜色
+}
+
+li {
+	list-style: none;
+	vertical-align: top;
+}
+
+.list_item {
+	margin: 0 20px 10px 0;
+	height: 217px;
+	width: 285px;
+}
+
+li a {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: 0 0;
+}
+
+.img_thumd {
+	position: relative;
+	width: 100%;
+}
+
+.img {
+	width: 285px;
+	height: 160px;
+	overflow: hidden;
+}
+
+.img_play {
+	width: 100%;
+	display: block;
+}
+
+.thumd_layer {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 3;
+	opacity: 0;
+	background-color: #000000;
+	transition: all ease-in 250ms;
+}
+
+.play_btn {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -20px;
+	margin-left: -20px;
+	width: 40px;
+	height: 40px;
+	z-index: 4;
+	opacity: 0;
+	transform: scale(2);
+	transition: all ease-in 250ms;
+}
+
+.thumd_info {
+	width: 265px;
+	height: 40.4px;
+	padding: 7px 10px 6px;
+	margin: 0 0 2.4px;
+	border-bottom: 3px solid #ececec;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.thumd_bar {
+	width: 0;
+	height: 3px;
+	transition: all ease-in 250ms;
+	background-color: #1dd388;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.list_item_img:hover .thumd_info {
+	border-bottom: 3px solid #1DD388;
+}
+
+.img_thumd:hover .thumd_layer {
+	opacity: 0.5;
+}
+
+.img_thumd:hover .play_btn {
+	opacity: 0.5;
+	transform: scale(1);
+}
+
+.thumd_list {}
+
+.thumd_title {
+	float: left;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 14px;
+	line-height: 19px;
+	height: 19px;
+}
+
+.thumd_list_info {
+	padding-top: 4px;
+}
+
+.neck_name {
+	color: #1cd388;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	/* height: 18px; */
+	float: left;
+	line-height: 18px;
+}
+
+.thumd_num {
+	float: right;
+	background-image: url(../img/num_corn.png) no-repert;
+	color: #b9b9b9;
+	font-size: 12px;
+	height: 18px;
+	line-height: 18px;
+}
+
+.page_container {
+	width:100%;
+	height:30px;
+	float:left;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font-weight: 400;
+	vertical-align: baseline;
+	background: 0 0;
+}
+
+.page_component_container {
+	/*margin: 30px auto;*/
+}
+
+.page_component {
+	text-align: center;
+	color: #787878;
+	font-size: 14px;
+	line-height: 30px;
+}
+
+
+/*涓婁竴椤�*/
+
+.page_prev {
+	border: 1px solid #e6e6e6 !important;
+	color: #787878 !important;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+	filter: alpha(opacity=40);
+	opacity: .4;
+	cursor: not-allowed;
+	padding: 0 9px;
+}
+.page_component{
+	/* background-color: #1DD388; */
+	/* color: #FFFFFF; */
+	border-radius: 2px;
+	padding: 0 9px;
+	/* border: 1px solid #1DD388; */
+	line-height: 30px;
+	font-weight: 400;
+}
+
+.page_component a {
+	line-height: 30px;
+	border: 1px solid #e6e6e6;
+	color: #787878;
+	display: inline-block;
+	zoom: 1;
+	padding: 0 9px;
+	/*margin-left: 10px;*/
+	border-radius: 2px;
+	-webkit-transition: all ease-in-out .2s;
+	transition: all ease-in-out .2s;
+	cursor: pointer;
+}
+
+
+/*涓嬩竴椤�*/
+
+.page_next {
+	line-height: 30px;
+	border: 1px solid #e6e6e6;
+	color: #787878;
+	display: inline-block;
+	zoom: 1;
+	padding: 0 9px;
+	border-radius: 2px;
+	-webkit-transition: all ease-in-out .2s;
+	transition: all ease-in-out .2s;
+	cursor: pointer;
+}
+b{
+	color: #787878;
+}
+
+
+/*璺宠浆鍒�*/
+
+.page_component_jumppage {
+	/*margin-left: 20px;*/
+	color: #787878;
+}
+
+
+/*璺宠浆鍒扮殑鏂囨湰妗�*/
+
+.page_component_jumptxt {
+	padding: 0 5px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #e6e6e6;
+	vertical-align: top;
+	outline: none;
+	-webkit-transition: all ease-in-out .2s;
+	transition: all ease-in-out .2s;
+}
+
+
+.page_component a:hover{
+	color: #1DD388;
+	border: 1px solid #1DD388;
+}
+
+
+
+/*瀛愬鑸�-涓庢垜鐩稿叧銆佹秷鎭腑蹇�*/
+
+
+.clearfix {
+	content: "\0020";
+	display: block;
+	height: 30px;
+	overflow: hidden;
+	text-decoration: none;
+}
+
+.clearfix a {
+	float:left;
+	display: block;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 16px;
+	border-right: 1px solid #ebebeb;
+	border-top: ;
+	color: #333;
+	background-color: #f6f6f6;
+	text-decoration: none;
+}
+.clearfix a:hover{
+	border-top: 3px solid #1DD388;
+	text-decoration: none;
+	 color: #1DD388; 
+
+}
+.clearfix a:focus{
+	text-decoration: none;
+}
+.clearfix .selected{
+	 color: #1DD388; 
+	 border-top: 3px solid #1DD388;
+}

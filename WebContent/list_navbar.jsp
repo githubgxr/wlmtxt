@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="<%=basePath%>css/lwk/navbar.css" />
+		<link rel="stylesheet" href="<%=basePath%>css/zb/zb.css" />
+		<link rel="stylesheet" href="<%=basePath%>css/zb/fontawesome-all.css" />
+	</head>
+	<body>
+		<div style="background-color: #FFFFFF;width: 100%;height: 56px;">
+			<!--导航的主体部分-->
+			<div style="width: 960px;height: 100%;margin: 0 auto;">
+				<!--分类-->
+				<div class="a_cateory" style="float: left;">首页</div>
+				<div class="a_cateory" style="float: left;">分类</div>
+				<div class="a_cateory" style="float: left;">排行榜</div>
+
+				<!--头像-->
+				<img class="user_img" src="<%=basePath%>img/xgs_jpg.jpg" style="float: right;height: 45px;width: 45px;margin: 5.5px 0 0 0;" />
+				<!--个人中心-->
+				<div class="a_cateory" style="float: right;margin: 0 10px;">个人中心</div>
+				<!--搜索-->
+				<input class="form-control input_zb1" style="width: 200px;float: right;margin: 11px 0 0 0;" />
+			</div>
+		</div>
+	</body>
+</html>

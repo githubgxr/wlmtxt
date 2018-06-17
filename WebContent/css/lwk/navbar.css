@@ -1,0 +1,175 @@
+body{
+	position:relative;
+}
+.a_cateory {
+	height: 100%;
+	padding: 0 15px;
+	line-height: 56px;
+	cursor: pointer;
+	font-size: 18px;
+	color: #1dd388;
+}
+
+.a_cateory:hover {
+	transition: background-color 1s, color 0.3s;
+	background-color: #1dd388;
+	color: #FFFFFF;
+}
+
+.a_cateory_activity {
+	height: 100%;
+	padding: 0 15px;
+	line-height: 56px;
+	cursor: pointer;
+	font-size: 18px;
+	background-color: #1dd388;
+	color: #FFFFFF;
+}
+
+/*注册登录*/
+/*遮罩层  */
+#mask {
+	background-color: #000;
+	opacity: 0.5;
+	filter: alpha(opacity = 50); /*解决IE不兼容的问题*/
+	height: 700px;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1000; /*层级问题*/
+}
+/* 弹出框div */
+.login_and_register {
+	background-color: #FFFFFF;
+	position: fixed;
+	left: 30%;
+	top: 30%;
+	z-index: 1001;
+	border-radius: 4px;
+}
+/* 注册登录主体内容 */
+.log_and_reg {
+	width: 390px;
+	position: relative;
+	/* padding: 0 0 0 35px; */
+}
+/* 注册登录头部 */
+.log_head {
+	width: 100%;
+	height: 60px;
+	float: left;
+	background: url(/wlmtxt/img/login.png) no-repeat;
+	background-position-x: 0%;
+	background-position-y: 0%;
+	background-position: 0 -5px;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+}
+/* 头部logo */
+.log_head .logo_img {
+	width: 40px;
+	height: 40px;
+	margin: 10px 25px 10px 35px;
+	float: left;
+}
+/* 头部注册登录样式 */
+.log_text{
+	width: 115px;
+	height: 60px;
+	float: left;
+	text-align: center;
+	line-height: 60px;
+	text-align: center;
+}
+.log_text:hover {
+	cursor: pointer;
+}
+/* 未选中样式 */
+.not_selected_log {
+	color: #1dd388;
+	font-size: 15px;
+}
+/* 当前样式 */
+.selected_log {
+	font-size: 18px;
+	color: #333;
+}
+
+.log_head .close_img {
+	width: 30px;
+	height: 30px;
+	float: right;
+	margin: 15px;
+	cursor: pointer;
+	background: url(/wlmtxt/img/close.png) no-repeat;
+}
+/* 登录 */
+.login_div {
+	position: relative;
+	width: 390px;
+	float: left;
+	padding: 0 35px;
+	margin: 10px 0;
+}
+
+.log_email, .log_password {
+	margin: 10px 0 !important;
+}
+/* 邮箱输入框 */
+.log_email {
+	padding: 0 0 0 30px !important;
+	background: url(/wlmtxt/img/login_email.png) 5px 7px no-repeat
+		!important;
+	background-size: 15px 15px !important;
+}
+
+.log_email:focus {
+	border: solid 1px #1dd388 !important;
+}
+/* 密码框 */
+.log_password {
+	padding: 0 0 0 30px !important;
+	background: url(/wlmtxt/img/login_password.png) 3px 5px no-repeat
+		!important;
+	background-size: 20px 20px !important;
+}
+
+.log_password:focus {
+	border: solid 1px #1dd388 !important;
+}
+.log_alert_div{
+	color:red;
+	font-size:12px;
+	display:none;
+	float:left;
+}
+/* 忘记密码 */
+.forget_password {
+	color: #1dd388;
+	font-size: 12px;
+	text-align: right;
+	margin: 10px 0 !important;
+}
+
+.forget_password:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+/* 注册按钮和登录按钮 */
+.log_btn, .reg_btn {
+	margin: 10px 0 20px 0 !important;
+}
+/*注册*/
+.reg_username{
+	padding: 0 0 0 30px !important;
+	background: url(/wlmtxt/img/login_username.png) 3px 5px no-repeat
+		!important;
+	background-size: 18px 18px !important;
+}
+.reg_repassword{
+	padding: 0 0 0 30px !important;
+	background: url(/wlmtxt/img/login_repswd.png) 3px 5px no-repeat
+		!important;
+	background-size: 21px 21px !important;
+}

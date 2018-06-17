@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-6-13 9:09:17 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.wlmtxt.domain.DO.wlmtxt_user" table="WLMTXT_USER">
+        <id name="user_id" type="java.lang.String">
+            <column name="USER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="user_username" type="java.lang.String">
+            <column name="USER_USERNAME" />
+        </property>
+        <property name="user_password" type="java.lang.String">
+            <column name="USER_PASSWORD" />
+        </property>
+        <property name="user_mail" type="java.lang.String">
+            <column name="USER_MAIL" />
+        </property>
+        <property name="user_avatar" type="java.lang.String">
+            <column name="USER_AVATAR" />
+        </property>
+        <property name="user_sex" type="java.lang.String">
+            <column name="USER_SEX" />
+        </property>
+        <property name="user_bio" type="java.lang.String">
+            <column name="USER_BIO" />
+        </property>
+        <property name="user_upload" type="java.lang.String">
+            <column name="USER_UPLOAD" />
+        </property>
+        <property name="user_discuss" type="java.lang.String">
+            <column name="USER_DISCUSS" />
+        </property>
+        <property name="user_gmt_create" type="java.lang.String">
+            <column name="USER_GMT_CREATE" />
+        </property>
+        <property name="user_gmt_modified" type="java.lang.String">
+            <column name="USER_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

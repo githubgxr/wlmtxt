@@ -1,0 +1,140 @@
+/*导航是210px宽度，总宽度960px*/
+
+* {
+	margin: 0px;
+	padding: 0px;
+	/* font-family: "微软雅黑"; */
+	
+}
+.main_container
+ {
+	width: 730px;
+	height: auto;
+}
+
+
+/*头部*/
+
+ .tdzl_header {
+	width: 100%;
+	height: 35px;
+	float: left;
+	margin: 0 0 30px 0;
+}
+
+ .tdzl_header .header_line {
+	float: left;
+}
+
+.tdzl_header h3 {
+	font-size: 24px;
+	line-height: 30px;
+	color: #333;
+	float: left;
+}
+
+
+/*主体*/
+
+/*他的资料*/
+ .tdzl_content {
+	width: 690px;
+	float: left;
+	height: auto;
+	background-color: #FFFFFF;
+	margin: 20px;
+	overflow: hidden;
+}
+
+ .tdzl_content .personal-setting-container {
+	width: 650px;
+	padding: 20px;
+	float: left;
+}
+
+ .tdzl_content .personal-setting-container .personal_info {
+	width: 100%;
+	float: left;
+	color: #333333;
+}
+
+.personal_info .personal_pic {
+	width: 100%;
+	float: left;
+}
+.personal_info .personal_pic .user_img_div{
+	width: 120px;
+	float: left;
+	margin: 0 30px 0 0;
+}
+.personal_info .personal_pic img {
+	width: 120px;
+	height: 120px;
+	float: left;
+	
+}
+.personal_info .personal_pic .user_foot{
+width: 100%;
+height: 40px;
+line-height: 40px;
+	margin: 10px 0 0 0;
+	float: left;
+}
+.personal_info .personal_pic .user_foot .user_fans{
+	width: 55px;
+	float: left;
+	margin: 0 0 0 5px;
+}
+.personal_info .personal_pic .user_foot .user_fans span{
+	margin: 0 5px;
+	color: #1cd388;
+}
+.personal_info .personal_info_details {
+	width: 450px;
+	float: left;
+	font-size: 14px;
+}
+
+.personal_info .personal_info_details .img_wrap_list {
+	width: 100%;
+	float: left;
+}
+
+ .img_wrap_list span {
+	width: 50px;
+	height: 40px;
+	text-align: left;
+	line-height: 40px;
+	float: left;
+	padding: 0 5px 0 0;
+}
+
+.personal_info .personal_info_details .img_wrap_list .highlight {
+	width: 50px;
+	font-size: 16px;
+	padding: 0px;
+}
+
+.personal_info .personal_info_details .img_wrap_list .personal_info_value {
+	width: 400px;
+	height: 40px;
+	text-align: left;
+	line-height: 40px;
+	float: left;
+}
+.personal_info .personal_info_details .img_wrap_list .grjj {
+	height: auto;
+	float: left;
+	height: 90px;
+	line-height: 30px;
+	padding: 5px 0 0 0;
+	
+}
+/*他的动态*/
+.tdzl_header{
+	margin: 0px 0 10px 0;
+}
+.wddt_content{
+	width: 100%;
+	float: left;
+}

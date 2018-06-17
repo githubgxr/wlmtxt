@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="User" namespace="/User" extends="struts-default">
+		<action name="User_*" class="com.wlmtxt.User.action.UserAction"
+			method="{1}">
+			<!--登陆后首页  -->
+			<!-- 激活页面-->
+			<result name="skipActivatePage">/WEB-INF/view/index/email_verification.jsp</result>
+			<!-- <result name="list_carousel_page">/WEB-INF/view/Admin/list_carousel.jsp</result>
+			添加轮播图 页
+			<result name="add_carousel_page">/WEB-INF/view/Admin/add_carousel.jsp</result>
+			作品列表页 
+			<result name="list_works_page">/WEB-INF/view/Admin/list_works.jsp</result>
+			用户列表页
+			<result name="list_user_page">/WEB-INF/view/Admin/list_user.jsp</result>
+			评价列表页 
+			<result name="list_discuss_page">/WEB-INF/view/Admin/list_discuss.jsp</result>
+			管理员列表页 
+			<result name="list_admin_page">/WEB-INF/view/Admin/list_admin.jsp</result>
+			
+			<result name="modified_adminPassword_page">/WEB-INF/view/Admin/modified_adminPassword.jsp</result>
+			
+			<result name="logout">/adminLogin.jsp</result>
+			
+			<result name="count_page">/WEB-INF/view/Admin/count_page.jsp</result>
+			登录失败
+			<result name="error">/error.jsp</result>-->
+		</action>
+	</package>
+</struts>

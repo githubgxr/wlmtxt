@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	
+	<bean id="worksDao" class="com.wlmtxt.Works.dao.impl.WorksDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="worksService" class="com.wlmtxt.Works.service.impl.WorksServiceImpl">
+		<property name="worksDao" ref="worksDao"></property>
+	</bean>
+	<bean id="worksAction" class="com.wlmtxt.Works.action.WorksAction">
+		<property name="worksService" ref="worksService"></property>
+	</bean>
+</beans>
+

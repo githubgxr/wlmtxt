@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-6-13 9:09:17 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.wlmtxt.domain.DO.wlmtxt_works" table="WLMTXT_WORKS">
+        <id name="works_id" type="java.lang.String">
+            <column name="WORKS_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="works_user_id" type="java.lang.String">
+            <column name="WORKS_USER_ID" />
+        </property>
+        <property name="works_name" type="java.lang.String">
+            <column name="WORKS_NAME" />
+        </property>
+        <property name="works_cover" type="java.lang.String">
+            <column name="WORKS_COVER" />
+        </property>
+        <property name="works_second_menu_id" type="java.lang.String">
+            <column name="WORKS_SECOND_MENU_ID" />
+        </property>
+        <property name="works_title" type="java.lang.String">
+            <column name="WORKS_TITLE" />
+        </property>
+        <property name="works_reason" type="java.lang.String">
+            <column name="WORKS_REASON" />
+        </property>
+        <property name="works_passed" type="java.lang.String">
+            <column name="WORKS_PASSED" />
+        </property>
+        <property name="works_deleted" type="java.lang.String">
+            <column name="WORKS_DELETED" />
+        </property>
+        <property name="works_gmt_create" type="java.lang.String">
+            <column name="WORKS_GMT_CREATE" />
+        </property>
+        <property name="works_gmt_modified" type="java.lang.String">
+            <column name="WORKS_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>
