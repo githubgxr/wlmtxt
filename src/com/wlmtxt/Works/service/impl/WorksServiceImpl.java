@@ -24,6 +24,16 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public boolean isCollectWorks(String user_id, String works_id) throws Exception {
+		wlmtxt_collect collect = worksDao.findCollectBy_user_id_And_collect_works_id(user_id, user_id);
+		if (collect == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
 	public boolean isLiked(String userID, String worksID) throws Exception {
 
 		wlmtxt_like like = worksDao.findLikeBy_user_id_And_like_works_id(userID, worksID);

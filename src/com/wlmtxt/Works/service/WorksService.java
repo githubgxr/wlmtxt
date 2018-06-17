@@ -18,4 +18,6 @@ public interface WorksService {
 
 	public boolean isLiked(String userID, String worksID) throws Exception;
 
+	public boolean isCollectWorks(String user_id, String works_id) throws Exception;
+
 }

@@ -126,13 +126,33 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 收藏及取消，接收wlmtxt_works.works_id
+	 * 查询是否已收藏<br>
+	 * 接收accept_works.works_id
+	 * 
+	 * @throws Exception
+	 */
+	public void isCollectWorks() throws Exception {
+		// TODO
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		if (worksService.isCollectWorks(user.getUser_id(), accept_works.getWorks_id())) {
+			response.getWriter().write("1");
+		} else {
+			response.getWriter().write("2");
+		}
+	}
+
+	/**
+	 * 收藏及取消，接收accept_works.works_id
 	 */
 	public void collectWorks() {
-		// TODO
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
 		try {
 			worksService.collectWorks(user, accept_works);
+			HttpServletResponse response = ServletActionContext.getResponse();
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("1");
 		} catch (Exception e) {
 			System.out.println("收藏失败");
 			e.printStackTrace();
