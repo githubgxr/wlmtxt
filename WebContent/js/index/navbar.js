@@ -154,9 +154,73 @@ function checkLogin() {
 					}
 				});
 				/*---------下载-----------*/
-				
+				$(".video_download").click(function() {
+					// 取消点赞
+					var xhr = new XMLHttpRequest();
+					xhr.open("POST", "");
+					xhr.send();
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4 && xhr.status == 200) {
+							if (xhr.responseText == "1") {
+								console.log("下载成功！");
+							} else {
+								console.log("下载失败！");
+								return false;
+							}
+						}
+					}
+
+				});
 				/*---------评论-----------*/
-				
+				$("#video_comment_btn")
+						.click(
+								function() {
+									var comment_text = $("#textarea_comment").val();
+									if (comment_text == "") {
+										alert("请输入评论内容！");
+									} else {
+										var comment_list_str = '<div class="comment_list">';
+										comment_list_str += '<hr style="width: 100%;" />';
+										/* <!--整个评论--> */
+										comment_list_str += '<div class="comment_list_content">';
+										/* <!--左边--> */
+										comment_list_str += '<div class="comment_list_content_left">';
+										/* <!--头像--> */
+										comment_list_str += '<img class="user_img comment_user_img" src="../../css/zb/img/tx.jpg" />';
+										comment_list_str += '<div class="comment_user_name">树深时见鹿dear</div>';
+										comment_list_str+=' </div>';
+										/* <!--右边--> */
+										comment_list_str += '<div class="comment_list_content_right">';
+										/*评论内容*/
+										comment_list_str += '<div class="comment_text">';
+										comment_list_str += comment_text;
+										comment_list_str += '</div>';
+										comment_list_str += '<div class="comment_time">2017-05-11 23:22</div>';
+										comment_list_str += '<div class="comment_delete">删除</div>';
+										comment_list_str += '</div>';
+										comment_list_str += '</div>';
+										comment_list_str += '</div>';
+										$("#comment_div").append(
+												comment_list_str);
+										document.getElementById("textarea_comment").value="";
+										/*
+										  var xhr = new XMLHttpRequest();
+										  xhr.open("POST", ""); 
+										  xhr.send();
+										  xhr.onreadystatechange = function() {
+										  if (xhr.readyState == 4 && xhr.status == 200) {
+										   if (xhr.responseText == "1") { 
+										   console.log("评论成功！"); 
+										   } 
+										   else {
+										console.log("评论失败！"); 
+										return false; }
+										 }
+										  }
+										 */
+									}
+								});
+
 			}
 		}
 	}

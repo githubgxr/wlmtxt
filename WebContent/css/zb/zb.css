@@ -1,7 +1,6 @@
 /*
  * 用户头像
  */
-
 .user_img {
 	width: 70px;
 	height: 70px;
@@ -13,22 +12,23 @@
 	height: 25px;
 	border-radius: 50%;
 }
-img:hover{
-	cursor:pointer;
+
+img:hover {
+	cursor: pointer;
 }
 /*关注*/
-.has_focus{
-	filter: alpha(opacity=70);
+.has_focus {
+	filter: alpha(opacity = 70);
 	opacity: .7;
 }
-.not_focus{
-	filter: alpha(opacity=100);
+
+.not_focus {
+	filter: alpha(opacity = 100);
 	opacity: 1;
 }
 /*
  * 点赞
  */
-
 .dz_no {
 	background-color: #ffffff;
 	color: #99a2aa;
@@ -53,16 +53,14 @@ img:hover{
 	cursor: pointer;
 }
 
-
 /*
  * 推荐的样式
  */
-
 .tj {
 	width: 160px;
 	margin: 0 12px;
 	/* color: #bfbfbf; */
-	color:#999;
+	color: #999;
 	cursor: pointer;
 }
 
@@ -75,14 +73,12 @@ img:hover{
 	height: 100px;
 }
 
-
 /*
  * 
  * textarea评论框
  * 
  * 
  * */
-
 .textarea_pl {
 	border-width: 2px;
 	min-height: 80px;
@@ -121,4 +117,48 @@ img:hover{
 
 .input_zb1:hover {
 	border-color: #1cd388;
+}
+/*单条评论*/
+.comment_list, comment_list_content {
+	float: left;
+	width: 100%;
+}
+
+.comment_list_content_left {
+	float: left;
+	margin: 0 30px 0 0;
+	width: 70px;
+}
+
+.comment_user_img {
+	float: left;
+}
+
+.comment_user_name {
+	color: #1cd388;
+	float: left;
+	margin: 20px 0 0 0;
+	overflow: hidden;
+	height: 20px;
+}
+.comment_list_content_right{
+	float: right; width: 820px;
+}
+.comment_text{
+margin: 0 0 10px 0; min-height: 80px;
+}
+.comment_time{
+	height:20px;
+	color: #bfbfbf;
+	float:left;
+	margin:0 50px 0 0;
+}
+.comment_delete{
+	color: #1cd388;
+	float:left;
+	height:20px;
+}
+.comment_delete:hover{
+	text-decoration: underline;
+	cursor:pointer;
 }
