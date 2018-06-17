@@ -126,9 +126,10 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 收藏及取消，接收wlmtxt_works.works_id TODO
+	 * 收藏及取消，接收wlmtxt_works.works_id
 	 */
 	public void collectWorks() {
+		// TODO
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
 		try {
 			worksService.collectWorks(user, accept_works);
