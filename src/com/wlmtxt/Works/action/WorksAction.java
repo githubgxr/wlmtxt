@@ -1,7 +1,12 @@
 package com.wlmtxt.Works.action;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -14,6 +19,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
+@SuppressWarnings("serial")
 public class WorksAction extends ActionSupport {
 
 	wlmtxt_user accept_user;
@@ -22,6 +28,62 @@ public class WorksAction extends ActionSupport {
 	wlmtxt_first_menu first_menu;
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
+
+	private File worksfile;
+	private String worksfileFileName;
+	private String worksfileContentType;
+
+	private File imgfile;
+	private String imgfileFileName;
+	private String imgfileContentType;
+
+	public File getWorksfile() {
+		return worksfile;
+	}
+
+	public void setWorksfile(File worksfile) {
+		this.worksfile = worksfile;
+	}
+
+	public String getWorksfileFileName() {
+		return worksfileFileName;
+	}
+
+	public void setWorksfileFileName(String worksfileFileName) {
+		this.worksfileFileName = worksfileFileName;
+	}
+
+	public String getWorksfileContentType() {
+		return worksfileContentType;
+	}
+
+	public void setWorksfileContentType(String worksfileContentType) {
+		this.worksfileContentType = worksfileContentType;
+	}
+
+	public File getImgfile() {
+		return imgfile;
+	}
+
+	public void setImgfile(File imgfile) {
+		this.imgfile = imgfile;
+	}
+
+	public String getImgfileFileName() {
+		return imgfileFileName;
+	}
+
+	public void setImgfileFileName(String imgfileFileName) {
+		this.imgfileFileName = imgfileFileName;
+	}
+
+	public String getImgfileContentType() {
+		return imgfileContentType;
+	}
+
+	public void setImgfileContentType(String imgfileContentType) {
+		this.imgfileContentType = imgfileContentType;
+	}
 
 	public wlmtxt_discuss getAccpet_discuss() {
 		return accpet_discuss;
@@ -212,7 +274,40 @@ public class WorksAction extends ActionSupport {
 	 * 上传作品
 	 */
 	public void uploadWorks() {
+		// 处理封面
+		if (imgfile != null) {
 
+			String filePath;
+
+			String fileName = UUID.randomUUID().toString()
+					+ imgfileFileName.substring(imgfileFileName.lastIndexOf("."));
+
+			filePath = "c://wlmtxt/img/" + fileName;
+
+			File newFile = new File(filePath);
+
+			try {
+				FileUtils.copyFile(imgfile, newFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			System.out.println(fileName);
+
+			try {
+				HttpServletResponse response = ServletActionContext.getResponse();
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("1");
+			} catch (Exception e) {
+				System.out.println("2");
+				e.printStackTrace();
+			}
+
+		} else {
+			System.out.println("未上传封面");
+		}
+
+		// 处理视频
 	}
 
 	/**
