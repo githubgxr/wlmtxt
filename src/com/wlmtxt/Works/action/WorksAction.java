@@ -1,7 +1,10 @@
 package com.wlmtxt.Works.action;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +37,9 @@ public class WorksAction extends ActionSupport {
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
 
+	// 作品播放
+	private String worksName;
+	private InputStream inputStream;
 	// 作品
 	private File worksfile;
 	private String worksfileFileName;
@@ -53,6 +59,22 @@ public class WorksAction extends ActionSupport {
 
 	public File getWorksfile() {
 		return worksfile;
+	}
+
+	public String getWorksName() {
+		return worksName;
+	}
+
+	public void setWorksName(String worksName) {
+		this.worksName = worksName;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}
 
 	public String getKeyword() {
@@ -163,6 +185,27 @@ public class WorksAction extends ActionSupport {
 
 	public void setWorksService(WorksService worksService) {
 		this.worksService = worksService;
+	}
+
+	public String getVideo() throws FileNotFoundException {
+		/*
+		 * 获取路径
+		 */
+		/*
+		 * 
+		 */
+		if (worksName.equals("") || worksName == null) {
+			worksName = "";
+		}
+		File file = new File("C://wlmtxt/video/" + worksName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getVideo";
 	}
 
 	/**
