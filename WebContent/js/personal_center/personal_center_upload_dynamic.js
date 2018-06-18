@@ -1,5 +1,3 @@
-
-var xmlhttp;
 window.onload=function(){
 	$("input").blur(function(){
 		var input_value=$("input").val();
@@ -21,7 +19,6 @@ window.onload=function(){
 	})
 }
 function uploadWorks(){
-	console.log(111);
 	var works_classificationTwo=$("#works_classificationTwo").val();
 	var input_title=$("#input_title").val();
 	var works_describe=$("#works_describe").val();
@@ -33,7 +30,10 @@ function uploadWorks(){
 	}
 	var imgfile=document.getElementById("imgfile").files[0];
 	var worksfile = document.getElementById("worksfile").files[0];
-	XMLHttp();
+	console.debug(worksfile);
+	console.debug(imgfile);
+	var xmlhttp=false;
+	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange=function(){
 		if(xmlhttp.readyState==4&&xmlhttp.status==200){
 			var result=xmlhttp.responseText;
@@ -47,23 +47,34 @@ function uploadWorks(){
 	}
 	var formData=new FormData();
 	xmlhttp.open("POST","/wlmtxt/Works/Works_uploadWorks",true);
-	formData.append("works_second_menu_id",works_classificationTwo);
-	formData.append("works_title",input_title);
-	formData.append("works_reason",works_describe);
+	formData.append("accept_works.works_second_menu_id",works_classificationTwo);
+	formData.append("accept_works.works_title",input_title);
+	formData.append("accept_works.works_reason",works_describe);
 	formData.append("keyword",keyword);
 	formData.append("imgfile",imgfile);
-	formData.append("worksfile",worksfile);
+	formData.append("worksfile",worksfile); 
 	xmlhttp.send(formData);
 }
+function works_classification(){
+	var xhr=false;
+	xhr=new XMLHttpRequest();
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			var caterory = JSON.parse(xhr.responseText);
+			for ( var num in caterory) {
+				var option = document.createElement("option");
+				option.appendChild(document.createTextNode(caterory[num].second_menu_name));
+				var works_classificationOne=document.getElementById("works_classificationOne");
+				works_classificationOne.appendChild(option);
+				option.value = caterory[num].second_menu_id;
+				
+			}
+			$('#' + select.id).selectpicker('refresh');
 
-function XMLHttp(){
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-
+		}
+		toastr.error(xhr.status);
+	}
+	xhr.open("POST","/wlmtxt/Works/listSecondMenu");
+	xhr.send(null);
 }
+

@@ -53,17 +53,10 @@
 				<div class="fbsp_content list_container">
 					<div class="img_wrap">
 						<div class="img_wrap_list">
-							<span>作品分类：</span> <select class="works_classificationOne"
-								id="works_classificationOne"
-								onchange="works_classificationTwo()">
-								<option value="" id="selected">---请选择---</option>
-								<option value=1>电影</option>
-								<option value=2>电视剧</option>
-								<option value=3>综艺</option>
-								<option value=4>动画</option>
-								<option value=5>短片</option>
-							</select> <select id="works_classificationTwo">
-							</select>
+							<span>作品分类：</span>
+							 <select class="works_classificationOne" id="works_classificationOne" onchange="works_classification()">
+							</select> 
+							<!-- <select id="works_classificationTwo"></select> -->
 						</div>
 						<div class="img_wrap_list">
 							<span>视频标题：</span> <input class="form-control input_xzt"
@@ -99,8 +92,8 @@
 							<span>选择作品：</span>
 							<div class="imgnum">
 
-								<input type="file" name="file" id="worksfile" class="inputfile"
-								data-multiple-caption="{count} files selected" multiple /> 
+								<input type="file" id="worksfile" class="inputfile"
+								/> 
 								<label for="file">Choose a file</label>
 
 							</div>
@@ -116,7 +109,7 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		var arr = new Array();
 		arr[0] = "---请选择---"
 		arr[1] = "科幻电影,恐怖电影,剧情电影,喜剧电影,电影短片"
@@ -163,7 +156,7 @@
 						works_classificationTwoArr[i]);
 			}
 		}
-	</script>
+	</script> -->
 	<script type="text/javascript">
 		$(".btn_keyword").click(
 				function() {
