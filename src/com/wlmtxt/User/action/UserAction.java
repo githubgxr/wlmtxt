@@ -219,7 +219,7 @@ public class UserAction extends ActionSupport {
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		if ((md5.GetMD5Code(accpet_user.getUser_password())).equals(loginUser.getUser_password())) {
-			loginUser.setUser_password(new_password);
+			loginUser.setUser_password(md5.GetMD5Code(new_password));
 			String result = userService.modifyPassword(loginUser);
 			if (result != null) {
 				pw.write("1");
