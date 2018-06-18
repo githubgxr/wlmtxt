@@ -3,11 +3,10 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<package name="Admin" namespace="/Admin" extends="struts-default">
-		<action name="Admin_*" class="com.wlmtxt.Admin.action.AdminAction"
+	<package name="Works" namespace="/Works" extends="struts-default">
+		<action name="Works_*" class="com.wlmtxt.Works.action.WorksAction"
 			method="{1}">
 			<!--登陆后首页  -->
-			<result name="index">/WEB-INF/view/Admin/index.jsp</result>	
 		</action>
 	</package>
 </struts>
