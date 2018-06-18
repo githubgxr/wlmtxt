@@ -4,6 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src"/>
         <wb-resource deploy-path="/" source-path="/config"/>
         <wb-resource deploy-path="/" source-path="/test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="context-root" value="wlmtxt"/>
         <property name="java-output-path" value="/wlmtxt/build/classes"/>
     </wb-module>

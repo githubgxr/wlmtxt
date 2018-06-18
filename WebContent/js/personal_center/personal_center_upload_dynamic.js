@@ -28,27 +28,28 @@ function uploadWorks(){
 	var input_title=$("#input_title").val();
 	var works_describe=$("#works_describe").val();
 	var div_keyword=$(".div_keyword").text();
-	/* var upload_img = $("#upload_img").get(0).files[0];
-	 var upload_works = $("#upload_works").get(0).files[0];*/
-	
+	var imgfile=document.getElementById("imgfile").files[0];
+	var worksfile = document.getElementById("worksfile").files[0];
 	XMLHttp();
 	xmlhttp.onreadystatechange=function(){
 		if(xmlhttp.readyState==4&&xmlhttp.status==200){
-			/*var result=xmlhttp.responseText;
+			var result=xmlhttp.responseText;
 			if(result=="1"){
 				toastr.error("作品发布成功");
 			}else{
 				toastr.error("作品发布失败");
-			}*/
+			}
 			
 		}
 	}
 	var formData=new FormData();
-	xmlhttp.open("POST","",true);
-	formData.append("",works_classificationTwo);
-	formData.append("",input_title);
-	formData.append("",works_describe);
-	formData.append("",div_keyword);
+	xmlhttp.open("POST","/wlmtxt/Works/Works_uploadWorks",true);
+	formData.append("works_second_menu_id",works_classificationTwo);
+	formData.append("works_title",input_title);
+	formData.append("works_reason",works_describe);
+	formData.append("keyword",div_keyword);
+	formData.append("imgfile",imgfile);
+	formData.append("worksfile",worksfile);
 	xmlhttp.send(formData);
 }
 
