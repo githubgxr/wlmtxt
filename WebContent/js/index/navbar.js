@@ -527,7 +527,6 @@ function register() {
 											&& xhr.status == 200) {
 										if (xhr.responseText == "1") {
 											/* 发送成功 */
-											alert("发送成功！");
 											$("#register_div").css("display",
 													"none");
 											$("#check_email_text").css(
