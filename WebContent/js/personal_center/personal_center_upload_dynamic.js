@@ -27,7 +27,12 @@ function uploadWorks(){
 	var works_classificationTwo=$("#works_classificationTwo").val();
 	var input_title=$("#input_title").val();
 	var works_describe=$("#works_describe").val();
-	var div_keyword=$(".div_keyword").text();
+	
+	var div_keyword=$(".div_keyword");
+	var keyword="";
+	for(i=0;i<div_keyword.length;i++){
+		keyword=keyword+div_keyword[i].innerHTML+";";
+	}
 	var imgfile=document.getElementById("imgfile").files[0];
 	var worksfile = document.getElementById("worksfile").files[0];
 	XMLHttp();
@@ -47,7 +52,7 @@ function uploadWorks(){
 	formData.append("works_second_menu_id",works_classificationTwo);
 	formData.append("works_title",input_title);
 	formData.append("works_reason",works_describe);
-	formData.append("keyword",div_keyword);
+	formData.append("keyword",keyword);
 	formData.append("imgfile",imgfile);
 	formData.append("worksfile",worksfile);
 	xmlhttp.send(formData);
