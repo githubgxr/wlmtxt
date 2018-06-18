@@ -29,6 +29,11 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
+		return worksDao.listSecondMenu_byFirstMenuID(first_menu_id);
+	}
+
+	@Override
 	public List<wlmtxt_second_menu> listSecondMenu() {
 		return worksDao.listSecondMenu();
 	}

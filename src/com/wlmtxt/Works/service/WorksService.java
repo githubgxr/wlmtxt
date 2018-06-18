@@ -33,4 +33,6 @@ public interface WorksService {
 
 	public List<wlmtxt_second_menu> listSecondMenu();
 
+	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id);
+
 }

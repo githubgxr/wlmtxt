@@ -46,4 +46,6 @@ public interface WorksDao {
 
 	List<wlmtxt_second_menu> listSecondMenu();
 
+	List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id);
+
 }

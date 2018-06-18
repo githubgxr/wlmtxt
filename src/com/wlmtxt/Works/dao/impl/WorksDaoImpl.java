@@ -34,6 +34,14 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
+		String hql = " from wlmtxt_second_menu  where second_menu_first_menu_id='" + first_menu_id + "'";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_second_menu> secondMenuList = query.list();
+		return secondMenuList;
+	}
+
+	@Override
 	public List<wlmtxt_second_menu> listSecondMenu() {
 		String hql = " from wlmtxt_second_menu  ";
 		Query query = getSession().createQuery(hql);

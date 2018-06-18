@@ -353,6 +353,27 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write(gson.toJson(firstMenuList));
 	}
 
+	/**
+	 * 根据第一类别ID获取第二类别列表
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu_byFirstMenuID() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
+	 * 获取所有第二级类别
+	 * 
+	 * @throws IOException
+	 */
 	public void listSecondMenu() throws IOException {
 		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
 		secondMenuList = worksService.listSecondMenu();
