@@ -5,18 +5,7 @@ import java.util.List;
 import com.wlmtxt.domain.DO.wlmtxt_admin;
 
 public interface AdminDao {
-	
-	/**
-	 * 管理员登录验证
-	 * @param admin
-	 * 				使用admin对象的用户名、密码匹配数据库有无此对象
-	 * @return	返回一个wlmtxt_admin对象
-	 * 
-	 * @author 王鹏志
-	 */
-	public boolean adminLogin(wlmtxt_admin admin);
-	
-	
+
 	/**
 	 * 查询一个管理员
 	 * @param admin
@@ -49,7 +38,7 @@ public interface AdminDao {
 	 * 						匹配admin的id属性更新记录
 	 * @author 王鹏志
 	 */	
-	public void updateAdmin (wlmtxt_admin admin);
+	public void update (wlmtxt_admin admin);
 	
 	/**
 	 * 查询所有管理员，前台分页列表显示

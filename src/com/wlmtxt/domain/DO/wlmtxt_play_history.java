@@ -7,14 +7,6 @@ public class wlmtxt_play_history {
 	private String play_history_works_id;
 	//用户id
 	private String play_history_user_id;
-	//是否在个人中心显示
-	private String play_history_show;
-	public String getPlay_history_show() {
-		return play_history_show;
-	}
-	public void setPlay_history_show(String play_history_show) {
-		this.play_history_show = play_history_show;
-	}
 	//创建时间
 	private String play_history_gmt_create;
 	//修改时间

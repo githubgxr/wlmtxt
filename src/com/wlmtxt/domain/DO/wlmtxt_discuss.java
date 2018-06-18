@@ -9,14 +9,6 @@ public class wlmtxt_discuss {
 	private String discuss_user_id;
 	//评论内容
 	private String discuss_content;
-	//是否删除
-	private String discuss_deleted;
-	public String getDiscuss_deleted() {
-		return discuss_deleted;
-	}
-	public void setDiscuss_deleted(String discuss_deleted) {
-		this.discuss_deleted = discuss_deleted;
-	}
 	//创建时间
 	private String discuss_gmt_create;
 	//修改时间
