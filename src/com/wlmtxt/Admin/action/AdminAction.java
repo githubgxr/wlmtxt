@@ -1,11 +1,7 @@
 package com.wlmtxt.Admin.action;
 
-import org.apache.struts2.ServletActionContext;
-
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Admin.service.AdminService;
-import com.wlmtxt.domain.DO.wlmtxt_admin;
 
 public class AdminAction extends ActionSupport {
 
@@ -22,7 +18,6 @@ public class AdminAction extends ActionSupport {
 	 * @return
 	 */
 	public String login() {
-		System.out.println("dd");
 		return "index";
 	}
 	

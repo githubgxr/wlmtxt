@@ -11,6 +11,12 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=basePath%>css/lwk/navbar.css" />
+<link rel="stylesheet" href="<%=basePath%>css/zb/zb.css" />
+<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=basePath%>css/zb/fontawesome-all.css" />
 </head>
 
 <body style="margin: 0; padding: 0; background-color: #f6f6f6;">
@@ -22,7 +28,7 @@
 			style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px; line-height: 36px;">
 			推荐</div>
 		<!--大推荐-->
-		<div id="dtj"
+		<div
 			style="background-size:660px 330px ; background-image:url('<%=basePath%>css/zb/img/4.png'); height: 330px; width: 660px; float: left;">
 			<div
 				style="margin: 280px 0 0 0; background-color: #fbfbfb; float: left; opacity: 0.5; width: 100%; height: 50px; line-height: 50px; color: #1cd388; padding: 0 20px;">小猪正在享受高空飞翔的快感</div>
@@ -35,7 +41,7 @@
 				<div
 					style="margin: 125px 0 0 0; background-color: #fbfbfb; float: right; opacity: 0.5; width: 100%; height: 30px; line-height: 30px; color: #1cd388; padding: 0 20px;">小猪正在享受高空飞翔的快感</div>
 			</div>
-			<div
+<div
 				style="background-size:240px 155px ; background-image:url('<%=basePath%>css/zb/img/4.png'); height: 155px; width: 240px; float: right;">
 				<div
 					style="margin: 125px 0 0 0; background-color: #fbfbfb; float: right; opacity: 0.5; width: 100%; height: 30px; line-height: 30px; color: #1cd388; padding: 0 20px;">小猪正在享受高空飞翔的快感</div>
@@ -196,7 +202,9 @@
 
 		<script type="text/javascript">
 			$(function() {
-				$("#dtj").click(
+				$("img")
+						.not(".user_img")
+						.click(
 								function() {
 									window.location.href = "/wlmtxt/view/index/video_details.jsp";
 								});

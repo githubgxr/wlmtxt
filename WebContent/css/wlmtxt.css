@@ -240,7 +240,7 @@ li a {
 	font-size: 12px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	/* height: 18px; */
+	height: 18px;
 	float: left;
 	line-height: 18px;
 }

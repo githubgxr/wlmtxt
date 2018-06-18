@@ -6,6 +6,4 @@
 	
 	<import resource="spring/Test.xml" />
 	<import resource="spring/Admin.xml" />
-	<import resource="spring/Works.xml" />
-	<import resource="spring/User.xml" />
 </beans>

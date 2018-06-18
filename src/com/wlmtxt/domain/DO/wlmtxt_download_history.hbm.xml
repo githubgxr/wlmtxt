@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-6-13 15:13:23 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-6-13 9:09:17 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.wlmtxt.domain.DO.wlmtxt_download_history" table="WLMTXT_DOWNLOAD_HISTORY">
         <id name="download_history_id" type="java.lang.String">
@@ -13,9 +13,6 @@
         </property>
         <property name="download_history_user_id" type="java.lang.String">
             <column name="DOWNLOAD_HISTORY_USER_ID" />
-        </property>
-        <property name="download_history_show" type="java.lang.String">
-            <column name="DOWNLOAD_HISTORY_SHOW" />
         </property>
         <property name="download_history_gmt_create" type="java.lang.String">
             <column name="DOWNLOAD_HISTORY_GMT_CREATE" />

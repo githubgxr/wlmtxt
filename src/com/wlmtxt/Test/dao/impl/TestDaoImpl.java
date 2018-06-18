@@ -27,7 +27,6 @@ public class TestDaoImpl implements TestDao {
 		String hql = "select tt from Test tt where tt.id='"+1+"'";
 		Query query = session.createQuery(hql);
 		Test new_t = (Test) query.uniqueResult();
-
 		return new_t;
 	}
 
