@@ -221,6 +221,7 @@ public class UserAction extends ActionSupport {
 		if ((md5.GetMD5Code(accpet_user.getUser_password())).equals(loginUser.getUser_password())) {
 			loginUser.setUser_password(md5.GetMD5Code(new_password));
 			String result = userService.modifyPassword(loginUser);
+System.out.println(loginUser.getUser_password());
 			if (result != null) {
 				pw.write("1");
 			} else {
