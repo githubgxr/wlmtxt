@@ -216,7 +216,6 @@
 		var $input = $(this), 
 		$label = $input.next('label'), 
 		labelVal = $label.html(); 
-		alert(labelVal);
 		$input.on( 'change', function(e){ 
 			var fileName = ''; 
 			if( this.files && this.files.length > 1 ) 
