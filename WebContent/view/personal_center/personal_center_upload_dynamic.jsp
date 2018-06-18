@@ -88,8 +88,9 @@
 						<div class="img_wrap_list img_cover">
 							<span>选择封面：</span>
 							<div class="imgnum">
-								<input type="file" class="filepath" id="imgfile" onchange="img_change(this)" />
-								<img class="img" id="img" src="<%=basePath%>img/upload_video.png" onclick="img_click()" /> 
+								<input type="file" class="filepath" id="imgfile"
+									onchange="img_change(this)" /> <img class="img" id="img"
+									src="<%=basePath%>img/upload_video.png" onclick="img_click()" />
 							</div>
 						</div>
 
@@ -97,7 +98,8 @@
 						<div class="img_wrap_list">
 							<span>选择作品：</span>
 							<div class="imgnum">
-								<input type="file" name="file" id="worksfile" class="inputfile" />
+								<input type="file" name="file" id="worksfile" class="inputfile"
+								data-multiple-caption="{count} files selected" multiple /> 
 								<label for="file">Choose a file</label>
 							</div>
 						</div>
@@ -165,8 +167,9 @@
 					if (input_keyword_value != ""
 							&& input_keyword_value != null) {
 						$(".div_box").css("display", "block");
-						
-						var str = '<div class="div_keyword">'+ input_keyword_value + '</div>';
+
+						var str = '<div class="div_keyword">'
+								+ input_keyword_value + '</div>';
 						if ($(".div_box").html() == "") {
 							$(".div_box").append(str);
 						} else {
@@ -198,13 +201,34 @@
 			var imgfile = document.getElementById("imgfile");
 			var reader = new FileReader();
 			reader.onload = function(evt) {
-				var img=document.getElementById("img");
+				var img = document.getElementById("img");
 				img.src = evt.target.result;
 			}
 			reader.readAsDataURL(file.files[0]);
 		}
 	</script>
+	<script type="text/javascript">
+	$(".inputfile").each( function(){ 
+		var $input = $(this), 
+		$label = $input.next('label'), 
+		labelVal = $label.html(); 
+		alert(labelVal);
+		$input.on( 'change', function(e){ 
+			var fileName = ''; 
+			if( this.files && this.files.length > 1 ) 
+				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' )
+				.replace( '{count}', this.files.length ); 
+			else if(e.target.value)
+				fileName = e.target.value.split( '\\' ).pop(); 
+			if( fileName ) 
+				$label.html( fileName ); 
+			else 
+				$label.html( labelVal ); 
+			}); 
+		});
 
+
+	</script>
 </body>
 <script type="text/javascript"
 	src="<%=basePath%>/js/personal_center/personal_center_upload_dynamic.js">
