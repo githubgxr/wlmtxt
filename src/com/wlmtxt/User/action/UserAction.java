@@ -1,11 +1,7 @@
 package com.wlmtxt.User.action;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,7 +15,6 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import util.JavaMail;
 import util.JsonUtils;
 import util.ReflectUtil;
-import util.TeamUtil;
 import util.md5;
 
 public class UserAction extends ActionSupport {
@@ -224,7 +219,7 @@ public class UserAction extends ActionSupport {
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		if ((md5.GetMD5Code(accpet_user.getUser_password())).equals(loginUser.getUser_password())) {
-			loginUser.setUser_password(new_password);
+			loginUser.setUser_password(md5.GetMD5Code(new_password));
 			String result = userService.modifyPassword(loginUser);
 			if (result != null) {
 				pw.write("1");
