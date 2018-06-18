@@ -145,13 +145,21 @@
 	padding: 0px;
 }
 
-.imgnum input {
+.imgnum #imgfile {
 	position: absolute;
 	margin-left: 180px;
 	margin-top: 0px;
 	width: 160px;
 	height: 100px;
-	opacity: 0;
+	opacity: 0; 
+}
+#worksfile{
+	width: 160px;
+	height: 30px;
+	position: absolute;
+	margin-left: 180px;
+	margin-top: 0px;
+	color: #1dd388;
 }
 
 .imgnum img {
