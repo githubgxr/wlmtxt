@@ -1,5 +1,4 @@
 var if_login = false;
-
 //查询是否收藏
 function checkCollect() {
 	var collect_xhr = new XMLHttpRequest();
@@ -176,9 +175,9 @@ function checkLogin() {
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							if (xhr.responseText == "1") {
-								console.log("下载成功！");
+								toastr.success("下载成功！");
 							} else {
-								console.log("下载失败！");
+								toastr.error("下载失败！");
 								return false;
 							}
 						}
@@ -227,9 +226,9 @@ function checkLogin() {
 													document
 															.getElementById("textarea_comment").value = "";
 
-													console.log("评论成功！");
+													toastr.success("评论成功！");
 												} else {
-													console.log("评论失败！");
+													toastr.error("评论失败！");
 													return false;
 												}
 											}
@@ -246,9 +245,9 @@ function checkLogin() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							if (xhr.responseText == "1") {
 								$(this).remove();
-								console.log("删除评论成功！");
+								toastr.success("删除评论成功！");
 							} else {
-								console.log("删除评论失败！");
+								toastr.error("删除评论失败！");
 								return false;
 							}
 						}
