@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +18,7 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 
 import util.JavaMail;
 import util.JsonUtils;
+import util.ReflectUtil;
 import util.TeamUtil;
 import util.md5;
 
@@ -156,13 +158,17 @@ public class UserAction extends ActionSupport {
 	 * 判断是否已经登录<br>
 	 * 
 	 * @throws IOException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
 	 */
-	public void isLogin() throws IOException {
+	public void isLogin() throws IOException, IllegalArgumentException, IllegalAccessException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		PrintWriter pw = response.getWriter();
 		if (user != null) {
+			// 对象属性值为null替换为""
+			ReflectUtil.getAllField(user);
 			pw.write(JsonUtils.toJson(user));
 		} else {
 			pw.write("2");
