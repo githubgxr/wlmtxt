@@ -1,5 +1,4 @@
 var if_login = false;
-
 //查询是否收藏
 function checkCollect() {
 	var collect_xhr = new XMLHttpRequest();
@@ -97,6 +96,22 @@ function checkLogin() {
 				if_login = true;
 				console.log("if_login：" + if_login);
 				/* 登录后 */
+				/** *********************个人资料*********************************** */
+				//用户名
+				$(".div_username").html(userInfo.user_username);
+				$(".input_username").val(userInfo.user_username);
+				//密码
+				/*$(".div_password").html(userInfo.user_password);
+				$(".input_password").val(userInfo.user_password);*/
+				//邮箱
+				$(".div_email").html(userInfo.user_mail);
+				$(".input_email").val(userInfo.user_mail);
+				//性别
+				$(".div_sex").html(userInfo.user_sex);
+				$(".input_sex").val(userInfo.user_sex);
+				//简介
+				$(".div_bio").html(userInfo.user_bio);
+				$(".input_bio").val(userInfo.user_bio);
 				/** *********************详情*********************************** */
 				/*-----------收藏----------*/
 				// 收藏
@@ -160,9 +175,9 @@ function checkLogin() {
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							if (xhr.responseText == "1") {
-								console.log("下载成功！");
+								toastr.success("下载成功！");
 							} else {
-								console.log("下载失败！");
+								toastr.error("下载失败！");
 								return false;
 							}
 						}
@@ -211,9 +226,9 @@ function checkLogin() {
 													document
 															.getElementById("textarea_comment").value = "";
 
-													console.log("评论成功！");
+													toastr.success("评论成功！");
 												} else {
-													console.log("评论失败！");
+													toastr.error("评论失败！");
 													return false;
 												}
 											}
@@ -230,9 +245,9 @@ function checkLogin() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							if (xhr.responseText == "1") {
 								$(this).remove();
-								console.log("删除评论成功！");
+								toastr.success("删除评论成功！");
 							} else {
-								console.log("删除评论失败！");
+								toastr.error("删除评论失败！");
 								return false;
 							}
 						}

@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="<%=basePath%>css/lwk/navbar.css" />
 <script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
 <script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
 </head>
 
@@ -104,7 +105,7 @@
 				<button class="btn btn-success btn-block reg_btn button_a"
 					style="font-size: 16px;" id="register_button" onclick="register()">注册</button>
 			</div>
-			<h4 style="display:none;padding:20px 10px;float:left;" id="check_email_text">邮件发送成功，请进行验证...</h4>
+			<h4 style="display:none;padding:20px;float:left;" id="check_email_text">邮件发送成功，请进行验证...</h4>
 		</div>
 	</div>
 

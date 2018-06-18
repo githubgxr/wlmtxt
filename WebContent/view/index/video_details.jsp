@@ -79,14 +79,14 @@
 					下载-->
 				<div style="margin: 10px 0 0 0;">
 					<div>
-						<!-- <a class="button_code user_operate button_a" href="../../css/zb/img/trailer.mp4" download="trailer">
+						<a class="button_code user_operate button_a" href="../../css/zb/img/trailer.mp4" download="trailer">
 							<i class="fas fa-download"  style="width:50px;float:left;line-height:32px;text-align:left;margin:0 0 0 -10px;">&nbsp;下载</i>
 							<div style="float:left;"></div>
-						</a> -->
-						<div class="button_code user_operate button_a">
+						</a>
+						<!-- <div class="button_code user_operate button_a">
 							<i class="fas fa-download"
 								style="width: 50px; float: left; line-height: 32px; text-align: left; margin: 0 0 0 -10px;">&nbsp;下载</i>
-						</div>
+						</div> -->
 						<div class="dz_no user_operate" id="thumbs_number_div"
 							style="float: right;">
 							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number">2555</span>
