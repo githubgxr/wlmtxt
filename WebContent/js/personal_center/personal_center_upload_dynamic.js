@@ -44,9 +44,9 @@ function uploadWorks(){
 	}
 	var formData=new FormData();
 	xmlhttp.open("POST","/wlmtxt/Works/Works_uploadWorks",true);
-	formData.append("works_second_menu_id",works_classificationTwo);
-	formData.append("works_title",input_title);
-	formData.append("works_reason",works_describe);
+	formData.append("accept_works.works_second_menu_id",works_classificationTwo);
+	formData.append("accept_works.works_title",input_title);
+	formData.append("accept_works.works_reason",works_describe);
 	formData.append("keyword",div_keyword);
 	formData.append("imgfile",imgfile);
 	formData.append("worksfile",worksfile);

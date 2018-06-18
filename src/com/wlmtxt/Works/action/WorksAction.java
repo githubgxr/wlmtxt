@@ -277,7 +277,7 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void uploadWorks() {
 		// 处理其他数据
-
+		System.out.println(accept_works);
 		// 处理封面
 		if (imgfile != null) {
 
