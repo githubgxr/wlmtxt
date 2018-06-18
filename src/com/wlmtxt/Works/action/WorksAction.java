@@ -39,7 +39,9 @@ public class WorksAction extends ActionSupport {
 
 	// 作品播放
 	private String worksName;
+	private String imgName;
 	private InputStream inputStream;
+
 	// 作品
 	private File worksfile;
 	private String worksfileFileName;
@@ -59,6 +61,14 @@ public class WorksAction extends ActionSupport {
 
 	public File getWorksfile() {
 		return worksfile;
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
 
 	public String getWorksName() {
@@ -187,13 +197,25 @@ public class WorksAction extends ActionSupport {
 		this.worksService = worksService;
 	}
 
+	/*
+	 * 
+	 */
+	public String getImg() throws FileNotFoundException {
+		if (imgName.equals("") || imgName == null) {
+			imgName = "";
+		}
+		File file = new File("C://wlmtxt/img/" + imgName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
+	}
+
 	public String getVideo() throws FileNotFoundException {
-		/*
-		 * 获取路径
-		 */
-		/*
-		 * 
-		 */
 		if (worksName.equals("") || worksName == null) {
 			worksName = "";
 		}
@@ -205,7 +227,7 @@ public class WorksAction extends ActionSupport {
 			// file = new File("C://wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
-		return "getVideo";
+		return "getFile";
 	}
 
 	/**
