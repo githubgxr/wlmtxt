@@ -12,6 +12,7 @@ import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
@@ -30,6 +31,14 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public void saveLike(wlmtxt_like like) throws Exception {
 		getSession().save(like);
+	}
+
+	@Override
+	public List<wlmtxt_second_menu> listSecondMenu() {
+		String hql = " from wlmtxt_second_menu  ";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_second_menu> secondMenuList = query.list();
+		return secondMenuList;
 	}
 
 	@Override

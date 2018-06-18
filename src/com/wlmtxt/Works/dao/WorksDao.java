@@ -7,6 +7,7 @@ import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
@@ -42,5 +43,7 @@ public interface WorksDao {
 	void saveWorks(wlmtxt_works accept_works);
 
 	List<wlmtxt_first_menu> listFirstMenu();
+
+	List<wlmtxt_second_menu> listSecondMenu();
 
 }
