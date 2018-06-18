@@ -63,16 +63,13 @@ public class UserAction extends ActionSupport {
 	 * 2-失败<br>
 	 * @throws IOException 
 	 */
-	public void logout() throws IOException {
+	public String logout() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		try {
-			ActionContext.getContext().getSession().remove("loginResult");
-			pw.write("1");
-		} catch (Exception e) {
-			pw.write("2");
-		}
+		ActionContext.getContext().getSession().remove("loginResult");
+		pw.write("1");
+		return "skipToIndexPage";
 	}
 	/**
 	 * 1-验证邮件发送成功<br />
@@ -82,11 +79,8 @@ public class UserAction extends ActionSupport {
 	public void sendRegisterMail() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		//此返回值无作用
-//		String str = userService.saveUser(accpet_user);
-		String href = "http://localhost:8080/wlmtxt/User_skipActivatePage?accpet_user.user_mail=1074545235@qq.com&accpet_user.user_password=111111&accpet_user.user_username=小官";
-//		String href = "http://localhost:8080/wlmtxt/User_registerUser?accpet_user.user_mail="+accpet_user.getUser_mail()+"&accpet_user.user_password="+accpet_user.getUser_password()+"&accpet_user.user_username"+accpet_user.getUser_username();
-//		String href = "http://localhost:8080/wlmtxt/User_skipActivatePage";
+		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="+accpet_user.getUser_mail()+"&accpet_user.user_password="+accpet_user.getUser_password()+"&accpet_user.user_username="+accpet_user.getUser_username();
+//		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		//邮件内容
 		String mailcontent = "<p><a href="+href+">register</a></p>";
 		PrintWriter pw = response.getWriter();
@@ -103,7 +97,7 @@ public class UserAction extends ActionSupport {
 	 * @return 跳转到激活页面
 	 */
 	public String skipActivatePage() {
-		return "activatePage";
+		return "skipActivatePage";
 	}
 	/**
 	 * 确认激活按钮
@@ -210,4 +204,119 @@ public class UserAction extends ActionSupport {
 		
 	}
 	
+	public String skipToIndexPage() {
+		return "skipToIndexPage";
+	}
+	/**
+	 * 跳转到分类页
+	 * @return
+	 */
+	public String skipToCategoryPage() {
+		return "skipToCategoryPage";
+	}
+	/**
+	 * 跳转到排行榜页面
+	 * @return
+	 */
+	public String skipToRankPage() {
+		return "skipToRankPage";
+	}
+	/**
+	 * 跳转到发布作品页面
+	 * @return
+	 */
+	public String skipToPublishWorksPage() {
+		return "skipToPublishWorksPage";
+	}
+	/**
+	 * 跳转到个人中心页面
+	 * @return
+	 *//*
+	public String skipToPersonalCenterPage() {
+		return "skipToMyDynamicPage";
+	}*/
+	/**
+	 * 跳转到我的动态页面
+	 * @return
+	 */
+	public String skipToMyDynamicPage() {
+		return "skipToMyDynamicPage";
+	}
+	/**
+	 * 跳转到个人资料页
+	 * @return
+	 */
+	public String skipToPersonalDataPage() {
+		return "skipToPersonalDataPage";
+	}
+	/**
+	 * 跳转到我的关注页面
+	 * @return
+	 */
+	public String skipToMyAttentionPage() {
+		return "skipToMyAttentionPage";
+	}
+	/**
+	 * 跳转到我的粉丝页面
+	 * @return
+	 */
+	public String skipToMyFansPage() {
+		return "skipToMyFansPage";
+	}
+	/**
+	 *跳转到播放历史页面
+	 * @return
+	 */
+	public String skipToWatchHistoryPage() {
+		return "skipToWatchHistoryPage";
+	}
+	/**
+	 *跳转到与我相关之我的收藏页面
+	 * @return
+	 */
+	public String skipToRelationCollectionPage() {
+		return "skipToRelationCollectionPage";
+	}
+	/**
+	 *跳转到与我相关之我的点赞页面
+	 * @return
+	 */
+	public String skipToRelationAppreciatesPage() {
+		return "skipToRelationAppreciatesPage";
+	}
+	/**
+	 *跳转到与我相关之我的评论页面
+	 * @return
+	 */
+	public String skipToRelationCommentsPage() {
+		return "skipToRelationCommentsPage";
+	}
+	/**
+	 * 跳转到消息中心之点赞通知页
+	 * @return
+	 */
+	public String skipToAppreciatesNoticePage() {
+		return "skipToAppreciatesNoticePage";
+	}
+	/**
+	 * 跳转到消息中心之收藏通知页
+	 * @return
+	 */
+	public String skipToCollectionNoticePage() {
+		return "skipToCollectionNoticePage";
+	}
+	/**
+	 * 跳转到消息中心之评论通知页
+	 * @return
+	 */
+	public String skipToCommentsNoticePage() {
+		return "skipToCommentsNoticePage";
+	}
+	/**
+	 * 跳转到消息中心之审核通知页
+	 * @return
+	 */
+	public String skipToAuditNoticePage() {
+		return "skipToAuditNoticePage";
+	}
 }
