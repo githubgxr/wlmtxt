@@ -274,8 +274,11 @@ public class WorksAction extends ActionSupport {
 
 	/**
 	 * 上传作品
+	 * 
+	 * @throws IOException
 	 */
-	public void uploadWorks() {
+	public void uploadWorks() throws IOException {
+		System.out.println("uploadWorks");
 		// 处理其他数据
 		System.out.println(accept_works);
 		// 处理封面
@@ -303,36 +306,27 @@ public class WorksAction extends ActionSupport {
 		}
 
 		// 处理视频
-		// if (worksfile != null) {
-		//
-		// String filePath;
-		//
-		// String fileName = UUID.randomUUID().toString()
-		// + worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
-		//
-		// filePath = "c://wlmtxt/video/" + fileName;
-		//
-		// File newFile = new File(filePath);
-		//
-		// try {
-		// FileUtils.copyFile(worksfile, newFile);
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// System.out.println(fileName);
-		//
-		// } else {
-		// System.out.println("未上传视频");
-		// }
+		if (worksfile != null) {
 
-		try {
-			HttpServletResponse response = ServletActionContext.getResponse();
-			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().write("1");
-		} catch (Exception e) {
-			System.out.println("2");
-			e.printStackTrace();
+			String filePath;
+
+			String fileName = UUID.randomUUID().toString()
+					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
+
+			filePath = "c://wlmtxt/video/" + fileName;
+
+			File newFile = new File(filePath);
+
+			try {
+				FileUtils.copyFile(worksfile, newFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			System.out.println(fileName);
+
+		} else {
+			System.out.println("未上传视频");
 		}
 	}
 

@@ -97,9 +97,11 @@
 						<div class="img_wrap_list">
 							<span>选择作品：</span>
 							<div class="imgnum">
-								<input type="file" id="worksfile" onchange="file_change(this)"	/>
+								<input type="file" id="worksfile" onchange=""	/>
 							</div>
 						</div>
+						
+						
 						<div class=" img_wrap_list">
 							<a class="button_a" onclick="uploadWorks()">确认发布</a>
 						</div>
@@ -201,15 +203,6 @@
 				var img=document.getElementById("img");
 				img.src = evt.target.result;
 			}
-			reader.readAsDataURL(file.files[0]);
-		}
-		function file_change(file) {
-			var worksfile = document.getElementById("worksfile");
-			var reader = new FileReader();
-			reader.onload = function(evt) {
-				var file=document.getElementById("file");
-				file.src = evt.target.result; 
-				}
 			reader.readAsDataURL(file.files[0]);
 		}
 	</script>
