@@ -56,6 +56,9 @@ $(".check_pwd_btn").click(function(){
 	}else if($(".new_repassword").val()!==$(".new_password").val()){
 		toastr.error("两次密码不一致！");
 		return false;
+	}else if($(".old_password").val()==$(".new_password").val()){
+		toastr.error("新旧密码不能相同！");
+		return false;
 	}else{
 		var formData=new FormData();
 		//旧密码
