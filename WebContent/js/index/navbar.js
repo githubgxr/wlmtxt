@@ -97,6 +97,22 @@ function checkLogin() {
 				if_login = true;
 				console.log("if_login：" + if_login);
 				/* 登录后 */
+				/** *********************个人资料*********************************** */
+				//用户名
+				$(".div_username").html(userInfo.user_username);
+				$(".input_username").val(userInfo.user_username);
+				//密码
+				/*$(".div_password").html(userInfo.user_password);
+				$(".input_password").val(userInfo.user_password);*/
+				//邮箱
+				$(".div_email").html(userInfo.user_mail);
+				$(".input_email").val(userInfo.user_mail);
+				//性别
+				/*$(".div_sex").html(userInfo.user_sex);
+				$(".input_sex").val(userInfo.user_sex);*/
+				//简介
+				$(".div_bio").html(userInfo.user_bio);
+				$(".input_bio").val(userInfo.user_bio);
 				/** *********************详情*********************************** */
 				/*-----------收藏----------*/
 				// 收藏

@@ -41,23 +41,23 @@
 								<div class="personal_info_details">
 									<div class="img_wrap_list">
 										<span class="highlight">昵称：</span>
-										<div class="personal_info_value highlight">熊子婷</div>
-										<input type="text" class="input_xzt xg" style="width:400px;" placeholder="" value="熊子婷" />
+										<div class="personal_info_value highlight div_username"></div>
+										<input type="text"   class="input_xzt xg input_username" style="width:400px;" placeholder="" value="" />
 									</div>
 									<div class="img_wrap_list">
 										<span>账号：</span>
-										<div class="personal_info_value">xzt15478013</div>
-										<input type="text" class="input_xzt xg" style="width:400px;" placeholder="" value="熊子婷" />
+										<div class="personal_info_value div_email"></div>
+										<input type="text" class="input_xzt xg input_email" style="width:400px;" placeholder="" value="" />
 									</div>
 									<div class="img_wrap_list">
 										<span>性别：</span>
-										<div class="personal_info_value">女</div>
-										<input type="text" class="input_xzt xg" style="width:400px;" placeholder="" value="熊子婷" />
+										<div class="personal_info_value div_sex"></div>
+										<input type="text" class="input_xzt xg input_sex" style="width:400px;" placeholder="" value="" />
 									</div>
 									<div class="img_wrap_list">
 										<span>简介：</span>
-										<div class="personal_info_value grjj">电饭锅共同语言不广发银行gfhjgjh不傻是dfhqwerutyernvferghfnregv好腹黑如果和雕刻时光哈尔你发的光华科技覅额日而你个费迪南德克己奉公过得好快解放后扣几分</div>
-										<textarea class="textarea_xzt xg" style="width:400px;" maxlength="100">电饭锅共同语言不广发银行gfhjgjh不傻是dfhqwerutyernvferghfnregv好腹黑如果和雕刻时光哈尔你发的光华科技覅额日而你个费迪南德克己奉公过得好快解放后扣几分
+										<div class="personal_info_value grjj div_bio"></div>
+										<textarea class="textarea_xzt xg input_bio" style="width:400px;" maxlength="100">
 										</textarea>
 									</div>
 									
