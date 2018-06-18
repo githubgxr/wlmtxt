@@ -25,8 +25,13 @@ import util.md5;
 public class UserAction extends ActionSupport {
 
 	private UserService userService;
+	
 	private wlmtxt_user accpet_user;
+	
+	// 修改密码，新密码
 	private String new_password;
+	
+	// 
 
 	public String getNew_password() {
 		return new_password;
@@ -190,11 +195,11 @@ public class UserAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		PrintWriter pw = response.getWriter();
-//		loginUser.setUser_username(accpet_user.getUser_username());
-//		loginUser.setUser_mail(accpet_user.getUser_mail());
-//		loginUser.setUser_sex(accpet_user.getUser_sex());
-		accpet_user.setUser_id(loginUser.getUser_id());
-		String modifyResult = userService.modifyPersonalData(accpet_user);
+		loginUser.setUser_username(accpet_user.getUser_username());
+		loginUser.setUser_mail(accpet_user.getUser_mail());
+		loginUser.setUser_sex(accpet_user.getUser_sex());
+		loginUser.setUser_bio(accpet_user.getUser_bio());
+		String modifyResult = userService.modifyPersonalData(loginUser);
 		if ("1".equals(modifyResult)) {
 			pw.write("1");
 		} else {
@@ -221,7 +226,7 @@ public class UserAction extends ActionSupport {
 		if ((md5.GetMD5Code(accpet_user.getUser_password())).equals(loginUser.getUser_password())) {
 			loginUser.setUser_password(new_password);
 			String result = userService.modifyPassword(loginUser);
-			if ("1".equals(result)) {
+			if (result != null) {
 				pw.write("1");
 			} else {
 				pw.write("2");
@@ -244,7 +249,7 @@ public class UserAction extends ActionSupport {
 	 * @throws IOException 
 	 * TODO 未测试
 	 */
-	public void getUserAvatar() throws IOException {
+	/*public void getUserAvatar() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		//头像后缀名
@@ -277,12 +282,20 @@ public class UserAction extends ActionSupport {
 		os.flush();
 		os.close();
 		is.close();
-	}
+	}*/
+	
+	
+	
 	/**
 	 * 关注用户
 	 * TODO
+	 * @throws IOException 
 	 */
-	public void 	followUser() {
+	public void 	followUser() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		
 	}
 	
