@@ -19,6 +19,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
+@SuppressWarnings("serial")
 public class WorksAction extends ActionSupport {
 
 	wlmtxt_user accept_user;
@@ -292,6 +293,15 @@ public class WorksAction extends ActionSupport {
 			}
 
 			System.out.println(fileName);
+
+			try {
+				HttpServletResponse response = ServletActionContext.getResponse();
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("1");
+			} catch (Exception e) {
+				System.out.println("2");
+				e.printStackTrace();
+			}
 
 		} else {
 			System.out.println("未上传封面");
