@@ -17,6 +17,8 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 
 import util.JavaMail;
 import util.JsonUtils;
+import util.TeamUtil;
+import util.md5;
 
 public class UserAction extends ActionSupport {
 
@@ -90,7 +92,7 @@ public class UserAction extends ActionSupport {
 	public void sendRegisterMail() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="+accpet_user.getUser_mail()+"&accpet_user.user_password="+accpet_user.getUser_password()+"&accpet_user.user_username="+accpet_user.getUser_username();
+		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="+accpet_user.getUser_mail()+"&accpet_user.user_password="+md5.GetMD5Code(accpet_user.getUser_password())+"&accpet_user.user_username="+accpet_user.getUser_username();
 //		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		//邮件内容
 		String mailcontent = "<p><a href="+href+">register</a></p>";
