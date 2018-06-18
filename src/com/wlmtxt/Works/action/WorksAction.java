@@ -29,10 +29,12 @@ public class WorksAction extends ActionSupport {
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
 
+	// 作品
 	private File worksfile;
 	private String worksfileFileName;
 	private String worksfileContentType;
 
+	// 封面
 	private File imgfile;
 	private String imgfileFileName;
 	private String imgfileContentType;
