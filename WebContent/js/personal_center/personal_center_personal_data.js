@@ -64,7 +64,7 @@ $(".check_pwd_btn").click(function(){
 		//旧密码
 		formData.append("accpet_user.user_password", $(".old_password").val());
 		//新密码
-		formData.append("accpet_user.new_password", $(".new_password").val());
+		formData.append("new_password", $(".new_password").val());
 		var xhr=new XMLHttpRequest();
 		xhr.open("POST","/wlmtxt/User/User_modifyPassword");
 		xhr.send(formData);
