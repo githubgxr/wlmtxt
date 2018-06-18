@@ -25,8 +25,13 @@ import util.md5;
 public class UserAction extends ActionSupport {
 
 	private UserService userService;
+	
 	private wlmtxt_user accpet_user;
+	
+	// 修改密码，新密码
 	private String new_password;
+	
+	// 
 
 	public String getNew_password() {
 		return new_password;
@@ -244,7 +249,7 @@ public class UserAction extends ActionSupport {
 	 * @throws IOException 
 	 * TODO 未测试
 	 */
-	public void getUserAvatar() throws IOException {
+	/*public void getUserAvatar() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		//头像后缀名
@@ -277,12 +282,20 @@ public class UserAction extends ActionSupport {
 		os.flush();
 		os.close();
 		is.close();
-	}
+	}*/
+	
+	
+	
 	/**
 	 * 关注用户
 	 * TODO
+	 * @throws IOException 
 	 */
-	public void 	followUser() {
+	public void 	followUser() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		
 	}
 	
