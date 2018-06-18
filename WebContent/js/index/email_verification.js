@@ -39,6 +39,10 @@ document.getElementById("register_check_btn").onclick=function(){
 				
 			}else{
 				console.log("激活失败！");
+				var str='<img src="/wlmtxt/img/check_failed.png" width="50px" style="float:left;margin:0 0 0 120px;"/>'
+					str += '<h4 style="width:300px;line-height:50px;float:left;margin:0 30px;">很遗憾，激活账号失败！</h4>';
+				str +='<button class="button_a" style="width:200px;height:50px;float:left;margin:50px 170px;font-size:16px;" onclick="checkSuccess()">返回首页</button>';
+					$("#register_check_div").html(str);
 				return false;
 			}
 		}
