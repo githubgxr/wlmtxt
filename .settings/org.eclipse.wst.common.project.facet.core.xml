@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
-<<<<<<< HEAD
-=======
   <fixed facet="jst.web"/>
->>>>>>> origin/LYQ
   <fixed facet="java"/>
   <fixed facet="wst.jsdt.web"/>
   <installed facet="java" version="1.8"/>
