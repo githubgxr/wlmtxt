@@ -46,9 +46,7 @@
 		<div style="background-color: #FFFFFF;margin: 20px calc( ( 100% - 1000px ) / 2 ) 0px;border-radius: 5px;padding: 20px 20px 0 20px;">
 			<div class="llls_header list_header" style="margin: 0 0 20px 0;">
 				<i class="header_line"></i>
-				<div class="title" style="padding:0 0 20px 0;">
-					<h3 class="header-title-firstname">分类-电影</h3>
-				</div>
+					<h3 style="margin:4px 0 0 0;">分类-电影</h3>
 			</div>
 			<div class="llls_content list_container" style="margin:20px 0 20px 0;">
 				<ul id="llls_list_container">
