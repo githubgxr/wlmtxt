@@ -298,52 +298,42 @@ public class WorksAction extends ActionSupport {
 
 			System.out.println(fileName);
 
-			try {
-				HttpServletResponse response = ServletActionContext.getResponse();
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().write("1");
-			} catch (Exception e) {
-				System.out.println("2");
-				e.printStackTrace();
-			}
-
 		} else {
 			System.out.println("未上传封面");
 		}
 
 		// 处理视频
-		if (worksfile != null) {
+		// if (worksfile != null) {
+		//
+		// String filePath;
+		//
+		// String fileName = UUID.randomUUID().toString()
+		// + worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
+		//
+		// filePath = "c://wlmtxt/video/" + fileName;
+		//
+		// File newFile = new File(filePath);
+		//
+		// try {
+		// FileUtils.copyFile(worksfile, newFile);
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+		//
+		// System.out.println(fileName);
+		//
+		// } else {
+		// System.out.println("未上传视频");
+		// }
 
-			String filePath;
-
-			String fileName = UUID.randomUUID().toString()
-					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
-
-			filePath = "c://wlmtxt/img/" + fileName;
-
-			File newFile = new File(filePath);
-
-			try {
-				FileUtils.copyFile(worksfile, newFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			System.out.println(fileName);
-
-			try {
-				HttpServletResponse response = ServletActionContext.getResponse();
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().write("1");
-			} catch (Exception e) {
-				System.out.println("2");
-				e.printStackTrace();
-			}
-
-		} else {
-			System.out.println("未上传封面");
+		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("1");
+		} catch (Exception e) {
+			System.out.println("2");
+			e.printStackTrace();
 		}
-
 	}
 
 	/**
