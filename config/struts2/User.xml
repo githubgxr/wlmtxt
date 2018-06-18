@@ -6,6 +6,12 @@
 	<package name="User" namespace="/User" extends="struts-default">
 		<action name="User_*" class="com.wlmtxt.User.action.UserAction"
 			method="{1}">
+			
+			
+			<!--TODO 忘记密码，修改密码页面 -->
+			<result name="skipToModifyPasswordPage">/</result>
+			
+			
 			<!-- 激活页面-->
 			<result name="skipActivatePage">/view/index/email_verification.jsp</result>
 			<!--  跳转到首页-->
