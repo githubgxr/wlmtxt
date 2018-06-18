@@ -7,26 +7,16 @@
 %>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title></title>
-
-<script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="../../css/bootstrap.min.css" />
-<link rel="stylesheet" href="../../css/navbar/style.css" />
-<link rel="stylesheet" href="../../css/zb/fontawesome-all.css" />
-<link rel="stylesheet" href="../../css/zb/zb.css" />
-<link rel="stylesheet" href="../../css/wlmtxt.css" />
-<link rel="stylesheet" href="../../css/xzt.css" />
 </head>
-
 <body style="margin: 0; padding: 0; background-color: #f6f6f6;">
 	<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 	<!--<div style="background-color: blanchedalmond;height: 230px;"></div>-->
 	<div style="width: 960px; margin: 0 calc(( 100% - 960px)/2);">
+		<!--隐藏的div，作品id  -->
+		<div id="video_id" style="display: none;"></div>
 		<!--顶部-->
 		<div
 			style="float: left; background-color: #ffffff; padding: 0 20px; border-radius: 5px; margin: 20px 0 0 0;">
@@ -63,14 +53,15 @@
 					<!--关注和粉丝-->
 					<div style="color: #99a2aa;">
 						<div style="width: 85px; float: left;">
-							关注：<span style="color: #1cd388;">20</span>
+							关注：<span id="his_attention" style="color: #1cd388;">20</span>
 						</div>
 						<div style="width: 85px; float: right;">
-							粉丝：<span style="color: #1cd388;">5</span>
+							粉丝：<span id="his_fans" style="color: #1cd388;">5</span>
 						</div>
 					</div>
 					<div>
-						<button class="button_a" style="width: 100%; margin: 10px 0;">关注</button>
+						<button class="button_a user_operate not_focus" id="focus_btn"
+							style="width: 100%; margin: 10px 0;">+ 关注</button>
 					</div>
 				</div>
 			</div>
@@ -88,18 +79,25 @@
 					下载-->
 				<div style="margin: 10px 0 0 0;">
 					<div>
-						<button class="button_code">
-							<i class="fas fa-download"></i>&nbsp;下载
-						</button>
-
-						<div class="dz_yes" style="float: right;">
-							<i class="fas fa-thumbs-up"></i>&nbsp;顶255
+						<!-- <a class="button_code user_operate button_a" href="../../css/zb/img/trailer.mp4" download="trailer">
+							<i class="fas fa-download"  style="width:50px;float:left;line-height:32px;text-align:left;margin:0 0 0 -10px;">&nbsp;下载</i>
+							<div style="float:left;"></div>
+						</a> -->
+						<div class="button_code user_operate button_a">
+							<i class="fas fa-download"
+								style="width: 50px; float: left; line-height: 32px; text-align: left; margin: 0 0 0 -10px;">&nbsp;下载</i>
 						</div>
-						<div class="dz_no" style="float: right; margin: 0 20px;">
-							<i class="fas fa-heart"></i>&nbsp;收藏50
+						<div class="dz_no user_operate" id="thumbs_number_div"
+							style="float: right;">
+							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number">2555</span>
 						</div>
-						<div class="dz_no" style="float: right; margin: 0">
-							<i class="fas fa-play-circle"></i>&nbsp;播放500
+						<div class="dz_no user_operate" id="collect_number_div"
+							style="float: right; margin: 0 20px;">
+							<i class="fas fa-heart"></i>&nbsp;收藏<span id="collect_number">500</span>
+						</div>
+						<div class="dz_no" id="play_number_div"
+							style="float: right; margin: 0">
+							<i class="fas fa-play-circle"></i>&nbsp;播放<span id="play_number">30</span>
 						</div>
 					</div>
 				</div>
@@ -153,95 +151,99 @@
 				<div style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px;">2452&nbsp;评论</div>
 				<!--发表评论-->
 				<div>
-					<textarea class="form-control textarea_pl"
+					<textarea class="form-control textarea_pl" id="textarea_comment"
 						style="width: 90%; float: left;"></textarea>
-					<div class="button_pl" style="float: right;">
+					<div class="button_pl user_operate" style="float: right;" id="video_comment_btn">
 						发表<br />评论
 					</div>
 				</div>
-				<!--遍历内容-->
-				<div style="float: left; width: 100%;">
-					<hr style="width: 100%;" />
-					<!--整个评论-->
+				<div id="comment_div" style="float:left;width:100%;">
+					<!--遍历内容-->
 					<div style="float: left; width: 100%;">
-						<!--左边-->
-						<div style="float: left; margin: 0 30px 0 0; width: 70px;">
-							<!--头像-->
-							<img class="user_img" src="../../css/zb/img/tx.jpg"
-								style="float: left;" />
-							<div
-								style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
-						</div>
-						<!--右边-->
-						<div style="float: right; width: 820px;">
-							<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是最好看的。</div>
-							<div style="color: #bfbfbf;">2017-05-11 23:22</div>
+						<hr style="width: 100%;" />
+						<!--整个评论-->
+						<div style="float: left; width: 100%;">
+							<!--左边-->
+							<div style="float: left; margin: 0 30px 0 0; width: 70px;">
+								<!--头像-->
+								<img class="user_img" src="../../css/zb/img/tx.jpg"
+									style="float: left;" />
+								<div
+									style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
+							</div>
+							<!--右边-->
+							<div style="float: right; width: 820px;">
+								<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是最好看的。</div>
+								<div style="color: #bfbfbf;">2017-05-11 23:22</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!--遍历内容-->
-				<div style="float: left; width: 100%;">
-					<hr style="width: 100%;" />
-					<!--整个评论-->
+					<!--遍历内容-->
 					<div style="float: left; width: 100%;">
-						<!--左边-->
-						<div style="float: left; margin: 0 30px 0 0; width: 70px;">
-							<!--头像-->
-							<img class="user_img" src="../../css/zb/img/tx.jpg"
-								style="float: left;" />
-							<div
-								style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
-						</div>
-						<!--右边-->
-						<div style="float: right; width: 820px;">
-							<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的最好个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的看的。</div>
-							<div style="color: #bfbfbf;">2017-05-11 23:22</div>
+						<hr style="width: 100%;" />
+						<!--整个评论-->
+						<div style="float: left; width: 100%;">
+							<!--左边-->
+							<div style="float: left; margin: 0 30px 0 0; width: 70px;">
+								<!--头像-->
+								<img class="user_img" src="../../css/zb/img/tx.jpg"
+									style="float: left;" />
+								<div
+									style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
+							</div>
+							<!--右边-->
+							<div style="float: right; width: 820px;">
+								<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的最好个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的看的。</div>
+								<div style="color: #bfbfbf;">2017-05-11 23:22</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!--遍历内容-->
-				<div style="float: left; width: 100%;">
-					<hr style="width: 100%;" />
-					<!--整个评论-->
+					<!--遍历内容-->
 					<div style="float: left; width: 100%;">
-						<!--左边-->
-						<div style="float: left; margin: 0 30px 0 0; width: 70px;">
-							<!--头像-->
-							<img class="user_img" src="../../css/zb/img/tx.jpg"
-								style="float: left;" />
-							<div
-								style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
-						</div>
-						<!--右边-->
-						<div style="float: right; width: 820px;">
-							<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是最好看的。</div>
-							<div style="color: #bfbfbf;">2017-05-11 23:22</div>
+						<hr style="width: 100%;" />
+						<!--整个评论-->
+						<div style="float: left; width: 100%;">
+							<!--左边-->
+							<div style="float: left; margin: 0 30px 0 0; width: 70px;">
+								<!--头像-->
+								<img class="user_img" src="../../css/zb/img/tx.jpg"
+									style="float: left;" />
+								<div
+									style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
+							</div>
+							<!--右边-->
+							<div style="float: right; width: 820px;">
+								<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是最好看的。</div>
+								<div style="color: #bfbfbf;">2017-05-11 23:22</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!--
+					<!--
 						
 					-->
 
-<!-- 				<div class="page_container" -->
-<!-- 					style="float: left; margin: 10px 0;"> -->
-<!-- 					<hr style="width: 100%;" /> -->
-<!-- 					<div class="page_component_container"> -->
-<!-- 						<div class="page_component"> -->
-<!-- 							<a class="page_prev" href="#">上一页</a> <a class="pageSelected" -->
-<!-- 								href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> -->
-<!-- 							<a href="#">5</a> <b>...</b> <a href="#">23</a> <a -->
-<!-- 								class="page_next" href="#">上一页</a> <span -->
-<!-- 								class="page_component_jumppage">跳转到：</span> <input -->
-<!-- 								class="page_component_jumptxt" type="text"> <a href="#" -->
-<!-- 								class="page_component_submit">GO</a> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+					<!-- 				<div class="page_container" -->
+					<!-- 					style="float: left; margin: 10px 0;"> -->
+					<!-- 					<hr style="width: 100%;" /> -->
+					<!-- 					<div class="page_component_container"> -->
+					<!-- 						<div class="page_component"> -->
+					<!-- 							<a class="page_prev" href="#">上一页</a> <a class="pageSelected" -->
+					<!-- 								href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> -->
+					<!-- 							<a href="#">5</a> <b>...</b> <a href="#">23</a> <a -->
+					<!-- 								class="page_next" href="#">上一页</a> <span -->
+					<!-- 								class="page_component_jumppage">跳转到：</span> <input -->
+					<!-- 								class="page_component_jumptxt" type="text"> <a href="#" -->
+					<!-- 								class="page_component_submit">GO</a> -->
+					<!-- 						</div> -->
+					<!-- 					</div> -->
+					<!-- 				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="/foot.jsp" flush="true"></jsp:include>
+	<script type="text/javascript"
+		src="<%=basePath%>js/index/video_details.js"></script>
 </body>
 
 </html>
