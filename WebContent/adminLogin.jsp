@@ -50,10 +50,12 @@
 			<h1>管理入口</h1>
 		</div>
 		<div class="content">
-			<input type="text" class="userName" id="account" /> <input
-				type="password" id="password" class="passWord" />
-			<div class="clear"></div>
-			<div id="login" class="logo-button">LOGIN</div>
+			<form action="Admin_login" method="get">
+				<input type="text" class="userName" id="account" /> <input
+					type="password" id="password" class="passWord" />
+				<div class="clear"></div>
+				<div id="login" class="logo-button">LOGIN</div>
+			</form>
 		</div>
 	</div>
 	<script>

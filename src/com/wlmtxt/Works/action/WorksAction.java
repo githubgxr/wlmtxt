@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -29,16 +30,33 @@ public class WorksAction extends ActionSupport {
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
 
+	// 作品
 	private File worksfile;
 	private String worksfileFileName;
 	private String worksfileContentType;
 
+	// 封面
 	private File imgfile;
 	private String imgfileFileName;
 	private String imgfileContentType;
 
+	//
+	private String keyword;
+
+	/*
+	 * 
+	 */
+
 	public File getWorksfile() {
 		return worksfile;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	public void setWorksfile(File worksfile) {
@@ -272,8 +290,11 @@ public class WorksAction extends ActionSupport {
 
 	/**
 	 * 上传作品
+	 * 
+	 * @throws IOException
 	 */
-	public void uploadWorks() {
+	public void uploadWorks() throws IOException {
+
 		// 处理封面
 		if (imgfile != null) {
 
@@ -288,26 +309,64 @@ public class WorksAction extends ActionSupport {
 
 			try {
 				FileUtils.copyFile(imgfile, newFile);
+				accept_works.setWorks_cover(fileName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-			System.out.println(fileName);
-
-			try {
-				HttpServletResponse response = ServletActionContext.getResponse();
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().write("1");
-			} catch (Exception e) {
-				System.out.println("2");
-				e.printStackTrace();
-			}
+			System.out.println("封面：" + fileName);
 
 		} else {
 			System.out.println("未上传封面");
 		}
 
 		// 处理视频
+		if (worksfile != null) {
+
+			String filePath;
+
+			String fileName = UUID.randomUUID().toString()
+					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
+
+			filePath = "c://wlmtxt/video/" + fileName;
+
+			File newFile = new File(filePath);
+
+			try {
+				FileUtils.copyFile(worksfile, newFile);
+				accept_works.setWorks_name(fileName);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			System.out.println("作品：" + fileName);
+
+		} else {
+			System.out.println("未上传视频");
+		}
+
+		// 作者
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		accept_works.setWorks_user_id(user.getUser_id());
+
+		// 关键词
+		if (!keyword.equals("")) {
+			String[] keywords = keyword.split(";");
+			wlmtxt_keyword newkeywords;
+			for (int i = 0; i < keywords.length; i++) {
+				if (!keywords[i].equals("")) {
+					newkeywords = new wlmtxt_keyword();
+					newkeywords.setKeyword_name(keywords[i]);
+					worksService.saveKeyword(newkeywords);
+				}
+
+			}
+
+		}
+
+		worksService.saveWorks(accept_works);
+
 	}
 
 	/**

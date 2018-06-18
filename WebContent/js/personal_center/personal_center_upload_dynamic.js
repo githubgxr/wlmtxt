@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 var xmlhttp;
 window.onload=function(){
 	$("input").blur(function(){
@@ -67,4 +65,5 @@ function XMLHttp(){
 	  {// code for IE6, IE5
 	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
+
 }

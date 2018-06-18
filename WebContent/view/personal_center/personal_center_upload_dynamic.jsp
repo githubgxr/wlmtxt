@@ -98,11 +98,15 @@
 						<div class="img_wrap_list">
 							<span>选择作品：</span>
 							<div class="imgnum">
+
 								<input type="file" name="file" id="worksfile" class="inputfile"
 								data-multiple-caption="{count} files selected" multiple /> 
 								<label for="file">Choose a file</label>
+
 							</div>
 						</div>
+						
+						
 						<div class=" img_wrap_list">
 							<a class="button_a" onclick="uploadWorks()">确认发布</a>
 						</div>

@@ -7,6 +7,14 @@ public class wlmtxt_download_history {
 	private String download_history_works_id;
 	//用户id
 	private String download_history_user_id;
+	//个人中心是否显示
+	private String download_history_show;
+	public String getDownload_history_show() {
+		return download_history_show;
+	}
+	public void setDownload_history_show(String download_history_show) {
+		this.download_history_show = download_history_show;
+	}
 	//创建时间
 	private String download_history_gmt_create;
 	//修改时间
