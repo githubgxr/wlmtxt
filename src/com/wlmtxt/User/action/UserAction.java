@@ -210,4 +210,119 @@ public class UserAction extends ActionSupport {
 		
 	}
 	
+	public String skipToIndexPage() {
+		return "skipToIndexPage";
+	}
+	/**
+	 * 跳转到分类页
+	 * @return
+	 */
+	public String skipToCategoryPage() {
+		return "skipToCategoryPage";
+	}
+	/**
+	 * 跳转到排行榜页面
+	 * @return
+	 */
+	public String skipToRankPage() {
+		return "skipToRankPage";
+	}
+	/**
+	 * 跳转到发布作品页面
+	 * @return
+	 */
+	public String skipToPublishWorksPage() {
+		return "skipToPublishWorksPage";
+	}
+	/**
+	 * 跳转到个人中心页面
+	 * @return
+	 *//*
+	public String skipToPersonalCenterPage() {
+		return "skipToMyDynamicPage";
+	}*/
+	/**
+	 * 跳转到我的动态页面
+	 * @return
+	 */
+	public String skipToMyDynamicPage() {
+		return "skipToMyDynamicPage";
+	}
+	/**
+	 * 跳转到个人资料页
+	 * @return
+	 */
+	public String skipToPersonalDataPage() {
+		return "skipToPersonalDataPage";
+	}
+	/**
+	 * 跳转到我的关注页面
+	 * @return
+	 */
+	public String skipToMyAttentionPage() {
+		return "skipToMyAttentionPage";
+	}
+	/**
+	 * 跳转到我的粉丝页面
+	 * @return
+	 */
+	public String skipToMyFansPage() {
+		return "skipToMyFansPage";
+	}
+	/**
+	 *跳转到播放历史页面
+	 * @return
+	 */
+	public String skipToWatchHistoryPage() {
+		return "skipToWatchHistoryPage";
+	}
+	/**
+	 *跳转到与我相关之我的收藏页面
+	 * @return
+	 */
+	public String skipToRelationCollectionPage() {
+		return "skipToRelationCollectionPage";
+	}
+	/**
+	 *跳转到与我相关之我的点赞页面
+	 * @return
+	 */
+	public String skipToRelationAppreciatesPage() {
+		return "skipToRelationAppreciatesPage";
+	}
+	/**
+	 *跳转到与我相关之我的评论页面
+	 * @return
+	 */
+	public String skipToRelationCommentsPage() {
+		return "skipToRelationCommentsPage";
+	}
+	/**
+	 * 跳转到消息中心之点赞通知页
+	 * @return
+	 */
+	public String skipToAppreciatesNoticePage() {
+		return "skipToAppreciatesNoticePage";
+	}
+	/**
+	 * 跳转到消息中心之收藏通知页
+	 * @return
+	 */
+	public String skipToCollectionNoticePage() {
+		return "skipToCollectionNoticePage";
+	}
+	/**
+	 * 跳转到消息中心之评论通知页
+	 * @return
+	 */
+	public String skipToCommentsNoticePage() {
+		return "skipToCommentsNoticePage";
+	}
+	/**
+	 * 跳转到消息中心之审核通知页
+	 * @return
+	 */
+	public String skipToAuditNoticePage() {
+		return "skipToAuditNoticePage";
+	}
 }
