@@ -63,16 +63,13 @@ public class UserAction extends ActionSupport {
 	 * 2-失败<br>
 	 * @throws IOException 
 	 */
-	public void logout() throws IOException {
+	public String logout() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		try {
-			ActionContext.getContext().getSession().remove("loginResult");
-			pw.write("1");
-		} catch (Exception e) {
-			pw.write("2");
-		}
+		ActionContext.getContext().getSession().remove("loginResult");
+		pw.write("1");
+		return "skipToIndexPage";
 	}
 	/**
 	 * 1-验证邮件发送成功<br />
@@ -82,11 +79,8 @@ public class UserAction extends ActionSupport {
 	public void sendRegisterMail() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		//此返回值无作用
-//		String str = userService.saveUser(accpet_user);
-		String href = "http://localhost:8080/wlmtxt/User_skipActivatePage?accpet_user.user_mail=1074545235@qq.com&accpet_user.user_password=111111&accpet_user.user_username=小官";
-//		String href = "http://localhost:8080/wlmtxt/User_registerUser?accpet_user.user_mail="+accpet_user.getUser_mail()+"&accpet_user.user_password="+accpet_user.getUser_password()+"&accpet_user.user_username"+accpet_user.getUser_username();
-//		String href = "http://localhost:8080/wlmtxt/User_skipActivatePage";
+		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="+accpet_user.getUser_mail()+"&accpet_user.user_password="+accpet_user.getUser_password()+"&accpet_user.user_username="+accpet_user.getUser_username();
+//		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		//邮件内容
 		String mailcontent = "<p><a href="+href+">register</a></p>";
 		PrintWriter pw = response.getWriter();
@@ -103,7 +97,7 @@ public class UserAction extends ActionSupport {
 	 * @return 跳转到激活页面
 	 */
 	public String skipActivatePage() {
-		return "activatePage";
+		return "skipActivatePage";
 	}
 	/**
 	 * 确认激活按钮
