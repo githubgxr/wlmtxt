@@ -1,11 +1,16 @@
 package com.wlmtxt.Works.service.impl;
 
+import java.util.List;
+
 import com.wlmtxt.Works.dao.WorksDao;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
+import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
@@ -21,6 +26,52 @@ public class WorksServiceImpl implements WorksService {
 
 	public void setWorksDao(WorksDao worksDao) {
 		this.worksDao = worksDao;
+	}
+
+	@Override
+	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
+		return worksDao.listSecondMenu_byFirstMenuID(first_menu_id);
+	}
+
+	@Override
+	public List<wlmtxt_second_menu> listSecondMenu() {
+		return worksDao.listSecondMenu();
+	}
+
+	@Override
+	public List<wlmtxt_first_menu> listFirstMenu() {
+
+		return worksDao.listFirstMenu();
+	}
+
+	@Override
+	public void saveWorks(wlmtxt_works accept_works) {
+		//
+		accept_works.setWorks_id(TeamUtil.getUuid());
+		//
+		accept_works.setWorks_passed("3");
+		//
+		accept_works.setWorks_deleted("2");
+		//
+		String time = TeamUtil.getStringSecond();
+		accept_works.setWorks_gmt_create(time);
+		accept_works.setWorks_gmt_modified(time);
+		//
+		worksDao.saveWorks(accept_works);
+		System.out.println(accept_works);
+	}
+
+	@Override
+	public void saveKeyword(wlmtxt_keyword newkeywords) {
+		//
+		newkeywords.setKeyword_id(TeamUtil.getUuid());
+		//
+		String time = TeamUtil.getStringSecond();
+		newkeywords.setKeyword_gmt_modified(time);
+		newkeywords.setKeyword_gmt_create(time);
+		//
+		worksDao.saveKeyword(newkeywords);
+		System.out.println(newkeywords);
 	}
 
 	@Override

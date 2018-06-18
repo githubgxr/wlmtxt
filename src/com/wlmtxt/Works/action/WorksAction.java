@@ -1,7 +1,12 @@
 package com.wlmtxt.Works.action;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,11 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -29,6 +37,11 @@ public class WorksAction extends ActionSupport {
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
 
+	// 作品播放
+	private String worksName;
+	private String imgName;
+	private InputStream inputStream;
+
 	// 作品
 	private File worksfile;
 	private String worksfileFileName;
@@ -39,8 +52,47 @@ public class WorksAction extends ActionSupport {
 	private String imgfileFileName;
 	private String imgfileContentType;
 
+	//
+	private String keyword;
+
+	/*
+	 * 
+	 */
+
 	public File getWorksfile() {
 		return worksfile;
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
+	public String getWorksName() {
+		return worksName;
+	}
+
+	public void setWorksName(String worksName) {
+		this.worksName = worksName;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	public void setWorksfile(File worksfile) {
@@ -143,6 +195,39 @@ public class WorksAction extends ActionSupport {
 
 	public void setWorksService(WorksService worksService) {
 		this.worksService = worksService;
+	}
+
+	/*
+	 * 
+	 */
+	public String getImg() throws FileNotFoundException {
+		if (imgName.equals("") || imgName == null) {
+			imgName = "";
+		}
+		File file = new File("C://wlmtxt/img/" + imgName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
+	}
+
+	public String getVideo() throws FileNotFoundException {
+		if (worksName.equals("") || worksName == null) {
+			worksName = "";
+		}
+		File file = new File("C://wlmtxt/video/" + worksName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
 	}
 
 	/**
@@ -273,11 +358,62 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 上传作品
+	 * 获取所有一级类别的
+	 * 
+	 * @throws IOException
 	 */
-	public void uploadWorks() {
-		// 处理其他数据
-		System.out.println(accept_works);
+	public void listFirstMenu() throws IOException {
+		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
+
+		firstMenuList = worksService.listFirstMenu();
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(firstMenuList));
+	}
+
+	/**
+	 * 根据第一类别ID获取第二类别列表
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu_byFirstMenuID() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
+	 * 获取所有第二级类别
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
+	 * 上传作品
+	 * 
+	 * @throws IOException
+	 */
+	public void uploadWorks() throws IOException {
+
 		// 处理封面
 		if (imgfile != null) {
 
@@ -292,20 +428,12 @@ public class WorksAction extends ActionSupport {
 
 			try {
 				FileUtils.copyFile(imgfile, newFile);
+				accept_works.setWorks_cover(fileName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-			System.out.println(fileName);
-
-			try {
-				HttpServletResponse response = ServletActionContext.getResponse();
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().write("1");
-			} catch (Exception e) {
-				System.out.println("2");
-				e.printStackTrace();
-			}
+			System.out.println("封面：" + fileName);
 
 		} else {
 			System.out.println("未上传封面");
@@ -319,31 +447,47 @@ public class WorksAction extends ActionSupport {
 			String fileName = UUID.randomUUID().toString()
 					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
 
-			filePath = "c://wlmtxt/img/" + fileName;
+			filePath = "c://wlmtxt/video/" + fileName;
 
 			File newFile = new File(filePath);
 
 			try {
 				FileUtils.copyFile(worksfile, newFile);
+				accept_works.setWorks_name(fileName);
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-			System.out.println(fileName);
-
-			try {
-				HttpServletResponse response = ServletActionContext.getResponse();
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().write("1");
-			} catch (Exception e) {
-				System.out.println("2");
-				e.printStackTrace();
-			}
+			System.out.println("作品：" + fileName);
 
 		} else {
-			System.out.println("未上传封面");
+			System.out.println("未上传视频");
 		}
 
+		// 作者
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		accept_works.setWorks_user_id(user.getUser_id());
+
+		// 关键词
+		if (!keyword.equals("")) {
+			String[] keywords = keyword.split(";");
+			wlmtxt_keyword newkeywords;
+			for (int i = 0; i < keywords.length; i++) {
+				if (!keywords[i].equals("")) {
+					newkeywords = new wlmtxt_keyword();
+					newkeywords.setKeyword_name(keywords[i]);
+					worksService.saveKeyword(newkeywords);
+				}
+
+			}
+
+		}
+
+		worksService.saveWorks(accept_works);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
 	}
 
 	/**

@@ -91,7 +91,6 @@
 								<input type="file" class="filepath" id="imgfile"
 									onchange="img_change(this)" /> <img class="img" id="img"
 									src="<%=basePath%>img/upload_video.png" onclick="img_click()" />
-								<img src="" class="img2" />
 							</div>
 						</div>
 
@@ -99,12 +98,15 @@
 						<div class="img_wrap_list">
 							<span>选择作品：</span>
 							<div class="imgnum">
-								<input type="file" class="filepath" id="worksfile"
-									onchange="img_change(this)" /> <img class="img" id="img"
-									src="<%=basePath%>img/upload_video.png" onclick="img_click()" />
-								<img src="" class="img2" />
+
+								<input type="file" name="file" id="worksfile" class="inputfile"
+								data-multiple-caption="{count} files selected" multiple /> 
+								<label for="file">Choose a file</label>
+
 							</div>
 						</div>
+						
+						
 						<div class=" img_wrap_list">
 							<a class="button_a" onclick="uploadWorks()">确认发布</a>
 						</div>
@@ -200,70 +202,38 @@
 			document.getElementById("img").click();
 		}
 		function img_change(file) {
-			var worksfile = document.getElementById("worksfile");
+			var imgfile = document.getElementById("imgfile");
 			var reader = new FileReader();
 			reader.onload = function(evt) {
+				var img = document.getElementById("img");
 				img.src = evt.target.result;
 			}
 			reader.readAsDataURL(file.files[0]);
 		}
 	</script>
+	<script type="text/javascript">
+	$(".inputfile").each( function(){ 
+		var $input = $(this), 
+		$label = $input.next('label'), 
+		labelVal = $label.html(); 
+		alert(labelVal);
+		$input.on( 'change', function(e){ 
+			var fileName = ''; 
+			if( this.files && this.files.length > 1 ) 
+				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' )
+				.replace( '{count}', this.files.length ); 
+			else if(e.target.value)
+				fileName = e.target.value.split( '\\' ).pop(); 
+			if( fileName ) 
+				$label.html( fileName ); 
+			else 
+				$label.html( labelVal ); 
+			}); 
+		});
 
 
-	<!-- <script type="text/javascript">
-		$(function() {
-			$(".filepath").on("change", function() {
-				var srcs = getObjectURL(this.files[0]); //获取路径
-				$(this).nextAll(".img1").hide(); //this指的是input
-				$(this).nextAll(".img2").show(); //fireBUg查看第二次换图片不起做用
-				$(this).nextAll('.close').show(); //this指的是input
-				$(this).nextAll(".img2").attr("src", srcs); //this指的是input
-				$(this).val(''); //必须制空
-			})
-		})
-
-		function getObjectURL(file) {
-			var url = null;
-			if (window.createObjectURL != undefined) {
-				url = window.createObjectURL(file)
-			} else if (window.URL != undefined) {
-				url = window.URL.createObjectURL(file)
-			} else if (window.webkitURL != undefined) {
-				url = window.webkitURL.createObjectURL(file)
-			}
-			return url
-		};
-
-		$(function() {
-			$("#img")
-					.on(
-							"change",
-							".filepath1",
-							function() {
-								var srcs = getObjectURL(this.files[0]); //获取路径
-								//this指的是input
-								$(this).nextAll(".img22").attr("src", srcs); //this指的是input
-								$(this).nextAll(".img22").show(); //fireBUg查看第二次换图片不起做用*/
-								var htmlImg = '<div class="imgbox1">'
-										+ '<div class="imgnum1">'
-										+ '<input type="file" class="filepath1" />'
-										+ '<span class="close1">X</span>'
-										+ '<img src="btn.png" class="img11" />'
-										+ '<img src="'+srcs+'" class="img22" />'
-										+ '</div>' + '</div>';
-
-								$(this).parent().parent().before(htmlImg);
-								$(this).val(''); //必须制空
-								$(this).parent().parent().prev().find(".img11")
-										.hide(); //this指的是input
-								$(this).parent().parent().prev()
-										.find('.close1').show();
-
-							})
-		})
-	</script> -->
+	</script>
 </body>
-
 <script type="text/javascript"
 	src="<%=basePath%>/js/personal_center/personal_center_upload_dynamic.js">
 	
