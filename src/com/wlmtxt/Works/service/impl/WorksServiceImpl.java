@@ -1,10 +1,13 @@
 package com.wlmtxt.Works.service.impl;
 
+import java.util.List;
+
 import com.wlmtxt.Works.dao.WorksDao;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
+import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -22,6 +25,12 @@ public class WorksServiceImpl implements WorksService {
 
 	public void setWorksDao(WorksDao worksDao) {
 		this.worksDao = worksDao;
+	}
+
+	@Override
+	public List<wlmtxt_first_menu> listFirstMenu() {
+
+		return worksDao.listFirstMenu();
 	}
 
 	@Override

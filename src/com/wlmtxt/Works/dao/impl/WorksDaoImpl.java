@@ -1,5 +1,7 @@
 package com.wlmtxt.Works.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,6 +9,7 @@ import org.hibernate.SessionFactory;
 import com.wlmtxt.Works.dao.WorksDao;
 import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
+import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -27,6 +30,14 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public void saveLike(wlmtxt_like like) throws Exception {
 		getSession().save(like);
+	}
+
+	@Override
+	public List<wlmtxt_first_menu> listFirstMenu() {
+		String hql = " from wlmtxt_first_menu  ";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_first_menu> firstMenuList = query.list();
+		return firstMenuList;
 	}
 
 	@Override

@@ -1,7 +1,10 @@
 package com.wlmtxt.Works.dao;
 
+import java.util.List;
+
 import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
+import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -37,5 +40,7 @@ public interface WorksDao {
 	void saveKeyword(wlmtxt_keyword newkeywords);
 
 	void saveWorks(wlmtxt_works accept_works);
+
+	List<wlmtxt_first_menu> listFirstMenu();
 
 }

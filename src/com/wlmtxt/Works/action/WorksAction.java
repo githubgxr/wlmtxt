@@ -2,6 +2,8 @@ package com.wlmtxt.Works.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Works.service.WorksService;
@@ -289,6 +293,24 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
+	 * 获取所有一级类别的
+	 * 
+	 * @throws IOException
+	 */
+	public void listFirstMenu() throws IOException {
+		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
+
+		firstMenuList = worksService.listFirstMenu();
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(firstMenuList));
+	}
+
+	/**
 	 * 上传作品
 	 * 
 	 * @throws IOException
@@ -366,7 +388,9 @@ public class WorksAction extends ActionSupport {
 		}
 
 		worksService.saveWorks(accept_works);
-
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
 	}
 
 	/**
