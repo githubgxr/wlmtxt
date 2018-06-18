@@ -107,8 +107,8 @@ function checkLogin() {
 				$(".div_email").html(userInfo.user_mail);
 				$(".input_email").val(userInfo.user_mail);
 				//性别
-				/*$(".div_sex").html(userInfo.user_sex);
-				$(".input_sex").val(userInfo.user_sex);*/
+				$(".div_sex").html(userInfo.user_sex);
+				$(".input_sex").val(userInfo.user_sex);
 				//简介
 				$(".div_bio").html(userInfo.user_bio);
 				$(".input_bio").val(userInfo.user_bio);

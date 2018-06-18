@@ -10,6 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
+<script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
 </head>
 <body>
 <div style="width:300px;margin:0 auto;">

@@ -31,10 +31,10 @@ document.getElementById("register_check_btn").onclick=function(){
 			console.log("user_email:"+user_email);
 			console.log("user_password:"+user_password);
 			if (xhr.responseText == "1") {
-				toastr.success("注册成功！");
+				console.log("注册成功！");
 				window.location.href="/wlmtxt/User/User_skipToIndexPage";
 			}else{
-				toastr.error("注册失败！");
+				console.log("注册失败！");
 				return false;
 			}
 		}

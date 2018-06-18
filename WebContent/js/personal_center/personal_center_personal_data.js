@@ -26,7 +26,7 @@ $(".check_btn").click(function(){
 	//简介
 	formData.append("accpet_user.user_bio", $(".input_bio").val());
 	var xhr=new XMLHttpRequest();
-	xhr.open("POST","");
+	xhr.open("POST","/wlmtxt/User/User_modifyPersonalData");
 	xhr.send(formData);
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
@@ -50,26 +50,35 @@ $(".check_btn").click(function(){
 });
 /*----------------修改密码---------------*/
 $(".check_pwd_btn").click(function(){
-	var formData=new FormData();
-	//旧密码
-	formData.append("accpet_user.user_username", $(".old_password").val());
-	//新密码
-	formData.append("accpet_user.user_mail", $(".new_password").val());
-	//确认新密码
-	formData.append("accpet_user.user_sex", $(".new_repassword").val());
-	var xhr=new XMLHttpRequest();
-	xhr.open("POST","");
-	xhr.send(formData);
-	xhr.onreadystatechange=function(){
-		if(xhr.readyState==4 && xhr.status==200){
-			if(xhr.responseText=="1"){
-				toastr.success("修改密码成功！");
-				$(".old_password").val("");
-				 $(".new_password").val("");
-				 $(".new_repassword").val("");
-			}else{
-				toastr.error("修改密码失败！");
-				return false;
+	if($(".new_password").val().length<6||$(".new_password").val().length>15){
+		toastr.error("请输入6~15位新密码！");
+		return false;
+	}else if($(".new_repassword").val()!==$(".new_password").val()){
+		toastr.error("两次密码不一致！");
+		return false;
+	}else{
+		var formData=new FormData();
+		//旧密码
+		formData.append("accpet_user.user_password", $(".old_password").val());
+		//新密码
+		formData.append("accpet_user.new_password", $(".new_password").val());
+		var xhr=new XMLHttpRequest();
+		xhr.open("POST","/wlmtxt/User/User_modifyPassword");
+		xhr.send(formData);
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				if(xhr.responseText=="1"){
+					toastr.success("修改密码成功！");
+					$(".old_password").val("");
+					 $(".new_password").val("");
+					 $(".new_repassword").val("");
+				}else if(xhr.responseText=="3"){
+					toastr.error("旧密码错误！");
+					return false;
+				}else{
+					toastr.error("修改密码失败！");
+					return false;
+				}
 			}
 		}
 	}
