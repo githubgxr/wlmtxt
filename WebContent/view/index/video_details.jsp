@@ -151,7 +151,6 @@
 				<div style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px;">2452&nbsp;评论</div>
 				<!--发表评论-->
 				<div>
-<<<<<<< HEAD
 					<textarea class="form-control textarea_pl" id="textarea_comment"
 						style="width: 90%; float: left;"></textarea>
 					<div class="button_pl user_operate" style="float: right;" id="video_comment_btn">
@@ -239,93 +238,6 @@
 					<!-- 					</div> -->
 					<!-- 				</div> -->
 				</div>
-=======
-					<textarea class="form-control textarea_pl"
-						style="width: 90%; float: left;"></textarea>
-					<div class="button_pl user_operate" style="float: right;">
-						发表<br />评论
-					</div>
-				</div>
-				<!--遍历内容-->
-				<div style="float: left; width: 100%;">
-					<hr style="width: 100%;" />
-					<!--整个评论-->
-					<div style="float: left; width: 100%;">
-						<!--左边-->
-						<div style="float: left; margin: 0 30px 0 0; width: 70px;">
-							<!--头像-->
-							<img class="user_img" src="../../css/zb/img/tx.jpg"
-								style="float: left;" />
-							<div
-								style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
-						</div>
-						<!--右边-->
-						<div style="float: right; width: 820px;">
-							<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是最好看的。</div>
-							<div style="color: #bfbfbf;">2017-05-11 23:22</div>
-						</div>
-					</div>
-				</div>
-				<!--遍历内容-->
-				<div style="float: left; width: 100%;">
-					<hr style="width: 100%;" />
-					<!--整个评论-->
-					<div style="float: left; width: 100%;">
-						<!--左边-->
-						<div style="float: left; margin: 0 30px 0 0; width: 70px;">
-							<!--头像-->
-							<img class="user_img" src="../../css/zb/img/tx.jpg"
-								style="float: left;" />
-							<div
-								style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
-						</div>
-						<!--右边-->
-						<div style="float: right; width: 820px;">
-							<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的最好个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的个人认为Z剧场版是最好看的看的。</div>
-							<div style="color: #bfbfbf;">2017-05-11 23:22</div>
-						</div>
-					</div>
-				</div>
-				<!--遍历内容-->
-				<div style="float: left; width: 100%;">
-					<hr style="width: 100%;" />
-					<!--整个评论-->
-					<div style="float: left; width: 100%;">
-						<!--左边-->
-						<div style="float: left; margin: 0 30px 0 0; width: 70px;">
-							<!--头像-->
-							<img class="user_img" src="../../css/zb/img/tx.jpg"
-								style="float: left;" />
-							<div
-								style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
-						</div>
-						<!--右边-->
-						<div style="float: right; width: 820px;">
-							<div style="margin: 0 0 10px 0; min-height: 80px;">个人认为Z剧场版是最好看的。</div>
-							<div style="color: #bfbfbf;">2017-05-11 23:22</div>
-						</div>
-					</div>
-				</div>
-				<!--
-						
-					-->
-
-				<!-- 				<div class="page_container" -->
-				<!-- 					style="float: left; margin: 10px 0;"> -->
-				<!-- 					<hr style="width: 100%;" /> -->
-				<!-- 					<div class="page_component_container"> -->
-				<!-- 						<div class="page_component"> -->
-				<!-- 							<a class="page_prev" href="#">上一页</a> <a class="pageSelected" -->
-				<!-- 								href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> -->
-				<!-- 							<a href="#">5</a> <b>...</b> <a href="#">23</a> <a -->
-				<!-- 								class="page_next" href="#">上一页</a> <span -->
-				<!-- 								class="page_component_jumppage">跳转到：</span> <input -->
-				<!-- 								class="page_component_jumptxt" type="text"> <a href="#" -->
-				<!-- 								class="page_component_submit">GO</a> -->
-				<!-- 						</div> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
->>>>>>> parent of 2cd7d99... 。。。
 			</div>
 		</div>
 	</div>
