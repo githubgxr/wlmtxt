@@ -188,9 +188,14 @@ public class UserAction extends ActionSupport {
 	public void modifyPersonalData() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		PrintWriter pw = response.getWriter();
-		String user = userService.modifyPersonalData(accpet_user);
-		if ("1".equals(user)) {
+//		loginUser.setUser_username(accpet_user.getUser_username());
+//		loginUser.setUser_mail(accpet_user.getUser_mail());
+//		loginUser.setUser_sex(accpet_user.getUser_sex());
+		accpet_user.setUser_id(loginUser.getUser_id());
+		String modifyResult = userService.modifyPersonalData(accpet_user);
+		if ("1".equals(modifyResult)) {
 			pw.write("1");
 		} else {
 			pw.write("2");
@@ -212,10 +217,10 @@ public class UserAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		if (accpet_user.getUser_password().equals(user.getUser_password())) {
-			user.setUser_password(new_password);
-			String result = userService.modifyPassword(user);
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		if ((md5.GetMD5Code(accpet_user.getUser_password())).equals(loginUser.getUser_password())) {
+			loginUser.setUser_password(new_password);
+			String result = userService.modifyPassword(loginUser);
 			if ("1".equals(result)) {
 				pw.write("1");
 			} else {
@@ -226,7 +231,10 @@ public class UserAction extends ActionSupport {
 		}
 	}
 	
-	
+	/**
+	 * 跳转到忘记密码，修改密码页面
+	 * @return
+	 */
 	public String skipToModifyPasswordPage() {
 		return "skipToModifyPasswordPage";
 	}
