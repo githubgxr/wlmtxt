@@ -60,29 +60,19 @@
 
 						<div class="img_wrap_list">
 							<span>选择封面：</span>
-<<<<<<< HEAD
-							<div class="upload_selected"></div>
-							<img class="select_img" src="<%=basePath%>img/upload_video.png" />
-=======
 							<div class="imgnum">  
 								<input type="file" class="filepath" id="imgfile"
 								    	 />
 								<img class="img1" src="<%=basePath%>img/upload_video.png" /> <img
 									src="" class="img2" />
 							</div>
->>>>>>> origin/LYQ
 						</div>
 						<div class="img_wrap_list">
 							<span>选择作品：</span>
-<<<<<<< HEAD
-							<div class="upload_selected"></div>
-							<img class="select_img" src="<%=basePath%>img/upload_video.png" />
-=======
 							<div class="imgnum">
 								<input type="file" class="filepath" id="worksfile"	/>
 								
 							</div>
->>>>>>> origin/LYQ
 						</div>
 						<div class=" img_wrap_list">
 							<a class="button_a">确认发布</a>
