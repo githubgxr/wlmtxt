@@ -1,11 +1,7 @@
 package com.wlmtxt.User.action;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,7 +15,6 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import util.JavaMail;
 import util.JsonUtils;
 import util.ReflectUtil;
-import util.TeamUtil;
 import util.md5;
 
 public class UserAction extends ActionSupport {
