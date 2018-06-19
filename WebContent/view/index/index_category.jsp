@@ -24,7 +24,7 @@
 	<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 	<!--页面主体-->
 
-	<div
+	<div id="div_box"
 		style="background-color: #FFFFFF; width: 1000px; margin: 20px calc(( 100% - 1000px)/2) 10px calc(( 100% - 1000px)/2); border-radius: 5px; padding: 20px 0">
 		<a class="category_a" href="index_second_category.jsp">电影</a> <a
 			class="category_a" href="index_second_category.jsp">电视剧</a> <a

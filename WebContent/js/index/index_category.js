@@ -1,56 +1,65 @@
 /**
  * 
  */
-var xmlhttp;
-var category_vo=null;
-window.onload=function(){
-	XMLHttp();
+/*获得所有一级分类*/
+$(function(){
+	var xmlhttp=null;
+	var category_vo=null;
+	xmlhttp=new XMLHttpRequest();
 	console.log(111);
 	xmlhttp.onreadystatechange=function(){
 		if(xmlhttp.readyState==4&&xmlhttp.status==200){
-			console.log(111);
 			category_vo = JSON.parse(xmlhttp.responseText);
-			var new_a = null;
-			var div_box = document.getElementById("div_box");
-
-			/*
-			 * 移出除标题以外的所有行
-			 */
-			var old_a = document.getElementsByClassName("category_a");
-			var long = old_a.length;
-			for (var i = 0; i < long; i++) {
-				old_a[0].parentNode.removeChild(old_a[0]);
-			}			
-			/*
-			 * 将数据库的数据取出来放到表格里
-			 */
-			for (var num = 0; num < category_vo.statisticPoliceCaseDto.length; num++) {
+			for ( var num in category_vo) {
+				var new_a = null;
+				var div_box = document.getElementById("div_box");
 				new_a = document.createElement("a");
 				new_a.className = "category_a";
-				new_a.appendChild(document.createTextNode(''));
-				div_box.append(new_a);
-				
-				new_a.innerHTML = category_vo.statisticPoliceCaseDto[num].department.department_name;
-				new_a.href = "/ajdbxt/total/Total_page_caseInfoList?totalcase=2&policeId="+policeId+"&select_start_time="
-				+select_start_time+"&select_stop_time="+select_stop_time;
+				new_a.appendChild(document.createTextNode(category_vo[num].first_menu_name));
+				div_box.appendChild(new_a);
+				new_a.id=category_vo[num].first_menu_id;
+				/*new_a.href = "/ajdbxt/total/Total_page_caseInfoList?totalcase=2&policeId="+policeId+"&select_start_time="
+				+select_start_time+"&select_stop_time="+select_stop_time;*/
 			}
+			$('#' + select.id).selectpicker('refresh');	
+		}
+		toastr.error(xhr.status);
+	}
+	xhr.open("POST","/wlmtxt/Works/listFirstMenu");
+	var formData=new FormData();
+	xmlhttp.send(formData);	
+})
 
+/*移除一级分类，显示二级*/
+function getSecondMenu(){
+	var xhr=false;
+	var categorySecond_vo=null;
+	
+	/*
+	 * 移出所有一级菜单
+	 */
+	
+	var old_a = document.getElementsByClassName("category_a");
+	var long = old_a.length;
+	for (var i = 0; i < long; i++) {
+		old_a[0].parentNode.removeChild(old_a[0]);
+	}
+	
+	xhr=new XMLHttpRequest();
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			categorySecond_vo=JSON.parse(xhr.responseText);
+			for(var num in categorySecond_vo){
+				var new_a=null;
+				var div_box=document.getElementById("div_box");
+				new_a=document.createElement("a");
+				new_a.className="category_a";
+				new_a.append(document.createTextNode(categorySecond_vo[num].second_menu_name));
+				div_box.appendChild(new_a);
+			}
 		}
 	}
-	xmlhttp.open("POST","url",true);
-	var formData=new FormData();
-	xmlhttp.send(formData);
-	
+	xhr.open("POST","/wlmtxt/Works/listSecondMenu");
+	xhr.send(null);
 }
 
-
-function XMLHttp(){
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-}
