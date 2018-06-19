@@ -6,28 +6,46 @@
 	<package name="User" namespace="/User" extends="struts-default">
 		<action name="User_*" class="com.wlmtxt.User.action.UserAction"
 			method="{1}">
-			<!--登陆后首页  -->
+			
+			
+			<!--TODO 忘记密码，修改密码页面 -->
+			<result name="skipToModifyPasswordPage">/</result>
+			
+			
 			<!-- 激活页面-->
-			<result name="skipActivatePage">/WEB-INF/view/index/email_verification.jsp</result>
-			<!-- <result name="list_carousel_page">/WEB-INF/view/Admin/list_carousel.jsp</result>
-			添加轮播图 页
-			<result name="add_carousel_page">/WEB-INF/view/Admin/add_carousel.jsp</result>
-			作品列表页 
-			<result name="list_works_page">/WEB-INF/view/Admin/list_works.jsp</result>
-			用户列表页
-			<result name="list_user_page">/WEB-INF/view/Admin/list_user.jsp</result>
-			评价列表页 
-			<result name="list_discuss_page">/WEB-INF/view/Admin/list_discuss.jsp</result>
-			管理员列表页 
-			<result name="list_admin_page">/WEB-INF/view/Admin/list_admin.jsp</result>
-			
-			<result name="modified_adminPassword_page">/WEB-INF/view/Admin/modified_adminPassword.jsp</result>
-			
-			<result name="logout">/adminLogin.jsp</result>
-			
-			<result name="count_page">/WEB-INF/view/Admin/count_page.jsp</result>
-			登录失败
-			<result name="error">/error.jsp</result>-->
+			<result name="skipActivatePage">/view/index/email_verification.jsp</result>
+			<!--  跳转到首页-->
+			<result name="skipToIndexPage">/view/index/index.jsp</result>
+			<!--分类页面  -->
+			<result name="skipToCategoryPage">/view/index/index_category.jsp</result>
+			<!-- 排行榜页 -->
+			<result name="skipToRankPage">/view/index/index_rank.jsp</result>
+			<!--发布作品页  -->
+			<result name="skipToPublishWorksPage">/view/personal_center/personal_center_upload_dynamic.jsp</result>
+			<!-- 个人中心之我的动态页 -->
+			<result name="skipToMyDynamicPage">/view/personal_center/personal_center_my_dynamic.jsp</result>
+			<!-- 个人资料页 -->
+			<result name="skipToPersonalDataPage">/view/personal_center/personal_center_personal_data.jsp</result>
+			<!-- 我的关注页 -->
+			<result name="skipToMyAttentionPage">/view/personal_center/personal_center_my_attention.jsp</result>
+			<!-- 我的粉丝页 -->
+			<result name="skipToMyFansPage">/view/personal_center/personal_center_my_fans.jsp</result>
+			<!-- 观看历史页 -->
+			<result name="skipToWatchHistoryPage">/view/personal_center/personal_center_watch_history.jsp</result>
+			<!-- 与我相关之我的收藏页 -->
+			<result name="skipToRelationCollectionPage">/view/personal_center/personal_center_relation_collection.jsp</result>
+			<!-- 与我相关之我的点赞页 -->
+			<result name="skipToRelationAppreciatesPage">/view/personal_center/personal_center_relation_appreciates.jsp</result>
+			<!-- 与我相关之我的评论页 -->
+			<result name="skipToRelationCommentsPage">/view/personal_center/personal_center_relation_comments.jsp</result>
+			<!-- 消息中心之点赞通知页 -->
+			<result name="skipToAppreciatesNoticePage">/view/personal_center/personal_center_appreciates_notice.jsp</result>
+			<!-- 消息中心之收藏通知页 -->
+			<result name="skipToCollectionNoticePage">/view/personal_center/personal_center_collection_notice.jsp</result>
+			<!-- 消息中心之评论通知页 -->	
+			<result name="skipToCommentsNoticePage">/view/personal_center/personal_center_comments_notice.jsp</result>
+			<!-- 消息中心之审核通知页 -->
+			<result name="skipToAuditNoticePage">/view/personal_center/personal_center_audit_notice.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -1,7 +1,10 @@
 package com.wlmtxt.Works.action;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +37,11 @@ public class WorksAction extends ActionSupport {
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
 
+	// 作品播放
+	private String worksName;
+	private String imgName;
+	private InputStream inputStream;
+
 	// 作品
 	private File worksfile;
 	private String worksfileFileName;
@@ -50,119 +58,44 @@ public class WorksAction extends ActionSupport {
 	/*
 	 * 
 	 */
-
-	public File getWorksfile() {
-		return worksfile;
+	public String videoDetailsPage() {
+		accept_works = new wlmtxt_works();
+		accept_works.setWorks_id("13627c40-1b00-4053-bde6-c0c49dbe6d00");
+		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
+		return "videoDetailsPage";
 	}
 
-	public String getKeyword() {
-		return keyword;
+	/*
+	 * 
+	 */
+	public String getImg() throws FileNotFoundException {
+		if (imgName.equals("") || imgName == null) {
+			imgName = "";
+		}
+		File file = new File("C://wlmtxt/img/" + imgName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
 	}
 
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
-	public void setWorksfile(File worksfile) {
-		this.worksfile = worksfile;
-	}
-
-	public String getWorksfileFileName() {
-		return worksfileFileName;
-	}
-
-	public void setWorksfileFileName(String worksfileFileName) {
-		this.worksfileFileName = worksfileFileName;
-	}
-
-	public String getWorksfileContentType() {
-		return worksfileContentType;
-	}
-
-	public void setWorksfileContentType(String worksfileContentType) {
-		this.worksfileContentType = worksfileContentType;
-	}
-
-	public File getImgfile() {
-		return imgfile;
-	}
-
-	public void setImgfile(File imgfile) {
-		this.imgfile = imgfile;
-	}
-
-	public String getImgfileFileName() {
-		return imgfileFileName;
-	}
-
-	public void setImgfileFileName(String imgfileFileName) {
-		this.imgfileFileName = imgfileFileName;
-	}
-
-	public String getImgfileContentType() {
-		return imgfileContentType;
-	}
-
-	public void setImgfileContentType(String imgfileContentType) {
-		this.imgfileContentType = imgfileContentType;
-	}
-
-	public wlmtxt_discuss getAccpet_discuss() {
-		return accpet_discuss;
-	}
-
-	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
-		this.accpet_discuss = accpet_discuss;
-	}
-
-	public wlmtxt_first_menu getFirst_menu() {
-		return first_menu;
-	}
-
-	public void setFirst_menu(wlmtxt_first_menu first_menu) {
-		this.first_menu = first_menu;
-	}
-
-	public wlmtxt_second_menu getSecond_menu() {
-		return second_menu;
-	}
-
-	public void setSecond_menu(wlmtxt_second_menu second_menu) {
-		this.second_menu = second_menu;
-	}
-
-	public wlmtxt_play_history getPlay_history() {
-		return play_history;
-	}
-
-	public void setPlay_history(wlmtxt_play_history play_history) {
-		this.play_history = play_history;
-	}
-
-	WorksService worksService;
-
-	public wlmtxt_user getAccept_user() {
-		return accept_user;
-	}
-
-	public void setAccept_user(wlmtxt_user accept_user) {
-		this.accept_user = accept_user;
-	}
-
-	public wlmtxt_works getAccept_works() {
-		return accept_works;
-	}
-
-	public void setAccept_works(wlmtxt_works accept_works) {
-		this.accept_works = accept_works;
-	}
-
-	public WorksService getWorksService() {
-		return worksService;
-	}
-
-	public void setWorksService(WorksService worksService) {
-		this.worksService = worksService;
+	public String getVideo() throws FileNotFoundException {
+		if (worksName.equals("") || worksName == null) {
+			worksName = "";
+		}
+		File file = new File("C://wlmtxt/video/" + worksName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
 	}
 
 	/**
@@ -311,6 +244,38 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
+	 * 根据第一类别ID获取第二类别列表
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu_byFirstMenuID() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
+	 * 获取所有第二级类别
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
 	 * 上传作品
 	 * 
 	 * @throws IOException
@@ -369,7 +334,8 @@ public class WorksAction extends ActionSupport {
 		}
 
 		// 作者
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		System.out.println(user);
 		accept_works.setWorks_user_id(user.getUser_id());
 
 		// 关键词
@@ -424,5 +390,145 @@ public class WorksAction extends ActionSupport {
 	public void listWorksOfSecondMenu() {
 
 	}
+	/*
+	 * 
+	 */
 
+	public File getWorksfile() {
+		return worksfile;
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
+	public String getWorksName() {
+		return worksName;
+	}
+
+	public void setWorksName(String worksName) {
+		this.worksName = worksName;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public void setWorksfile(File worksfile) {
+		this.worksfile = worksfile;
+	}
+
+	public String getWorksfileFileName() {
+		return worksfileFileName;
+	}
+
+	public void setWorksfileFileName(String worksfileFileName) {
+		this.worksfileFileName = worksfileFileName;
+	}
+
+	public String getWorksfileContentType() {
+		return worksfileContentType;
+	}
+
+	public void setWorksfileContentType(String worksfileContentType) {
+		this.worksfileContentType = worksfileContentType;
+	}
+
+	public File getImgfile() {
+		return imgfile;
+	}
+
+	public void setImgfile(File imgfile) {
+		this.imgfile = imgfile;
+	}
+
+	public String getImgfileFileName() {
+		return imgfileFileName;
+	}
+
+	public void setImgfileFileName(String imgfileFileName) {
+		this.imgfileFileName = imgfileFileName;
+	}
+
+	public String getImgfileContentType() {
+		return imgfileContentType;
+	}
+
+	public void setImgfileContentType(String imgfileContentType) {
+		this.imgfileContentType = imgfileContentType;
+	}
+
+	public wlmtxt_discuss getAccpet_discuss() {
+		return accpet_discuss;
+	}
+
+	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
+		this.accpet_discuss = accpet_discuss;
+	}
+
+	public wlmtxt_first_menu getFirst_menu() {
+		return first_menu;
+	}
+
+	public void setFirst_menu(wlmtxt_first_menu first_menu) {
+		this.first_menu = first_menu;
+	}
+
+	public wlmtxt_second_menu getSecond_menu() {
+		return second_menu;
+	}
+
+	public void setSecond_menu(wlmtxt_second_menu second_menu) {
+		this.second_menu = second_menu;
+	}
+
+	public wlmtxt_play_history getPlay_history() {
+		return play_history;
+	}
+
+	public void setPlay_history(wlmtxt_play_history play_history) {
+		this.play_history = play_history;
+	}
+
+	WorksService worksService;
+
+	public wlmtxt_user getAccept_user() {
+		return accept_user;
+	}
+
+	public void setAccept_user(wlmtxt_user accept_user) {
+		this.accept_user = accept_user;
+	}
+
+	public wlmtxt_works getAccept_works() {
+		return accept_works;
+	}
+
+	public void setAccept_works(wlmtxt_works accept_works) {
+		this.accept_works = accept_works;
+	}
+
+	public WorksService getWorksService() {
+		return worksService;
+	}
+
+	public void setWorksService(WorksService worksService) {
+		this.worksService = worksService;
+	}
 }

@@ -10,4 +10,8 @@ public interface UserDao {
 
 	wlmtxt_user mailRegisted(wlmtxt_user accpet_user);
 
+	String modifyPersonalData(wlmtxt_user accpet_user);
+
+	String modifyPassword(wlmtxt_user user);
+
 }

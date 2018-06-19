@@ -51,4 +51,24 @@ public class UserDaoImpl implements UserDao {
 		return user;
 	}
 
+	@Override
+	public String modifyPersonalData(wlmtxt_user accpet_user) {
+		try {
+			getSession().saveOrUpdate(accpet_user);
+			return "1";
+		} catch (Exception e) {
+			return "2";
+		}
+	}
+
+	@Override
+	public String modifyPassword(wlmtxt_user user) {
+		try {
+			getSession().saveOrUpdate(user);
+			return "1";
+		} catch (Exception e) {
+			return "2";
+		}
+	}
+
 }

@@ -45,4 +45,18 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	@Override
+	public String modifyPersonalData(wlmtxt_user accpet_user) {
+		accpet_user.setUser_gmt_modified(TeamUtil.getStringSecond());
+		String user = userDao.modifyPersonalData(accpet_user);
+		return user;
+	}
+
+	@Override
+	public String modifyPassword(wlmtxt_user user) {
+		user.setUser_gmt_modified(TeamUtil.getStringSecond());
+		String result = userDao.modifyPassword(user);
+		return result;
+	}
+
 }

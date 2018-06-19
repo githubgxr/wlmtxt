@@ -5,6 +5,7 @@ import java.util.List;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
+import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
@@ -29,5 +30,9 @@ public interface WorksService {
 	public void saveKeyword(wlmtxt_keyword newkeywords);
 
 	public List<wlmtxt_first_menu> listFirstMenu();
+
+	public List<wlmtxt_second_menu> listSecondMenu();
+
+	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id);
 
 }

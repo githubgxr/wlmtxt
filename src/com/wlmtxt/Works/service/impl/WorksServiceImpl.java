@@ -10,6 +10,7 @@ import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
@@ -25,6 +26,16 @@ public class WorksServiceImpl implements WorksService {
 
 	public void setWorksDao(WorksDao worksDao) {
 		this.worksDao = worksDao;
+	}
+
+	@Override
+	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
+		return worksDao.listSecondMenu_byFirstMenuID(first_menu_id);
+	}
+
+	@Override
+	public List<wlmtxt_second_menu> listSecondMenu() {
+		return worksDao.listSecondMenu();
 	}
 
 	@Override
