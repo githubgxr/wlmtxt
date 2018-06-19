@@ -58,7 +58,7 @@ public class WorksServiceImpl implements WorksService {
 		accept_works.setWorks_gmt_modified(time);
 		//
 		worksDao.saveWorks(accept_works);
-		System.out.println(accept_works);
+
 	}
 
 	@Override
