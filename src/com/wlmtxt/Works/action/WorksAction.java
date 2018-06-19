@@ -450,6 +450,7 @@ public class WorksAction extends ActionSupport {
 		this.worksfileContentType = worksfileContentType;
 	}
 
+
 	public File getImgfile() {
 		return imgfile;
 	}
@@ -515,6 +516,7 @@ public class WorksAction extends ActionSupport {
 	public void setAccept_user(wlmtxt_user accept_user) {
 		this.accept_user = accept_user;
 	}
+
 
 	public wlmtxt_works getAccept_works() {
 		return accept_works;
