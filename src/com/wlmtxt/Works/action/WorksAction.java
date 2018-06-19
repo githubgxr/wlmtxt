@@ -334,7 +334,8 @@ public class WorksAction extends ActionSupport {
 		}
 
 		// 作者
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		System.out.println(user);
 		accept_works.setWorks_user_id(user.getUser_id());
 
 		// 关键词

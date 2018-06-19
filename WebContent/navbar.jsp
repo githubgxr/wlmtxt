@@ -51,7 +51,6 @@
 			<div class="a_cateory login_show" style="float: right;display:none;"
 				onclick="window.location.href='/wlmtxt/view/personal_center/personal_center_upload_dynamic.jsp'">发布作品</div>
 			<!--搜索-->
-
 		</div>
 	</div>
 	<!-- 遮罩层 -->
