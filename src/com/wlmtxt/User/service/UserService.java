@@ -12,4 +12,8 @@ public interface UserService {
 
 	void update_userImg(String user_id, String fileName);
 
+	String modifyPersonalData(wlmtxt_user accpet_user);
+
+	String modifyPassword(wlmtxt_user user);
+
 }

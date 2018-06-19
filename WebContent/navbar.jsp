@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="<%=basePath%>css/lwk/navbar.css" />
 <script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
 <script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
 </head>
 
@@ -40,7 +41,7 @@
 			<div class="a_cateory" style="float: left;"
 				onclick="window.location.href='/wlmtxt/view/index/index_rank.jsp'">排行榜</div>
 			<!--头像-->
-			<img class="user_img" id="user_img"
+			<img class="user_img img_user" id="user_img"
 				src="<%=basePath%>img/user.jpg"
 				style="float: right; height: 45px; width: 45px; margin: 5.5px 0 0 0;" />
 			<!--个人中心-->
@@ -50,7 +51,6 @@
 			<div class="a_cateory login_show" style="float: right;display:none;"
 				onclick="window.location.href='/wlmtxt/view/personal_center/personal_center_upload_dynamic.jsp'">发布作品</div>
 			<!--搜索-->
-
 		</div>
 	</div>
 	<!-- 遮罩层 -->
@@ -104,7 +104,7 @@
 				<button class="btn btn-success btn-block reg_btn button_a"
 					style="font-size: 16px;" id="register_button" onclick="register()">注册</button>
 			</div>
-			<h4 style="display:none;padding:20px 10px;float:left;" id="check_email_text">邮件发送成功，请进行验证...</h4>
+			<h4 style="display:none;padding:20px;float:left;" id="check_email_text">邮件发送成功，请进行验证...</h4>
 		</div>
 	</div>
 

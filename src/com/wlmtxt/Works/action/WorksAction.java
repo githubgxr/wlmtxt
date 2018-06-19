@@ -333,7 +333,8 @@ public class WorksAction extends ActionSupport {
 		}
 
 		// 作者
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		System.out.println(user);
 		accept_works.setWorks_user_id(user.getUser_id());
 
 		// 关键词
@@ -448,6 +449,7 @@ public class WorksAction extends ActionSupport {
 		this.worksfileContentType = worksfileContentType;
 	}
 
+
 	public File getImgfile() {
 		return imgfile;
 	}
@@ -513,6 +515,7 @@ public class WorksAction extends ActionSupport {
 	public void setAccept_user(wlmtxt_user accept_user) {
 		this.accept_user = accept_user;
 	}
+
 
 	public wlmtxt_works getAccept_works() {
 		return accept_works;

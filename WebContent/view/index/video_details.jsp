@@ -41,7 +41,7 @@
 			<!--用户-->
 			<div style="width: 260px; float: right; margin: 15px 0 0 0;">
 				<!--用户头像-->
-				<img class="user_img" src="../../css/zb/img/tx.jpg"
+				<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=作品名"
 					style="float: left;" />
 
 				<div style="float: right; margin: 0 0 0 20px; width: 170px;">
@@ -72,21 +72,21 @@
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<!--视频-->
 				<video controls="controls" poster="../../css/zb/img/t1.jpg"
-					src="../../css/zb/img/trailer.mp4" style="width: 100%;"></video>
+					src="/wlmtxt/Works/Works_getVideo?worksName=作品名" style="width: 100%;"></video>
 				<!--点赞
 					收藏
 					播放量
 					下载-->
 				<div style="margin: 10px 0 0 0;">
 					<div>
-						<!-- <a class="button_code user_operate button_a" href="../../css/zb/img/trailer.mp4" download="trailer">
+						<a class="button_code user_operate button_a" href="../../css/zb/img/trailer.mp4" download="trailer">
 							<i class="fas fa-download"  style="width:50px;float:left;line-height:32px;text-align:left;margin:0 0 0 -10px;">&nbsp;下载</i>
 							<div style="float:left;"></div>
-						</a> -->
-						<div class="button_code user_operate button_a">
+						</a>
+						<!-- <div class="button_code user_operate button_a">
 							<i class="fas fa-download"
 								style="width: 50px; float: left; line-height: 32px; text-align: left; margin: 0 0 0 -10px;">&nbsp;下载</i>
-						</div>
+						</div> -->
 						<div class="dz_no user_operate" id="thumbs_number_div"
 							style="float: right;">
 							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number">2555</span>
