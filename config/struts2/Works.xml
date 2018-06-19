@@ -6,7 +6,7 @@
 	<package name="Works" namespace="/Works" extends="struts-default">
 		<action name="Works_*" class="com.wlmtxt.Works.action.WorksAction"
 			method="{1}">
-			<result name="videoDetailsPage">/WEB-INF/view/index/video_details.jsp
+			<result name="videoDetailsPage">/view/index/video_details.jsp
 			</result>
 			<result name="getFile" type="stream">
 				<!-- 指定下载文件的类型 -->

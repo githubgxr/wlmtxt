@@ -59,7 +59,7 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 */
 	public String videoDetailsPage() {
-
+		accept_works = new wlmtxt_works();
 		accept_works.setWorks_id("13627c40-1b00-4053-bde6-c0c49dbe6d00");
 		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
 		return "videoDetailsPage";
