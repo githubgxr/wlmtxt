@@ -22,7 +22,7 @@
 					<div class="sidebar_user_head">
 						<!--用户头像-->
 						<div class="user_img">
-							<img src="<%=basePath%>/css/zb/img/tx.jpg" />
+							<img class="img_user" src="<%=basePath%>/css/zb/img/tx.jpg" />
 						</div>
 						<!--用户名-->
 						<div class="user_name">熊熊熊</div>
