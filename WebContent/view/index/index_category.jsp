@@ -37,7 +37,7 @@
 		<div class="llls_content list_container"
 			style="margin: 20px 0 20px 0;">
 			<ul id="llls_list_container">
-				<li class="list_video_item" style="margin: 0 5px 20px 5px;">
+				<%-- <li class="list_video_item" style="margin: 0 5px 20px 5px;">
 					<!--视频链接--> <a class="video_list_item_wrap">
 						<div class="video_cover">
 							<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
@@ -535,7 +535,7 @@
 							<a class="video_label_item">绝地求生</a>
 						</div>
 					</div>
-				</li>
+				</li> --%>
 
 
 			</ul>

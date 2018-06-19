@@ -38,7 +38,7 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 </head>
-<body onload="init()">
+<body>
 	<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 		<div class="wlmtxt_container ">
@@ -54,7 +54,7 @@
 					<div class="img_wrap">
 						<div class="img_wrap_list">
 							<span>作品分类：</span>
-							 <select class="works_classificationOne" id="works_classificationOne" onchange="works_classification()">
+							 <select class="works_classificationOne" id="works_classificationOne">
 							</select> 
 							<!-- <select id="works_classificationTwo"></select> -->
 						</div>
@@ -182,14 +182,14 @@
 							if (($.inArray(input_keyword_value, array)) < 0) {
 								$(".div_box").append(str)
 							} else {
-								alert("请不要输入相同的关键字");
+								toastr.error("请不要输入相同的关键字");
 								$(".input_keyword").val("");
 								return;
 							}
 						}
 						$(".input_keyword").val("");
 					} else {
-						alert("请输入关键字");
+						toastr.error("请输入关键字");
 					}
 				});
 	</script>
