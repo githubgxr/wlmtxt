@@ -1,5 +1,5 @@
 /*得到二级分类的name*/
-window.onload=function works_classification(){
+$(function(){
 	var xhr=false;
 	xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
@@ -8,8 +8,8 @@ window.onload=function works_classification(){
 			for ( var num in caterory) {
 				var option = document.createElement("option");
 				option.appendChild(document.createTextNode(caterory[num].second_menu_name));
-				var works_classificationOne=document.getElementById("works_classificationOne");
-				works_classificationOne.appendChild(option);
+				var select=document.getElementById("works_classificationOne");
+				select.appendChild(option);
 				option.value = caterory[num].second_menu_id;
 				
 			}
@@ -20,9 +20,9 @@ window.onload=function works_classification(){
 	}
 	xhr.open("POST","/wlmtxt/Works/listSecondMenu");
 	xhr.send(null);
-}
+})
 
-window.onload=function(){
+$(function(){
 	$("input").blur(function(){
 		var input_value=$("input").val();
 		if(input_value=="" || input_value==null){
@@ -41,7 +41,7 @@ window.onload=function(){
 			toastr.error("请输入内容");
 		}
 	})
-}
+})
 
 function uploadWorks(){
 	var input_title=$("#input_title").val();//视频标题

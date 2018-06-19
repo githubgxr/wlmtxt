@@ -2,7 +2,7 @@
  * 
  */
 /*获得所有一级分类*/
-window.onload=function(){
+$(function(){
 	var xmlhttp=null;
 	var category_vo=null;
 	xmlhttp=new XMLHttpRequest();
@@ -16,17 +16,20 @@ window.onload=function(){
 				new_a = document.createElement("a");
 				new_a.className = "category_a";
 				new_a.appendChild(document.createTextNode(category_vo[num].first_menu_name));
-				div_box.append(new_a);
+				div_box.appendChild(new_a);
+				new_a.id=category_vo[num].first_menu_id;
 				/*new_a.href = "/ajdbxt/total/Total_page_caseInfoList?totalcase=2&policeId="+policeId+"&select_start_time="
 				+select_start_time+"&select_stop_time="+select_stop_time;*/
 			}
-				
+			$('#' + select.id).selectpicker('refresh');	
 		}
+		toastr.error(xhr.status);
 	}
 	xhr.open("POST","/wlmtxt/Works/listFirstMenu");
 	var formData=new FormData();
 	xmlhttp.send(formData);	
-}
+})
+
 /*移除一级分类，显示二级*/
 function getSecondMenu(){
 	var xhr=false;
@@ -51,9 +54,12 @@ function getSecondMenu(){
 				var div_box=document.getElementById("div_box");
 				new_a=document.createElement("a");
 				new_a.className="category_a";
-				new_a.append();
+				new_a.append(document.createTextNode(categorySecond_vo[num].second_menu_name));
+				div_box.appendChild(new_a);
 			}
 		}
 	}
+	xhr.open("POST","/wlmtxt/Works/listSecondMenu");
+	xhr.send(null);
 }
 
