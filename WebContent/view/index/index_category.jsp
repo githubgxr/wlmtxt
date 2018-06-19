@@ -26,27 +26,6 @@
 
 	<div id="div_box"
 		style="background-color: #FFFFFF; width: 1000px; margin: 20px calc(( 100% - 1000px)/2) 10px calc(( 100% - 1000px)/2); border-radius: 5px; padding: 20px 0">
-		<a class="category_a" href="index_second_category.jsp">电影</a> <a
-			class="category_a" href="index_second_category.jsp">电视剧</a> <a
-			class="category_a" href="index_second_category.jsp">综艺</a> <a
-			class="category_a" href="index_second_category.jsp">动画</a> <a
-			class="category_a" href="index_second_category.jsp">电影</a> <a
-			class="category_a" href="index_second_category.jsp">电视剧</a> <a
-			class="category_a" href="index_second_category.jsp">综艺</a> <a
-			class="category_a" href="index_second_category.jsp">动画</a> <a
-			class="category_a" href="index_second_category.jsp">短片</a> <a
-			class="category_a" href="index_second_category.jsp">电影</a> <a
-			class="category_a" href="index_second_category.jsp">电视剧</a> <a
-			class="category_a" href="index_second_category.jsp">综艺</a> <a
-			class="category_a" href="index_second_category.jsp">动画</a> <a
-			class="category_a" href="index_second_category.jsp">短片</a> <a
-			class="category_a" href="index_second_category.jsp">电影</a> <a
-			class="category_a" href="index_second_category.jsp">电视剧</a> <a
-			class="category_a" href="index_second_category.jsp">综艺</a> <a
-			class="category_a" href="index_second_category.jsp">动画</a> <a
-			class="category_a" href="index_second_category.jsp">短片</a> <a
-			class="category_a" href="index_second_category.jsp">短片</a>
-		<!-- <a class="category_a">默片</a> -->
 	</div>
 
 	<div
@@ -58,7 +37,7 @@
 		<div class="llls_content list_container"
 			style="margin: 20px 0 20px 0;">
 			<ul id="llls_list_container">
-				<li class="list_video_item" style="margin: 0 5px 20px 5px;">
+				<%-- <li class="list_video_item" style="margin: 0 5px 20px 5px;">
 					<!--视频链接--> <a class="video_list_item_wrap">
 						<div class="video_cover">
 							<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
@@ -556,7 +535,7 @@
 							<a class="video_label_item">绝地求生</a>
 						</div>
 					</div>
-				</li>
+				</li> --%>
 
 
 			</ul>
@@ -577,5 +556,8 @@
 	</div>
 	<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 </body>
-
+<script type="text/javascript"
+	src="<%=basePath%>/js/index/index_category.js">
+	
+</script>
 </html>

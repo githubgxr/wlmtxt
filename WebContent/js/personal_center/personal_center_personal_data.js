@@ -14,6 +14,7 @@ $(".reset_btn").click(function() {
 	$(".reset_btn").css("display", "none");
 	$(".check_btn").css("display", "none");
 });
+
 /*-----------修改个人资料------------*/
 $(".check_btn").click(function(){
 	var formData=new FormData();
@@ -31,6 +32,7 @@ $(".check_btn").click(function(){
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
 			if(xhr.responseText=="1"){
+
 				toastr.success("修改资料成功！");
 				$(".div_username").html($(".input_username").val());
 				$(".div_email").html($(".input_email").val());
@@ -41,7 +43,9 @@ $(".check_btn").click(function(){
 				$(".update_btn").css("display", "block");
 				$(".reset_btn").css("display", "none");
 				$(".check_btn").css("display", "none");
+
 			}else{
+
 				toastr.error("修改资料失败！");
 				return false;
 			}
@@ -49,6 +53,7 @@ $(".check_btn").click(function(){
 	}
 });
 /*----------------修改密码---------------*/
+
 $(".check_pwd_btn").click(function(){
 	if($(".new_password").val().length<6||$(".new_password").val().length>15){
 		toastr.error("请输入6~15位新密码！");
@@ -86,3 +91,4 @@ $(".check_pwd_btn").click(function(){
 		}
 	}
 });
+

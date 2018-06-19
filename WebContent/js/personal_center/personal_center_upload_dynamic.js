@@ -13,12 +13,12 @@ $(function(){
 				option.value = caterory[num].second_menu_id;
 				
 			}
-			$('#' + select.id).selectpicker('refresh');
+		/*	$('#' + select.id).selectpicker('refresh');*/
 
 		}
 		toastr.error(xhr.status);
 	}
-	xhr.open("POST","/wlmtxt/Works/listSecondMenu");
+	xhr.open("POST","/wlmtxt/Works/Works_listSecondMenu");
 	xhr.send(null);
 })
 
@@ -26,19 +26,19 @@ $(function(){
 	$("input").blur(function(){
 		var input_value=$("input").val();
 		if(input_value=="" || input_value==null){
-			toastr.error("请输入内容");
+			toastr.error("请输入视频标题");
 		}
 	})
 	$("textarea").blur(function(){
 		var textarea_value=$("textarea").val();
 		if(textarea_value=="" || textarea_value==null){
-			toastr.error("请输入内容");
+			toastr.error("请输入作品描述");
 		}
 	})
 	$(".input_keyword").blur(function(){
 		var input_keyword_value=$(".input_keyword").val();
 		if(input_keyword_value=="" || input_keyword_value==null){
-			toastr.error("请输入内容");
+			toastr.error("请输入关键字");
 		}
 	})
 })
@@ -60,7 +60,7 @@ function uploadWorks(){
 		if(xmlhttp.readyState==4&&xmlhttp.status==200){
 			var result=xmlhttp.responseText;
 			if(result=="1"){
-				toastr.error("作品发布成功");
+				toastr.success("作品发布成功");
 			}else{
 				toastr.error("作品发布失败");
 			}
