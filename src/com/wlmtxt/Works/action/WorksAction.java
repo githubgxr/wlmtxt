@@ -58,143 +58,11 @@ public class WorksAction extends ActionSupport {
 	/*
 	 * 
 	 */
+	public String videoDetailsPage() {
 
-	public File getWorksfile() {
-		return worksfile;
-	}
-
-	public String getImgName() {
-		return imgName;
-	}
-
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
-	}
-
-	public String getWorksName() {
-		return worksName;
-	}
-
-	public void setWorksName(String worksName) {
-		this.worksName = worksName;
-	}
-
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
-	public void setWorksfile(File worksfile) {
-		this.worksfile = worksfile;
-	}
-
-	public String getWorksfileFileName() {
-		return worksfileFileName;
-	}
-
-	public void setWorksfileFileName(String worksfileFileName) {
-		this.worksfileFileName = worksfileFileName;
-	}
-
-	public String getWorksfileContentType() {
-		return worksfileContentType;
-	}
-
-	public void setWorksfileContentType(String worksfileContentType) {
-		this.worksfileContentType = worksfileContentType;
-	}
-
-	public File getImgfile() {
-		return imgfile;
-	}
-
-	public void setImgfile(File imgfile) {
-		this.imgfile = imgfile;
-	}
-
-	public String getImgfileFileName() {
-		return imgfileFileName;
-	}
-
-	public void setImgfileFileName(String imgfileFileName) {
-		this.imgfileFileName = imgfileFileName;
-	}
-
-	public String getImgfileContentType() {
-		return imgfileContentType;
-	}
-
-	public void setImgfileContentType(String imgfileContentType) {
-		this.imgfileContentType = imgfileContentType;
-	}
-
-	public wlmtxt_discuss getAccpet_discuss() {
-		return accpet_discuss;
-	}
-
-	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
-		this.accpet_discuss = accpet_discuss;
-	}
-
-	public wlmtxt_first_menu getFirst_menu() {
-		return first_menu;
-	}
-
-	public void setFirst_menu(wlmtxt_first_menu first_menu) {
-		this.first_menu = first_menu;
-	}
-
-	public wlmtxt_second_menu getSecond_menu() {
-		return second_menu;
-	}
-
-	public void setSecond_menu(wlmtxt_second_menu second_menu) {
-		this.second_menu = second_menu;
-	}
-
-	public wlmtxt_play_history getPlay_history() {
-		return play_history;
-	}
-
-	public void setPlay_history(wlmtxt_play_history play_history) {
-		this.play_history = play_history;
-	}
-
-	WorksService worksService;
-
-	public wlmtxt_user getAccept_user() {
-		return accept_user;
-	}
-
-	public void setAccept_user(wlmtxt_user accept_user) {
-		this.accept_user = accept_user;
-	}
-
-	public wlmtxt_works getAccept_works() {
-		return accept_works;
-	}
-
-	public void setAccept_works(wlmtxt_works accept_works) {
-		this.accept_works = accept_works;
-	}
-
-	public WorksService getWorksService() {
-		return worksService;
-	}
-
-	public void setWorksService(WorksService worksService) {
-		this.worksService = worksService;
+		accept_works.setWorks_id("13627c40-1b00-4053-bde6-c0c49dbe6d00");
+		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
+		return "videoDetailsPage";
 	}
 
 	/*
@@ -521,5 +389,145 @@ public class WorksAction extends ActionSupport {
 	public void listWorksOfSecondMenu() {
 
 	}
+	/*
+	 * 
+	 */
 
+	public File getWorksfile() {
+		return worksfile;
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
+	public String getWorksName() {
+		return worksName;
+	}
+
+	public void setWorksName(String worksName) {
+		this.worksName = worksName;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public void setWorksfile(File worksfile) {
+		this.worksfile = worksfile;
+	}
+
+	public String getWorksfileFileName() {
+		return worksfileFileName;
+	}
+
+	public void setWorksfileFileName(String worksfileFileName) {
+		this.worksfileFileName = worksfileFileName;
+	}
+
+	public String getWorksfileContentType() {
+		return worksfileContentType;
+	}
+
+	public void setWorksfileContentType(String worksfileContentType) {
+		this.worksfileContentType = worksfileContentType;
+	}
+
+	public File getImgfile() {
+		return imgfile;
+	}
+
+	public void setImgfile(File imgfile) {
+		this.imgfile = imgfile;
+	}
+
+	public String getImgfileFileName() {
+		return imgfileFileName;
+	}
+
+	public void setImgfileFileName(String imgfileFileName) {
+		this.imgfileFileName = imgfileFileName;
+	}
+
+	public String getImgfileContentType() {
+		return imgfileContentType;
+	}
+
+	public void setImgfileContentType(String imgfileContentType) {
+		this.imgfileContentType = imgfileContentType;
+	}
+
+	public wlmtxt_discuss getAccpet_discuss() {
+		return accpet_discuss;
+	}
+
+	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
+		this.accpet_discuss = accpet_discuss;
+	}
+
+	public wlmtxt_first_menu getFirst_menu() {
+		return first_menu;
+	}
+
+	public void setFirst_menu(wlmtxt_first_menu first_menu) {
+		this.first_menu = first_menu;
+	}
+
+	public wlmtxt_second_menu getSecond_menu() {
+		return second_menu;
+	}
+
+	public void setSecond_menu(wlmtxt_second_menu second_menu) {
+		this.second_menu = second_menu;
+	}
+
+	public wlmtxt_play_history getPlay_history() {
+		return play_history;
+	}
+
+	public void setPlay_history(wlmtxt_play_history play_history) {
+		this.play_history = play_history;
+	}
+
+	WorksService worksService;
+
+	public wlmtxt_user getAccept_user() {
+		return accept_user;
+	}
+
+	public void setAccept_user(wlmtxt_user accept_user) {
+		this.accept_user = accept_user;
+	}
+
+	public wlmtxt_works getAccept_works() {
+		return accept_works;
+	}
+
+	public void setAccept_works(wlmtxt_works accept_works) {
+		this.accept_works = accept_works;
+	}
+
+	public WorksService getWorksService() {
+		return worksService;
+	}
+
+	public void setWorksService(WorksService worksService) {
+		this.worksService = worksService;
+	}
 }
