@@ -14,7 +14,34 @@ $(".reset_btn").click(function() {
 	$(".reset_btn").css("display", "none");
 	$(".check_btn").css("display", "none");
 });
-
+/*-----------修改头像------------*/
+var btn_file=document.getElementById("btn_file");
+$("#update_user_img").click(function(){
+	btn_file.click();
+});
+btn_file.oninput=function(){
+	console.log("user_id:"+user_id);
+	var btn_file_value=btn_file.files[0];
+	var formData=new FormData();
+	formData.append("touxiangfile",btn_file_value);
+	var xhr=new XMLHttpRequest();
+	xhr.open("POST","/wlmtxt/User/User_uploadTouXiang");
+	xhr.send(formData);
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4&&xhr.status==200){
+			if(xhr.responseText=="1"){
+				console.log("修改头像成功");
+				$(".img_user").attr("src",
+						"/wlmtxt/Works/Works_getImg?imgName="+user_id);
+				toastr.success("上传成功！");
+			}else{
+				console.log("修改头像失败");
+				toastr.error("上传失败！");
+				return false;
+			}
+		}
+	}
+}
 /*-----------修改个人资料------------*/
 $(".check_btn").click(function(){
 	var formData=new FormData();
@@ -76,10 +103,11 @@ $(".check_pwd_btn").click(function(){
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4 && xhr.status==200){
 				if(xhr.responseText=="1"){
-					toastr.success("修改密码成功！");
-					$(".old_password").val("");
+					toastr.success("修改密码成功，请重新登录！");
+					window.location.href="/wlmtxt/User/User_logout";
+					/*$(".old_password").val("");
 					 $(".new_password").val("");
-					 $(".new_repassword").val("");
+					 $(".new_repassword").val("");*/
 				}else if(xhr.responseText=="3"){
 					toastr.error("旧密码错误！");
 					return false;

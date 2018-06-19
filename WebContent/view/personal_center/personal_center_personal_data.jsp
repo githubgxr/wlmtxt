@@ -45,7 +45,7 @@
 									<div class="img_wrap_list">
 										<span>账号：</span>
 										<div class="personal_info_value div_email"></div>
-										<input type="text" class="input_xzt xg input_email" style="width:400px;" placeholder="" value="" />
+										<input type="text" class="input_xzt xg input_email" style="width:400px;" placeholder="" value="" disabled="disabled" />
 									</div>
 									<div class="img_wrap_list">
 										<span>性别：</span>

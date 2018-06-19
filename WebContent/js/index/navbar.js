@@ -1,5 +1,5 @@
 var if_login = false;
-
+var user_id=null;
 //查询是否收藏
 function checkCollect() {
 	var collect_xhr = new XMLHttpRequest();
@@ -76,6 +76,7 @@ function checkLogin() {
 			if (xhr.responseText == "2") {
 				console.log("未登录！");
 				// 点击头像栏显示登录注册
+				$(".img_user").attr("src","/wlmtxt/img/user.jpg");
 				$("#user_img").click(function() {
 					show_login_div();
 				});
@@ -89,12 +90,13 @@ function checkLogin() {
 				});
 			} else {
 				var userInfo = JSON.parse(xhr.responseText);
+				user_id=userInfo.user_id;
 				console.log("已登录！");
 				console.log("user_mail:" + userInfo.user_mail);
 				$(".login_show").css("display", "block");
 				// 记得修改为用户的头像
 				$(".img_user").attr("src",
-						"/wlmtxt/Works/Works_getImg?imgName="+userInfo.user_id);
+						"/wlmtxt/Works/Works_getImg?imgName="+user_id);
 				if_login = true;
 				console.log("if_login：" + if_login);
 				/* 登录后 */
