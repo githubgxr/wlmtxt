@@ -17,16 +17,34 @@ public class UserDaoImpl implements UserDao {
 		return this.sessionFactory.getCurrentSession();
 	}
 
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	@Override
 	public void update_userImg(String user_id, String fileName) {
 		Session session = getSession();
 
-		String hql = "update wlmtxt_user user set user.user_avatar='" + fileName + "' where user.wlmtxt_user_id='"
-				+ user_id + "'";
+		String hql = "update wlmtxt_user user set user.user_avatar='" + fileName + "' where user.user_id='" + user_id
+				+ "'";
+
+		System.out.println();
 
 		Query query = session.createQuery(hql);
 
 		query.executeUpdate();
+	}
+
+	@Override
+	public wlmtxt_user get_user_byID(String user_id) {
+		String hql = "from wlmtxt_user where user_id='" + user_id + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_user user = (wlmtxt_user) query.uniqueResult();
+		return user;
 	}
 
 	@Override
@@ -36,14 +54,6 @@ public class UserDaoImpl implements UserDao {
 		Query query = getSession().createQuery(hql);
 		wlmtxt_user user = (wlmtxt_user) query.uniqueResult();
 		return user;
-	}
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
 	}
 
 	@Override

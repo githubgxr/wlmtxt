@@ -105,7 +105,7 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void isLiked() throws Exception {
 
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
@@ -124,7 +124,7 @@ public class WorksAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public void likeWorks() throws Exception {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 
 		worksService.likWorks(user, accept_works);
 
@@ -149,7 +149,7 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void isCollectWorks() throws Exception {
 		// TODO
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		if (worksService.isCollectWorks(user.getUser_id(), accept_works.getWorks_id())) {
@@ -163,7 +163,7 @@ public class WorksAction extends ActionSupport {
 	 * 收藏及取消，接收accept_works.works_id
 	 */
 	public void collectWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		try {
 			worksService.collectWorks(user, accept_works);
 			HttpServletResponse response = ServletActionContext.getResponse();
@@ -199,7 +199,7 @@ public class WorksAction extends ActionSupport {
 	 * wlmtxt_download_history.download_history_gmt_create
 	 */
 	public void removeDownloadHistory() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		try {
 			worksService.removeDownloadHistory(user, accept_works);
 		} catch (Exception e) {
@@ -220,7 +220,7 @@ public class WorksAction extends ActionSupport {
 	 * TODO
 	 */
 	public void discussWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		// worksService.discussWorks(user, accpet_discuss);
 	}
 
@@ -449,7 +449,6 @@ public class WorksAction extends ActionSupport {
 		this.worksfileContentType = worksfileContentType;
 	}
 
-
 	public File getImgfile() {
 		return imgfile;
 	}
@@ -515,7 +514,6 @@ public class WorksAction extends ActionSupport {
 	public void setAccept_user(wlmtxt_user accept_user) {
 		this.accept_user = accept_user;
 	}
-
 
 	public wlmtxt_works getAccept_works() {
 		return accept_works;

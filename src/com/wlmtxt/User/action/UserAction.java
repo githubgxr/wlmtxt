@@ -62,8 +62,8 @@ public class UserAction extends ActionSupport {
 
 			try {
 				FileUtils.copyFile(touxiangfile, newFile);
-				wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-
+				wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+				user = userService.get_user_byID(user.getUser_id());
 				userService.update_userImg(user.getUser_id(), fileName);
 
 				response.getWriter().write("1");
@@ -202,8 +202,11 @@ public class UserAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+
 		PrintWriter pw = response.getWriter();
+
 		if (user != null) {
+			user = userService.get_user_byID(user.getUser_id());
 			// 对象属性值为null替换为""
 			ReflectUtil.getAllField(user);
 			pw.write(JsonUtils.toJson(user));
@@ -227,6 +230,7 @@ public class UserAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		loginUser = userService.get_user_byID(loginUser.getUser_id());
 		PrintWriter pw = response.getWriter();
 		loginUser.setUser_username(accpet_user.getUser_username());
 		loginUser.setUser_mail(accpet_user.getUser_mail());
@@ -257,6 +261,7 @@ public class UserAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		loginUser = userService.get_user_byID(loginUser.getUser_id());
 		if ((md5.GetMD5Code(accpet_user.getUser_password())).equals(loginUser.getUser_password())) {
 			loginUser.setUser_password(md5.GetMD5Code(new_password));
 			String result = userService.modifyPassword(loginUser);
@@ -307,46 +312,6 @@ public class UserAction extends ActionSupport {
 	 * os.flush(); os.close(); is.close(); }
 	 */
 
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-
-	public wlmtxt_user getAccpet_user() {
-		return accpet_user;
-	}
-
-	public void setAccpet_user(wlmtxt_user accpet_user) {
-		this.accpet_user = accpet_user;
-	}
-
-	public File getTouxiangfile() {
-		return touxiangfile;
-	}
-
-	public void setTouxiangfile(File touxiangfile) {
-		this.touxiangfile = touxiangfile;
-	}
-
-	public String getTouxiangfileFileName() {
-		return touxiangfileFileName;
-	}
-
-	public void setTouxiangfileFileName(String touxiangfileFileName) {
-		this.touxiangfileFileName = touxiangfileFileName;
-	}
-
-	public String getTouxiangfileContentType() {
-		return touxiangfileContentType;
-	}
-
-	public void setTouxiangfileContentType(String touxiangfileContentType) {
-		this.touxiangfileContentType = touxiangfileContentType;
-	}
-
 	/**
 	 * 关注用户 TODO
 	 * 
@@ -357,6 +322,7 @@ public class UserAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		loginUser = userService.get_user_byID(loginUser.getUser_id());
 
 	}
 
@@ -505,5 +471,45 @@ public class UserAction extends ActionSupport {
 	 */
 	public String skipToAuditNoticePage() {
 		return "skipToAuditNoticePage";
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public wlmtxt_user getAccpet_user() {
+		return accpet_user;
+	}
+
+	public void setAccpet_user(wlmtxt_user accpet_user) {
+		this.accpet_user = accpet_user;
+	}
+
+	public File getTouxiangfile() {
+		return touxiangfile;
+	}
+
+	public void setTouxiangfile(File touxiangfile) {
+		this.touxiangfile = touxiangfile;
+	}
+
+	public String getTouxiangfileFileName() {
+		return touxiangfileFileName;
+	}
+
+	public void setTouxiangfileFileName(String touxiangfileFileName) {
+		this.touxiangfileFileName = touxiangfileFileName;
+	}
+
+	public String getTouxiangfileContentType() {
+		return touxiangfileContentType;
+	}
+
+	public void setTouxiangfileContentType(String touxiangfileContentType) {
+		this.touxiangfileContentType = touxiangfileContentType;
 	}
 }
