@@ -109,6 +109,8 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
+	
+	<!-- 二级联动 -->
 	<!-- <script type="text/javascript">
 		var arr = new Array();
 		arr[0] = "---请选择---"
@@ -157,6 +159,8 @@
 			}
 		}
 	</script> -->
+	
+	<!-- 关键字 -->
 	<script type="text/javascript">
 		$(".btn_keyword").click(
 				function() {
@@ -189,6 +193,8 @@
 					}
 				});
 	</script>
+	
+	<!-- 上传图片预览 -->
 	<script type="text/javascript">
 		/*上传图片的JS*/
 		function img_click() {
@@ -204,6 +210,8 @@
 			reader.readAsDataURL(file.files[0]);
 		}
 	</script>
+	
+	<!-- 选择作品样式修饰 -->
 	<script type="text/javascript">
 	$(".inputfile").each( function(){ 
 		var $input = $(this), 
