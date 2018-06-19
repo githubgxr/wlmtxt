@@ -10,4 +10,6 @@ public interface UserService {
 
 	wlmtxt_user mailRegisted(wlmtxt_user accpet_user);
 
+	void update_userImg(String user_id, String fileName);
+
 }
