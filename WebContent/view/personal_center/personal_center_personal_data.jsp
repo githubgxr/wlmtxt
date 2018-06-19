@@ -7,14 +7,11 @@
 %>
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 			<link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_grzl.css" />
-
 	</head>
-
 	<body>
 		<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>

@@ -91,8 +91,8 @@ function checkLogin() {
 				console.log("user_mail:" + userInfo.user_mail);
 				$(".login_show").css("display", "block");
 				// 记得修改为用户的头像
-				$("#user_img").attr("src",
-						"http://localhost:8080/wlmtxt/css/zb/img/tx.jpg");
+				$(".img_user").attr("src",
+						"/wlmtxt/Works/Works_getImg?imgName="+userInfo.user_id);
 				if_login = true;
 				console.log("if_login：" + if_login);
 				/* 登录后 */
