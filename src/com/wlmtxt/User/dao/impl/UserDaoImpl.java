@@ -10,18 +10,31 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import util.md5;
 
 public class UserDaoImpl implements UserDao {
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public Session getSession() {
 		return this.sessionFactory.getCurrentSession();
 	}
-	
+
+	@Override
+	public void update_userImg(String user_id, String fileName) {
+		Session session = getSession();
+
+		String hql = "update wlmtxt_user user set user.user_avatar='" + fileName + "' where user.wlmtxt_user_id='"
+				+ user_id + "'";
+
+		Query query = session.createQuery(hql);
+
+		query.executeUpdate();
+	}
+
 	@Override
 	public wlmtxt_user findUser(wlmtxt_user accpet_user) {
-		String hql = "from wlmtxt_user where user_mail='"+accpet_user.getUser_mail()+"' and user_password='"+md5.GetMD5Code(accpet_user.getUser_password())+"'";
+		String hql = "from wlmtxt_user where user_mail='" + accpet_user.getUser_mail() + "' and user_password='"
+				+ md5.GetMD5Code(accpet_user.getUser_password()) + "'";
 		Query query = getSession().createQuery(hql);
-		wlmtxt_user user = (wlmtxt_user)query.uniqueResult();
+		wlmtxt_user user = (wlmtxt_user) query.uniqueResult();
 		return user;
 	}
 
@@ -45,7 +58,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public wlmtxt_user mailRegisted(wlmtxt_user accpet_user) {
-		String hql = "from wlmtxt_user where user_mail='"+accpet_user.getUser_mail()+"'";
+		String hql = "from wlmtxt_user where user_mail='" + accpet_user.getUser_mail() + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_user user = (wlmtxt_user) query.uniqueResult();
 		return user;

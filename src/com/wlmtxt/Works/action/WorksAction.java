@@ -60,7 +60,6 @@ public class WorksAction extends ActionSupport {
 	 */
 	public String videoDetailsPage() {
 		accept_works = new wlmtxt_works();
-		accept_works.setWorks_id("13627c40-1b00-4053-bde6-c0c49dbe6d00");
 		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
 		return "videoDetailsPage";
 	}
@@ -450,6 +449,7 @@ public class WorksAction extends ActionSupport {
 		this.worksfileContentType = worksfileContentType;
 	}
 
+
 	public File getImgfile() {
 		return imgfile;
 	}
@@ -516,6 +516,7 @@ public class WorksAction extends ActionSupport {
 		this.accept_user = accept_user;
 	}
 
+
 	public wlmtxt_works getAccept_works() {
 		return accept_works;
 	}
@@ -531,4 +532,5 @@ public class WorksAction extends ActionSupport {
 	public void setWorksService(WorksService worksService) {
 		this.worksService = worksService;
 	}
+
 }
