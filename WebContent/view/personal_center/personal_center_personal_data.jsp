@@ -52,7 +52,12 @@
 									<div class="img_wrap_list">
 										<span>性别：</span>
 										<div class="personal_info_value div_sex"></div>
-										<input type="text" class="input_xzt xg input_sex" style="width:400px;" placeholder="" value="" />
+										<!-- <input type="text" class="input_xzt xg input_sex" style="width:400px;" placeholder="" value="" /> -->
+										<select class="input_xzt xg input_sex " style="width:400px;">
+										<option value="">请选择</option>
+										<option value="男">男</option>
+										<option value="女">女</option>
+										</select>
 									</div>
 									<div class="img_wrap_list">
 										<span>简介：</span>
