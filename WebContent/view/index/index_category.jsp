@@ -26,27 +26,6 @@
 
 	<div id="div_box"
 		style="background-color: #FFFFFF; width: 1000px; margin: 20px calc(( 100% - 1000px)/2) 10px calc(( 100% - 1000px)/2); border-radius: 5px; padding: 20px 0">
-		<a class="category_a" href="index_second_category.jsp">电影</a> <a
-			class="category_a" href="index_second_category.jsp">电视剧</a> <a
-			class="category_a" href="index_second_category.jsp">综艺</a> <a
-			class="category_a" href="index_second_category.jsp">动画</a> <a
-			class="category_a" href="index_second_category.jsp">电影</a> <a
-			class="category_a" href="index_second_category.jsp">电视剧</a> <a
-			class="category_a" href="index_second_category.jsp">综艺</a> <a
-			class="category_a" href="index_second_category.jsp">动画</a> <a
-			class="category_a" href="index_second_category.jsp">短片</a> <a
-			class="category_a" href="index_second_category.jsp">电影</a> <a
-			class="category_a" href="index_second_category.jsp">电视剧</a> <a
-			class="category_a" href="index_second_category.jsp">综艺</a> <a
-			class="category_a" href="index_second_category.jsp">动画</a> <a
-			class="category_a" href="index_second_category.jsp">短片</a> <a
-			class="category_a" href="index_second_category.jsp">电影</a> <a
-			class="category_a" href="index_second_category.jsp">电视剧</a> <a
-			class="category_a" href="index_second_category.jsp">综艺</a> <a
-			class="category_a" href="index_second_category.jsp">动画</a> <a
-			class="category_a" href="index_second_category.jsp">短片</a> <a
-			class="category_a" href="index_second_category.jsp">短片</a>
-		<!-- <a class="category_a">默片</a> -->
 	</div>
 
 	<div
@@ -577,5 +556,8 @@
 	</div>
 	<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 </body>
-
+<script type="text/javascript"
+	src="<%=basePath%>/js/index/index_category.js">
+	
+</script>
 </html>
