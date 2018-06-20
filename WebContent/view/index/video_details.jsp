@@ -154,7 +154,7 @@
 				<div>
 					<textarea class="form-control textarea_pl" id="textarea_comment"
 						style="width: 90%; float: left;"></textarea>
-					<div class="button_pl user_operate" style="float: right;" id="video_comment_btn">
+					<div class="button_pl user_operate" style="float: right;" id="video_comment_btn" onclick="video_comment_btn_click()">
 						发表<br />评论
 					</div>
 				</div>
