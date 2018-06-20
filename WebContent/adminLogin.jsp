@@ -50,28 +50,15 @@
 			<h1>管理入口</h1>
 		</div>
 		<div class="content">
-			<form action="Admin_login" method="get">
+			<form action="" method="post">
 				<input type="text" class="userName" id="account" /> <input
 					type="password" id="password" class="passWord" />
 				<div class="clear"></div>
-				<div id="login" class="logo-button">LOGIN</div>
+				<div id="login" class="logo-button" onclick="admin_login()">LOGIN</div>
 			</form>
 		</div>
 	</div>
-	<script>
-		var btn = document.querySelector(".logo-button");
-		btn.onclick = check;
-		function check() {
-			btn.style.background = " #0284c4";
-			var userName = document.querySelector(".userName").value;
-			var passWord = document.querySelector(".passWord").value;
-			if (userName.trim() == "" || passWord.trim() == "") {
-				toastr.warning("用户名密码不能为空!");
-			} else if (passWord.length > 20) {
-				toastr.warning("密码不能超过20位!");
-			}
-		}
-	</script>
+	
 
 
 </body>
