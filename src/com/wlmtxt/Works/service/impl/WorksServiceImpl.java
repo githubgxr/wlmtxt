@@ -1,6 +1,8 @@
 package com.wlmtxt.Works.service.impl;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import com.wlmtxt.Works.dao.WorksDao;
@@ -32,6 +34,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO) {
 
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
@@ -70,6 +73,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
 		return worksDao.listSecondMenu_byFirstMenuID(first_menu_id);
 	}
@@ -99,7 +103,6 @@ public class WorksServiceImpl implements WorksService {
 		accept_works.setWorks_gmt_modified(time);
 		//
 		worksDao.saveWorks(accept_works);
-
 	}
 
 	@Override

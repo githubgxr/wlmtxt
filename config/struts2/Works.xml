@@ -6,8 +6,10 @@
 	<package name="Works" namespace="/Works" extends="struts-default">
 		<action name="Works_*" class="com.wlmtxt.Works.action.WorksAction"
 			method="{1}">
+
 			<result name="videoDetailsPage">/view/index/video_details.jsp
 			</result>
+
 			<result name="getFile" type="stream">
 				<!-- 指定下载文件的类型 -->
 				<param name="contentType">image/jpeg</param>
