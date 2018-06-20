@@ -2,9 +2,11 @@ var if_login = false;
 var user_id = null;
 // 查询是否收藏
 function checkCollect() {
+	var formData_check_collect=new FormData();
+	formData_check_collect.append("accept_works.works_id",video_id);
 	var collect_xhr = new XMLHttpRequest();
 	collect_xhr.open("POST", "/wlmtxt/Works/Works_isCollectWorks");
-	collect_xhr.send();
+	collect_xhr.send(formData_check_collect);
 	collect_xhr.onreadystatechange = function() {
 		if (collect_xhr.readyState == 4 && collect_xhr.status == 200) {
 			if (collect_xhr.responseText == "1") {
@@ -22,9 +24,11 @@ function checkCollect() {
 }
 // 查询是否点赞
 function checkLike() {
+	var formData_check_like=new FormData();
+	formData_check_like.append("accept_works.works_id",video_id);
 	var like_xhr = new XMLHttpRequest();
 	like_xhr.open("POST", "/wlmtxt/Works/Works_isLiked");
-	like_xhr.send();
+	like_xhr.send(formData_check_like);
 	like_xhr.onreadystatechange = function() {
 		if (like_xhr.readyState == 4 && like_xhr.status == 200) {
 			if (like_xhr.responseText == "1") {
@@ -42,9 +46,11 @@ function checkLike() {
 }
 // 查询是否关注
 function checkFocus() {
+	var formData_check_focus=new FormData();
+	formData_check_focus.append("accept_works.works_id",video_id);
 	var focus_xhr = new XMLHttpRequest();
 	focus_xhr.open("POST", "/wlmtxt/Works/Works_isLiked");
-	focus_xhr.send();
+	focus_xhr.send(formData_check_focus);
 	focus_xhr.onreadystatechange = function() {
 		if (focus_xhr.readyState == 4 && focus_xhr.status == 200) {
 			if (focus_xhr.responseText == "1") {
@@ -119,6 +125,21 @@ function checkLogin() {
 				$(".div_bio").html(userInfo.user_bio);
 				$(".input_bio").val(userInfo.user_bio);
 				/** *********************详情*********************************** */
+				//视频id
+				var video_id=$("#video_id").html();
+				console.log("video_id:"+video_id);
+				//获取视频的详细信息
+				var formData_detail=new FormData();
+				formData_detail.append("accept_works.works_id",video_id);
+				var xhr_detail=new XMLHttpRequest();
+				xhr_detail.open("POST", "/wlmtxt/Works/Works_getWorksDetailVO");
+				xhr_detail.send(formData_detail);
+				xhr.onreadystatechange=function(){
+					if(xhr_detail.readyState==4&&xhr_detail.status==200){
+						var detail_response=JSON.parse(xhr.responseText);
+						
+					}
+				}
 				/*-----------收藏----------*/
 				// 收藏
 				checkCollect();
@@ -126,9 +147,11 @@ function checkLogin() {
 				/* var $collect_number = $("#collect_number").html(); */
 				$("#collect_number_div").click(function() {
 					// 收藏
+					var formData_collect=new FormData();
+					formData_collect.append("accept_works.works_id",video_id);
 					var xhr = new XMLHttpRequest();
 					xhr.open("POST", "/wlmtxt/Works/Works_collectWorks");
-					xhr.send();
+					xhr.send(formData_collect);
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							if (xhr.responseText == "1") {
@@ -144,9 +167,11 @@ function checkLogin() {
 				/* var $collect_number = $("#collect_number").html(); */
 				$("#thumbs_number_div").click(function() {
 					// 点赞
+					var formData_like=new FormData();
+					formData_like.append("accept_works.works_id",video_id);
 					var xhr = new XMLHttpRequest();
 					xhr.open("POST", "/wlmtxt/Works/Works_likeWorks");
-					xhr.send();
+					xhr.send(formData_like);
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							if (xhr.responseText == "1") {
@@ -159,9 +184,11 @@ function checkLogin() {
 				/*---------关注-----------*/
 				checkFocus();
 				$("#focus_btn").click(function() {
+					var formData_focus=new FormData();
+					formData_focus.append("accept_works.works_id",video_id);
 					var xhr = new XMLHttpRequest();
-					xhr.open("POST", "/wlmtxt/Works/");
-					xhr.send();
+					xhr.open("POST", "/wlmtxt/Works/Works");
+					xhr.send(formData_focus);
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							if (xhr.responseText == "1") {
@@ -174,10 +201,11 @@ function checkLogin() {
 				});
 				/*---------下载-----------*/
 				$(".video_download").click(function() {
-					// 取消点赞
+					var formData_download=new FormData();
+					formData_download.append("accept_works.works_id",video_id);
 					var xhr = new XMLHttpRequest();
-					xhr.open("POST", "/wlmtxt/Works/downloadWorks");
-					xhr.send();
+					xhr.open("POST", "/wlmtxt/Works/Works");
+					xhr.send(formData_download);
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							if (xhr.responseText == "1") {
@@ -199,9 +227,11 @@ function checkLogin() {
 									if (comment_text == "") {
 										alert("请输入评论内容！");
 									} else {
+										var formData_comment=new FormData();
+										formData_comment.append("accept_works.works_id",video_id);
 										var xhr = new XMLHttpRequest();
-										xhr.open("POST", "");
-										xhr.send();
+										xhr.open("POST", "/wlmtxt/Works/Works_discussWorks");
+										xhr.send(formData_comment);
 										xhr.onreadystatechange = function() {
 											if (xhr.readyState == 4
 													&& xhr.status == 200) {

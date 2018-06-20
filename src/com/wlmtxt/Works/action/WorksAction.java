@@ -67,7 +67,6 @@ public class WorksAction extends ActionSupport {
 	 * 跳转到播放页，作品对象存入值栈
 	 */
 	public String videoDetailsPage() {
-		accept_works = new wlmtxt_works();
 		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
 		return "videoDetailsPage";
 	}
@@ -261,6 +260,12 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write(gson.toJson(worksDTOList));
 	}
 
+	/**
+	 * 根据一级类别，获取二级类别
+	 * 
+	 * @throws IOException
+	 */
+
 	public void listSecondMenu_byFirstMenuID() throws IOException {
 		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
 		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
@@ -302,7 +307,7 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void listWorksByFirstMenuID() throws IOException {
-		List<WorksDTO> worksDTOList = worksService.listWorksByFirstMenuID(second_menu.getSecond_menu_id());
+		List<WorksDTO> worksDTOList = worksService.listWorksByFirstMenuID(first_menu.getFirst_menu_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
