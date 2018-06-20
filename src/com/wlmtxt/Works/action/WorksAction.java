@@ -1,6 +1,8 @@
 package com.wlmtxt.Works.action;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -73,14 +75,42 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 */
 
+	public String getImg() throws FileNotFoundException {
+		if (imgName.equals("") || imgName == null) {
+			imgName = "";
+		}
+		File file = new File("C://wlmtxt/img/" + imgName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
+	}
 
+	public String getVideo() throws FileNotFoundException {
+		if (worksName.equals("") || worksName == null) {
+			worksName = "";
+		}
+		File file = new File("C://wlmtxt/video/" + worksName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
+	}
 
 	/**
 	 * 查询是否已点赞<br>
 	 * 接收accept_works.works_id
 	 * 
-	 * 1-已点赞
-	 * 2-未点赞
+	 * 1-已点赞 2-未点赞
+	 * 
 	 * @throws Exception
 	 */
 	public void isLiked() throws Exception {
@@ -122,8 +152,7 @@ public class WorksAction extends ActionSupport {
 	 * 查询是否已收藏<br>
 	 * 接收accept_works.works_id
 	 * 
-	 * 1-已收藏
-	 * 2-未收藏
+	 * 1-已收藏 2-未收藏
 	 * 
 	 * @throws Exception
 	 */
@@ -356,14 +385,14 @@ public class WorksAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
 	}
-	
+
 	/**
 	 * 播放页，统计作品播放次数
 	 * 
-	 * @date 2018年6月20日	下午6:20:23
+	 * @date 2018年6月20日 下午6:20:23
 	 * 
 	 * @author gxr
-	 * @throws IOException 
+	 * @throws IOException
 	 *
 	 */
 	public void totalPlayNum() throws IOException {
@@ -373,31 +402,31 @@ public class WorksAction extends ActionSupport {
 		int playCountNum = worksService.totalPlayNum(accept_works.getWorks_id());
 		pw.write(playCountNum);
 	}
-	
+
 	/**
-	 *  播放页，统计收藏次数
+	 * 播放页，统计收藏次数
 	 * 
-	 * @date 2018年6月20日	下午6:55:51
+	 * @date 2018年6月20日 下午6:55:51
 	 * 
 	 * @author gxr
-	 * @throws IOException 
+	 * @throws IOException
 	 *
 	 */
-	public  void countCollectNum() throws IOException {
+	public void countCollectNum() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		int collectNum = worksService.countCollectNum(accept_works.getWorks_id());
 		pw.write(collectNum);
 	}
-	
+
 	/**
-	 *  播放页，统计点赞量
+	 * 播放页，统计点赞量
 	 * 
-	 * @date 2018年6月20日	下午7:01:05
+	 * @date 2018年6月20日 下午7:01:05
 	 * 
 	 * @author gxr
-	 * @throws IOException 
+	 * @throws IOException
 	 *
 	 */
 	public void countLikeNum() throws IOException {
@@ -552,6 +581,5 @@ public class WorksAction extends ActionSupport {
 	public MyWorksVO getMyWorksVO() {
 		return myWorksVO;
 	}
-
 
 }

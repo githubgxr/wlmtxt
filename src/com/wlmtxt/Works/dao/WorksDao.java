@@ -11,6 +11,7 @@ import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.VO.MyWorksVO;
 
 public interface WorksDao {
@@ -77,5 +78,9 @@ public interface WorksDao {
 	int countCollectNum(String works_id);
 
 	int countLikeNum(String works_id);
+
+	List<wlmtxt_works_keyword> listKeyWordByByWorksID(String worksID);
+
+	wlmtxt_keyword getWordByID(String works_keyword_keyword_id);
 
 }

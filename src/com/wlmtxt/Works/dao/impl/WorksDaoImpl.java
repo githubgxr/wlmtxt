@@ -17,6 +17,7 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.VO.MyWorksVO;
 
 public class WorksDaoImpl implements WorksDao {
@@ -29,6 +30,24 @@ public class WorksDaoImpl implements WorksDao {
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+
+	@Override
+	public wlmtxt_keyword getWordByID(String works_keyword_keyword_id) {
+		String hql = " from wlmtxt_keyword  where keyword_id='" + works_keyword_keyword_id
+				+ "' order by keyword_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_keyword> keywordList = query.list();
+		return keywordList.get(0);
+	}
+
+	@Override
+	public List<wlmtxt_works_keyword> listKeyWordByByWorksID(String worksID) {
+		String hql = " from wlmtxt_works_keyword  where works_keyword_works_id='" + worksID
+				+ "' order by works_keyword_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works_keyword> keywordList = query.list();
+		return keywordList;
 	}
 
 	@Override
