@@ -182,18 +182,7 @@ public class WorksServiceImpl implements WorksService {
 		List<wlmtxt_works> worksList = worksDao.listWorksAll();
 		for (wlmtxt_works works : worksList) {
 			WorksDTO worksDTO = new WorksDTO();
-			worksDTO.setWorks(works);
-			if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
-			} else {
-				wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-				worksDTO.setSecondMenu(secondMenu);
-				if (null == secondMenu.getSecond_menu_first_menu_id()
-						|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
-				} else {
-					wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-					worksDTO.setFirstMenu(firstMenu);
-				}
-			}
+			worksDTO = getWorksDTOByID(works.getWorks_id());
 			worksDTOList.add(worksDTO);
 		}
 		return worksDTOList;
