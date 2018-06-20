@@ -22,7 +22,8 @@ $(function(){
 				//关键字
 				$("#detail_video_keywords").html();
 				//视频
-				$("#detail_video_content").attr("src","/wlmtxt/Works/Works_getVideo?worksName=" + detail_response.worksDTO.works.works_id);
+				$("#detail_video_content").attr("src","/wlmtxt/Works/Works_getVideo?worksName=" + detail_response.worksDTO.works.works_name);
+				$("#detail_video_content").attr("poster","/wlmtxt/Works/Works_getImg?imgName=" + detail_response.worksDTO.works.works_cover);
 				//下载
 				$("#detail_user_img").attr("href","/wlmtxt/Works/Works_getVideo?worksName=" + detail_response.worksDTO.works.works_id);
 				

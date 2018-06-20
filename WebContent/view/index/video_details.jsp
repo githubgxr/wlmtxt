@@ -42,15 +42,15 @@
 			<!--用户-->
 			<div style="width: 260px; float: right; margin: 15px 0 0 0;">
 				<!--用户头像-->
-				<img id="detail_user_img" class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=作品名"
+				<img id="detail_user_img" class="user_img" src=""
 					style="float: left;" />
 
 				<div style="float: right; margin: 0 0 0 20px; width: 170px;">
 					<!--用户名-->
-					<div id="detail_user_name" style="color: #1cd388;">树深时见鹿dear</div>
+					<div id="detail_user_name" style="color: #1cd388;"></div>
 					<!--个人介绍-->
 					<div id="detail_user_bio"
-						style="color: #99a2aa; height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">月黑杀人夜，风高放火天,月黑杀人夜，风高放火天,月黑杀人夜，风高放火天</div>
+						style="color: #99a2aa; height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;"></div>
 					<!--关注和粉丝-->
 					<div style="color: #99a2aa;">
 						<div style="width: 85px; float: left;">
@@ -72,7 +72,7 @@
 			<div
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<!--视频-->
-				<video id="detail_video_content" controls="controls" poster="<%=basePath%>css/zb/img/t1.jpg"
+				<video id="detail_video_content" controls="controls" poster=""
 					src="" style="width: 100%;"></video>
 				<!--点赞
 					收藏
