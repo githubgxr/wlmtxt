@@ -93,7 +93,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public wlmtxt_second_menu getSecondMenuByID(String works_second_menu_id) {
-		String hql = "from wlmtxt_second_menu  where second_menu_id ='" + works_second_menu_id + "'";
+		String hql = "from wlmtxt_second_menu  where second_menu_id ='" + works_second_menu_id + "' ";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_second_menu second_menu = (wlmtxt_second_menu) query.uniqueResult();
 		return second_menu;
@@ -110,7 +110,7 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id) {
 		String hql = " from wlmtxt_works  where works_second_menu_id='" + second_menu_id
-				+ "' order by works_gmt_create desc";
+				+ "' and works_passed='1' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
@@ -118,7 +118,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> listWorksAll() {
-		String hql = " from wlmtxt_works   order by works_gmt_create desc";
+		String hql = " from wlmtxt_works where works_passed='1'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
@@ -126,7 +126,8 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO) {
-		String hql = " from wlmtxt_works  where works_user_id='" + user_id + "' order by works_gmt_create desc";
+		String hql = " from wlmtxt_works  where works_user_id='" + user_id
+				+ "' and works_passed='1' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		query.setFirstResult((myWorksVO.getPageIndex() - 1) * myWorksVO.getPageSize());
 		query.setMaxResults(myWorksVO.getPageSize());
