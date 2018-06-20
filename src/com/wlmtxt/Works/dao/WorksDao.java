@@ -72,4 +72,10 @@ public interface WorksDao {
 
 	List<wlmtxt_second_menu> listSecondMenuByFather(String second_menu_first_menu_id);
 
+	int totalPlayNum(String works_id);
+
+	int countCollectNum(String works_id);
+
+	int countLikeNum(String works_id);
+
 }
