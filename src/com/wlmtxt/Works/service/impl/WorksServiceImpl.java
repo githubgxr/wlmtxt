@@ -58,7 +58,7 @@ public class WorksServiceImpl implements WorksService {
 		wlmtxt_works works = worksDao.getWorksByID(works_id);
 		worksDTO.setWorks(works);
 		//
-		if (works.getWorks_second_menu_id() != null && !works.getWorks_second_menu_id().equals("")) {
+		if (null != works.getWorks_second_menu_id() && !works.getWorks_second_menu_id().equals("")) {
 			wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
 			worksDTO.setSecondMenu(secondMenu);
 			if (secondMenu.getSecond_menu_first_menu_id() != null
@@ -94,6 +94,7 @@ public class WorksServiceImpl implements WorksService {
 			keyWordDTOList.add(keyWordDTO);
 		}
 		//
+		System.out.println(keyWordDTOList);
 		return keyWordDTOList;
 	}
 

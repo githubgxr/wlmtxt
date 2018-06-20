@@ -234,8 +234,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void getWorksDetailVO() throws IOException {
-		accept_works = new wlmtxt_works();
-
+		System.out.println(accept_works);
 		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -265,7 +264,6 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * @throws IOException
 	 */
-
 	public void listSecondMenu_byFirstMenuID() throws IOException {
 		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
 		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
