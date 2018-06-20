@@ -52,7 +52,7 @@ $('.second_input_sure')
  */
 
 function second_menu_add_first_id(id) {
-	alert("a");
+	
 	$("#second_menu_first_menu_id").val(id);
 }
 
