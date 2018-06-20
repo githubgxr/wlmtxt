@@ -2,9 +2,11 @@ var if_login = false;
 var user_id = null;
 // 查询是否收藏
 function checkCollect() {
+	var formData_check_collect=new FormData();
+	formData_check_collect.append("accept_works.works_id",video_id);
 	var collect_xhr = new XMLHttpRequest();
 	collect_xhr.open("POST", "/wlmtxt/Works/Works_isCollectWorks");
-	collect_xhr.send();
+	collect_xhr.send(formData_check_collect);
 	collect_xhr.onreadystatechange = function() {
 		if (collect_xhr.readyState == 4 && collect_xhr.status == 200) {
 			if (collect_xhr.responseText == "1") {
@@ -22,9 +24,11 @@ function checkCollect() {
 }
 // 查询是否点赞
 function checkLike() {
+	var formData_check_like=new FormData();
+	formData_check_like.append("accept_works.works_id",video_id);
 	var like_xhr = new XMLHttpRequest();
 	like_xhr.open("POST", "/wlmtxt/Works/Works_isLiked");
-	like_xhr.send();
+	like_xhr.send(formData_check_like);
 	like_xhr.onreadystatechange = function() {
 		if (like_xhr.readyState == 4 && like_xhr.status == 200) {
 			if (like_xhr.responseText == "1") {
@@ -42,9 +46,11 @@ function checkLike() {
 }
 // 查询是否关注
 function checkFocus() {
+	var formData_check_focus=new FormData();
+	formData_check_focus.append("accept_works.works_id",video_id);
 	var focus_xhr = new XMLHttpRequest();
 	focus_xhr.open("POST", "/wlmtxt/Works/Works_isLiked");
-	focus_xhr.send();
+	focus_xhr.send(formData_check_focus);
 	focus_xhr.onreadystatechange = function() {
 		if (focus_xhr.readyState == 4 && focus_xhr.status == 200) {
 			if (focus_xhr.responseText == "1") {
