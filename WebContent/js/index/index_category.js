@@ -20,8 +20,27 @@ $(function(){
 				new_a.id=category_vo[num].first_menu_id;
 				/*new_a.href = "/wlmtxt/Works/Works_listSecondMenu?first_menu.first_menu_id="+category_vo[num].first_menu_id;*/
 				new_a.onclick=function(){
-					getSecondMenu(this.id);
+					getSecondMenu(this.id,1);
+					getSecondList(this.id,1);
 				}
+				
+			}
+		}
+	}
+	xmlhttp.open("POST","/wlmtxt/Works/Works_listFirstMenu");
+	xmlhttp.send(null);	
+})
+
+$(function(){
+	var xmlhtp=null;
+	var list_vo=null;
+	xmlhtp=new XMLHttpRequest();
+	xmlhtp.onreadystatechange=function(){
+		if(xmlhtp.readyState==4&&xmlhtp.status==200){
+			list_vo = JSON.parse(xmlhtp.responseText);
+			console.log(list_vo);
+			
+			for ( var num=0; num< list_vo.length;num++) {
 				
 				/*获得一级分类作品列表*/
 				var ul_li=null;//ul下的li
@@ -80,10 +99,6 @@ $(function(){
 				a_div2_div1.className="video_title";
 				a_div2_div2.className="video_number";
 				a_div2_div3.className="video_username";
-				
-				a_div2_div1.innerHTML="德科恶女合家福好地方好地方";
-				a_div2_div2.innerHTML="425";
-				a_div2_div3.innerHTML="发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr";
 				
 				a_div2.appendChild(a_div2_div1);
 				a_div2.appendChild(a_div2_div2);
@@ -102,17 +117,22 @@ $(function(){
 				
 				li_div_div.appendChild(li_div_div_a);
 				li_div.appendChild(li_div_div);
+
+				a_div2_div1.innerHTML=list_vo[num].works.works_title;//得到作品标题
+				a_div2_div2.innerHTML="425";//得到作品浏览量
+				a_div2_div3.innerHTML=list_vo[num].works.works_name;//得到作品用户名
+				
+				/*li_div_div_a.innerHTML=list_vo[num].keyWordDTOList.keyword;*/
 				
 			}
 		}
 	}
-	xmlhttp.open("POST","/wlmtxt/Works/Works_listFirstMenu");
-	xmlhttp.send(null);	
+	xmlhtp.open("POST","/wlmtxt/Works/Works_listWorksAll");
+	xmlhtp.send(null);	
 })
 
 /*移除一级分类，显示二级*/
-function getSecondMenu(first_menu_id){
-	console.log(first_menu_id)
+function getSecondMenu(first_menu_id,pageIndex){
 	var xhr=false;
 	var secondMenuList=null;
 	
@@ -128,13 +148,6 @@ function getSecondMenu(first_menu_id){
 				old_a[0].parentNode.removeChild(old_a[0]);
 			}
 			
-			/*移出所有一级列表*/
-			var old_li = document.getElementsByClassName("list_video_item");
-			var long = old_li.length;
-			for (var i = 0; i < long; i++) {
-				old_li[0].parentNode.removeChild(old_li[0]);
-			}
-			
 			for(var num in secondMenuList){
 				var new_a=null;
 				var div_box=document.getElementById("div_box");
@@ -143,8 +156,35 @@ function getSecondMenu(first_menu_id){
 				new_a.append(document.createTextNode(secondMenuList[num].second_menu_name));
 				div_box.appendChild(new_a);
 				new_a.id=secondMenuList[num].second_menu_id;
+			}
+		}
+	}
+	xhr.open("POST","/wlmtxt/Works/Works_listSecondMenu_byFirstMenuID");
+	var formData=new FormData();
+	formData.append("first_menu.first_menu_id",first_menu_id);
+	formData.append("myWorksVO.pageIndex",pageIndex);
+	xhr.send(formData);
+}
+/*根据第一类别ID获取第二类别列表*/
+function getSecondList(first_menu_id,pageIndex){
+	console.log(first_menu_id);
+	var xhrhp=false;
+	var SecondList_vo=null;
+	xhrhp=new XMLHttpRequest();
+	xhrhp.onreadystatechange=function(){
+		if(xhrhp.readyState==4 && xhrhp.status==200){
+			SecondList_vo=JSON.parse(xhrhp.responseText);
+			console.log(SecondList_vo);
+			/*移出所有一级列表*/
+			var old_li = document.getElementsByClassName("list_video_item");
+			var long = old_li.length;
+			for (var i = 0; i < long; i++) {
+				old_li[0].parentNode.removeChild(old_li[0]);
+			}
+			
+			for ( var num=0; num< SecondList_vo.length;num++) {
 				
-				/*获得一级分类作品列表*/
+				获得一级分类作品列表
 				var ul_li=null;//ul下的li
 				var li_a=null;//li下的a
 				var li_div=null;//li下的div
@@ -182,7 +222,7 @@ function getSecondMenu(first_menu_id){
 				a_div1_div2=document.createElement("div");
 				
 				a_div1_img.className="video_img";
-				/*a_div1_img.src="css/zb/img/4.png";*/
+				a_div1_img.src="css/zb/img/4.png";
 				a_div1_div1.className="video_overplay";
 				a_div1_div2.className="video_play";
 				
@@ -202,10 +242,6 @@ function getSecondMenu(first_menu_id){
 				a_div2_div2.className="video_number";
 				a_div2_div3.className="video_username";
 				
-				a_div2_div1.innerHTML="德科恶女合家福好地方好地方";
-				a_div2_div2.innerHTML="425";
-				a_div2_div3.innerHTML="发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr";
-				
 				a_div2.appendChild(a_div2_div1);
 				a_div2.appendChild(a_div2_div2);
 				a_div2.appendChild(a_div2_div3);
@@ -219,16 +255,24 @@ function getSecondMenu(first_menu_id){
 				li_div_div.className="video_label_content";
 				li_div_div_a.className="video_label_item";
 				
-				li_div_div_a.innerHTML="王者荣耀";
+				li_div_div_a.innerHTML="绝地求生";
 				
 				li_div_div.appendChild(li_div_div_a);
 				li_div.appendChild(li_div_div);
+
+				a_div2_div1.innerHTML=SecondList_vo[num].works.works_title;//得到作品标题
+				a_div2_div2.innerHTML="425";//得到作品浏览量
+				a_div2_div3.innerHTML=SecondList_vo[num].works.works_name;//得到作品用户名
+				
+				li_div_div_a.innerHTML=list_vo[num].keyWordDTOList.keyword;
+				
 				
 			}
 		}
 	}
-	xhr.open("POST","/wlmtxt/Works/Works_listSecondMenu_byFirstMenuID");
+	xhrhp.open("POST","/wlmtxt/Works/Works_listWorksByFirstMenuID");
 	var formData=new FormData();
 	formData.append("first_menu.first_menu_id",first_menu_id);
-	xhr.send(formData);
+	formData.append("myWorksVO.pageIndex",pageIndex);
+	xhrhp.send(formData);
 }
