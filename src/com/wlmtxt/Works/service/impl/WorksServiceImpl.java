@@ -55,9 +55,7 @@ public class WorksServiceImpl implements WorksService {
 	public WorksDTO getWorksDTOByID(String works_id) {
 		WorksDTO worksDTO = new WorksDTO();
 		//
-		System.out.println(works_id);
 		wlmtxt_works works = worksDao.getWorksByID(works_id);
-		System.out.println(works);
 		worksDTO.setWorks(works);
 		//
 		if (null != works.getWorks_second_menu_id() && !works.getWorks_second_menu_id().equals("")) {

@@ -234,8 +234,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void getWorksDetailVO() throws IOException {
-		accept_works = new wlmtxt_works();
-
+		System.out.println(accept_works);
 		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
