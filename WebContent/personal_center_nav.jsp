@@ -73,12 +73,12 @@
 						<a href="/wlmtxt/view/personal_center/personal_center_appreciates_notice.jsp"><img src="<%=basePath%>/img/xxtz1.png" />消息中心</a>
 					</li>
 					<li>
-						<a class="login_out" id="login_out" href="/wlmtxt/view/personal_center/personal_center_my_dynamic.jsp"><img src="<%=basePath%>/img/tcdl3.png" />退出登录</a>
+						<a class="login_out" id="login_out" href="/wlmtxt/User/User_logout"><img src="<%=basePath%>/img/tcdl3.png" />退出登录</a>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 		/*退出登录*/
 		$("#login_out").click(function(){
 			var xhr = new XMLHttpRequest();
@@ -96,7 +96,7 @@
 			}
 		});
 
-		</script>
+		</script> -->
 	</body>
 
 </html>
