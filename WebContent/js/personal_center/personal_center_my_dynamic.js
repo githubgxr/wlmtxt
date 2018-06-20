@@ -16,23 +16,23 @@ function listMyDynamicByPage(pageIndex){
 			console.log("totalPages:"+wddt_response.totalPages);
 			console.log("HavePrePage:"+wddt_response.HavePrePage);
 			console.log("HaveNextPage:"+wddt_response.HaveNextPage);
-			for(var i=0;i<wddt_response.length;i++){
+			for(var i=0;i<wddt_response.worksDTOList.length;i++){
 				var wddt_str='<li class="list_video_item">';
 				/*---视频链接---*/
-				 wddt_str+='<a class="video_list_item_wrap">';
+				 wddt_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?"+wddt_response.worksDTOList[i].works.works_id>';
 				 wddt_str+='<div class="video_cover">';
-				 wddt_str+='<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />';
+				 wddt_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=" +wddt_response.worksDTOList[i].works.works_cover/>';
 				 wddt_str+='<div class="video_overplay"></div>';
 				 wddt_str+='<div class="video_play"></div>';
 				 wddt_str+='</div>';
 				 /*视频信息*/
 				 wddt_str+='<div class="video_info">';
 				 /*标题*/
-				 wddt_str+='<div class="video_title">德科恶女合家福好地方好地方</div>';
+				 wddt_str+='<div class="video_title">'+wddt_response.worksDTOList[i].works.works_title+'</div>';
 				 /*浏览量*/
-				 wddt_str+='<div class="video_number">425</div>';
+				 wddt_str+='<div class="video_number">64845241</div>';
 				 /*时间*/
-				 wddt_str+='<div class="video_time">2018-5-30 14:18:02</div>';
+				 wddt_str+='<div class="video_time">'+wddt_response.worksDTOList[i].works.works_gmt_create+'</div>';
 				 wddt_str+='</div>';
 				 wddt_str+='</a>';
 				 /*---视频分类---*/
