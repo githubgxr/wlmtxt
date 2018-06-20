@@ -26,10 +26,15 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksDetailVO;
 
 @SuppressWarnings("serial")
 public class WorksAction extends ActionSupport {
-
+	//
+	WorksService worksService;
+	//
 	wlmtxt_user accept_user;
 	wlmtxt_works accept_works;
 	wlmtxt_discuss accpet_discuss;
@@ -54,16 +59,21 @@ public class WorksAction extends ActionSupport {
 
 	//
 	private String keyword;
+	//
+	private MyWorksVO myWorksVO;
 
 	/*
 	 * 
 	 */
 	public String videoDetailsPage() {
 		accept_works = new wlmtxt_works();
-		accept_works.setWorks_id("13627c40-1b00-4053-bde6-c0c49dbe6d00");
 		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
 		return "videoDetailsPage";
 	}
+
+	/*
+	 * 
+	 */
 
 	/*
 	 * 
@@ -106,7 +116,7 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void isLiked() throws Exception {
 
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
@@ -125,7 +135,7 @@ public class WorksAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public void likeWorks() throws Exception {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 
 		worksService.likWorks(user, accept_works);
 
@@ -150,7 +160,7 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void isCollectWorks() throws Exception {
 		// TODO
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		if (worksService.isCollectWorks(user.getUser_id(), accept_works.getWorks_id())) {
@@ -164,7 +174,7 @@ public class WorksAction extends ActionSupport {
 	 * 收藏及取消，接收accept_works.works_id
 	 */
 	public void collectWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		try {
 			worksService.collectWorks(user, accept_works);
 			HttpServletResponse response = ServletActionContext.getResponse();
@@ -184,23 +194,11 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 下载，接收wlmtxt_download_history.download_history_id TODO
-	 */
-	public void downloadWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		try {
-			worksService.downloadWorks(user, accept_works);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * 删除下载历史,wlmtxt_download_history.download_history_id、
 	 * wlmtxt_download_history.download_history_gmt_create
 	 */
 	public void removeDownloadHistory() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		try {
 			worksService.removeDownloadHistory(user, accept_works);
 		} catch (Exception e) {
@@ -210,7 +208,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 我的下载历史列表
+	 * 我的下载历史列表 TODO
 	 */
 	public void listDownloadWorks() {
 
@@ -219,10 +217,92 @@ public class WorksAction extends ActionSupport {
 	/**
 	 * 评论，接收discuss.discuee_father_discuss_id父评论id：顶级评论则接收作品id，评论的回复评论则为上级评论id）
 	 * TODO
+	 * 
+	 * @throws IOException
 	 */
-	public void discussWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		// worksService.discussWorks(user, accpet_discuss);
+	public void discussWorks() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		accpet_discuss.setDiscuss_user_id(user.getUser_id());
+		worksService.discussWorks(accpet_discuss);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void deleteMyWorks() throws IOException {
+		worksService.deleteMyWorks(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void getWorksDetailVO() throws IOException {
+		accept_works = new wlmtxt_works();
+
+		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDetailVO));
+	}
+
+	/**
+	 * 获取所有的作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorksAll() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorksAll();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 根据一级类别获取相应的作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorksByFirstMenuID() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorksByFirstMenuID(second_menu.getSecond_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 根据二级类别获取相应的作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorksBySecondMenuID() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	public void getMyWorksListVO() throws IOException {
+
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		myWorksVO = worksService.getMyWorksVO(user.getUser_id(), myWorksVO);
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(myWorksVO));
 	}
 
 	/**
@@ -359,120 +439,28 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
-	/**
-	 * 播放<br>
-	 * TODO
-	 */
-	public void playWorks() {
-		// TODO
+	public WorksService getWorksService() {
+		return worksService;
 	}
 
-	/**
-	 * 发布作品<br>
-	 * TODO
-	 */
-	public void publishWords() {
-
+	public void setWorksService(WorksService worksService) {
+		this.worksService = worksService;
 	}
 
-	/**
-	 * 一级分类列表<br>
-	 * TODO
-	 */
-	public void listWorksOfFirstMenu() {
-
+	public wlmtxt_user getAccept_user() {
+		return accept_user;
 	}
 
-	/**
-	 * 二级分类列表<br>
-	 * TODO
-	 */
-	public void listWorksOfSecondMenu() {
-
-	}
-	/*
-	 * 
-	 */
-
-	public File getWorksfile() {
-		return worksfile;
+	public void setAccept_user(wlmtxt_user accept_user) {
+		this.accept_user = accept_user;
 	}
 
-	public String getImgName() {
-		return imgName;
+	public wlmtxt_works getAccept_works() {
+		return accept_works;
 	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
-	}
-
-	public String getWorksName() {
-		return worksName;
-	}
-
-	public void setWorksName(String worksName) {
-		this.worksName = worksName;
-	}
-
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
-	public void setWorksfile(File worksfile) {
-		this.worksfile = worksfile;
-	}
-
-	public String getWorksfileFileName() {
-		return worksfileFileName;
-	}
-
-	public void setWorksfileFileName(String worksfileFileName) {
-		this.worksfileFileName = worksfileFileName;
-	}
-
-	public String getWorksfileContentType() {
-		return worksfileContentType;
-	}
-
-	public void setWorksfileContentType(String worksfileContentType) {
-		this.worksfileContentType = worksfileContentType;
-	}
-
-
-	public File getImgfile() {
-		return imgfile;
-	}
-
-	public void setImgfile(File imgfile) {
-		this.imgfile = imgfile;
-	}
-
-	public String getImgfileFileName() {
-		return imgfileFileName;
-	}
-
-	public void setImgfileFileName(String imgfileFileName) {
-		this.imgfileFileName = imgfileFileName;
-	}
-
-	public String getImgfileContentType() {
-		return imgfileContentType;
-	}
-
-	public void setImgfileContentType(String imgfileContentType) {
-		this.imgfileContentType = imgfileContentType;
+	public void setAccept_works(wlmtxt_works accept_works) {
+		this.accept_works = accept_works;
 	}
 
 	public wlmtxt_discuss getAccpet_discuss() {
@@ -507,30 +495,96 @@ public class WorksAction extends ActionSupport {
 		this.play_history = play_history;
 	}
 
-	WorksService worksService;
-
-	public wlmtxt_user getAccept_user() {
-		return accept_user;
+	public String getWorksName() {
+		return worksName;
 	}
 
-	public void setAccept_user(wlmtxt_user accept_user) {
-		this.accept_user = accept_user;
+	public void setWorksName(String worksName) {
+		this.worksName = worksName;
 	}
 
-
-	public wlmtxt_works getAccept_works() {
-		return accept_works;
+	public String getImgName() {
+		return imgName;
 	}
 
-	public void setAccept_works(wlmtxt_works accept_works) {
-		this.accept_works = accept_works;
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
 
-	public WorksService getWorksService() {
-		return worksService;
+	public InputStream getInputStream() {
+		return inputStream;
 	}
 
-	public void setWorksService(WorksService worksService) {
-		this.worksService = worksService;
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}
+
+	public File getWorksfile() {
+		return worksfile;
+	}
+
+	public void setWorksfile(File worksfile) {
+		this.worksfile = worksfile;
+	}
+
+	public String getWorksfileFileName() {
+		return worksfileFileName;
+	}
+
+	public void setWorksfileFileName(String worksfileFileName) {
+		this.worksfileFileName = worksfileFileName;
+	}
+
+	public String getWorksfileContentType() {
+		return worksfileContentType;
+	}
+
+	public void setWorksfileContentType(String worksfileContentType) {
+		this.worksfileContentType = worksfileContentType;
+	}
+
+	public File getImgfile() {
+		return imgfile;
+	}
+
+	public void setImgfile(File imgfile) {
+		this.imgfile = imgfile;
+	}
+
+	public String getImgfileFileName() {
+		return imgfileFileName;
+	}
+
+	public void setImgfileFileName(String imgfileFileName) {
+		this.imgfileFileName = imgfileFileName;
+	}
+
+	public String getImgfileContentType() {
+		return imgfileContentType;
+	}
+
+	public void setImgfileContentType(String imgfileContentType) {
+		this.imgfileContentType = imgfileContentType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public void setMyWorksVO(MyWorksVO myWorksVO) {
+		this.myWorksVO = myWorksVO;
+	}
+
+	public MyWorksVO getMyWorksVO() {
+		return myWorksVO;
+	}
+
+	/*
+	 * 
+	 */
+
 }

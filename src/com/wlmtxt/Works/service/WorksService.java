@@ -8,6 +8,9 @@ import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksDetailVO;
 
 public interface WorksService {
 
@@ -16,8 +19,6 @@ public interface WorksService {
 	public void collectWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
 
 	public void downloadWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
-
-	public void discussWorks(wlmtxt_user user, wlmtxt_discuss accpet_discuss) throws Exception;
 
 	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
 
@@ -34,5 +35,21 @@ public interface WorksService {
 	public List<wlmtxt_second_menu> listSecondMenu();
 
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id);
+
+	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO);
+
+	public void deleteMyWorks(String works_id);
+
+	public WorksDetailVO getWorksDetailVO(String works_id);
+
+	public WorksDTO getWorksDTOByID(String works_id);
+
+	public void discussWorks(wlmtxt_discuss accpet_discuss);
+
+	public List<WorksDTO> listWorksAll();
+
+	public List<WorksDTO> listWorksBySecondMenuID(String second_menu_id);
+
+	public List<WorksDTO> listWorksByFirstMenuID(String second_menu_id);
 
 }
