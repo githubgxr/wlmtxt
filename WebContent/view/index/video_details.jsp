@@ -159,7 +159,7 @@
 					</div>
 				</div>
 				<div id="comment_div" style="float:left;width:100%;">
-					<!--遍历内容-->
+					<%-- <!--遍历内容-->
 					<div style="float: left; width: 100%;">
 						<hr style="width: 100%;" />
 						<!--整个评论-->
@@ -218,7 +218,7 @@
 								<div style="color: #bfbfbf;">2017-05-11 23:22</div>
 							</div>
 						</div>
-					</div>
+					</div> --%>
 					<!--
 						
 					-->
