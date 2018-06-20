@@ -72,7 +72,7 @@
 			<div
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<!--视频-->
-				<video controls="controls" poster="<%=basePath%>css/zb/img/t1.jpg"
+				<video id="detail_video_content" controls="controls" poster="<%=basePath%>css/zb/img/t1.jpg"
 					src="" style="width: 100%;"></video>
 				<!--点赞
 					收藏
