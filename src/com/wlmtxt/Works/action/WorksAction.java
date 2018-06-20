@@ -319,6 +319,7 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void listWorksBySecondMenuID() throws IOException {
+		System.out.println(second_menu.getSecond_menu_id());
 		List<WorksDTO> worksDTOList = worksService.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据

@@ -178,7 +178,12 @@ $(function(){
 								alert("请输入评论内容！");
 							} else {
 								var formData_comment=new FormData();
-								formData_comment.append("accept_works.works_id",video_id);
+								//评论的作品或者评论
+								formData_comment.append("accpet_discuss.discuee_father_discuss_id",video_id);
+								//评论内容
+								formData_comment.append("accpet_discuss.discuss_content",comment_text);
+								
+								
 								var xhr = new XMLHttpRequest();
 								xhr.open("POST", "/wlmtxt/Works/Works_discussWorks");
 								xhr.send(formData_comment);

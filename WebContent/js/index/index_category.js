@@ -392,8 +392,7 @@ function getThirdList(second_menu_id, pageIndex) {
 	}
 	xhrhprt.open("POST", "/wlmtxt/Works/Works_listWorksBySecondMenuID");
 	var formData = new FormData();
-	formData.append("secondMenu.second_menu_id", second_menu_id);
-	formData.append("myWorksVO.pageIndex", pageIndex);
+	formData.append("second_menu.second_menu_id", second_menu_id);
 	xhrhprt.send(formData);
 }
 
