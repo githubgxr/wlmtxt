@@ -43,6 +43,8 @@ public interface WorksDao {
 
 	void saveKeyword(wlmtxt_keyword newkeywords);
 
+	void saveWord(wlmtxt_works_keyword works_keyword);
+
 	void saveWorks(wlmtxt_works accept_works);
 
 	List<wlmtxt_first_menu> listFirstMenu();

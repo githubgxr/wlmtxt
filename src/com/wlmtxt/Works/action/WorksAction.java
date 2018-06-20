@@ -22,7 +22,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
-import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -406,19 +405,12 @@ public class WorksAction extends ActionSupport {
 		// 关键词
 		if (!keyword.equals("")) {
 			String[] keywords = keyword.split(";");
-			wlmtxt_keyword newkeywords;
-			for (int i = 0; i < keywords.length; i++) {
-				if (!keywords[i].equals("")) {
-					newkeywords = new wlmtxt_keyword();
-					newkeywords.setKeyword_name(keywords[i]);
-					worksService.saveKeyword(newkeywords);
-				}
 
-			}
-
+			worksService.saveWorks(accept_works, keywords);
+		} else {
+			worksService.saveWorks(accept_works, null);
 		}
 
-		worksService.saveWorks(accept_works);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");

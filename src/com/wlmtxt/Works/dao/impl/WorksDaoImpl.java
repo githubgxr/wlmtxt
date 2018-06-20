@@ -233,6 +233,11 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public void saveWord(wlmtxt_works_keyword works_keyword) {
+		getSession().save(works_keyword);
+	}
+
+	@Override
 	public void saveCollect(wlmtxt_collect new_collect) throws Exception {
 		getSession().save(new_collect);
 	}
