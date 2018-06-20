@@ -206,7 +206,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 我的下载历史列表
+	 * 我的下载历史列表 TODO
 	 */
 	public void listDownloadWorks() {
 
@@ -215,10 +215,16 @@ public class WorksAction extends ActionSupport {
 	/**
 	 * 评论，接收discuss.discuee_father_discuss_id父评论id：顶级评论则接收作品id，评论的回复评论则为上级评论id）
 	 * TODO
+	 * 
+	 * @throws IOException
 	 */
-	public void discussWorks() {
+	public void discussWorks() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		// worksService.discussWorks(user, accpet_discuss);
+		accpet_discuss.setDiscuss_user_id(user.getUser_id());
+		worksService.discussWorks(accpet_discuss);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
 	}
 
 	public void deleteMyWorks() throws IOException {

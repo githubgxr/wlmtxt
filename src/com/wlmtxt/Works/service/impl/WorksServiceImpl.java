@@ -252,8 +252,14 @@ public class WorksServiceImpl implements WorksService {
 	// 删除下载历史记录，即不显示在个人中心，实际的表记录未删除
 
 	@Override
-	public void discussWorks(wlmtxt_user user, wlmtxt_discuss accpet_discuss) throws Exception {
-		// TODO Auto-generated method stub
+	public void discussWorks(wlmtxt_discuss accpet_discuss) {
+
+		accpet_discuss.setDiscuss_id(TeamUtil.getUuid());
+		accpet_discuss.setDiscuss_deleted("2");
+
+		accpet_discuss.setDiscuss_gmt_create(TeamUtil.getStringSecond());
+		accpet_discuss.setDiscuss_gmt_modified(TeamUtil.getStringSecond());
+		worksDao.saveDiscuss(accpet_discuss);
 
 	}
 

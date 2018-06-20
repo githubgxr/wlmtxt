@@ -64,4 +64,6 @@ public interface WorksDao {
 
 	List<wlmtxt_discuss> getDiscussListByFatherID(String works_id);
 
+	void saveDiscuss(wlmtxt_discuss accpet_discuss);
+
 }

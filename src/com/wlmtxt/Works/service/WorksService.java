@@ -20,8 +20,6 @@ public interface WorksService {
 
 	public void downloadWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
 
-	public void discussWorks(wlmtxt_user user, wlmtxt_discuss accpet_discuss) throws Exception;
-
 	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
 
 	public boolean isLiked(String userID, String worksID) throws Exception;
@@ -45,5 +43,7 @@ public interface WorksService {
 	public WorksDetailVO getWorksDetailVO(String works_id);
 
 	public WorksDTO getWorksDTOByID(String works_id);
+
+	public void discussWorks(wlmtxt_discuss accpet_discuss);
 
 }

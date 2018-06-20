@@ -170,6 +170,12 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public void saveDiscuss(wlmtxt_discuss accpet_discuss) {
+		getSession().save(accpet_discuss);
+
+	}
+
+	@Override
 	public void saveWorks(wlmtxt_works accept_works) {
 		getSession().save(accept_works);
 
