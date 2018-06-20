@@ -251,11 +251,29 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public int countPlay(String works_id) {
+	public int totalPlayNum(String works_id) {
 		String hql = "from wlmtxt_play_history where play_history_works_id = '" + works_id + "'";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_play_history> listPlayHistory = query.list();
 		int num = listPlayHistory.size();
+		return num;
+	}
+
+	@Override
+	public int countCollectNum(String works_id) {
+		String hql = "from wlmtxt_collect where collect_works_id = '" + works_id + "'";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_collect> listCollect = query.list();
+		int num = listCollect.size();
+		return num;
+	}
+
+	@Override
+	public int countLikeNum(String works_id) {
+		String hql = "from wlmtxt_like where like_works_id = '" + works_id + "'";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_like> list = query.list();
+		int num = list.size();
 		return num;
 	}
 

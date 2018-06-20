@@ -358,7 +358,7 @@ public class WorksAction extends ActionSupport {
 	}
 	
 	/**
-	 * 播放页，作品播放次数查询
+	 * 播放页，统计作品播放次数
 	 * 
 	 * @date 2018年6月20日	下午6:20:23
 	 * 
@@ -366,12 +366,46 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException 
 	 *
 	 */
-	public void playCount() throws IOException {
+	public void totalPlayNum() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int playCountNum = worksService.playCount(accept_works.getWorks_id());
+		int playCountNum = worksService.totalPlayNum(accept_works.getWorks_id());
 		pw.write(playCountNum);
+	}
+	
+	/**
+	 *  播放页，统计收藏次数
+	 * 
+	 * @date 2018年6月20日	下午6:55:51
+	 * 
+	 * @author gxr
+	 * @throws IOException 
+	 *
+	 */
+	public  void countCollectNum() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int collectNum = worksService.countCollectNum(accept_works.getWorks_id());
+		pw.write(collectNum);
+	}
+	
+	/**
+	 *  播放页，统计点赞量
+	 * 
+	 * @date 2018年6月20日	下午7:01:05
+	 * 
+	 * @author gxr
+	 * @throws IOException 
+	 *
+	 */
+	public void countLikeNum() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int num = worksService.countLikeNum(accept_works.getWorks_id());
+		pw.write(num);
 	}
 
 	public WorksService getWorksService() {
