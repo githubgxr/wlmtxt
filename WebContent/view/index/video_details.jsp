@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -16,7 +17,7 @@
 	<!--<div style="background-color: blanchedalmond;height: 230px;"></div>-->
 	<div style="width: 960px; margin: 0 calc(( 100% - 960px)/2);">
 		<!--隐藏的div，作品id  -->
-		<div id="video_id" style="display: none;"></div>
+		<div id="video_id" style="display: none;"><s:property value="accept_works.works_id" /></div>
 		<!--顶部-->
 		<div
 			style="float: left; background-color: #ffffff; padding: 0 20px; border-radius: 5px; margin: 20px 0 0 0;">
@@ -71,7 +72,7 @@
 			<div
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<!--视频-->
-				<video controls="controls" poster="../../css/zb/img/t1.jpg"
+				<video controls="controls" poster="<%=basePath%>css/zb/img/t1.jpg"
 					src="/wlmtxt/Works/Works_getVideo?worksName=作品名" style="width: 100%;"></video>
 				<!--点赞
 					收藏
@@ -79,7 +80,7 @@
 					下载-->
 				<div style="margin: 10px 0 0 0;">
 					<div>
-						<a class="button_code user_operate button_a" href="../../css/zb/img/trailer.mp4" download="trailer">
+						<a class="button_code user_operate button_a" href="<%=basePath%>css/zb/img/trailer.mp4" download="trailer">
 							<i class="fas fa-download"  style="width:50px;float:left;line-height:32px;text-align:left;margin:0 0 0 -10px;">&nbsp;下载</i>
 							<div style="float:left;"></div>
 						</a>
@@ -110,35 +111,35 @@
 				<div>
 					<!--一个视频-->
 					<div class="tj" style="float: left;">
-						<img src="../../css/zb/img/4.png" />
+						<img src="<%=basePath%>css/zb/img/4.png" />
 						<div
 							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
 							05【千夏】</div>
 					</div>
 					<!--一个视频-->
 					<div class="tj" style="float: left;">
-						<img src="../../css/zb/img/4.png" />
+						<img src="<%=basePath%>css/zb/img/4.png" />
 						<div
 							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
 							05【千夏】</div>
 					</div>
 					<!--一个视频-->
 					<div class="tj" style="float: left;">
-						<img src="../../css/zb/img/4.png" />
+						<img src="<%=basePath%>css/zb/img/4.png" />
 						<div
 							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
 							05【千夏】</div>
 					</div>
 					<!--一个视频-->
 					<div class="tj" style="float: left;">
-						<img src="../../css/zb/img/4.png" />
+						<img src="<%=basePath%>css/zb/img/4.png" />
 						<div
 							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
 							05【千夏】</div>
 					</div>
 					<!--一个视频-->
 					<div class="tj" style="float: left;">
-						<img src="../../css/zb/img/4.png" />
+						<img src="<%=basePath%>css/zb/img/4.png" />
 						<div
 							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
 							05【千夏】</div>
@@ -166,7 +167,7 @@
 							<!--左边-->
 							<div style="float: left; margin: 0 30px 0 0; width: 70px;">
 								<!--头像-->
-								<img class="user_img" src="../../css/zb/img/tx.jpg"
+								<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg"
 									style="float: left;" />
 								<div
 									style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
@@ -186,7 +187,7 @@
 							<!--左边-->
 							<div style="float: left; margin: 0 30px 0 0; width: 70px;">
 								<!--头像-->
-								<img class="user_img" src="../../css/zb/img/tx.jpg"
+								<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg"
 									style="float: left;" />
 								<div
 									style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>
@@ -206,7 +207,7 @@
 							<!--左边-->
 							<div style="float: left; margin: 0 30px 0 0; width: 70px;">
 								<!--头像-->
-								<img class="user_img" src="../../css/zb/img/tx.jpg"
+								<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg"
 									style="float: left;" />
 								<div
 									style="color: #1cd388; float: left; margin: 20px 0 0 0; overflow: hidden; height: 20px;">树深时见鹿dear</div>

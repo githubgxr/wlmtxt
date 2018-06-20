@@ -58,11 +58,17 @@ public class WorksServiceImpl implements WorksService {
 		wlmtxt_works works = worksDao.getWorksByID(works_id);
 		worksDTO.setWorks(works);
 		//
-		wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-		worksDTO.setSecondMenu(secondMenu);
+		if (null != works.getWorks_second_menu_id() && !works.getWorks_second_menu_id().equals("")) {
+			wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
+			worksDTO.setSecondMenu(secondMenu);
+			if (secondMenu.getSecond_menu_first_menu_id() != null
+					&& !secondMenu.getSecond_menu_first_menu_id().equals("")) {
+				wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
+				worksDTO.setFirstMenu(firstMenu);
+			}
+		}
 		//
-		wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-		worksDTO.setFirstMenu(firstMenu);
+
 		// 获取关键词列表
 		List<KeyWordDTO> keyWordDTOList = listWorksKeywordByWorksID(works.getWorks_id());
 		worksDTO.setKeyWordDTOList(keyWordDTOList);
@@ -121,10 +127,13 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public List<WorksDTO> listWorksByFirstMenuID(String second_menu_id) {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
-
+		// 根据一级类别获取所属的二级类别
 		List<wlmtxt_second_menu> secondMenuList = worksDao.listSecondMenuByFather(second_menu_id);
+		System.out.println(secondMenuList.size());
 		for (wlmtxt_second_menu second_menu : secondMenuList) {
+			// 遍历二级类别取出所有相应作品
 			List<wlmtxt_works> worksList = worksDao.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
+			System.out.println(worksList.size());
 			for (wlmtxt_works works : worksList) {
 				WorksDTO worksDTO = new WorksDTO();
 				worksDTO.setWorks(works);
@@ -143,7 +152,7 @@ public class WorksServiceImpl implements WorksService {
 				worksDTOList.add(worksDTO);
 			}
 		}
-
+		System.out.println(worksDTOList.size());
 		return worksDTOList;
 	}
 
@@ -176,23 +185,11 @@ public class WorksServiceImpl implements WorksService {
 		List<wlmtxt_works> worksList = worksDao.listWorksAll();
 		for (wlmtxt_works works : worksList) {
 			WorksDTO worksDTO = new WorksDTO();
-			worksDTO.setWorks(works);
-			if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
-			} else {
-				wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-				worksDTO.setSecondMenu(secondMenu);
-				if (null == secondMenu.getSecond_menu_first_menu_id()
-						|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
-				} else {
-					wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-					worksDTO.setFirstMenu(firstMenu);
-				}
-			}
+			worksDTO = getWorksDTOByID(works.getWorks_id());
 			worksDTOList.add(worksDTO);
 		}
 		return worksDTOList;
 	}
-	
 
 	@Override
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO) {
@@ -218,20 +215,7 @@ public class WorksServiceImpl implements WorksService {
 		for (wlmtxt_works works : workList) {
 			WorksDTO worksDTO = new WorksDTO();
 			//
-			worksDTO.setWorks(works);
-			//
-			if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
-			} else {
-				wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-				worksDTO.setSecondMenu(secondMenu);
-				if (null == secondMenu.getSecond_menu_first_menu_id()
-						|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
-				} else {
-					wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-					worksDTO.setFirstMenu(firstMenu);
-				}
-			}
-
+			worksDTO = getWorksDTOByID(works.getWorks_id());
 			//
 
 			//
@@ -242,7 +226,6 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
 		return worksDao.listSecondMenuByFirstMenuID(first_menu_id);
 	}
@@ -284,7 +267,6 @@ public class WorksServiceImpl implements WorksService {
 		newkeywords.setKeyword_gmt_create(time);
 		//
 		worksDao.saveKeyword(newkeywords);
-		System.out.println(newkeywords);
 	}
 
 	@Override
