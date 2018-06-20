@@ -73,14 +73,14 @@
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<!--视频-->
 				<video controls="controls" poster="<%=basePath%>css/zb/img/t1.jpg"
-					src="/wlmtxt/Works/Works_getVideo?worksName=作品名" style="width: 100%;"></video>
+					src="" style="width: 100%;"></video>
 				<!--点赞
 					收藏
 					播放量
 					下载-->
 				<div style="margin: 10px 0 0 0;">
 					<div>
-						<a class="button_code user_operate button_a" href="<%=basePath%>css/zb/img/trailer.mp4" download="trailer">
+						<a id="download_a" class="button_code user_operate button_a" href="" download="trailer">
 							<i class="fas fa-download"  style="width:50px;float:left;line-height:32px;text-align:left;margin:0 0 0 -10px;">&nbsp;下载</i>
 							<div style="float:left;"></div>
 						</a>

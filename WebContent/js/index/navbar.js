@@ -79,9 +79,18 @@ function checkLogin() {
 						$("#detail_video_time").html(detail_response.worksDTO.works.works_title);
 						//关键字
 						$("#detail_video_keywords").html();
+						//视频
+						$("#detail_user_img").attr("src","/wlmtxt/Works/Works_getVideo?worksName=" + detail_response.worksDTO.works.works_id);
+						//下载
+						$("#detail_user_img").attr("href","/wlmtxt/Works/Works_getVideo?worksName=" + detail_response.worksDTO.works.works_id);
+						
 						/*------用户*/
 						//头像
-						$("#detail_user_img").attr("src","");
+						$("#detail_user_img").attr("src","/wlmtxt/Works/Works_getImg?imgName=" + detail_response.worksDTO.user.user_avatar);
+						//用户名
+						$("#detail_user_name").html(detail_response.worksDTO.user.username);
+						//个人介绍
+						$("#detail_user_bio").html(detail_response.worksDTO.user.bio);
 					}
 				}
 				/*-----------收藏----------*/
