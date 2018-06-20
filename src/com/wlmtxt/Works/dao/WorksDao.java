@@ -10,6 +10,7 @@ import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.VO.MyWorksVO;
 
 public interface WorksDao {
 
@@ -47,5 +48,13 @@ public interface WorksDao {
 	List<wlmtxt_second_menu> listSecondMenu();
 
 	List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id);
+
+	wlmtxt_second_menu getSecondMenu_byID(String works_second_menu_id);
+
+	wlmtxt_first_menu getFirstMenu_byID(String second_menu_first_menu_id);
+
+	List<wlmtxt_works> listMyWorks_byUserID_andNum(String user_id, MyWorksVO myWorksVO);
+
+	int getMyWorksTotalRecords(String user_id);
 
 }

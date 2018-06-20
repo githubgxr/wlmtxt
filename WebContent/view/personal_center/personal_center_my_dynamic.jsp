@@ -931,7 +931,7 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	
+	<script type="text/javascript" src="<%=basePath%>js/personal_center/personal_center_upload_dynamic.js"></script>
 </body>
 
 </html>

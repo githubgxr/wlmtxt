@@ -1,5 +1,8 @@
 package com.wlmtxt.Works.service.impl;
 
+
+import java.util.ArrayList;
+
 import java.util.List;
 
 import com.wlmtxt.Works.dao.WorksDao;
@@ -13,6 +16,8 @@ import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyWorksVO;
 
 import util.TeamUtil;
 
@@ -29,6 +34,46 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+
+	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO) {
+
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+
+		List<wlmtxt_works> workList = worksDao.listMyWorks_byUserID_andNum(user_id, myWorksVO);
+
+		int i = worksDao.getMyWorksTotalRecords(user_id);
+		myWorksVO.setTotalRecords(i);
+		myWorksVO.setTotalPages(((i - 1) / myWorksVO.getPageSize()) + 1);
+		if (myWorksVO.getPageIndex() <= 1) {
+			myWorksVO.setHavePrePage(false);
+		} else {
+			myWorksVO.setHavePrePage(true);
+		}
+		if (myWorksVO.getPageIndex() >= myWorksVO.getTotalPages()) {
+			myWorksVO.setHaveNextPage(false);
+		} else {
+			myWorksVO.setHaveNextPage(true);
+		}
+
+		for (wlmtxt_works works : workList) {
+			WorksDTO worksDTO = new WorksDTO();
+			//
+			worksDTO.setWorks(works);
+			//
+			wlmtxt_second_menu secondMenu = worksDao.getSecondMenu_byID(works.getWorks_second_menu_id());
+			worksDTO.setSecondMenu(secondMenu);
+			//
+			wlmtxt_first_menu firstMenu = worksDao.getFirstMenu_byID(secondMenu.getSecond_menu_first_menu_id());
+			worksDTO.setFirstMenu(firstMenu);
+			//
+			worksDTOList.add(worksDTO);
+		}
+		myWorksVO.setWorksDTOList(worksDTOList);
+		return myWorksVO;
+	}
+
+	@Override
+
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
 		return worksDao.listSecondMenu_byFirstMenuID(first_menu_id);
 	}
@@ -58,7 +103,6 @@ public class WorksServiceImpl implements WorksService {
 		accept_works.setWorks_gmt_modified(time);
 		//
 		worksDao.saveWorks(accept_works);
-		System.out.println(accept_works);
 	}
 
 	@Override

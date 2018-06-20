@@ -26,6 +26,8 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyWorksVO;
 
 @SuppressWarnings("serial")
 public class WorksAction extends ActionSupport {
@@ -54,6 +56,395 @@ public class WorksAction extends ActionSupport {
 
 	//
 	private String keyword;
+	//
+	private MyWorksVO myWorksVO;
+
+
+	/*
+	 * 
+	 */
+	public String videoDetailsPage() {
+		accept_works = new wlmtxt_works();
+		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
+		return "videoDetailsPage";
+	}
+
+	/*
+	 * 
+	 */
+	public String getImg() throws FileNotFoundException {
+		if (imgName.equals("") || imgName == null) {
+			imgName = "";
+		}
+		File file = new File("C://wlmtxt/img/" + imgName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
+	}
+
+	public String getVideo() throws FileNotFoundException {
+		if (worksName.equals("") || worksName == null) {
+			worksName = "";
+		}
+		File file = new File("C://wlmtxt/video/" + worksName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
+	}
+
+	/*
+	 * 
+	 */
+	public String getImg() throws FileNotFoundException {
+		if (imgName.equals("") || imgName == null) {
+			imgName = "";
+		}
+		File file = new File("C://wlmtxt/img/" + imgName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
+	}
+
+	public String getVideo() throws FileNotFoundException {
+		if (worksName.equals("") || worksName == null) {
+			worksName = "";
+		}
+		File file = new File("C://wlmtxt/video/" + worksName);
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			inputStream = new FileInputStream(file);
+		}
+		return "getFile";
+	}
+
+	/**
+	 * 查询是否已点赞<br>
+	 * 接收accept_works.works_id
+	 * 
+	 * @throws Exception
+	 */
+	public void isLiked() throws Exception {
+
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		if (worksService.isLiked(user.getUser_id(), accept_works.getWorks_id())) {
+			response.getWriter().write("1");
+		} else {
+			response.getWriter().write("2");
+		}
+
+	}
+
+	/**
+	 * 点赞及取消<br>
+	 * 接收accept_works.works_id
+	 * 
+	 * @throws Exception
+	 */
+	public void likeWorks() throws Exception {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+
+		worksService.likWorks(user, accept_works);
+
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+
+	}
+
+	/**
+	 * 我点赞的列表
+	 */
+	public void listLke() {
+		// TODO
+	}
+
+	/**
+	 * 查询是否已收藏<br>
+	 * 接收accept_works.works_id
+	 * 
+	 * @throws Exception
+	 */
+	public void isCollectWorks() throws Exception {
+		// TODO
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		if (worksService.isCollectWorks(user.getUser_id(), accept_works.getWorks_id())) {
+			response.getWriter().write("1");
+		} else {
+			response.getWriter().write("2");
+		}
+	}
+
+	/**
+	 * 收藏及取消，接收accept_works.works_id
+	 */
+	public void collectWorks() {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		try {
+			worksService.collectWorks(user, accept_works);
+			HttpServletResponse response = ServletActionContext.getResponse();
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("1");
+		} catch (Exception e) {
+			System.out.println("收藏失败");
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 我收藏的列表
+	 */
+	public void listCollect() {
+		// TODO
+	}
+
+	/**
+	 * 删除下载历史,wlmtxt_download_history.download_history_id、
+	 * wlmtxt_download_history.download_history_gmt_create
+	 */
+	public void removeDownloadHistory() {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		try {
+			worksService.removeDownloadHistory(user, accept_works);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 我的下载历史列表
+	 */
+	public void listDownloadWorks() {
+
+	}
+
+	/**
+	 * 评论，接收discuss.discuee_father_discuss_id父评论id：顶级评论则接收作品id，评论的回复评论则为上级评论id）
+	 * TODO
+	 */
+	public void discussWorks() {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		// worksService.discussWorks(user, accpet_discuss);
+	}
+
+	public void getMyWorksVO() throws IOException {
+		List<WorksDTO> worksDTO = new ArrayList<WorksDTO>();
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		myWorksVO = worksService.getMyWorksVO(user.getUser_id(), myWorksVO);
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTO));
+	}
+
+	/**
+	 * 获取所有一级类别的
+	 * 
+	 * @throws IOException
+	 */
+	public void listFirstMenu() throws IOException {
+		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
+
+		firstMenuList = worksService.listFirstMenu();
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(firstMenuList));
+	}
+
+	/**
+	 * 根据第一类别ID获取第二类别列表
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu_byFirstMenuID() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
+	 * 获取所有第二级类别
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
+	 * 获取所有一级类别的
+	 * 
+	 * @throws IOException
+	 */
+	public void listFirstMenu() throws IOException {
+		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
+
+		firstMenuList = worksService.listFirstMenu();
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(firstMenuList));
+	}
+
+	/**
+	 * 根据第一类别ID获取第二类别列表
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu_byFirstMenuID() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
+	 * 获取所有第二级类别
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	/**
+	 * 上传作品
+	 * 
+	 * @throws IOException
+	 */
+	public void uploadWorks() throws IOException {
+
+		// 处理封面
+		if (imgfile != null) {
+
+			String filePath;
+
+			String fileName = UUID.randomUUID().toString()
+					+ imgfileFileName.substring(imgfileFileName.lastIndexOf("."));
+
+			filePath = "c://wlmtxt/img/" + fileName;
+
+			File newFile = new File(filePath);
+
+			try {
+				FileUtils.copyFile(imgfile, newFile);
+				accept_works.setWorks_cover(fileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			System.out.println("封面：" + fileName);
+
+		} else {
+			System.out.println("未上传封面");
+		}
+
+		// 处理视频
+		if (worksfile != null) {
+
+			String filePath;
+
+			String fileName = UUID.randomUUID().toString()
+					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
+
+			filePath = "c://wlmtxt/video/" + fileName;
+
+			File newFile = new File(filePath);
+
+			try {
+				FileUtils.copyFile(worksfile, newFile);
+				accept_works.setWorks_name(fileName);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			System.out.println("作品：" + fileName);
+
+		} else {
+			System.out.println("未上传视频");
+		}
+
+		// 作者
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		System.out.println(user);
+		accept_works.setWorks_user_id(user.getUser_id());
+
+		// 关键词
+		if (!keyword.equals("")) {
+			String[] keywords = keyword.split(";");
+			wlmtxt_keyword newkeywords;
+			for (int i = 0; i < keywords.length; i++) {
+				if (!keywords[i].equals("")) {
+					newkeywords = new wlmtxt_keyword();
+					newkeywords.setKeyword_name(keywords[i]);
+					worksService.saveKeyword(newkeywords);
+				}
+
+			}
+
+		}
+
+		worksService.saveWorks(accept_works);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
 
 	/*
 	 * 
@@ -195,331 +586,6 @@ public class WorksAction extends ActionSupport {
 
 	public void setWorksService(WorksService worksService) {
 		this.worksService = worksService;
-	}
-
-	/*
-	 * 
-	 */
-	public String getImg() throws FileNotFoundException {
-		if (imgName.equals("") || imgName == null) {
-			imgName = "";
-		}
-		File file = new File("C://wlmtxt/img/" + imgName);
-		try {
-			inputStream = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
-			inputStream = new FileInputStream(file);
-		}
-		return "getFile";
-	}
-
-	public String getVideo() throws FileNotFoundException {
-		if (worksName.equals("") || worksName == null) {
-			worksName = "";
-		}
-		File file = new File("C://wlmtxt/video/" + worksName);
-		try {
-			inputStream = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
-			inputStream = new FileInputStream(file);
-		}
-		return "getFile";
-	}
-
-	/**
-	 * 查询是否已点赞<br>
-	 * 接收accept_works.works_id
-	 * 
-	 * @throws Exception
-	 */
-	public void isLiked() throws Exception {
-
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		if (worksService.isLiked(user.getUser_id(), accept_works.getWorks_id())) {
-			response.getWriter().write("1");
-		} else {
-			response.getWriter().write("2");
-		}
-
-	}
-
-	/**
-	 * 点赞及取消<br>
-	 * 接收accept_works.works_id
-	 * 
-	 * @throws Exception
-	 */
-	public void likeWorks() throws Exception {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-
-		worksService.likWorks(user, accept_works);
-
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write("1");
-
-	}
-
-	/**
-	 * 我点赞的列表
-	 */
-	public void listLke() {
-		// TODO
-	}
-
-	/**
-	 * 查询是否已收藏<br>
-	 * 接收accept_works.works_id
-	 * 
-	 * @throws Exception
-	 */
-	public void isCollectWorks() throws Exception {
-		// TODO
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		if (worksService.isCollectWorks(user.getUser_id(), accept_works.getWorks_id())) {
-			response.getWriter().write("1");
-		} else {
-			response.getWriter().write("2");
-		}
-	}
-
-	/**
-	 * 收藏及取消，接收accept_works.works_id
-	 */
-	public void collectWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		try {
-			worksService.collectWorks(user, accept_works);
-			HttpServletResponse response = ServletActionContext.getResponse();
-			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().write("1");
-		} catch (Exception e) {
-			System.out.println("收藏失败");
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 我收藏的列表
-	 */
-	public void listCollect() {
-		// TODO
-	}
-
-	/**
-	 * 下载，接收wlmtxt_download_history.download_history_id TODO
-	 */
-	public void downloadWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		try {
-			worksService.downloadWorks(user, accept_works);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 删除下载历史,wlmtxt_download_history.download_history_id、
-	 * wlmtxt_download_history.download_history_gmt_create
-	 */
-	public void removeDownloadHistory() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		try {
-			worksService.removeDownloadHistory(user, accept_works);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 我的下载历史列表
-	 */
-	public void listDownloadWorks() {
-
-	}
-
-	/**
-	 * 评论，接收discuss.discuee_father_discuss_id父评论id：顶级评论则接收作品id，评论的回复评论则为上级评论id）
-	 * TODO
-	 */
-	public void discussWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		// worksService.discussWorks(user, accpet_discuss);
-	}
-
-	/**
-	 * 获取所有一级类别的
-	 * 
-	 * @throws IOException
-	 */
-	public void listFirstMenu() throws IOException {
-		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
-
-		firstMenuList = worksService.listFirstMenu();
-
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(firstMenuList));
-	}
-
-	/**
-	 * 根据第一类别ID获取第二类别列表
-	 * 
-	 * @throws IOException
-	 */
-	public void listSecondMenu_byFirstMenuID() throws IOException {
-		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
-		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(secondMenuList));
-	}
-
-	/**
-	 * 获取所有第二级类别
-	 * 
-	 * @throws IOException
-	 */
-	public void listSecondMenu() throws IOException {
-		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
-		secondMenuList = worksService.listSecondMenu();
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(secondMenuList));
-	}
-
-	/**
-	 * 上传作品
-	 * 
-	 * @throws IOException
-	 */
-	public void uploadWorks() throws IOException {
-
-		// 处理封面
-		if (imgfile != null) {
-
-			String filePath;
-
-			String fileName = UUID.randomUUID().toString()
-					+ imgfileFileName.substring(imgfileFileName.lastIndexOf("."));
-
-			filePath = "c://wlmtxt/img/" + fileName;
-
-			File newFile = new File(filePath);
-
-			try {
-				FileUtils.copyFile(imgfile, newFile);
-				accept_works.setWorks_cover(fileName);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			System.out.println("封面：" + fileName);
-
-		} else {
-			System.out.println("未上传封面");
-		}
-
-		// 处理视频
-		if (worksfile != null) {
-
-			String filePath;
-
-			String fileName = UUID.randomUUID().toString()
-					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
-
-			filePath = "c://wlmtxt/video/" + fileName;
-
-			File newFile = new File(filePath);
-
-			try {
-				FileUtils.copyFile(worksfile, newFile);
-				accept_works.setWorks_name(fileName);
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			System.out.println("作品：" + fileName);
-
-		} else {
-			System.out.println("未上传视频");
-		}
-
-		// 作者
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		accept_works.setWorks_user_id(user.getUser_id());
-
-		// 关键词
-		if (!keyword.equals("")) {
-			String[] keywords = keyword.split(";");
-			wlmtxt_keyword newkeywords;
-			for (int i = 0; i < keywords.length; i++) {
-				if (!keywords[i].equals("")) {
-					newkeywords = new wlmtxt_keyword();
-					newkeywords.setKeyword_name(keywords[i]);
-					worksService.saveKeyword(newkeywords);
-				}
-
-			}
-
-		}
-
-		worksService.saveWorks(accept_works);
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write("1");
-	}
-
-	/**
-	 * 播放<br>
-	 * TODO
-	 */
-	public void playWorks() {
-		// TODO
-	}
-
-	/**
-	 * 发布作品<br>
-	 * TODO
-	 */
-	public void publishWords() {
-
-	}
-
-	/**
-	 * 一级分类列表<br>
-	 * TODO
-	 */
-	public void listWorksOfFirstMenu() {
-
-	}
-
-	/**
-	 * 二级分类列表<br>
-	 * TODO
-	 */
-	public void listWorksOfSecondMenu() {
-
 	}
 
 }

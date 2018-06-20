@@ -15,6 +15,7 @@ import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.VO.MyWorksVO;
 
 public class WorksDaoImpl implements WorksDao {
 
@@ -34,6 +35,40 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public wlmtxt_first_menu getFirstMenu_byID(String second_menu_first_menu_id) {
+		String hql = "from wlmtxt_first_menu  where wlmtxt_first_menu_id ='" + second_menu_first_menu_id + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_first_menu first_menu = (wlmtxt_first_menu) query.uniqueResult();
+		return first_menu;
+	}
+
+	@Override
+	public wlmtxt_second_menu getSecondMenu_byID(String works_second_menu_id) {
+		String hql = "from wlmtxt_second_menu  where wlmtxt_second_menu_id ='" + works_second_menu_id + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_second_menu second_menu = (wlmtxt_second_menu) query.uniqueResult();
+		return second_menu;
+	}
+
+	@Override
+	public int getMyWorksTotalRecords(String user_id) {
+		String hql = "select count(*) from wlmtxt_works  where works_user_id='" + user_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public List<wlmtxt_works> listMyWorks_byUserID_andNum(String user_id, MyWorksVO myWorksVO) {
+		String hql = " from wlmtxt_works  where works_user_id='" + user_id + "' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult((myWorksVO.getPageIndex() - 1) * myWorksVO.getPageSize());
+		query.setMaxResults(myWorksVO.getPageSize());
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
 		String hql = " from wlmtxt_second_menu  where second_menu_first_menu_id='" + first_menu_id + "'";
 		Query query = getSession().createQuery(hql);
@@ -45,6 +80,7 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_second_menu> listSecondMenu() {
 		String hql = " from wlmtxt_second_menu  ";
 		Query query = getSession().createQuery(hql);
+
 		List<wlmtxt_second_menu> secondMenuList = query.list();
 		return secondMenuList;
 	}
