@@ -47,14 +47,16 @@ public interface WorksDao {
 
 	List<wlmtxt_second_menu> listSecondMenu();
 
-	List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id);
+	List<wlmtxt_second_menu> listSecondMenuByFirstMenuID(String first_menu_id);
 
-	wlmtxt_second_menu getSecondMenu_byID(String works_second_menu_id);
+	wlmtxt_second_menu getSecondMenuByID(String works_second_menu_id);
 
-	wlmtxt_first_menu getFirstMenu_byID(String second_menu_first_menu_id);
+	wlmtxt_first_menu getFirstMenuByID(String second_menu_first_menu_id);
 
-	List<wlmtxt_works> listMyWorks_byUserID_andNum(String user_id, MyWorksVO myWorksVO);
+	List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO);
 
 	int getMyWorksTotalRecords(String user_id);
+
+	void deleteMyWorks(String works_id);
 
 }

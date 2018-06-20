@@ -32,11 +32,17 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public void deleteMyWorks(String works_id) {
+		worksDao.deleteMyWorks(works_id);
+
+	}
+
+	@Override
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO) {
 
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 
-		List<wlmtxt_works> workList = worksDao.listMyWorks_byUserID_andNum(user_id, myWorksVO);
+		List<wlmtxt_works> workList = worksDao.listMyWorksByUserIDAndNum(user_id, myWorksVO);
 
 		int i = worksDao.getMyWorksTotalRecords(user_id);
 		myWorksVO.setTotalRecords(i);
@@ -57,10 +63,10 @@ public class WorksServiceImpl implements WorksService {
 			//
 			worksDTO.setWorks(works);
 			//
-			wlmtxt_second_menu secondMenu = worksDao.getSecondMenu_byID(works.getWorks_second_menu_id());
+			wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
 			worksDTO.setSecondMenu(secondMenu);
 			//
-			wlmtxt_first_menu firstMenu = worksDao.getFirstMenu_byID(secondMenu.getSecond_menu_first_menu_id());
+			wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
 			worksDTO.setFirstMenu(firstMenu);
 			//
 			worksDTOList.add(worksDTO);
@@ -71,7 +77,7 @@ public class WorksServiceImpl implements WorksService {
 
 	@Override
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
-		return worksDao.listSecondMenu_byFirstMenuID(first_menu_id);
+		return worksDao.listSecondMenuByFirstMenuID(first_menu_id);
 	}
 
 	@Override

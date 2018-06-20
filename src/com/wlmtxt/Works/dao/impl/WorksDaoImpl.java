@@ -35,7 +35,18 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public wlmtxt_first_menu getFirstMenu_byID(String second_menu_first_menu_id) {
+	public void deleteMyWorks(String works_id) {
+
+		String hql = "delete from wlmtxt_works  where works_id='" + works_id + "'";
+
+		Query query = getSession().createQuery(hql);
+
+		query.executeUpdate();
+
+	}
+
+	@Override
+	public wlmtxt_first_menu getFirstMenuByID(String second_menu_first_menu_id) {
 		String hql = "from wlmtxt_first_menu  where wlmtxt_first_menu_id ='" + second_menu_first_menu_id + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_first_menu first_menu = (wlmtxt_first_menu) query.uniqueResult();
@@ -43,7 +54,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public wlmtxt_second_menu getSecondMenu_byID(String works_second_menu_id) {
+	public wlmtxt_second_menu getSecondMenuByID(String works_second_menu_id) {
 		String hql = "from wlmtxt_second_menu  where wlmtxt_second_menu_id ='" + works_second_menu_id + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_second_menu second_menu = (wlmtxt_second_menu) query.uniqueResult();
@@ -59,7 +70,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public List<wlmtxt_works> listMyWorks_byUserID_andNum(String user_id, MyWorksVO myWorksVO) {
+	public List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO) {
 		String hql = " from wlmtxt_works  where works_user_id='" + user_id + "' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		query.setFirstResult((myWorksVO.getPageIndex() - 1) * myWorksVO.getPageSize());
@@ -69,7 +80,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
+	public List<wlmtxt_second_menu> listSecondMenuByFirstMenuID(String first_menu_id) {
 		String hql = " from wlmtxt_second_menu  where second_menu_first_menu_id='" + first_menu_id + "'";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_second_menu> secondMenuList = query.list();

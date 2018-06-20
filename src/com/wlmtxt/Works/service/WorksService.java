@@ -38,4 +38,6 @@ public interface WorksService {
 
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO);
 
+	public void deleteMyWorks(String works_id);
+
 }

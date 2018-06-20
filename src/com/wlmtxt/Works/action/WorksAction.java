@@ -216,6 +216,13 @@ public class WorksAction extends ActionSupport {
 		// worksService.discussWorks(user, accpet_discuss);
 	}
 
+	public void deleteMyWorks() throws IOException {
+		worksService.deleteMyWorks(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
 	public void getMyWorksVO() throws IOException {
 		List<WorksDTO> worksDTO = new ArrayList<WorksDTO>();
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
