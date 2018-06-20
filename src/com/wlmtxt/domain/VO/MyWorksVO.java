@@ -19,17 +19,17 @@ public class MyWorksVO {
 	private int totalPages = 1;
 
 	// 是否有上一页
-	private boolean HavePrePage = false;
+	private boolean havePrePage = false;
 
 	// 是否有下一页
-	private boolean HaveNextPage = false;
+	private boolean haveNextPage = false;
 
 	private List<WorksDTO> worksDTOList;
 
 	@Override
 	public String toString() {
 		return "MyWorksVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize=" + pageSize
-				+ ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage=" + HaveNextPage
+				+ ", totalPages=" + totalPages + ", havePrePage=" + havePrePage + ", haveNextPage=" + haveNextPage
 				+ ", worksDTOList=" + worksDTOList + "]";
 	}
 
@@ -66,19 +66,19 @@ public class MyWorksVO {
 	}
 
 	public boolean isHavePrePage() {
-		return HavePrePage;
+		return havePrePage;
 	}
 
 	public void setHavePrePage(boolean havePrePage) {
-		HavePrePage = havePrePage;
+		this.havePrePage = havePrePage;
 	}
 
 	public boolean isHaveNextPage() {
-		return HaveNextPage;
+		return haveNextPage;
 	}
 
 	public void setHaveNextPage(boolean haveNextPage) {
-		HaveNextPage = haveNextPage;
+		this.haveNextPage = haveNextPage;
 	}
 
 	public List<WorksDTO> getWorksDTOList() {

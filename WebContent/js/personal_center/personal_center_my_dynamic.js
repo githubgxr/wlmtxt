@@ -5,7 +5,7 @@ function listMyDynamicByPage(pageIndex){
 	var xhr=new XMLHttpRequest();
 	var formData=new FormData();
 	formData.append("myWorksVO.pageIndex",pageIndex);
-	xhr.open("POST","/wlmtxt/Works/Works_getMyWorksVO");
+	xhr.open("POST","/wlmtxt/Works/Works_getMyWorksListVO");
 	xhr.send(formData);
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
