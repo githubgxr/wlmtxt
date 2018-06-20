@@ -83,6 +83,58 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public List<WorksDTO> listWorksByFirstMenuID(String second_menu_id) {
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+
+		List<wlmtxt_second_menu> secondMenuList = worksDao.listSecondMenuByFather(second_menu_id);
+		for (wlmtxt_second_menu second_menu : secondMenuList) {
+			List<wlmtxt_works> worksList = worksDao.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
+			for (wlmtxt_works works : worksList) {
+				WorksDTO worksDTO = new WorksDTO();
+				worksDTO.setWorks(works);
+				if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
+				} else {
+					wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
+					worksDTO.setSecondMenu(secondMenu);
+					if (null == secondMenu.getSecond_menu_first_menu_id()
+							|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
+					} else {
+						wlmtxt_first_menu firstMenu = worksDao
+								.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
+						worksDTO.setFirstMenu(firstMenu);
+					}
+				}
+				worksDTOList.add(worksDTO);
+			}
+		}
+
+		return worksDTOList;
+	}
+
+	@Override
+	public List<WorksDTO> listWorksBySecondMenuID(String second_menu_id) {
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		List<wlmtxt_works> worksList = worksDao.listWorksBySecondMenuID(second_menu_id);
+		for (wlmtxt_works works : worksList) {
+			WorksDTO worksDTO = new WorksDTO();
+			worksDTO.setWorks(works);
+			if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
+			} else {
+				wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
+				worksDTO.setSecondMenu(secondMenu);
+				if (null == secondMenu.getSecond_menu_first_menu_id()
+						|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
+				} else {
+					wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
+					worksDTO.setFirstMenu(firstMenu);
+				}
+			}
+			worksDTOList.add(worksDTO);
+		}
+		return worksDTOList;
+	}
+
+	@Override
 	public List<WorksDTO> listWorksAll() {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 		List<wlmtxt_works> worksList = worksDao.listWorksAll();
