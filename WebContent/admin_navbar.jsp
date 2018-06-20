@@ -61,8 +61,7 @@
 			style="margin: 0 0 0 0; position: fixed; top: 0; left: 0;">
 			<div
 				style="color: white; font-size: 25px; margin: 0 0 20px 0; text-align: center; padding: 0 50px 0 0;">
-				管理员&nbsp;张三
-				<s:property value="#session.Admin.admin_account" />
+				管理员&nbsp;<s:property value="#session.adminLoginResult.admin_username"/>
 			</div>
 			<div class="sidebar-scroll">
 
@@ -117,11 +116,11 @@
 					<!--  -->
 					<li><s:if test="page=='page_list_news'">
 							<a
-								href="<%=basePath%>Admin/Admin_list_works_page?page=page_list_news&page_list_news.pageIndex=1"
+								href="<%=basePath%>WorksExamine/WorksExamine_list_works"
 								class="active">作品管理</a>
 						</s:if> <s:else>
 							<a
-								href="<%=basePath%>Admin/Admin_list_works_page?page=page_list_news&page_list_news.pageIndex=1"
+								href="<%=basePath%>WorksExamine/WorksExamine_list_works"
 								>作品管理</a>
 						</s:else></li>
 					<!--  -->
@@ -196,7 +195,7 @@
 		<!---------------------------------------------------------------------------------------------------------------------------------->
 					
 		<li><a
-				href="<%=basePath%>Admin/Admin_count_page"><i
+				href="<%=basePath%>Admin/Admin_page_list_category"><i
 					class="lnr lnr lnr-chart-bars"></i><span>分类管理</span></a></li>
 		
 		<!---------------------------------------------------------------------------------------------------------------------------------->			
@@ -229,12 +228,5 @@
 	<!--------------------------------------------------------------------------------------------->
 	<!--------------------------------------------------------------------------------------------->
 </body>
-<script>
-	$(document).ready(function() {
-		$('input').iCheck({
-			checkboxClass : 'icheckbox_flat-green',
-			radioClass : 'iradio_flat-green'
-		});
-	});
-</script>
+
 </html>

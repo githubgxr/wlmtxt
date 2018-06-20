@@ -3,6 +3,7 @@ package com.wlmtxt.domain.DTO;
 import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
+import com.wlmtxt.domain.DO.wlmtxt_user;
 
 public class DiscussDTO {
 
@@ -10,9 +11,19 @@ public class DiscussDTO {
 
 	List<wlmtxt_discuss> reply;
 
+	wlmtxt_user user;
+
 	@Override
 	public String toString() {
-		return "DiscussDTO [discuss=" + discuss + ", reply=" + reply + "]";
+		return "DiscussDTO [discuss=" + discuss + ", reply=" + reply + ", user=" + user + "]";
+	}
+
+	public wlmtxt_user getUser() {
+		return user;
+	}
+
+	public void setUser(wlmtxt_user user) {
+		this.user = user;
 	}
 
 	public wlmtxt_discuss getDiscuss() {

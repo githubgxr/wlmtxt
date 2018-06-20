@@ -14,5 +14,15 @@
 	<bean id="adminAction" class="com.wlmtxt.Admin.action.AdminAction">
 		<property name="adminService" ref="adminService"></property>
 	</bean>
+	
+	<bean id="worksExamineDao" class="com.wlmtxt.Admin.dao.impl.WorksExamineDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="worksExamineService" class="com.wlmtxt.Admin.service.impl.WorksExamineServiceImpl">
+		<property name="worksExamineDao" ref="worksExamineDao"></property>
+	</bean>
+	<bean id="worksExamineAction" class="com.wlmtxt.Admin.action.WorksExamineAction">
+		<property name="worksExamineService" ref="worksExamineService"></property>
+	</bean>
 </beans>
 

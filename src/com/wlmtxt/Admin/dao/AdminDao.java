@@ -3,6 +3,8 @@ package com.wlmtxt.Admin.dao;
 import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_admin;
+import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 
 public interface AdminDao {
 	
@@ -14,7 +16,7 @@ public interface AdminDao {
 	 * 
 	 * @author 王鹏志
 	 */
-	public boolean adminLogin(wlmtxt_admin admin);
+	public wlmtxt_admin adminLogin(wlmtxt_admin admin);
 	
 	
 	/**
@@ -57,4 +59,64 @@ public interface AdminDao {
 	 * @author 王鹏志
 	 */
 	public List<wlmtxt_admin> listAdmin();
+     
+/*
+ * 一级分类的添加
+ */
+	public boolean addFirst_menu(wlmtxt_first_menu first_menu);
+    /*
+     * 一级分类的列表
+     */
+	public List<wlmtxt_first_menu> listFirst_menuAll();
+   /*
+    * 根据一级菜单得到二级菜单
+    */
+
+	public List<wlmtxt_second_menu> listCategoryByFather(String first_menu_id);
+
+   /*
+    * 得到一级菜单
+    */
+	public List<wlmtxt_first_menu> listCategory();
+/*
+ * 添加二级分类
+ */
+
+	public boolean addSecond_menu(wlmtxt_second_menu second_menu);
+
+    /*
+     * 根据一级菜单id获得二级菜单
+     */
+	public List<wlmtxt_second_menu> getSecond_menuByFirstId(String first_menu_id);
+
+    /*
+     * 删除二级菜单
+     */
+	public void deleteSecond_menu(String second_menu_id);
+
+   /*
+    * 删除一级菜单
+    */
+ 
+	public void deleteFirst_munu(String first_menu_id);
+
+    /*
+     * 一级菜单的修改
+     */
+	public boolean updateFirst_menu(wlmtxt_first_menu first_menu);
+   /*
+    * 二级菜单的修改
+    */
+
+	public boolean updateSecond_menu(wlmtxt_second_menu second_menu);
+
+   /*
+    * 根据一级菜单的id得到一级菜单的记录
+    */
+	public wlmtxt_first_menu getFirst_menuById(String first_menu_id);
+
+   /*
+    * 根据二级菜单id得到二级菜单
+    */
+	public wlmtxt_second_menu getSecondById(String second_menu_id);
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
-import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
@@ -26,9 +25,7 @@ public interface WorksService {
 
 	public boolean isCollectWorks(String user_id, String works_id) throws Exception;
 
-	public void saveWorks(wlmtxt_works accept_works);
-
-	public void saveKeyword(wlmtxt_keyword newkeywords);
+	public void saveWorks(wlmtxt_works accept_works, String[] keywords);
 
 	public List<wlmtxt_first_menu> listFirstMenu();
 
