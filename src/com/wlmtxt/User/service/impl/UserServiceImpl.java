@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public wlmtxt_user get_user_byID(String user_id) {
+		return userDao.get_user_byID(user_id);
+	}
+
+	@Override
 	public wlmtxt_user login(wlmtxt_user accpet_user) {
 		if (accpet_user.getUser_mail() == null || accpet_user.getUser_password() == null
 				|| "".equals(accpet_user.getUser_mail()) || "".equals(accpet_user.getUser_password())) {

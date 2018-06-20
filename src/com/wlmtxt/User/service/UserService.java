@@ -16,4 +16,6 @@ public interface UserService {
 
 	String modifyPassword(wlmtxt_user user);
 
+	wlmtxt_user get_user_byID(String user_id);
+
 }
