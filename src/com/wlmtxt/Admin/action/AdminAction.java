@@ -165,9 +165,9 @@ public class AdminAction extends ActionSupport {
 		 GsonBuilder gsonBuilder = new GsonBuilder();
 	 	 gsonBuilder.setPrettyPrinting();// 格式化json数据
 	 	 Gson gson = gsonBuilder.create();
-	 	wlmtxt_first_menu	first_menua = adminService.getFirst_menuById(first_menu.getFirst_menu_id());
+	 		first_menu = adminService.getFirst_menuById(first_menu.getFirst_menu_id());
 		if(first_menu!=null){
-			pw.write(gson.toJson(first_menua));	
+			pw.write(gson.toJson(first_menu));	
 		}else{
 			pw.write("2");
 		}
@@ -183,7 +183,7 @@ public class AdminAction extends ActionSupport {
 	 	 gsonBuilder.setPrettyPrinting();// 格式化json数据
 	 	 Gson gson = gsonBuilder.create();
 	 	second_menu = adminService.getSecondById(second_menu.getSecond_menu_id());
-		if(first_menu!=null){
+		if(second_menu!=null){
 			pw.write(gson.toJson(second_menu));	
 		}else{
 			pw.write("2");
@@ -199,6 +199,9 @@ public class AdminAction extends ActionSupport {
 		ActionContext.getContext().getValueStack().set("categoryListDTO", categoryListDTO);
 		return "page_list_category";
 	}
+	/*
+	 * 作品审核
+	 */
 	/**
 	 * 跳转登录成功页
 	 * @return

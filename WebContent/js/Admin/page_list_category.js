@@ -140,13 +140,42 @@ function getFirst_menuById(first_menu_id){
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    {
 	    var first_mune=xmlhttp.responseText;
+	    first_mune = JSON.parse(first_mune);
 	    $('#first_menu_name').val(first_mune.first_menu_name);
 	    $('#first_menu_id').val(first_mune.first_menu_id);
 	    }
 	  }
 
 }
-
+/*
+ * 获得单个二级菜单
+ */
+function getSecond_menuById(second_menu_id){
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	var fromDate = new FormData();
+	fromDate.append("second_menu.second_menu_id",second_menu_id);
+	xmlhttp.open("post","/wlmtxt/Admin/Admin_getSecondById",true);
+	xmlhttp.send(fromDate);
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    var second_mune=xmlhttp.responseText;
+	    second_mune = JSON.parse(second_mune);
+	    $('#update_second_menu_name').val(second_mune.second_menu_name);
+	    $('#update_second_menu_first_menu_id').val(second_mune.second_menu_first_menu_id);
+	    $('#update_second_menu_id').val(second_mune.second_menu_id);
+	    }
+	  }
+}
 /*
  * 修改一级菜单
  */
@@ -166,7 +195,24 @@ function updateFirst_menu(){
 			}, 'text')
 }
 
-
+/*
+ * 修改二级菜单
+ */
+function updateSecond_menu(){
+	var this_modal = $(this);
+	$.post('/wlmtxt/Admin/Admin_updateSecond_menu',
+			$('#updateSecond_menu form').serialize(), function(xhr) {
+				if (xhr == 1) {
+					toastr.success('修改成功!');
+					$('#updateSecond_menu').modal('hide');
+					$('#updateSecond_menu input').val("");
+					window.location.reload();
+				} else {
+					toastr.error('修改失败!');
+					return false;
+				}
+			}, 'text')
+}
 
 
 

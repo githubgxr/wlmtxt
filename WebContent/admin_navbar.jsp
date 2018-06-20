@@ -116,11 +116,11 @@
 					<!--  -->
 					<li><s:if test="page=='page_list_news'">
 							<a
-								href="<%=basePath%>Admin/Admin_list_works_page?page=page_list_news&page_list_news.pageIndex=1"
+								href="<%=basePath%>WorksExamine/WorksExamine_list_works"
 								class="active">作品管理</a>
 						</s:if> <s:else>
 							<a
-								href="<%=basePath%>Admin/Admin_list_works_page?page=page_list_news&page_list_news.pageIndex=1"
+								href="<%=basePath%>WorksExamine/WorksExamine_list_works"
 								>作品管理</a>
 						</s:else></li>
 					<!--  -->

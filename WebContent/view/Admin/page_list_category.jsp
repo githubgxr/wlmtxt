@@ -51,7 +51,7 @@
 						data-target="#model_delete_category"
 						onclick="javascript:delete_category_id=this.id;">删除</button>
 					<!--  -->
-					<button class="btn btn-warning" data-toggle="modal" data-target="#model_update_category"
+					<button class="btn btn-warning" data-toggle="modal" data-target="#update_frist_menu"
 						style="margin: 8px 5px; float: right;"
 						onclick="getFirst_menuById('<s:property
 							value="#CL.category.first_menu_id" />')">修改</button>
@@ -78,10 +78,10 @@
 							style="margin: 8px 5px ; float: right;"
 							onclick="javascript:delete_category_id=this.id;">删除</button>
 						<!--  -->
-						<button class="btn btn-warning" data-toggle="modal" data-target="#model_update_soncategory"
+						<button class="btn btn-warning" data-toggle="modal" data-target="#updateSecond_menu"
 							style="margin: 8px 5px; float: right;"
-							onclick="window.location='<%=basePath%>snews/category_page_create_category?page=page_create_category&option=update&category.jsj_snews_category_id=<s:property
-							value="#SCL.second_menu_id" />'">修改</button>
+							onclick="getSecond_menuById('<s:property
+							value="#SCL.second_menu_id" />')">修改</button>
 						<!--  -->
 					</div>
 				</s:iterator>
@@ -161,7 +161,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary input_sure" onclick="input_sure()">添加</button>
+					<button type="button" class="btn btn-primary input_sure">添加</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
@@ -171,7 +171,7 @@
 	</div>
 	<!-------------------------------------------修改一级菜单的模态框--------------------------------------------------------->
 	<div class="modal fade" id="update_frist_menu" tabindex="-1"
-		role="dialog" aria-labelledby="model_update_category" aria-hidden="true">
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" style="width:500px;">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -190,7 +190,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary input_sure" onclick="updateFirst_menu()">修改</button>
+					<button type="button" class="btn btn-primary " onclick="updateFirst_menu()">修改</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
@@ -220,6 +220,36 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary second_input_sure" >添加</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-------------------------------------------修改二级菜单的模态框--------------------------------------------------------->
+	<div class="modal fade" id="updateSecond_menu" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" style="width:500px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<form action="">
+						<div style="width: 80%; margin: auto;" class="panel-body">
+										<span style="float:left;margin:0 30px 0 0;line-height:34px;">二级菜单名</span>
+										<span style="float:left;"><input style="witdh: 70%;" class="form-control"
+											id="update_second_menu_name" name="second_menu.second_menu_name" type="text"></span>
+										<input type="hidden" id="update_second_menu_first_menu_id" name="second_menu.second_menu_first_menu_id">
+										<input type="hidden" id="update_second_menu_id" name="second_menu.second_menu_id">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary " onclick="updateSecond_menu()">添加</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
