@@ -88,6 +88,23 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id) {
+		String hql = " from wlmtxt_works  where works_second_menu_id='" + second_menu_id
+				+ "' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_works> listWorksAll() {
+		String hql = " from wlmtxt_works   order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
 	public List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO) {
 		String hql = " from wlmtxt_works  where works_user_id='" + user_id + "' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
@@ -100,6 +117,14 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public List<wlmtxt_second_menu> listSecondMenuByFirstMenuID(String first_menu_id) {
 		String hql = " from wlmtxt_second_menu  where second_menu_first_menu_id='" + first_menu_id + "'";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_second_menu> secondMenuList = query.list();
+		return secondMenuList;
+	}
+
+	@Override
+	public List<wlmtxt_second_menu> listSecondMenuByFather(String second_menu_first_menu_id) {
+		String hql = " from wlmtxt_second_menu  where second_menu_first_menu_id='" + second_menu_first_menu_id + "'";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_second_menu> secondMenuList = query.list();
 		return secondMenuList;
