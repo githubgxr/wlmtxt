@@ -17,11 +17,12 @@ function listMyDynamicByPage(pageIndex){
 			console.log("HavePrePage:"+wddt_response.HavePrePage);
 			console.log("HaveNextPage:"+wddt_response.HaveNextPage);
 			for(var i=0;i<wddt_response.worksDTOList.length;i++){
+				alert(wddt_response.worksDTOList[i].works.works_id);
 				var wddt_str='<li class="list_video_item">';
 				/*---视频链接---*/
-				 wddt_str+='<a class="video_list_item_wrap" href="">';
+				 wddt_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?"+wddt_response.worksDTOList[i].works.works_id>';
 				 wddt_str+='<div class="video_cover">';
-				 wddt_str+='<img class="video_img" src="'+wddt_response.worksDTOList[i].works.works_cover+'" />';
+				 wddt_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=" +wddt_response.worksDTOList[i].works.works_cover />';
 				 wddt_str+='<div class="video_overplay"></div>';
 				 wddt_str+='<div class="video_play"></div>';
 				 wddt_str+='</div>';
