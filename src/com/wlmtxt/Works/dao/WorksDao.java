@@ -66,4 +66,6 @@ public interface WorksDao {
 
 	void saveDiscuss(wlmtxt_discuss accpet_discuss);
 
+	List<wlmtxt_works> listWorksAll();
+
 }

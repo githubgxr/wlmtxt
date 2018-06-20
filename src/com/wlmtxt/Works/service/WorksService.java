@@ -46,4 +46,6 @@ public interface WorksService {
 
 	public void discussWorks(wlmtxt_discuss accpet_discuss);
 
+	public List<WorksDTO> listWorksAll();
+
 }

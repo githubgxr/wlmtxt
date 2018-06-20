@@ -26,6 +26,7 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
@@ -245,6 +246,21 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(worksDetailVO));
+	}
+
+	/**
+	 * 获取所有的作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorksAll() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorksAll();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
 	}
 
 	public void getMyWorksListVO() throws IOException {

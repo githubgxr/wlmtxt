@@ -88,6 +88,14 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_works> listWorksAll() {
+		String hql = " from wlmtxt_works   order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
 	public List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO) {
 		String hql = " from wlmtxt_works  where works_user_id='" + user_id + "' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
