@@ -24,17 +24,17 @@
 			<!--左上角大DIV-->
 			<div style="width: 660px; float: left;">
 				<!--标题-->
-				<div
+				<div id="detail_video_title"
 					style="color: #1cd388; font-size: 30px; margin: 20px 0 10px; padding: 0 50px 0 0; overflow: hidden;">樱花庄的宠物女孩</div>
 				<!--简介-->
-				<div
+				<div id="detail_video_discribe"
 					style="color: #99a2aa; height: 50px; line-height: 25px; overflow: hidden; padding: 0 50px 0 0;">其实樱花庄一再告诉我们梦想是遥不可及的东西，人要学会现实，更要学会接受。其实樱花庄一再告诉我们梦想是遥不可及的东西。</div>
 				<!--日期-->
-				<div style="color: #99a2aa; margin: 10px 0 0px;">
+				<div id="detail_video_time" style="color: #99a2aa; margin: 10px 0 0px;">
 					<span>2013-02-26 09:12:49</span>
 				</div>
 				<!--关键字-->
-				<div style="margin: 10px 0 10px;">
+				<div id="detail_video_keywords" style="margin: 10px 0 10px;">
 					<span class="video_label_item" style="margin: 0 10px 0 0;">TV动画</span>
 					<span class="video_label_item" style="margin: 0 10px 0 0;">高虐</span>
 				</div>
@@ -42,15 +42,15 @@
 			<!--用户-->
 			<div style="width: 260px; float: right; margin: 15px 0 0 0;">
 				<!--用户头像-->
-				<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=作品名"
+				<img id="detail_user_img" class="user_img" src=""
 					style="float: left;" />
 
 				<div style="float: right; margin: 0 0 0 20px; width: 170px;">
 					<!--用户名-->
-					<div style="color: #1cd388;">树深时见鹿dear</div>
+					<div id="detail_user_name" style="color: #1cd388;"></div>
 					<!--个人介绍-->
-					<div
-						style="color: #99a2aa; height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">月黑杀人夜，风高放火天,月黑杀人夜，风高放火天,月黑杀人夜，风高放火天</div>
+					<div id="detail_user_bio"
+						style="color: #99a2aa; height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;"></div>
 					<!--关注和粉丝-->
 					<div style="color: #99a2aa;">
 						<div style="width: 85px; float: left;">
@@ -72,15 +72,15 @@
 			<div
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<!--视频-->
-				<video controls="controls" poster="<%=basePath%>css/zb/img/t1.jpg"
-					src="/wlmtxt/Works/Works_getVideo?worksName=作品名" style="width: 100%;"></video>
+				<video id="detail_video_content" controls="controls" poster=""
+					src="" style="width: 100%;"></video>
 				<!--点赞
 					收藏
 					播放量
 					下载-->
 				<div style="margin: 10px 0 0 0;">
 					<div>
-						<a class="button_code user_operate button_a" href="<%=basePath%>css/zb/img/trailer.mp4" download="trailer">
+						<a id="download_a" class="button_code user_operate button_a" href="" download="trailer">
 							<i class="fas fa-download"  style="width:50px;float:left;line-height:32px;text-align:left;margin:0 0 0 -10px;">&nbsp;下载</i>
 							<div style="float:left;"></div>
 						</a>
@@ -159,7 +159,7 @@
 					</div>
 				</div>
 				<div id="comment_div" style="float:left;width:100%;">
-					<!--遍历内容-->
+					<%-- <!--遍历内容-->
 					<div style="float: left; width: 100%;">
 						<hr style="width: 100%;" />
 						<!--整个评论-->
@@ -218,7 +218,7 @@
 								<div style="color: #bfbfbf;">2017-05-11 23:22</div>
 							</div>
 						</div>
-					</div>
+					</div> --%>
 					<!--
 						
 					-->

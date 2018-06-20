@@ -1,116 +1,243 @@
-/*window.onload=function(){
-	checkLogin();
-	if(if_login==true){
-		登录后
-		-----------收藏----------
-		//收藏
-		var $collect_number = $("#collect_number").html();
-		$("#collect_number_div").click(function() {
-			if ($(this).hasClass("dz_no")) {
-				//收藏
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "");
-				xhr.send();
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						if (xhr.responseText == "1") {
-							console.log("收藏成功！");
-							$(this).addClass("dz_yes");
-							$(this).removeClass("dz_no");
-							$("#collect_number").html(parseInt($collect_number)+1);
-						} else {
-							alert("收藏失败！");
-							console.log("收藏失败！");
-							return false;
-						}
-					} 
-				}
-			}else if($(this).hasClass("dz_yes")){
-				//取消点赞
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "");
-				xhr.send();
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						if (xhr.responseText == "1") {
-							console.log("取消收藏成功！");
-							$(this).addClass("dz_no");
-							$(this).removeClass("dz_yes");
-							$("#collect_number").html($collect_number);
-						} else {
-							alert("取消收藏失败！");
-							return false;
-						}
+$(function(){
+	//视频id
+	var video_id=$("#video_id").html();
+	console.log("video_id:"+video_id);
+	//获取视频的详细信息
+		var formData_detail=new FormData();
+		formData_detail.append("accept_works.works_id",video_id);
+		var xhr_detail=new XMLHttpRequest();
+		xhr_detail.open("POST", "/wlmtxt/Works/Works_getWorksDetailVO");
+		xhr_detail.send(formData_detail);
+		xhr_detail.onreadystatechange=function(){
+			if(xhr_detail.readyState==4&&xhr_detail.status==200){
+				console.log(1);
+				var detail_response=JSON.parse(xhr_detail.responseText);
+				/*------视频*/
+				//标题
+				$("#detail_video_title").html(detail_response.worksDTO.works.works_title);
+				//简介
+				$("#detail_video_discribe").html(detail_response.worksDTO.works.works_reason);
+				//时间
+				$("#detail_video_time").html(detail_response.worksDTO.works.works_gmt_create);
+				//关键字
+				$("#detail_video_keywords").html();
+				//视频
+				$("#detail_video_content").attr("src","/wlmtxt/Works/Works_getVideo?worksName=" + detail_response.worksDTO.works.works_name);
+				$("#detail_video_content").attr("poster","/wlmtxt/Works/Works_getImg?imgName=" + detail_response.worksDTO.works.works_cover);
+				//下载
+				$("#detail_user_img").attr("href","/wlmtxt/Works/Works_getVideo?worksName=" + detail_response.worksDTO.works.works_id);
+				
+				/*------用户*/
+				//头像
+				$("#detail_user_img").attr("src","/wlmtxt/Works/Works_getImg?imgName=" + detail_response.worksDTO.user.user_avatar);
+				//用户名
+				$("#detail_user_name").html(detail_response.worksDTO.user.user_username);
+				//个人介绍
+				$("#detail_user_bio").html(detail_response.worksDTO.user.user_bio);
+			}
+		}
+		/** *********************详情*********************************** */
+		
+		/*-----------收藏----------*/
+		// 收藏
+		// 查询是否收藏
+		function checkCollect() {
+			var formData_check_collect=new FormData();
+			formData_check_collect.append("accept_works.works_id",video_id);
+			var collect_xhr = new XMLHttpRequest();
+			collect_xhr.open("POST", "/wlmtxt/Works/Works_isCollectWorks");
+			collect_xhr.send(formData_check_collect);
+			collect_xhr.onreadystatechange = function() {
+				if (collect_xhr.readyState == 4 && collect_xhr.status == 200) {
+					if (collect_xhr.responseText == "1") {
+						console.log("已收藏！");
+						$("#collect_number_div").addClass("dz_yes");
+						$("#collect_number_div").removeClass("dz_no");
+						/* $("#collect_number").html(parseInt($collect_number) + 1); */
+					} else {
+						console.log("未收藏！");
+						$("#collect_number_div").addClass("dz_no");
+						$("#collect_number_div").removeClass("dz_yes");
 					}
 				}
-				
+			}
+		}
+		
+		checkCollect();
+		// 点击收藏和取消收藏
+		/* var $collect_number = $("#collect_number").html(); */
+		$("#collect_number_div").click(function() {
+			// 收藏
+			var formData_collect=new FormData();
+			formData_collect.append("accept_works.works_id",video_id);
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/wlmtxt/Works/Works_collectWorks");
+			xhr.send(formData_collect);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					if (xhr.responseText == "1") {
+						console.log("收藏或取消收藏成功！");
+						checkCollect();
+					}
+				}
 			}
 		});
-		-----------点赞----------
-		//点赞
-		var $thumbs_number = $("#thumbs_number").html();
+		/*-----------点赞----------*/
+		// 点赞
+		// 查询是否点赞
+		function checkLike() {
+			var formData_check_like=new FormData();
+			formData_check_like.append("accept_works.works_id",video_id);
+			var like_xhr = new XMLHttpRequest();
+			like_xhr.open("POST", "/wlmtxt/Works/Works_isLiked");
+			like_xhr.send(formData_check_like);
+			like_xhr.onreadystatechange = function() {
+				if (like_xhr.readyState == 4 && like_xhr.status == 200) {
+					if (like_xhr.responseText == "1") {
+						console.log("已点赞！");
+						$("#thumbs_number_div").addClass("dz_yes");
+						$("#thumbs_number_div").removeClass("dz_no");
+						/* $("#collect_number").html(parseInt($collect_number) + 1); */
+					} else {
+						console.log("未点赞！");
+						$("#thumbs_number_div").addClass("dz_no");
+						$("#thumbs_number_div").removeClass("dz_yes");
+					}
+				}
+			}
+		}
+		
+		checkLike();
+		/* var $collect_number = $("#collect_number").html(); */
 		$("#thumbs_number_div").click(function() {
-			if ($(this).hasClass("dz_no")) {
-				//点赞
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "");
-				xhr.send();
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						if (xhr.responseText == "1") {
-							console.log("点赞成功！");
-							$(this).addClass("dz_yes");
-							$(this).removeClass("dz_no");
-							$("#thumbs_number").html(parseInt($thumbs_number)+1);
-						} else {
-							alert("点赞失败！");
-							return false;
-						}
-					} 
+			// 点赞
+			var formData_like=new FormData();
+			formData_like.append("accept_works.works_id",video_id);
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/wlmtxt/Works/Works_likeWorks");
+			xhr.send(formData_like);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					if (xhr.responseText == "1") {
+						console.log("点赞或取消点赞成功！");
+						checkLike();
+					}
 				}
-			}else if($(this).hasClass("dz_yes")){
-				//取消点赞
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "");
-				xhr.send();
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						if (xhr.responseText == "1") {
-							console.log("取消点赞成功！");
-							$(this).addClass("dz_no");
-							$(this).removeClass("dz_yes");
-							$("#thumbs_number").html($thumbs_number);
-						} else {
-							alert("取消点赞失败！");
-							return false;
-						}
-					} 
-				}
-				
 			}
 		});
-		---------关注-----------
-		$("#focus_btn").click(function(){
-			if($(this).hasClass("not_focus")){
-				//未关注
-				$(this).addClass("has_focus");
-				$(this).removeClass("not_focus");
-				$(this).html("关注");
-			}else if($(this).hasClass("has_focus")){
-				//已关注
-				$(this).addClass("not_focus");
-				$(this).removeClass("has_focus");
-				$(this).html("已关注");
+		/*---------关注-----------*/
+		/*// 查询是否关注
+		function checkFocus() {
+			var formData_check_focus=new FormData();
+			formData_check_focus.append("accept_works.works_id",video_id);
+			var focus_xhr = new XMLHttpRequest();
+			focus_xhr.open("POST", "/wlmtxt/Works/Works_isLiked");
+			focus_xhr.send(formData_check_focus);
+			focus_xhr.onreadystatechange = function() {
+				if (focus_xhr.readyState == 4 && focus_xhr.status == 200) {
+					if (focus_xhr.responseText == "1") {
+						console.log("已关注！");
+						$("#focus_btn").addClass("has_focus");
+						$("#focus_btn").removeClass("not_focus");
+						
+						 * $("#collect_number").html(parseInt($collect_number) + 1);
+						 
+					} else {
+						console.log("未关注！");
+						$("#focus_btn").addClass("not_focus");
+						$("#focus_btn").removeClass("has_focus");
+					}
+				}
 			}
-		});
+		}
+		*/
+		/*checkFocus();
+		$("#focus_btn").click(function() {
+			var formData_focus=new FormData();
+			formData_focus.append("accept_works.works_id",video_id);
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/wlmtxt/Works/Works");
+			xhr.send(formData_focus);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					if (xhr.responseText == "1") {
+						console.log("关注或取消成功！");
+						checkFocus();
+					}
+				}
 
-	}else{
-		登录前
-		未登录时点击用户操作的关注、点赞、收藏等出现登录框
-		$(".user_operate").click(function(){
-			//显示navbar.js中的登录框
-			 show_login_div();
-			 });
-	}
-}
-*/
+			}
+		});*/
+		/*---------评论-----------*/
+		$("#video_comment_btn")
+				.click(
+						function() {
+							var comment_text = $("#textarea_comment")
+									.val();
+							if (comment_text == "") {
+								alert("请输入评论内容！");
+							} else {
+								var formData_comment=new FormData();
+								formData_comment.append("accept_works.works_id",video_id);
+								var xhr = new XMLHttpRequest();
+								xhr.open("POST", "/wlmtxt/Works/Works_discussWorks");
+								xhr.send(formData_comment);
+								xhr.onreadystatechange = function() {
+									if (xhr.readyState == 4
+											&& xhr.status == 200) {
+										if (xhr.responseText == "1") {
+											var comment_list_str = '<div class="comment_list">';
+											comment_list_str += '<hr style="width: 100%;" />';
+											/* <!--整个评论--> */
+											comment_list_str += '<div class="comment_list_content">';
+											/* <!--左边--> */
+											comment_list_str += '<div class="comment_list_content_left">';
+											/* <!--头像--> */
+											comment_list_str += '<img class="user_img comment_user_img" src="../../css/zb/img/tx.jpg" />';
+											comment_list_str += '<div class="comment_user_name">树深时见鹿dear</div>';
+											comment_list_str += ' </div>';
+											/* <!--右边--> */
+											comment_list_str += '<div class="comment_list_content_right">';
+											/* 评论内容 */
+											comment_list_str += '<div class="comment_text">';
+											comment_list_str += comment_text;
+											comment_list_str += '</div>';
+											comment_list_str += '<div class="comment_time">2017-05-11 23:22</div>';
+											comment_list_str += '<div class="comment_delete">删除</div>';
+											comment_list_str += '</div>';
+											comment_list_str += '</div>';
+											comment_list_str += '</div>';
+											$("#comment_div").append(
+													comment_list_str);
+											document
+													.getElementById("textarea_comment").value = "";
+
+											toastr.success("评论成功！");
+										} else {
+											toastr.error("评论失败！");
+											return false;
+										}
+									}
+								}
+
+							}
+						});
+		/*--------删除评论-----------*/
+		$(".comment_delete").click(function() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "");
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					if (xhr.responseText == "1") {
+						$(this).remove();
+						toastr.success("删除评论成功！");
+					} else {
+						toastr.error("删除评论失败！");
+						return false;
+					}
+				}
+			}
+
+		});
+});
