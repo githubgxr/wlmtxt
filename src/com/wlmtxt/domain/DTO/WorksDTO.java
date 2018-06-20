@@ -14,9 +14,9 @@ public class WorksDTO {
 	private wlmtxt_second_menu secondMenu;
 
 	private wlmtxt_first_menu firstMenu;
-
+	// 关键词列表
 	private List<KeyWordDTO> keyWordDTOList;
-
+	// 作者
 	private wlmtxt_user user;
 
 	@Override
