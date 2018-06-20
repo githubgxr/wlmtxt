@@ -55,7 +55,6 @@ function getWorksDetailVO() {
 
 			var comment_list = document.getElementsByClassName("comment_list");
 			var long = comment_list.length;
-			alert(long);
 			for (var num = 0; num < long; num++) {
 				comment_list[0].parentNode.removeChild(comment_list[0]);
 			}
@@ -208,53 +207,12 @@ function getWorksDetailVO() {
 	 * console.log("关注或取消成功！"); checkFocus(); } } } });
 	 */
 	/*---------评论-----------*/
-	/*function setDiscuss() {
+	/*
+	 * function setDiscuss() { }
+	 * 
+	 * setDiscuss();
+	 */
 
-	}
-
-	setDiscuss();*/
-	$("#video_comment_btn")
-			.click(
-					function() {
-						var comment_text = $("#textarea_comment").val();
-						if (comment_text == "") {
-							toastr.error("请输入评论内容！");
-						} else {
-							var formData_comment = new FormData();
-							// 评论的作品或者评论
-							formData_comment.append(
-									"accpet_discuss.discuee_father_discuss_id",
-									video_id);
-							// 评论内容
-							formData_comment.append(
-									"accpet_discuss.discuss_content",
-									comment_text);
-
-							var xhr = new XMLHttpRequest();
-							xhr
-									.open("POST",
-											"/wlmtxt/Works/Works_discussWorks");
-							xhr.send(formData_comment);
-							xhr.onreadystatechange = function() {
-								if (xhr.readyState == 4 && xhr.status == 200) {
-									if (xhr.responseText == "1") {
-
-										document
-												.getElementById("textarea_comment").value = "";
-
-										toastr.success("评论成功！");
-
-										getWorksDetailVO();
-
-									} else {
-										toastr.error("评论失败！");
-										return false;
-									}
-								}
-							}
-
-						}
-					});
 	/*--------删除评论-----------*/
 	$(".comment_delete").click(function() {
 		var xhr = new XMLHttpRequest();
@@ -275,3 +233,40 @@ function getWorksDetailVO() {
 	});
 }
 getWorksDetailVO();
+
+function video_comment_btn_click() {
+	var video_id = $("#video_id").html();
+	var comment_text = $("#textarea_comment").val();
+	if (comment_text == "") {
+		toastr.error("请输入评论内容！");
+	} else {
+		var formData_comment = new FormData();
+		// 评论的作品或者评论
+		formData_comment.append("accpet_discuss.discuee_father_discuss_id",
+				video_id);
+		// 评论内容
+		formData_comment.append("accpet_discuss.discuss_content", comment_text);
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "/wlmtxt/Works/Works_discussWorks");
+
+		xhr.send(formData_comment);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				if (xhr.responseText == "1") {
+
+					document.getElementById("textarea_comment").value = "";
+
+					toastr.success("评论成功！");
+
+					getWorksDetailVO();
+
+				} else {
+					toastr.error("评论失败！");
+					return false;
+				}
+			}
+		}
+
+	}
+}
