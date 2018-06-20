@@ -113,7 +113,7 @@ $(function(){
 				li_div_div.className="video_label_content";
 				li_div_div_a.className="video_label_item";
 				
-				li_div_div_a.innerHTML="绝地求生";
+			/*	li_div_div_a.innerHTML="绝地求生";*/
 				
 				li_div_div.appendChild(li_div_div_a);
 				li_div.appendChild(li_div_div);
@@ -122,7 +122,7 @@ $(function(){
 				a_div2_div2.innerHTML="425";//得到作品浏览量
 				a_div2_div3.innerHTML=list_vo[num].works.works_name;//得到作品用户名
 				
-				/*li_div_div_a.innerHTML=list_vo[num].keyWordDTOList.keyword;*/
+				li_div_div_a.innerHTML=list_vo[num].keyWordDTOList.keyword.keyword_name;
 				
 			}
 		}
@@ -255,7 +255,7 @@ function getSecondList(first_menu_id,pageIndex){
 				li_div_div.className="video_label_content";
 				li_div_div_a.className="video_label_item";
 				
-				li_div_div_a.innerHTML="绝地求生";
+				/*li_div_div_a.innerHTML="绝地求生";*/
 				
 				li_div_div.appendChild(li_div_div_a);
 				li_div.appendChild(li_div_div);
@@ -264,7 +264,11 @@ function getSecondList(first_menu_id,pageIndex){
 				a_div2_div2.innerHTML="425";//得到作品浏览量
 				a_div2_div3.innerHTML=SecondList_vo[num].works.works_name;//得到作品用户名
 				
-				li_div_div_a.innerHTML=list_vo[num].keyWordDTOList.keyword;
+			/*	var list_keyword=list_vo[num].keyWordDTOList;
+				li_div_div_a.innerHTML=list_keyword[num].keyword.keyword_name*/
+
+				li_div_div_a.innerHTML=list_vo[num].keyWordDTOList.keyword.keyword_name;
+				console.log(list_vo[num].keyWordDTOList.keyword.keyword_name);
 				
 				
 			}
