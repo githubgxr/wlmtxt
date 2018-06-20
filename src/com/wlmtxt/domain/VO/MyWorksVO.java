@@ -5,6 +5,7 @@ import java.util.List;
 import com.wlmtxt.domain.DTO.WorksDTO;
 
 public class MyWorksVO {
+
 	// 当前页
 	private int pageIndex = 1;
 
