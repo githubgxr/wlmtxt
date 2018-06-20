@@ -61,7 +61,7 @@ public class WorksAction extends ActionSupport {
 	private MyWorksVO myWorksVO;
 
 	/*
-	 * 
+	 * 跳转到播放页，作品对象存入值栈
 	 */
 	public String videoDetailsPage() {
 		accept_works = new wlmtxt_works();
