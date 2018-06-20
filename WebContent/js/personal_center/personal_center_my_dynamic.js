@@ -19,7 +19,7 @@ function listMyDynamicByPage(pageIndex){
 			for(var i=0;i<wddt_response.worksDTOList.length;i++){
 				var wddt_str='<li class="list_video_item">';
 				/*---视频链接---*/
-				 wddt_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?"+wddt_response.worksDTOList[i].works.works_id>';
+				 wddt_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+wddt_response.worksDTOList[i].works.works_id+'">';
 				 wddt_str+='<div class="video_cover">';
 				 wddt_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +wddt_response.worksDTOList[i].works.works_cover +'"/>';
 				 wddt_str+='<div class="video_overplay"></div>';
