@@ -64,7 +64,7 @@ public class WorksAction extends ActionSupport {
 	private MyWorksVO myWorksVO;
 
 	/*
-	 * 
+	 * 跳转到播放页，作品对象存入值栈
 	 */
 	public String videoDetailsPage() {
 		accept_works = new wlmtxt_works();
@@ -472,6 +472,7 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.countLikeNum(accept_works.getWorks_id());
 		pw.write(num);
 	}
+	
 
 	public WorksService getWorksService() {
 		return worksService;

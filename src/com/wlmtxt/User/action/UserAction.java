@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -127,16 +128,24 @@ public class UserAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void sendRegisterMail() throws IOException {
+		//加载邮件配置文件
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader().getResourceAsStream("javamail.properties"));
+		String host = properties.getProperty("projecthost");
+		String port = properties.getProperty("projectport");
+		String content = properties.getProperty("mailcontent");
+		String utf8_content = new String(content.getBytes("ISO-8859-1"), "utf-8");
+		
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="
+		String href = "http://"+host+":"+port+"/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="
 				+ accpet_user.getUser_mail() + "&accpet_user.user_password="
 				+ md5.GetMD5Code(accpet_user.getUser_password()) + "&accpet_user.user_username="
 				+ accpet_user.getUser_username();
 		// String href =
 		// "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		// 邮件内容
-		String mailcontent = "<p><a href=" + href + ">register</a></p>";
+		String mailcontent = "<p><a href=" + href + ">"+utf8_content+"</a></p>";
 		PrintWriter pw = response.getWriter();
 		try {
 			JavaMail.sendMail(mailcontent, accpet_user.getUser_mail());
