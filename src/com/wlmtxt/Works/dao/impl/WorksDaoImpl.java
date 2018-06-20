@@ -170,7 +170,7 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public wlmtxt_like findLikeBy_user_id_And_like_works_id(String like_user_id, String like_works_id)
 			throws Exception {
-		String hql = "select l from wlmtxt_like l where l.like_user_id = '" + like_user_id + "' and l.like_works_id='"
+		String hql = " from wlmtxt_like  where like_user_id = '" + like_user_id + "' and like_works_id='"
 				+ like_works_id + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_like like = (wlmtxt_like) query.uniqueResult();
