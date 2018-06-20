@@ -208,17 +208,17 @@ function getWorksDetailVO() {
 	 * console.log("关注或取消成功！"); checkFocus(); } } } });
 	 */
 	/*---------评论-----------*/
-	function setDiscuss() {
+	/*function setDiscuss() {
 
 	}
 
-	setDiscuss();
+	setDiscuss();*/
 	$("#video_comment_btn")
 			.click(
 					function() {
 						var comment_text = $("#textarea_comment").val();
 						if (comment_text == "") {
-							alert("请输入评论内容！");
+							toastr.error("请输入评论内容！");
 						} else {
 							var formData_comment = new FormData();
 							// 评论的作品或者评论
