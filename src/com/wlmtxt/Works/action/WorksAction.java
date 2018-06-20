@@ -26,6 +26,9 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksDetailVO;
 
 @SuppressWarnings("serial")
 public class WorksAction extends ActionSupport {
@@ -54,6 +57,8 @@ public class WorksAction extends ActionSupport {
 
 	//
 	private String keyword;
+	//
+	private MyWorksVO myWorksVO;
 
 	/*
 	 * 
@@ -63,6 +68,10 @@ public class WorksAction extends ActionSupport {
 		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
 		return "videoDetailsPage";
 	}
+
+	/*
+	 * 
+	 */
 
 	/*
 	 * 
@@ -183,18 +192,6 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 下载，接收wlmtxt_download_history.download_history_id TODO
-	 */
-	public void downloadWorks() {
-		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("wlmtxt_user");
-		try {
-			worksService.downloadWorks(user, accept_works);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * 删除下载历史,wlmtxt_download_history.download_history_id、
 	 * wlmtxt_download_history.download_history_gmt_create
 	 */
@@ -209,7 +206,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 我的下载历史列表
+	 * 我的下载历史列表 TODO
 	 */
 	public void listDownloadWorks() {
 
@@ -218,10 +215,47 @@ public class WorksAction extends ActionSupport {
 	/**
 	 * 评论，接收discuss.discuee_father_discuss_id父评论id：顶级评论则接收作品id，评论的回复评论则为上级评论id）
 	 * TODO
+	 * 
+	 * @throws IOException
 	 */
-	public void discussWorks() {
+	public void discussWorks() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		// worksService.discussWorks(user, accpet_discuss);
+		accpet_discuss.setDiscuss_user_id(user.getUser_id());
+		worksService.discussWorks(accpet_discuss);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void deleteMyWorks() throws IOException {
+		worksService.deleteMyWorks(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void getWorksDetailVO() throws IOException {
+		accept_works = new wlmtxt_works();
+
+		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDetailVO));
+	}
+
+	public void getMyWorksVO() throws IOException {
+		List<WorksDTO> worksDTO = new ArrayList<WorksDTO>();
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		myWorksVO = worksService.getMyWorksVO(user.getUser_id(), myWorksVO);
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTO));
 	}
 
 	/**
@@ -358,37 +392,6 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
-	/**
-	 * 播放<br>
-	 * TODO
-	 */
-	public void playWorks() {
-		// TODO
-	}
-
-	/**
-	 * 发布作品<br>
-	 * TODO
-	 */
-	public void publishWords() {
-
-	}
-
-	/**
-	 * 一级分类列表<br>
-	 * TODO
-	 */
-	public void listWorksOfFirstMenu() {
-
-	}
-
-	/**
-	 * 二级分类列表<br>
-	 * TODO
-	 */
-	public void listWorksOfSecondMenu() {
-
-	}
 	/*
 	 * 
 	 */
