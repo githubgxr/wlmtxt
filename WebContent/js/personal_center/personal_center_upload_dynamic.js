@@ -3,7 +3,8 @@ $(function(){
 	var xhr=false;
 	xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
-		if(xhr.readyState==4 && xhr.status==200){
+		if(xhr.readyState==4){
+			if( xhr.status==200){
 			var caterory = JSON.parse(xhr.responseText);
 			for ( var num in caterory) {
 				var option = document.createElement("option");
@@ -13,18 +14,16 @@ $(function(){
 				option.value = caterory[num].second_menu_id;
 				
 			}
-		/*	$('#' + select.id).selectpicker('refresh');*/
-
 		}
-		toastr.error(xhr.status);
+	}
 	}
 	xhr.open("POST","/wlmtxt/Works/Works_listSecondMenu");
 	xhr.send(null);
 })
 
 $(function(){
-	$("input").blur(function(){
-		var input_value=$("input").val();
+	$(".input_xzt").blur(function(){
+		var input_value=$(".input_xzt").val();
 		if(input_value=="" || input_value==null){
 			toastr.error("请输入视频标题");
 		}
@@ -57,12 +56,14 @@ function uploadWorks(){
 	var xmlhttp=false;
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange=function(){
-		if(xmlhttp.readyState==4&&xmlhttp.status==200){
+		if(xmlhttp.readyState==4){
+			if(xmlhttp.status==200){
 			var result=xmlhttp.responseText;
 			if(result=="1"){
 				toastr.success("作品发布成功");
 			}else{
 				toastr.error("作品发布失败");
+			}
 			}
 			
 		}
