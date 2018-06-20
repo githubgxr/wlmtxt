@@ -108,11 +108,17 @@ public class WorksServiceImpl implements WorksService {
 			//
 			worksDTO.setWorks(works);
 			//
-			wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-			worksDTO.setSecondMenu(secondMenu);
+			if (works.getWorks_second_menu_id() != null) {
+				wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
+				worksDTO.setSecondMenu(secondMenu);
+				if (secondMenu.getSecond_menu_first_menu_id() != null) {
+					wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
+					worksDTO.setFirstMenu(firstMenu);
+				}
+			}
+
 			//
-			wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-			worksDTO.setFirstMenu(firstMenu);
+
 			//
 			worksDTOList.add(worksDTO);
 		}
