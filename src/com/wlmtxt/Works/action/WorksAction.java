@@ -32,7 +32,9 @@ import com.wlmtxt.domain.VO.WorksDetailVO;
 
 @SuppressWarnings("serial")
 public class WorksAction extends ActionSupport {
-
+	//
+	WorksService worksService;
+	//
 	wlmtxt_user accept_user;
 	wlmtxt_works accept_works;
 	wlmtxt_discuss accpet_discuss;
@@ -246,9 +248,12 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write(gson.toJson(worksDetailVO));
 	}
 
-	public void getMyWorksVO() throws IOException {
+	public void getMyWorksListVO() throws IOException {
+		System.out.println(myWorksVO);
+
 		List<WorksDTO> worksDTO = new ArrayList<WorksDTO>();
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		System.out.println(user);
 		myWorksVO = worksService.getMyWorksVO(user.getUser_id(), myWorksVO);
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -392,20 +397,60 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
-	/*
-	 * 
-	 */
-
-	public File getWorksfile() {
-		return worksfile;
+	public WorksService getWorksService() {
+		return worksService;
 	}
 
-	public String getImgName() {
-		return imgName;
+	public void setWorksService(WorksService worksService) {
+		this.worksService = worksService;
 	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public wlmtxt_user getAccept_user() {
+		return accept_user;
+	}
+
+	public void setAccept_user(wlmtxt_user accept_user) {
+		this.accept_user = accept_user;
+	}
+
+	public wlmtxt_works getAccept_works() {
+		return accept_works;
+	}
+
+	public void setAccept_works(wlmtxt_works accept_works) {
+		this.accept_works = accept_works;
+	}
+
+	public wlmtxt_discuss getAccpet_discuss() {
+		return accpet_discuss;
+	}
+
+	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
+		this.accpet_discuss = accpet_discuss;
+	}
+
+	public wlmtxt_first_menu getFirst_menu() {
+		return first_menu;
+	}
+
+	public void setFirst_menu(wlmtxt_first_menu first_menu) {
+		this.first_menu = first_menu;
+	}
+
+	public wlmtxt_second_menu getSecond_menu() {
+		return second_menu;
+	}
+
+	public void setSecond_menu(wlmtxt_second_menu second_menu) {
+		this.second_menu = second_menu;
+	}
+
+	public wlmtxt_play_history getPlay_history() {
+		return play_history;
+	}
+
+	public void setPlay_history(wlmtxt_play_history play_history) {
+		this.play_history = play_history;
 	}
 
 	public String getWorksName() {
@@ -416,6 +461,14 @@ public class WorksAction extends ActionSupport {
 		this.worksName = worksName;
 	}
 
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
 	public InputStream getInputStream() {
 		return inputStream;
 	}
@@ -424,12 +477,8 @@ public class WorksAction extends ActionSupport {
 		this.inputStream = inputStream;
 	}
 
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
+	public File getWorksfile() {
+		return worksfile;
 	}
 
 	public void setWorksfile(File worksfile) {
@@ -476,62 +525,24 @@ public class WorksAction extends ActionSupport {
 		this.imgfileContentType = imgfileContentType;
 	}
 
-	public wlmtxt_discuss getAccpet_discuss() {
-		return accpet_discuss;
+	public String getKeyword() {
+		return keyword;
 	}
 
-	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
-		this.accpet_discuss = accpet_discuss;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
-	public wlmtxt_first_menu getFirst_menu() {
-		return first_menu;
+	public void setMyWorksVO(MyWorksVO myWorksVO) {
+		this.myWorksVO = myWorksVO;
 	}
 
-	public void setFirst_menu(wlmtxt_first_menu first_menu) {
-		this.first_menu = first_menu;
+	public MyWorksVO getMyWorksVO() {
+		return myWorksVO;
 	}
 
-	public wlmtxt_second_menu getSecond_menu() {
-		return second_menu;
-	}
-
-	public void setSecond_menu(wlmtxt_second_menu second_menu) {
-		this.second_menu = second_menu;
-	}
-
-	public wlmtxt_play_history getPlay_history() {
-		return play_history;
-	}
-
-	public void setPlay_history(wlmtxt_play_history play_history) {
-		this.play_history = play_history;
-	}
-
-	WorksService worksService;
-
-	public wlmtxt_user getAccept_user() {
-		return accept_user;
-	}
-
-	public void setAccept_user(wlmtxt_user accept_user) {
-		this.accept_user = accept_user;
-	}
-
-	public wlmtxt_works getAccept_works() {
-		return accept_works;
-	}
-
-	public void setAccept_works(wlmtxt_works accept_works) {
-		this.accept_works = accept_works;
-	}
-
-	public WorksService getWorksService() {
-		return worksService;
-	}
-
-	public void setWorksService(WorksService worksService) {
-		this.worksService = worksService;
-	}
+	/*
+	 * 
+	 */
 
 }
