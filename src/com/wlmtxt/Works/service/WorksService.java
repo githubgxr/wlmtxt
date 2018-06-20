@@ -8,7 +8,9 @@ import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksDetailVO;
 
 public interface WorksService {
 
@@ -39,5 +41,9 @@ public interface WorksService {
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO);
 
 	public void deleteMyWorks(String works_id);
+
+	public WorksDetailVO getWorksDetailVO(String works_id);
+
+	public WorksDTO getWorksDTOByID(String works_id);
 
 }

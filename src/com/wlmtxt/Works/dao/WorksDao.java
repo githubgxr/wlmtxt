@@ -3,6 +3,7 @@ package com.wlmtxt.Works.dao;
 import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_collect;
+import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
@@ -58,5 +59,9 @@ public interface WorksDao {
 	int getMyWorksTotalRecords(String user_id);
 
 	void deleteMyWorks(String works_id);
+
+	wlmtxt_works getWorksByID(String works_id);
+
+	List<wlmtxt_discuss> getDiscussListByFatherID(String works_id);
 
 }

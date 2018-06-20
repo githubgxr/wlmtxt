@@ -28,6 +28,7 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksDetailVO;
 
 @SuppressWarnings("serial")
 public class WorksAction extends ActionSupport {
@@ -225,6 +226,18 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
+	}
+
+	public void getWorksDetailVO() throws IOException {
+		accept_works = new wlmtxt_works();
+
+		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDetailVO));
 	}
 
 	public void getMyWorksVO() throws IOException {

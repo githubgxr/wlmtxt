@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 
 import com.wlmtxt.Works.dao.WorksDao;
 import com.wlmtxt.domain.DO.wlmtxt_collect;
+import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
@@ -30,6 +31,23 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_discuss> getDiscussListByFatherID(String works_id) {
+		String hql = " from wlmtxt_discuss  where discuee_father_discuss_id='" + works_id
+				+ "' order by discuss_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_discuss> discussList = query.list();
+		return discussList;
+	}
+
+	@Override
+	public wlmtxt_works getWorksByID(String works_id) {
+		String hql = "from wlmtxt_works where works_id = '" + works_id + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_works works = (wlmtxt_works) query.uniqueResult();
+		return works;
+	}
+
+	@Override
 	public void saveLike(wlmtxt_like like) throws Exception {
 		getSession().save(like);
 	}
@@ -47,7 +65,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public wlmtxt_first_menu getFirstMenuByID(String second_menu_first_menu_id) {
-		String hql = "from wlmtxt_first_menu  where wlmtxt_first_menu_id ='" + second_menu_first_menu_id + "'";
+		String hql = "from wlmtxt_first_menu  where first_menu_id ='" + second_menu_first_menu_id + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_first_menu first_menu = (wlmtxt_first_menu) query.uniqueResult();
 		return first_menu;
@@ -55,7 +73,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public wlmtxt_second_menu getSecondMenuByID(String works_second_menu_id) {
-		String hql = "from wlmtxt_second_menu  where wlmtxt_second_menu_id ='" + works_second_menu_id + "'";
+		String hql = "from wlmtxt_second_menu  where second_menu_id ='" + works_second_menu_id + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_second_menu second_menu = (wlmtxt_second_menu) query.uniqueResult();
 		return second_menu;

@@ -14,8 +14,10 @@ import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.DiscussDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksDetailVO;
 
 import util.TeamUtil;
 
@@ -35,6 +37,49 @@ public class WorksServiceImpl implements WorksService {
 	public void deleteMyWorks(String works_id) {
 		worksDao.deleteMyWorks(works_id);
 
+	}
+
+	@Override
+	public WorksDTO getWorksDTOByID(String works_id) {
+		WorksDTO worksDTO = new WorksDTO();
+		//
+		wlmtxt_works works = worksDao.getWorksByID(works_id);
+		worksDTO.setWorks(works);
+		//
+		wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
+		worksDTO.setSecondMenu(secondMenu);
+		//
+		wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
+		worksDTO.setFirstMenu(firstMenu);
+
+		return worksDTO;
+	}
+
+	@Override
+	public WorksDetailVO getWorksDetailVO(String works_id) {
+		WorksDetailVO worksDetailVO = new WorksDetailVO();
+		//
+		WorksDTO worksDTO = getWorksDTOByID(works_id);
+		worksDetailVO.setWorksDTO(worksDTO);
+		//
+		List<DiscussDTO> discussDTOList = new ArrayList<DiscussDTO>();
+		// 评论
+		List<wlmtxt_discuss> discussList = worksDao.getDiscussListByFatherID(works_id);
+		for (wlmtxt_discuss discuss : discussList) {
+
+			DiscussDTO discussDTO = new DiscussDTO();
+			discussDTO.setDiscuss(discuss);
+			//
+			List<wlmtxt_discuss> replyList = worksDao.getDiscussListByFatherID(discuss.getDiscuss_id());
+
+			discussDTO.setReply(replyList);
+			//
+			discussDTOList.add(discussDTO);
+		}
+		worksDetailVO.setDiscussDTOList(discussDTOList);
+
+		//
+		return worksDetailVO;
 	}
 
 	@Override
