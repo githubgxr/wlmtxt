@@ -41,7 +41,7 @@
 			<!--用户-->
 			<div style="width: 260px; float: right; margin: 15px 0 0 0;">
 				<!--用户头像-->
-				<img class="user_img" src="../../css/zb/img/tx.jpg"
+				<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=作品名"
 					style="float: left;" />
 
 				<div style="float: right; margin: 0 0 0 20px; width: 170px;">
@@ -72,7 +72,7 @@
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<!--视频-->
 				<video controls="controls" poster="../../css/zb/img/t1.jpg"
-					src="../../css/zb/img/trailer.mp4" style="width: 100%;"></video>
+					src="/wlmtxt/Works/Works_getVideo?worksName=作品名" style="width: 100%;"></video>
 				<!--点赞
 					收藏
 					播放量

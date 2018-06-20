@@ -38,7 +38,7 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 </head>
-<body onload="init()">
+<body>
 	<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 		<div class="wlmtxt_container ">
@@ -53,17 +53,10 @@
 				<div class="fbsp_content list_container">
 					<div class="img_wrap">
 						<div class="img_wrap_list">
-							<span>作品分类：</span> <select class="works_classificationOne"
-								id="works_classificationOne"
-								onchange="works_classificationTwo()">
-								<option value="" id="selected">---请选择---</option>
-								<option value=1>电影</option>
-								<option value=2>电视剧</option>
-								<option value=3>综艺</option>
-								<option value=4>动画</option>
-								<option value=5>短片</option>
-							</select> <select id="works_classificationTwo">
-							</select>
+							<span>作品分类：</span>
+							 <select class="works_classificationOne" id="works_classificationOne">
+							</select> 
+							<!-- <select id="works_classificationTwo"></select> -->
 						</div>
 						<div class="img_wrap_list">
 							<span>视频标题：</span> <input class="form-control input_xzt"
@@ -99,8 +92,8 @@
 							<span>选择作品：</span>
 							<div class="imgnum">
 
-								<input type="file" name="file" id="worksfile" class="inputfile"
-								data-multiple-caption="{count} files selected" multiple /> 
+								<input type="file" id="worksfile" class="inputfile"
+								/> 
 								<label for="file">Choose a file</label>
 
 							</div>
@@ -116,7 +109,9 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	<script type="text/javascript">
+	
+	<!-- 二级联动 -->
+	<!-- <script type="text/javascript">
 		var arr = new Array();
 		arr[0] = "---请选择---"
 		arr[1] = "科幻电影,恐怖电影,剧情电影,喜剧电影,电影短片"
@@ -163,7 +158,9 @@
 						works_classificationTwoArr[i]);
 			}
 		}
-	</script>
+	</script> -->
+	
+	<!-- 关键字 -->
 	<script type="text/javascript">
 		$(".btn_keyword").click(
 				function() {
@@ -185,17 +182,19 @@
 							if (($.inArray(input_keyword_value, array)) < 0) {
 								$(".div_box").append(str)
 							} else {
-								alert("请不要输入相同的关键字");
+								toastr.error("请不要输入相同的关键字");
 								$(".input_keyword").val("");
 								return;
 							}
 						}
 						$(".input_keyword").val("");
 					} else {
-						alert("请输入关键字");
+						toastr.error("请输入关键字");
 					}
 				});
 	</script>
+	
+	<!-- 上传图片预览 -->
 	<script type="text/javascript">
 		/*上传图片的JS*/
 		function img_click() {
@@ -211,12 +210,13 @@
 			reader.readAsDataURL(file.files[0]);
 		}
 	</script>
+	
+	<!-- 选择作品样式修饰 -->
 	<script type="text/javascript">
 	$(".inputfile").each( function(){ 
 		var $input = $(this), 
 		$label = $input.next('label'), 
 		labelVal = $label.html(); 
-		alert(labelVal);
 		$input.on( 'change', function(e){ 
 			var fileName = ''; 
 			if( this.files && this.files.length > 1 ) 

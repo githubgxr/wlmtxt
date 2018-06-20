@@ -168,7 +168,7 @@
 	font-size: 15px;
 	line-height: 40px;
 }
-.personal_info .operate_btns .reset_btn,.check_btn{
+.personal_info .operate_btns .reset_btn,.personal_info .operate_btns .check_btn{
 	display: none;
 }
 /*修改密码*/

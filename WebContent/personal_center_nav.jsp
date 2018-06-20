@@ -22,7 +22,7 @@
 					<div class="sidebar_user_head">
 						<!--用户头像-->
 						<div class="user_img">
-							<img src="<%=basePath%>/css/zb/img/tx.jpg" />
+							<img class="img_user" src="<%=basePath%>img/user.jpg" />
 						</div>
 						<!--用户名-->
 						<div class="user_name">熊熊熊</div>
@@ -88,7 +88,7 @@
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					if (xhr.responseText == "1") {
 						console.log("退出成功！");
-						window.location.href="/wlmtxt/view/index/index.jsp";
+						window.location.href="/wlmtxt/User/User_logout";
 					} else {
 						console.log("退出失败！");
 					}

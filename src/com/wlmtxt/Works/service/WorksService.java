@@ -8,6 +8,7 @@ import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.VO.MyWorksVO;
 
 public interface WorksService {
 
@@ -34,5 +35,9 @@ public interface WorksService {
 	public List<wlmtxt_second_menu> listSecondMenu();
 
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id);
+
+
+	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO);
+
 
 }

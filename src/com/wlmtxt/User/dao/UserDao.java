@@ -17,6 +17,8 @@ public interface UserDao {
 
 	wlmtxt_user mailRegisted(wlmtxt_user accpet_user);
 
+	void update_userImg(String user_id, String fileName);
+
 	String modifyPersonalData(wlmtxt_user accpet_user);
 
 	String modifyPassword(wlmtxt_user user);
@@ -32,5 +34,6 @@ public interface UserDao {
 	wlmtxt_first_menu findFirstMenu_single_second_menu_id(wlmtxt_second_menu second_menu);
 
 //	List<wlmtxt_works_keyword> listWorksKeyword_by_works_id(wlmtxt_works works);
+	wlmtxt_user get_user_byID(String user_id);
 
 }
