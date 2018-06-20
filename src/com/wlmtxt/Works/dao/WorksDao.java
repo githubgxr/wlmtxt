@@ -3,6 +3,7 @@ package com.wlmtxt.Works.dao;
 import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_collect;
+import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
@@ -47,14 +48,24 @@ public interface WorksDao {
 
 	List<wlmtxt_second_menu> listSecondMenu();
 
-	List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id);
+	List<wlmtxt_second_menu> listSecondMenuByFirstMenuID(String first_menu_id);
 
-	wlmtxt_second_menu getSecondMenu_byID(String works_second_menu_id);
+	wlmtxt_second_menu getSecondMenuByID(String works_second_menu_id);
 
-	wlmtxt_first_menu getFirstMenu_byID(String second_menu_first_menu_id);
+	wlmtxt_first_menu getFirstMenuByID(String second_menu_first_menu_id);
 
-	List<wlmtxt_works> listMyWorks_byUserID_andNum(String user_id, MyWorksVO myWorksVO);
+	List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO);
 
 	int getMyWorksTotalRecords(String user_id);
+
+	void deleteMyWorks(String works_id);
+
+	wlmtxt_works getWorksByID(String works_id);
+
+	List<wlmtxt_discuss> getDiscussListByFatherID(String works_id);
+
+	void saveDiscuss(wlmtxt_discuss accpet_discuss);
+
+	List<wlmtxt_works> listWorksAll();
 
 }

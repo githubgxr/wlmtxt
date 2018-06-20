@@ -28,10 +28,13 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksDetailVO;
 
 @SuppressWarnings("serial")
 public class WorksAction extends ActionSupport {
-
+	//
+	WorksService worksService;
+	//
 	wlmtxt_user accept_user;
 	wlmtxt_works accept_works;
 	wlmtxt_discuss accpet_discuss;
@@ -59,7 +62,6 @@ public class WorksAction extends ActionSupport {
 	//
 	private MyWorksVO myWorksVO;
 
-
 	/*
 	 * 
 	 */
@@ -72,35 +74,6 @@ public class WorksAction extends ActionSupport {
 	/*
 	 * 
 	 */
-	public String getImg() throws FileNotFoundException {
-		if (imgName.equals("") || imgName == null) {
-			imgName = "";
-		}
-		File file = new File("C://wlmtxt/img/" + imgName);
-		try {
-			inputStream = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
-			inputStream = new FileInputStream(file);
-		}
-		return "getFile";
-	}
-
-	public String getVideo() throws FileNotFoundException {
-		if (worksName.equals("") || worksName == null) {
-			worksName = "";
-		}
-		File file = new File("C://wlmtxt/video/" + worksName);
-		try {
-			inputStream = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
-			inputStream = new FileInputStream(file);
-		}
-		return "getFile";
-	}
 
 
 
@@ -204,7 +177,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 我的下载历史列表
+	 * 我的下载历史列表 TODO
 	 */
 	public void listDownloadWorks() {
 
@@ -213,14 +186,54 @@ public class WorksAction extends ActionSupport {
 	/**
 	 * 评论，接收discuss.discuee_father_discuss_id父评论id：顶级评论则接收作品id，评论的回复评论则为上级评论id）
 	 * TODO
+	 * 
+	 * @throws IOException
 	 */
-	public void discussWorks() {
+	public void discussWorks() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		// worksService.discussWorks(user, accpet_discuss);
+		accpet_discuss.setDiscuss_user_id(user.getUser_id());
+		worksService.discussWorks(accpet_discuss);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
 	}
 
-	public void getMyWorksVO() throws IOException {
-		List<WorksDTO> worksDTO = new ArrayList<WorksDTO>();
+	public void deleteMyWorks() throws IOException {
+		worksService.deleteMyWorks(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void getWorksDetailVO() throws IOException {
+		accept_works = new wlmtxt_works();
+
+		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDetailVO));
+	}
+
+	/**
+	 * 获取所有的作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorksAll() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorksAll();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	public void getMyWorksListVO() throws IOException {
+
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		myWorksVO = worksService.getMyWorksVO(user.getUser_id(), myWorksVO);
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -228,57 +241,7 @@ public class WorksAction extends ActionSupport {
 		Gson gson = gsonBuilder.create();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(worksDTO));
-	}
-
-	/**
-	 * 获取所有一级类别的
-	 * 
-	 * @throws IOException
-	 */
-	public void listFirstMenu() throws IOException {
-		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
-
-		firstMenuList = worksService.listFirstMenu();
-
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(firstMenuList));
-	}
-
-	/**
-	 * 根据第一类别ID获取第二类别列表
-	 * 
-	 * @throws IOException
-	 */
-	public void listSecondMenu_byFirstMenuID() throws IOException {
-		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
-		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(secondMenuList));
-	}
-
-	/**
-	 * 获取所有第二级类别
-	 * 
-	 * @throws IOException
-	 */
-	public void listSecondMenu() throws IOException {
-		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
-		secondMenuList = worksService.listSecondMenu();
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(secondMenuList));
+		response.getWriter().write(gson.toJson(myWorksVO));
 	}
 
 	/**
@@ -365,20 +328,60 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
-	/*
-	 * 
-	 */
-
-	public File getWorksfile() {
-		return worksfile;
+	public WorksService getWorksService() {
+		return worksService;
 	}
 
-	public String getImgName() {
-		return imgName;
+	public void setWorksService(WorksService worksService) {
+		this.worksService = worksService;
 	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public wlmtxt_user getAccept_user() {
+		return accept_user;
+	}
+
+	public void setAccept_user(wlmtxt_user accept_user) {
+		this.accept_user = accept_user;
+	}
+
+	public wlmtxt_works getAccept_works() {
+		return accept_works;
+	}
+
+	public void setAccept_works(wlmtxt_works accept_works) {
+		this.accept_works = accept_works;
+	}
+
+	public wlmtxt_discuss getAccpet_discuss() {
+		return accpet_discuss;
+	}
+
+	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
+		this.accpet_discuss = accpet_discuss;
+	}
+
+	public wlmtxt_first_menu getFirst_menu() {
+		return first_menu;
+	}
+
+	public void setFirst_menu(wlmtxt_first_menu first_menu) {
+		this.first_menu = first_menu;
+	}
+
+	public wlmtxt_second_menu getSecond_menu() {
+		return second_menu;
+	}
+
+	public void setSecond_menu(wlmtxt_second_menu second_menu) {
+		this.second_menu = second_menu;
+	}
+
+	public wlmtxt_play_history getPlay_history() {
+		return play_history;
+	}
+
+	public void setPlay_history(wlmtxt_play_history play_history) {
+		this.play_history = play_history;
 	}
 
 	public String getWorksName() {
@@ -389,6 +392,14 @@ public class WorksAction extends ActionSupport {
 		this.worksName = worksName;
 	}
 
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
 	public InputStream getInputStream() {
 		return inputStream;
 	}
@@ -397,12 +408,8 @@ public class WorksAction extends ActionSupport {
 		this.inputStream = inputStream;
 	}
 
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
+	public File getWorksfile() {
+		return worksfile;
 	}
 
 	public void setWorksfile(File worksfile) {
@@ -449,62 +456,24 @@ public class WorksAction extends ActionSupport {
 		this.imgfileContentType = imgfileContentType;
 	}
 
-	public wlmtxt_discuss getAccpet_discuss() {
-		return accpet_discuss;
+	public String getKeyword() {
+		return keyword;
 	}
 
-	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
-		this.accpet_discuss = accpet_discuss;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
-	public wlmtxt_first_menu getFirst_menu() {
-		return first_menu;
+	public void setMyWorksVO(MyWorksVO myWorksVO) {
+		this.myWorksVO = myWorksVO;
 	}
 
-	public void setFirst_menu(wlmtxt_first_menu first_menu) {
-		this.first_menu = first_menu;
+	public MyWorksVO getMyWorksVO() {
+		return myWorksVO;
 	}
 
-	public wlmtxt_second_menu getSecond_menu() {
-		return second_menu;
-	}
-
-	public void setSecond_menu(wlmtxt_second_menu second_menu) {
-		this.second_menu = second_menu;
-	}
-
-	public wlmtxt_play_history getPlay_history() {
-		return play_history;
-	}
-
-	public void setPlay_history(wlmtxt_play_history play_history) {
-		this.play_history = play_history;
-	}
-
-	WorksService worksService;
-
-	public wlmtxt_user getAccept_user() {
-		return accept_user;
-	}
-
-	public void setAccept_user(wlmtxt_user accept_user) {
-		this.accept_user = accept_user;
-	}
-
-	public wlmtxt_works getAccept_works() {
-		return accept_works;
-	}
-
-	public void setAccept_works(wlmtxt_works accept_works) {
-		this.accept_works = accept_works;
-	}
-
-	public WorksService getWorksService() {
-		return worksService;
-	}
-
-	public void setWorksService(WorksService worksService) {
-		this.worksService = worksService;
-	}
+	/*
+	 * 
+	 */
 
 }
