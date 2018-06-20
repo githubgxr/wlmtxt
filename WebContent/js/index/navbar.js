@@ -69,7 +69,19 @@ function checkLogin() {
 				xhr.onreadystatechange=function(){
 					if(xhr_detail.readyState==4&&xhr_detail.status==200){
 						var detail_response=JSON.parse(xhr.responseText);
-						
+						console.log("works_title:"+detail_response.worksDTO.works.works_title);
+						/*------视频*/
+						//标题
+						$("#detail_video_title").html(detail_response.worksDTO.works.works_title);
+						//简介
+						$("#detail_video_discribe").html(detail_response.worksDTO.works.works_title);
+						//时间
+						$("#detail_video_time").html(detail_response.worksDTO.works.works_title);
+						//关键字
+						$("#detail_video_keywords").html();
+						/*------用户*/
+						//头像
+						$("#detail_user_img").attr("src","");
 					}
 				}
 				/*-----------收藏----------*/
