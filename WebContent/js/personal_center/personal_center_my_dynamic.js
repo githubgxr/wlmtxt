@@ -1,10 +1,21 @@
 $(function(){
+	listMyDynamicByPage(1);
+});
+function listMyDynamicByPage(pageIndex){
 	var xhr=new XMLHttpRequest();
-	xhr.open("POST","");
-	xhr.send();
+	var formData=new FormData();
+	formData.append("myWorksVO.pageIndex",pageIndex);
+	xhr.open("POST","/wlmtxt/Works/Works_getMyWorksVO");
+	xhr.send(formData);
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
 			var wddt_response=JSON.parse(xhr.responseText);
+			console.log("pageIndex:"+wddt_response.pageIndex);
+			console.log("totalRecords:"+wddt_response.totalRecords);
+			console.log("pageSize:"+wddt_response.pageSize);
+			console.log("totalPages:"+wddt_response.totalPages);
+			console.log("HavePrePage:"+wddt_response.HavePrePage);
+			console.log("HaveNextPage:"+wddt_response.HaveNextPage);
 			for(var i=0;i<wddt_response.length;i++){
 				var wddt_str='<li class="list_video_item">';
 				/*---视频链接---*/
@@ -40,5 +51,4 @@ $(function(){
 			}
 		}
 	}
-	
-});
+}
