@@ -3,6 +3,8 @@ package com.wlmtxt.User.action;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +15,10 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.User.service.UserService;
+import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 
 import util.JavaMail;
 import util.JsonUtils;
@@ -123,16 +128,24 @@ public class UserAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void sendRegisterMail() throws IOException {
+		//加载邮件配置文件
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader().getResourceAsStream("javamail.properties"));
+		String host = properties.getProperty("projecthost");
+		String port = properties.getProperty("projectport");
+		String content = properties.getProperty("mailcontent");
+		String utf8_content = new String(content.getBytes("ISO-8859-1"), "utf-8");
+		
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		String href = "http://localhost:8080/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="
+		String href = "http://"+host+":"+port+"/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="
 				+ accpet_user.getUser_mail() + "&accpet_user.user_password="
 				+ md5.GetMD5Code(accpet_user.getUser_password()) + "&accpet_user.user_username="
 				+ accpet_user.getUser_username();
 		// String href =
 		// "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		// 邮件内容
-		String mailcontent = "<p><a href=" + href + ">register</a></p>";
+		String mailcontent = "<p><a href=" + href + ">"+utf8_content+"</a></p>";
 		PrintWriter pw = response.getWriter();
 		try {
 			JavaMail.sendMail(mailcontent, accpet_user.getUser_mail());
@@ -265,7 +278,6 @@ public class UserAction extends ActionSupport {
 		if ((md5.GetMD5Code(accpet_user.getUser_password())).equals(loginUser.getUser_password())) {
 			loginUser.setUser_password(md5.GetMD5Code(new_password));
 			String result = userService.modifyPassword(loginUser);
-System.out.println(loginUser.getUser_password());
 			if (result != null) {
 				pw.write("1");
 			} else {
@@ -284,12 +296,9 @@ System.out.println(loginUser.getUser_password());
 	public String skipToModifyPasswordPage() {
 		return "skipToModifyPasswordPage";
 	}
-
 	/**
 	 * 得到用户头像
-	 * 
-	 * @throws IOException
-	 *             TODO 未测试
+	 * @throws IOException 
 	 */
 	/*
 	 * public void getUserAvatar() throws IOException { HttpServletResponse
@@ -312,17 +321,70 @@ System.out.println(loginUser.getUser_password());
 	 * -1; while ((i = is.read(buffer)) != -1) { os.write(buffer, 0, i); }
 	 * os.flush(); os.close(); is.close(); }
 	 */
+	
+	/**
+	 * 查询用户是否已关注
+	 * 
+	 * 1-已关注
+	 * 2-未关注
+	 *
+	 * @date 2018年6月20日	下午6:09:21
+	 * 
+	 * @author gxr
+	 * @throws IOException 
+	 *
+	 */
+	public void isFollowedUser() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		if (userService.isFollowedUser(user.getUser_id(), accpet_user.getUser_id())) {
+			response.getWriter().write("1");
+		} else {
+			response.getWriter().write("2");
+		}
+	}
 
 	/**
-	 * 关注用户 TODO
+	 * 关注用户
 	 * 
-	 * @throws IOException
+	 * 1-关注成功
+	 * 2-关注失败
+	 * 3-未登录
+	 * 
+	 * @throws IOException 
 	 */
 	public void followUser() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		if (null != loginUser) {
+			String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
+			if ("1".equals(followResult)) {
+				pw.write("1");
+			} else {
+				pw.write("2");
+			}
+		} else {
+			pw.write("3");
+		}
+	}
+	
+	/**
+	 * 我的动态
+	 * @throws IOException 
+	 */
+	public void MyDynamic() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		if (loginUser == null) {
+//			userService.MyDynamic(loginUser);
+		} else {
+			pw.write("3");
+		}
 		loginUser = userService.get_user_byID(loginUser.getUser_id());
 
 	}
@@ -472,6 +534,39 @@ System.out.println(loginUser.getUser_password());
 	 */
 	public String skipToAuditNoticePage() {
 		return "skipToAuditNoticePage";
+	}
+	
+	/**
+	 * 跳转到播放页
+	 * @return
+	 */
+	public String skipToPlayPage() {
+		return "skipToPlayPage";
+	}
+	
+	/**
+	 * 
+	 * 返回所有的上传作品一级分类
+	 * 如果未空，返回2
+	 * 
+	 * @throws IOException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
+	 * 
+	 */
+	public void listSecondOfMyWorks() throws IOException, IllegalArgumentException, IllegalAccessException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+//		List<wlmtxt_works_keyword> listWorksKeyword = userService.listSecondOfMyWorks(loginUser.getUser_id());
+		List<wlmtxt_first_menu> listFirstMenu = userService.listFirstMenu(loginUser.getUser_id()); 
+		if (listFirstMenu != null) {
+			ReflectUtil.getAllField(listFirstMenu);
+			pw.write(JsonUtils.toJson(listFirstMenu));
+		} else {
+			pw.write("2");
+		}
 	}
 
 	public UserService getUserService() {

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -63,10 +64,9 @@ public class WorksAction extends ActionSupport {
 	private MyWorksVO myWorksVO;
 
 	/*
-	 * 
+	 * 跳转到播放页，作品对象存入值栈
 	 */
 	public String videoDetailsPage() {
-		accept_works = new wlmtxt_works();
 		ActionContext.getContext().getValueStack().set("accept_works", accept_works);
 		return "videoDetailsPage";
 	}
@@ -75,9 +75,6 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 */
 
-	/*
-	 * 
-	 */
 	public String getImg() throws FileNotFoundException {
 		if (imgName.equals("") || imgName == null) {
 			imgName = "";
@@ -112,6 +109,8 @@ public class WorksAction extends ActionSupport {
 	 * 查询是否已点赞<br>
 	 * 接收accept_works.works_id
 	 * 
+	 * 1-已点赞 2-未点赞
+	 * 
 	 * @throws Exception
 	 */
 	public void isLiked() throws Exception {
@@ -136,13 +135,10 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void likeWorks() throws Exception {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-
 		worksService.likWorks(user, accept_works);
-
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
-
 	}
 
 	/**
@@ -156,10 +152,11 @@ public class WorksAction extends ActionSupport {
 	 * 查询是否已收藏<br>
 	 * 接收accept_works.works_id
 	 * 
+	 * 1-已收藏 2-未收藏
+	 * 
 	 * @throws Exception
 	 */
 	public void isCollectWorks() throws Exception {
-		// TODO
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
@@ -237,8 +234,6 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void getWorksDetailVO() throws IOException {
-		accept_works = new wlmtxt_works();
-
 		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -264,12 +259,52 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
+	 * 根据一级类别，获取二级类别
+	 * 
+	 * @throws IOException
+	 */
+	public void listSecondMenu_byFirstMenuID() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	public void listSecondMenu() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu();
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	public void listFirstMenu() throws IOException {
+		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
+
+		firstMenuList = worksService.listFirstMenu();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(firstMenuList));
+	}
+
+	/**
 	 * 根据一级类别获取相应的作品
 	 * 
 	 * @throws IOException
 	 */
 	public void listWorksByFirstMenuID() throws IOException {
-		List<WorksDTO> worksDTOList = worksService.listWorksByFirstMenuID(second_menu.getSecond_menu_id());
+		List<WorksDTO> worksDTOList = worksService.listWorksByFirstMenuID(first_menu.getFirst_menu_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -284,6 +319,7 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void listWorksBySecondMenuID() throws IOException {
+		System.out.println(second_menu.getSecond_menu_id());
 		List<WorksDTO> worksDTOList = worksService.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -303,56 +339,6 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(myWorksVO));
-	}
-
-	/**
-	 * 获取所有一级类别的
-	 * 
-	 * @throws IOException
-	 */
-	public void listFirstMenu() throws IOException {
-		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
-
-		firstMenuList = worksService.listFirstMenu();
-
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(firstMenuList));
-	}
-
-	/**
-	 * 根据第一类别ID获取第二类别列表
-	 * 
-	 * @throws IOException
-	 */
-	public void listSecondMenu_byFirstMenuID() throws IOException {
-		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
-		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(secondMenuList));
-	}
-
-	/**
-	 * 获取所有第二级类别
-	 * 
-	 * @throws IOException
-	 */
-	public void listSecondMenu() throws IOException {
-		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
-		secondMenuList = worksService.listSecondMenu();
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(secondMenuList));
 	}
 
 	/**
@@ -415,7 +401,6 @@ public class WorksAction extends ActionSupport {
 
 		// 作者
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		System.out.println(user);
 		accept_works.setWorks_user_id(user.getUser_id());
 
 		// 关键词
@@ -437,6 +422,57 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
+	}
+
+	/**
+	 * 播放页，统计作品播放次数
+	 * 
+	 * @date 2018年6月20日 下午6:20:23
+	 * 
+	 * @author gxr
+	 * @throws IOException
+	 *
+	 */
+	public void totalPlayNum() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int playCountNum = worksService.totalPlayNum(accept_works.getWorks_id());
+		pw.write(playCountNum);
+	}
+
+	/**
+	 * 播放页，统计收藏次数
+	 * 
+	 * @date 2018年6月20日 下午6:55:51
+	 * 
+	 * @author gxr
+	 * @throws IOException
+	 *
+	 */
+	public void countCollectNum() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int collectNum = worksService.countCollectNum(accept_works.getWorks_id());
+		pw.write(collectNum);
+	}
+
+	/**
+	 * 播放页，统计点赞量
+	 * 
+	 * @date 2018年6月20日 下午7:01:05
+	 * 
+	 * @author gxr
+	 * @throws IOException
+	 *
+	 */
+	public void countLikeNum() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int num = worksService.countLikeNum(accept_works.getWorks_id());
+		pw.write(num);
 	}
 
 	public WorksService getWorksService() {
@@ -582,9 +618,5 @@ public class WorksAction extends ActionSupport {
 	public MyWorksVO getMyWorksVO() {
 		return myWorksVO;
 	}
-
-	/*
-	 * 
-	 */
 
 }

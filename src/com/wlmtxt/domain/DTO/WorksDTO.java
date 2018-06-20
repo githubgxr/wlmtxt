@@ -4,22 +4,33 @@ import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
+import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
 public class WorksDTO {
 
-	wlmtxt_works works;
+	private wlmtxt_works works;
 
-	wlmtxt_second_menu secondMenu;
+	private wlmtxt_second_menu secondMenu;
 
-	wlmtxt_first_menu firstMenu;
-
-	List<KeyWordDTO> keyWordDTOList;
+	private wlmtxt_first_menu firstMenu;
+	// 关键词列表
+	private List<KeyWordDTO> keyWordDTOList;
+	// 作者
+	private wlmtxt_user user;
 
 	@Override
 	public String toString() {
 		return "WorksDTO [works=" + works + ", secondMenu=" + secondMenu + ", firstMenu=" + firstMenu
-				+ ", keyWordDTOList=" + keyWordDTOList + "]";
+				+ ", keyWordDTOList=" + keyWordDTOList + ", user=" + user + "]";
+	}
+
+	public wlmtxt_user getUser() {
+		return user;
+	}
+
+	public void setUser(wlmtxt_user user) {
+		this.user = user;
 	}
 
 	public wlmtxt_works getWorks() {
