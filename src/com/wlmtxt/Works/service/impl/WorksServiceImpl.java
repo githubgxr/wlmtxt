@@ -94,7 +94,6 @@ public class WorksServiceImpl implements WorksService {
 			keyWordDTOList.add(keyWordDTO);
 		}
 		//
-		System.out.println(keyWordDTOList);
 		return keyWordDTOList;
 	}
 
@@ -128,10 +127,13 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public List<WorksDTO> listWorksByFirstMenuID(String second_menu_id) {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
-
+		// 根据一级类别获取所属的二级类别
 		List<wlmtxt_second_menu> secondMenuList = worksDao.listSecondMenuByFather(second_menu_id);
+		System.out.println(secondMenuList.size());
 		for (wlmtxt_second_menu second_menu : secondMenuList) {
+			// 遍历二级类别取出所有相应作品
 			List<wlmtxt_works> worksList = worksDao.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
+			System.out.println(worksList.size());
 			for (wlmtxt_works works : worksList) {
 				WorksDTO worksDTO = new WorksDTO();
 				worksDTO.setWorks(works);
@@ -150,7 +152,7 @@ public class WorksServiceImpl implements WorksService {
 				worksDTOList.add(worksDTO);
 			}
 		}
-
+		System.out.println(worksDTOList.size());
 		return worksDTOList;
 	}
 
@@ -188,7 +190,6 @@ public class WorksServiceImpl implements WorksService {
 		}
 		return worksDTOList;
 	}
-	
 
 	@Override
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO) {
@@ -266,7 +267,6 @@ public class WorksServiceImpl implements WorksService {
 		newkeywords.setKeyword_gmt_create(time);
 		//
 		worksDao.saveKeyword(newkeywords);
-		System.out.println(newkeywords);
 	}
 
 	@Override

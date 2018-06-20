@@ -234,7 +234,6 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void getWorksDetailVO() throws IOException {
-		System.out.println(accept_works);
 		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -401,7 +400,6 @@ public class WorksAction extends ActionSupport {
 
 		// 作者
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		System.out.println(user);
 		accept_works.setWorks_user_id(user.getUser_id());
 
 		// 关键词
@@ -475,7 +473,6 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.countLikeNum(accept_works.getWorks_id());
 		pw.write(num);
 	}
-	
 
 	public WorksService getWorksService() {
 		return worksService;
