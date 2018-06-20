@@ -113,8 +113,10 @@ public class WorksServiceImpl implements WorksService {
 			discussDTO.setDiscuss(discuss);
 			//
 			List<wlmtxt_discuss> replyList = worksDao.getDiscussListByFatherID(discuss.getDiscuss_id());
-
 			discussDTO.setReply(replyList);
+			//
+			wlmtxt_user user = userService.get_user_byID(discuss.getDiscuss_user_id());
+			discussDTO.setUser(user);
 			//
 			discussDTOList.add(discussDTO);
 		}
