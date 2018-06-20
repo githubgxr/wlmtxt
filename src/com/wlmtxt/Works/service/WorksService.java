@@ -46,4 +46,10 @@ public interface WorksService {
 
 	public void discussWorks(wlmtxt_discuss accpet_discuss);
 
+	public List<WorksDTO> listWorksAll();
+
+	public List<WorksDTO> listWorksBySecondMenuID(String second_menu_id);
+
+	public List<WorksDTO> listWorksByFirstMenuID(String second_menu_id);
+
 }

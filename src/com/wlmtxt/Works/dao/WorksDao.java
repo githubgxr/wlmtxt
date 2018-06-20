@@ -66,4 +66,10 @@ public interface WorksDao {
 
 	void saveDiscuss(wlmtxt_discuss accpet_discuss);
 
+	List<wlmtxt_works> listWorksAll();
+
+	List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id);
+
+	List<wlmtxt_second_menu> listSecondMenuByFather(String second_menu_first_menu_id);
+
 }
