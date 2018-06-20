@@ -407,6 +407,7 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.countLikeNum(accept_works.getWorks_id());
 		pw.write(num);
 	}
+	
 
 	public WorksService getWorksService() {
 		return worksService;
