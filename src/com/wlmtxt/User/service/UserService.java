@@ -1,6 +1,11 @@
 package com.wlmtxt.User.service;
 
+import java.util.List;
+
+import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 
 public interface UserService {
 
@@ -13,5 +18,11 @@ public interface UserService {
 	String modifyPersonalData(wlmtxt_user accpet_user);
 
 	String modifyPassword(wlmtxt_user user);
+
+	String followUser(String user_id, wlmtxt_user loginUser);
+
+	List<wlmtxt_first_menu> listFirstMenu(String user_id);
+
+//	List<wlmtxt_works_keyword> listSecondOfMyWorks(String user_id);
 
 }
