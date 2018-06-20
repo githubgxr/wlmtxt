@@ -265,7 +265,6 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * @throws IOException
 	 */
-
 	public void listSecondMenu_byFirstMenuID() throws IOException {
 		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
 		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
