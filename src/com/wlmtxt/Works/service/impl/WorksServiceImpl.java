@@ -94,7 +94,6 @@ public class WorksServiceImpl implements WorksService {
 			keyWordDTOList.add(keyWordDTO);
 		}
 		//
-		System.out.println(keyWordDTOList);
 		return keyWordDTOList;
 	}
 
@@ -114,8 +113,10 @@ public class WorksServiceImpl implements WorksService {
 			discussDTO.setDiscuss(discuss);
 			//
 			List<wlmtxt_discuss> replyList = worksDao.getDiscussListByFatherID(discuss.getDiscuss_id());
-
 			discussDTO.setReply(replyList);
+			//
+			wlmtxt_user user = userService.get_user_byID(discuss.getDiscuss_user_id());
+			discussDTO.setUser(user);
 			//
 			discussDTOList.add(discussDTO);
 		}
@@ -128,10 +129,13 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public List<WorksDTO> listWorksByFirstMenuID(String second_menu_id) {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
-
+		// 根据一级类别获取所属的二级类别
 		List<wlmtxt_second_menu> secondMenuList = worksDao.listSecondMenuByFather(second_menu_id);
+		System.out.println(secondMenuList.size());
 		for (wlmtxt_second_menu second_menu : secondMenuList) {
+			// 遍历二级类别取出所有相应作品
 			List<wlmtxt_works> worksList = worksDao.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
+			System.out.println(worksList.size());
 			for (wlmtxt_works works : worksList) {
 				WorksDTO worksDTO = new WorksDTO();
 				worksDTO.setWorks(works);
@@ -150,7 +154,7 @@ public class WorksServiceImpl implements WorksService {
 				worksDTOList.add(worksDTO);
 			}
 		}
-
+		System.out.println(worksDTOList.size());
 		return worksDTOList;
 	}
 
@@ -188,7 +192,6 @@ public class WorksServiceImpl implements WorksService {
 		}
 		return worksDTOList;
 	}
-	
 
 	@Override
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO) {
@@ -241,7 +244,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public void saveWorks(wlmtxt_works accept_works) {
+	public void saveWorks(wlmtxt_works accept_works, String[] keywords) {
 		//
 		accept_works.setWorks_id(TeamUtil.getUuid());
 		//
@@ -254,19 +257,40 @@ public class WorksServiceImpl implements WorksService {
 		accept_works.setWorks_gmt_modified(time);
 		//
 		worksDao.saveWorks(accept_works);
-	}
+		/*
+		 * 
+		 */
+		wlmtxt_keyword newkeywords;
+		for (int i = 0; i < keywords.length; i++) {
+			if (!keywords[i].equals("")) {
+				newkeywords = new wlmtxt_keyword();
+				String uuidkey1 = TeamUtil.getUuid();
+				newkeywords.setKeyword_id(uuidkey1);
+				newkeywords.setKeyword_name(keywords[i]);
+				newkeywords.setKeyword_gmt_modified(time);
+				newkeywords.setKeyword_gmt_create(time);
+				worksDao.saveKeyword(newkeywords);
+				/*
+				 * 
+				 */
+				wlmtxt_works_keyword works_keyword = new wlmtxt_works_keyword();
+				works_keyword.setWorks_keyword_works_id(accept_works.getWorks_id());
+				works_keyword.setWorks_keyword_keyword_id(uuidkey1);
+				works_keyword.setWorks_keyword_gmt_create(time);
+				works_keyword.setWorks_keyword_gmt_modified(time);
+				worksDao.saveWord(works_keyword);
 
-	@Override
-	public void saveKeyword(wlmtxt_keyword newkeywords) {
+			}
+
+		}
 		//
-		newkeywords.setKeyword_id(TeamUtil.getUuid());
 		//
-		String time = TeamUtil.getStringSecond();
-		newkeywords.setKeyword_gmt_modified(time);
-		newkeywords.setKeyword_gmt_create(time);
+
 		//
-		worksDao.saveKeyword(newkeywords);
-		System.out.println(newkeywords);
+		/*
+		 * 
+		 */
+
 	}
 
 	@Override

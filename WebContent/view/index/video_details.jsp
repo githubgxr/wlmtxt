@@ -149,7 +149,7 @@
 			<!--评论-->
 			<div
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
-				<div style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px;">2452&nbsp;评论</div>
+				<div style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px;"><span id="discussNum">0</span>&nbsp;评论</div>
 				<!--发表评论-->
 				<div>
 					<textarea class="form-control textarea_pl" id="textarea_comment"

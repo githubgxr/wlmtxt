@@ -22,7 +22,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
-import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -234,7 +233,6 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void getWorksDetailVO() throws IOException {
-		System.out.println(accept_works);
 		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -320,6 +318,7 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void listWorksBySecondMenuID() throws IOException {
+		System.out.println(second_menu.getSecond_menu_id());
 		List<WorksDTO> worksDTOList = worksService.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -401,25 +400,17 @@ public class WorksAction extends ActionSupport {
 
 		// 作者
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		System.out.println(user);
 		accept_works.setWorks_user_id(user.getUser_id());
 
 		// 关键词
 		if (!keyword.equals("")) {
 			String[] keywords = keyword.split(";");
-			wlmtxt_keyword newkeywords;
-			for (int i = 0; i < keywords.length; i++) {
-				if (!keywords[i].equals("")) {
-					newkeywords = new wlmtxt_keyword();
-					newkeywords.setKeyword_name(keywords[i]);
-					worksService.saveKeyword(newkeywords);
-				}
 
-			}
-
+			worksService.saveWorks(accept_works, keywords);
+		} else {
+			worksService.saveWorks(accept_works, null);
 		}
 
-		worksService.saveWorks(accept_works);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
@@ -475,7 +466,6 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.countLikeNum(accept_works.getWorks_id());
 		pw.write(num);
 	}
-	
 
 	public WorksService getWorksService() {
 		return worksService;
