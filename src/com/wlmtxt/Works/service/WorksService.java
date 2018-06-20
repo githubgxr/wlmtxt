@@ -48,4 +48,8 @@ public interface WorksService {
 
 	public List<WorksDTO> listWorksAll();
 
+	public List<WorksDTO> listWorksBySecondMenuID(String second_menu_id);
+
+	public List<WorksDTO> listWorksByFirstMenuID(String second_menu_id);
+
 }
