@@ -76,6 +76,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
 		return worksDao.listSecondMenuByFirstMenuID(first_menu_id);
 	}
@@ -105,7 +106,6 @@ public class WorksServiceImpl implements WorksService {
 		accept_works.setWorks_gmt_modified(time);
 		//
 		worksDao.saveWorks(accept_works);
-
 	}
 
 	@Override

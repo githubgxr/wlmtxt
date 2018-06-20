@@ -91,6 +91,7 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_second_menu> listSecondMenu() {
 		String hql = " from wlmtxt_second_menu  ";
 		Query query = getSession().createQuery(hql);
+
 		List<wlmtxt_second_menu> secondMenuList = query.list();
 		return secondMenuList;
 	}

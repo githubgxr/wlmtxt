@@ -71,6 +71,10 @@ public class WorksAction extends ActionSupport {
 	/*
 	 * 
 	 */
+
+	/*
+	 * 
+	 */
 	public String getImg() throws FileNotFoundException {
 		if (imgName.equals("") || imgName == null) {
 			imgName = "";
