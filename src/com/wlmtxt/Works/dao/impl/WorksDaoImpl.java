@@ -13,9 +13,11 @@ import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.VO.MyWorksVO;
 
 public class WorksDaoImpl implements WorksDao {
@@ -28,6 +30,24 @@ public class WorksDaoImpl implements WorksDao {
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+
+	@Override
+	public wlmtxt_keyword getWordByID(String works_keyword_keyword_id) {
+		String hql = " from wlmtxt_keyword  where keyword_id='" + works_keyword_keyword_id
+				+ "' order by keyword_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_keyword> keywordList = query.list();
+		return keywordList.get(0);
+	}
+
+	@Override
+	public List<wlmtxt_works_keyword> listKeyWordByByWorksID(String worksID) {
+		String hql = " from wlmtxt_works_keyword  where works_keyword_works_id='" + worksID
+				+ "' order by works_keyword_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works_keyword> keywordList = query.list();
+		return keywordList;
 	}
 
 	@Override
@@ -247,6 +267,33 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception {
+	}
+
+	@Override
+	public int totalPlayNum(String works_id) {
+		String hql = "from wlmtxt_play_history where play_history_works_id = '" + works_id + "'";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_play_history> listPlayHistory = query.list();
+		int num = listPlayHistory.size();
+		return num;
+	}
+
+	@Override
+	public int countCollectNum(String works_id) {
+		String hql = "from wlmtxt_collect where collect_works_id = '" + works_id + "'";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_collect> listCollect = query.list();
+		int num = listCollect.size();
+		return num;
+	}
+
+	@Override
+	public int countLikeNum(String works_id) {
+		String hql = "from wlmtxt_like where like_works_id = '" + works_id + "'";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_like> list = query.list();
+		int num = list.size();
+		return num;
 	}
 
 }

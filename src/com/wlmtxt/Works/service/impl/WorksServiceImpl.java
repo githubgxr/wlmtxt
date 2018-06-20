@@ -14,7 +14,9 @@ import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.DTO.DiscussDTO;
+import com.wlmtxt.domain.DTO.KeyWordDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -51,8 +53,29 @@ public class WorksServiceImpl implements WorksService {
 		//
 		wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
 		worksDTO.setFirstMenu(firstMenu);
-
+		// 获取关键词列表
+		List<KeyWordDTO> keyWordDTOList = listWorksKeywordByWorksID(works.getWorks_id());
+		worksDTO.setKeyWordDTOList(keyWordDTOList);
+		//
 		return worksDTO;
+	}
+
+	public List<KeyWordDTO> listWorksKeywordByWorksID(String worksID) {
+		List<KeyWordDTO> keyWordDTOList = new ArrayList<KeyWordDTO>();
+		//
+		List<wlmtxt_works_keyword> keyWordList = worksDao.listKeyWordByByWorksID(worksID);
+		for (wlmtxt_works_keyword keyWord : keyWordList) {
+			KeyWordDTO keyWordDTO = new KeyWordDTO();
+			//
+			keyWordDTO.setWorks_keyword(keyWord);
+			//
+			wlmtxt_keyword word = worksDao.getWordByID(keyWord.getWorks_keyword_keyword_id());
+			keyWordDTO.setKeyword(word);
+			//
+			keyWordDTOList.add(keyWordDTO);
+		}
+		//
+		return keyWordDTOList;
 	}
 
 	@Override
@@ -350,6 +373,24 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception {
 		worksDao.removeDownloadHistory(user, accept_works);
+	}
+
+	@Override
+	public int totalPlayNum(String works_id) {
+		int playCount = worksDao.totalPlayNum(works_id);
+		return playCount;
+	}
+
+	@Override
+	public int countCollectNum(String works_id) {
+		int collectNum = worksDao.countCollectNum(works_id);
+		return collectNum;
+	}
+
+	@Override
+	public int countLikeNum(String works_id) {
+		int num = worksDao.countLikeNum(works_id);
+		return num;
 	}
 
 }

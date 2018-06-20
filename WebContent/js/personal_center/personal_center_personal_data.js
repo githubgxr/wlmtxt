@@ -33,6 +33,7 @@ btn_file.oninput=function(){
 				console.log("修改头像成功");
 				$(".img_user").attr("src",
 						"/wlmtxt/Works/Works_getImg?imgName="+user_id);
+				location.reload();
 				toastr.success("上传成功！");
 			}else{
 				console.log("修改头像失败");
