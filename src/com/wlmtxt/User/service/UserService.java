@@ -28,4 +28,6 @@ public interface UserService {
 //	List<wlmtxt_works_keyword> listSecondOfMyWorks(String user_id);
 	wlmtxt_user get_user_byID(String user_id);
 
+	boolean isFollowedUser(String user_id, String user_id2);
+
 }

@@ -1,11 +1,9 @@
 package com.wlmtxt.Works.action;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
 
@@ -81,6 +79,8 @@ public class WorksAction extends ActionSupport {
 	 * 查询是否已点赞<br>
 	 * 接收accept_works.works_id
 	 * 
+	 * 1-已点赞
+	 * 2-未点赞
 	 * @throws Exception
 	 */
 	public void isLiked() throws Exception {
@@ -105,13 +105,10 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void likeWorks() throws Exception {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-
 		worksService.likWorks(user, accept_works);
-
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
-
 	}
 
 	/**
@@ -125,10 +122,12 @@ public class WorksAction extends ActionSupport {
 	 * 查询是否已收藏<br>
 	 * 接收accept_works.works_id
 	 * 
+	 * 1-已收藏
+	 * 2-未收藏
+	 * 
 	 * @throws Exception
 	 */
 	public void isCollectWorks() throws Exception {
-		// TODO
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
@@ -357,6 +356,23 @@ public class WorksAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
 	}
+	
+	/**
+	 * 播放页，作品播放次数查询
+	 * 
+	 * @date 2018年6月20日	下午6:20:23
+	 * 
+	 * @author gxr
+	 * @throws IOException 
+	 *
+	 */
+	public void playCount() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int playCountNum = worksService.playCount(accept_works.getWorks_id());
+		pw.write(playCountNum);
+	}
 
 	public WorksService getWorksService() {
 		return worksService;
@@ -502,8 +518,5 @@ public class WorksAction extends ActionSupport {
 		return myWorksVO;
 	}
 
-	/*
-	 * 
-	 */
 
 }

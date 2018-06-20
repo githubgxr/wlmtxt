@@ -1,7 +1,6 @@
 package com.wlmtxt.User.service.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.wlmtxt.User.dao.UserDao;
@@ -11,7 +10,6 @@ import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
-import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 
 import util.TeamUtil;
 
@@ -117,6 +115,16 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		return listFirstMenuOfAll;
+	}
+
+	@Override
+	public boolean isFollowedUser(String active_user_id, String passive_user_id) {
+		wlmtxt_follow follow = userDao.findFollowBy_user_id(active_user_id, passive_user_id);
+		if (follow == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	/*@Override

@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.wlmtxt.User.dao.UserDao;
+import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
@@ -148,6 +149,17 @@ public class UserDaoImpl implements UserDao {
 	public wlmtxt_first_menu findFirstMenu_single_second_menu_id(wlmtxt_second_menu second_menu) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * 查询关注用户
+	 */
+	@Override
+	public wlmtxt_follow findFollowBy_user_id(String active_user_id, String passive_user_id) {
+		String hql = "from wlmtxt_follow where follow_passive_user_id = '" + passive_user_id + "' and follow_active_user_id='" + active_user_id + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_follow follow = (wlmtxt_follow) query.uniqueResult();
+		return follow;
 	}
 	
 	/**

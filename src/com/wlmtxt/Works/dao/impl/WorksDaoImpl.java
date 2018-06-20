@@ -13,6 +13,7 @@ import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
@@ -247,6 +248,15 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception {
+	}
+
+	@Override
+	public int countPlay(String works_id) {
+		String hql = "from wlmtxt_play_history where play_history_works_id = '" + works_id + "'";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_play_history> listPlayHistory = query.list();
+		int num = listPlayHistory.size();
+		return num;
 	}
 
 }

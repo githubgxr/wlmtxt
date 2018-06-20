@@ -52,4 +52,6 @@ public interface WorksService {
 
 	public List<WorksDTO> listWorksByFirstMenuID(String second_menu_id);
 
+	public int playCount(String works_id);
+
 }

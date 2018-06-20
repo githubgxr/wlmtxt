@@ -352,4 +352,10 @@ public class WorksServiceImpl implements WorksService {
 		worksDao.removeDownloadHistory(user, accept_works);
 	}
 
+	@Override
+	public int playCount(String works_id) {
+		int playCount = worksDao.countPlay(works_id);
+		return playCount;
+	}
+	
 }

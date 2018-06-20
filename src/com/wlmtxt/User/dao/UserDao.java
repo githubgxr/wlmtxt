@@ -36,4 +36,6 @@ public interface UserDao {
 //	List<wlmtxt_works_keyword> listWorksKeyword_by_works_id(wlmtxt_works works);
 	wlmtxt_user get_user_byID(String user_id);
 
+	wlmtxt_follow findFollowBy_user_id(String active_user_id, String passive_user_id);
+
 }

@@ -72,4 +72,6 @@ public interface WorksDao {
 
 	List<wlmtxt_second_menu> listSecondMenuByFather(String second_menu_first_menu_id);
 
+	int countPlay(String works_id);
+
 }

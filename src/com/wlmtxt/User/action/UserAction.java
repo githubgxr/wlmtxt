@@ -312,6 +312,29 @@ public class UserAction extends ActionSupport {
 	 * -1; while ((i = is.read(buffer)) != -1) { os.write(buffer, 0, i); }
 	 * os.flush(); os.close(); is.close(); }
 	 */
+	
+	/**
+	 * 查询用户是否已关注
+	 * 
+	 * 1-已关注
+	 * 2-未关注
+	 *
+	 * @date 2018年6月20日	下午6:09:21
+	 * 
+	 * @author gxr
+	 * @throws IOException 
+	 *
+	 */
+	public void isFollowedUser() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		if (userService.isFollowedUser(user.getUser_id(), accpet_user.getUser_id())) {
+			response.getWriter().write("1");
+		} else {
+			response.getWriter().write("2");
+		}
+	}
 
 	/**
 	 * 关注用户
@@ -329,7 +352,7 @@ public class UserAction extends ActionSupport {
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		if (null != loginUser) {
 			String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
-			if (null != followResult) {
+			if ("1".equals(followResult)) {
 				pw.write("1");
 			} else {
 				pw.write("2");
