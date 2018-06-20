@@ -3,6 +3,7 @@ package com.wlmtxt.Works.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wlmtxt.User.service.UserService;
 import com.wlmtxt.Works.dao.WorksDao;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_collect;
@@ -26,6 +27,15 @@ import util.TeamUtil;
 public class WorksServiceImpl implements WorksService {
 
 	private WorksDao worksDao;
+	private UserService userService;
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 
 	public WorksDao getWorksDao() {
 		return worksDao;
@@ -56,6 +66,9 @@ public class WorksServiceImpl implements WorksService {
 		// 获取关键词列表
 		List<KeyWordDTO> keyWordDTOList = listWorksKeywordByWorksID(works.getWorks_id());
 		worksDTO.setKeyWordDTOList(keyWordDTOList);
+		//
+		wlmtxt_user user = userService.get_user_byID(works.getWorks_user_id());
+		worksDTO.setUser(user);
 		//
 		return worksDTO;
 	}

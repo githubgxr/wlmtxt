@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -258,6 +259,41 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	public void listSecondMenu_byFirstMenuID() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu_byFirstMenuID(first_menu.getFirst_menu_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	public void listSecondMenu() throws IOException {
+		List<wlmtxt_second_menu> secondMenuList = new ArrayList<wlmtxt_second_menu>();
+		secondMenuList = worksService.listSecondMenu();
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(secondMenuList));
+	}
+
+	public void listFirstMenu() throws IOException {
+		List<wlmtxt_first_menu> firstMenuList = new ArrayList<wlmtxt_first_menu>();
+
+		firstMenuList = worksService.listFirstMenu();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(firstMenuList));
 	}
 
 	/**
