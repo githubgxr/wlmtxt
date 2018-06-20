@@ -125,9 +125,9 @@ $(function() {
 
 				a_div2_div1.innerHTML = list_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
-				//a_div2_div3.innerHTML = list_vo[num].user.user_username;// 得到作品用户名
+				a_div2_div3.innerHTML = list_vo[num].user.user_username;// 得到作品用户名
 			
-				a_div1_img.src="/wlmtxt/Works/Works_getImg?imgName="+list_vo[num].works.works_cover;
+				a_div1_img.src="/wlmtxt/Works/Works_getImg?imgName="+list_vo[num].works.works_cover;//得到封面
 
 				/*li_div_div_a.innerHTML = list_vo[num].keyWordDTOList.keyword.keyword_name*/
 				
@@ -256,20 +256,19 @@ function getSecondList(first_menu_id, pageIndex) {
 			  li_div_div.className="video_label_content";
 			  li_div_div_a.className="video_label_item";
 			  
-			  li_div_div_a.innerHTML="绝地求生";
+			 /* li_div_div_a.innerHTML="绝地求生";*/
 			  
 			  li_div_div.appendChild(li_div_div_a);
 			  li_div.appendChild(li_div_div);
 			  
 			  a_div2_div1.innerHTML=SecondList_vo[num].works.works_title;//得到作品标题
+			  console.log(SecondList_vo[num].works.works_title);
 			  a_div2_div2.innerHTML="425";//得到作品浏览量
-			  a_div2_div3.innerHTML=SecondList_vo[num].works.works_name;//得到作品用户名
+			/*  a_div2_div3.innerHTML=SecondList_vo[num].user.user_username;// 得到作品用户名
+*/			  
+			  a_div1_img.src="/wlmtxt/Works/Works_getImg?imgName="+SecondList_vo[num].works.works_cover;//得到封面
 			  
-			  var list_keyword=list_vo[num].keyWordDTOList;
-			  li_div_div_a.innerHTML=list_keyword[num].keyword.keyword_name
-			  
-			  li_div_div_a.innerHTML=SecondList_vo[num].keyWordDTOList.keyword.keyword_name;
-			  console.log(SecondList_vo[num].keyWordDTOList.keyword.keyword_name);
+			 /* li_div_div_a.innerHTML=SecondList_vo[num].keyWordDTOList.keyword.keyword_name;*/
 			 
 
 			 } 
