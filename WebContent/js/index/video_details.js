@@ -55,6 +55,7 @@ function getWorksDetailVO() {
 
 			var comment_list = document.getElementsByClassName("comment_list");
 			var long = comment_list.length;
+			alert(long);
 			for (var num = 0; num < long; num++) {
 				comment_list[0].parentNode.removeChild(comment_list[0]);
 			}
@@ -243,7 +244,7 @@ function getWorksDetailVO() {
 
 										toastr.success("评论成功！");
 
-										getWorksDetailVO()
+										getWorksDetailVO();
 
 									} else {
 										toastr.error("评论失败！");
