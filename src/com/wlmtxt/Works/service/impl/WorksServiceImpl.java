@@ -260,29 +260,32 @@ public class WorksServiceImpl implements WorksService {
 		/*
 		 * 
 		 */
-		wlmtxt_keyword newkeywords;
-		for (int i = 0; i < keywords.length; i++) {
-			if (!keywords[i].equals("")) {
-				newkeywords = new wlmtxt_keyword();
-				String uuidkey1 = TeamUtil.getUuid();
-				newkeywords.setKeyword_id(uuidkey1);
-				newkeywords.setKeyword_name(keywords[i]);
-				newkeywords.setKeyword_gmt_modified(time);
-				newkeywords.setKeyword_gmt_create(time);
-				worksDao.saveKeyword(newkeywords);
-				/*
-				 * 
-				 */
-				wlmtxt_works_keyword works_keyword = new wlmtxt_works_keyword();
-				works_keyword.setWorks_keyword_works_id(accept_works.getWorks_id());
-				works_keyword.setWorks_keyword_keyword_id(uuidkey1);
-				works_keyword.setWorks_keyword_gmt_create(time);
-				works_keyword.setWorks_keyword_gmt_modified(time);
-				worksDao.saveWord(works_keyword);
+		if (null != keywords) {
+			wlmtxt_keyword newkeywords;
+			for (int i = 0; i < keywords.length; i++) {
+				if (!keywords[i].equals("")) {
+					newkeywords = new wlmtxt_keyword();
+					String uuidkey1 = TeamUtil.getUuid();
+					newkeywords.setKeyword_id(uuidkey1);
+					newkeywords.setKeyword_name(keywords[i]);
+					newkeywords.setKeyword_gmt_modified(time);
+					newkeywords.setKeyword_gmt_create(time);
+					worksDao.saveKeyword(newkeywords);
+					/*
+					 * 
+					 */
+					wlmtxt_works_keyword works_keyword = new wlmtxt_works_keyword();
+					works_keyword.setWorks_keyword_id(TeamUtil.getUuid());
+					works_keyword.setWorks_keyword_works_id(accept_works.getWorks_id());
+					works_keyword.setWorks_keyword_keyword_id(uuidkey1);
+					works_keyword.setWorks_keyword_gmt_create(time);
+					works_keyword.setWorks_keyword_gmt_modified(time);
+					worksDao.saveWord(works_keyword);
+				}
 
 			}
-
 		}
+
 		//
 		//
 

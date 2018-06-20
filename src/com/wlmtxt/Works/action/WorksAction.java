@@ -401,16 +401,16 @@ public class WorksAction extends ActionSupport {
 		// 作者
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		accept_works.setWorks_user_id(user.getUser_id());
-
 		// 关键词
-		if (!keyword.equals("")) {
+		if (!keyword.equals("") && null != keyword) {
 			String[] keywords = keyword.split(";");
 
 			worksService.saveWorks(accept_works, keywords);
+			System.out.println(keywords);
 		} else {
 			worksService.saveWorks(accept_works, null);
 		}
-
+		// worksService.saveWorks(accept_works, null);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
