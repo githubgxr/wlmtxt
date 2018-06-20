@@ -108,10 +108,13 @@ public class WorksServiceImpl implements WorksService {
 			//
 			worksDTO.setWorks(works);
 			//
-			if (works.getWorks_second_menu_id() != null) {
+			if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
+			} else {
 				wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
 				worksDTO.setSecondMenu(secondMenu);
-				if (secondMenu.getSecond_menu_first_menu_id() != null) {
+				if (null == secondMenu.getSecond_menu_first_menu_id()
+						|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
+				} else {
 					wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
 					worksDTO.setFirstMenu(firstMenu);
 				}

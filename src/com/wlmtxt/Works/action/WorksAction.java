@@ -26,7 +26,6 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
-import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
@@ -249,18 +248,15 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void getMyWorksListVO() throws IOException {
-		System.out.println(myWorksVO);
 
-		List<WorksDTO> worksDTO = new ArrayList<WorksDTO>();
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		System.out.println(user);
 		myWorksVO = worksService.getMyWorksVO(user.getUser_id(), myWorksVO);
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(worksDTO));
+		response.getWriter().write(gson.toJson(myWorksVO));
 	}
 
 	/**
