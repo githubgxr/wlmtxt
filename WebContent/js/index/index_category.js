@@ -125,8 +125,8 @@ $(function() {
 
 				a_div2_div1.innerHTML = list_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
-				/*a_div2_div3.innerHTML = list_vo[num].user.user_username;// 得到作品用户名
-*/				
+				//a_div2_div3.innerHTML = list_vo[num].user.user_username;// 得到作品用户名
+			
 				a_div1_img.src="/wlmtxt/Works/Works_getImg?imgName="+list_vo[num].works.works_cover;
 
 				/*li_div_div_a.innerHTML = list_vo[num].keyWordDTOList.keyword.keyword_name*/
@@ -275,7 +275,7 @@ function getSecondList(first_menu_id, pageIndex) {
 			 } 
 		}
 	}
-	xhrhp.open("POST", "/wlmtxt/Works/Works_listWorksBySecondMenuID");
+	xhrhp.open("POST", "/wlmtxt/Works/Works_listWorksByFirstMenuID");
 	var formData = new FormData();
 	formData.append("first_menu.first_menu_id", first_menu_id);
 	formData.append("myWorksVO.pageIndex", pageIndex);
