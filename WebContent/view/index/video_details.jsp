@@ -90,15 +90,15 @@
 						</div> -->
 						<div class="dz_no user_operate" id="thumbs_number_div"
 							style="float: right;">
-							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number">2555</span>
+							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number"></span>
 						</div>
 						<div class="dz_no user_operate" id="collect_number_div"
 							style="float: right; margin: 0 20px;">
-							<i class="fas fa-heart"></i>&nbsp;收藏<span id="collect_number">500</span>
+							<i class="fas fa-heart"></i>&nbsp;收藏<span id="collect_number"></span>
 						</div>
 						<div class="dz_no" id="play_number_div"
 							style="float: right; margin: 0">
-							<i class="fas fa-play-circle"></i>&nbsp;播放<span id="play_number">30</span>
+							<i class="fas fa-play-circle"></i>&nbsp;播放<span id="play_number"></span>
 						</div>
 					</div>
 				</div>

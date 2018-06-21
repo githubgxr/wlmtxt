@@ -101,9 +101,38 @@ function getWorksDetailVO() {
 		}
 	}
 	/** *********************详情*********************************** */
-
+	//获取播放数
+	function getPlayNum() {
+		var formData_get_play_num = new FormData();
+		formData_get_play_num.append("accept_works.works_id", video_id);
+		var play_num_xhr = new XMLHttpRequest();
+		play_num_xhr.open("POST", "/wlmtxt/Works/Works_getPlayNum");
+		play_num_xhr.send(formData_get_play_num);
+		play_num_xhr.onreadystatechange = function() {
+			if (play_num_xhr.readyState == 4 && play_num_xhr.status == 200) {
+				console.log("收藏："+play_num_xhr.responseText);
+				$("#collect_number").html(play_num_xhr.responseText);
+			}
+		}
+	}
+	getPlayNum();
 	/*-----------收藏----------*/
 	// 收藏
+	//获取收藏数
+	function getCollectNum() {
+		var formData_get_collect_num = new FormData();
+		formData_get_collect_num.append("accept_works.works_id", video_id);
+		var collect_num_xhr = new XMLHttpRequest();
+		collect_num_xhr.open("POST", "/wlmtxt/Works/Works_getCollectNum");
+		collect_num_xhr.send(formData_get_collect_num);
+		collect_num_xhr.onreadystatechange = function() {
+			if (collect_num_xhr.readyState == 4 && collect_num_xhr.status == 200) {
+				console.log("收藏："+collect_num_xhr.responseText);
+				$("#collect_number").html(collect_num_xhr.responseText);
+			}
+		}
+	}
+	getCollectNum();
 	// 查询是否收藏
 	function checkCollect() {
 		var formData_check_collect = new FormData();
@@ -142,12 +171,29 @@ function getWorksDetailVO() {
 				if (xhr.responseText == "1") {
 					console.log("收藏或取消收藏成功！");
 					checkCollect();
+					getCollectNum();
 				}
 			}
 		}
 	});
 	/*-----------点赞----------*/
 	// 点赞
+	//获取点赞数
+	function getLikeNum() {
+		var formData_get_like_num = new FormData();
+		formData_get_like_num.append("accept_works.works_id", video_id);
+		var like_num_xhr = new XMLHttpRequest();
+		like_num_xhr.open("POST", "/wlmtxt/Works/Works_getLikeNum");
+		like_num_xhr.send(formData_get_like_num);
+		like_num_xhr.onreadystatechange = function() {
+			if (like_num_xhr.readyState == 4 && like_num_xhr.status == 200) {
+				console.log("点赞："+like_num_xhr.responseText);
+				$("#thumbs_number").html(like_num_xhr.responseText);
+			}
+		}
+	}
+	getLikeNum();
+	
 	// 查询是否点赞
 	function checkLike() {
 		var formData_check_like = new FormData();
