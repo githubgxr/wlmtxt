@@ -8,6 +8,7 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -69,5 +70,7 @@ public interface WorksService {
 	public wlmtxt_works getWorksByFileName(String fileName);
 
 	public int getPlayNum(String works_id);
+
+	public CategoryDTO getCategoryDTOByID(String menu_id);
 
 }

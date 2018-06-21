@@ -26,6 +26,7 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -177,6 +178,22 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(num + "");
+	}
+
+	public void getCategoryDTOByID() throws IOException {
+		CategoryDTO categoryDTO;
+		if (first_menu != null) {
+			categoryDTO = worksService.getCategoryDTOByID(first_menu.getFirst_menu_id());
+		} else {
+			categoryDTO = worksService.getCategoryDTOByID(second_menu.getSecond_menu_id());
+		}
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(categoryDTO));
 	}
 
 	/**
