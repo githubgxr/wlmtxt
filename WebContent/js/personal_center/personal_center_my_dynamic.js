@@ -2,6 +2,11 @@ $(function(){
 	listMyDynamicByPage(1);
 });
 function listMyDynamicByPage(pageIndex){
+	var list_video_item = document.getElementsByClassName("list_video_item");
+	var long = list_video_item.length;
+	for (var num = 0; num < long; num++) {
+		list_video_item[0].parentNode.removeChild(list_video_item[0]);
+	}
 	var xhr=new XMLHttpRequest();
 	var formData=new FormData();
 	formData.append("myWorksVO.pageIndex",pageIndex);
@@ -49,10 +54,31 @@ function listMyDynamicByPage(pageIndex){
 				 wddt_str+='</div>';
 				 /*---删除---*/
 				 wddt_str+='<div class="video_options">';
-				 wddt_str+='<a class="video_delete_btn">删除</a>';
+				 wddt_str+='<a class="video_delete_btn" onclick="deleteWork(this.id)" id="'+wddt_response.worksDTOList[i].works.works_id+'">删除</a>';
 				 wddt_str+='</div>';
 				 wddt_str+='</li>';
 				$("#wddt_list_container").append(wddt_str);
+				
+			}
+		}
+	}
+}
+//删除单个作品
+function deleteWork(video_delete_btn_id){
+	console.log("video_delete_btn_id:"+video_delete_btn_id);
+	var video_delete_formData=new FormData();
+	video_delete_formData.append("accept_works.works_id",video_delete_btn_id);
+	var xhr_delete=new XMLHttpRequest();
+	xhr_delete.open("POST","/wlmtxt/Works/Works_deleteMyWorks");
+	xhr_delete.send(video_delete_formData);
+	xhr_delete.onreadystatechange=function(){
+		if(xhr_delete.readyState==4&&xhr_delete.status==200){
+			if(xhr_delete.responseText=="1"){
+				toastr.success("删除成功！");
+				listMyDynamicByPage(1);
+			}else{
+				toastr.error("删除失败！");
+				return false;
 			}
 		}
 	}
