@@ -17,6 +17,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
+import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.DiscussDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
@@ -345,6 +346,28 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public int getLikeNum(String works_id) {
 		return worksDao.getLikeNum(works_id);
+	}
+
+	@Override
+	public CategoryDTO getCategoryDTOByID(String menu_id) {
+
+		CategoryDTO categoryDTO = new CategoryDTO();
+
+		wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(menu_id);
+
+		if (firstMenu == null) {
+			// 用的二级
+			wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(menu_id);
+			categoryDTO.setSecondMenu(secondMenu);
+			//
+			firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
+			categoryDTO.setFirstMenu(firstMenu);
+		} else {
+			// 用的一级
+			categoryDTO.setFirstMenu(firstMenu);
+		}
+
+		return categoryDTO;
 	}
 
 	@Override
