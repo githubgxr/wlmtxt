@@ -78,12 +78,12 @@ public class WorksAction extends ActionSupport {
 		if (imgName.equals("") || imgName == null) {
 			imgName = "";
 		}
-		File file = new File("C://wlmtxt/img/" + imgName);
+		File file = new File("D://wlmtxt/img/" + imgName);
 		try {
 			inputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			// file = new File("D://wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
 		return "getFile";
@@ -93,12 +93,12 @@ public class WorksAction extends ActionSupport {
 		if (worksName.equals("") || worksName == null) {
 			worksName = "";
 		}
-		File file = new File("C://wlmtxt/video/" + worksName);
+		File file = new File("D://wlmtxt/video/" + worksName);
 		try {
 			inputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			// file = new File("D://wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
 		return "getFile";
@@ -355,7 +355,7 @@ public class WorksAction extends ActionSupport {
 			String fileName = UUID.randomUUID().toString()
 					+ imgfileFileName.substring(imgfileFileName.lastIndexOf("."));
 
-			filePath = "c://wlmtxt/img/" + fileName;
+			filePath = "D://wlmtxt/img/" + fileName;
 
 			File newFile = new File(filePath);
 
@@ -380,7 +380,7 @@ public class WorksAction extends ActionSupport {
 			String fileName = UUID.randomUUID().toString()
 					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
 
-			filePath = "c://wlmtxt/video/" + fileName;
+			filePath = "D://wlmtxt/video/" + fileName;
 
 			File newFile = new File(filePath);
 
