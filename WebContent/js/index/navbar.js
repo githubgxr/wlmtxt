@@ -95,6 +95,7 @@ function show_login_div() {
 	$("#check_email_text").css("display", "none");
 	$("#forget_password_div").css("display", "none");
 	$(".login_text").addClass("selected_log");
+	$(".log_alert_div").html("");
 	$(".login_text").removeClass("not_selected_log");
 	$(".register_text").addClass("not_selected_log");
 	$(".register_text").removeClass("selected_log");
@@ -416,40 +417,41 @@ function getBackPassword() {
 		xhr0.onreadystatechange = function() {
 			if (xhr0.readyState == 4 && xhr0.status == 200) {
 				if (xhr0.responseText == "1") {
-					console.log("该用户不存在！");
-					/* 发送成功 */
-					$(".log_alert_div").html("");
-					$(".log_alert_div").css("display", "none");
-					/* 和后台交互 */
-					var xhr = new XMLHttpRequest();
-					xhr.open("POST", "/wlmtxt/User/User_sendMailOfForgotPassword");// 发送验证邮件
-					xhr.send(formData);
-					xhr.onreadystatechange = function() {
-						if (xhr.readyState == 4 && xhr.status == 200) {
-							if (xhr.responseText == "1") {
-								/* 发送成功 */
-								$("#login_div").css("display", "none");
-								$("#register_div").css("display", "none");
-								$("#forget_password_div")
-										.css("display", "none");
-								$("#check_email_text").css("display", "block");
-								$("#login_and_register").click(function() {
-									removeTest();
-								});
-							} else {
-								/* 发送失败 */
-								alert("发送失败！");
-								return false;
-							}
-						}
-
-					}
+					/* 发送失败 */
+					$(".log_alert_div").html("该用户不存在！");
+					$(".log_alert_div").css("display", "block");
+					return false;
 				}
 			} else {
-				/* 发送失败 */
-				$(".log_alert_div").html("该邮箱已注册！");
-				$(".log_alert_div").css("display", "block");
-				return false;
+				/* 发送成功 */
+				$(".log_alert_div").html("");
+				$(".log_alert_div").css("display", "none");
+				/* 和后台交互 */
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", "/wlmtxt/User/User_sendMailOfForgotPassword");// 发送验证邮件
+				xhr.send(formData);
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						if (xhr.responseText == "1") {
+							/* 发送成功 */
+							$("#login_div").css("display", "none");
+							$("#register_div").css("display", "none");
+							$("#forget_password_div")
+									.css("display", "none");
+							$("#check_email_text").css("display", "block");
+							$("#login_and_register").click(function() {
+								removeTest();
+							});
+						} else {
+							/* 发送失败 */
+							alert("发送失败！");
+							return false;
+						}
+					}
+
+				}
+			
+				
 			}
 		}
 	} else {
