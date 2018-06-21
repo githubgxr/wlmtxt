@@ -156,7 +156,8 @@ margin: 0 0 10px 0; min-height: 80px;
 }
 .comment_delete{
 	color: #1cd388;
-	float:left;
+	float:right;
+	margin:0 20px 0 0;
 	height:20px;
 }
 .comment_delete:hover{

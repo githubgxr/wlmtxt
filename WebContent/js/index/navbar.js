@@ -32,9 +32,11 @@ function checkLogin() {
 				console.log("user_mail:" + userInfo.user_mail);
 				$(".login_show").css("display", "block");
 				// 记得修改为用户的头像
-				
-				$(".img_user").attr("src",
-						"/wlmtxt/Works/Works_getImg?imgName=" + userInfo.user_avatar);
+
+				$(".img_user").attr(
+						"src",
+						"/wlmtxt/Works/Works_getImg?imgName="
+								+ userInfo.user_avatar);
 				if_login = true;
 				console.log("if_login：" + if_login);
 				/* 登录后 */
@@ -56,7 +58,6 @@ function checkLogin() {
 				// 简介
 				$(".div_bio").html(userInfo.user_bio);
 				$(".input_bio").val(userInfo.user_bio);
-				
 
 			}
 		}
@@ -90,6 +91,13 @@ function show_login_div() {
 	var login_and_register = document.getElementById("login_and_register");
 	login_and_register.style.display = "block";
 	$("#login_div").css("display", "block");
+	$("#register_div").css("display", "none");
+	$("#check_email_text").css("display", "none");
+	$("#forget_password_div").css("display", "none");
+	$(".login_text").addClass("selected_log");
+	$(".login_text").removeClass("not_selected_log");
+	$(".register_text").addClass("not_selected_log");
+	$(".register_text").removeClass("selected_log");
 	/* var wWidth=document.documentElement.clientWidth; *//* 针对当前页面（如果说页面是一个竖向的页面），它的页面宽度与可视区域的宽度相同 */
 	/*
 	 */
@@ -117,14 +125,28 @@ function show_login_div() {
 			$("#login_div").css("display", "block");
 			$("#register_div").css("display", "none");
 			$("#check_email_text").css("display", "none");
+			$("#forget_password_div").css("display", "none");
 		} else {
 			// 显示注册，隐藏提示，隐藏登录
 			$("#login_div").css("display", "none");
 			$("#register_div").css("display", "block");
 			$("#check_email_text").css("display", "none");
+			$("#forget_password_div").css("display", "none");
 
 		}
 	});
+	// 点击忘记密码
+	$(".forget_password").click(function() {
+		$(".log_text").addClass("not_selected_log");
+		$(".log_text").removeClass("selected_log");
+		$("input").val("");
+		$(".log_alert_div").html("");
+		$("#login_div").css("display", "none");
+		$("#register_div").css("display", "none");
+		$("#check_email_text").css("display", "none");
+		$("#forget_password_div").css("display", "block");
+	})
+
 }
 
 /*-------------验证-------------------*/
@@ -147,6 +169,19 @@ function checkEmailRegister() {
 	var register_email = $("#register_email").val();// 注册邮箱
 	// 注册
 	if (filter.test(register_email)) {
+		$(".log_alert_div").html("");
+		$(".log_alert_div").css("display", "none");
+		return true;
+	} else {
+		$(".log_alert_div").html("您的邮箱格式不正确！");
+		$(".log_alert_div").css("display", "block");
+		return false;
+	}
+}
+function checkEmailForgetPassword() {
+	var forget_password_email = $("#forget_password_email").val();// 注册邮箱
+	// 找回密码
+	if (filter.test(forget_password_email)) {
 		$(".log_alert_div").html("");
 		$(".log_alert_div").css("display", "none");
 		return true;
@@ -365,65 +400,62 @@ function register() {
 	}
 
 }
-// 查询是否收藏
-function checkCollect() {
-	var collect_xhr = new XMLHttpRequest();
-	collect_xhr.open("POST", "/wlmtxt/Works/Works_isCollectWorks");
-	collect_xhr.send();
-	collect_xhr.onreadystatechange = function() {
-		if (collect_xhr.readyState == 4 && collect_xhr.status == 200) {
-			if (collect_xhr.responseText == "1") {
-				console.log("已收藏！");
-				$("#collect_number_div").addClass("dz_yes");
-				$("#collect_number_div").removeClass("dz_no");
-				/* $("#collect_number").html(parseInt($collect_number) + 1); */
+// 找回密码
+function getBackPassword() {
+	var forget_password_email = $("#forget_password_email").val();// 注册邮箱
+	var formData = new FormData();
+	formData.append("accpet_user.user_mail", forget_password_email);
+	// 找回密码
+	if (filter.test(forget_password_email)) {
+		$(".log_alert_div").html("");
+		$(".log_alert_div").css("display", "none");
+		// 验证邮箱是否被注册
+		var xhr0 = new XMLHttpRequest();
+		xhr0.open("POST", "/wlmtxt/User/User_mailRegisted");
+		xhr0.send(formData);
+		xhr0.onreadystatechange = function() {
+			if (xhr0.readyState == 4 && xhr0.status == 200) {
+				if (xhr0.responseText == "1") {
+					console.log("该用户不存在！");
+					/* 发送成功 */
+					$(".log_alert_div").html("");
+					$(".log_alert_div").css("display", "none");
+					/* 和后台交互 */
+					var xhr = new XMLHttpRequest();
+					xhr.open("POST", "/wlmtxt/User/User_sendMailOfForgotPassword");// 发送验证邮件
+					xhr.send(formData);
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4 && xhr.status == 200) {
+							if (xhr.responseText == "1") {
+								/* 发送成功 */
+								$("#login_div").css("display", "none");
+								$("#register_div").css("display", "none");
+								$("#forget_password_div")
+										.css("display", "none");
+								$("#check_email_text").css("display", "block");
+								$("#login_and_register").click(function() {
+									removeTest();
+								});
+							} else {
+								/* 发送失败 */
+								alert("发送失败！");
+								return false;
+							}
+						}
+
+					}
+				}
 			} else {
-				console.log("未收藏！");
-				$("#collect_number_div").addClass("dz_no");
-				$("#collect_number_div").removeClass("dz_yes");
+				/* 发送失败 */
+				$(".log_alert_div").html("该邮箱已注册！");
+				$(".log_alert_div").css("display", "block");
+				return false;
 			}
 		}
+	} else {
+		$(".log_alert_div").html("您的邮箱格式不正确！");
+		$(".log_alert_div").css("display", "block");
+		return false;
 	}
-}
-// 查询是否点赞
-function checkLike() {
-	var like_xhr = new XMLHttpRequest();
-	like_xhr.open("POST", "/wlmtxt/Works/Works_isLiked");
-	like_xhr.send();
-	like_xhr.onreadystatechange = function() {
-		if (like_xhr.readyState == 4 && like_xhr.status == 200) {
-			if (like_xhr.responseText == "1") {
-				console.log("已点赞！");
-				$("#thumbs_number_div").addClass("dz_yes");
-				$("#thumbs_number_div").removeClass("dz_no");
-				/* $("#collect_number").html(parseInt($collect_number) + 1); */
-			} else {
-				console.log("未点赞！");
-				$("#thumbs_number_div").addClass("dz_no");
-				$("#thumbs_number_div").removeClass("dz_yes");
-			}
-		}
-	}
-}
-// 查询是否关注
-function checkFocus() {
-	var focus_xhr = new XMLHttpRequest();
-	focus_xhr.open("POST", "/wlmtxt/Works/Works_isLiked");
-	focus_xhr.send();
-	focus_xhr.onreadystatechange = function() {
-		if (focus_xhr.readyState == 4 && focus_xhr.status == 200) {
-			if (focus_xhr.responseText == "1") {
-				console.log("已关注！");
-				$("#focus_btn").addClass("has_focus");
-				$("#focus_btn").removeClass("not_focus");
-				/*
-				 * $("#collect_number").html(parseInt($collect_number) + 1);
-				 */
-			} else {
-				console.log("未关注！");
-				$("#focus_btn").addClass("not_focus");
-				$("#focus_btn").removeClass("has_focus");
-			}
-		}
-	}
+
 }

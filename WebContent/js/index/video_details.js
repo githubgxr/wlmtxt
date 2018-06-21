@@ -23,7 +23,12 @@ function getWorksDetailVO() {
 			$("#detail_video_time").html(
 					detail_response.worksDTO.works.works_gmt_create);
 			// 关键字
-			$("#detail_video_keywords").html();
+			var detail_str="";
+			 for(var num=0;num<detail_response.worksDTO.keyWordDTOList.length;num++){
+				 detail_str+='<span class="video_label_item" style="margin: 0 10px 0 0;">'+detail_response.worksDTO.keyWordDTOList[num].keyword.keyword_name+'</span>';
+				
+			 }
+			 $("#detail_video_keywords").html(detail_str);
 			// 视频
 			$("#detail_video_content").attr(
 					"src",
@@ -34,10 +39,10 @@ function getWorksDetailVO() {
 					"/wlmtxt/Works/Works_getImg?imgName="
 							+ detail_response.worksDTO.works.works_cover);
 			// 下载
-			$("#detail_user_img").attr(
+			$("#download_a").attr(
 					"href",
 					"/wlmtxt/Works/Works_getVideo?worksName="
-							+ detail_response.worksDTO.works.works_id);
+					+ detail_response.worksDTO.works.works_name);
 
 			/*------用户*/
 			// 头像
@@ -84,7 +89,9 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				comment_list_str += '<div class="comment_delete"></div>';
+				comment_list_str += '<div class="comment_delete">删除</div>';
+				comment_list_str += '<div class="comment_delete">回复</div>';
+			
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
@@ -94,9 +101,38 @@ function getWorksDetailVO() {
 		}
 	}
 	/** *********************详情*********************************** */
-
+	//获取播放数
+	function getPlayNum() {
+		var formData_get_play_num = new FormData();
+		formData_get_play_num.append("accept_works.works_id", video_id);
+		var play_num_xhr = new XMLHttpRequest();
+		play_num_xhr.open("POST", "/wlmtxt/Works/Works_getPlayNum");
+		play_num_xhr.send(formData_get_play_num);
+		play_num_xhr.onreadystatechange = function() {
+			if (play_num_xhr.readyState == 4 && play_num_xhr.status == 200) {
+				console.log("播放："+play_num_xhr.responseText);
+				$("#play_number").html(play_num_xhr.responseText);
+			}
+		}
+	}
+	getPlayNum();
 	/*-----------收藏----------*/
 	// 收藏
+	//获取收藏数
+	function getCollectNum() {
+		var formData_get_collect_num = new FormData();
+		formData_get_collect_num.append("accept_works.works_id", video_id);
+		var collect_num_xhr = new XMLHttpRequest();
+		collect_num_xhr.open("POST", "/wlmtxt/Works/Works_getCollectNum");
+		collect_num_xhr.send(formData_get_collect_num);
+		collect_num_xhr.onreadystatechange = function() {
+			if (collect_num_xhr.readyState == 4 && collect_num_xhr.status == 200) {
+				console.log("收藏："+collect_num_xhr.responseText);
+				$("#collect_number").html(collect_num_xhr.responseText);
+			}
+		}
+	}
+	getCollectNum();
 	// 查询是否收藏
 	function checkCollect() {
 		var formData_check_collect = new FormData();
@@ -135,12 +171,29 @@ function getWorksDetailVO() {
 				if (xhr.responseText == "1") {
 					console.log("收藏或取消收藏成功！");
 					checkCollect();
+					getCollectNum();
 				}
 			}
 		}
 	});
 	/*-----------点赞----------*/
 	// 点赞
+	//获取点赞数
+	function getLikeNum() {
+		var formData_get_like_num = new FormData();
+		formData_get_like_num.append("accept_works.works_id", video_id);
+		var like_num_xhr = new XMLHttpRequest();
+		like_num_xhr.open("POST", "/wlmtxt/Works/Works_getLikeNum");
+		like_num_xhr.send(formData_get_like_num);
+		like_num_xhr.onreadystatechange = function() {
+			if (like_num_xhr.readyState == 4 && like_num_xhr.status == 200) {
+				console.log("点赞："+like_num_xhr.responseText);
+				$("#thumbs_number").html(like_num_xhr.responseText);
+			}
+		}
+	}
+	getLikeNum();
+	
 	// 查询是否点赞
 	function checkLike() {
 		var formData_check_like = new FormData();
@@ -178,6 +231,7 @@ function getWorksDetailVO() {
 				if (xhr.responseText == "1") {
 					console.log("点赞或取消点赞成功！");
 					checkLike();
+					getLikeNum();
 				}
 			}
 		}
