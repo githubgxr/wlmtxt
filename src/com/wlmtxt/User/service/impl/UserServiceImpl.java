@@ -128,6 +128,11 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public int deleteAllMyFollow(wlmtxt_user loginUser) {
+		return userDao.deleteAllMyFollow(loginUser);
+	}
+
 	/*
 	 * @Override public List<wlmtxt_works_keyword> listSecondOfMyWorks(String
 	 * user_id) { List<wlmtxt_works> listWorks = userDao.listMyWorks(user_id);

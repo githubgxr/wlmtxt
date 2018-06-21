@@ -8,6 +8,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
@@ -61,4 +62,7 @@ public interface WorksService {
 	public int getLikeNum(String works_id);
 
 	public int getCollectNum(String works_id);
+
+	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO);
+
 }

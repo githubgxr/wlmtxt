@@ -30,4 +30,6 @@ public interface UserService {
 
 	boolean isFollowedUser(String user_id, String user_id2);
 
+	int deleteAllMyFollow(wlmtxt_user loginUser);
+
 }

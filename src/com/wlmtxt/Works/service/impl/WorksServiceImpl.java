@@ -3,6 +3,7 @@ package com.wlmtxt.Works.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wlmtxt.User.dao.UserDao;
 import com.wlmtxt.User.service.UserService;
 import com.wlmtxt.Works.dao.WorksDao;
 import com.wlmtxt.Works.service.WorksService;
@@ -10,6 +11,7 @@ import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
@@ -17,8 +19,10 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.DTO.DiscussDTO;
+import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
@@ -28,6 +32,15 @@ public class WorksServiceImpl implements WorksService {
 
 	private WorksDao worksDao;
 	private UserService userService;
+	private UserDao userDao;
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
 
 	public UserService getUserService() {
 		return userService;
@@ -422,6 +435,41 @@ public class WorksServiceImpl implements WorksService {
 			worksDao.deleteMyWorks(works.getWorks_id());
 		}
 		return 1;
+	}
+
+	@Override
+	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO) {
+		List<FollowDTO> DTOList = new ArrayList<FollowDTO>();
+
+		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(user_id, myAttentionVO);
+
+		int i = worksDao.getMyAttentionTotalRecords(user_id);
+		myAttentionVO.setTotalRecords(i);
+		myAttentionVO.setTotalPages(((i - 1) / myAttentionVO.getPageSize()) + 1);
+		if (myAttentionVO.getPageIndex() <= 1) {
+			myAttentionVO.setHavePrePage(false);
+		} else {
+			myAttentionVO.setHavePrePage(true);
+		}
+		if (myAttentionVO.getPageIndex() >= myAttentionVO.getTotalPages()) {
+			myAttentionVO.setHaveNextPage(false);
+		} else {
+			myAttentionVO.setHaveNextPage(true);
+		}
+		
+		FollowDTO followDTO = new FollowDTO();
+		for (wlmtxt_follow follow : list) {
+			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(user_id, follow.getFollow_passive_user_id());
+			if (mutualFollow != null) {
+				followDTO.setMutualFollow("1");
+			} else {
+				followDTO.setMutualFollow("2");
+			}
+			followDTO.setUser(userDao.get_user_byID(user_id));
+			DTOList.add(followDTO);
+		}
+		myAttentionVO.setFollowDTO(DTOList);
+		return myAttentionVO;
 	}
 
 }

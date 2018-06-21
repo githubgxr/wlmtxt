@@ -438,6 +438,30 @@ public class UserAction extends ActionSupport {
 			pw.write("3");
 		}
 	}
+	
+	/**
+	 * 取消全部关注的用户
+	 * 
+	 * 返回，1-取关成功，2-取关失败
+	 * 
+	 * @date 2018年6月21日	下午7:47:25
+	 * 
+	 * @author gxr
+	 * @throws IOException 
+	 * 
+	 */
+	public void deleteAllMyFollow() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int result = userService.deleteAllMyFollow(loginUser);
+		if (result > 0) {
+			pw.write("1");
+		} else {
+			pw.write("2");
+		}
+	}
 
 	/**
 	 * 我的动态
