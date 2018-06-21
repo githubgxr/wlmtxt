@@ -10,11 +10,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
+
 
 <link rel="stylesheet" href="<%=basePath%>css/xzt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css" />
 <link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
 <script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
 </head>
@@ -29,12 +30,12 @@
 				<div class="img_wrap_list" style="float:left;width:100%;margin:5px 0;">
 					<span style="float:left;width:160px;text-align: right;line-height: 30px;">新密码：</span>
 					<input type="text" class="input_xzt" id="input_new_password"
-						style="width: 350px;float:left;margin:0 0 0 10px;" placeholder="请输入新密码"/>
+						style="width: 350px;float:left;margin:0 0 0 10px;" placeholder="请输入新密码" />
 				</div>
 				<div class="img_wrap_list" style="float:left;width:100%;margin:5px 0;">
 					<span style="float:left;width:160px;text-align: right;line-height: 30px;">确认新密码：</span>
 					<input type="text" class="input_xzt" id="input_new_repassword"
-						style="width: 350px;float:left;margin:0 0 0 10px;" placeholder="请确认新密码"/>
+						style="width: 350px;float:left;margin:0 0 0 10px;" placeholder="请确认新密码" />
 				</div>
 
 			</div>
