@@ -30,16 +30,21 @@ function listMyDynamicByPage(pageIndex){
 				 /*标题*/
 				 wddt_str+='<div class="video_title">'+wddt_response.worksDTOList[i].works.works_title+'</div>';
 				 /*浏览量*/
-				 wddt_str+='<div class="video_number">64845241</div>';
+				 wddt_str+='<div class="video_number">99999</div>';
 				 /*时间*/
 				 wddt_str+='<div class="video_time">'+wddt_response.worksDTOList[i].works.works_gmt_create+'</div>';
 				 wddt_str+='</div>';
 				 wddt_str+='</a>';
+				 
 				 /*---视频分类---*/
 				 wddt_str+='<div class="video_label">';
-				 wddt_str+='<div class="video_label_content">';
-				 wddt_str+='<a class="video_label_item">绝地求生</a>';
-				 wddt_str+='<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>';
+				 wddt_str+='<div id="video_label_content" class="video_label_content">';
+			/*	 wddt_str+='<a class="video_label_item">绝地求生</a>';
+				 wddt_str+='<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>';*/
+				
+				 for(var num=0;num<wddt_response.worksDTOList[i].keyWordDTOList.length;num++){
+					 wddt_str+='<a class="video_label_item">'+wddt_response.worksDTOList[i].keyWordDTOList[num].keyword.keyword_name+'</a>';
+				 }
 				 wddt_str+='</div>';
 				 wddt_str+='</div>';
 				 /*---删除---*/
