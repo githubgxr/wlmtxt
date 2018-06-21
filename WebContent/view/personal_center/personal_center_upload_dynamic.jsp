@@ -38,7 +38,7 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 </head>
-<body onload="init()">
+<body>
 	<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 		<div class="wlmtxt_container ">
@@ -53,17 +53,10 @@
 				<div class="fbsp_content list_container">
 					<div class="img_wrap">
 						<div class="img_wrap_list">
-							<span>作品分类：</span> <select class="works_classificationOne"
-								id="works_classificationOne"
-								onchange="works_classificationTwo()">
-								<option value="" id="selected">---请选择---</option>
-								<option value=1>电影</option>
-								<option value=2>电视剧</option>
-								<option value=3>综艺</option>
-								<option value=4>动画</option>
-								<option value=5>短片</option>
-							</select> <select id="works_classificationTwo">
-							</select>
+							<span>作品分类：</span>
+							 <select class="works_classificationOne" id="works_classificationOne">
+							</select> 
+							<!-- <select id="works_classificationTwo"></select> -->
 						</div>
 						<div class="img_wrap_list">
 							<span>视频标题：</span> <input class="form-control input_xzt"
@@ -91,7 +84,6 @@
 								<input type="file" class="filepath" id="imgfile"
 									onchange="img_change(this)" /> <img class="img" id="img"
 									src="<%=basePath%>img/upload_video.png" onclick="img_click()" />
-								<img src="" class="img2" />
 							</div>
 						</div>
 
@@ -99,12 +91,15 @@
 						<div class="img_wrap_list">
 							<span>选择作品：</span>
 							<div class="imgnum">
-								<input type="file" class="filepath" id="worksfile"
-									onchange="img_change(this)" /> <img class="img" id="img"
-									src="<%=basePath%>img/upload_video.png" onclick="img_click()" />
-								<img src="" class="img2" />
+
+								<input type="file" id="worksfile" class="inputfile"
+								/> 
+								<label for="file">Choose a file</label>
+
 							</div>
 						</div>
+						
+						
 						<div class=" img_wrap_list">
 							<a class="button_a" onclick="uploadWorks()">确认发布</a>
 						</div>
@@ -114,7 +109,9 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	<script type="text/javascript">
+	
+	<!-- 二级联动 -->
+	<!-- <script type="text/javascript">
 		var arr = new Array();
 		arr[0] = "---请选择---"
 		arr[1] = "科幻电影,恐怖电影,剧情电影,喜剧电影,电影短片"
@@ -161,7 +158,9 @@
 						works_classificationTwoArr[i]);
 			}
 		}
-	</script>
+	</script> -->
+	
+	<!-- 关键字 -->
 	<script type="text/javascript">
 		$(".btn_keyword").click(
 				function() {
@@ -183,87 +182,58 @@
 							if (($.inArray(input_keyword_value, array)) < 0) {
 								$(".div_box").append(str)
 							} else {
-								alert("请不要输入相同的关键字");
+								toastr.error("请不要输入相同的关键字");
 								$(".input_keyword").val("");
 								return;
 							}
 						}
 						$(".input_keyword").val("");
 					} else {
-						alert("请输入关键字");
+						toastr.error("请输入关键字");
 					}
 				});
 	</script>
+	
+	<!-- 上传图片预览 -->
 	<script type="text/javascript">
 		/*上传图片的JS*/
 		function img_click() {
 			document.getElementById("img").click();
 		}
 		function img_change(file) {
-			var worksfile = document.getElementById("worksfile");
+			var imgfile = document.getElementById("imgfile");
 			var reader = new FileReader();
 			reader.onload = function(evt) {
+				var img = document.getElementById("img");
 				img.src = evt.target.result;
 			}
 			reader.readAsDataURL(file.files[0]);
 		}
 	</script>
+	
+	<!-- 选择作品样式修饰 -->
+	<script type="text/javascript">
+	$(".inputfile").each( function(){ 
+		var $input = $(this), 
+		$label = $input.next('label'), 
+		labelVal = $label.html(); 
+		$input.on( 'change', function(e){ 
+			var fileName = ''; 
+			if( this.files && this.files.length > 1 ) 
+				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' )
+				.replace( '{count}', this.files.length ); 
+			else if(e.target.value)
+				fileName = e.target.value.split( '\\' ).pop(); 
+			if( fileName ) 
+				$label.html( fileName ); 
+			else 
+				$label.html( labelVal ); 
+			}); 
+		});
 
 
-	<!-- <script type="text/javascript">
-		$(function() {
-			$(".filepath").on("change", function() {
-				var srcs = getObjectURL(this.files[0]); //获取路径
-				$(this).nextAll(".img1").hide(); //this指的是input
-				$(this).nextAll(".img2").show(); //fireBUg查看第二次换图片不起做用
-				$(this).nextAll('.close').show(); //this指的是input
-				$(this).nextAll(".img2").attr("src", srcs); //this指的是input
-				$(this).val(''); //必须制空
-			})
-		})
-
-		function getObjectURL(file) {
-			var url = null;
-			if (window.createObjectURL != undefined) {
-				url = window.createObjectURL(file)
-			} else if (window.URL != undefined) {
-				url = window.URL.createObjectURL(file)
-			} else if (window.webkitURL != undefined) {
-				url = window.webkitURL.createObjectURL(file)
-			}
-			return url
-		};
-
-		$(function() {
-			$("#img")
-					.on(
-							"change",
-							".filepath1",
-							function() {
-								var srcs = getObjectURL(this.files[0]); //获取路径
-								//this指的是input
-								$(this).nextAll(".img22").attr("src", srcs); //this指的是input
-								$(this).nextAll(".img22").show(); //fireBUg查看第二次换图片不起做用*/
-								var htmlImg = '<div class="imgbox1">'
-										+ '<div class="imgnum1">'
-										+ '<input type="file" class="filepath1" />'
-										+ '<span class="close1">X</span>'
-										+ '<img src="btn.png" class="img11" />'
-										+ '<img src="'+srcs+'" class="img22" />'
-										+ '</div>' + '</div>';
-
-								$(this).parent().parent().before(htmlImg);
-								$(this).val(''); //必须制空
-								$(this).parent().parent().prev().find(".img11")
-										.hide(); //this指的是input
-								$(this).parent().parent().prev()
-										.find('.close1').show();
-
-							})
-		})
-	</script> -->
+	</script>
 </body>
-
 <script type="text/javascript"
 	src="<%=basePath%>/js/personal_center/personal_center_upload_dynamic.js">
 	

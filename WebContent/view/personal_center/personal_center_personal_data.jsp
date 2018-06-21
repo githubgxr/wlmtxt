@@ -7,14 +7,11 @@
 %>
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 			<link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_grzl.css" />
-
 	</head>
-
 	<body>
 		<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
@@ -32,9 +29,10 @@
 						<div class="personal-setting-container">
 							<div class="personal_info">
 								<div class="personal_pic">
-									<img src="<%=basePath%>img/user.jpg" />
+									<img class="img_user" src="<%=basePath%>img/user.jpg" />
 									<div class="update_msg">
-										<a href="#" class="category_a">更换头像</a>
+									<input type="file" id="btn_file" style="display:none;"/>
+										<a  class="category_a" id="update_user_img">更换头像</a>
 										<div class="personal_pic_alert">JPG或PNG格式，最大3MB，不支持GIF</div>
 									</div>
 								</div>
@@ -47,12 +45,17 @@
 									<div class="img_wrap_list">
 										<span>账号：</span>
 										<div class="personal_info_value div_email"></div>
-										<input type="text" class="input_xzt xg input_email" style="width:400px;" placeholder="" value="" />
+										<input type="text" class="input_xzt xg input_email" style="width:400px;" placeholder="" value="" disabled="disabled" />
 									</div>
 									<div class="img_wrap_list">
 										<span>性别：</span>
 										<div class="personal_info_value div_sex"></div>
-										<input type="text" class="input_xzt xg input_sex" style="width:400px;" placeholder="" value="" />
+										<!-- <input type="text" class="input_xzt xg input_sex" style="width:400px;" placeholder="" value="" /> -->
+										<select class="input_xzt xg input_sex " style="width:400px;">
+										<option value="">请选择</option>
+										<option value="男">男</option>
+										<option value="女">女</option>
+										</select>
 									</div>
 									<div class="img_wrap_list">
 										<span>简介：</span>

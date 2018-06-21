@@ -41,7 +41,7 @@
 			<div class="a_cateory" style="float: left;"
 				onclick="window.location.href='/wlmtxt/view/index/index_rank.jsp'">排行榜</div>
 			<!--头像-->
-			<img class="user_img" id="user_img"
+			<img class="user_img img_user" id="user_img"
 				src="<%=basePath%>img/user.jpg"
 				style="float: right; height: 45px; width: 45px; margin: 5.5px 0 0 0;" />
 			<!--个人中心-->
@@ -51,7 +51,6 @@
 			<div class="a_cateory login_show" style="float: right;display:none;"
 				onclick="window.location.href='/wlmtxt/view/personal_center/personal_center_upload_dynamic.jsp'">发布作品</div>
 			<!--搜索-->
-
 		</div>
 	</div>
 	<!-- 遮罩层 -->

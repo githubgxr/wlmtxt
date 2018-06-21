@@ -24,8 +24,9 @@
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 		<!--页面主体-->
 		
-		<div style="background-color: #FFFFFF;width: 1000px;margin: 10px calc( ( 100% - 1000px ) / 2 );border-radius: 5px;padding: 20px 0">
-			<a class="category_a" href="index_second_category_detail.jsp">科幻电影</a>
+		<div  id="div_box"
+		style="background-color: #FFFFFF;width: 1000px;margin: 10px calc( ( 100% - 1000px ) / 2 );border-radius: 5px;padding: 20px 0">
+			<!-- <a class="category_a" href="index_second_category_detail.jsp">科幻电影</a>
 			<a class="category_a" href="index_second_category_detail.jsp">恐怖电影</a>
 			<a class="category_a" href="index_second_category_detail.jsp">剧情电影</a>
 			<a class="category_a" href="index_second_category_detail.jsp">喜剧电影</a>
@@ -39,7 +40,7 @@
 			<a class="category_a" href="index_second_category_detail.jsp">喜剧电影</a>
 			<a class="category_a" href="index_second_category_detail.jsp">剧情电影</a>
 			<a class="category_a" href="index_second_category_detail.jsp">喜剧电影</a>
-			
+			 -->
 		</div>
 		
 		

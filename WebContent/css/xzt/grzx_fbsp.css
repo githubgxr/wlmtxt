@@ -145,13 +145,36 @@
 	padding: 0px;
 }
 
-.imgnum input {
+.imgnum #imgfile {
 	position: absolute;
 	margin-left: 180px;
 	margin-top: 0px;
 	width: 160px;
 	height: 100px;
-	opacity: 0;
+	opacity: 0; 
+}
+.inputfile {
+    width: 160px;
+	height: 30px;
+	margin-left: 180px;
+	margin-top: 0px;
+    opacity: 0; 
+    position: absolute; 
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+}
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+    cursor:pointer;
+}
+.inputfile:focus + label {
+    outline: 1px dotted #000; 
+    outline: -webkit-focus-ring-color auto 5px;
 }
 
 .imgnum img {
