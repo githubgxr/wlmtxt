@@ -141,6 +141,30 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
+	 * 获取该作品点赞数
+	 * 
+	 * @throws IOException
+	 */
+	public void getLikeNum() throws IOException {
+		int num = worksService.getLikeNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num);
+	}
+
+	/**
+	 * 获取该作品收藏数
+	 * 
+	 * @throws IOException
+	 */
+	public void getCollectNum() throws IOException {
+		int num = worksService.getCollectNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num);
+	}
+
+	/**
 	 * 我点赞的列表
 	 */
 	public void listLke() {

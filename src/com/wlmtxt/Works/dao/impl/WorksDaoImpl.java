@@ -38,7 +38,12 @@ public class WorksDaoImpl implements WorksDao {
 				+ "' order by keyword_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_keyword> keywordList = query.list();
-		return keywordList.get(0);
+
+		if (keywordList.size() == 0) {
+			return null;
+		} else {
+			return keywordList.get(0);
+		}
 	}
 
 	@Override
@@ -97,6 +102,22 @@ public class WorksDaoImpl implements WorksDao {
 		Query query = getSession().createQuery(hql);
 		wlmtxt_second_menu second_menu = (wlmtxt_second_menu) query.uniqueResult();
 		return second_menu;
+	}
+
+	@Override
+	public int getLikeNum(String works_id) {
+		String hql = "select count(*) from wlmtxt_like  where like_works_id='" + works_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public int getCollectNum(String works_id) {
+		String hql = "select count(*) from wlmtxt_collect  where collect_works_id='" + works_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
 	}
 
 	@Override
@@ -169,50 +190,48 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public wlmtxt_like findLikeBy_user_id_And_like_works_id(String like_user_id, String like_works_id)
-			throws Exception {
-		String hql = " from wlmtxt_like  where like_user_id = '" + like_user_id + "' and like_works_id='"
-				+ like_works_id + "'";
+	public void removeCollect(String collect_user_id, String collect_works_id) throws Exception {
+		String hql = "delete from wlmtxt_collect  where collect_user_id = '" + collect_user_id
+				+ "' and collect_works_id='" + collect_works_id + "'";
 		Query query = getSession().createQuery(hql);
-		wlmtxt_like like = (wlmtxt_like) query.uniqueResult();
-		return like;
+		query.executeUpdate();
 	}
 
 	@Override
-	public void removeLikeBy_user_id_And_like_works_id(String user_id, String like_works_id) throws Exception {
-		String hql = "delete l from wlmtxt_like l where l.like_user_id = '" + user_id + "' and l.like_works_id='"
+	public void removeLike(String user_id, String like_works_id) throws Exception {
+		String hql = "delete  from wlmtxt_like  where like_user_id = '" + user_id + "' and like_works_id='"
 				+ like_works_id + "'";
 		Query query = getSession().createQuery(hql);
-		int i = query.executeUpdate();
-		if (i > 0) {
-			System.out.println("取消点赞成功");
-		} else {
-			System.out.println("取消点赞失败");
-		}
+		query.executeUpdate();
 	}
 
 	@Override
-	public wlmtxt_collect findCollectBy_user_id_And_collect_works_id(String collect_user_id, String collect_works_id)
-			throws Exception {
+	public wlmtxt_collect findCollect(String collect_user_id, String collect_works_id) throws Exception {
 		String hql = "from wlmtxt_collect where collect_user_id = '" + collect_user_id + "' and collect_works_id='"
 				+ collect_works_id + "'";
 		Query query = getSession().createQuery(hql);
-		wlmtxt_collect collect = (wlmtxt_collect) query.uniqueResult();
-		return collect;
+		List<wlmtxt_collect> collect = query.list();
+
+		if (collect.size() == 0) {
+			return null;
+		} else {
+			return collect.get(0);
+		}
 	}
 
 	@Override
-	public void removeCollectBy_user_id_And_collect_works_id(String collect_user_id, String collect_works_id)
-			throws Exception {
-		String hql = "delete from wlmtxt_collect collect where collect.collect_user_id = '" + collect_user_id
-				+ "' and collect.collect_works_id='" + collect_works_id + "'";
+	public wlmtxt_like findLike(String like_user_id, String like_works_id) throws Exception {
+		String hql = " from wlmtxt_like  where like_user_id = '" + like_user_id + "' and like_works_id='"
+				+ like_works_id + "'";
 		Query query = getSession().createQuery(hql);
-		int i = query.executeUpdate();
-		if (i > 0) {
-			System.out.println("取消收藏成功");
+		List<wlmtxt_like> like = query.list();
+
+		if (like.size() == 0) {
+			return null;
 		} else {
-			System.out.println("取消收藏失败");
+			return like.get(0);
 		}
+
 	}
 
 	@Override

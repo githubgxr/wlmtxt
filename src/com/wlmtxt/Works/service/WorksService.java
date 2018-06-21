@@ -55,4 +55,7 @@ public interface WorksService {
 
 	public int countLikeNum(String works_id);
 
+	public int getLikeNum(String works_id);
+
+	public int getCollectNum(String works_id);
 }
