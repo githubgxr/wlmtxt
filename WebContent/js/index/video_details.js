@@ -23,7 +23,12 @@ function getWorksDetailVO() {
 			$("#detail_video_time").html(
 					detail_response.worksDTO.works.works_gmt_create);
 			// 关键字
-			$("#detail_video_keywords").html();
+			var detail_str="";
+			 for(var num=0;num<detail_response.worksDTO.keyWordDTOList.length;num++){
+				 detail_str+='<span class="video_label_item" style="margin: 0 10px 0 0;">'+detail_response.worksDTO.keyWordDTOList[num].keyword.keyword_name+'</span>';
+				
+			 }
+			 $("#detail_video_keywords").html(detail_str);
 			// 视频
 			$("#detail_video_content").attr(
 					"src",
@@ -34,10 +39,10 @@ function getWorksDetailVO() {
 					"/wlmtxt/Works/Works_getImg?imgName="
 							+ detail_response.worksDTO.works.works_cover);
 			// 下载
-			$("#detail_user_img").attr(
+			$("#download_a").attr(
 					"href",
 					"/wlmtxt/Works/Works_getVideo?worksName="
-							+ detail_response.worksDTO.works.works_id);
+					+ detail_response.worksDTO.works.works_name);
 
 			/*------用户*/
 			// 头像
@@ -84,7 +89,9 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				comment_list_str += '<div class="comment_delete"></div>';
+				comment_list_str += '<div class="comment_delete">删除</div>';
+				comment_list_str += '<div class="comment_delete">回复</div>';
+			
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';

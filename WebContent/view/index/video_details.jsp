@@ -25,18 +25,18 @@
 			<div style="width: 660px; float: left;">
 				<!--标题-->
 				<div id="detail_video_title"
-					style="color: #1cd388; font-size: 30px; margin: 20px 0 10px; padding: 0 50px 0 0; overflow: hidden;">樱花庄的宠物女孩</div>
+					style="color: #1cd388; font-size: 30px; margin: 20px 0 10px; padding: 0 50px 0 0; overflow: hidden;"></div>
 				<!--简介-->
 				<div id="detail_video_discribe"
-					style="color: #99a2aa; height: 50px; line-height: 25px; overflow: hidden; padding: 0 50px 0 0;">其实樱花庄一再告诉我们梦想是遥不可及的东西，人要学会现实，更要学会接受。其实樱花庄一再告诉我们梦想是遥不可及的东西。</div>
+					style="color: #99a2aa; height: 50px; line-height: 25px; overflow: hidden; padding: 0 50px 0 0;"></div>
 				<!--日期-->
 				<div id="detail_video_time" style="color: #99a2aa; margin: 10px 0 0px;">
-					<span>2013-02-26 09:12:49</span>
+					<span></span>
 				</div>
 				<!--关键字-->
 				<div id="detail_video_keywords" style="margin: 10px 0 10px;">
-					<span class="video_label_item" style="margin: 0 10px 0 0;">TV动画</span>
-					<span class="video_label_item" style="margin: 0 10px 0 0;">高虐</span>
+				<%-- 	<span class="video_label_item" style="margin: 0 10px 0 0;">TV动画</span>
+					<span class="video_label_item" style="margin: 0 10px 0 0;">高虐</span> --%>
 				</div>
 			</div>
 			<!--用户-->
