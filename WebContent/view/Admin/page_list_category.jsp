@@ -13,6 +13,7 @@
 <!---------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------->
 <title>菜单</title>
+<link rel="stylesheet" href="<%=basePath%>css/Admin/menu.css">
 </head>
 <body>
 	<jsp:include page="/admin_navbar.jsp" flush="true"></jsp:include>
@@ -35,7 +36,7 @@
 			<!---------------------------------------------------------------------------->
 
 			<s:iterator value="categoryListDTO" var="CL">
-				<div style="height: 50px;">
+				<div style="height: 50px;" id="father">
 					<i class="lnr lnr-bookmark"
 						style="color: #1abc9c; font-weight: bold; margin: 0 5px 0 0; font-size: 20px;"></i>
 					<%--  --%>
@@ -66,8 +67,9 @@
 					
 				</div>
 				<!---------------------------->
+				
 				<s:iterator value="#CL.sonCategoryList" var="SCL">
-					<div style="height: 50px; margin: 0 0 0 80px;">
+					<div style="height: 50px; margin: 0 0 0 80px;" class="son">
 						<span style="line-height: 50px;"><s:property
 								value="#SCL.second_menu_name" /></span>
 						
