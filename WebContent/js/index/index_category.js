@@ -19,10 +19,7 @@ $(function() {
 						.createTextNode(category_vo[num].first_menu_name));
 				div_box.appendChild(new_a);
 				new_a.id = category_vo[num].first_menu_id;
-				/*
-				 * new_a.href =
-				 * "/wlmtxt/Works/Works_listSecondMenu?first_menu.first_menu_id="+category_vo[num].first_menu_id;
-				 */
+				
 				new_a.onclick = function() {
 					getSecondMenu(this.id, 1);
 					getSecondList(this.id, 1);
@@ -42,6 +39,7 @@ $(function() {
 	xmlhtp.onreadystatechange = function() {
 		if (xmlhtp.readyState == 4 && xmlhtp.status == 200) {
 			list_vo = JSON.parse(xmlhtp.responseText);
+			console.log(list_vo);
 			for (var num = 0; num < list_vo.length; num++) {
 
 				/* 获得一级分类作品列表 */
@@ -113,28 +111,22 @@ $(function() {
 				var li_div_div_a = null;// li下的div下的div下的a
 
 				li_div_div = document.createElement("div");
-				li_div_div_a = document.createElement("a");
-
 				li_div_div.className = "video_label_content";
-				li_div_div_a.className = "video_label_item";
-
-				/* li_div_div_a.innerHTML="绝地求生"; */
-
-				li_div_div.appendChild(li_div_div_a);
 				li_div.appendChild(li_div_div);
 
 				a_div2_div1.innerHTML = list_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
 				a_div2_div3.innerHTML = list_vo[num].user.user_username;// 得到作品用户名
-
-				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
-						+ list_vo[num].works.works_cover;// 得到封面
-
-				/*
-				 * li_div_div_a.innerHTML =
-				 * list_vo[num].keyWordDTOList.keyword.keyword_name
-				 */
-
+				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="+list_vo[num].works.works_cover;// 得到封面
+				
+				/*获得关键字*/
+				for(i=0;i<list_vo[num].keyWordDTOList.length;i++){
+					li_div_div_a = document.createElement("a");
+					li_div_div_a.className = "video_label_item";
+					li_div_div_a.innerHTML = list_vo[num].keyWordDTOList[i].keyword.keyword_name;
+					li_div_div.appendChild(li_div_div_a);
+				}
+				
 			}
 		}
 	}
@@ -146,7 +138,6 @@ $(function() {
 function getSecondMenu(first_menu_id, pageIndex) {
 	var xhr = false;
 	var secondMenuList = null;
-
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -182,9 +173,9 @@ function getSecondMenu(first_menu_id, pageIndex) {
 	formData.append("myWorksVO.pageIndex", pageIndex);
 	xhr.send(formData);
 }
+
 /* 根据第一类别ID获取第二类别列表 */
 function getSecondList(first_menu_id, pageIndex) {
-	console.log(first_menu_id);
 	var xhrhp = false;
 	var SecondList_vo = null;
 	xhrhp = new XMLHttpRequest();
@@ -268,26 +259,23 @@ function getSecondList(first_menu_id, pageIndex) {
 				li_div_div_a = null;// li下的div下的div下的a
 
 				li_div_div = document.createElement("div");
-				li_div_div_a = document.createElement("a");
-
 				li_div_div.className = "video_label_content";
-				li_div_div_a.className = "video_label_item";
-
-				/* li_div_div_a.innerHTML="绝地求生"; */
-
-				li_div_div.appendChild(li_div_div_a);
 				li_div.appendChild(li_div_div);
 
 				a_div2_div1.innerHTML = SecondList_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
-				/*
-				 * a_div2_div3.innerHTML=SecondList_vo[num].user.user_username;//
-				 * 得到作品用户名
-				 */
+				
+				//a_div2_div3.innerHTML=SecondList_vo[num].user.user_username;//得到作品用户名
+				 
 				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
 						+ SecondList_vo[num].works.works_cover;// 得到封面
 
-				/* li_div_div_a.innerHTML=SecondList_vo[num].keyWordDTOList.keyword.keyword_name; */
+			/*	for(i=0;i<SecondList_vo[num].keyWordDTOList.length;i++){
+					li_div_div_a = document.createElement("a");
+					li_div_div_a.className = "video_label_item";
+					li_div_div_a.innerHTML = SecondList_vo[num].keyWordDTOList[i].keyword.keyword_name;
+					li_div_div.appendChild(li_div_div_a);
+				}*/
 
 			}
 		}
@@ -309,15 +297,12 @@ function getThirdList(second_menu_id, pageIndex) {
 		if (xhrhprt.readyState == 4 && xhrhprt.status == 200) {
 			ThirdList_vo = JSON.parse(xhrhprt.responseText);
 			console.log("555");
+			
+			/*隐藏所有包含二级分类的div*/
+			var div_box=document.getElementById("div_box");
+			div_box.style.display="none";
 
-			/* 移出所有二级菜单 */
-			var old_a = document.getElementsByClassName("category_a");
-			var long = old_a.length;
-			for (var i = 0; i < long; i++) {
-				old_a[0].parentNode.removeChild(old_a[0]);
-			}
-
-			/* 移出所有二级列表 */
+			/* 移出所有二级作品列表 */
 			var old_li = document.getElementsByClassName("list_video_item");
 			var long = old_li.length;
 			for (var i = 0; i < long; i++) {
@@ -395,25 +380,22 @@ function getThirdList(second_menu_id, pageIndex) {
 				li_div_div_a = null;// li下的div下的div下的a
 
 				li_div_div = document.createElement("div");
-				li_div_div_a = document.createElement("a");
-
 				li_div_div.className = "video_label_content";
-				li_div_div_a.className = "video_label_item";
-
-				/* li_div_div_a.innerHTML="绝地求生"; */
-
-				li_div_div.appendChild(li_div_div_a);
 				li_div.appendChild(li_div_div);
 
 				a_div2_div1.innerHTML = ThirdList_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
-				// a_div2_div3.innerHTML=SecondList_vo[num].user.user_username;//
-				// 得到作品用户名
+				//a_div2_div3.innerHTML=ThirdList_vo[num].user.user_username;// 得到作品用户名
 
 				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
 						+ ThirdList_vo[num].works.works_cover;// 得到封面
 
-				// li_div_div_a.innerHTML=SecondList_vo[num].keyWordDTOList.keyword.keyword_name;
+				/*for(i=0;i<ThirdList_vo[num].keyWordDTOList.length;i++){
+					li_div_div_a = document.createElement("a");
+					li_div_div_a.className = "video_label_item";
+					li_div_div_a.innerHTML = ThirdList_vo[num].keyWordDTOList[i].keyword.keyword_name;
+					li_div_div.appendChild(li_div_div_a);
+				}*/
 
 			}
 		}
