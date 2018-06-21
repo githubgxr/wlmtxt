@@ -61,8 +61,8 @@
 		<div class="log_and_reg">
 			<div class="log_head">
 				<img class="logo_img" alt="" src="<%=basePath%>css/zb/img/logo.png">
-				<span class="log_text selected_log">登录</span> <span
-					class="log_text  not_selected_log">注册</span> <img id="close"
+				<span class="log_text login_text selected_log">登录</span> <span
+					class="log_text register_text not_selected_log">注册</span> <img id="close"
 					class="close_img" alt="" src="<%=basePath%>img/close.png">
 			</div>
 			<!-- 登录 -->
@@ -103,6 +103,17 @@
 				<!-- 注册按钮 -->
 				<button class="btn btn-success btn-block reg_btn button_a"
 					style="font-size: 16px;" id="register_button" onclick="register()">注册</button>
+			</div>
+			<!-- 忘记密码-->
+			<div class="login_div" id="forget_password_div" style="display: none;">
+				<!-- 邮箱 -->
+				<input type="text" class="form-control log_email"
+					placeholder="请输入邮箱" id="forget_password_email" oninput="checkEmailForgetPassword()" onblur="checkEmailForgetPassword()" />
+				<!-- 错误提示框 -->
+				<div class="log_alert_div" id="forget_password_alert_div"></div>
+				<!-- 找回密码按钮 -->
+				<button class="btn btn-success btn-block reg_btn button_a"
+					style="font-size: 16px;" id="forget_password_button" onclick="getBackPassword()">找回密码</button>
 			</div>
 			<h4 style="display:none;padding:20px;float:left;" id="check_email_text">邮件发送成功，请进行验证...</h4>
 		</div>
