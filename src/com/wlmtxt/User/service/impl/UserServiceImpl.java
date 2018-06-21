@@ -128,6 +128,36 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public int deleteAllMyFollow(wlmtxt_user loginUser) {
+		return userDao.deleteAllMyFollow(loginUser);
+	}
+
+	@Override
+	public void noticeAllMyFans(wlmtxt_user loginUser) throws Exception {
+		List<wlmtxt_user> list = userDao.listMyFans(loginUser.getUser_id());
+		wlmtxt_follow follow = new wlmtxt_follow();
+		for (wlmtxt_user user : list) {
+			follow.setFollow_id(TeamUtil.getUuid());
+			follow.setFollow_passive_user_id(user.getUser_id());
+			follow.setFollow_active_user_id(loginUser.getUser_id());
+			follow.setFollow_gmt_create(TeamUtil.getStringSecond());
+			follow.setFollow_gmt_modified(TeamUtil.getStringSecond());
+			userDao.noticeFans(follow);
+		}
+	}
+
+	@Override
+	public void noticeMyFans(wlmtxt_user loginUser, wlmtxt_user accpet_user) throws Exception {
+		wlmtxt_follow follow = new wlmtxt_follow();
+		follow.setFollow_id(TeamUtil.getUuid());
+		follow.setFollow_passive_user_id(accpet_user.getUser_id());
+		follow.setFollow_active_user_id(loginUser.getUser_id());
+		follow.setFollow_gmt_create(TeamUtil.getStringSecond());
+		follow.setFollow_gmt_modified(TeamUtil.getStringSecond());
+		userDao.noticeFans(follow);
+	}
+
 	/*
 	 * @Override public List<wlmtxt_works_keyword> listSecondOfMyWorks(String
 	 * user_id) { List<wlmtxt_works> listWorks = userDao.listMyWorks(user_id);

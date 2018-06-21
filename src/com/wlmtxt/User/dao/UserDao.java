@@ -38,4 +38,10 @@ public interface UserDao {
 
 	wlmtxt_follow findFollowBy_user_id(String active_user_id, String passive_user_id);
 
+	int deleteAllMyFollow(wlmtxt_user loginUser);
+
+	List<wlmtxt_user> listMyFans(String user_id);
+
+	void noticeFans(wlmtxt_follow follow) throws Exception;
+
 }
