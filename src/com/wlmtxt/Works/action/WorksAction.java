@@ -101,6 +101,9 @@ public class WorksAction extends ActionSupport {
 			// file = new File("D://wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		worksService.addPlayHistoryByFileName(worksName, user.getUser_id());
+
 		return "getFile";
 	}
 
@@ -138,6 +141,42 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
+	}
+
+	/**
+	 * 获取该作品点赞数
+	 * 
+	 * @throws IOException
+	 */
+	public void getLikeNum() throws IOException {
+		int num = worksService.getLikeNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num);
+	}
+
+	/**
+	 * 获取该作品收藏数
+	 * 
+	 * @throws IOException
+	 */
+	public void getCollectNum() throws IOException {
+		int num = worksService.getCollectNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num);
+	}
+
+	/**
+	 * 获取该作品播放量
+	 * 
+	 * @throws IOException
+	 */
+	public void getPlayNum() throws IOException {
+		int num = worksService.getPlayNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num);
 	}
 
 	/**
