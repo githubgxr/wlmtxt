@@ -18,14 +18,14 @@ public interface WorksDao {
 
 	void saveLike(wlmtxt_like like) throws Exception;
 
-	wlmtxt_like findLikeBy_user_id_And_like_works_id(String like_user_id, String like_works_id) throws Exception;
+	wlmtxt_like findLike(String like_user_id, String like_works_id) throws Exception;
 
-	void removeLikeBy_user_id_And_like_works_id(String user_id, String like_works_id) throws Exception;
+	void removeLike(String user_id, String like_works_id) throws Exception;
 
-	wlmtxt_collect findCollectBy_user_id_And_collect_works_id(String collect_user_id, String collect_works_id)
+	wlmtxt_collect findCollect(String collect_user_id, String collect_works_id)
 			throws Exception;
 
-	void removeCollectBy_user_id_And_collect_works_id(String collect_user_id, String collect_works_id) throws Exception;
+	void removeCollect(String collect_user_id, String collect_works_id) throws Exception;
 
 	void saveCollect(wlmtxt_collect new_collect) throws Exception;
 
@@ -86,5 +86,8 @@ public interface WorksDao {
 	wlmtxt_keyword getWordByID(String works_keyword_keyword_id);
 
 	List<wlmtxt_works> listWorksAllByUserId(String user_id);
+	int getLikeNum(String works_id);
+
+	int getCollectNum(String works_id);
 
 }
