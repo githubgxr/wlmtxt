@@ -8,6 +8,7 @@ import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
@@ -22,8 +23,7 @@ public interface WorksDao {
 
 	void removeLike(String user_id, String like_works_id) throws Exception;
 
-	wlmtxt_collect findCollect(String collect_user_id, String collect_works_id)
-			throws Exception;
+	wlmtxt_collect findCollect(String collect_user_id, String collect_works_id) throws Exception;
 
 	void removeCollect(String collect_user_id, String collect_works_id) throws Exception;
 
@@ -65,6 +65,8 @@ public interface WorksDao {
 
 	wlmtxt_works getWorksByID(String works_id);
 
+	wlmtxt_works getWorksByFileName(String fileName);
+
 	List<wlmtxt_discuss> getDiscussListByFatherID(String works_id);
 
 	void saveDiscuss(wlmtxt_discuss accpet_discuss);
@@ -88,5 +90,13 @@ public interface WorksDao {
 	int getLikeNum(String works_id);
 
 	int getCollectNum(String works_id);
+
+	int getPlayHistoryNumByFileName(String fileName);
+
+	int getPlayNum(String works_id);
+
+	void addPlayHistoryByFileName(wlmtxt_play_history history);
+
+	List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID);
 
 }
