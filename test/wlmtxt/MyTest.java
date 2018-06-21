@@ -21,7 +21,7 @@ public class MyTest {
 	@Test
 	public void ttttt() {
 
-		System.out.println(worksService.findPlayHistoryNumByFileName("f8ef023f-7b7a-47aa-b679-f50c50bd9f86.mp4"));
+		System.out.println(worksService.getCollectNum("sdafasdf"));
 	}
 
 	/*

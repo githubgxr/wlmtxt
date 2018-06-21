@@ -152,7 +152,7 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.getLikeNum(accept_works.getWorks_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(num);
+		response.getWriter().write(num + "");
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.getCollectNum(accept_works.getWorks_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(num);
+		response.getWriter().write(num + "");
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.getPlayNum(accept_works.getWorks_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(num);
+		response.getWriter().write(num + "");
 	}
 
 	/**
