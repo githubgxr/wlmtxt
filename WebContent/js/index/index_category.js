@@ -265,17 +265,17 @@ function getSecondList(first_menu_id, pageIndex) {
 				a_div2_div1.innerHTML = SecondList_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
 				
-				//a_div2_div3.innerHTML=SecondList_vo[num].user.user_username;//得到作品用户名
+				a_div2_div3.innerHTML=SecondList_vo[num].user.user_username;//得到作品用户名
 				 
 				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
 						+ SecondList_vo[num].works.works_cover;// 得到封面
 
-			/*	for(i=0;i<SecondList_vo[num].keyWordDTOList.length;i++){
+				for(i=0;i<SecondList_vo[num].keyWordDTOList.length;i++){
 					li_div_div_a = document.createElement("a");
 					li_div_div_a.className = "video_label_item";
 					li_div_div_a.innerHTML = SecondList_vo[num].keyWordDTOList[i].keyword.keyword_name;
 					li_div_div.appendChild(li_div_div_a);
-				}*/
+				}
 
 			}
 		}
@@ -385,17 +385,17 @@ function getThirdList(second_menu_id, pageIndex) {
 
 				a_div2_div1.innerHTML = ThirdList_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
-				//a_div2_div3.innerHTML=ThirdList_vo[num].user.user_username;// 得到作品用户名
+				a_div2_div3.innerHTML=ThirdList_vo[num].user.user_username;// 得到作品用户名
 
 				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
 						+ ThirdList_vo[num].works.works_cover;// 得到封面
 
-				/*for(i=0;i<ThirdList_vo[num].keyWordDTOList.length;i++){
+				for(i=0;i<ThirdList_vo[num].keyWordDTOList.length;i++){
 					li_div_div_a = document.createElement("a");
 					li_div_div_a.className = "video_label_item";
 					li_div_div_a.innerHTML = ThirdList_vo[num].keyWordDTOList[i].keyword.keyword_name;
 					li_div_div.appendChild(li_div_div_a);
-				}*/
+				}
 
 			}
 		}
