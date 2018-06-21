@@ -63,7 +63,7 @@ public class WorksAction extends ActionSupport {
 	private String keyword;
 	//
 	private MyWorksVO myWorksVO;
-	//我的关注页面列表
+	// 我的关注页面列表
 	private MyAttentionVO myAttentionVO;
 
 	public MyAttentionVO getMyAttentionVO() {
@@ -162,6 +162,13 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void getLikeNum() throws IOException {
 		int num = worksService.getLikeNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num + "");
+	}
+
+	public void getHotByWorksID() throws IOException {
+		int num = worksService.getHotByWorksID(accept_works.getWorks_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(num + "");
@@ -309,7 +316,7 @@ public class WorksAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
 	}
-	
+
 	/**
 	 * 删除所有作品
 	 * 
@@ -317,7 +324,7 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * @author gxr
 	 * 
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void deleteAllMyWorks() throws IOException {
 		wlmtxt_user loginuser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -326,7 +333,6 @@ public class WorksAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
 	}
-	
 
 	public void getWorksDetailVO() throws IOException {
 		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
@@ -535,7 +541,7 @@ public class WorksAction extends ActionSupport {
 		int playCountNum = worksService.totalPlayNum(accept_works.getWorks_id());
 		pw.write(playCountNum);
 	}
-	
+
 	/**
 	 * 播放页，统计收藏次数
 	 * 
@@ -569,25 +575,24 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.countLikeNum(accept_works.getWorks_id());
 		pw.write(num);
 	}
-	
+
 	/**
-	 * 个人中心的搜索：
-	 * 搜索我的动态（作品标题、二级分类）: 接收，option=dynamic, searchword; 返回分类列表
+	 * 个人中心的搜索： 搜索我的动态（作品标题、二级分类）: 接收，option=dynamic, searchword; 返回分类列表
 	 * 我的关注（用户昵称、邮箱）：接收，option=attention， searchword; 返回分类列表
 	 * 我的粉丝（用户昵称、邮箱）：接收，option=fans， searchword; 返回分类列表
 	 * 观看历史（作品标题、二级分类）：接收，option=playhistory， searchword; 返回分类列表
 	 * 与我相关（作品标题、二级分类）：接收，option=relation， searchword; 返回分类列表
 	 * 
-	 * @date 2018年6月21日	下午4:43:04
+	 * @date 2018年6月21日 下午4:43:04
 	 * 
 	 * @author gxr
 	 * 
-	 * TODO
+	 *         TODO
 	 */
 	public void search() {
-		
+
 	}
-	
+
 	/**
 	 * 我的关注
 	 * 
@@ -595,12 +600,12 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * 返回，vo中1为已关注，2为未关注
 	 * 
-	 * @date 2018年6月21日	下午4:57:51
+	 * @date 2018年6月21日 下午4:57:51
 	 * 
 	 * @author gxr
 	 * 
-	 * XXX 待测试
-	 * @throws IOException 
+	 *         XXX 待测试
+	 * @throws IOException
 	 */
 	public void listMyAttentionVO() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -612,7 +617,6 @@ public class WorksAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(myAttentionVO));
 	}
-	
 
 	public WorksService getWorksService() {
 		return worksService;
