@@ -23,6 +23,7 @@ import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import util.JavaMail;
 import util.JsonUtils;
 import util.ReflectUtil;
+import util.TeamUtil;
 import util.md5;
 
 @SuppressWarnings("serial")
@@ -135,13 +136,14 @@ public class UserAction extends ActionSupport {
 		String port = properties.getProperty("projectport");
 		String content = properties.getProperty("mailcontent");
 		String utf8_content = new String(content.getBytes("ISO-8859-1"), "utf-8");
-		
+		//昵称
+		String nickname = new String(accpet_user.getUser_username().getBytes("ISO-8859-1"), "utf-8");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		String href = "http://"+host+":"+port+"/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="
 				+ accpet_user.getUser_mail() + "&accpet_user.user_password="
 				+ md5.GetMD5Code(accpet_user.getUser_password()) + "&accpet_user.user_username="
-				+ accpet_user.getUser_username();
+				+ nickname;
 		// String href =
 		// "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		// 邮件内容
@@ -289,13 +291,82 @@ public class UserAction extends ActionSupport {
 	}
 
 	/**
-	 * 跳转到忘记密码，修改密码页面
+	 * 发送忘记密码的验证邮件
+	 * 
+	 * 1-发送成功
+	 * 2-发送失败
+	 * 
+	 * @date 2018年6月21日	下午2:39:32
+	 * 
+	 * @author gxr
+	 * 
+	 * TODO
+	 * @throws IOException 
+	 */
+	public void sendMailOfForgotPassword() throws IOException {
+		//加载邮件配置文件
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader().getResourceAsStream("javamail.properties"));
+		String host = properties.getProperty("projecthost");
+		String port = properties.getProperty("projectport");
+		String content = properties.getProperty("mailcontent");
+		String utf8_content = new String(content.getBytes("ISO-8859-1"), "utf-8");
+		//昵称
+		String nickname = new String(accpet_user.getUser_username().getBytes("ISO-8859-1"), "utf-8");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		String href = "http://"+host+":"+port+"/wlmtxt/User/User_skipToModifyPasswordPage?accpet_user.user_mail=" + accpet_user.getUser_mail();
+		// 邮件内容
+		String mailcontent = "<p><a href=" + href + ">"+utf8_content+"</a></p>";
+		PrintWriter pw = response.getWriter();
+		try {
+			JavaMail.sendMail(mailcontent, accpet_user.getUser_mail());
+			pw.write("1");
+		} catch (Exception e) {
+			pw.write("2");
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 跳转到忘记密码后，输入新密码页面
 	 * 
 	 * @return
 	 */
 	public String skipToModifyPasswordPage() {
 		return "skipToModifyPasswordPage";
 	}
+	
+	/**
+	 * 输入新密码后，确认修改密码
+	 * 
+	 * 接收，user_mail, user_password
+	 * 
+	 * 返回，1-修改成功， 2-修改失败
+	 * 
+	 * @date 2018年6月21日	下午2:38:30
+	 * 
+	 * @author gxr
+	 * 
+	 * TODO
+	 * @throws IOException 
+	 */
+	public void modifiedPasswordBehindForgetted() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		//获取此邮箱的用户信息
+		wlmtxt_user user = userService.mailRegisted(accpet_user);
+		user.setUser_password(accpet_user.getUser_password());
+		user.setUser_gmt_modified(TeamUtil.getStringSecond());
+		String registerResult = userService.modifyPassword(user);
+		PrintWriter pw = response.getWriter();
+		if ("1".equals(registerResult)) {
+			pw.write("1");
+		} else {
+			pw.write("2");
+		}
+	}
+	
+	
 	/**
 	 * 得到用户头像
 	 * @throws IOException 
