@@ -168,7 +168,19 @@ public class UserDaoImpl implements UserDao {
 		Query query = getSession().createQuery(hql);
 		return query.executeUpdate();
 	}
-	
+
+	@Override
+	public List<wlmtxt_user> listMyFans(String user_id) {
+		String hql = "from wlmtxt_follow where follow_passive_user_id='"+user_id+"'";
+		Query query = getSession().createQuery(hql);
+		return query.list();
+	}
+
+	@Override
+	public void noticeFans(wlmtxt_follow follow)  throws Exception{
+		getSession().save(follow);
+	}
+
 	
 //	public void remov
 	

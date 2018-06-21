@@ -403,6 +403,7 @@ public class UserAction extends ActionSupport {
 	 * @author gxr
 	 * @throws IOException
 	 *
+	 * XXX 
 	 */
 	public void isFollowedUser() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -421,6 +422,8 @@ public class UserAction extends ActionSupport {
 	 * 1-关注成功 2-关注失败 3-未登录
 	 * 
 	 * @throws IOException
+	 * 
+	 * XXX
 	 */
 	public void followUser() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -449,6 +452,7 @@ public class UserAction extends ActionSupport {
 	 * @author gxr
 	 * @throws IOException 
 	 * 
+	 * XXX
 	 */
 	public void deleteAllMyFollow() throws IOException {
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -462,7 +466,62 @@ public class UserAction extends ActionSupport {
 			pw.write("2");
 		}
 	}
-
+	
+	/**
+	 * 关注所有粉丝
+	 * 
+	 * 返回，1-成功，2-失败
+	 * 
+	 * @date 2018年6月21日	下午8:14:30
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 * 
+	 * XXX
+	 */
+	public void noticeAllMyFans() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		 try {
+			userService.noticeAllMyFans(loginUser);
+			pw.write("1");
+		} catch (Exception e) {
+			pw.write("2");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 关注单个粉丝
+	 * 
+	 * 返回，1-成功，2-失败
+	 * 
+	 * @date 2018年6月21日	下午8:42:33
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 * 
+	 * XXX
+	 */
+	public void noticeMyFans() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		try {
+			userService.noticeMyFans(loginUser, accpet_user);
+			pw.write("1");
+		} catch (Exception e) {
+			pw.write("2");
+			e.printStackTrace();
+		}
+	}
+	
+	
 	/**
 	 * 我的动态
 	 * 
