@@ -60,13 +60,12 @@ public interface WorksService {
 
 	public int deleteAllMyWorks(String user_id);
 
-
 	public int getLikeNum(String works_id);
 
 	public int getCollectNum(String works_id);
 
 	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO);
-	
+
 	public void addPlayHistoryByFileName(String fileName, String userID);
 
 	public int findPlayHistoryNumByFileName(String fileName);
@@ -78,5 +77,14 @@ public interface WorksService {
 	public int getPlayNum(String works_id);
 
 	public CategoryDTO getCategoryDTOByID(String menu_id);
+
+	/**
+	 * 获取单个作品的热度 <br>
+	 * 播放1 点赞2 评论3 收藏4
+	 * 
+	 * @param works_id
+	 * @return
+	 */
+	public int getHotByWorksID(String works_id);
 
 }

@@ -137,6 +137,14 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public int getDiscussNum(String works_id) {
+		String hql = "select count(*) from wlmtxt_discuss  where discuss_father_discuss_id='" + works_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
 	public int getPlayNum(String works_id) {
 		String hql = "select count(*) from wlmtxt_play_history  where play_history_works_id='" + works_id + "' ";
 		Query query = getSession().createQuery(hql);
@@ -364,7 +372,8 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> listWorksAllByUserId(String user_id) {
-		String hql = "from wlmtxt_works where works_passed='1' and works_deleted='2' and works_user_id='"+user_id+"' order by works_gmt_create desc";
+		String hql = "from wlmtxt_works where works_passed='1' and works_deleted='2' and works_user_id='" + user_id
+				+ "' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
@@ -391,9 +400,10 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public wlmtxt_follow findFollowByActiveUserId(String user_id, String follow_passive_user_id) {
-		String hql = "from wlmtxt_follow where follow_active_user_id='"+ follow_passive_user_id+"' and follow_passie_user_id='"+user_id+"'";
+		String hql = "from wlmtxt_follow where follow_active_user_id='" + follow_passive_user_id
+				+ "' and follow_passie_user_id='" + user_id + "'";
 		Query query = getSession().createQuery(hql);
-		wlmtxt_follow result= (wlmtxt_follow) query.uniqueResult();
+		wlmtxt_follow result = (wlmtxt_follow) query.uniqueResult();
 		return result;
 	}
 

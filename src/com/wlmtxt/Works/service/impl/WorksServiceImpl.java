@@ -60,13 +60,34 @@ public class WorksServiceImpl implements WorksService {
 		this.worksDao = worksDao;
 	}
 
+	@Override
+	public int getHotByWorksID(String works_id) {
+		/*
+		 * 播放1 点赞2 评论3 收藏4
+		 */
+		int hot = 0;
+		// 获取播放数量
+		int playNum = getPlayNum(works_id);
+		hot = hot + (playNum * 1);
+		// 获取点赞数量
+		int likeNum = getLikeNum(works_id);
+		hot = hot + (likeNum * 2);
+		// 获取评论及评论回复的数量
+		int discussNum = getDiscussNum(works_id);
+		hot = hot + (discussNum * 3);
+		// 收藏数量
+		int collectNum = getCollectNum(works_id);
+		hot = hot + (collectNum * 4);
+		//
+		return hot;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
 	 * com.wlmtxt.Works.service.WorksService#deleteMyWorks(java.lang.String)
 	 */
-	// TODO
 	@Override
 	public List<wlmtxt_play_history> findPlayHistoryListByWorksID(String worksID) {
 		return worksDao.listPlayHistoryByWorksID(worksID);
@@ -75,6 +96,10 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public int getPlayNum(String works_id) {
 		return worksDao.getPlayNum(works_id);
+	}
+
+	private int getDiscussNum(String works_id) {
+		return worksDao.getDiscussNum(works_id);
 	}
 
 	@Override
@@ -502,7 +527,7 @@ public class WorksServiceImpl implements WorksService {
 		} else {
 			myAttentionVO.setHaveNextPage(true);
 		}
-		
+
 		FollowDTO followDTO = new FollowDTO();
 		for (wlmtxt_follow follow : list) {
 			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(user_id, follow.getFollow_passive_user_id());
