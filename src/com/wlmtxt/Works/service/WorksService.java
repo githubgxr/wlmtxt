@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
@@ -54,5 +55,19 @@ public interface WorksService {
 	public int countCollectNum(String works_id);
 
 	public int countLikeNum(String works_id);
+
+	public int getLikeNum(String works_id);
+
+	public int getCollectNum(String works_id);
+
+	public void addPlayHistoryByFileName(String fileName, String userID);
+
+	public int findPlayHistoryNumByFileName(String fileName);
+
+	public List<wlmtxt_play_history> findPlayHistoryListByWorksID(String worksID);
+
+	public wlmtxt_works getWorksByFileName(String fileName);
+
+	public int getPlayNum(String works_id);
 
 }

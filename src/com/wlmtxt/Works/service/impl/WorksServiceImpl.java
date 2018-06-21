@@ -12,6 +12,7 @@ import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
@@ -44,6 +45,50 @@ public class WorksServiceImpl implements WorksService {
 	public void setWorksDao(WorksDao worksDao) {
 		this.worksDao = worksDao;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.wlmtxt.Works.service.WorksService#deleteMyWorks(java.lang.String)
+	 */
+	// TODO
+	@Override
+	public List<wlmtxt_play_history> findPlayHistoryListByWorksID(String worksID) {
+		return worksDao.listPlayHistoryByWorksID(worksID);
+	};
+
+	@Override
+	public int getPlayNum(String works_id) {
+		return worksDao.getPlayNum(works_id);
+	}
+
+	@Override
+	public int findPlayHistoryNumByFileName(String fileName) {
+		return worksDao.getPlayHistoryNumByFileName(fileName);
+	}
+
+	@Override
+	public wlmtxt_works getWorksByFileName(String fileName) {
+		return worksDao.getWorksByFileName(fileName);
+	}
+
+	@Override
+	public void addPlayHistoryByFileName(String fileName, String userID) {
+
+		wlmtxt_works works = getWorksByFileName(fileName);
+
+		wlmtxt_play_history history = new wlmtxt_play_history();
+		history.setPlay_history_id(TeamUtil.getUuid());
+		history.setPlay_history_show("1");
+		history.setPlay_history_user_id(userID);
+		history.setPlay_history_works_id(works.getWorks_id());
+		String time = TeamUtil.getStringSecond();
+		history.setPlay_history_gmt_create(time);
+		history.setPlay_history_gmt_modified(time);
+
+		worksDao.addPlayHistoryByFileName(history);
+	};
 
 	@Override
 	public void deleteMyWorks(String works_id) {
@@ -138,19 +183,7 @@ public class WorksServiceImpl implements WorksService {
 			System.out.println(worksList.size());
 			for (wlmtxt_works works : worksList) {
 				WorksDTO worksDTO = new WorksDTO();
-				worksDTO.setWorks(works);
-				if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
-				} else {
-					wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-					worksDTO.setSecondMenu(secondMenu);
-					if (null == secondMenu.getSecond_menu_first_menu_id()
-							|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
-					} else {
-						wlmtxt_first_menu firstMenu = worksDao
-								.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-						worksDTO.setFirstMenu(firstMenu);
-					}
-				}
+				worksDTO = getWorksDTOByID(works.getWorks_id());
 				worksDTOList.add(worksDTO);
 			}
 		}
@@ -165,17 +198,7 @@ public class WorksServiceImpl implements WorksService {
 		for (wlmtxt_works works : worksList) {
 			WorksDTO worksDTO = new WorksDTO();
 			worksDTO.setWorks(works);
-			if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
-			} else {
-				wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-				worksDTO.setSecondMenu(secondMenu);
-				if (null == secondMenu.getSecond_menu_first_menu_id()
-						|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
-				} else {
-					wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-					worksDTO.setFirstMenu(firstMenu);
-				}
-			}
+			worksDTO = getWorksDTOByID(works.getWorks_id());
 			worksDTOList.add(worksDTO);
 		}
 		return worksDTOList;
@@ -298,7 +321,8 @@ public class WorksServiceImpl implements WorksService {
 
 	@Override
 	public boolean isCollectWorks(String user_id, String works_id) throws Exception {
-		wlmtxt_collect collect = worksDao.findCollectBy_user_id_And_collect_works_id(user_id, user_id);
+		wlmtxt_collect collect = worksDao.findCollect(user_id, works_id);
+		System.out.println(collect);
 		if (collect == null) {
 			return false;
 		} else {
@@ -309,7 +333,7 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public boolean isLiked(String userID, String worksID) throws Exception {
 
-		wlmtxt_like like = worksDao.findLikeBy_user_id_And_like_works_id(userID, worksID);
+		wlmtxt_like like = worksDao.findLike(userID, worksID);
 		if (like == null) {
 			return false;
 		} else {
@@ -319,50 +343,48 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public int getLikeNum(String works_id) {
+		return worksDao.getLikeNum(works_id);
+	}
+
+	@Override
+	public int getCollectNum(String works_id) {
+		return worksDao.getCollectNum(works_id);
+	}
+
+	@Override
 	public void likWorks(wlmtxt_user user, wlmtxt_works works) throws Exception {
-		String like_user_id = user.getUser_id();
-		String like_works_id = works.getWorks_id();
-		wlmtxt_like like = worksDao.findLikeBy_user_id_And_like_works_id(like_user_id, like_works_id);
-		Boolean like_flag;
+		// 查询是否有点赞记录
+		wlmtxt_like like = worksDao.findLike(user.getUser_id(), works.getWorks_id());
 		if (like == null) {
-			like_flag = false;
-		} else {
-			like_flag = true;
-		}
-		if (like_flag) {
-			worksDao.removeLikeBy_user_id_And_like_works_id(like_user_id, like_works_id);
-		} else {
+			// 如果没有点赞，就点赞
 			wlmtxt_like new_like = new wlmtxt_like();
 			new_like.setLike_id(TeamUtil.getUuid());
-			new_like.setLike_user_id(like_user_id);
-			new_like.setLike_works_id(like_works_id);
+			new_like.setLike_user_id(user.getUser_id());
+			new_like.setLike_works_id(works.getWorks_id());
 			new_like.setLike_gmt_create(TeamUtil.getStringSecond());
 			new_like.setLike_gmt_modified(TeamUtil.getStringSecond());
 			worksDao.saveLike(new_like);
+		} else {
+			// 点赞了就取消点赞
+			worksDao.removeLike(user.getUser_id(), works.getWorks_id());
 		}
 	}
 
 	@Override
 	public void collectWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception {
-		String collect_user_id = user.getUser_id();
-		String collect_works_id = accept_works.getWorks_id();
-		wlmtxt_collect collect = worksDao.findCollectBy_user_id_And_collect_works_id(collect_user_id, collect_works_id);
-		Boolean collect_flag;
+		wlmtxt_collect collect = worksDao.findCollect(user.getUser_id(), accept_works.getWorks_id());
 		if (collect == null) {
-			collect_flag = false;
-		} else {
-			collect_flag = true;
-		}
-		if (collect_flag) {
-			worksDao.removeCollectBy_user_id_And_collect_works_id(collect_user_id, collect_works_id);
-		} else {
 			wlmtxt_collect new_collect = new wlmtxt_collect();
 			new_collect.setCollect_id(TeamUtil.getUuid());
-			new_collect.setCollect_user_id(collect_user_id);
-			new_collect.setCollect_works_id(collect_works_id);
+			new_collect.setCollect_user_id(user.getUser_id());
+			new_collect.setCollect_works_id(accept_works.getWorks_id());
 			new_collect.setCollect_gmt_create(TeamUtil.getStringSecond());
 			new_collect.setCollect_gmt_modified(TeamUtil.getStringSecond());
+			System.out.println(new_collect);
 			worksDao.saveCollect(new_collect);
+		} else {
+			worksDao.removeCollect(user.getUser_id(), accept_works.getWorks_id());
 		}
 	}
 

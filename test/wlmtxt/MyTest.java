@@ -7,24 +7,36 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.wlmtxt.Works.dao.WorksDao;
 import com.wlmtxt.Works.service.WorksService;
-import com.wlmtxt.domain.VO.MyWorksVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext*.xml" })
 public class MyTest {
 	@Resource
 	WorksService worksService;
+	@Resource
+	WorksDao worksDao;
 
 	@Test
 	public void ttttt() {
-		MyWorksVO myWorksVO = new MyWorksVO();
 
-		System.out.println(worksService.getMyWorksVO("e9660cab-759b-4d84-a1f0-241c265b3e88", myWorksVO));
+		System.out.println(worksService.findPlayHistoryNumByFileName("f8ef023f-7b7a-47aa-b679-f50c50bd9f86.mp4"));
 	}
 
+	/*
+	 * 
+	 */
 	public WorksService getWorksService() {
 		return worksService;
+	}
+
+	public WorksDao getWorksDao() {
+		return worksDao;
+	}
+
+	public void setWorksDao(WorksDao worksDao) {
+		this.worksDao = worksDao;
 	}
 
 	public void setWorksService(WorksService worksService) {
