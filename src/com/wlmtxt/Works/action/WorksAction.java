@@ -461,7 +461,7 @@ public class WorksAction extends ActionSupport {
 		int playCountNum = worksService.totalPlayNum(accept_works.getWorks_id());
 		pw.write(playCountNum);
 	}
-
+	
 	/**
 	 * 播放页，统计收藏次数
 	 * 
