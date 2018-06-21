@@ -8,7 +8,9 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
@@ -56,10 +58,15 @@ public interface WorksService {
 
 	public int countLikeNum(String works_id);
 
+	public int deleteAllMyWorks(String user_id);
+
+
 	public int getLikeNum(String works_id);
 
 	public int getCollectNum(String works_id);
 
+	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO);
+	
 	public void addPlayHistoryByFileName(String fileName, String userID);
 
 	public int findPlayHistoryNumByFileName(String fileName);
@@ -69,5 +76,7 @@ public interface WorksService {
 	public wlmtxt_works getWorksByFileName(String fileName);
 
 	public int getPlayNum(String works_id);
+
+	public CategoryDTO getCategoryDTOByID(String menu_id);
 
 }
