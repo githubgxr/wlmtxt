@@ -11,6 +11,7 @@ import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
@@ -18,6 +19,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
+import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 
 public class WorksDaoImpl implements WorksDao {
@@ -358,6 +360,41 @@ public class WorksDaoImpl implements WorksDao {
 		List<wlmtxt_like> list = query.list();
 		int num = list.size();
 		return num;
+	}
+
+	@Override
+	public List<wlmtxt_works> listWorksAllByUserId(String user_id) {
+		String hql = "from wlmtxt_works where works_passed='1' and works_deleted='2' and works_user_id='"+user_id+"' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_follow> listMyWorksByUserId(String user_id, MyAttentionVO myWorksVO) {
+		String hql = " from wlmtxt_follow  where follow_active_user_id='" + user_id
+				+ "' order by follow_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult((myWorksVO.getPageIndex() - 1) * myWorksVO.getPageSize());
+		query.setMaxResults(myWorksVO.getPageSize());
+		List<wlmtxt_follow> list = query.list();
+		return list;
+	}
+
+	@Override
+	public int getMyAttentionTotalRecords(String user_id) {
+		String hql = "select count(*) from wlmtxt_follow  where follow_active_user_id='" + user_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public wlmtxt_follow findFollowByActiveUserId(String user_id, String follow_passive_user_id) {
+		String hql = "from wlmtxt_follow where follow_active_user_id='"+ follow_passive_user_id+"' and follow_passie_user_id='"+user_id+"'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_follow result= (wlmtxt_follow) query.uniqueResult();
+		return result;
 	}
 
 }

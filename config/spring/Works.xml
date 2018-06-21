@@ -11,6 +11,7 @@
 	<bean id="worksService" class="com.wlmtxt.Works.service.impl.WorksServiceImpl">
 		<property name="worksDao" ref="worksDao"></property>
 		<property name="userService" ref="userService"></property>
+		<property name="userDao" ref="userDao"></property>
 	</bean>
 	<bean id="worksAction" class="com.wlmtxt.Works.action.WorksAction">
 		<property name="worksService" ref="worksService"></property>

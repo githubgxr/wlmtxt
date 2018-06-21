@@ -161,6 +161,28 @@ public class UserDaoImpl implements UserDao {
 		wlmtxt_follow follow = (wlmtxt_follow) query.uniqueResult();
 		return follow;
 	}
+
+	@Override
+	public int deleteAllMyFollow(wlmtxt_user loginUser) {
+		String hql = "delete from wlmtxt_follow  where follow_active_user_id='"+loginUser.getUser_id()+"'";
+		Query query = getSession().createQuery(hql);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public List<wlmtxt_user> listMyFans(String user_id) {
+		String hql = "from wlmtxt_follow where follow_passive_user_id='"+user_id+"'";
+		Query query = getSession().createQuery(hql);
+		return query.list();
+	}
+
+	@Override
+	public void noticeFans(wlmtxt_follow follow)  throws Exception{
+		getSession().save(follow);
+	}
+
+	
+//	public void remov
 	
 	/**
 	 * 通过单个作品id得到对应的作品关键词记录list

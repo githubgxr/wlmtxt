@@ -6,6 +6,7 @@ import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
@@ -13,6 +14,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
+import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 
 public interface WorksDao {
@@ -87,10 +89,16 @@ public interface WorksDao {
 
 	wlmtxt_keyword getWordByID(String works_keyword_keyword_id);
 
+	List<wlmtxt_works> listWorksAllByUserId(String user_id);
 	int getLikeNum(String works_id);
 
 	int getCollectNum(String works_id);
 
+	List<wlmtxt_follow> listMyWorksByUserId(String user_id, MyAttentionVO myAttentionVO);
+
+	int getMyAttentionTotalRecords(String user_id);
+
+	wlmtxt_follow findFollowByActiveUserId(String user_id, String follow_passive_user_id);
 	int getPlayHistoryNumByFileName(String fileName);
 
 	int getPlayNum(String works_id);
