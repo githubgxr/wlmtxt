@@ -110,8 +110,8 @@ function getWorksDetailVO() {
 		play_num_xhr.send(formData_get_play_num);
 		play_num_xhr.onreadystatechange = function() {
 			if (play_num_xhr.readyState == 4 && play_num_xhr.status == 200) {
-				console.log("收藏："+play_num_xhr.responseText);
-				$("#collect_number").html(play_num_xhr.responseText);
+				console.log("播放："+play_num_xhr.responseText);
+				$("#play_number").html(play_num_xhr.responseText);
 			}
 		}
 	}
@@ -231,6 +231,7 @@ function getWorksDetailVO() {
 				if (xhr.responseText == "1") {
 					console.log("点赞或取消点赞成功！");
 					checkLike();
+					getLikeNum();
 				}
 			}
 		}
