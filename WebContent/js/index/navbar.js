@@ -422,7 +422,7 @@ function getBackPassword() {
 					$(".log_alert_div").css("display", "none");
 					/* 和后台交互 */
 					var xhr = new XMLHttpRequest();
-					xhr.open("POST", "/wlmtxt/User/User_sendRegisterMail");// 发送验证邮件
+					xhr.open("POST", "/wlmtxt/User/User_sendMailOfForgotPassword");// 发送验证邮件
 					xhr.send(formData);
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
