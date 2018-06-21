@@ -302,4 +302,12 @@ public class WorksDaoImpl implements WorksDao {
 		return num;
 	}
 
+	@Override
+	public List<wlmtxt_works> listWorksAllByUserId(String user_id) {
+		String hql = "from wlmtxt_works where works_passed='1' and works_deleted='2' and works_user_id='"+user_id+"' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
 }

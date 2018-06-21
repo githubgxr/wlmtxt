@@ -85,4 +85,6 @@ public interface WorksDao {
 
 	wlmtxt_keyword getWordByID(String works_keyword_keyword_id);
 
+	List<wlmtxt_works> listWorksAllByUserId(String user_id);
+
 }

@@ -416,4 +416,13 @@ public class WorksServiceImpl implements WorksService {
 		return num;
 	}
 
+	@Override
+	public int deleteAllMyWorks(String user_id) {
+		List<wlmtxt_works> list = worksDao.listWorksAllByUserId(user_id);
+		for (wlmtxt_works works : list) {
+			worksDao.deleteMyWorks(works.getWorks_id());
+		}
+		return 1;
+	}
+
 }

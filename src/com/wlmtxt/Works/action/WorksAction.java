@@ -225,12 +225,41 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
+	/**
+	 * 删除单个我的上传作品
+	 * 
+	 * 接收，works_id
+	 * 
+	 * 返回，1
+	 * 
+	 * @author zb
+	 * 
+	 * @throws IOException
+	 */
 	public void deleteMyWorks() throws IOException {
 		worksService.deleteMyWorks(accept_works.getWorks_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
 	}
+	
+	/**
+	 * 删除所有作品
+	 * 
+	 * 返回，1
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 */
+	public void deleteAllMyWorks() throws IOException {
+		wlmtxt_user loginuser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		worksService.deleteAllMyWorks(loginuser.getUser_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+	
 
 	public void getWorksDetailVO() throws IOException {
 		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
