@@ -26,6 +26,7 @@ import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
@@ -112,6 +113,9 @@ public class WorksAction extends ActionSupport {
 			// file = new File("D://wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		worksService.addPlayHistoryByFileName(worksName, user.getUser_id());
+
 		return "getFile";
 	}
 
@@ -160,7 +164,7 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.getLikeNum(accept_works.getWorks_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(num);
+		response.getWriter().write(num + "");
 	}
 
 	/**
@@ -172,7 +176,35 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.getCollectNum(accept_works.getWorks_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(num);
+		response.getWriter().write(num + "");
+	}
+
+	/**
+	 * 获取该作品播放量
+	 * 
+	 * @throws IOException
+	 */
+	public void getPlayNum() throws IOException {
+		int num = worksService.getPlayNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num + "");
+	}
+
+	public void getCategoryDTOByID() throws IOException {
+		CategoryDTO categoryDTO;
+		if (first_menu != null) {
+			categoryDTO = worksService.getCategoryDTOByID(first_menu.getFirst_menu_id());
+		} else {
+			categoryDTO = worksService.getCategoryDTOByID(second_menu.getSecond_menu_id());
+		}
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(categoryDTO));
 	}
 
 	/**

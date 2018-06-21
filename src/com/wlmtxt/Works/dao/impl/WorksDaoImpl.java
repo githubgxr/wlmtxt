@@ -35,6 +35,11 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public void addPlayHistoryByFileName(wlmtxt_play_history history) {
+		getSession().save(history);
+	}
+
+	@Override
 	public wlmtxt_keyword getWordByID(String works_keyword_keyword_id) {
 		String hql = " from wlmtxt_keyword  where keyword_id='" + works_keyword_keyword_id
 				+ "' order by keyword_gmt_create desc";
@@ -58,12 +63,29 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID) {
+		String hql = " from wlmtxt_play_history  where download_history_works_id='" + worksID
+				+ "' order by discuss_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_play_history> historyList = query.list();
+		return historyList;
+	}
+
+	@Override
 	public List<wlmtxt_discuss> getDiscussListByFatherID(String works_id) {
 		String hql = " from wlmtxt_discuss  where discuee_father_discuss_id='" + works_id
 				+ "' order by discuss_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_discuss> discussList = query.list();
 		return discussList;
+	}
+
+	@Override
+	public wlmtxt_works getWorksByFileName(String fileName) {
+		String hql = "from wlmtxt_works where works_name = '" + fileName + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_works works = (wlmtxt_works) query.uniqueResult();
+		return works;
 	}
 
 	@Override
@@ -109,6 +131,23 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public int getLikeNum(String works_id) {
 		String hql = "select count(*) from wlmtxt_like  where like_works_id='" + works_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public int getPlayNum(String works_id) {
+		String hql = "select count(*) from wlmtxt_play_history  where play_history_works_id='" + works_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public int getPlayHistoryNumByFileName(String fileName) {
+		String hql = "select count(history) from wlmtxt_works works,wlmtxt_play_history history where works.works_name='"
+				+ fileName + "' and  history.play_history_works_id=works.works_id";
 		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
 		return count;

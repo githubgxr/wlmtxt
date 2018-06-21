@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
@@ -64,5 +66,17 @@ public interface WorksService {
 	public int getCollectNum(String works_id);
 
 	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO);
+	
+	public void addPlayHistoryByFileName(String fileName, String userID);
+
+	public int findPlayHistoryNumByFileName(String fileName);
+
+	public List<wlmtxt_play_history> findPlayHistoryListByWorksID(String worksID);
+
+	public wlmtxt_works getWorksByFileName(String fileName);
+
+	public int getPlayNum(String works_id);
+
+	public CategoryDTO getCategoryDTOByID(String menu_id);
 
 }

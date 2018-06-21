@@ -14,10 +14,12 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
+import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.DiscussDTO;
 import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
@@ -57,6 +59,50 @@ public class WorksServiceImpl implements WorksService {
 	public void setWorksDao(WorksDao worksDao) {
 		this.worksDao = worksDao;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.wlmtxt.Works.service.WorksService#deleteMyWorks(java.lang.String)
+	 */
+	// TODO
+	@Override
+	public List<wlmtxt_play_history> findPlayHistoryListByWorksID(String worksID) {
+		return worksDao.listPlayHistoryByWorksID(worksID);
+	};
+
+	@Override
+	public int getPlayNum(String works_id) {
+		return worksDao.getPlayNum(works_id);
+	}
+
+	@Override
+	public int findPlayHistoryNumByFileName(String fileName) {
+		return worksDao.getPlayHistoryNumByFileName(fileName);
+	}
+
+	@Override
+	public wlmtxt_works getWorksByFileName(String fileName) {
+		return worksDao.getWorksByFileName(fileName);
+	}
+
+	@Override
+	public void addPlayHistoryByFileName(String fileName, String userID) {
+
+		wlmtxt_works works = getWorksByFileName(fileName);
+
+		wlmtxt_play_history history = new wlmtxt_play_history();
+		history.setPlay_history_id(TeamUtil.getUuid());
+		history.setPlay_history_show("1");
+		history.setPlay_history_user_id(userID);
+		history.setPlay_history_works_id(works.getWorks_id());
+		String time = TeamUtil.getStringSecond();
+		history.setPlay_history_gmt_create(time);
+		history.setPlay_history_gmt_modified(time);
+
+		worksDao.addPlayHistoryByFileName(history);
+	};
 
 	@Override
 	public void deleteMyWorks(String works_id) {
@@ -151,19 +197,7 @@ public class WorksServiceImpl implements WorksService {
 			System.out.println(worksList.size());
 			for (wlmtxt_works works : worksList) {
 				WorksDTO worksDTO = new WorksDTO();
-				worksDTO.setWorks(works);
-				if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
-				} else {
-					wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-					worksDTO.setSecondMenu(secondMenu);
-					if (null == secondMenu.getSecond_menu_first_menu_id()
-							|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
-					} else {
-						wlmtxt_first_menu firstMenu = worksDao
-								.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-						worksDTO.setFirstMenu(firstMenu);
-					}
-				}
+				worksDTO = getWorksDTOByID(works.getWorks_id());
 				worksDTOList.add(worksDTO);
 			}
 		}
@@ -178,17 +212,7 @@ public class WorksServiceImpl implements WorksService {
 		for (wlmtxt_works works : worksList) {
 			WorksDTO worksDTO = new WorksDTO();
 			worksDTO.setWorks(works);
-			if (null == works.getWorks_second_menu_id() || works.getWorks_second_menu_id().equals("")) {
-			} else {
-				wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
-				worksDTO.setSecondMenu(secondMenu);
-				if (null == secondMenu.getSecond_menu_first_menu_id()
-						|| secondMenu.getSecond_menu_first_menu_id().equals("")) {
-				} else {
-					wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
-					worksDTO.setFirstMenu(firstMenu);
-				}
-			}
+			worksDTO = getWorksDTOByID(works.getWorks_id());
 			worksDTOList.add(worksDTO);
 		}
 		return worksDTOList;
@@ -335,6 +359,28 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public int getLikeNum(String works_id) {
 		return worksDao.getLikeNum(works_id);
+	}
+
+	@Override
+	public CategoryDTO getCategoryDTOByID(String menu_id) {
+
+		CategoryDTO categoryDTO = new CategoryDTO();
+
+		wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(menu_id);
+
+		if (firstMenu == null) {
+			// 用的二级
+			wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(menu_id);
+			categoryDTO.setSecondMenu(secondMenu);
+			//
+			firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
+			categoryDTO.setFirstMenu(firstMenu);
+		} else {
+			// 用的一级
+			categoryDTO.setFirstMenu(firstMenu);
+		}
+
+		return categoryDTO;
 	}
 
 	@Override
