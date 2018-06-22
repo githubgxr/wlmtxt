@@ -412,7 +412,9 @@ public class WorksServiceImpl implements WorksService {
 
 	@Override
 	public List<wlmtxt_notification> listUserNotification(String user_id) {
-		return worksDao.listUserNotification(user_id);
+		List<wlmtxt_notification> notificationList = worksDao.listUserNotification(user_id);
+
+		return notificationList;
 	}
 
 	@Override
