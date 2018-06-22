@@ -355,6 +355,13 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
+	public void deleteDisscuss() throws IOException {
+		worksService.deleteDisscuss(accpet_discuss.getDiscuss_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
 	public void deleteAllMyHistory() throws IOException {
 
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");

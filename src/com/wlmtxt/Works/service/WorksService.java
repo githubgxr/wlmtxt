@@ -127,4 +127,6 @@ public interface WorksService {
 	public List<CollectDTO> listMycollectDTOList(String user_id);
 
 	public List<wlmtxt_collect> listMycollectList(String user_id);
+
+	public void deleteDisscuss(String discuss_id);
 }

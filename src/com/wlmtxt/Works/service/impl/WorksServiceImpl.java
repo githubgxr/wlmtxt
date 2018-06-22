@@ -218,6 +218,12 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public void deleteDisscuss(String discuss_id) {
+		worksDao.deleteDisscuss(discuss_id);
+
+	}
+
+	@Override
 	public void deleteAllMyHistory(String userID) {
 		worksDao.deleteAllMyHistory(userID);
 

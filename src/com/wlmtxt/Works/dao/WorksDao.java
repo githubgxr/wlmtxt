@@ -140,6 +140,8 @@ public interface WorksDao {
 
 	List<wlmtxt_collect> listMycollectList(String user_id);
 
+	void deleteDisscuss(String discuss_id);
+
 	// List<wlmtxt_works> listWorks10OrderHot();
 
 }
