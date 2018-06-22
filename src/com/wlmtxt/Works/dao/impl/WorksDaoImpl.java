@@ -80,7 +80,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID) {
-		String hql = " from wlmtxt_play_history  where download_history_works_id='" + worksID
+		String hql = " from wlmtxt_play_history  where play_history_works_id='" + worksID
 				+ "' order by play_history_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_play_history> historyList = query.list();
@@ -89,7 +89,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_discuss> getDiscussListByFatherID(String works_id) {
-		String hql = " from wlmtxt_discuss  where discuee_father_discuss_id='" + works_id
+		String hql = " from wlmtxt_discuss  where discuss_father_discuss_id='" + works_id
 				+ "' order by discuss_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_discuss> discussList = query.list();
@@ -126,6 +126,14 @@ public class WorksDaoImpl implements WorksDao {
 
 		query.executeUpdate();
 
+	}
+
+	@Override
+	public wlmtxt_discuss getDiscussByID(String discuss_id) {
+		String hql = "from wlmtxt_discuss  where discuss_id ='" + discuss_id + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_discuss discuss = (wlmtxt_discuss) query.uniqueResult();
+		return discuss;
 	}
 
 	@Override
