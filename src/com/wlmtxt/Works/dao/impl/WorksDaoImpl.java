@@ -18,6 +18,7 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_notification;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -71,7 +72,7 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID) {
 		String hql = " from wlmtxt_play_history  where play_history_user_id='" + userID
-				+ "' order by discuss_gmt_create desc";
+				+ "' order by play_history_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_play_history> historyList = query.list();
 		return historyList;
@@ -80,7 +81,7 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID) {
 		String hql = " from wlmtxt_play_history  where download_history_works_id='" + worksID
-				+ "' order by discuss_gmt_create desc";
+				+ "' order by play_history_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_play_history> historyList = query.list();
 		return historyList;
@@ -436,6 +437,12 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public void saveDiscuss(wlmtxt_discuss accpet_discuss) {
 		getSession().save(accpet_discuss);
+
+	}
+
+	@Override
+	public void addNotification(wlmtxt_notification notification) {
+		getSession().save(notification);
 
 	}
 
