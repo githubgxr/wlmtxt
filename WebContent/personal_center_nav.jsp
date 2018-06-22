@@ -22,20 +22,19 @@
 					<div class="sidebar_user_head">
 						<!--用户头像-->
 						<div class="user_img">
-							<img class="img_user" src="<%=basePath%>img/user.jpg" />
+							<img class="img_user sidebar_img_user" src="<%=basePath%>img/user.jpg" />
 						</div>
 						<!--用户名-->
-						<div class="user_name">熊熊熊</div>
-						<div class="user_signature">
-							你都在愤怒光和热uwnbtghwiognvbhorityunbgyhoitgmb
+						<div class="user_name sidebar_user_name"></div>
+						<div class="user_signature sidebar_user_signature">
 						</div>
 					</div>
 					<!--个性签名-->
 
 					<!--关注量和粉丝量-->
 					<div class="sidebar_user_foot">
-						<div class="user_fans">关注<span>0</span></div>
-						<div class="user_fans">粉丝<span>0</span></div>
+						<div class="user_fans">关注<span class="sidebar_user_focus">0</span></div>
+						<div class="user_fans">粉丝<span class="sidebar_user_fans">0</span></div>
 					</div>
 				</div>
 			<div class="sidebar_head">
@@ -78,25 +77,8 @@
 				</ul>
 			</div>
 		</div>
-		<!-- <script type="text/javascript">
-		/*退出登录*/
-		$("#login_out").click(function(){
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "/wlmtxt/User/User_logout");// 退出
-			xhr.send(null);
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					if (xhr.responseText == "1") {
-						console.log("退出成功！");
-						window.location.href="/wlmtxt/User/User_skipToIndexPage";
-					} else {
-						console.log("退出失败！");
-					}
-				}
-			}
-		});
-
-		</script> -->
+		<script type="text/javascript"
+		src="<%=basePath%>js/index/personal_center_nav.js"></script>
 	</body>
 
 </html>

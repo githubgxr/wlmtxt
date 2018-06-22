@@ -33,6 +33,8 @@ btn_file.oninput=function(){
 				console.log("修改头像成功");
 				$(".img_user").attr("src",
 						"/wlmtxt/Works/Works_getImg?imgName="+user_id);
+				
+				$(".sidebar_img_user").attr("src","/wlmtxt/Works/Works_getImg?imgName="	+ user_id);
 				location.reload();
 				toastr.success("上传成功！");
 			}else{
@@ -66,6 +68,10 @@ $(".check_btn").click(function(){
 				$(".div_email").html($(".input_email").val());
 				$(".div_sex").html($(".input_sex").val());
 				$(".div_bio").html($(".input_bio").val());
+				//个人中心导航的资料
+				
+				$(".sidebar_user_name").html($(".input_username").val());
+				$(".sidebar_user_signature").html($(".input_bio").val());
 				$(".personal_info_value").css("display", "block");
 				$(".xg").css("display", "none");
 				$(".update_btn").css("display", "block");

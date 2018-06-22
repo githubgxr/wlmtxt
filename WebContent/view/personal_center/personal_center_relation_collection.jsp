@@ -22,13 +22,10 @@
 				<jsp:include page="/personal_center_nav.jsp" flush="true"></jsp:include>
 				<div id="llls_main" class="main_container">
 					<!--浏览历史头部-->
-					<jsp:include page="/personal_center_relation_nav.jsp" flush="true"></jsp:include>
+					
 					<!--子导航-与我相关、消息中心-->
-				<!-- 	<div class="tab_container clearfix" style="display:none;">
-						<a class="tabButton" id="collection">我的收藏</a> 
-						<a class="tabButton" id="appreciates">我的点赞</a>
-						<a class="tabButton" id="comments">我的评论</a>
-					</div> -->
+					<jsp:include page="/personal_center_relation_nav.jsp" flush="true"></jsp:include>
+					
 					<!--主体部分-->
 					<div class="llls_content list_container">
 						<ul id="llls_list_container">
@@ -103,5 +100,6 @@
 			})	
 		
 		</script>
+		<script type="text/javascript" src="<%=basePath%>js/personal_center/personal_center_relation_collection.js"></script>
 	</body>
 </html>

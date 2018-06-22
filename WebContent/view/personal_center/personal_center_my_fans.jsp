@@ -27,13 +27,13 @@
 				<div class="wdfs_header list_header">
 					<i class="header_line"></i>
 					<h3>我的粉丝</h3>
-					<a class="button_a" style="float: right;">全部关注</a>
+					<a class="button_a" style="float: right;" onclick="withFocusAll()">全部关注</a>
 				</div>
 				<!--主体部分-->
 				<div class="wdfs_content">
 					<div class="user_list_container">
 						<ul class="user_list_ul">
-							<li class="user_list">
+							<%-- <li class="user_list">
 								<div class="user_list_img_div">
 									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
 								</div>
@@ -42,7 +42,7 @@
 									<div class="user_operateing">+ 关注</div>
 									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
 								</div>
-							</li>
+							</li> --%>
 							
 						</ul>
 						
