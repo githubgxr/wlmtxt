@@ -195,6 +195,21 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
+	 * 根据关键词和分类推荐
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorksByKeyword() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorksByKeyword();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
 	 * 根据热度排序，取本周最多前十个作品
 	 * 
 	 * @throws IOException

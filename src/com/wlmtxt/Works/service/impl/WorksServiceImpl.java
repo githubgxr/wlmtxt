@@ -449,6 +449,26 @@ public class WorksServiceImpl implements WorksService {
 		return worksDTOList;
 	}
 
+	/*
+	 * TODO(non-Javadoc)
+	 * 
+	 * @see com.wlmtxt.Works.service.WorksService#listWorksByKeyword()
+	 */
+	@Override
+	public List<WorksDTO> listWorksByKeyword() {
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		// List<wlmtxt_works> worksList1 = worksDao.listWorksByKeyword();
+		// List<wlmtxt_works> worksList2 = worksDao.listWorksByMenu();
+		// worksList1.addAll(worksList2);
+		//
+		// for (wlmtxt_works works : worksList1) {
+		// WorksDTO worksDTO = new WorksDTO();
+		// worksDTO = getWorksDTOByID(works.getWorks_id());
+		// worksDTOList.add(worksDTO);
+		// }
+		return worksDTOList;
+	}
+
 	@Override
 	public List<WorksDTO> listWorksAll() {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();

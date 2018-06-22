@@ -132,4 +132,6 @@ public interface WorksService {
 	public void deleteDisscuss(String discuss_id);
 
 	public DynamicVO getDynamicVO(String user_id);
+
+	public List<WorksDTO> listWorksByKeyword();
 }
