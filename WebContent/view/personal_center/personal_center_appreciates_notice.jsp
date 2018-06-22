@@ -82,5 +82,6 @@
 			}
 		});
 	</script>
+	<script type="text/javascript" src="<%=basePath%>js/personal_center/personal_center_appreciates_notice.js"></script>
 </body>
 </html>
