@@ -88,7 +88,6 @@ public class WorksServiceImpl implements WorksService {
 	public List<PlayHistoryDTO> listPlayHistoryDTOListByUserID(String userID) {
 		List<PlayHistoryDTO> PlayHistoryDTOList = new ArrayList<PlayHistoryDTO>();
 		List<wlmtxt_play_history> playHistoryList = listPlayHistoryListByUserID(userID);
-
 		for (wlmtxt_play_history playHistory : playHistoryList) {
 			PlayHistoryDTO playHistoryDTO = new PlayHistoryDTO();
 			playHistoryDTO.setPlayHistory(playHistory);
@@ -96,6 +95,8 @@ public class WorksServiceImpl implements WorksService {
 			//
 			WorksDTO worksDTO = getWorksDTOByID(playHistory.getPlay_history_works_id());
 			playHistoryDTO.setWorksDTO(worksDTO);
+			//
+			PlayHistoryDTOList.add(playHistoryDTO);
 		}
 
 		return PlayHistoryDTOList;
@@ -333,18 +334,15 @@ public class WorksServiceImpl implements WorksService {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 		// 根据一级类别获取所属的二级类别
 		List<wlmtxt_second_menu> secondMenuList = worksDao.listSecondMenuByFather(second_menu_id);
-		System.out.println(secondMenuList.size());
 		for (wlmtxt_second_menu second_menu : secondMenuList) {
 			// 遍历二级类别取出所有相应作品
 			List<wlmtxt_works> worksList = worksDao.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
-			System.out.println(worksList.size());
 			for (wlmtxt_works works : worksList) {
 				WorksDTO worksDTO = new WorksDTO();
 				worksDTO = getWorksDTOByID(works.getWorks_id());
 				worksDTOList.add(worksDTO);
 			}
 		}
-		System.out.println(worksDTOList.size());
 		return worksDTOList;
 	}
 
@@ -365,11 +363,9 @@ public class WorksServiceImpl implements WorksService {
 	public List<WorksDTO> listWorksAll() {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 		List<wlmtxt_works> worksList = worksDao.listWorksAll();
-		System.out.println(worksList);
 		for (wlmtxt_works works : worksList) {
 			WorksDTO worksDTO = new WorksDTO();
 			worksDTO = getWorksDTOByID(works.getWorks_id());
-			System.out.println(worksDTO);
 			worksDTOList.add(worksDTO);
 		}
 		return worksDTOList;
@@ -481,7 +477,6 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public boolean isCollectWorks(String user_id, String works_id) throws Exception {
 		wlmtxt_collect collect = worksDao.findCollect(user_id, works_id);
-		System.out.println(collect);
 		if (collect == null) {
 			return false;
 		} else {
@@ -562,7 +557,6 @@ public class WorksServiceImpl implements WorksService {
 			new_collect.setCollect_works_id(accept_works.getWorks_id());
 			new_collect.setCollect_gmt_create(TeamUtil.getStringSecond());
 			new_collect.setCollect_gmt_modified(TeamUtil.getStringSecond());
-			System.out.println(new_collect);
 			worksDao.saveCollect(new_collect);
 			/*
 			 * 通知
