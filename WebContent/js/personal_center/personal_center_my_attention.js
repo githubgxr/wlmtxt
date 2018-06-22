@@ -5,6 +5,13 @@ $(function(){
 	listMyAttentionByPage(1);
 });
 function listMyAttentionByPage(pageIndex){
+	
+	var user_list = document.getElementsByClassName("user_list");
+	var long = user_list.length;
+	for (var num = 0; num < long; num++) {
+		user_list[0].parentNode.removeChild(user_list[0]);
+	}
+	
 	var xhr=new XMLHttpRequest();
 	var formData=new FormData();
 	formData.append("myAttentionVO.pageIndex",pageIndex);
@@ -14,26 +21,23 @@ function listMyAttentionByPage(pageIndex){
 		if(xhr.readyState==4 && xhr.status==200){
 			var list_myAttention=JSON.parse(xhr.responseText);
 
-		
 			for(var i=0;i<list_myAttention.followDTO.length;i++){
 				
-
-				
-				var list_myAttention='<li class="user_list">';
-				list_myAttention+='<div class="user_list_img_div">';
+				var myAttention='<li class="user_list">';
+				myAttention+='<div class="user_list_img_div">';
 				/*用户头像*/
-			/*	list_myAttention+='<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myAttention.followDTO[i].works.works_cover +'"/>';*/
-				list_myAttention+='</div>';
-				list_myAttention+='<div class="user_info">';
+				myAttention+='<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myAttention.followDTO[i].user.user_avatar +'"/>';
+				myAttention+='</div>';
+				myAttention+='<div class="user_info">';
 				/*用户名*/
-				list_myAttention+='<div class="user_name">'+list_myAttention.followDTO[i].user.user_username+'</div>';
+				myAttention+='<div class="user_name">'+list_myAttention.followDTO[i].user.user_username+'</div>';
 				/*取消关注*/
-				list_myAttention+='<div class="user_operateing" onclick="cancelFocus(this.id)" id="'+list_myAttention.followDTO[i].user.user_id+'">取消关注</div>';
+				myAttention+='<div class="user_operateing" onclick="cancelFocus(this.id)" id="'+list_myAttention.followDTO[i].user.user_id+'">取消关注</div>';
 				/*个性签名*/
-				list_myAttention+='<div class="user_grjj">'+list_myAttention.followDTO[i].user.user_bio+'</div>';
-				list_myAttention+='</div>';
-				list_myAttention+='</li>';
-				$(".user_list_ul").append(list_myAttention);
+				myAttention+='<div class="user_grjj">'+list_myAttention.followDTO[i].user.user_bio+'</div>';
+				myAttention+='</div>';
+				myAttention+='</li>';
+				$(".user_list_ul").append(myAttention);
 				
 			}
 		}
@@ -45,12 +49,13 @@ function listMyAttentionByPage(pageIndex){
 function cancelFocus(focus_user_id){
 	console.log("focus_user_id:"+focus_user_id);
 	var xhrhp=new XMLHttpRequest();
-	xhrhp.open("POST","/wlmtxt/Works/Works_deleteMyWorks");
+	xhrhp.open("POST","/wlmtxt/User/User_followUser");
 	var formData=new FormData();
-	formData.append("accept_works.works_id",focus_user_id);
+	formData.append("accpet_user.user_id",focus_user_id);
 	xhrhp.send(formData);
 	xhrhp.onreadystatechange=function(){
 		if(xhrhp.readyState==4&&xhrhp.status==200){
+			
 			if(xhrhp.responseText=="1"){
 				toastr.success("取消关注成功！");
 				listMyAttentionByPage(1);
@@ -65,7 +70,7 @@ function cancelFocus(focus_user_id){
 //取消关注全部用户
 function cancelAllFocus(){
 	var xhrhttp=new XMLHttpRequest();
-	xhrhttp.open("POST","/wlmtxt/Works/Works_deleteAllMyWorks");
+	xhrhttp.open("POST","/wlmtxt/User/User_deleteAllMyFollow");
 	xhrhttp.send(null);
 	xhrhttp.onreadystatechange=function(){
 		if(xhrhttp.readyState==4&&xhrhttp.status==200){
