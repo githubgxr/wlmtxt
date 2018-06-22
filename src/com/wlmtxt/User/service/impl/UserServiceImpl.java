@@ -148,7 +148,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void noticeAllMyFans(wlmtxt_user loginUser) throws Exception {
-		List<wlmtxt_user> list = userDao.listMyFans(loginUser.getUser_id());
+		List<wlmtxt_follow> followList = userDao.listFollowByLogin_user_id(loginUser.getUser_id());
+		List<wlmtxt_user> list = new ArrayList<wlmtxt_user>();
+		for (wlmtxt_follow follow : followList) {
+			wlmtxt_user follower = userDao.myFansByFollow_passive_user_id(follow.getFollow_active_user_id());
+			list.add(follower);
+		}
 		wlmtxt_follow follow = new wlmtxt_follow();
 		for (wlmtxt_user user : list) {
 			follow.setFollow_id(TeamUtil.getUuid());
@@ -178,9 +183,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override 
 	public MyFansVO listMyFansVO(wlmtxt_user loginUser, MyFansVO myFansVO) {
-//		List<wlmtxt_follow> list = userDao.listMyFans(loginUser.getUser_id());
-		
-		List<wlmtxt_user> listFans = userDao.listMyFansByFollow_passive_user_id(loginUser.getUser_id());
+		List<wlmtxt_follow> listFollow = userDao.listFollowByLogin_user_id(loginUser.getUser_id());
+		wlmtxt_user user_follower = new wlmtxt_user();
+		List<wlmtxt_user> listFollower = new ArrayList<wlmtxt_user>();
+		for (wlmtxt_follow follow : listFollow) {
+			user_follower = userDao.myFansByFollow_passive_user_id(follow.getFollow_active_user_id());
+			listFollower.add(user_follower);
+		}
 		
 		int i =worksDao.totalFansNum(loginUser.getUser_id());
 		myFansVO.setTotalRecords(i);
@@ -196,7 +205,7 @@ public class UserServiceImpl implements UserService {
 			myFansVO.setHaveNextPage(true);
 		}
 
-		myFansVO.setUserlist(listFans);
+		myFansVO.setUserlist(listFollower);
 		return myFansVO;
 	}
 
