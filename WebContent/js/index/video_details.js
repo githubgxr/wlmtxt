@@ -1,4 +1,5 @@
 function getWorksDetailVO() {
+	checkLogin();
 	// 视频id
 	var video_id = $("#video_id").html();
 	console.log("video_id:" + video_id);
@@ -61,6 +62,25 @@ function getWorksDetailVO() {
 			$("#detail_user_bio").html(detail_response.worksDTO.user.user_bio);
 			// 查询是否关注
 			checkFocus();
+			//推荐信息列表
+			var xhr_tj=new XMLHttpRequest();
+			xhr_tj.open("POST","");
+			xhr_tj.send(null);
+			xhr_tj.onreadystatechange=function(){
+				if(xhr_tj.readyState==4&&xhr_tj.status==200){
+					var ti_response=JSON.parse(xhr_tj.responseText);
+					for (var numDiss = 0; numDiss < detail_response.discussDTOList.length; numDiss++) {
+					var tj_str='<div class="tj" style="float: left;">';
+					tj_str+='<img src="<%=basePath%>css/zb/img/4.png" />';
+					tj_str+='<div style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">';
+					tj_str+='</div>';
+					tj_str+='</div>';
+					$("#tj_list").append(tj_str);
+					}
+				}
+			}
+			
+			
 			// 评论
 
 			var comment_list = document.getElementsByClassName("comment_list");
@@ -94,13 +114,16 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == detail_response.worksDTO.user.user_id) {
+				console.log("user_id_detail:"+user_id);
+				if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == user_id) {
 					comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
 							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
 							+ '">删除</div>';
+				}else{
+					comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
 				}
 
-				comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
+				
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';

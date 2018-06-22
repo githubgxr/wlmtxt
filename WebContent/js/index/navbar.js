@@ -32,6 +32,7 @@ function checkLogin() {
 				if_login = true;
 				console.log("if_login：" + if_login);
 				/* 登录后 */
+				
 				removeTest();
 				$("#user_img")
 						.click(
@@ -39,7 +40,7 @@ function checkLogin() {
 									window.location.href = "/wlmtxt/view/personal_center/personal_center_personal_data.jsp";
 								});
 				//关于评论
-				$(".comment_delete").css("display","block");
+				/*$(".comment_delete").css("display","block");*/
 				var userInfo = JSON.parse(xhr.responseText);
 				user_id = userInfo.user_id;
 				console.log("已登录！");
@@ -320,6 +321,7 @@ function login() {
 						 * "/wlmtxt/view/index/index.jsp";
 						 */
 						// 执行登录成功操作
+						window.location.href="/wlmtxt/User/User_skipToIndexPage";
 						checkLogin();
 					} else {
 						/* 登录失败 */

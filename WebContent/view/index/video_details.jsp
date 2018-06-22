@@ -110,7 +110,7 @@
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<div style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px;">相关推荐</div>
 				<!--推荐列表-->
-				<div>
+				<div id="tj_list">
 					<!--一个视频-->
 					<div class="tj" style="float: left;">
 						<img src="<%=basePath%>css/zb/img/4.png" />
@@ -118,34 +118,7 @@
 							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
 							05【千夏】</div>
 					</div>
-					<!--一个视频-->
-					<div class="tj" style="float: left;">
-						<img src="<%=basePath%>css/zb/img/4.png" />
-						<div
-							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-							05【千夏】</div>
-					</div>
-					<!--一个视频-->
-					<div class="tj" style="float: left;">
-						<img src="<%=basePath%>css/zb/img/4.png" />
-						<div
-							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-							05【千夏】</div>
-					</div>
-					<!--一个视频-->
-					<div class="tj" style="float: left;">
-						<img src="<%=basePath%>css/zb/img/4.png" />
-						<div
-							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-							05【千夏】</div>
-					</div>
-					<!--一个视频-->
-					<div class="tj" style="float: left;">
-						<img src="<%=basePath%>css/zb/img/4.png" />
-						<div
-							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-							05【千夏】</div>
-					</div>
+					
 				</div>
 			</div>
 			
