@@ -176,9 +176,11 @@ public class UserServiceImpl implements UserService {
 		return userDao.removeFollow(loginUser, accpet_user);
 	}
 
-	@Override
+	@Override 
 	public MyFansVO listMyFansVO(wlmtxt_user loginUser, MyFansVO myFansVO) {
-		List<wlmtxt_user> list = userDao.listMyFans(loginUser.getUser_id());
+//		List<wlmtxt_follow> list = userDao.listMyFans(loginUser.getUser_id());
+		
+		List<wlmtxt_user> listFans = userDao.listMyFansByFollow_passive_user_id(loginUser.getUser_id());
 		
 		int i =worksDao.totalFansNum(loginUser.getUser_id());
 		myFansVO.setTotalRecords(i);
@@ -194,7 +196,7 @@ public class UserServiceImpl implements UserService {
 			myFansVO.setHaveNextPage(true);
 		}
 
-		myFansVO.setUserlist(list);
+		myFansVO.setUserlist(listFans);
 		return myFansVO;
 	}
 
