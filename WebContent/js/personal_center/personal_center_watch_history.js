@@ -1,3 +1,4 @@
+
 $(function(){
 	listMyHistoryByPage();
 });
@@ -99,3 +100,4 @@ function deletePlayHistory(video_delete_btn_id){
 		}
 	}
 	
+

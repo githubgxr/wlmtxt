@@ -613,9 +613,9 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public wlmtxt_follow findFollowByActiveUserId(String user_id, String follow_passive_user_id) {
+	public wlmtxt_follow findFollowByActiveUserId(String loginUser_id, String follow_passive_user_id) {
 		String hql = "from wlmtxt_follow where follow_active_user_id='" + follow_passive_user_id
-				+ "' and follow_passie_user_id='" + user_id + "'";
+				+ "' and follow_passive_user_id='" + loginUser_id + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_follow result = (wlmtxt_follow) query.uniqueResult();
 		return result;

@@ -737,12 +737,12 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO) {
+	public MyAttentionVO listMyAttentionVO(String loginUser_id, MyAttentionVO myAttentionVO) {
 		List<FollowDTO> DTOList = new ArrayList<FollowDTO>();
 
-		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(user_id, myAttentionVO);
+		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(loginUser_id, myAttentionVO);
 
-		int i = worksDao.getMyAttentionTotalRecords(user_id);
+		int i = worksDao.getMyAttentionTotalRecords(loginUser_id);
 		myAttentionVO.setTotalRecords(i);
 		myAttentionVO.setTotalPages(((i - 1) / myAttentionVO.getPageSize()) + 1);
 		if (myAttentionVO.getPageIndex() <= 1) {
@@ -756,15 +756,15 @@ public class WorksServiceImpl implements WorksService {
 			myAttentionVO.setHaveNextPage(true);
 		}
 
-		FollowDTO followDTO = new FollowDTO();
 		for (wlmtxt_follow follow : list) {
-			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(user_id, follow.getFollow_passive_user_id());
+			FollowDTO followDTO = new FollowDTO();
+			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(loginUser_id, follow.getFollow_passive_user_id());
 			if (mutualFollow != null) {
 				followDTO.setMutualFollow("1");
 			} else {
 				followDTO.setMutualFollow("2");
 			}
-			followDTO.setUser(userDao.get_user_byID(user_id));
+			followDTO.setUser(userDao.get_user_byID(follow.getFollow_passive_user_id()));
 			DTOList.add(followDTO);
 		}
 		myAttentionVO.setFollowDTO(DTOList);
