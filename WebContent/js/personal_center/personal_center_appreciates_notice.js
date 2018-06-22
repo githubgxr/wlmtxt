@@ -14,12 +14,17 @@ function appreciateNoticeByPage(pageIndex){
 		if(xhr.readyState==4 && xhr.status==200){
 			var list_appreciateNotice=JSON.parse(xhr.responseText);
 			for(var i=0;i<list_appreciateNotice.followDTO.length;i++){
+				
 				var list_appreciateNotice='<div id="llls_list_container">';
+				
 				list_appreciateNotice+='<div class="video_options">';
+				/*用户头像*/
 				list_appreciateNotice+='<div class="neck_name user_img_small">';
-				list_appreciateNotice+='<img class="user_img_small" src="/wlmtxt/Works/Works_getImg?imgName=' +list_appreciateNotice.followDTO[i].works.works_cover +'"/>';
+				/*list_appreciateNotice+='<img class="user_img_small" src="/wlmtxt/Works/Works_getImg?imgName=' +list_appreciateNotice.followDTO[i].works.works_cover +'"/>';*/
 				list_appreciateNotice+='</div>';
+				/*用户名*/
 				list_appreciateNotice+='<div class="thumd_name">王小二</div>';
+				/*时间*/
 				list_appreciateNotice+='<div class="thumd_time">2018.6.3</div>';
 				list_appreciateNotice+='</div>';
 				list_appreciateNotice+='<div class="info_concise">王小二点赞了你的视频</div>';
@@ -27,7 +32,7 @@ function appreciateNoticeByPage(pageIndex){
 				list_appreciateNotice+='<div class="list_li ">';
 				list_appreciateNotice='<a class="video_list_item_wrap ">';
 				list_appreciateNotice+='<div class="video_cover ">';
-				list_appreciateNotice+='<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_appreciateNotice.followDTO[i].works.works_cover +'"/>';
+				/*list_appreciateNotice+='<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_appreciateNotice.followDTO[i].works.works_cover +'"/>';*/
 				list_appreciateNotice+='<div class="video_overplay "></div>';
 				list_appreciateNotice+='<div class="video_play "></div>';
 				list_appreciateNotice+='</div>';
