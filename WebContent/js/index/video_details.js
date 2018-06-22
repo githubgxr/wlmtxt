@@ -71,7 +71,7 @@ function getWorksDetailVO() {
 			document.getElementById("discussNum").innerHTML = ""
 					+ detail_response.discussDTOList.length;
 			for (var numDiss = 0; numDiss < detail_response.discussDTOList.length; numDiss++) {
-				var comment_list_str = '<div class="comment_list">';
+				var comment_list_str = '<div class="comment_list" >';
 				comment_list_str += '<hr style="width: 100%;" />';
 				/* <!--整个评论--> */
 				comment_list_str += '<div class="comment_list_content">';
@@ -94,20 +94,75 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				alert(detail_response.discussDTOList[numDiss].discuss.discuss_user_id==detail_response.worksDTO.user.user_id);
-				if(detail_response.discussDTOList[numDiss].discuss.discuss_user_id==detail_response.worksDTO.user.user_id){
-					comment_list_str += '<div class="comment_delete">删除</div>';
+				if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == detail_response.worksDTO.user.user_id) {
+					comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
+							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
+							+ '">删除</div>';
 				}
-				comment_list_str += '<div class="comment_delete">回复</div>';
 
+				comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				$("#comment_div").append(comment_list_str);
-			}
 
+			}
+			// 删除评论
+			$(".comment_delete_operate").click(
+					function() {
+						var formData_comment_delete = new FormData();
+						formData_comment_delete.append(
+								"accpet_discuss.discuss_id", this.id);
+						var comment_delete_xhr = new XMLHttpRequest();
+						comment_delete_xhr.open("POST",
+								"/wlmtxt/Works/Works_deleteDisscuss");
+						comment_delete_xhr.send(formData_comment_delete);
+						comment_delete_xhr.onreadystatechange = function() {
+							if (comment_delete_xhr.readyState == 4
+									&& comment_delete_xhr.status == 200) {
+								if (comment_delete_xhr.responseText == "1") {
+									toastr.success("删除评论成功！");
+									getWorksDetailVO();
+								}
+							}
+						}
+					})
+			// 回复评论
+			$(".comment_response_operate").click(function() {
+				var discuss_id=$(this).siblings(".comment_delete").attr("id");
+				$("#mymodal").modal("toggle");
+				$("#check_response_btn").click(function(){
+					if($("#responseComment").val==""){
+						toastr.error("请输入回复内容！");
+						return false;
+					}
+					var formData_response=new FormData();
+					formData_response.append("accpet_discuss.discuss_content",$("#responseComment").val());
+					formData_response.append("accpet_discuss.discuss_father_discuss_id",discuss_id);
+					var xhr_response=new XMLHttpRequest();
+					xhr_response.open("POST","/wlmtxt/Works/Works_discussWorks");
+					xhr_response.send(formData_response);
+					xhr_response.onreadystatechange=function(){
+						if(xhr_response.readyState==4&&xhr_response.status==200){
+							if (xhr_response.responseText == "1") {
+
+								$("#mymodal").css("display","none");
+
+								toastr.success("评论成功！");
+
+								getWorksDetailVO();
+
+							} else {
+								toastr.error("评论失败！");
+								return false;
+							}
+						}
+					}
+				});
+			});
 		}
 	}
+
 	/** *********************详情*********************************** */
 	// 获取播放数
 	function getPlayNum() {
@@ -246,24 +301,6 @@ function getWorksDetailVO() {
 		}
 	});
 
-	/*--------删除评论-----------*/
-	$(".comment_delete").click(function() {
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "");
-		xhr.send();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				if (xhr.responseText == "1") {
-					$(this).remove();
-					toastr.success("删除评论成功！");
-				} else {
-					toastr.error("删除评论失败！");
-					return false;
-				}
-			}
-		}
-
-	});
 }
 getWorksDetailVO();
 
@@ -303,6 +340,7 @@ function video_comment_btn_click() {
 
 	}
 }
+
 /*---------关注-----------*/
 // 查询是否关注
 function checkFocus() {

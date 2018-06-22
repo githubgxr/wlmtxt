@@ -148,6 +148,9 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
 			<!--评论-->
 			<div
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
@@ -240,6 +243,26 @@
 					<!-- 						</div> -->
 					<!-- 					</div> -->
 					<!-- 				</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+			<!--回复面板  -->
+	<div class="modal" id="mymodal" style="display:none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">回复评论：</h4>
+				</div>
+				<div class="modal-body">
+					<textarea id="responseComment" name="responseComment" class="form-control"
+						rows="9" cols="0"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button id="check_response_btn" class="btn btn-success">确认回复</button>
 				</div>
 			</div>
 		</div>
