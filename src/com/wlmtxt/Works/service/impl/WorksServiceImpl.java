@@ -771,4 +771,14 @@ public class WorksServiceImpl implements WorksService {
 		return myAttentionVO;
 	}
 
+	@Override
+	public int totalFansNum(wlmtxt_user loginUser) {
+		return worksDao.totalFansNum(loginUser.getUser_id());
+	}
+
+	@Override
+	public int totalFollowingNum(wlmtxt_user loginUser) {
+		return worksDao.totalFollowingNum(loginUser.getUser_id());
+	}
+
 }
