@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.User.service.UserService;
@@ -147,6 +149,7 @@ public class UserAction extends ActionSupport {
 		// "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		// 邮件内容
 		String mailcontent = "<p><a href=" + href + ">" + utf8_content + "</a></p>";
+//		String utf8_mailcontent =  new String(mailcontent.getBytes("ISO-8859-1"), "utf-8");
 		PrintWriter pw = response.getWriter();
 		try {
 			JavaMail.sendMail(mailcontent, accpet_user.getUser_mail());
@@ -311,7 +314,7 @@ public class UserAction extends ActionSupport {
 		String content = properties.getProperty("mailcontent");
 		String utf8_content = new String(content.getBytes("ISO-8859-1"), "utf-8");
 		//昵称
-		String nickname = new String(accpet_user.getUser_username().getBytes("ISO-8859-1"), "utf-8");
+//		String nickname = new String(accpet_user.getUser_username().getBytes("ISO-8859-1"), "utf-8");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		String href = "http://"+host+":"+port+"/wlmtxt/User/User_skipToModifyPasswordPage?accpet_user.user_mail=" + accpet_user.getUser_mail();
@@ -354,7 +357,7 @@ public class UserAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		//获取此邮箱的用户信息
 		wlmtxt_user user = userService.mailRegisted(accpet_user);
-		user.setUser_password(accpet_user.getUser_password());
+		user.setUser_password(md5.GetMD5Code(accpet_user.getUser_password()));
 		user.setUser_gmt_modified(TeamUtil.getStringSecond());
 		String registerResult = userService.modifyPassword(user);
 		PrintWriter pw = response.getWriter();
@@ -417,11 +420,13 @@ public class UserAction extends ActionSupport {
 	}
 
 	/**
-	 * 关注用户
+	 * 关注用户及取消关注
 	 * 
-	 * 1-关注成功 2-关注失败 3-未登录
+	 * 1-成功 2-失败 3-未登录
 	 * 
 	 * @throws IOException
+	 * 
+	 * @author gxr
 	 * 
 	 * XXX
 	 */
@@ -431,11 +436,22 @@ public class UserAction extends ActionSupport {
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		if (null != loginUser) {
-			String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
-			if ("1".equals(followResult)) {
-				pw.write("1");
+			if (userService.isFollowedUser(loginUser.getUser_id(), accpet_user.getUser_id())) {
+				// 取关
+				String result = userService.removeFollow(loginUser, accpet_user);
+				if ("1".equals(result)) {
+					pw.write("1");
+				} else {
+					pw.write("2");
+				}
 			} else {
-				pw.write("2");
+				// 关注
+				String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
+				if ("1".equals(followResult)) {
+					pw.write("1");
+				} else {
+					pw.write("2");
+				}
 			}
 		} else {
 			pw.write("3");
@@ -495,7 +511,37 @@ public class UserAction extends ActionSupport {
 	}
 	
 	/**
-	 * 关注单个粉丝
+	 * 我的粉丝列表
+	 * 
+	 * 返回，list-全部粉丝数据，2-无粉丝
+	 * 
+	 * @date 2018年6月22日	上午10:52:53
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 */
+	public void listMyFansVO() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		List<wlmtxt_user> list = userService.listMyFansVO(loginUser);
+		if (list != null) {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write(gson.toJson(list));
+		} else {
+			pw.write("2");
+		}
+	}
+	
+	/**
+	 * XXX此方法被重复，不要用
+	 * 
+	 * 关注单个粉丝，
 	 * 
 	 * 返回，1-成功，2-失败
 	 * 
