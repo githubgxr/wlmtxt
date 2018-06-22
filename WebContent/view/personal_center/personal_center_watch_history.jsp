@@ -37,7 +37,7 @@
 				<!--主体部分-->
 				<div class="llls_content list_container">
 					<ul id="llls_list_container">
-						<li class="list_video_item">
+						<%-- <li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">
 
@@ -65,13 +65,13 @@
 							<div class="video_options">
 								<a class="video_delete_btn">删除</a>
 							</div>
-						</li>
+						</li> --%>
 					</ul>
 
 
 				</div>
 				<!--翻页-->
-				<div class="page_container">
+				<!-- <div class="page_container">
 					<div class="page_component_container">
 						<div class="page_component">
 							<a class="page_prev" href="#">上一页</a> <a class="selected"
@@ -83,14 +83,14 @@
 								class="page_component_submit">GO</a>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
 
 	<script type="text/javascript"
-		src="<%=basePath%>js/personal_center/personal_center_my_dynamic.js"></script>
+		src="<%=basePath%>js/personal_center/personal_center_watch_history.js"></script>
 </body>
 
 </html>
