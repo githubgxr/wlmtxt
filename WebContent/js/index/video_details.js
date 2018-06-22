@@ -11,7 +11,7 @@ function getWorksDetailVO() {
 	xhr_detail.onreadystatechange = function() {
 		if (xhr_detail.readyState == 4 && xhr_detail.status == 200) {
 			var detail_response = JSON.parse(xhr_detail.responseText);
-			//用户id
+			// 用户id
 			$("#user_id").html(detail_response.worksDTO.user.user_id);
 			console.log("user_id:" + $("#user_id").html());
 			/*------视频*/
@@ -25,12 +25,14 @@ function getWorksDetailVO() {
 			$("#detail_video_time").html(
 					detail_response.worksDTO.works.works_gmt_create);
 			// 关键字
-			var detail_str="";
-			 for(var num=0;num<detail_response.worksDTO.keyWordDTOList.length;num++){
-				 detail_str+='<span class="video_label_item" style="margin: 0 10px 0 0;">'+detail_response.worksDTO.keyWordDTOList[num].keyword.keyword_name+'</span>';
-				
-			 }
-			 $("#detail_video_keywords").html(detail_str);
+			var detail_str = "";
+			for (var num = 0; num < detail_response.worksDTO.keyWordDTOList.length; num++) {
+				detail_str += '<span class="video_label_item" style="margin: 0 10px 0 0;">'
+						+ detail_response.worksDTO.keyWordDTOList[num].keyword.keyword_name
+						+ '</span>';
+
+			}
+			$("#detail_video_keywords").html(detail_str);
 			// 视频
 			$("#detail_video_content").attr(
 					"src",
@@ -44,7 +46,7 @@ function getWorksDetailVO() {
 			$("#download_a").attr(
 					"href",
 					"/wlmtxt/Works/Works_getVideo?worksName="
-					+ detail_response.worksDTO.works.works_name);
+							+ detail_response.worksDTO.works.works_name);
 
 			/*------用户*/
 			// 头像
@@ -57,7 +59,7 @@ function getWorksDetailVO() {
 					detail_response.worksDTO.user.user_username);
 			// 个人介绍
 			$("#detail_user_bio").html(detail_response.worksDTO.user.user_bio);
-//查询是否关注
+			// 查询是否关注
 			checkFocus();
 			// 评论
 
@@ -94,7 +96,7 @@ function getWorksDetailVO() {
 						+ '</div>';
 				comment_list_str += '<div class="comment_delete">删除</div>';
 				comment_list_str += '<div class="comment_delete">回复</div>';
-			
+
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
@@ -104,7 +106,7 @@ function getWorksDetailVO() {
 		}
 	}
 	/** *********************详情*********************************** */
-	//获取播放数
+	// 获取播放数
 	function getPlayNum() {
 		var formData_get_play_num = new FormData();
 		formData_get_play_num.append("accept_works.works_id", video_id);
@@ -113,7 +115,7 @@ function getWorksDetailVO() {
 		play_num_xhr.send(formData_get_play_num);
 		play_num_xhr.onreadystatechange = function() {
 			if (play_num_xhr.readyState == 4 && play_num_xhr.status == 200) {
-				console.log("播放："+play_num_xhr.responseText);
+				console.log("播放：" + play_num_xhr.responseText);
 				$("#play_number").html(play_num_xhr.responseText);
 			}
 		}
@@ -121,7 +123,7 @@ function getWorksDetailVO() {
 	getPlayNum();
 	/*-----------收藏----------*/
 	// 收藏
-	//获取收藏数
+	// 获取收藏数
 	function getCollectNum() {
 		var formData_get_collect_num = new FormData();
 		formData_get_collect_num.append("accept_works.works_id", video_id);
@@ -129,8 +131,9 @@ function getWorksDetailVO() {
 		collect_num_xhr.open("POST", "/wlmtxt/Works/Works_getCollectNum");
 		collect_num_xhr.send(formData_get_collect_num);
 		collect_num_xhr.onreadystatechange = function() {
-			if (collect_num_xhr.readyState == 4 && collect_num_xhr.status == 200) {
-				console.log("收藏："+collect_num_xhr.responseText);
+			if (collect_num_xhr.readyState == 4
+					&& collect_num_xhr.status == 200) {
+				console.log("收藏：" + collect_num_xhr.responseText);
 				$("#collect_number").html(collect_num_xhr.responseText);
 			}
 		}
@@ -181,7 +184,7 @@ function getWorksDetailVO() {
 	});
 	/*-----------点赞----------*/
 	// 点赞
-	//获取点赞数
+	// 获取点赞数
 	function getLikeNum() {
 		var formData_get_like_num = new FormData();
 		formData_get_like_num.append("accept_works.works_id", video_id);
@@ -190,13 +193,13 @@ function getWorksDetailVO() {
 		like_num_xhr.send(formData_get_like_num);
 		like_num_xhr.onreadystatechange = function() {
 			if (like_num_xhr.readyState == 4 && like_num_xhr.status == 200) {
-				console.log("点赞："+like_num_xhr.responseText);
+				console.log("点赞：" + like_num_xhr.responseText);
 				$("#thumbs_number").html(like_num_xhr.responseText);
 			}
 		}
 	}
 	getLikeNum();
-	
+
 	// 查询是否点赞
 	function checkLike() {
 		var formData_check_like = new FormData();
@@ -239,7 +242,6 @@ function getWorksDetailVO() {
 			}
 		}
 	});
-	
 
 	/*--------删除评论-----------*/
 	$(".comment_delete").click(function() {
@@ -299,10 +301,10 @@ function video_comment_btn_click() {
 	}
 }
 /*---------关注-----------*/
-// 查询是否关注 
+// 查询是否关注
 function checkFocus() {
 	var formData_check_focus = new FormData();
-	console.log("checkfocus:"+$("#user_id").html());
+	console.log("checkfocus:" + $("#user_id").html());
 	formData_check_focus.append("accpet_user.user_id", $("#user_id").html());
 	var focus_xhr = new XMLHttpRequest();
 	focus_xhr.open("POST", "/wlmtxt/User/User_isFollowedUser");
@@ -324,9 +326,8 @@ function checkFocus() {
 	}
 }
 
-
 $("#focus_btn").click(function() {
-	console.log("focus:"+$("#user_id").html());
+	console.log("focus:" + $("#user_id").html());
 	var formData_focus = new FormData();
 	formData_focus.append("accpet_user.user_id", $("#user_id").html());
 	var xhr = new XMLHttpRequest();

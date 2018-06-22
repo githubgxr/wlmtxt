@@ -65,7 +65,7 @@ function deletePlayHistory(video_delete_btn_id){
 
 	console.log("video_delete_btn_id:"+video_delete_btn_id);
 	var video_delete_formData=new FormData();
-	video_delete_formData.append("accept_works.works_id",video_delete_btn_id);
+	video_delete_formData.append("play_history.play_history_id",video_delete_btn_id);
 	var xhr_delete=new XMLHttpRequest();
 	xhr_delete.open("POST","/wlmtxt/Works/Works_deletePlayHistory");
 	xhr_delete.send(video_delete_formData);
@@ -84,7 +84,7 @@ function deletePlayHistory(video_delete_btn_id){
 //删除全部作品
 	function deleteAllMyHistory(){
 		var xhr_delete_all=new XMLHttpRequest();
-		xhr_delete_all.open("POST","/wlmtxt/Works/Works_deleteAllPlayHistory");
+		xhr_delete_all.open("POST","/wlmtxt/Works/Works_deleteAllMyHistory");
 		xhr_delete_all.send(null);
 		xhr_delete_all.onreadystatechange=function(){
 			if(xhr_delete_all.readyState==4&&xhr_delete_all.status==200){
