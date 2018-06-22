@@ -35,7 +35,7 @@ function listMyFansByPage(pageIndex){
 				myFans+='</div>';
 				myFans+='</li>';
 				$(".user_list_ul").append(myFans);
-				
+				console.log(list_myFans.userlist[i].user_bio);
 			}
 		}
 	}
