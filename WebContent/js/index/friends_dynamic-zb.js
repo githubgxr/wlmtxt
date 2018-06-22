@@ -25,10 +25,14 @@ function getDynamicVO() {
 							+ '<div class="info_dynamic_time">'
 							+ dynamicVO.worksDTOList[num].works.works_gmt_create
 							+ '</div>'
-							+ '<div class="info_dynamic_title">'
+							+ '<div class="info_dynamic_title" onclick="window.location=\'/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
+							+ dynamicVO.worksDTOList[num].works.works_id
+							+ '\'">'
 							+ dynamicVO.worksDTOList[num].works.works_title
 							+ '</div>'
-							+ '<div class="info_dynamic_concise">'
+							+ '<div class="info_dynamic_concise" onclick="window.location=\'/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
+							+ dynamicVO.worksDTOList[num].works.works_id
+							+ '\'">'
 							+ dynamicVO.worksDTOList[num].works.works_reason
 							+ '</div>'
 							+ '<div class="list_img">'
@@ -36,7 +40,7 @@ function getDynamicVO() {
 							+ dynamicVO.worksDTOList[num].works.works_cover
 							+ '" class="video_img" src="/wlmtxt/Works/Works_getVideo?worksName='
 							+ dynamicVO.worksDTOList[num].works.works_name
-							+ '" style="width: 660px; height: 330px;" />'
+							+ '" style="width: 560px; height: 315px;" />'
 							+ '</div>'
 							+ '</div>'
 							+ '<hr style="float: left; width: 100%;" />'
