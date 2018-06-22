@@ -355,7 +355,7 @@ public class UserAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		//获取此邮箱的用户信息
 		wlmtxt_user user = userService.mailRegisted(accpet_user);
-		user.setUser_password(accpet_user.getUser_password());
+		user.setUser_password(md5.GetMD5Code(accpet_user.getUser_password()));
 		user.setUser_gmt_modified(TeamUtil.getStringSecond());
 		String registerResult = userService.modifyPassword(user);
 		PrintWriter pw = response.getWriter();
@@ -418,9 +418,9 @@ public class UserAction extends ActionSupport {
 	}
 
 	/**
-	 * 关注用户
+	 * 关注用户及取消关注
 	 * 
-	 * 1-关注成功 2-关注失败 3-未登录
+	 * 1-成功 2-失败 3-未登录
 	 * 
 	 * @throws IOException
 	 * 
@@ -432,11 +432,20 @@ public class UserAction extends ActionSupport {
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		if (null != loginUser) {
-			String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
-			if ("1".equals(followResult)) {
-				pw.write("1");
+			if (userService.isFollowedUser(loginUser.getUser_id(), accpet_user.getUser_id())) {
+				String result = userService.removeFollow(loginUser, accpet_user);
+				if ("1".equals(result)) {
+					pw.write("1");
+				} else {
+					pw.write("2");
+				}
 			} else {
-				pw.write("2");
+				String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
+				if ("1".equals(followResult)) {
+					pw.write("1");
+				} else {
+					pw.write("2");
+				}
 			}
 		} else {
 			pw.write("3");

@@ -36,4 +36,6 @@ public interface UserService {
 
 	void noticeMyFans(wlmtxt_user loginUser, wlmtxt_user accpet_user) throws Exception;
 
+	String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user);
+
 }

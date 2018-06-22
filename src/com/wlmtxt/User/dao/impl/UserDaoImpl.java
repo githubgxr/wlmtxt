@@ -77,7 +77,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public wlmtxt_user mailRegisted(wlmtxt_user accpet_user) {
 		String hql = "from wlmtxt_user where user_mail='" + accpet_user.getUser_mail() + "'";
-		Query query = getSession().createQuery(hql);
+		Query query = getSession().createQuery(hql);	
 		wlmtxt_user user = (wlmtxt_user) query.uniqueResult();
 		return user;
 	}
@@ -179,6 +179,17 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void noticeFans(wlmtxt_follow follow)  throws Exception{
 		getSession().save(follow);
+	}
+
+	@Override
+	public String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user) {
+		String hql = "delete from wlmtxt_follow where follow_active_user_id='"+ loginUser.getUser_id() +"' and follow_passive_user_id='"+accpet_user.getUser_id()+"'";
+		Query query = getSession().createQuery(hql);
+		if (query.executeUpdate() == 1) {
+			return "1";
+		} else {
+			return "2";
+		}
 	}
 
 	
