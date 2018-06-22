@@ -191,6 +191,13 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	@Override
+	public List<wlmtxt_user> listMyFansByFollow_passive_user_id(String user_id) {
+		String hql = "from wlmtxt_user where follow_passive_user_id='"+user_id+"'";
+		Query query = getSession().createQuery(hql);
+		return query.list();
+	}
+
 	
 //	public void remov
 	

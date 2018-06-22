@@ -46,4 +46,6 @@ public interface UserDao {
 
 	String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user);
 
+	List<wlmtxt_user> listMyFansByFollow_passive_user_id(String user_id);
+
 }
