@@ -23,6 +23,7 @@ import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.DiscussDTO;
 import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
+import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
@@ -60,21 +61,64 @@ public class WorksServiceImpl implements WorksService {
 		this.worksDao = worksDao;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.wlmtxt.Works.service.WorksService#deleteMyWorks(java.lang.String)
-	 */
-	// TODO
 	@Override
-	public List<wlmtxt_play_history> findPlayHistoryListByWorksID(String worksID) {
+	public int getHotByWorksID(String works_id) {
+		/*
+		 * 播放1 点赞2 评论3 收藏4
+		 */
+		int hot = 0;
+		// 获取播放数量
+		int playNum = getPlayNum(works_id);
+		hot = hot + (playNum * 1);
+		// 获取点赞数量
+		int likeNum = getLikeNum(works_id);
+		hot = hot + (likeNum * 2);
+		// 获取评论及评论回复的数量
+		int discussNum = getDiscussNum(works_id);
+		hot = hot + (discussNum * 3);
+		// 收藏数量
+		int collectNum = getCollectNum(works_id);
+		hot = hot + (collectNum * 4);
+		//
+		return hot;
+	}
+
+	@Override
+	public List<PlayHistoryDTO> listPlayHistoryDTOListByUserID(String userID) {
+		List<PlayHistoryDTO> PlayHistoryDTOList = new ArrayList<PlayHistoryDTO>();
+		List<wlmtxt_play_history> playHistoryList = listPlayHistoryListByUserID(userID);
+
+		for (wlmtxt_play_history playHistory : playHistoryList) {
+			PlayHistoryDTO playHistoryDTO = new PlayHistoryDTO();
+			playHistoryDTO.setPlayHistory(playHistory);
+
+			//
+			WorksDTO worksDTO = getWorksDTOByID(playHistory.getPlay_history_works_id());
+			playHistoryDTO.setWorksDTO(worksDTO);
+		}
+
+		return PlayHistoryDTOList;
+	}
+
+	@Override
+	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID) {
+
+		return worksDao.listPlayHistoryListByUserID(userID);
+	}
+
+	@Override
+	public List<wlmtxt_play_history> listPlayHistoryListByWorksID(String worksID) {
 		return worksDao.listPlayHistoryByWorksID(worksID);
 	};
 
 	@Override
 	public int getPlayNum(String works_id) {
 		return worksDao.getPlayNum(works_id);
+	}
+
+	@Override
+	public int getDiscussNum(String works_id) {
+		return worksDao.getDiscussNum(works_id);
 	}
 
 	@Override
@@ -131,11 +175,94 @@ public class WorksServiceImpl implements WorksService {
 		// 获取关键词列表
 		List<KeyWordDTO> keyWordDTOList = listWorksKeywordByWorksID(works.getWorks_id());
 		worksDTO.setKeyWordDTOList(keyWordDTOList);
-		//
+		// 获取作者信息
 		wlmtxt_user user = userService.get_user_byID(works.getWorks_user_id());
 		worksDTO.setUser(user);
+
+		// 获取点赞评论收藏播放数
+		worksDTO.setPlayNum(getPlayNum(works_id));
+		worksDTO.setLikeNum(getLikeNum(works_id));
+		worksDTO.setCollectNum(getCollectNum(works_id));
+		worksDTO.setDiscussNum(getDiscussNum(works_id));
+		// 获取热度
+		worksDTO.setHot(getHotByWorksID(works_id));
 		//
 		return worksDTO;
+	}
+
+	@Override
+	public List<WorksDTO> listWorks10OrderHotByDay() {
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		List<wlmtxt_works> worksList = worksDao.listWorksByDay();
+		for (wlmtxt_works works : worksList) {
+			WorksDTO worksDTO = new WorksDTO();
+			worksDTO = getWorksDTOByID(works.getWorks_id());
+			worksDTOList.add(worksDTO);
+		}
+		for (int i = 0; i < worksDTOList.size() - 1; i++) {
+			for (int j = 0; j < worksDTOList.size() - i - 1; j++) {// 比较两个整数
+				if (worksDTOList.get(j).getHot() > worksDTOList.get(j + 1).getHot()) {
+					WorksDTO temp = worksDTOList.get(j);
+					worksDTOList.set(j, worksDTOList.get(j + 1));
+					worksDTOList.set(j + 1, temp);
+				}
+			}
+		}
+		if (worksDTOList.size() < 9) {
+			return worksDTOList.subList(0, worksDTOList.size() - 1);
+		} else {
+			return worksDTOList.subList(0, 9);
+		}
+	}
+
+	@Override
+	public List<WorksDTO> listWorks10OrderHotByMonth() {
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		List<wlmtxt_works> worksList = worksDao.listWorksByMonth();
+		for (wlmtxt_works works : worksList) {
+			WorksDTO worksDTO = new WorksDTO();
+			worksDTO = getWorksDTOByID(works.getWorks_id());
+			worksDTOList.add(worksDTO);
+		}
+		for (int i = 0; i < worksDTOList.size() - 1; i++) {
+			for (int j = 0; j < worksDTOList.size() - i - 1; j++) {// 比较两个整数
+				if (worksDTOList.get(j).getHot() > worksDTOList.get(j + 1).getHot()) {
+					WorksDTO temp = worksDTOList.get(j);
+					worksDTOList.set(j, worksDTOList.get(j + 1));
+					worksDTOList.set(j + 1, temp);
+				}
+			}
+		}
+		if (worksDTOList.size() < 9) {
+			return worksDTOList.subList(0, worksDTOList.size() - 1);
+		} else {
+			return worksDTOList.subList(0, 9);
+		}
+	}
+
+	@Override
+	public List<WorksDTO> listWorks10OrderHotByWeek() {
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		List<wlmtxt_works> worksList = worksDao.listWorksByWeek();
+		for (wlmtxt_works works : worksList) {
+			WorksDTO worksDTO = new WorksDTO();
+			worksDTO = getWorksDTOByID(works.getWorks_id());
+			worksDTOList.add(worksDTO);
+		}
+		for (int i = 0; i < worksDTOList.size() - 1; i++) {
+			for (int j = 0; j < worksDTOList.size() - i - 1; j++) {// 比较两个整数
+				if (worksDTOList.get(j).getHot() > worksDTOList.get(j + 1).getHot()) {
+					WorksDTO temp = worksDTOList.get(j);
+					worksDTOList.set(j, worksDTOList.get(j + 1));
+					worksDTOList.set(j + 1, temp);
+				}
+			}
+		}
+		if (worksDTOList.size() < 9) {
+			return worksDTOList.subList(0, worksDTOList.size() - 1);
+		} else {
+			return worksDTOList.subList(0, 9);
+		}
 	}
 
 	public List<KeyWordDTO> listWorksKeywordByWorksID(String worksID) {
@@ -502,7 +629,7 @@ public class WorksServiceImpl implements WorksService {
 		} else {
 			myAttentionVO.setHaveNextPage(true);
 		}
-		
+
 		FollowDTO followDTO = new FollowDTO();
 		for (wlmtxt_follow follow : list) {
 			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(user_id, follow.getFollow_passive_user_id());

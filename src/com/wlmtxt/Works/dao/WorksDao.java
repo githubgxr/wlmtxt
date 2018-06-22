@@ -90,6 +90,7 @@ public interface WorksDao {
 	wlmtxt_keyword getWordByID(String works_keyword_keyword_id);
 
 	List<wlmtxt_works> listWorksAllByUserId(String user_id);
+
 	int getLikeNum(String works_id);
 
 	int getCollectNum(String works_id);
@@ -99,6 +100,7 @@ public interface WorksDao {
 	int getMyAttentionTotalRecords(String user_id);
 
 	wlmtxt_follow findFollowByActiveUserId(String user_id, String follow_passive_user_id);
+
 	int getPlayHistoryNumByFileName(String fileName);
 
 	int getPlayNum(String works_id);
@@ -106,5 +108,23 @@ public interface WorksDao {
 	void addPlayHistoryByFileName(wlmtxt_play_history history);
 
 	List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID);
+
+	List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID);
+
+	/**
+	 * 获取评论的数量
+	 * 
+	 * @param works_id
+	 * @return
+	 */
+	int getDiscussNum(String works_id);
+
+	List<wlmtxt_works> listWorksByDay();
+
+	List<wlmtxt_works> listWorksByMonth();
+
+	List<wlmtxt_works> listWorksByWeek();
+
+	// List<wlmtxt_works> listWorks10OrderHot();
 
 }
