@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.wlmtxt.User.dao.UserDao;
-import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;

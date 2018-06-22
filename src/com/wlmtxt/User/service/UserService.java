@@ -38,4 +38,6 @@ public interface UserService {
 
 	String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user);
 
+	List<wlmtxt_user> listMyFansVO(wlmtxt_user loginUser);
+
 }
