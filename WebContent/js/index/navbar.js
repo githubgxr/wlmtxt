@@ -38,7 +38,8 @@ function checkLogin() {
 								function() {
 									window.location.href = "/wlmtxt/view/personal_center/personal_center_personal_data.jsp";
 								});
-
+				//关于评论
+				$(".comment_delete").css("display","block");
 				var userInfo = JSON.parse(xhr.responseText);
 				user_id = userInfo.user_id;
 				console.log("已登录！");
