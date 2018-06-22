@@ -110,7 +110,7 @@
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
 				<div style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px;">相关推荐</div>
 				<!--推荐列表-->
-				<div>
+				<div id="tj_list">
 					<!--一个视频-->
 					<div class="tj" style="float: left;">
 						<img src="<%=basePath%>css/zb/img/4.png" />
@@ -118,36 +118,12 @@
 							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
 							05【千夏】</div>
 					</div>
-					<!--一个视频-->
-					<div class="tj" style="float: left;">
-						<img src="<%=basePath%>css/zb/img/4.png" />
-						<div
-							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-							05【千夏】</div>
-					</div>
-					<!--一个视频-->
-					<div class="tj" style="float: left;">
-						<img src="<%=basePath%>css/zb/img/4.png" />
-						<div
-							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-							05【千夏】</div>
-					</div>
-					<!--一个视频-->
-					<div class="tj" style="float: left;">
-						<img src="<%=basePath%>css/zb/img/4.png" />
-						<div
-							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-							05【千夏】</div>
-					</div>
-					<!--一个视频-->
-					<div class="tj" style="float: left;">
-						<img src="<%=basePath%>css/zb/img/4.png" />
-						<div
-							style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-							05【千夏】</div>
-					</div>
+					
 				</div>
 			</div>
+			
+			
+			
 			<!--评论-->
 			<div
 				style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: calc(100%); margin: 20px 0 0;">
@@ -240,6 +216,26 @@
 					<!-- 						</div> -->
 					<!-- 					</div> -->
 					<!-- 				</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+			<!--回复面板  -->
+	<div class="modal" id="mymodal" style="display:none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">回复评论：</h4>
+				</div>
+				<div class="modal-body">
+					<textarea id="responseComment" name="responseComment" class="form-control"
+						rows="9" cols="0"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button id="check_response_btn" class="btn btn-success">确认回复</button>
 				</div>
 			</div>
 		</div>

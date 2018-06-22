@@ -32,6 +32,7 @@ import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -406,6 +407,25 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
+	/**
+	 * 获取9条关注者的动态
+	 * 
+	 * @throws IOException
+	 */
+	public void getDynamicVO() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		DynamicVO dynamicVO = worksService.getDynamicVO(user.getUser_id());
+		/*
+		 * 
+		 */
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(dynamicVO));
+	}
+
 	public void getWorksDetailVO() throws IOException {
 		WorksDetailVO worksDetailVO = worksService.getWorksDetailVO(accept_works.getWorks_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -679,11 +699,11 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException 
 	 */
 	public void totalFansNum() throws IOException {
-//		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int num = worksService.totalFansNum(accept_user);
+		int num = worksService.totalFansNum(loginUser);
 		pw.write(String.valueOf(num));
 	}
 	
@@ -705,7 +725,7 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int num = worksService.totalFollowingNum(accept_user);
+		int num = worksService.totalFollowingNum(loginUser);
 		pw.write(String.valueOf(num));
 	}
 
