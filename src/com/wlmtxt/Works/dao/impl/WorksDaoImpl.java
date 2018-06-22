@@ -18,6 +18,7 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_notification;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -436,6 +437,12 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public void saveDiscuss(wlmtxt_discuss accpet_discuss) {
 		getSession().save(accpet_discuss);
+
+	}
+
+	@Override
+	public void addNotification(wlmtxt_notification notification) {
+		getSession().save(notification);
 
 	}
 

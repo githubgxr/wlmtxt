@@ -100,4 +100,13 @@ public interface WorksService {
 
 	List<PlayHistoryDTO> listPlayHistoryDTOListByUserID(String userID);
 
+	/**
+	 * 添加通知
+	 * 
+	 * @param notification_user_id
+	 * @param notification_type
+	 * @param notification_content
+	 */
+	public void addNotification(String notification_user_id, String notification_type, String notification_content);
+
 }

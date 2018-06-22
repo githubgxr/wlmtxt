@@ -14,6 +14,7 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_notification;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -129,6 +130,21 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public wlmtxt_works getWorksByFileName(String fileName) {
 		return worksDao.getWorksByFileName(fileName);
+	}
+
+	@Override
+	public void addNotification(String notification_user_id, String notification_type, String notification_content) {
+		wlmtxt_notification notification = new wlmtxt_notification();
+		notification.setNotification_id(TeamUtil.getUuid());
+		//
+		notification.setNotification_user_id(notification_user_id);
+		notification.setNotification_type(notification_type);
+		notification.setNotification_content(notification_content);
+		//
+		String time = TeamUtil.getStringSecond();
+		notification.setNotification_gmt_create(time);
+		notification.setNotification_gmt_modified(time);
+		worksDao.addNotification(notification);
 	}
 
 	@Override
@@ -548,6 +564,18 @@ public class WorksServiceImpl implements WorksService {
 			new_collect.setCollect_gmt_modified(TeamUtil.getStringSecond());
 			System.out.println(new_collect);
 			worksDao.saveCollect(new_collect);
+			/*
+			 * 通知
+			 */
+			// 查询发起者
+			wlmtxt_user putMan = userService.get_user_byID(user.getUser_id());
+			// 查询作品
+			wlmtxt_works works = worksDao.getWorksByID(accept_works.getWorks_id());
+			addNotification(works.getWorks_user_id(), "2",
+					putMan.getUser_username() + "收藏了您的作品" + works.getWorks_name());
+			/*
+			 * 
+			 */
 		} else {
 			worksDao.removeCollect(user.getUser_id(), accept_works.getWorks_id());
 		}
@@ -572,7 +600,6 @@ public class WorksServiceImpl implements WorksService {
 	public void discussWorks(wlmtxt_discuss accpet_discuss) {
 
 		accpet_discuss.setDiscuss_id(TeamUtil.getUuid());
-		accpet_discuss.setDiscuss_deleted("2");
 
 		accpet_discuss.setDiscuss_gmt_create(TeamUtil.getStringSecond());
 		accpet_discuss.setDiscuss_gmt_modified(TeamUtil.getStringSecond());
