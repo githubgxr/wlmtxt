@@ -147,7 +147,7 @@ public interface WorksDao {
 
 	void deleteDisscuss(String discuss_id);
 
-
+	List<wlmtxt_user> listAttentionUser(String user_id);
 	// List<wlmtxt_works> listWorks10OrderHot();
 
 }
