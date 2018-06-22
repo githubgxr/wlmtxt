@@ -38,10 +38,10 @@
 									<img src="<%=basePath%>img/user.jpg" />
 									<div class="user_foot">
 										<div class="user_fans">
-											关注<span>0</span>
+											关注<span id="other_data_focus"></span>
 										</div>
 										<div class="user_fans">
-											粉丝<span>0</span>
+											粉丝<span id="other_data_fans"></span>
 										</div>
 									</div>
 								</div>
@@ -49,20 +49,20 @@
 								<div class="personal_info_details">
 									<div class="img_wrap_list">
 										<span class="highlight">昵称：</span>
-										<div class="personal_info_value highlight"
-											style="color: #1cd388;">熊子婷</div>
+										<div id="other_data_username" class="personal_info_value highlight"
+											style="color: #1cd388;"></div>
 									</div>
 									<div class="img_wrap_list">
 										<span>账号：</span>
-										<div class="personal_info_value">xzt15478013</div>
+										<div class="personal_info_value" id="other_data_email"></div>
 									</div>
 									<div class="img_wrap_list">
 										<span>性别：</span>
-										<div class="personal_info_value">女</div>
+										<div class="personal_info_value" id="other_data_sex"></div>
 									</div>
 									<div class="img_wrap_list">
 										<span>简介：</span>
-										<div class="personal_info_value grjj">电饭锅共同语言不广发银行gfhjgjh不傻是dfhqwerutyernvferghfnregv好腹黑如果和雕刻时光哈尔你发的光华科技覅额日而你个费迪南德克己奉公过得好快解放后扣几分</div>
+										<div class="personal_info_value grjj" id="other_data_bio"></div>
 									</div>
 
 								</div>
