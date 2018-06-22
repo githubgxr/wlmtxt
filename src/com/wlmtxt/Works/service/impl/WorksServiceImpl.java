@@ -23,6 +23,7 @@ import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.DiscussDTO;
 import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
+import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
@@ -83,7 +84,25 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public List<PlayHistoryDTO> listPlayHistoryDTOListByUserID(String userID) {
+		List<PlayHistoryDTO> PlayHistoryDTOList = new ArrayList<PlayHistoryDTO>();
+		List<wlmtxt_play_history> playHistoryList = listPlayHistoryListByUserID(userID);
+
+		for (wlmtxt_play_history playHistory : playHistoryList) {
+			PlayHistoryDTO playHistoryDTO = new PlayHistoryDTO();
+			playHistoryDTO.setPlayHistory(playHistory);
+
+			//
+			WorksDTO worksDTO = getWorksDTOByID(playHistory.getPlay_history_works_id());
+			playHistoryDTO.setWorksDTO(worksDTO);
+		}
+
+		return PlayHistoryDTOList;
+	}
+
+	@Override
 	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID) {
+
 		return worksDao.listPlayHistoryListByUserID(userID);
 	}
 

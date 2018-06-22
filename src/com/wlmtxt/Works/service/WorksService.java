@@ -9,6 +9,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
@@ -96,5 +97,7 @@ public interface WorksService {
 	public List<WorksDTO> listWorks10OrderHotByWeek();
 
 	public List<WorksDTO> listWorks10OrderHotByMonth();
+
+	List<PlayHistoryDTO> listPlayHistoryDTOListByUserID(String userID);
 
 }

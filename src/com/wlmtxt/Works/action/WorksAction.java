@@ -27,6 +27,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
@@ -664,19 +665,19 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 根据当前登录用户查看播放历史
+	 * 根据当前登录用户查看播放历史DTO
 	 * 
 	 * @throws IOException
 	 */
 	public void listPlayHistoryListByUserID() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		List<wlmtxt_play_history> playHistoryList = worksService.listPlayHistoryListByUserID(user.getUser_id());
+		List<PlayHistoryDTO> playHistoryDTOList = worksService.listPlayHistoryDTOListByUserID(user.getUser_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(playHistoryList));
+		response.getWriter().write(gson.toJson(playHistoryDTOList));
 	}
 
 	public WorksService getWorksService() {
