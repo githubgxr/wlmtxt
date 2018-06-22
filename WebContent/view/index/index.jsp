@@ -23,28 +23,8 @@
 		<!--大推荐-->
 		<div id="dtj"
 			style="background-size:660px 330px ; background-image:url('<%=basePath%>css/zb/img/4.png'); height: 330px; width: 660px; float: left;">
-			<div style="margin: 280px 0 0 0; background-color: #fbfbfb; float: left; opacity: 0.5; width: 100%; height: 50px; line-height: 50px; color: #1cd388; padding: 0 20px;">小猪正在享受高空飞翔的快感</div>
-			<!-- <div style="margin: 10px 0 0 0;">
-					<div>
-						<a id="download_a" class="button_code user_operate button_a" href="/wlmtxt/Works/Works_getVideo?worksName=bd9ae373-9682-4839-b04c-cb2f9965ce64.mp4" download="trailer">
-							<i class="fas fa-download" style="width:50px;float:left;line-height:32px;text-align:left;margin:0 0 0 -10px;">&nbsp;下载</i>
-							<div style="float:left;"></div>
-						</a>
-						<div class="button_code user_operate button_a">
-							<i class="fas fa-download"
-								style="width: 50px; float: left; line-height: 32px; text-align: left; margin: 0 0 0 -10px;">&nbsp;下载</i>
-						</div>
-						<div class="dz_no user_operate" id="thumbs_number_div" style="float: right;">
-							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number">0</span>
-						</div>
-						<div class="dz_no user_operate" id="collect_number_div" style="float: right; margin: 0 20px;">
-							<i class="fas fa-heart"></i>&nbsp;收藏<span id="collect_number">0</span>
-						</div>
-						<div class="dz_no" id="play_number_div" style="float: right; margin: 0">
-							<i class="fas fa-play-circle"></i>&nbsp;播放<span id="play_number">1</span>
-						</div>
-					</div>
-				</div> -->
+			<div
+				style="margin: 280px 0 0 0; background-color: #fbfbfb; float: left; opacity: 0.5; width: 100%; height: 50px; line-height: 50px; color: #1cd388; padding: 0 20px;">小猪正在享受高空飞翔的快感</div>
 		</div>
 		<!--小推荐-->
 		<div style="height: 330px; width: 260px; float: right;">
