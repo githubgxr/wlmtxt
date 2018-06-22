@@ -16,6 +16,7 @@ import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -129,4 +130,6 @@ public interface WorksService {
 	public List<wlmtxt_collect> listMycollectList(String user_id);
 
 	public void deleteDisscuss(String discuss_id);
+
+	public DynamicVO getDynamicVO(String user_id);
 }

@@ -379,6 +379,15 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_user> listAttentionUser(String user_id) {
+		String hql = "select user from wlmtxt_user user,wlmtxt_follow follow where follow.follow_active_user_id='"
+				+ user_id + "' and follow.follow_passive_user_id=user.user_id order by follow.follow_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_user> userList = query.list();
+		return userList;
+	}
+
+	@Override
 	public List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO) {
 		String hql = " from wlmtxt_works  where works_user_id='" + user_id
 				+ "' and works_passed='1' order by works_gmt_create desc";
