@@ -1,14 +1,21 @@
 /**
  * 
  */
+
+var first_menu_id=null;
+var first_menu_name=null;
+var second_menu_id=null
+var second_menu_name=null
 /* 获得所有一级分类 */
-$(function() {
+function getFirstMenu()
+{
 	var xmlhttp = null;
 	var category_vo = null;
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			category_vo = JSON.parse(xmlhttp.responseText);
+			
 			/* 获得一级分类头部 */
 			for ( var num in category_vo) {
 				var new_a = null;
@@ -19,8 +26,10 @@ $(function() {
 						.createTextNode(category_vo[num].first_menu_name));
 				div_box.appendChild(new_a);
 				new_a.id = category_vo[num].first_menu_id;
-				
+				first_menu_id=new_a.id;
+				first_menu_name=new_a.innerHTML;
 				new_a.onclick = function() {
+					document.getElementById("img_back").style.display="block";			
 					getSecondMenu(this.id, 1);
 					getSecondList(this.id, 1);
 				}
@@ -30,16 +39,19 @@ $(function() {
 	}
 	xmlhttp.open("POST", "/wlmtxt/Works/Works_listFirstMenu");
 	xmlhttp.send(null);
-})
+}
+getFirstMenu();
 
-$(function() {
+/* 获得一级分类作品列表 */
+function getFirstWorksAll() {
 	var xmlhtp = null;
 	var list_vo = null;
 	xmlhtp = new XMLHttpRequest();
 	xmlhtp.onreadystatechange = function() {
 		if (xmlhtp.readyState == 4 && xmlhtp.status == 200) {
 			list_vo = JSON.parse(xmlhtp.responseText);
-			console.log(list_vo);
+			
+			document.getElementById("img_back").style.display="none";			
 			for (var num = 0; num < list_vo.length; num++) {
 
 				/* 获得一级分类作品列表 */
@@ -52,7 +64,7 @@ $(function() {
 				ul_li = document.createElement("li");
 				li_a = document.createElement("a");
 				li_a.href = '/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
-					+ list_vo[num].works.works_id;
+						+ list_vo[num].works.works_id;
 				li_div = document.createElement("div");
 
 				ul_li.className = "list_video_item";
@@ -117,22 +129,23 @@ $(function() {
 				a_div2_div1.innerHTML = list_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
 				a_div2_div3.innerHTML = list_vo[num].user.user_username;// 得到作品用户名
-				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="+list_vo[num].works.works_cover;// 得到封面
-				
-				/*获得关键字*/
-				for(i=0;i<list_vo[num].keyWordDTOList.length;i++){
+				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="+ list_vo[num].works.works_cover;// 得到封面
+
+				/* 获得关键字 */
+				for (i = 0; i < list_vo[num].keyWordDTOList.length; i++) {
 					li_div_div_a = document.createElement("a");
 					li_div_div_a.className = "video_label_item";
 					li_div_div_a.innerHTML = list_vo[num].keyWordDTOList[i].keyword.keyword_name;
 					li_div_div.appendChild(li_div_div_a);
 				}
-				
+
 			}
 		}
 	}
 	xmlhtp.open("POST", "/wlmtxt/Works/Works_listWorksAll");
 	xmlhtp.send(null);
-})
+}
+getFirstWorksAll();
 
 /* 移除一级分类，显示二级 */
 function getSecondMenu(first_menu_id, pageIndex) {
@@ -154,16 +167,27 @@ function getSecondMenu(first_menu_id, pageIndex) {
 				var new_a = null;
 				var div_box = document.getElementById("div_box");
 				new_a = document.createElement("a");
-				
-				new_a.className = "category_a";
+
+				new_a.className = "category_a second_menu";
 				new_a.append(document
 						.createTextNode(secondMenuList[num].second_menu_name));
 				div_box.appendChild(new_a);
 				new_a.id = secondMenuList[num].second_menu_id;
-				new_a.onclick = function() {
-					getThirdList(this.id, 1);
-				}
+				second_menu_id=new_a.id;
 
+				$(".second_menu").click(function() {
+					document.getElementById("img_back").style.display="block";			
+					getThirdList(this.id, 1);
+					$(".second_menu").not($(this)).css({
+						"background-color" : "#ffffff",
+						"color" : "#1CD388"
+					});
+					$(this).css({
+						"background-color" : "#1CD388",
+						"color" : "#ffffff"
+					});
+
+				});
 			}
 		}
 	}
@@ -174,7 +198,7 @@ function getSecondMenu(first_menu_id, pageIndex) {
 	xhr.send(formData);
 }
 
-/* 根据第一类别ID获取第二类别列表 */
+/* 根据第一类别ID获取第二类作品列表 */
 function getSecondList(first_menu_id, pageIndex) {
 	var xhrhp = false;
 	var SecondList_vo = null;
@@ -182,16 +206,18 @@ function getSecondList(first_menu_id, pageIndex) {
 	xhrhp.onreadystatechange = function() {
 		if (xhrhp.readyState == 4 && xhrhp.status == 200) {
 			SecondList_vo = JSON.parse(xhrhp.responseText);
-
+			
 			/* 移出所有一级列表 */
 			var old_li = document.getElementsByClassName("list_video_item");
 			var long = old_li.length;
 			for (var i = 0; i < long; i++) {
 				old_li[0].parentNode.removeChild(old_li[0]);
 			}
-
+			
 			for (var num = 0; num < SecondList_vo.length; num++) {
 
+				var category_name=document.getElementById("category_name");
+				
 				/* 获得一级分类作品列表 */
 				var ul_li = null;// ul下的li var li_a=null;//li下的a var
 				li_div = null;// li下的div var
@@ -201,7 +227,7 @@ function getSecondList(first_menu_id, pageIndex) {
 				ul_li = document.createElement("li");
 				li_a = document.createElement("a");
 				li_a.href = '/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
-					+ SecondList_vo[num].works.works_id;
+						+ SecondList_vo[num].works.works_id;
 				li_div = document.createElement("div");
 
 				ul_li.className = "list_video_item";
@@ -261,22 +287,38 @@ function getSecondList(first_menu_id, pageIndex) {
 				li_div_div = document.createElement("div");
 				li_div_div.className = "video_label_content";
 				li_div.appendChild(li_div_div);
-
+				
+			/*	category_name.innerHTML=SecondList_vo[num].category.first_menu_name;*/
+				/*console.log("first_menu_name:"+first_menu_name);
+				$("#category_name").html('<h3 style="margin: 4px 0 0 0;" id="category_name">分类-'+first_menu_name+'</h3>');*/
+				
 				a_div2_div1.innerHTML = SecondList_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
-				
-				a_div2_div3.innerHTML=SecondList_vo[num].user.user_username;//得到作品用户名
-				 
+
+				a_div2_div3.innerHTML = SecondList_vo[num].user.user_username;// 得到作品用户名
+
 				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
 						+ SecondList_vo[num].works.works_cover;// 得到封面
+				
 
-				for(i=0;i<SecondList_vo[num].keyWordDTOList.length;i++){
+				for (var i = 0; i < SecondList_vo[num].keyWordDTOList.length; i++) {
 					li_div_div_a = document.createElement("a");
 					li_div_div_a.className = "video_label_item";
 					li_div_div_a.innerHTML = SecondList_vo[num].keyWordDTOList[i].keyword.keyword_name;
 					li_div_div.appendChild(li_div_div_a);
 				}
-
+				
+			}
+			document.getElementById("img_back").onclick=function(){
+				/*移出所有一级菜单 */
+				var old_a = document.getElementsByClassName("category_a");
+				var long = old_a.length;
+				for (var i = 0; i < long; i++) {
+					old_a[0].parentNode.removeChild(old_a[0]);
+				}
+				getFirstMenu();
+				getFirstWorksAll();
+				
 			}
 		}
 	}
@@ -289,18 +331,13 @@ function getSecondList(first_menu_id, pageIndex) {
 
 /* 点击二级分类显示对应的三级作品列表 */
 function getThirdList(second_menu_id, pageIndex) {
-	console.log(second_menu_id);
+	console.log("second_menu_id:"+second_menu_id);
 	var xhrhprt = false;
 	var ThirdList_vo = null;
 	xhrhprt = new XMLHttpRequest();
 	xhrhprt.onreadystatechange = function() {
 		if (xhrhprt.readyState == 4 && xhrhprt.status == 200) {
 			ThirdList_vo = JSON.parse(xhrhprt.responseText);
-			console.log("555");
-			
-			/*隐藏所有包含二级分类的div*/
-			var div_box=document.getElementById("div_box");
-			div_box.style.display="none";
 
 			/* 移出所有二级作品列表 */
 			var old_li = document.getElementsByClassName("list_video_item");
@@ -308,7 +345,7 @@ function getThirdList(second_menu_id, pageIndex) {
 			for (var i = 0; i < long; i++) {
 				old_li[0].parentNode.removeChild(old_li[0]);
 			}
-			
+
 			for (var num = 0; num < ThirdList_vo.length; num++) {
 
 				/* 获得一级分类作品列表 */
@@ -385,23 +422,29 @@ function getThirdList(second_menu_id, pageIndex) {
 
 				a_div2_div1.innerHTML = ThirdList_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
-				a_div2_div3.innerHTML=ThirdList_vo[num].user.user_username;// 得到作品用户名
+				a_div2_div3.innerHTML = ThirdList_vo[num].user.user_username;// 得到作品用户名
 
 				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
 						+ ThirdList_vo[num].works.works_cover;// 得到封面
 
-				for(i=0;i<ThirdList_vo[num].keyWordDTOList.length;i++){
+				for (i = 0; i < ThirdList_vo[num].keyWordDTOList.length; i++) {
 					li_div_div_a = document.createElement("a");
 					li_div_div_a.className = "video_label_item";
 					li_div_div_a.innerHTML = ThirdList_vo[num].keyWordDTOList[i].keyword.keyword_name;
 					li_div_div.appendChild(li_div_div_a);
 				}
-
 			}
+			
 		}
 	}
+	document.getElementById("img_back").onclick=function(){
+		getSecondMenu(second_menu_id,1);
+		getSecondList(second_menu_id,1);
+	}
+	
 	xhrhprt.open("POST", "/wlmtxt/Works/Works_listWorksBySecondMenuID");
 	var formData = new FormData();
 	formData.append("second_menu.second_menu_id", second_menu_id);
 	xhrhprt.send(formData);
 }
+
