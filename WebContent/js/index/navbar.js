@@ -19,7 +19,9 @@ function checkLogin() {
 				$("#user_img").click(function() {
 					show_login_div();
 				});
-				
+				//关于评论
+				$(".comment_delete").css("display","none");
+
 				/* 登录前 */
 				/* 未登录时点击用户操作的关注、点赞、收藏等出现登录框 */
 				$(".user_operate").click(function() {
@@ -30,11 +32,15 @@ function checkLogin() {
 				if_login = true;
 				console.log("if_login：" + if_login);
 				/* 登录后 */
-				removeTest();
-				$("#user_img").click(function() {
-					window.location.href="/wlmtxt/view/personal_center/personal_center_personal_data.jsp";
-				});
 				
+				removeTest();
+				$("#user_img")
+						.click(
+								function() {
+									window.location.href = "/wlmtxt/view/personal_center/personal_center_personal_data.jsp";
+								});
+				//关于评论
+				/*$(".comment_delete").css("display","block");*/
 				var userInfo = JSON.parse(xhr.responseText);
 				user_id = userInfo.user_id;
 				console.log("已登录！");
@@ -45,6 +51,28 @@ function checkLogin() {
 						"src",
 						"/wlmtxt/Works/Works_getImg?imgName="
 								+ userInfo.user_avatar);
+				//获取关注量
+				var formData_focus_num=new FormData();
+				formData_focus_num.append("accpet_user.user_id",userInfo.user_id);
+				var xhr_focus_num=new XMLHttpRequest();
+				xhr_focus_num.open("POST","/wlmtxt/Works/Works_totalFollowingNum");
+				xhr_focus_num.send(formData_focus_num);
+				xhr_focus_num.onreadystatechange=function(){
+					if (xhr_focus_num.readyState == 4 && xhr_focus_num.status == 200) {
+						/*$(".sidebar_user_focus").html(xhr_focus_num.responseText);*/
+							}
+						}
+				//获取粉丝量
+				var formData_fans_num=new FormData();
+				formData_fans_num.append("accpet_user.user_id",userInfo.user_id);
+				var xhr_fans_num=new XMLHttpRequest();
+				xhr_fans_num.open("POST","/wlmtxt/Works/Works_totalFansNum");
+				xhr_fans_num.send(formData_focus_num);
+				xhr_fans_num.onreadystatechange=function(){
+					if (xhr_fans_num.readyState == 4 && xhr_fans_num.status == 200) {
+						/*$(".sidebar_user_fans").html(xhr_fans_num.responseText);*/
+							}
+						}
 				/** *********************个人资料*********************************** */
 				// 用户名
 				$(".div_username").html(userInfo.user_username);
@@ -63,7 +91,10 @@ function checkLogin() {
 				// 简介
 				$(".div_bio").html(userInfo.user_bio);
 				$(".input_bio").val(userInfo.user_bio);
-
+				/*------------个人中心导航----------------*/
+				$(".sidebar_user_name").html(userInfo.user_username);
+				$(".sidebar_user_signature").html(userInfo.user_bio);
+				$(".sidebar_img_user").attr("src","/wlmtxt/Works/Works_getImg?imgName="	+ userInfo.user_avatar);
 			}
 		}
 	}
@@ -290,6 +321,7 @@ function login() {
 						 * "/wlmtxt/view/index/index.jsp";
 						 */
 						// 执行登录成功操作
+						window.location.href="/wlmtxt/User/User_skipToIndexPage";
 						checkLogin();
 					} else {
 						/* 登录失败 */
@@ -441,8 +473,7 @@ function getBackPassword() {
 							/* 发送成功 */
 							$("#login_div").css("display", "none");
 							$("#register_div").css("display", "none");
-							$("#forget_password_div")
-									.css("display", "none");
+							$("#forget_password_div").css("display", "none");
 							$("#check_email_text").css("display", "block");
 							$("#login_and_register").click(function() {
 								removeTest();
@@ -455,8 +486,7 @@ function getBackPassword() {
 					}
 
 				}
-			
-				
+
 			}
 		}
 	} else {

@@ -6,6 +6,7 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
+import com.wlmtxt.domain.VO.MyFansVO;
 
 public interface UserService {
 
@@ -38,6 +39,6 @@ public interface UserService {
 
 	String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user);
 
-	List<wlmtxt_user> listMyFansVO(wlmtxt_user loginUser);
+	MyFansVO listMyFansVO(wlmtxt_user loginUser, MyFansVO myFansVO);
 
 }

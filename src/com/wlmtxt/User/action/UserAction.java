@@ -19,6 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.User.service.UserService;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.VO.MyFansVO;
 
 import util.JavaMail;
 import util.JsonUtils;
@@ -41,6 +42,15 @@ public class UserAction extends ActionSupport {
 	private String new_password;
 
 	//
+	private MyFansVO myFansVO;
+
+	public MyFansVO getMyFansVO() {
+		return myFansVO;
+	}
+
+	public void setMyFansVO(MyFansVO myFansVO) {
+		this.myFansVO = myFansVO;
+	}
 
 	public String getNew_password() {
 		return new_password;
@@ -526,13 +536,13 @@ public class UserAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		List<wlmtxt_user> list = userService.listMyFansVO(loginUser);
-		if (list != null) {
+		myFansVO = userService.listMyFansVO(loginUser, myFansVO);
+		if (myFansVO != null) {
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			gsonBuilder.setPrettyPrinting();// 格式化json数据
 			Gson gson = gsonBuilder.create();
 			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().write(gson.toJson(list));
+			response.getWriter().write(gson.toJson(myFansVO));
 		} else {
 			pw.write("2");
 		}

@@ -630,4 +630,20 @@ public class WorksDaoImpl implements WorksDao {
 		return result;
 	}
 
+	@Override
+	public int totalFansNum(String user_id) {
+		String hql = "select count(*) from wlmtxt_follow  where follow_passive_user_id='" + user_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public int totalFollowingNum(String user_id) {
+		String hql = "select count(*) from wlmtxt_follow  where follow_active_user_id='" + user_id + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
 }
