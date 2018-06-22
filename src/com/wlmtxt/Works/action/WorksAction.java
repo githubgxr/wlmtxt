@@ -684,7 +684,7 @@ public class WorksAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		int num = worksService.totalFansNum(accept_user);
-		pw.write(num+"");
+		pw.write(String.valueOf(num));
 	}
 	
 	/**
@@ -706,7 +706,7 @@ public class WorksAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		int num = worksService.totalFollowingNum(accept_user);
-		pw.write(num+"");
+		pw.write(String.valueOf(num));
 	}
 
 	/**
