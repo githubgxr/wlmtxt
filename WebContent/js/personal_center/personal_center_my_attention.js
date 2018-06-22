@@ -13,9 +13,11 @@ function listMyAttentionByPage(pageIndex){
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
 			var list_myAttention=JSON.parse(xhr.responseText);
-			
+
+		
 			for(var i=0;i<list_myAttention.followDTO.length;i++){
-				console.log("list_myAttention:"+list_myAttention.followDTO[i].user.user_username);
+				
+
 				
 				var list_myAttention='<li class="user_list">';
 				list_myAttention+='<div class="user_list_img_div">';

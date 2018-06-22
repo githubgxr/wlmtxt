@@ -37,7 +37,7 @@ function listMyDynamicByPage(pageIndex){
 				 /*标题*/
 				 wddt_str+='<div class="video_title">'+wddt_response.worksDTOList[i].works.works_title+'</div>';
 				 /*浏览量*/
-				 wddt_str+='<div class="video_number"></div>';
+				 wddt_str+='<div class="video_number">'+wddt_response.worksDTOList[i].playNum+'</div>';
 				 /*时间*/
 				 wddt_str+='<div class="video_time">'+wddt_response.worksDTOList[i].works.works_gmt_create+'</div>';
 				 wddt_str+='</div>';
@@ -59,21 +59,6 @@ function listMyDynamicByPage(pageIndex){
 				 wddt_str+='<a class="video_delete_btn" onclick="deleteWork(this.id)" id="'+wddt_response.worksDTOList[i].works.works_id+'">删除</a>';
 				 wddt_str+='</div>';
 				 wddt_str+='</li>';
-				//获取播放量
-					var formData_get_play_num = new FormData();
-					formData_get_play_num.append("accept_works.works_id", wddt_response.worksDTOList[i].works.works_id);
-					var play_num_xhr = new XMLHttpRequest();
-					play_num_xhr.open("POST", "/wlmtxt/Works/Works_getPlayNum");
-					play_num_xhr.send(formData_get_play_num);
-					play_num_xhr.onreadystatechange = function() {
-						if (play_num_xhr.readyState == 4 && play_num_xhr.status == 200) {
-							console.log("我的动态播放："+play_num_xhr.responseText);
-							var video_number_div=document.getElementsByClassName("video_number");
-							for(var j=0;j<video_number_div.length;j++){
-								video_number_div[j].innerHTML=play_num_xhr.responseText;
-							}
-						}
-					}
 				$("#wddt_list_container").append(wddt_str);
 				
 			}
