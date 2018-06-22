@@ -120,7 +120,7 @@ public class WorksServiceImpl implements WorksService {
 		if (null != works.getWorks_second_menu_id() && !works.getWorks_second_menu_id().equals("")) {
 			wlmtxt_second_menu secondMenu = worksDao.getSecondMenuByID(works.getWorks_second_menu_id());
 			worksDTO.setSecondMenu(secondMenu);
-			if (secondMenu.getSecond_menu_first_menu_id() != null
+			if (null != secondMenu.getSecond_menu_first_menu_id()
 					&& !secondMenu.getSecond_menu_first_menu_id().equals("")) {
 				wlmtxt_first_menu firstMenu = worksDao.getFirstMenuByID(secondMenu.getSecond_menu_first_menu_id());
 				worksDTO.setFirstMenu(firstMenu);
@@ -222,9 +222,11 @@ public class WorksServiceImpl implements WorksService {
 	public List<WorksDTO> listWorksAll() {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 		List<wlmtxt_works> worksList = worksDao.listWorksAll();
+		System.out.println(worksList);
 		for (wlmtxt_works works : worksList) {
 			WorksDTO worksDTO = new WorksDTO();
 			worksDTO = getWorksDTOByID(works.getWorks_id());
+			System.out.println(worksDTO);
 			worksDTOList.add(worksDTO);
 		}
 		return worksDTOList;
@@ -443,7 +445,6 @@ public class WorksServiceImpl implements WorksService {
 	public void discussWorks(wlmtxt_discuss accpet_discuss) {
 
 		accpet_discuss.setDiscuss_id(TeamUtil.getUuid());
-		accpet_discuss.setDiscuss_deleted("2");
 
 		accpet_discuss.setDiscuss_gmt_create(TeamUtil.getStringSecond());
 		accpet_discuss.setDiscuss_gmt_modified(TeamUtil.getStringSecond());

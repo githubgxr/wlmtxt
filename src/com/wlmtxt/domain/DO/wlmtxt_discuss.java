@@ -9,21 +9,11 @@ public class wlmtxt_discuss {
 	private String discuss_user_id;
 	// 评论内容
 	private String discuss_content;
-	// 是否删除
-	private String discuss_deleted;
 
 	// 创建时间
 	private String discuss_gmt_create;
 	// 修改时间
 	private String discuss_gmt_modified;
-
-	public String getDiscuss_deleted() {
-		return discuss_deleted;
-	}
-
-	public void setDiscuss_deleted(String discuss_deleted) {
-		this.discuss_deleted = discuss_deleted;
-	}
 
 	public String getDiscuss_id() {
 		return discuss_id;
@@ -76,9 +66,8 @@ public class wlmtxt_discuss {
 	@Override
 	public String toString() {
 		return "wlmtxt_discuss [discuss_id=" + discuss_id + ", discuss_father_discuss_id=" + discuss_father_discuss_id
-				+ ", discuss_user_id=" + discuss_user_id + ", discuss_content=" + discuss_content + ", discuss_deleted="
-				+ discuss_deleted + ", discuss_gmt_create=" + discuss_gmt_create + ", discuss_gmt_modified="
-				+ discuss_gmt_modified + "]";
+				+ ", discuss_user_id=" + discuss_user_id + ", discuss_content=" + discuss_content
+				+ ", discuss_gmt_create=" + discuss_gmt_create + ", discuss_gmt_modified=" + discuss_gmt_modified + "]";
 	}
 
 }

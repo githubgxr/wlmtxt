@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-6-22 11:24:50 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.wlmtxt.domain.DO.wlmtxt_discuss" table="WLMTXT_DISCUSS">
+        <id name="discuss_id" type="java.lang.String">
+            <column name="DISCUSS_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="discuss_father_discuss_id" type="java.lang.String">
+            <column name="DISCUSS_FATHER_DISCUSS_ID" />
+        </property>
+        <property name="discuss_user_id" type="java.lang.String">
+            <column name="DISCUSS_USER_ID" />
+        </property>
+        <property name="discuss_content" type="java.lang.String">
+            <column name="DISCUSS_CONTENT" />
+        </property>
+        <property name="discuss_gmt_create" type="java.lang.String">
+            <column name="DISCUSS_GMT_CREATE" />
+        </property>
+        <property name="discuss_gmt_modified" type="java.lang.String">
+            <column name="DISCUSS_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

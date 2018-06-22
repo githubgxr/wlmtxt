@@ -1,15 +1,42 @@
 /**
  * 
  */
+document.getElementById("img_back").onclick = function() {
+	/*
+	 * 点击返回后，判断存储的是一级还是二级
+	 */
+	if (menu_state == "2") {
+		getSecondMenu(menu_id, 1);
+		getSecondList(menu_id, 1);
+	} else {
+		getFirstMenu();
+		getFirstWorksAll();
+	}
+	// getSecondMenu(second_menu_id, 1);
+	// getSecondList(second_menu_id, 1);
+}
+getFirstMenu();
+getFirstWorksAll();
+var menu_state = "";
+var menu_id = "";
+var menu_name = "所有分类";
 /* 获得所有一级分类 */
-function getFirstMenu()
-{
+function getFirstMenu() {
 	var xmlhttp = null;
 	var category_vo = null;
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			category_vo = JSON.parse(xmlhttp.responseText);
+
+			/*
+			 * 移出菜单
+			 */
+			var old_a = document.getElementsByClassName("category_a");
+			var long = old_a.length;
+			for (var i = 0; i < long; i++) {
+				old_a[0].parentNode.removeChild(old_a[0]);
+			}
 			
 			/* 获得一级分类头部 */
 			for ( var num in category_vo) {
@@ -21,19 +48,24 @@ function getFirstMenu()
 						.createTextNode(category_vo[num].first_menu_name));
 				div_box.appendChild(new_a);
 				new_a.id = category_vo[num].first_menu_id;
-
+				first_menu_id = new_a.id;
+				first_menu_name = new_a.innerHTML;
 				new_a.onclick = function() {
+
 					getSecondMenu(this.id, 1);
 					getSecondList(this.id, 1);
 				}
 
 			}
+			$("#category_name").empty();
+			document.getElementById("category_name").appendChild(
+					document.createTextNode(menu_name));
+
 		}
 	}
 	xmlhttp.open("POST", "/wlmtxt/Works/Works_listFirstMenu");
 	xmlhttp.send(null);
 }
-getFirstMenu();
 
 function getFirstWorksAll() {
 	var xmlhtp = null;
@@ -42,6 +74,15 @@ function getFirstWorksAll() {
 	xmlhtp.onreadystatechange = function() {
 		if (xmlhtp.readyState == 4 && xmlhtp.status == 200) {
 			list_vo = JSON.parse(xmlhtp.responseText);
+			
+			
+			/* 移出所有一级列表 */
+			var old_li = document.getElementsByClassName("list_video_item");
+			var long = old_li.length;
+			for (var i = 0; i < long; i++) {
+				old_li[0].parentNode.removeChild(old_li[0]);
+			}
+			
 			for (var num = 0; num < list_vo.length; num++) {
 
 				/* 获得一级分类作品列表 */
@@ -119,7 +160,8 @@ function getFirstWorksAll() {
 				a_div2_div1.innerHTML = list_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
 				a_div2_div3.innerHTML = list_vo[num].user.user_username;// 得到作品用户名
-				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="+ list_vo[num].works.works_cover;// 得到封面
+				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
+						+ list_vo[num].works.works_cover;// 得到封面
 
 				/* 获得关键字 */
 				for (i = 0; i < list_vo[num].keyWordDTOList.length; i++) {
@@ -130,12 +172,17 @@ function getFirstWorksAll() {
 				}
 
 			}
+			document.getElementById("img_back").style.display = "none";
+			menu_name = "所有分类";
+			$("#category_name").empty();
+			document.getElementById("category_name").appendChild(
+					document.createTextNode(menu_name));
+
 		}
 	}
 	xmlhtp.open("POST", "/wlmtxt/Works/Works_listWorksAll");
 	xmlhtp.send(null);
 }
-getFirstWorksAll();
 
 /* 移除一级分类，显示二级 */
 function getSecondMenu(first_menu_id, pageIndex) {
@@ -163,6 +210,7 @@ function getSecondMenu(first_menu_id, pageIndex) {
 						.createTextNode(secondMenuList[num].second_menu_name));
 				div_box.appendChild(new_a);
 				new_a.id = secondMenuList[num].second_menu_id;
+				second_menu_id = new_a.id;
 
 				$(".second_menu").click(function() {
 					getThirdList(this.id, 1);
@@ -177,6 +225,14 @@ function getSecondMenu(first_menu_id, pageIndex) {
 
 				});
 			}
+			document.getElementById("img_back").style.display = "block";
+			menu_id = first_menu_id;
+			menu_state = "1";
+			menu_name = "一级分类";
+			$("#category_name").empty();
+			document.getElementById("category_name").appendChild(
+					document.createTextNode(menu_name));
+
 		}
 	}
 	xhr.open("POST", "/wlmtxt/Works/Works_listSecondMenu_byFirstMenuID");
@@ -194,15 +250,17 @@ function getSecondList(first_menu_id, pageIndex) {
 	xhrhp.onreadystatechange = function() {
 		if (xhrhp.readyState == 4 && xhrhp.status == 200) {
 			SecondList_vo = JSON.parse(xhrhp.responseText);
-			
+
 			/* 移出所有一级列表 */
 			var old_li = document.getElementsByClassName("list_video_item");
 			var long = old_li.length;
 			for (var i = 0; i < long; i++) {
 				old_li[0].parentNode.removeChild(old_li[0]);
 			}
-			
+
 			for (var num = 0; num < SecondList_vo.length; num++) {
+
+				var category_name = document.getElementById("category_name");
 
 				/* 获得一级分类作品列表 */
 				var ul_li = null;// ul下的li var li_a=null;//li下的a var
@@ -274,6 +332,12 @@ function getSecondList(first_menu_id, pageIndex) {
 				li_div_div.className = "video_label_content";
 				li_div.appendChild(li_div_div);
 
+				/* category_name.innerHTML=SecondList_vo[num].category.first_menu_name; */
+				/*
+				 * console.log("first_menu_name:"+first_menu_name);
+				 * $("#category_name").html('<h3 style="margin: 4px 0 0 0;" id="category_name">分类-'+first_menu_name+'</h3>');
+				 */
+
 				a_div2_div1.innerHTML = SecondList_vo[num].works.works_title;// 得到作品标题
 				a_div2_div2.innerHTML = "425";// 得到作品浏览量
 
@@ -288,19 +352,7 @@ function getSecondList(first_menu_id, pageIndex) {
 					li_div_div_a.innerHTML = SecondList_vo[num].keyWordDTOList[i].keyword.keyword_name;
 					li_div_div.appendChild(li_div_div_a);
 				}
-				
-			}
-			document.getElementById("img_back").onclick=function(){
-				/* 移出所有一级菜单 */
-				var old_a = document.getElementsByClassName("category_a");
-				var long = old_a.length;
-				for (var i = 0; i < long; i++) {
-					old_a[0].parentNode.removeChild(old_a[0]);
-				}
-				console.log("二级到一级");
-				getFirstMenu();
-				getFirstWorksAll();
-				
+
 			}
 		}
 	}
@@ -313,6 +365,7 @@ function getSecondList(first_menu_id, pageIndex) {
 
 /* 点击二级分类显示对应的三级作品列表 */
 function getThirdList(second_menu_id, pageIndex) {
+	console.log("second_menu_id:" + second_menu_id);
 	var xhrhprt = false;
 	var ThirdList_vo = null;
 	xhrhprt = new XMLHttpRequest();
@@ -433,8 +486,18 @@ function getThirdList(second_menu_id, pageIndex) {
 				getSecondList(category_vo[num].first_menu_id,1);
 				console.log(category_vo[num].first_menu_id);
 			}
+			document.getElementById("img_back").style.display = "block";
+			menu_id = second_menu_id;
+			alert(second_menu_id);
+			menu_state = "2";
+			menu_name = "二级分类";
+			$("#category_name").empty();
+			document.getElementById("category_name").appendChild(
+					document.createTextNode(menu_name));
+
 		}
 	}
+
 	xhrhprt.open("POST", "/wlmtxt/Works/Works_listWorksBySecondMenuID");
 	var formData = new FormData();
 	formData.append("second_menu.second_menu_id", second_menu_id);
