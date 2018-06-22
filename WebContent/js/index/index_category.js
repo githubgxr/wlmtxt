@@ -8,16 +8,16 @@ document.getElementById("img_back").onclick = function() {
 	if (menu_state == "2") {
 		getSecondMenu(menu_id, 1);
 		getSecondList(menu_id, 1);
-	} else  {
+	} else {
 		getFirstMenu();
 		getFirstWorksAll();
-	} 
+	}
 	// getSecondMenu(second_menu_id, 1);
 	// getSecondList(second_menu_id, 1);
 }
 getFirstMenu();
 getFirstWorksAll();
-var menu_state = "all";
+var menu_state = "";
 var menu_id = "";
 var menu_name = "所有分类";
 /* 获得所有一级分类 */
@@ -29,6 +29,15 @@ function getFirstMenu() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			category_vo = JSON.parse(xmlhttp.responseText);
 
+			/*
+			 * 移出菜单
+			 */
+			var old_a = document.getElementsByClassName("category_a");
+			var long = old_a.length;
+			for (var i = 0; i < long; i++) {
+				old_a[0].parentNode.removeChild(old_a[0]);
+			}
+			
 			/* 获得一级分类头部 */
 			for ( var num in category_vo) {
 				var new_a = null;
@@ -66,7 +75,15 @@ function getFirstWorksAll() {
 	xmlhtp.onreadystatechange = function() {
 		if (xmlhtp.readyState == 4 && xmlhtp.status == 200) {
 			list_vo = JSON.parse(xmlhtp.responseText);
-
+			
+			
+			/* 移出所有一级列表 */
+			var old_li = document.getElementsByClassName("list_video_item");
+			var long = old_li.length;
+			for (var i = 0; i < long; i++) {
+				old_li[0].parentNode.removeChild(old_li[0]);
+			}
+			
 			for (var num = 0; num < list_vo.length; num++) {
 
 				/* 获得一级分类作品列表 */
@@ -161,7 +178,7 @@ function getFirstWorksAll() {
 			$("#category_name").empty();
 			document.getElementById("category_name").appendChild(
 					document.createTextNode(menu_name));
-			
+
 		}
 	}
 	xmlhtp.open("POST", "/wlmtxt/Works/Works_listWorksAll");
@@ -338,17 +355,6 @@ function getSecondList(first_menu_id, pageIndex) {
 				}
 
 			}
-			document.getElementById("img_back").onclick = function() {
-				/* 移出所有一级菜单 */
-				var old_a = document.getElementsByClassName("category_a");
-				var long = old_a.length;
-				for (var i = 0; i < long; i++) {
-					old_a[0].parentNode.removeChild(old_a[0]);
-				}
-				getFirstMenu();
-				getFirstWorksAll();
-
-			}
 		}
 	}
 	xhrhp.open("POST", "/wlmtxt/Works/Works_listWorksByFirstMenuID");
@@ -465,6 +471,7 @@ function getThirdList(second_menu_id, pageIndex) {
 			}
 			document.getElementById("img_back").style.display = "block";
 			menu_id = second_menu_id;
+			alert(second_menu_id);
 			menu_state = "2";
 			menu_name = "二级分类";
 			$("#category_name").empty();
