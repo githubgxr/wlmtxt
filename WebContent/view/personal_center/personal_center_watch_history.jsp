@@ -32,7 +32,7 @@
 							class="category_a">星秀星颜</a>
 					</div>
 
-					<a class="button_a">全部清空</a>
+					<a class="button_a" onclick="deleteAllMyHistory()">全部清空</a>
 				</div>
 				<!--主体部分-->
 				<div class="llls_content list_container">

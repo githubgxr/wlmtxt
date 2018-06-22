@@ -22,11 +22,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_notification;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.CollectDTO;
+import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
@@ -91,12 +94,12 @@ public class WorksAction extends ActionSupport {
 		if (imgName.equals("") || imgName == null) {
 			imgName = "";
 		}
-		File file = new File("D://wlmtxt/img/" + imgName);
+		File file = new File("C://wlmtxt/img/" + imgName);
 		try {
 			inputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			// file = new File("D://wlmtxt/video/NotFound.jpg");
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
 		return "getFile";
@@ -106,12 +109,12 @@ public class WorksAction extends ActionSupport {
 		if (worksName.equals("") || worksName == null) {
 			worksName = "";
 		}
-		File file = new File("D://wlmtxt/video/" + worksName);
+		File file = new File("C://wlmtxt/video/" + worksName);
 		try {
 			inputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			// file = new File("D://wlmtxt/video/NotFound.jpg");
+			// file = new File("C://wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -345,6 +348,29 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
+	public void deletePlayHistory() throws IOException {
+		worksService.deletePlayHistory(play_history.getPlay_history_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void deleteDisscuss() throws IOException {
+		worksService.deleteDisscuss(accpet_discuss.getDiscuss_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void deleteAllMyHistory() throws IOException {
+
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		worksService.deleteAllMyHistory(user.getUser_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
 	/**
 	 * 删除单个我的上传作品
 	 * 
@@ -403,6 +429,23 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 根据登陆的的用户，获取他的所有通知
+	 * 
+	 * @throws IOException
+	 */
+	public void listUserNotification() throws IOException {
+		List<wlmtxt_notification> notificationList = new ArrayList<wlmtxt_notification>();
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		notificationList = worksService.listUserNotification(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(notificationList));
 	}
 
 	/**
@@ -510,7 +553,7 @@ public class WorksAction extends ActionSupport {
 			String fileName = UUID.randomUUID().toString()
 					+ imgfileFileName.substring(imgfileFileName.lastIndexOf("."));
 
-			filePath = "D://wlmtxt/img/" + fileName;
+			filePath = "C://wlmtxt/img/" + fileName;
 
 			File newFile = new File(filePath);
 
@@ -535,7 +578,7 @@ public class WorksAction extends ActionSupport {
 			String fileName = UUID.randomUUID().toString()
 					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
 
-			filePath = "D://wlmtxt/video/" + fileName;
+			filePath = "C://wlmtxt/video/" + fileName;
 
 			File newFile = new File(filePath);
 
@@ -699,9 +742,9 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void listMyAttentionVO() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-System.out.println("worksaction:"+myAttentionVO.toString());
+		System.out.println("worksaction:" + myAttentionVO.toString());
 		myAttentionVO = worksService.listMyAttentionVO(user.getUser_id(), myAttentionVO);
-System.out.println(myAttentionVO.toString());
+		System.out.println(myAttentionVO.toString());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -724,6 +767,38 @@ System.out.println(myAttentionVO.toString());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(playHistoryDTOList));
+	}
+
+	/**
+	 * 根据当前登录用户获取点赞列表的DTO
+	 * 
+	 * @throws IOException
+	 */
+	public void listMyLikeList() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<LikeDTO> likeDTOList = worksService.listMyLikeList(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(likeDTOList));
+	}
+
+	/**
+	 * 根据当前登录用户获取收藏的列表DTO
+	 * 
+	 * @throws IOException
+	 */
+	public void listMyCollectList() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<CollectDTO> collectDTOList = worksService.listMycollectDTOList(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(collectDTOList));
 	}
 
 	public WorksService getWorksService() {

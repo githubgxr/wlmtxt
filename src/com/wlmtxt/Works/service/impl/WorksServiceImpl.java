@@ -21,9 +21,11 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.DiscussDTO;
 import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
+import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
@@ -88,7 +90,6 @@ public class WorksServiceImpl implements WorksService {
 	public List<PlayHistoryDTO> listPlayHistoryDTOListByUserID(String userID) {
 		List<PlayHistoryDTO> PlayHistoryDTOList = new ArrayList<PlayHistoryDTO>();
 		List<wlmtxt_play_history> playHistoryList = listPlayHistoryListByUserID(userID);
-
 		for (wlmtxt_play_history playHistory : playHistoryList) {
 			PlayHistoryDTO playHistoryDTO = new PlayHistoryDTO();
 			playHistoryDTO.setPlayHistory(playHistory);
@@ -96,9 +97,55 @@ public class WorksServiceImpl implements WorksService {
 			//
 			WorksDTO worksDTO = getWorksDTOByID(playHistory.getPlay_history_works_id());
 			playHistoryDTO.setWorksDTO(worksDTO);
+			//
+			PlayHistoryDTOList.add(playHistoryDTO);
 		}
 
 		return PlayHistoryDTOList;
+	}
+
+	@Override
+	public List<CollectDTO> listMycollectDTOList(String user_id) {
+		List<CollectDTO> collectDTOList = new ArrayList<CollectDTO>();
+		List<wlmtxt_collect> collecteList = listMycollectList(user_id);
+		for (wlmtxt_collect collect : collecteList) {
+			CollectDTO collectDTO = new CollectDTO();
+			collectDTO.setCollect(collect);
+			//
+			WorksDTO worksDTO = getWorksDTOByID(collect.getCollect_id());
+			collectDTO.setWorksDTO(worksDTO);
+			//
+			collectDTOList.add(collectDTO);
+		}
+
+		return collectDTOList;
+	}
+
+	@Override
+	public List<LikeDTO> listMyLikeList(String user_id) {
+		List<LikeDTO> likeDTOList = new ArrayList<LikeDTO>();
+		List<wlmtxt_like> likeList = listLikeByUserID(user_id);
+		for (wlmtxt_like like : likeList) {
+			LikeDTO likeDTO = new LikeDTO();
+			likeDTO.setLike(like);
+			//
+			WorksDTO worksDTO = getWorksDTOByID(like.getLike_works_id());
+			likeDTO.setWorksDTO(worksDTO);
+			//
+			likeDTOList.add(likeDTO);
+		}
+
+		return likeDTOList;
+	}
+
+	@Override
+	public List<wlmtxt_collect> listMycollectList(String user_id) {
+		return worksDao.listMycollectList(user_id);
+	}
+
+	@Override
+	public List<wlmtxt_like> listLikeByUserID(String user_id) {
+		return worksDao.listLikeByUserID(user_id);
 	}
 
 	@Override
@@ -163,6 +210,24 @@ public class WorksServiceImpl implements WorksService {
 
 		worksDao.addPlayHistoryByFileName(history);
 	};
+
+	@Override
+	public void deletePlayHistory(String play_history_id) {
+		worksDao.deletePlayHistory(play_history_id);
+
+	}
+
+	@Override
+	public void deleteDisscuss(String discuss_id) {
+		worksDao.deleteDisscuss(discuss_id);
+
+	}
+
+	@Override
+	public void deleteAllMyHistory(String userID) {
+		worksDao.deleteAllMyHistory(userID);
+
+	}
 
 	@Override
 	public void deleteMyWorks(String works_id) {
@@ -333,18 +398,15 @@ public class WorksServiceImpl implements WorksService {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 		// 根据一级类别获取所属的二级类别
 		List<wlmtxt_second_menu> secondMenuList = worksDao.listSecondMenuByFather(second_menu_id);
-		System.out.println(secondMenuList.size());
 		for (wlmtxt_second_menu second_menu : secondMenuList) {
 			// 遍历二级类别取出所有相应作品
 			List<wlmtxt_works> worksList = worksDao.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
-			System.out.println(worksList.size());
 			for (wlmtxt_works works : worksList) {
 				WorksDTO worksDTO = new WorksDTO();
 				worksDTO = getWorksDTOByID(works.getWorks_id());
 				worksDTOList.add(worksDTO);
 			}
 		}
-		System.out.println(worksDTOList.size());
 		return worksDTOList;
 	}
 
@@ -365,11 +427,9 @@ public class WorksServiceImpl implements WorksService {
 	public List<WorksDTO> listWorksAll() {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 		List<wlmtxt_works> worksList = worksDao.listWorksAll();
-		System.out.println(worksList);
 		for (wlmtxt_works works : worksList) {
 			WorksDTO worksDTO = new WorksDTO();
 			worksDTO = getWorksDTOByID(works.getWorks_id());
-			System.out.println(worksDTO);
 			worksDTOList.add(worksDTO);
 		}
 		return worksDTOList;
@@ -412,6 +472,13 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public List<wlmtxt_second_menu> listSecondMenu_byFirstMenuID(String first_menu_id) {
 		return worksDao.listSecondMenuByFirstMenuID(first_menu_id);
+	}
+
+	@Override
+	public List<wlmtxt_notification> listUserNotification(String user_id) {
+		List<wlmtxt_notification> notificationList = worksDao.listUserNotification(user_id);
+
+		return notificationList;
 	}
 
 	@Override
@@ -481,7 +548,6 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public boolean isCollectWorks(String user_id, String works_id) throws Exception {
 		wlmtxt_collect collect = worksDao.findCollect(user_id, works_id);
-		System.out.println(collect);
 		if (collect == null) {
 			return false;
 		} else {
@@ -546,6 +612,18 @@ public class WorksServiceImpl implements WorksService {
 			new_like.setLike_gmt_create(TeamUtil.getStringSecond());
 			new_like.setLike_gmt_modified(TeamUtil.getStringSecond());
 			worksDao.saveLike(new_like);
+			/*
+			 * 通知
+			 */
+			// 查询发起者
+			wlmtxt_user putMan = userService.get_user_byID(user.getUser_id());
+			// 查询作品
+			wlmtxt_works putWorks = worksDao.getWorksByID(works.getWorks_id());
+			addNotification(putWorks.getWorks_user_id(), "3",
+					putMan.getUser_username() + "喜欢了您的作品" + putWorks.getWorks_name());
+			/*
+			 * 
+			 */
 		} else {
 			// 点赞了就取消点赞
 			worksDao.removeLike(user.getUser_id(), works.getWorks_id());
@@ -562,7 +640,6 @@ public class WorksServiceImpl implements WorksService {
 			new_collect.setCollect_works_id(accept_works.getWorks_id());
 			new_collect.setCollect_gmt_create(TeamUtil.getStringSecond());
 			new_collect.setCollect_gmt_modified(TeamUtil.getStringSecond());
-			System.out.println(new_collect);
 			worksDao.saveCollect(new_collect);
 			/*
 			 * 通知
@@ -570,9 +647,9 @@ public class WorksServiceImpl implements WorksService {
 			// 查询发起者
 			wlmtxt_user putMan = userService.get_user_byID(user.getUser_id());
 			// 查询作品
-			wlmtxt_works works = worksDao.getWorksByID(accept_works.getWorks_id());
-			addNotification(works.getWorks_user_id(), "2",
-					putMan.getUser_username() + "收藏了您的作品" + works.getWorks_name());
+			wlmtxt_works putWorks = worksDao.getWorksByID(accept_works.getWorks_id());
+			addNotification(putWorks.getWorks_user_id(), "2",
+					putMan.getUser_username() + "收藏了您的作品" + putWorks.getWorks_name());
 			/*
 			 * 
 			 */
@@ -604,7 +681,27 @@ public class WorksServiceImpl implements WorksService {
 		accpet_discuss.setDiscuss_gmt_create(TeamUtil.getStringSecond());
 		accpet_discuss.setDiscuss_gmt_modified(TeamUtil.getStringSecond());
 		worksDao.saveDiscuss(accpet_discuss);
+		/*
+		 * 通知
+		 */
+		// 查询发起者
+		wlmtxt_user putMan = userService.get_user_byID(accpet_discuss.getDiscuss_user_id());
+		// 查询作品
+		wlmtxt_works putWorks = worksDao.getWorksByID(accpet_discuss.getDiscuss_father_discuss_id());
+		if (putWorks != null) {
+			// 评论
+			addNotification(putWorks.getWorks_user_id(), "4",
+					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name());
+		} else {
+			// 回复
+			wlmtxt_discuss reply = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
+			addNotification(putWorks.getWorks_user_id(), "5",
+					putMan.getUser_username() + "回复了您的评论" + reply.getDiscuss_content());
+		}
 
+		/*
+		 * 
+		 */
 	}
 
 	@Override
