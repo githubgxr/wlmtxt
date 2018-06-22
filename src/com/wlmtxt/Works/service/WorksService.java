@@ -72,7 +72,9 @@ public interface WorksService {
 
 	public int findPlayHistoryNumByFileName(String fileName);
 
-	public List<wlmtxt_play_history> findPlayHistoryListByWorksID(String worksID);
+	public List<wlmtxt_play_history> listPlayHistoryListByWorksID(String worksID);
+
+	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID);
 
 	public wlmtxt_works getWorksByFileName(String fileName);
 

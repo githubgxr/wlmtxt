@@ -109,6 +109,8 @@ public interface WorksDao {
 
 	List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID);
 
+	List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID);
+
 	/**
 	 * 获取评论的数量
 	 * 

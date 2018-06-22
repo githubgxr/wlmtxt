@@ -69,6 +69,15 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID) {
+		String hql = " from wlmtxt_play_history  where play_history_user_id='" + userID
+				+ "' order by discuss_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_play_history> historyList = query.list();
+		return historyList;
+	}
+
+	@Override
 	public List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID) {
 		String hql = " from wlmtxt_play_history  where download_history_works_id='" + worksID
 				+ "' order by discuss_gmt_create desc";

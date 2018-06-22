@@ -82,14 +82,13 @@ public class WorksServiceImpl implements WorksService {
 		return hot;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.wlmtxt.Works.service.WorksService#deleteMyWorks(java.lang.String)
-	 */
 	@Override
-	public List<wlmtxt_play_history> findPlayHistoryListByWorksID(String worksID) {
+	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID) {
+		return worksDao.listPlayHistoryListByUserID(userID);
+	}
+
+	@Override
+	public List<wlmtxt_play_history> listPlayHistoryListByWorksID(String worksID) {
 		return worksDao.listPlayHistoryByWorksID(worksID);
 	};
 

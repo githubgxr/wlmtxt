@@ -663,6 +663,22 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write(gson.toJson(myAttentionVO));
 	}
 
+	/**
+	 * 根据当前登录用户查看播放历史
+	 * 
+	 * @throws IOException
+	 */
+	public void listPlayHistoryListByUserID() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<wlmtxt_play_history> playHistoryList = worksService.listPlayHistoryListByUserID(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(playHistoryList));
+	}
+
 	public WorksService getWorksService() {
 		return worksService;
 	}
