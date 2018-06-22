@@ -13,10 +13,15 @@ function listMyAttentionByPage(pageIndex){
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
 			var list_myAttention=JSON.parse(xhr.responseText);
+			
+		
 			for(var i=0;i<list_myAttention.followDTO.length;i++){
+				
+				console.log("list_myAttention:"+list_myAttention.followDTO[i].user.user_username);
+				
 				var list_myAttention='<li class="user_list">';
 				list_myAttention+='<div class="user_list_img_div">';
-				list_myAttention+='<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myAttention.followDTO[i].works.works_cover +'"/>';
+			/*	list_myAttention+='<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myAttention.followDTO[i].works.works_cover +'"/>';*/
 				list_myAttention+='</div>';
 				list_myAttention+='<div class="user_info">';
 				list_myAttention+='<div class="user_name">'+list_myAttention.followDTO[i].user.user_username+'</div>';
@@ -24,14 +29,15 @@ function listMyAttentionByPage(pageIndex){
 				list_myAttention+='<div class="user_grjj">'+list_myAttention.followDTO[i].user.user_bio+'</div>';
 				list_myAttention+='</div>';
 				list_myAttention+='</li>';
-				$("#list_myAttention").append(list_myAttention);
+				$(".user_list_ul").append(list_myAttention);
 				
 			}
 		}
 	}
 }
 
-/*取消单个用户关注*/
+/*
+取消单个用户关注
 function cancelFocus(focus_user_id){
 	console.log("focus_user_id:"+focus_user_id);
 	var xhrhp=new XMLHttpRequest();
@@ -69,3 +75,4 @@ function cancelAllFocus(){
 		}
 	}
 }
+*/
