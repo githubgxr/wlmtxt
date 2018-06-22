@@ -35,7 +35,7 @@
 			<img src="<%=basePath%>img/img_back.png" id="img_back" style="width:30px;height:30px;">
 		</div>
 			<i class="header_line"></i>
-			<h3 style="margin: 4px 0 0 0;" class="category_name">分类</h3>
+			<h3 style="margin: 4px 0 0 0;" id="category_name">分类</h3>
 		</div>
 		<div class="llls_content list_container"
 			style="margin: 20px 0 20px 0;">
