@@ -54,11 +54,19 @@ font-size:13px;
 	color: #999;
 	margin:0 0 10px 0;
 }
+
 .user_img_xzt_div{
 	width:45px;
 	height:45px;
 	float:left;
 	margin:0 10px 0 0px;
+}
+.list_img{
+	width:100%;
+	float:left;
+}
+.list_img .video_img{
+	margin:0 120px;
 }
 .video_options{
 	margin:0 10px 40px 10px;
