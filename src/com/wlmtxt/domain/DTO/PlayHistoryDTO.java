@@ -1,11 +1,12 @@
+
 package com.wlmtxt.domain.DTO;
 
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 
 public class PlayHistoryDTO {
-	wlmtxt_play_history playHistory;
+	private wlmtxt_play_history playHistory;
 
-	WorksDTO worksDTO;
+	private WorksDTO worksDTO;
 
 	@Override
 	public String toString() {
@@ -29,3 +30,4 @@ public class PlayHistoryDTO {
 	}
 
 }
+

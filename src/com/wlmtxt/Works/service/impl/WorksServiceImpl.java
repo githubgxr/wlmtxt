@@ -21,11 +21,14 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.DiscussDTO;
 import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
+import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -103,6 +106,50 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public List<CollectDTO> listMycollectDTOList(String user_id) {
+		List<CollectDTO> collectDTOList = new ArrayList<CollectDTO>();
+		List<wlmtxt_collect> collecteList = listMycollectList(user_id);
+		for (wlmtxt_collect collect : collecteList) {
+			CollectDTO collectDTO = new CollectDTO();
+			collectDTO.setCollect(collect);
+			//
+			WorksDTO worksDTO = getWorksDTOByID(collect.getCollect_id());
+			collectDTO.setWorksDTO(worksDTO);
+			//
+			collectDTOList.add(collectDTO);
+		}
+
+		return collectDTOList;
+	}
+
+	@Override
+	public List<LikeDTO> listMyLikeList(String user_id) {
+		List<LikeDTO> likeDTOList = new ArrayList<LikeDTO>();
+		List<wlmtxt_like> likeList = listLikeByUserID(user_id);
+		for (wlmtxt_like like : likeList) {
+			LikeDTO likeDTO = new LikeDTO();
+			likeDTO.setLike(like);
+			//
+			WorksDTO worksDTO = getWorksDTOByID(like.getLike_works_id());
+			likeDTO.setWorksDTO(worksDTO);
+			//
+			likeDTOList.add(likeDTO);
+		}
+
+		return likeDTOList;
+	}
+
+	@Override
+	public List<wlmtxt_collect> listMycollectList(String user_id) {
+		return worksDao.listMycollectList(user_id);
+	}
+
+	@Override
+	public List<wlmtxt_like> listLikeByUserID(String user_id) {
+		return worksDao.listLikeByUserID(user_id);
+	}
+
+	@Override
 	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID) {
 
 		return worksDao.listPlayHistoryListByUserID(userID);
@@ -168,6 +215,12 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public void deletePlayHistory(String play_history_id) {
 		worksDao.deletePlayHistory(play_history_id);
+
+	}
+
+	@Override
+	public void deleteDisscuss(String discuss_id) {
+		worksDao.deleteDisscuss(discuss_id);
 
 	}
 
@@ -310,6 +363,26 @@ public class WorksServiceImpl implements WorksService {
 		}
 		//
 		return keyWordDTOList;
+	}
+
+	@Override
+	public DynamicVO getDynamicVO(String user_id) {
+		DynamicVO dynamicVO = new DynamicVO();
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		//
+		List<wlmtxt_user> attentionUserList = worksDao.listAttentionUser(user_id);
+		for (wlmtxt_user user : attentionUserList) {
+			List<wlmtxt_works> workList = worksDao.listWorksAllByUserId(user.getUser_id());
+			for (wlmtxt_works works : workList) {
+				WorksDTO worksDTO = new WorksDTO();
+				worksDTO = getWorksDTOByID(works.getWorks_id());
+				worksDTOList.add(worksDTO);
+			}
+		}
+
+		dynamicVO.setWorksDTOList(worksDTOList.subList(0, 9));
+		//
+		return dynamicVO;
 	}
 
 	@Override
@@ -685,12 +758,12 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO) {
+	public MyAttentionVO listMyAttentionVO(String loginUser_id, MyAttentionVO myAttentionVO) {
 		List<FollowDTO> DTOList = new ArrayList<FollowDTO>();
 
-		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(user_id, myAttentionVO);
+		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(loginUser_id, myAttentionVO);
 
-		int i = worksDao.getMyAttentionTotalRecords(user_id);
+		int i = worksDao.getMyAttentionTotalRecords(loginUser_id);
 		myAttentionVO.setTotalRecords(i);
 		myAttentionVO.setTotalPages(((i - 1) / myAttentionVO.getPageSize()) + 1);
 		if (myAttentionVO.getPageIndex() <= 1) {
@@ -704,15 +777,16 @@ public class WorksServiceImpl implements WorksService {
 			myAttentionVO.setHaveNextPage(true);
 		}
 
-		FollowDTO followDTO = new FollowDTO();
 		for (wlmtxt_follow follow : list) {
-			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(user_id, follow.getFollow_passive_user_id());
+			FollowDTO followDTO = new FollowDTO();
+			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(loginUser_id,
+					follow.getFollow_passive_user_id());
 			if (mutualFollow != null) {
 				followDTO.setMutualFollow("1");
 			} else {
 				followDTO.setMutualFollow("2");
 			}
-			followDTO.setUser(userDao.get_user_byID(user_id));
+			followDTO.setUser(userDao.get_user_byID(follow.getFollow_passive_user_id()));
 			DTOList.add(followDTO);
 		}
 		myAttentionVO.setFollowDTO(DTOList);

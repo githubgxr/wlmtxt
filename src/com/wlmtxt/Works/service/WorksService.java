@@ -2,16 +2,21 @@ package com.wlmtxt.Works.service;
 
 import java.util.List;
 
+import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_like;
 import com.wlmtxt.domain.DO.wlmtxt_notification;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.CollectDTO;
+import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -116,4 +121,15 @@ public interface WorksService {
 
 	public List<wlmtxt_notification> listUserNotification(String user_id);
 
+	public List<LikeDTO> listMyLikeList(String user_id);
+
+	List<wlmtxt_like> listLikeByUserID(String user_id);
+
+	public List<CollectDTO> listMycollectDTOList(String user_id);
+
+	public List<wlmtxt_collect> listMycollectList(String user_id);
+
+	public void deleteDisscuss(String discuss_id);
+
+	public DynamicVO getDynamicVO(String user_id);
 }
