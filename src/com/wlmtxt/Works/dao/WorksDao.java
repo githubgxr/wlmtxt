@@ -132,6 +132,11 @@ public interface WorksDao {
 
 	void addNotification(wlmtxt_notification notification);
 
+
+	int totalFansNum(String user_id);
+
+	int totalFollowingNum(String user_id);
+
 	wlmtxt_discuss getDiscussByID(String discuss_id);
 
 	List<wlmtxt_notification> listUserNotification(String user_id);
@@ -141,6 +146,7 @@ public interface WorksDao {
 	List<wlmtxt_collect> listMycollectList(String user_id);
 
 	void deleteDisscuss(String discuss_id);
+
 
 	// List<wlmtxt_works> listWorks10OrderHot();
 

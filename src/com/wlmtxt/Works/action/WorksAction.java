@@ -664,6 +664,50 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.countLikeNum(accept_works.getWorks_id());
 		pw.write(num);
 	}
+	
+	/**
+	 * 统计用户粉丝数
+	 * 
+	 * 接收，accpet_user.user_id
+	 * 
+	 * 返回，数量
+	 * 
+	 * @date 2018年6月22日	下午4:41:12
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 */
+	public void totalFansNum() throws IOException {
+//		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int num = worksService.totalFansNum(accept_user);
+		pw.write(num+"");
+	}
+	
+	/**
+	 * 统计我关注的用户数
+	  * 
+	 * 接收，accpet_user.user_id
+	 * 
+	 * 返回，数量
+	 *  
+	 * @date 2018年6月22日	下午4:43:31
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 */
+	public void totalFollowingNum() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int num = worksService.totalFollowingNum(accept_user);
+		pw.write(num+"");
+	}
 
 	/**
 	 * 个人中心的搜索： 搜索我的动态（作品标题、二级分类）: 接收，option=dynamic, searchword; 返回分类列表
