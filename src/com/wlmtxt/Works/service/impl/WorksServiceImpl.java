@@ -21,9 +21,11 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.DiscussDTO;
 import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
+import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
@@ -100,6 +102,50 @@ public class WorksServiceImpl implements WorksService {
 		}
 
 		return PlayHistoryDTOList;
+	}
+
+	@Override
+	public List<CollectDTO> listMycollectDTOList(String user_id) {
+		List<CollectDTO> collectDTOList = new ArrayList<CollectDTO>();
+		List<wlmtxt_collect> collecteList = listMycollectList(user_id);
+		for (wlmtxt_collect collect : collecteList) {
+			CollectDTO collectDTO = new CollectDTO();
+			collectDTO.setCollect(collect);
+			//
+			WorksDTO worksDTO = getWorksDTOByID(collect.getCollect_id());
+			collectDTO.setWorksDTO(worksDTO);
+			//
+			collectDTOList.add(collectDTO);
+		}
+
+		return collectDTOList;
+	}
+
+	@Override
+	public List<LikeDTO> listMyLikeList(String user_id) {
+		List<LikeDTO> likeDTOList = new ArrayList<LikeDTO>();
+		List<wlmtxt_like> likeList = listLikeByUserID(user_id);
+		for (wlmtxt_like like : likeList) {
+			LikeDTO likeDTO = new LikeDTO();
+			likeDTO.setLike(like);
+			//
+			WorksDTO worksDTO = getWorksDTOByID(like.getLike_works_id());
+			likeDTO.setWorksDTO(worksDTO);
+			//
+			likeDTOList.add(likeDTO);
+		}
+
+		return likeDTOList;
+	}
+
+	@Override
+	public List<wlmtxt_collect> listMycollectList(String user_id) {
+		return worksDao.listMycollectList(user_id);
+	}
+
+	@Override
+	public List<wlmtxt_like> listLikeByUserID(String user_id) {
+		return worksDao.listLikeByUserID(user_id);
 	}
 
 	@Override

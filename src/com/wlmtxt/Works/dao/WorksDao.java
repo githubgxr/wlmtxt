@@ -136,6 +136,10 @@ public interface WorksDao {
 
 	List<wlmtxt_notification> listUserNotification(String user_id);
 
+	List<wlmtxt_like> listLikeByUserID(String user_id);
+
+	List<wlmtxt_collect> listMycollectList(String user_id);
+
 	// List<wlmtxt_works> listWorks10OrderHot();
 
 }

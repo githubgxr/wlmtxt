@@ -28,6 +28,8 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.CollectDTO;
+import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
@@ -712,6 +714,38 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(playHistoryDTOList));
+	}
+
+	/**
+	 * 根据当前登录用户获取点赞列表的DTO
+	 * 
+	 * @throws IOException
+	 */
+	public void listMyLikeList() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<LikeDTO> likeDTOList = worksService.listMyLikeList(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(likeDTOList));
+	}
+
+	/**
+	 * 根据当前登录用户获取收藏的列表DTO
+	 * 
+	 * @throws IOException
+	 */
+	public void listMyCollectList() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<CollectDTO> collectDTOList = worksService.listMycollectDTOList(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(collectDTOList));
 	}
 
 	public WorksService getWorksService() {

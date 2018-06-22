@@ -202,6 +202,22 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_collect> listMycollectList(String user_id) {
+		String hql = " from wlmtxt_collect  where collect_user_id='" + user_id + "'  order by collect_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_collect> collectList = query.list();
+		return collectList;
+	}
+
+	@Override
+	public List<wlmtxt_like> listLikeByUserID(String user_id) {
+		String hql = " from wlmtxt_like  where like_user_id='" + user_id + "'  order by like_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_like> likeList = query.list();
+		return likeList;
+	}
+
+	@Override
 	public List<wlmtxt_notification> listUserNotification(String user_id) {
 		String hql = " from wlmtxt_notification  where notification_user_id='" + user_id
 				+ "'  order by notification_gmt_create desc";
