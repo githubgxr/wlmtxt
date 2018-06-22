@@ -94,7 +94,10 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				comment_list_str += '<div class="comment_delete">删除</div>';
+				
+				if(detail_response.discussDTOList[numDiss].discuss.discuss_user_id==detail_response.worksDTO.user.user_id){
+					comment_list_str += '<div class="comment_delete">删除</div>';
+				}
 				comment_list_str += '<div class="comment_delete">回复</div>';
 
 				comment_list_str += '</div>';
