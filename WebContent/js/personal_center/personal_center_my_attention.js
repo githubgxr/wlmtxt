@@ -78,9 +78,11 @@ function cancelAllFocus(){
 			if(xhrhttp.responseText=="1"){
 				toastr.success("全部取消关注成功！");
 				listMyAttentionByPage(1);
+			}
+			else if(xhrhttp.responseText=="2"){
+				toastr.error("没有关注的用户！");
 			}else{
 				toastr.error("全部取消关注失败！");
-				return false;
 			}
 		}
 	}

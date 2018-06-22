@@ -218,7 +218,7 @@ a:hover {
 /*li样式*/
 
 .list_video_item {
-	width: 230px !important;
+	width: 230px;
 	height: auto;
 	float: left;
 	overflow: hidden;
