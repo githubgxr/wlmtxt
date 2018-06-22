@@ -117,4 +117,12 @@ public interface WorksDao {
 	 */
 	int getDiscussNum(String works_id);
 
+	List<wlmtxt_works> listWorksByDay();
+
+	List<wlmtxt_works> listWorksByMonth();
+
+	List<wlmtxt_works> listWorksByWeek();
+
+	// List<wlmtxt_works> listWorks10OrderHot();
+
 }

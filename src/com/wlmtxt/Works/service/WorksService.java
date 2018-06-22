@@ -64,6 +64,8 @@ public interface WorksService {
 
 	public int getCollectNum(String works_id);
 
+	public int getDiscussNum(String works_id);
+
 	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO);
 
 	public void addPlayHistoryByFileName(String fileName, String userID);
@@ -86,5 +88,11 @@ public interface WorksService {
 	 * @return
 	 */
 	public int getHotByWorksID(String works_id);
+
+	public List<WorksDTO> listWorks10OrderHotByDay();
+
+	public List<WorksDTO> listWorks10OrderHotByWeek();
+
+	public List<WorksDTO> listWorks10OrderHotByMonth();
 
 }

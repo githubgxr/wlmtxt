@@ -175,6 +175,51 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
+	 * 根据热度排序，取本日最多前十个作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorks10OrderHotByDay() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorks10OrderHotByDay();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 根据热度排序，取本周最多前十个作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorks10OrderHotByWeek() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorks10OrderHotByWeek();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 根据热度排序，取本月最多前十个作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorks10OrderHotByMonth() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorks10OrderHotByMonth();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
 	 * 获取该作品收藏数
 	 * 
 	 * @throws IOException

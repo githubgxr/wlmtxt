@@ -1,5 +1,9 @@
 package com.wlmtxt.Works.dao.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -21,6 +25,8 @@ import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+
+import util.TeamUtil;
 
 public class WorksDaoImpl implements WorksDao {
 
@@ -181,6 +187,141 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id) {
 		String hql = " from wlmtxt_works  where works_second_menu_id='" + second_menu_id
 				+ "' and works_passed='1' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_works> listWorksByDay() {
+		String start_time = "0000-00-00";
+		String stop_time = "9999-99-99";
+		/*
+		 * 
+		 */
+		/*
+		 * 
+		 */
+		start_time = TeamUtil.getStringDay();
+		Calendar calendar = new GregorianCalendar();
+		java.util.Date date = TeamUtil.getDateDay();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 小写的mm表示的是分钟
+		calendar.setTime(date);
+		calendar.add(calendar.DATE, 1);// 把日期往后增加一天.整数往后推,负数往前移动
+		date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+		stop_time = sdf.format(date);
+		/*
+		 * 
+		 */
+		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_works> listWorksByMonth() {
+		String start_time = "0000-00-00";
+		String stop_time = "9999-99-99";
+		/*
+		 * 
+		 */
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 小写的mm表示的是分钟
+		String dstr = TeamUtil.getStringDay();
+		java.util.Date date = null;
+		try {
+			date = sdf.parse(dstr);
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+		}
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		// 把日期往后增加一天.整数往后推,负数往前移动
+		calendar.add(calendar.DATE, -1 * (Integer.parseInt(TeamUtil.getStringDay().substring(8)) - 1));
+		date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+		start_time = sdf.format(date);
+		/*
+		 * 
+		 */
+		Calendar calendar2 = new GregorianCalendar();
+		java.util.Date date2 = TeamUtil.getDateDay();
+		calendar2.setTime(date2);
+		calendar2.add(calendar2.DATE, 1);// 把日期往后增加一天.整数往后推,负数往前移动
+		date2 = calendar2.getTime(); // 这个时间就是日期往后推一天的结果
+		stop_time = sdf.format(date2);
+		/*
+		 * 
+		 */
+		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_works> listWorksByWeek() {
+		String start_time = "0000-00-00";
+		String stop_time = "9999-99-99";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 小写的mm表示的是分钟
+
+		String dstr = TeamUtil.getStringDay();
+
+		java.util.Date date = null;
+		try {
+			date = sdf.parse(dstr);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		Calendar calendar = new GregorianCalendar();
+
+		calendar.setTime(date);
+
+		String day = TeamUtil.getDay_Of_Week(TeamUtil.getDateDay());
+
+		switch (day) {
+		case "星期日":
+			day = "1";
+			break;
+		case "星期一":
+			day = "2";
+			break;
+		case "星期二":
+			day = "3";
+			break;
+		case "星期三":
+			day = "4";
+			break;
+		case "星期四":
+			day = "5";
+			break;
+		case "星期五":
+			day = "6";
+			break;
+		case "星期六":
+			day = "7";
+			break;
+		}
+
+		calendar.add(calendar.DATE, -1 * (Integer.parseInt(day) - 1));// 把日期往后增加一天.整数往后推,负数往前移动
+		date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+
+		start_time = sdf.format(date);
+		/*
+		 * 
+		 */
+		Calendar calendar2 = new GregorianCalendar();
+		java.util.Date date2 = TeamUtil.getDateDay();
+		calendar2.setTime(date2);
+		calendar2.add(calendar2.DATE, 1);// 把日期往后增加一天.整数往后推,负数往前移动
+		date2 = calendar2.getTime(); // 这个时间就是日期往后推一天的结果
+		stop_time = sdf.format(date2);
+
+		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
