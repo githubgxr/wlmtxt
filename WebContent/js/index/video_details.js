@@ -296,7 +296,7 @@ function video_comment_btn_click() {
 	} else {
 		var formData_comment = new FormData();
 		// 评论的作品或者评论
-		formData_comment.append("accpet_discuss.discuee_father_discuss_id",
+		formData_comment.append("accpet_discuss.discuss_father_discuss_id",
 				video_id);
 		// 评论内容
 		formData_comment.append("accpet_discuss.discuss_content", comment_text);
