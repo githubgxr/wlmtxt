@@ -169,7 +169,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<wlmtxt_user> listMyFans(String user_id) {
+	public List<wlmtxt_follow> listFollowByLogin_user_id(String user_id) {
 		String hql = "from wlmtxt_follow where follow_passive_user_id='"+user_id+"'";
 		Query query = getSession().createQuery(hql);
 		return query.list();
@@ -192,10 +192,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<wlmtxt_user> listMyFansByFollow_passive_user_id(String user_id) {
-		String hql = "from wlmtxt_user where follow_passive_user_id='"+user_id+"'";
+	public wlmtxt_user myFansByFollow_passive_user_id(String user_id) {
+		String hql = "from wlmtxt_user where user_id='"+user_id+"'";
 		Query query = getSession().createQuery(hql);
-		return query.list();
+		return (wlmtxt_user) query.uniqueResult();
 	}
 
 	
