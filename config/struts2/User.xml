@@ -9,7 +9,7 @@
 			
 			
 			<!--TODO 忘记密码，修改密码页面 -->
-			<result name="skipToModifyPasswordPage">/</result>
+			<result name="skipToModifyPasswordPage">/view/index/email_verification_getback_password.jsp</result>
 			
 			<!--跳转到播放页  -->
 			<result name="skipToPlayPage">/view/index/video_details.jsp</result>
