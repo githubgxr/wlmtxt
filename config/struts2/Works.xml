@@ -12,7 +12,7 @@
 
 			<result name="getFile" type="stream">
 				<!-- 指定下载文件的类型 -->
-				<param name="contentType">image/jpeg</param>
+				<param name="contentType">application/octet-stream</param>
 				<!-- 返回流 inputName为action中的流变量名称 -->
 				<param name="inputName">inputStream</param>
 				<!-- attachment 这个参数可以设置成下载时是否出现个下载提示框，或者直接打开的。 -->

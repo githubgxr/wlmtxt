@@ -740,9 +740,9 @@ public class WorksServiceImpl implements WorksService {
 					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name());
 		} else {
 			// 回复
-			wlmtxt_discuss reply = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
-			addNotification(putWorks.getWorks_user_id(), "5",
-					putMan.getUser_username() + "回复了您的评论" + reply.getDiscuss_content());
+			wlmtxt_discuss discuss = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
+			addNotification(discuss.getDiscuss_user_id(), "5",
+					putMan.getUser_username() + "回复了您的评论" + discuss.getDiscuss_content());
 		}
 
 		/*
