@@ -59,7 +59,7 @@ function checkLogin() {
 				xhr_focus_num.send(formData_focus_num);
 				xhr_focus_num.onreadystatechange=function(){
 					if (xhr_focus_num.readyState == 4 && xhr_focus_num.status == 200) {
-						/*$(".sidebar_user_focus").html(xhr_focus_num.responseText);*/
+						$(".sidebar_user_focus").html(xhr_focus_num.responseText);
 							}
 						}
 				//获取粉丝量
@@ -70,7 +70,7 @@ function checkLogin() {
 				xhr_fans_num.send(formData_focus_num);
 				xhr_fans_num.onreadystatechange=function(){
 					if (xhr_fans_num.readyState == 4 && xhr_fans_num.status == 200) {
-						/*$(".sidebar_user_fans").html(xhr_fans_num.responseText);*/
+						$(".sidebar_user_fans").html(xhr_fans_num.responseText);
 							}
 						}
 				/** *********************个人资料*********************************** */
