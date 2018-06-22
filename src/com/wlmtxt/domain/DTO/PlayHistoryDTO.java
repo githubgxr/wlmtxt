@@ -1,3 +1,4 @@
+
 package com.wlmtxt.domain.DTO;
 
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
@@ -29,3 +30,4 @@ public class PlayHistoryDTO {
 	}
 
 }
+
