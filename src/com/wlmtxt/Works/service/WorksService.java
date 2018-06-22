@@ -4,10 +4,15 @@ import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_notification;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
@@ -35,6 +40,10 @@ public interface WorksService {
 
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO);
 
+	public void deletePlayHistory(String play_history_id);
+
+	public void deleteAllMyHistory(String userID);
+
 	public void deleteMyWorks(String works_id);
 
 	public WorksDetailVO getWorksDetailVO(String works_id);
@@ -54,5 +63,57 @@ public interface WorksService {
 	public int countCollectNum(String works_id);
 
 	public int countLikeNum(String works_id);
+
+	public int deleteAllMyWorks(String user_id);
+
+	public int getLikeNum(String works_id);
+
+	public int getCollectNum(String works_id);
+
+	public int getDiscussNum(String works_id);
+
+	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO);
+
+	public void addPlayHistoryByFileName(String fileName, String userID);
+
+	public int findPlayHistoryNumByFileName(String fileName);
+
+	public List<wlmtxt_play_history> listPlayHistoryListByWorksID(String worksID);
+
+	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID);
+
+	public wlmtxt_works getWorksByFileName(String fileName);
+
+	public int getPlayNum(String works_id);
+
+	public CategoryDTO getCategoryDTOByID(String menu_id);
+
+	/**
+	 * 获取单个作品的热度 <br>
+	 * 播放1 点赞2 评论3 收藏4
+	 * 
+	 * @param works_id
+	 * @return
+	 */
+	public int getHotByWorksID(String works_id);
+
+	public List<WorksDTO> listWorks10OrderHotByDay();
+
+	public List<WorksDTO> listWorks10OrderHotByWeek();
+
+	public List<WorksDTO> listWorks10OrderHotByMonth();
+
+	List<PlayHistoryDTO> listPlayHistoryDTOListByUserID(String userID);
+
+	/**
+	 * 添加通知
+	 * 
+	 * @param notification_user_id
+	 * @param notification_type
+	 * @param notification_content
+	 */
+	public void addNotification(String notification_user_id, String notification_type, String notification_content);
+
+	public List<wlmtxt_notification> listUserNotification(String user_id);
 
 }

@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String saveUser(wlmtxt_user accpet_user) {
 		accpet_user.setUser_id(TeamUtil.getUuid());
+		accpet_user.setUser_avatar("user.jpg");
 		accpet_user.setUser_upload("有");
 		accpet_user.setUser_discuss("有");
 		accpet_user.setUser_gmt_create(TeamUtil.getStringSecond());
@@ -92,15 +93,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<wlmtxt_first_menu> listFirstMenu(String user_id) {
-		//我上传的所有作品，通过用户id查询
-		List<wlmtxt_works> listWorks= userDao.listMyWorks(user_id);
-		//我上传所有作品的所有二级菜单，都是唯一的
+		// 我上传的所有作品，通过用户id查询
+		List<wlmtxt_works> listWorks = userDao.listMyWorks(user_id);
+		// 我上传所有作品的所有二级菜单，都是唯一的
 		List<wlmtxt_second_menu> listSecondMenuOfAll_works_id = new ArrayList<wlmtxt_second_menu>();
-		//我上传所有作品的一级菜单，都是唯一的
+		// 我上传所有作品的一级菜单，都是唯一的
 		List<wlmtxt_first_menu> listFirstMenuOfAll = new ArrayList<wlmtxt_first_menu>();
-		//通过作品id，查询出的单个二级菜单
+		// 通过作品id，查询出的单个二级菜单
 		wlmtxt_second_menu secondMenuOfOne_works_id;
-		//通过二级菜单id，查询出的单个一级菜单
+		// 通过二级菜单id，查询出的单个一级菜单
 		wlmtxt_first_menu firstMenuOne_second_menu_id;
 		for (wlmtxt_works works : listWorks) {
 			secondMenuOfOne_works_id = userDao.findSecondMenu_single_works_id(works);
@@ -127,18 +128,57 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	/*@Override
-	public List<wlmtxt_works_keyword> listSecondOfMyWorks(String user_id) {
-		List<wlmtxt_works> listWorks = userDao.listMyWorks(user_id);
-		List<wlmtxt_works_keyword> listWorksKeyword = new ArrayList<wlmtxt_works_keyword>();
-		for (int i = 0; i < listWorks.size(); i++) {
-			List<wlmtxt_works_keyword> listWorksKeyword_single_works_id = userDao.listWorksKeyword_by_works_id(listWorks.get(i));
-//			for (int j = 0; j < listWorksKeyword_single_works_id.size(); j++) {
-//				listWorksKeyword.add(listWorksKeyword_single_works_id.get(j));
-//			}
-			listWorksKeyword.addAll(listWorksKeyword_single_works_id);
-		}
-		return listWorksKeyword;
+	@Override
+	public int deleteAllMyFollow(wlmtxt_user loginUser) {
+		return userDao.deleteAllMyFollow(loginUser);
 	}
-*/
+
+	@Override
+	public void noticeAllMyFans(wlmtxt_user loginUser) throws Exception {
+		List<wlmtxt_user> list = userDao.listMyFans(loginUser.getUser_id());
+		wlmtxt_follow follow = new wlmtxt_follow();
+		for (wlmtxt_user user : list) {
+			follow.setFollow_id(TeamUtil.getUuid());
+			follow.setFollow_passive_user_id(user.getUser_id());
+			follow.setFollow_active_user_id(loginUser.getUser_id());
+			follow.setFollow_gmt_create(TeamUtil.getStringSecond());
+			follow.setFollow_gmt_modified(TeamUtil.getStringSecond());
+			userDao.noticeFans(follow);
+		}
+	}
+
+	@Override
+	public void noticeMyFans(wlmtxt_user loginUser, wlmtxt_user accpet_user) throws Exception {
+		wlmtxt_follow follow = new wlmtxt_follow();
+		follow.setFollow_id(TeamUtil.getUuid());
+		follow.setFollow_passive_user_id(accpet_user.getUser_id());
+		follow.setFollow_active_user_id(loginUser.getUser_id());
+		follow.setFollow_gmt_create(TeamUtil.getStringSecond());
+		follow.setFollow_gmt_modified(TeamUtil.getStringSecond());
+		userDao.noticeFans(follow);
+	}
+
+	@Override
+	public String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user) {
+		return userDao.removeFollow(loginUser, accpet_user);
+	}
+
+	@Override
+	public List<wlmtxt_user> listMyFansVO(wlmtxt_user loginUser) {
+		List<wlmtxt_user> list = userDao.listMyFans(loginUser.getUser_id());
+		return list;
+	}
+
+	/*
+	 * @Override public List<wlmtxt_works_keyword> listSecondOfMyWorks(String
+	 * user_id) { List<wlmtxt_works> listWorks = userDao.listMyWorks(user_id);
+	 * List<wlmtxt_works_keyword> listWorksKeyword = new
+	 * ArrayList<wlmtxt_works_keyword>(); for (int i = 0; i < listWorks.size();
+	 * i++) { List<wlmtxt_works_keyword> listWorksKeyword_single_works_id =
+	 * userDao.listWorksKeyword_by_works_id(listWorks.get(i)); // for (int j =
+	 * 0; j < listWorksKeyword_single_works_id.size(); j++) { //
+	 * listWorksKeyword.add(listWorksKeyword_single_works_id.get(j)); // }
+	 * listWorksKeyword.addAll(listWorksKeyword_single_works_id); } return
+	 * listWorksKeyword; }
+	 */
 }

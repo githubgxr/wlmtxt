@@ -6,26 +6,31 @@ import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_download_history;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_like;
+import com.wlmtxt.domain.DO.wlmtxt_notification;
+import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
+import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 
 public interface WorksDao {
 
 	void saveLike(wlmtxt_like like) throws Exception;
 
-	wlmtxt_like findLikeBy_user_id_And_like_works_id(String like_user_id, String like_works_id) throws Exception;
+	wlmtxt_like findLike(String like_user_id, String like_works_id) throws Exception;
 
-	void removeLikeBy_user_id_And_like_works_id(String user_id, String like_works_id) throws Exception;
+	void removeLike(String user_id, String like_works_id) throws Exception;
 
-	wlmtxt_collect findCollectBy_user_id_And_collect_works_id(String collect_user_id, String collect_works_id)
-			throws Exception;
+	wlmtxt_collect findCollect(String collect_user_id, String collect_works_id) throws Exception;
 
-	void removeCollectBy_user_id_And_collect_works_id(String collect_user_id, String collect_works_id) throws Exception;
+	void removeCollect(String collect_user_id, String collect_works_id) throws Exception;
+
+	void deletePlayHistory(String play_history_id);
 
 	void saveCollect(wlmtxt_collect new_collect) throws Exception;
 
@@ -63,7 +68,11 @@ public interface WorksDao {
 
 	void deleteMyWorks(String works_id);
 
+	void deleteAllMyHistory(String userID);
+
 	wlmtxt_works getWorksByID(String works_id);
+
+	wlmtxt_works getWorksByFileName(String fileName);
 
 	List<wlmtxt_discuss> getDiscussListByFatherID(String works_id);
 
@@ -84,5 +93,49 @@ public interface WorksDao {
 	List<wlmtxt_works_keyword> listKeyWordByByWorksID(String worksID);
 
 	wlmtxt_keyword getWordByID(String works_keyword_keyword_id);
+
+	List<wlmtxt_works> listWorksAllByUserId(String user_id);
+
+	int getLikeNum(String works_id);
+
+	int getCollectNum(String works_id);
+
+	List<wlmtxt_follow> listMyWorksByUserId(String user_id, MyAttentionVO myAttentionVO);
+
+	int getMyAttentionTotalRecords(String user_id);
+
+	wlmtxt_follow findFollowByActiveUserId(String user_id, String follow_passive_user_id);
+
+	int getPlayHistoryNumByFileName(String fileName);
+
+	int getPlayNum(String works_id);
+
+	void addPlayHistoryByFileName(wlmtxt_play_history history);
+
+	List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID);
+
+	List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID);
+
+	/**
+	 * 获取评论的数量
+	 * 
+	 * @param works_id
+	 * @return
+	 */
+	int getDiscussNum(String works_id);
+
+	List<wlmtxt_works> listWorksByDay();
+
+	List<wlmtxt_works> listWorksByMonth();
+
+	List<wlmtxt_works> listWorksByWeek();
+
+	void addNotification(wlmtxt_notification notification);
+
+	wlmtxt_discuss getDiscussByID(String discuss_id);
+
+	List<wlmtxt_notification> listUserNotification(String user_id);
+
+	// List<wlmtxt_works> listWorks10OrderHot();
 
 }

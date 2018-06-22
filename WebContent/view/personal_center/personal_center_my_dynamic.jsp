@@ -35,7 +35,7 @@
 							class="category_a">星秀星颜</a>
 					</div>
 
-					<a class="button_a">全部清空</a>
+					<a id="delete_all_myworks" class="button_a" onclick="deleteAllMyWork()">全部清空</a>
 				</div>
 				<!--主体部分-->
 				<div class="wddt_content list_container">

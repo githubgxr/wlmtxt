@@ -22,11 +22,15 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_notification;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.CategoryDTO;
+import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
@@ -61,6 +65,16 @@ public class WorksAction extends ActionSupport {
 	private String keyword;
 	//
 	private MyWorksVO myWorksVO;
+	// 我的关注页面列表
+	private MyAttentionVO myAttentionVO;
+
+	public MyAttentionVO getMyAttentionVO() {
+		return myAttentionVO;
+	}
+
+	public void setMyAttentionVO(MyAttentionVO myAttentionVO) {
+		this.myAttentionVO = myAttentionVO;
+	}
 
 	/*
 	 * 跳转到播放页，作品对象存入值栈
@@ -101,6 +115,9 @@ public class WorksAction extends ActionSupport {
 			// file = new File("C://wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		worksService.addPlayHistoryByFileName(worksName, user.getUser_id());
+
 		return "getFile";
 	}
 
@@ -138,6 +155,110 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
+	}
+
+	/**
+	 * 获取该作品点赞数
+	 * 
+	 * @throws IOException
+	 */
+	public void getLikeNum() throws IOException {
+		int num = worksService.getLikeNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num + "");
+	}
+
+	public void getHotByWorksID() throws IOException {
+		int num = worksService.getHotByWorksID(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num + "");
+	}
+
+	/**
+	 * 根据热度排序，取本日最多前十个作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorks10OrderHotByDay() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorks10OrderHotByDay();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 根据热度排序，取本周最多前十个作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorks10OrderHotByWeek() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorks10OrderHotByWeek();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 根据热度排序，取本月最多前十个作品
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorks10OrderHotByMonth() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorks10OrderHotByMonth();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 获取该作品收藏数
+	 * 
+	 * @throws IOException
+	 */
+	public void getCollectNum() throws IOException {
+		int num = worksService.getCollectNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num + "");
+	}
+
+	/**
+	 * 获取该作品播放量
+	 * 
+	 * @throws IOException
+	 */
+	public void getPlayNum() throws IOException {
+		int num = worksService.getPlayNum(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(num + "");
+	}
+
+	public void getCategoryDTOByID() throws IOException {
+		CategoryDTO categoryDTO;
+		if (first_menu != null) {
+			categoryDTO = worksService.getCategoryDTOByID(first_menu.getFirst_menu_id());
+		} else {
+			categoryDTO = worksService.getCategoryDTOByID(second_menu.getSecond_menu_id());
+		}
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(categoryDTO));
 	}
 
 	/**
@@ -225,8 +346,52 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
+	public void deletePlayHistory() throws IOException {
+		worksService.deletePlayHistory(play_history.getPlay_history_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void deleteAllMyHistory() throws IOException {
+
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		worksService.deleteAllMyHistory(user.getUser_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	/**
+	 * 删除单个我的上传作品
+	 * 
+	 * 接收，works_id
+	 * 
+	 * 返回，1
+	 * 
+	 * @author zb
+	 * 
+	 * @throws IOException
+	 */
 	public void deleteMyWorks() throws IOException {
 		worksService.deleteMyWorks(accept_works.getWorks_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	/**
+	 * 删除所有作品
+	 * 
+	 * 返回，1
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException
+	 */
+	public void deleteAllMyWorks() throws IOException {
+		wlmtxt_user loginuser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		worksService.deleteAllMyWorks(loginuser.getUser_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
@@ -255,6 +420,23 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 根据登陆的的用户，获取他的所有通知
+	 * 
+	 * @throws IOException
+	 */
+	public void listUserNotification() throws IOException {
+		List<wlmtxt_notification> notificationList = new ArrayList<wlmtxt_notification>();
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		notificationList = worksService.listUserNotification(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(notificationList));
 	}
 
 	/**
@@ -328,6 +510,13 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write(gson.toJson(worksDTOList));
 	}
 
+	/**
+	 * 我的动态
+	 * 
+	 * @author zb
+	 * 
+	 * @throws IOException
+	 */
 	public void getMyWorksListVO() throws IOException {
 
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -355,7 +544,7 @@ public class WorksAction extends ActionSupport {
 			String fileName = UUID.randomUUID().toString()
 					+ imgfileFileName.substring(imgfileFileName.lastIndexOf("."));
 
-			filePath = "c://wlmtxt/img/" + fileName;
+			filePath = "C://wlmtxt/img/" + fileName;
 
 			File newFile = new File(filePath);
 
@@ -380,7 +569,7 @@ public class WorksAction extends ActionSupport {
 			String fileName = UUID.randomUUID().toString()
 					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
 
-			filePath = "c://wlmtxt/video/" + fileName;
+			filePath = "C://wlmtxt/video/" + fileName;
 
 			File newFile = new File(filePath);
 
@@ -465,6 +654,64 @@ public class WorksAction extends ActionSupport {
 		PrintWriter pw = response.getWriter();
 		int num = worksService.countLikeNum(accept_works.getWorks_id());
 		pw.write(num);
+	}
+
+	/**
+	 * 个人中心的搜索： 搜索我的动态（作品标题、二级分类）: 接收，option=dynamic, searchword; 返回分类列表
+	 * 我的关注（用户昵称、邮箱）：接收，option=attention， searchword; 返回分类列表
+	 * 我的粉丝（用户昵称、邮箱）：接收，option=fans， searchword; 返回分类列表
+	 * 观看历史（作品标题、二级分类）：接收，option=playhistory， searchword; 返回分类列表
+	 * 与我相关（作品标题、二级分类）：接收，option=relation， searchword; 返回分类列表
+	 * 
+	 * @date 2018年6月21日 下午4:43:04
+	 * 
+	 * @author gxr
+	 * 
+	 *         TODO
+	 */
+	public void search() {
+
+	}
+
+	/**
+	 * 我的关注
+	 * 
+	 * 接收，页数
+	 * 
+	 * 返回，vo中1为已关注，2为未关注
+	 * 
+	 * @date 2018年6月21日 下午4:57:51
+	 * 
+	 * @author gxr
+	 * 
+	 *         XXX 待测试
+	 * @throws IOException
+	 */
+	public void listMyAttentionVO() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		myAttentionVO = worksService.listMyAttentionVO(user.getUser_id(), myAttentionVO);
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(myAttentionVO));
+	}
+
+	/**
+	 * 根据当前登录用户查看播放历史DTO
+	 * 
+	 * @throws IOException
+	 */
+	public void listPlayHistoryListByUserID() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<PlayHistoryDTO> playHistoryDTOList = worksService.listPlayHistoryDTOListByUserID(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(playHistoryDTOList));
 	}
 
 	public WorksService getWorksService() {

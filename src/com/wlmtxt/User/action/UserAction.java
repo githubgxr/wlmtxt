@@ -12,17 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.User.service.UserService;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
-import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_user;
-import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 
 import util.JavaMail;
 import util.JsonUtils;
 import util.ReflectUtil;
+import util.TeamUtil;
 import util.md5;
 
 @SuppressWarnings("serial")
@@ -61,12 +62,13 @@ public class UserAction extends ActionSupport {
 			String fileName = UUID.randomUUID().toString()
 					+ touxiangfileFileName.substring(touxiangfileFileName.lastIndexOf("."));
 
-			filePath = "c://wlmtxt/img/" + fileName;
+			filePath = "D://wlmtxt/img/" + fileName;
 
 			File newFile = new File(filePath);
 
 			try {
 				FileUtils.copyFile(touxiangfile, newFile);
+
 				wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 				user = userService.get_user_byID(user.getUser_id());
 				userService.update_userImg(user.getUser_id(), fileName);
@@ -128,24 +130,26 @@ public class UserAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void sendRegisterMail() throws IOException {
-		//加载邮件配置文件
+		// 加载邮件配置文件
 		Properties properties = new Properties();
 		properties.load(this.getClass().getClassLoader().getResourceAsStream("javamail.properties"));
 		String host = properties.getProperty("projecthost");
 		String port = properties.getProperty("projectport");
 		String content = properties.getProperty("mailcontent");
 		String utf8_content = new String(content.getBytes("ISO-8859-1"), "utf-8");
-		
+		//昵称
+		String nickname = new String(accpet_user.getUser_username().getBytes("ISO-8859-1"), "utf-8");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		String href = "http://"+host+":"+port+"/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="
+		String href = "http://" + host + ":" + port + "/wlmtxt/User/User_skipActivatePage?accpet_user.user_mail="
 				+ accpet_user.getUser_mail() + "&accpet_user.user_password="
 				+ md5.GetMD5Code(accpet_user.getUser_password()) + "&accpet_user.user_username="
-				+ accpet_user.getUser_username();
+				+ nickname;
 		// String href =
 		// "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		// 邮件内容
-		String mailcontent = "<p><a href=" + href + ">"+utf8_content+"</a></p>";
+		String mailcontent = "<p><a href=" + href + ">" + utf8_content + "</a></p>";
+//		String utf8_mailcontent =  new String(mailcontent.getBytes("ISO-8859-1"), "utf-8");
 		PrintWriter pw = response.getWriter();
 		try {
 			JavaMail.sendMail(mailcontent, accpet_user.getUser_mail());
@@ -289,16 +293,86 @@ public class UserAction extends ActionSupport {
 	}
 
 	/**
-	 * 跳转到忘记密码，修改密码页面
+	 * 发送忘记密码的验证邮件
+	 * 
+	 * 1-发送成功
+	 * 2-发送失败
+	 * 
+	 * @date 2018年6月21日	下午2:39:32
+	 * 
+	 * @author gxr
+	 * 
+	 * TODO
+	 * @throws IOException 
+	 */
+	public void sendMailOfForgotPassword() throws IOException {
+		//加载邮件配置文件
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader().getResourceAsStream("javamail.properties"));
+		String host = properties.getProperty("projecthost");
+		String port = properties.getProperty("projectport");
+		String content = properties.getProperty("mailcontent");
+		String utf8_content = new String(content.getBytes("ISO-8859-1"), "utf-8");
+		//昵称
+//		String nickname = new String(accpet_user.getUser_username().getBytes("ISO-8859-1"), "utf-8");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		String href = "http://"+host+":"+port+"/wlmtxt/User/User_skipToModifyPasswordPage?accpet_user.user_mail=" + accpet_user.getUser_mail();
+		// 邮件内容
+		String mailcontent = "<p><a href=" + href + ">"+utf8_content+"</a></p>";
+		PrintWriter pw = response.getWriter();
+		try {
+			JavaMail.sendMail(mailcontent, accpet_user.getUser_mail());
+			pw.write("1");
+		} catch (Exception e) {
+			pw.write("2");
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 跳转到忘记密码后，输入新密码页面
 	 * 
 	 * @return
 	 */
 	public String skipToModifyPasswordPage() {
 		return "skipToModifyPasswordPage";
 	}
+	
+	/**
+	 * 输入新密码后，确认修改密码
+	 * 
+	 * 接收，user_mail, user_password
+	 * 
+	 * 返回，1-修改成功， 2-修改失败
+	 * 
+	 * @date 2018年6月21日	下午2:38:30
+	 * 
+	 * @author gxr
+	 * 
+	 * TODO
+	 * @throws IOException 
+	 */
+	public void modifiedPasswordBehindForgetted() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		//获取此邮箱的用户信息
+		wlmtxt_user user = userService.mailRegisted(accpet_user);
+		user.setUser_password(md5.GetMD5Code(accpet_user.getUser_password()));
+		user.setUser_gmt_modified(TeamUtil.getStringSecond());
+		String registerResult = userService.modifyPassword(user);
+		PrintWriter pw = response.getWriter();
+		if ("1".equals(registerResult)) {
+			pw.write("1");
+		} else {
+			pw.write("2");
+		}
+	}
+	
+	
 	/**
 	 * 得到用户头像
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	/*
 	 * public void getUserAvatar() throws IOException { HttpServletResponse
@@ -321,18 +395,18 @@ public class UserAction extends ActionSupport {
 	 * -1; while ((i = is.read(buffer)) != -1) { os.write(buffer, 0, i); }
 	 * os.flush(); os.close(); is.close(); }
 	 */
-	
+
 	/**
 	 * 查询用户是否已关注
 	 * 
-	 * 1-已关注
-	 * 2-未关注
+	 * 1-已关注 2-未关注
 	 *
-	 * @date 2018年6月20日	下午6:09:21
+	 * @date 2018年6月20日 下午6:09:21
 	 * 
 	 * @author gxr
-	 * @throws IOException 
+	 * @throws IOException
 	 *
+	 * XXX 
 	 */
 	public void isFollowedUser() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -346,13 +420,15 @@ public class UserAction extends ActionSupport {
 	}
 
 	/**
-	 * 关注用户
+	 * 关注用户及取消关注
 	 * 
-	 * 1-关注成功
-	 * 2-关注失败
-	 * 3-未登录
+	 * 1-成功 2-失败 3-未登录
 	 * 
-	 * @throws IOException 
+	 * @throws IOException
+	 * 
+	 * @author gxr
+	 * 
+	 * XXX
 	 */
 	public void followUser() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -360,11 +436,22 @@ public class UserAction extends ActionSupport {
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		if (null != loginUser) {
-			String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
-			if ("1".equals(followResult)) {
-				pw.write("1");
+			if (userService.isFollowedUser(loginUser.getUser_id(), accpet_user.getUser_id())) {
+				// 取关
+				String result = userService.removeFollow(loginUser, accpet_user);
+				if ("1".equals(result)) {
+					pw.write("1");
+				} else {
+					pw.write("2");
+				}
 			} else {
-				pw.write("2");
+				// 关注
+				String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
+				if ("1".equals(followResult)) {
+					pw.write("1");
+				} else {
+					pw.write("2");
+				}
 			}
 		} else {
 			pw.write("3");
@@ -372,8 +459,119 @@ public class UserAction extends ActionSupport {
 	}
 	
 	/**
-	 * 我的动态
+	 * 取消全部关注的用户
+	 * 
+	 * 返回，1-取关成功，2-取关失败
+	 * 
+	 * @date 2018年6月21日	下午7:47:25
+	 * 
+	 * @author gxr
 	 * @throws IOException 
+	 * 
+	 * XXX
+	 */
+	public void deleteAllMyFollow() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		int result = userService.deleteAllMyFollow(loginUser);
+		if (result > 0) {
+			pw.write("1");
+		} else {
+			pw.write("2");
+		}
+	}
+	
+	/**
+	 * 关注所有粉丝
+	 * 
+	 * 返回，1-成功，2-失败
+	 * 
+	 * @date 2018年6月21日	下午8:14:30
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 * 
+	 * XXX
+	 */
+	public void noticeAllMyFans() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		 try {
+			userService.noticeAllMyFans(loginUser);
+			pw.write("1");
+		} catch (Exception e) {
+			pw.write("2");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 我的粉丝列表
+	 * 
+	 * 返回，list-全部粉丝数据，2-无粉丝
+	 * 
+	 * @date 2018年6月22日	上午10:52:53
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 */
+	public void listMyFansVO() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		List<wlmtxt_user> list = userService.listMyFansVO(loginUser);
+		if (list != null) {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write(gson.toJson(list));
+		} else {
+			pw.write("2");
+		}
+	}
+	
+	/**
+	 * XXX此方法被重复，不要用
+	 * 
+	 * 关注单个粉丝，
+	 * 
+	 * 返回，1-成功，2-失败
+	 * 
+	 * @date 2018年6月21日	下午8:42:33
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 * 
+	 * XXX
+	 */
+	public void noticeMyFans() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		try {
+			userService.noticeMyFans(loginUser, accpet_user);
+			pw.write("1");
+		} catch (Exception e) {
+			pw.write("2");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * 我的动态
+	 * 
+	 * @throws IOException
 	 */
 	public void MyDynamic() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -381,7 +579,7 @@ public class UserAction extends ActionSupport {
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		if (loginUser == null) {
-//			userService.MyDynamic(loginUser);
+			// userService.MyDynamic(loginUser);
 		} else {
 			pw.write("3");
 		}
@@ -535,23 +733,23 @@ public class UserAction extends ActionSupport {
 	public String skipToAuditNoticePage() {
 		return "skipToAuditNoticePage";
 	}
-	
+
 	/**
 	 * 跳转到播放页
+	 * 
 	 * @return
 	 */
 	public String skipToPlayPage() {
 		return "skipToPlayPage";
 	}
-	
+
 	/**
 	 * 
-	 * 返回所有的上传作品一级分类
-	 * 如果未空，返回2
+	 * 返回所有的上传作品一级分类 如果未空，返回2
 	 * 
-	 * @throws IOException 
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
+	 * @throws IOException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
 	 * 
 	 */
 	public void listSecondOfMyWorks() throws IOException, IllegalArgumentException, IllegalAccessException {
@@ -559,8 +757,9 @@ public class UserAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-//		List<wlmtxt_works_keyword> listWorksKeyword = userService.listSecondOfMyWorks(loginUser.getUser_id());
-		List<wlmtxt_first_menu> listFirstMenu = userService.listFirstMenu(loginUser.getUser_id()); 
+		// List<wlmtxt_works_keyword> listWorksKeyword =
+		// userService.listSecondOfMyWorks(loginUser.getUser_id());
+		List<wlmtxt_first_menu> listFirstMenu = userService.listFirstMenu(loginUser.getUser_id());
 		if (listFirstMenu != null) {
 			ReflectUtil.getAllField(listFirstMenu);
 			pw.write(JsonUtils.toJson(listFirstMenu));
