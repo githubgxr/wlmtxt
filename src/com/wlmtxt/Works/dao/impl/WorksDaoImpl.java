@@ -202,6 +202,31 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_collect> listMycollectList(String user_id) {
+		String hql = " from wlmtxt_collect  where collect_user_id='" + user_id + "'  order by collect_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_collect> collectList = query.list();
+		return collectList;
+	}
+
+	@Override
+	public List<wlmtxt_like> listLikeByUserID(String user_id) {
+		String hql = " from wlmtxt_like  where like_user_id='" + user_id + "'  order by like_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_like> likeList = query.list();
+		return likeList;
+	}
+
+	@Override
+	public List<wlmtxt_notification> listUserNotification(String user_id) {
+		String hql = " from wlmtxt_notification  where notification_user_id='" + user_id
+				+ "'  order by notification_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_notification> notificationList = query.list();
+		return notificationList;
+	}
+
+	@Override
 	public List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id) {
 		String hql = " from wlmtxt_works  where works_second_menu_id='" + second_menu_id
 				+ "' and works_passed='1' order by works_gmt_create desc";
@@ -395,6 +420,30 @@ public class WorksDaoImpl implements WorksDao {
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_first_menu> firstMenuList = query.list();
 		return firstMenuList;
+	}
+
+	@Override
+	public void deletePlayHistory(String play_history_id) {
+		String hql = "delete from wlmtxt_play_history  where play_history_id = '" + play_history_id + "'";
+		Query query = getSession().createQuery(hql);
+		query.executeUpdate();
+
+	}
+
+	@Override
+	public void deleteDisscuss(String discuss_id) {
+		String hql = "delete from wlmtxt_discuss  where discuss_id = '" + discuss_id + "'";
+		Query query = getSession().createQuery(hql);
+		query.executeUpdate();
+
+	}
+
+	@Override
+	public void deleteAllMyHistory(String userID) {
+		String hql = "delete from wlmtxt_play_history  where play_history_user_id = '" + userID + "'";
+		Query query = getSession().createQuery(hql);
+		query.executeUpdate();
+
 	}
 
 	@Override
