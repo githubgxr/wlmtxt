@@ -30,4 +30,10 @@ public interface UserService {
 
 	boolean isFollowedUser(String user_id, String user_id2);
 
+	int deleteAllMyFollow(wlmtxt_user loginUser);
+
+	void noticeAllMyFans(wlmtxt_user loginUser) throws Exception;
+
+	void noticeMyFans(wlmtxt_user loginUser, wlmtxt_user accpet_user) throws Exception;
+
 }
