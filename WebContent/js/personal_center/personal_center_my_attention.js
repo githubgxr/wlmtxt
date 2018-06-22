@@ -6,6 +6,7 @@ $(function(){
 });
 function listMyAttentionByPage(pageIndex){
 	
+	/*移除之前的数据*/
 	var user_list = document.getElementsByClassName("user_list");
 	var long = user_list.length;
 	for (var num = 0; num < long; num++) {
