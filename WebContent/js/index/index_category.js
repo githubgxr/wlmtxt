@@ -276,7 +276,7 @@ function getSecondList(first_menu_id, pageIndex) {
 				li_div = document.createElement("div");
 
 				ul_li.className = "list_video_item";
-				ul_li.style.margin = " 0 5px20px 5px";
+				ul_li.style.margin = "0 5px 20px 5px";
 				li_a.className = "video_list_item_wrap";
 				li_div.className = "video_label";
 
@@ -395,7 +395,7 @@ function getThirdList(second_menu_id, pageIndex) {
 
 				ul_li.className = "list_video_item";
 
-				ul_li.style.margin = " 0 5px20px 5px";
+				ul_li.style.margin = "0 5px 20px 5px";
 				li_a.className = "video_list_item_wrap";
 				li_a.href = '/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
 						+ ThirdList_vo[num].works.works_id;

@@ -43,203 +43,13 @@
 									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
 								</div>
 							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
-							<li class="user_list">
-								<div class="user_list_img_div">
-									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />
-								</div>
-								<div class="user_info">
-									<div class="user_name">熊啊熊</div>
-									<div class="user_operateing">+ 关注</div>
-									<div class="user_grjj">你不必想念，也无需忧怀，我与岁月山河同好，关于未来，自有承担。不必想念，也无需忧怀，我与</div>
-								</div>
-							</li>
+							
 						</ul>
 						
 					</div>
 				</div>
 				<!--翻页-->
-						<div class="page_container">
+						<!-- <div class="page_container">
 							<div class="page_component_container">
 								<div class="page_component">
 									<a class="page_prev" href="#">上一页</a> <a class="selected"
@@ -251,12 +61,12 @@
 										href="#" class="page_component_submit">GO</a>
 								</div>
 							</div>
-						</div>
+						</div> -->
 			</div>
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-
+	<script type="text/javascript" src="<%=basePath%>js/personal_center/personal_center_my_fans.js"></script>
 </body>
 
 </html>

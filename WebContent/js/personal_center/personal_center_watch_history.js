@@ -2,12 +2,14 @@ $(function(){
 	listMyHistoryByPage();
 });
 function listMyHistoryByPage(){
+
 	var list_video_item = document.getElementsByClassName("list_video_item");
 	var long = list_video_item.length;
 	for (var num = 0; num < long; num++) {
 		list_video_item[0].parentNode.removeChild(list_video_item[0]);
 	}
 	var xhr=new XMLHttpRequest();
+
 	/*var formData=new FormData();
 	formData.append("myWorksVO.pageIndex",pageIndex);*/
 	xhr.open("POST","/wlmtxt/Works/Works_listPlayHistoryListByUserID");
@@ -54,6 +56,7 @@ function listMyHistoryByPage(){
 				//获取播放量
 					var formData_get_play_num = new FormData();
 					formData_get_play_num.append("accept_works.works_id", llls_response.worksDTOList[i].works.works_id);
+
 					var play_num_xhr = new XMLHttpRequest();
 					play_num_xhr.open("POST", "/wlmtxt/Works/Works_getPlayNum");
 					play_num_xhr.send(formData_get_play_num);
@@ -66,14 +69,18 @@ function listMyHistoryByPage(){
 							}
 						}
 					}
+
 				$("#llls_list_container").append(llls_str);
+
 				
 			}
 		}
 	}
 }
 //删除单个作品
+
 function deleteHistory(video_delete_btn_id){
+
 	console.log("video_delete_btn_id:"+video_delete_btn_id);
 	var video_delete_formData=new FormData();
 	video_delete_formData.append("accept_works.works_id",video_delete_btn_id);
