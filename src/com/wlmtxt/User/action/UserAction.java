@@ -147,6 +147,7 @@ public class UserAction extends ActionSupport {
 		// "http://localhost:8080/wlmtxt/User/User_skipActivatePage";
 		// 邮件内容
 		String mailcontent = "<p><a href=" + href + ">" + utf8_content + "</a></p>";
+//		String utf8_mailcontent =  new String(mailcontent.getBytes("ISO-8859-1"), "utf-8");
 		PrintWriter pw = response.getWriter();
 		try {
 			JavaMail.sendMail(mailcontent, accpet_user.getUser_mail());
@@ -311,7 +312,7 @@ public class UserAction extends ActionSupport {
 		String content = properties.getProperty("mailcontent");
 		String utf8_content = new String(content.getBytes("ISO-8859-1"), "utf-8");
 		//昵称
-		String nickname = new String(accpet_user.getUser_username().getBytes("ISO-8859-1"), "utf-8");
+//		String nickname = new String(accpet_user.getUser_username().getBytes("ISO-8859-1"), "utf-8");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		String href = "http://"+host+":"+port+"/wlmtxt/User/User_skipToModifyPasswordPage?accpet_user.user_mail=" + accpet_user.getUser_mail();
