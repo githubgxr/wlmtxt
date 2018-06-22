@@ -509,6 +509,24 @@ public class UserAction extends ActionSupport {
 	}
 	
 	/**
+	 * 我的粉丝列表
+	 * 
+	 * @date 2018年6月22日	上午10:52:53
+	 * 
+	 * @author gxr
+	 * 
+	 * TODO
+	 * @throws IOException 
+	 */
+	public void listMyFansVO() throws IOException {
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+//		List<wlmtxt_user> list = userService.listMyFansVO(loginUser);
+	}
+	
+	/**
 	 * XXX此方法被重复，不要用
 	 * 
 	 * 关注单个粉丝，
