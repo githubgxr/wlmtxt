@@ -129,6 +129,14 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public wlmtxt_discuss getDiscussByID(String discuss_id) {
+		String hql = "from wlmtxt_discuss  where discuss_id ='" + discuss_id + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_discuss discuss = (wlmtxt_discuss) query.uniqueResult();
+		return discuss;
+	}
+
+	@Override
 	public wlmtxt_first_menu getFirstMenuByID(String second_menu_first_menu_id) {
 		String hql = "from wlmtxt_first_menu  where first_menu_id ='" + second_menu_first_menu_id + "'";
 		Query query = getSession().createQuery(hql);

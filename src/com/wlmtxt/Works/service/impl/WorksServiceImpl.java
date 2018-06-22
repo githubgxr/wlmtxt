@@ -541,6 +541,18 @@ public class WorksServiceImpl implements WorksService {
 			new_like.setLike_gmt_create(TeamUtil.getStringSecond());
 			new_like.setLike_gmt_modified(TeamUtil.getStringSecond());
 			worksDao.saveLike(new_like);
+			/*
+			 * 通知
+			 */
+			// 查询发起者
+			wlmtxt_user putMan = userService.get_user_byID(user.getUser_id());
+			// 查询作品
+			wlmtxt_works putWorks = worksDao.getWorksByID(works.getWorks_id());
+			addNotification(putWorks.getWorks_user_id(), "3",
+					putMan.getUser_username() + "喜欢了您的作品" + putWorks.getWorks_name());
+			/*
+			 * 
+			 */
 		} else {
 			// 点赞了就取消点赞
 			worksDao.removeLike(user.getUser_id(), works.getWorks_id());
@@ -564,9 +576,9 @@ public class WorksServiceImpl implements WorksService {
 			// 查询发起者
 			wlmtxt_user putMan = userService.get_user_byID(user.getUser_id());
 			// 查询作品
-			wlmtxt_works works = worksDao.getWorksByID(accept_works.getWorks_id());
-			addNotification(works.getWorks_user_id(), "2",
-					putMan.getUser_username() + "收藏了您的作品" + works.getWorks_name());
+			wlmtxt_works putWorks = worksDao.getWorksByID(accept_works.getWorks_id());
+			addNotification(putWorks.getWorks_user_id(), "2",
+					putMan.getUser_username() + "收藏了您的作品" + putWorks.getWorks_name());
 			/*
 			 * 
 			 */
@@ -598,7 +610,27 @@ public class WorksServiceImpl implements WorksService {
 		accpet_discuss.setDiscuss_gmt_create(TeamUtil.getStringSecond());
 		accpet_discuss.setDiscuss_gmt_modified(TeamUtil.getStringSecond());
 		worksDao.saveDiscuss(accpet_discuss);
+		/*
+		 * 通知
+		 */
+		// 查询发起者
+		wlmtxt_user putMan = userService.get_user_byID(accpet_discuss.getDiscuss_user_id());
+		// 查询作品
+		wlmtxt_works putWorks = worksDao.getWorksByID(accpet_discuss.getDiscuss_father_discuss_id());
+		if (putWorks != null) {
+			// 评论
+			addNotification(putWorks.getWorks_user_id(), "4",
+					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name());
+		} else {
+			// 回复
+			wlmtxt_discuss reply = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
+			addNotification(putWorks.getWorks_user_id(), "5",
+					putMan.getUser_username() + "回复了您的评论" + reply.getDiscuss_content());
+		}
 
+		/*
+		 * 
+		 */
 	}
 
 	@Override
