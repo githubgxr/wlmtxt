@@ -130,6 +130,8 @@ public interface WorksDao {
 
 	wlmtxt_discuss getDiscussByID(String discuss_id);
 
+	List<wlmtxt_notification> listUserNotification(String user_id);
+
 	// List<wlmtxt_works> listWorks10OrderHot();
 
 }

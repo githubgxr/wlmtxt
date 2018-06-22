@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_discuss;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
+import com.wlmtxt.domain.DO.wlmtxt_notification;
 import com.wlmtxt.domain.DO.wlmtxt_play_history;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
@@ -108,5 +109,7 @@ public interface WorksService {
 	 * @param notification_content
 	 */
 	public void addNotification(String notification_user_id, String notification_type, String notification_content);
+
+	public List<wlmtxt_notification> listUserNotification(String user_id);
 
 }

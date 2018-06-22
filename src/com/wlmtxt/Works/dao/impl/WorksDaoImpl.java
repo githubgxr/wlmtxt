@@ -202,6 +202,15 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_notification> listUserNotification(String user_id) {
+		String hql = " from wlmtxt_notification  where notification_user_id='" + user_id
+				+ "'  order by notification_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_notification> notificationList = query.list();
+		return notificationList;
+	}
+
+	@Override
 	public List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id) {
 		String hql = " from wlmtxt_works  where works_second_menu_id='" + second_menu_id
 				+ "' and works_passed='1' order by works_gmt_create desc";

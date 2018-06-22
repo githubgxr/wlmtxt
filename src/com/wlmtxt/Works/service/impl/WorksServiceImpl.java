@@ -411,6 +411,11 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public List<wlmtxt_notification> listUserNotification(String user_id) {
+		return worksDao.listUserNotification(user_id);
+	}
+
+	@Override
 	public List<wlmtxt_second_menu> listSecondMenu() {
 		return worksDao.listSecondMenu();
 	}
