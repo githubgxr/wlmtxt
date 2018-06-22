@@ -22,6 +22,7 @@ function listMyFansByPage(pageIndex){
 		if(xhr.readyState==4 && xhr.status==200){
 			
 			var list_myFans=JSON.parse(xhr.responseText);
+			console.log(list_myFans);
 			for(var i=0;i<list_myFans.userlist.length;i++){
 				
 				var myFans='<li class="user_list">';
