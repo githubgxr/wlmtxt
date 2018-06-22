@@ -26,7 +26,7 @@
 				<div class="wdgz_header list_header">
 					<i class="header_line"></i>
 					<h3>我的关注</h3>
-					<a class="button_a" style="float: right;">全部取消关注</a>
+					<a class="button_a" style="float: right;" onclick="cancelAllFocus();" >全部取消关注</a>
 				</div>
 				<!--主体部分-->
 				<div class="wdgz_content">
