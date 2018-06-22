@@ -17,9 +17,9 @@
 	<!--<div style="background-color: blanchedalmond;height: 230px;"></div>-->
 	<div style="width: 960px; margin: 0 calc(( 100% - 960px)/2);">
 		<!--隐藏的div，作品id  -->
-		<div id="video_id" style="display: none;"><s:property value="accept_works.works_id" /></div>
-		<!--隐藏的div，用户id  -->
-		<div id="user_id" style="display: none;"></div>
+		<div id="video_id" style="display: none;"></div>
+		<!--隐藏的div，关注人id  -->
+		<div id="focus_user_id" style="display: none;"></div>
 		<!--顶部-->
 		<div
 			style="float: left; background-color: #ffffff; padding: 0 20px; border-radius: 5px; margin: 20px 0 0 0;">
