@@ -37,7 +37,7 @@ function getFirstMenu() {
 			for (var i = 0; i < long; i++) {
 				old_a[0].parentNode.removeChild(old_a[0]);
 			}
-			
+
 			/* 获得一级分类头部 */
 			for ( var num in category_vo) {
 				var new_a = null;
@@ -67,6 +67,7 @@ function getFirstMenu() {
 	xmlhttp.send(null);
 }
 
+/* 获得一级分类作品列表 */
 function getFirstWorksAll() {
 	var xmlhtp = null;
 	var list_vo = null;
@@ -74,15 +75,12 @@ function getFirstWorksAll() {
 	xmlhtp.onreadystatechange = function() {
 		if (xmlhtp.readyState == 4 && xmlhtp.status == 200) {
 			list_vo = JSON.parse(xmlhtp.responseText);
-			
-			
 			/* 移出所有一级列表 */
 			var old_li = document.getElementsByClassName("list_video_item");
 			var long = old_li.length;
 			for (var i = 0; i < long; i++) {
 				old_li[0].parentNode.removeChild(old_li[0]);
 			}
-			
 			for (var num = 0; num < list_vo.length; num++) {
 
 				/* 获得一级分类作品列表 */
@@ -174,6 +172,7 @@ function getFirstWorksAll() {
 			}
 			document.getElementById("img_back").style.display = "none";
 			menu_name = "所有分类";
+			menu_state = "all";
 			$("#category_name").empty();
 			document.getElementById("category_name").appendChild(
 					document.createTextNode(menu_name));
@@ -275,7 +274,7 @@ function getSecondList(first_menu_id, pageIndex) {
 				li_div = document.createElement("div");
 
 				ul_li.className = "list_video_item";
-				ul_li.style.margin = " 0 5px20px 5px";
+				ul_li.style.margin = "0 5px 20px 5px";
 				li_a.className = "video_list_item_wrap";
 				li_div.className = "video_label";
 
@@ -346,7 +345,7 @@ function getSecondList(first_menu_id, pageIndex) {
 				a_div1_img.src = "/wlmtxt/Works/Works_getImg?imgName="
 						+ SecondList_vo[num].works.works_cover;// 得到封面
 
-				for (i = 0; i < SecondList_vo[num].keyWordDTOList.length; i++) {
+				for (var i = 0; i < SecondList_vo[num].keyWordDTOList.length; i++) {
 					li_div_div_a = document.createElement("a");
 					li_div_div_a.className = "video_label_item";
 					li_div_div_a.innerHTML = SecondList_vo[num].keyWordDTOList[i].keyword.keyword_name;
@@ -394,7 +393,7 @@ function getThirdList(second_menu_id, pageIndex) {
 
 				ul_li.className = "list_video_item";
 
-				ul_li.style.margin = " 0 5px20px 5px";
+				ul_li.style.margin = "0 5px 20px 5px";
 				li_a.className = "video_list_item_wrap";
 				li_a.href = '/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
 						+ ThirdList_vo[num].works.works_id;
@@ -467,28 +466,8 @@ function getThirdList(second_menu_id, pageIndex) {
 					li_div_div_a.innerHTML = ThirdList_vo[num].keyWordDTOList[i].keyword.keyword_name;
 					li_div_div.appendChild(li_div_div_a);
 				}
-
-			}
-			document.getElementById("img_back").onclick=function(){
-				var category_vo=null;
-				for ( var num in category_vo) {
-					var new_a = null;
-					var div_box = document.getElementById("div_box");
-					new_a = document.createElement("a");
-					new_a.className = "category_a";
-					new_a.appendChild(document
-							.createTextNode(category_vo[num].first_menu_name));
-					div_box.appendChild(new_a);
-					new_a.id = category_vo[num].first_menu_id;
-				}
-				console.log("三级到一级");
-				getSecondMenu(category_vo[num].first_menu_id,1);
-				getSecondList(category_vo[num].first_menu_id,1);
-				console.log(category_vo[num].first_menu_id);
 			}
 			document.getElementById("img_back").style.display = "block";
-			menu_id = second_menu_id;
-			alert(second_menu_id);
 			menu_state = "2";
 			menu_name = "二级分类";
 			$("#category_name").empty();

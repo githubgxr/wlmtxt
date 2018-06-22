@@ -1,7 +1,7 @@
 $(function(){
-	listMyDynamicByPage(1);
+	listMyCollectionyPage(1);
 });
-function listMyDynamicByPage(pageIndex){
+function listMyCollectionyPage(pageIndex){
 	var list_video_item = document.getElementsByClassName("list_video_item");
 	var long = list_video_item.length;
 	for (var num = 0; num < long; num++) {
@@ -92,7 +92,7 @@ function deleteWork(video_delete_btn_id){
 		if(xhr_delete.readyState==4&&xhr_delete.status==200){
 			if(xhr_delete.responseText=="1"){
 				toastr.success("删除成功！");
-				listMyDynamicByPage(1);
+				listMyCollectionyPage(1);
 			}else{
 				toastr.error("删除失败！");
 				return false;
@@ -109,7 +109,7 @@ function deleteWork(video_delete_btn_id){
 			if(xhr_delete_all.readyState==4&&xhr_delete_all.status==200){
 				if(xhr_delete_all.responseText=="1"){
 					toastr.success("清除全部成功！");
-					listMyDynamicByPage(1);
+					listMyCollectionyPage(1);
 				}else{
 					toastr.error("清除全部失败！");
 					return false;
