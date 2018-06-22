@@ -128,6 +128,10 @@ public interface WorksDao {
 
 	void addNotification(wlmtxt_notification notification);
 
+	int totalFansNum(String user_id);
+
+	int totalFollowingNum(String user_id);
+
 	// List<wlmtxt_works> listWorks10OrderHot();
 
 }

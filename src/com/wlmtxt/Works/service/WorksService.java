@@ -109,4 +109,8 @@ public interface WorksService {
 	 */
 	public void addNotification(String notification_user_id, String notification_type, String notification_content);
 
+	public int totalFansNum(wlmtxt_user loginUser);
+
+	public int totalFollowingNum(wlmtxt_user loginUser);
+
 }
