@@ -8,8 +8,8 @@
             <column name="DISCUSS_ID" />
             <generator class="assigned" />
         </id>
-        <property name="discuee_father_discuss_id" type="java.lang.String">
-            <column name="DISCUEE_FATHER_DISCUSS_ID" />
+        <property name="discuss_father_discuss_id" type="java.lang.String">
+            <column name="DISCUSS_FATHER_DISCUSS_ID" />
         </property>
         <property name="discuss_user_id" type="java.lang.String">
             <column name="DISCUSS_USER_ID" />
