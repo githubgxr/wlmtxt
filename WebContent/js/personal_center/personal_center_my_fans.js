@@ -22,7 +22,6 @@ function listMyFansByPage(pageIndex){
 		if(xhr.readyState==4 && xhr.status==200){
 			
 			var list_myFans=JSON.parse(xhr.responseText);
-			console.log(list_myFans);
 			for(var i=0;i<list_myFans.userlist.length;i++){
 				
 				var myFans='<li class="user_list">';
@@ -36,7 +35,7 @@ function listMyFansByPage(pageIndex){
 				myFans+='</div>';
 				myFans+='</li>';
 				$(".user_list_ul").append(myFans);
-				console.log(list_myFans.userlist[i].user_bio);
+				
 			}
 		}
 	}
@@ -44,7 +43,6 @@ function listMyFansByPage(pageIndex){
 
 /*+关注*/
 function withFocus(focus_user_id){
-	console.log("focus_user_id:"+focus_user_id);
 	var xhrhp=new XMLHttpRequest();
 	xhrhp.open("POST","/wlmtxt/User/User_followUser");
 	var formData=new FormData();
@@ -69,8 +67,11 @@ function withFocusAll(){
 	xhrhttp.open("POST","/wlmtxt/User/User_noticeAllMyFans");
 	xhrhttp.send(null);
 	xhrhttp.onreadystatechange=function(){
+		
 		if(xhrhttp.readyState==4&&xhrhttp.status==200){
-			if(xhrhttp.responseText=="1"){
+			var result=xhrhttp.responseText;
+			console.log("result:"+result);
+			if(result=="1"){
 				toastr.success("全部关注成功！");
 				listMyFansByPage(1);
 			}else{
