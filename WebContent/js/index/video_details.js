@@ -1,3 +1,4 @@
+var user_id="";
 function getWorksDetailVO() {
 	// 视频id
 	var video_id = $("#video_id").html();
@@ -10,8 +11,10 @@ function getWorksDetailVO() {
 	xhr_detail.send(formData_detail);
 	xhr_detail.onreadystatechange = function() {
 		if (xhr_detail.readyState == 4 && xhr_detail.status == 200) {
-			console.log(1);
 			var detail_response = JSON.parse(xhr_detail.responseText);
+			//用户id
+			user_id=detail_response.worksDTO.user.user_id;
+			console.log("user_id:" + user_id);
 			/*------视频*/
 			// 标题
 			$("#detail_video_title").html(
@@ -237,35 +240,48 @@ function getWorksDetailVO() {
 		}
 	});
 	/*---------关注-----------*/
-	/*
-	 * // 查询是否关注 function checkFocus() { var formData_check_focus=new
-	 * FormData();
-	 * formData_check_focus.append("accept_works.works_id",video_id); var
-	 * focus_xhr = new XMLHttpRequest(); focus_xhr.open("POST",
-	 * "/wlmtxt/Works/Works_isLiked"); focus_xhr.send(formData_check_focus);
-	 * focus_xhr.onreadystatechange = function() { if (focus_xhr.readyState == 4 &&
-	 * focus_xhr.status == 200) { if (focus_xhr.responseText == "1") {
-	 * console.log("已关注！"); $("#focus_btn").addClass("has_focus");
-	 * $("#focus_btn").removeClass("not_focus");
-	 * 
-	 * $("#collect_number").html(parseInt($collect_number) + 1); } else {
-	 * console.log("未关注！"); $("#focus_btn").addClass("not_focus");
-	 * $("#focus_btn").removeClass("has_focus"); } } } }
-	 */
-	/*
-	 * checkFocus(); $("#focus_btn").click(function() { var formData_focus=new
-	 * FormData(); formData_focus.append("accept_works.works_id",video_id); var
-	 * xhr = new XMLHttpRequest(); xhr.open("POST", "/wlmtxt/Works/Works");
-	 * xhr.send(formData_focus); xhr.onreadystatechange = function() { if
-	 * (xhr.readyState == 4 && xhr.status == 200) { if (xhr.responseText == "1") {
-	 * console.log("关注或取消成功！"); checkFocus(); } } } });
-	 */
-	/*---------评论-----------*/
-	/*
-	 * function setDiscuss() { }
-	 * 
-	 * setDiscuss();
-	 */
+	 // 查询是否关注 
+	function checkFocus() {
+		var formData_check_focus = new FormData();
+		console.log("checkfocus:"+user_id);
+		formData_check_focus.append("accpet_user.user_id", user_id);
+		var focus_xhr = new XMLHttpRequest();
+		focus_xhr.open("POST", "/wlmtxt/User/User_isFollowedUser");
+		focus_xhr.send(formData_check_focus);
+		focus_xhr.onreadystatechange = function() {
+			if (focus_xhr.readyState == 4 && focus_xhr.status == 200) {
+				if (focus_xhr.responseText == "1") {
+					console.log("已关注！");
+					$("#focus_btn").html("已关注")
+					$("#focus_btn").addClass("has_focus");
+					$("#focus_btn").removeClass("not_focus");
+				} else {
+					console.log("未关注！");
+					$("#focus_btn").html("+ 关注")
+					$("#focus_btn").addClass("not_focus");
+					$("#focus_btn").removeClass("has_focus");
+				}
+			}
+		}
+	}
+
+	checkFocus();
+	$("#focus_btn").click(function() {
+		console.log("focus:"+user_id);
+		var formData_focus = new FormData();
+		formData_focus.append("accpet_user.user_id", user_id);
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "/wlmtxt/User/User_followUser");
+		xhr.send(formData_focus);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				if (xhr.responseText == "1") {
+					console.log("关注或取消成功！");
+					checkFocus();
+				}
+			}
+		}
+	});
 
 	/*--------删除评论-----------*/
 	$(".comment_delete").click(function() {
