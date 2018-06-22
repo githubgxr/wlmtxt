@@ -965,4 +965,10 @@ public class WorksAction extends ActionSupport {
 		return myWorksVO;
 	}
 
+	/**
+	 * 跳转到他人的动态和资料
+	 */
+	public String personal_cente_other_data() {
+		return "personal_cente_other_data";
+	}
 }
