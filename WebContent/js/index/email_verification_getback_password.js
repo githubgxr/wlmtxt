@@ -35,27 +35,25 @@ document.getElementById("get_password_check_btn").onclick = function() {
 			formData.append("accpet_user.user_mail", user_email);
 			formData.append("accpet_user.user_password", input_new_password);
 			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "/wlmtxt/User/User_registerUser");
+			xhr.open("POST", "/wlmtxt/User/User_modifiedPasswordBehindForgetted");
 			xhr.send(formData);
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
-					console.log("user_name:" + user_name);
 					console.log("user_email:" + user_email);
-					console.log("user_password:" + user_password);
-
+					console.log("user_password:" + input_new_password);
 					if (xhr.responseText == "1") {
 						console.log("修改成功！");
 						var str = '<img src="/wlmtxt/img/check_success.png" width="50px" style="float:left;margin:0 0 0 120px;"/>'
 						str += '<h4 style="width:300px;line-height:50px;float:left;margin:0 30px;">恭喜您，修改密码成功！</h4>';
 						str += '<button class="button_a" style="width:200px;height:50px;float:left;margin:50px 170px;font-size:16px;" onclick="checkSuccess()">返回首页</button>';
-						$("#register_check_div").html(str);
+						$("#get_password_check_div").html(str);
 
 					} else {
 						console.log("修改失败！");
 						var str = '<img src="/wlmtxt/img/check_failed.png" width="50px" style="float:left;margin:0 0 0 120px;"/>'
 						str += '<h4 style="width:300px;line-height:50px;float:left;margin:0 30px;">很遗憾，修改密码失败！</h4>';
 						str += '<button class="button_a" style="width:200px;height:50px;float:left;margin:50px 170px;font-size:16px;" onclick="checkSuccess()">返回首页</button>';
-						$("#register_check_div").html(str);
+						$("#get_password_check_div").html(str);
 						return false;
 					}
 				}

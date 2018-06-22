@@ -12,13 +12,14 @@ function checkLogin() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			if (xhr.responseText == "2") {
 				console.log("未登录！");
+				if_login = false;
+				console.log("if_login：" + if_login);
 				// 点击头像栏显示登录注册
 				$(".img_user").attr("src", "/wlmtxt/img/user.jpg");
 				$("#user_img").click(function() {
 					show_login_div();
 				});
-				if_login = false;
-				console.log("if_login：" + if_login);
+				
 				/* 登录前 */
 				/* 未登录时点击用户操作的关注、点赞、收藏等出现登录框 */
 				$(".user_operate").click(function() {
@@ -26,20 +27,24 @@ function checkLogin() {
 					show_login_div();
 				});
 			} else {
+				if_login = true;
+				console.log("if_login：" + if_login);
+				/* 登录后 */
+				removeTest();
+				$("#user_img").click(function() {
+					window.location.href="/wlmtxt/view/personal_center/personal_center_personal_data.jsp";
+				});
+				
 				var userInfo = JSON.parse(xhr.responseText);
 				user_id = userInfo.user_id;
 				console.log("已登录！");
 				console.log("user_mail:" + userInfo.user_mail);
 				$(".login_show").css("display", "block");
 				// 记得修改为用户的头像
-
 				$(".img_user").attr(
 						"src",
 						"/wlmtxt/Works/Works_getImg?imgName="
 								+ userInfo.user_avatar);
-				if_login = true;
-				console.log("if_login：" + if_login);
-				/* 登录后 */
 				/** *********************个人资料*********************************** */
 				// 用户名
 				$(".div_username").html(userInfo.user_username);
