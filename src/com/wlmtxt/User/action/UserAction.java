@@ -424,6 +424,8 @@ public class UserAction extends ActionSupport {
 	 * 
 	 * @throws IOException
 	 * 
+	 * @author gxr
+	 * 
 	 * XXX
 	 */
 	public void followUser() throws IOException {
@@ -433,6 +435,7 @@ public class UserAction extends ActionSupport {
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		if (null != loginUser) {
 			if (userService.isFollowedUser(loginUser.getUser_id(), accpet_user.getUser_id())) {
+				// 取关
 				String result = userService.removeFollow(loginUser, accpet_user);
 				if ("1".equals(result)) {
 					pw.write("1");
@@ -440,6 +443,7 @@ public class UserAction extends ActionSupport {
 					pw.write("2");
 				}
 			} else {
+				// 关注
 				String followResult = userService.followUser(accpet_user.getUser_id(), loginUser);
 				if ("1".equals(followResult)) {
 					pw.write("1");
@@ -505,7 +509,9 @@ public class UserAction extends ActionSupport {
 	}
 	
 	/**
-	 * 关注单个粉丝
+	 * XXX此方法被重复，不要用
+	 * 
+	 * 关注单个粉丝，
 	 * 
 	 * 返回，1-成功，2-失败
 	 * 
