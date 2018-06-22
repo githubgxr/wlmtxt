@@ -24,6 +24,8 @@ public class MyAttentionVO {
 	// 是否有下一页
 	private boolean haveNextPage = false;
 
+	private List<FollowDTO> followDTO;
+
 	public List<FollowDTO> getFollowDTO() {
 		return followDTO;
 	}
@@ -31,8 +33,6 @@ public class MyAttentionVO {
 	public void setFollowDTO(List<FollowDTO> followDTO) {
 		this.followDTO = followDTO;
 	}
-
-	private List<FollowDTO> followDTO;
 
 	@Override
 	public String toString() {
@@ -88,6 +88,5 @@ public class MyAttentionVO {
 	public void setHaveNextPage(boolean haveNextPage) {
 		this.haveNextPage = haveNextPage;
 	}
-
 
 }
