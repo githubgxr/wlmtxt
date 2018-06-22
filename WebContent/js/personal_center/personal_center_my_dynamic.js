@@ -100,21 +100,3 @@ function deleteWork(video_delete_btn_id){
 		}
 	}
 }
-//删除全部作品
-	function deleteAllMyWork(){
-		var xhr_delete_all=new XMLHttpRequest();
-		xhr_delete_all.open("POST","/wlmtxt/Works/Works_deleteAllMyWorks");
-		xhr_delete_all.send(null);
-		xhr_delete_all.onreadystatechange=function(){
-			if(xhr_delete_all.readyState==4&&xhr_delete_all.status==200){
-				if(xhr_delete_all.responseText=="1"){
-					toastr.success("清除全部成功！");
-					listMyDynamicByPage(1);
-				}else{
-					toastr.error("清除全部失败！");
-					return false;
-				}
-			}
-		}
-	}
-	

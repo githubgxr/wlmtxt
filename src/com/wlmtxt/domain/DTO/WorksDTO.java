@@ -18,62 +18,11 @@ public class WorksDTO {
 	private List<KeyWordDTO> keyWordDTOList;
 	// 作者
 	private wlmtxt_user user;
-	// 播放数
-	private int playNum;
-	// 点赞数
-	private int likeNum;
-	// 收藏数
-	private int collectNum;
-	// 评论数
-	private int discussNum;
-	// 热度
-	private int hot;
 
 	@Override
 	public String toString() {
 		return "WorksDTO [works=" + works + ", secondMenu=" + secondMenu + ", firstMenu=" + firstMenu
-				+ ", keyWordDTOList=" + keyWordDTOList + ", user=" + user + ", playNum=" + playNum + ", likeNum="
-				+ likeNum + ", collectNum=" + collectNum + ", discussNum=" + discussNum + ", hot=" + hot + "]";
-	}
-
-	public int getPlayNum() {
-		return playNum;
-	}
-
-	public void setPlayNum(int playNum) {
-		this.playNum = playNum;
-	}
-
-	public int getLikeNum() {
-		return likeNum;
-	}
-
-	public void setLikeNum(int likeNum) {
-		this.likeNum = likeNum;
-	}
-
-	public int getCollectNum() {
-		return collectNum;
-	}
-
-	public void setCollectNum(int collectNum) {
-		this.collectNum = collectNum;
-	}
-
-	public int getDiscussNum() {
-		return discussNum;
-	}
-
-	public void setDiscussNum(int discussNum) {
-		this.discussNum = discussNum;
-	}
-
-	public int getHot() {
-		return hot;
-	}
-
-	public void setHot(int hot) {
-		this.hot = hot;
+				+ ", keyWordDTOList=" + keyWordDTOList + ", user=" + user + "]";
 	}
 
 	public wlmtxt_user getUser() {
