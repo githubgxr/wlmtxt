@@ -30,6 +30,8 @@ public interface WorksDao {
 
 	void removeCollect(String collect_user_id, String collect_works_id) throws Exception;
 
+	void deletePlayHistory(String play_history_id);
+
 	void saveCollect(wlmtxt_collect new_collect) throws Exception;
 
 	wlmtxt_download_history findDownloadHistoryBy_download_history_user_id_And_download_history_works_id(
@@ -65,6 +67,8 @@ public interface WorksDao {
 	int getMyWorksTotalRecords(String user_id);
 
 	void deleteMyWorks(String works_id);
+
+	void deleteAllMyHistory(String userID);
 
 	wlmtxt_works getWorksByID(String works_id);
 

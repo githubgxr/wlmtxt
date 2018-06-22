@@ -40,6 +40,10 @@ public interface WorksService {
 
 	public MyWorksVO getMyWorksVO(String user_id, MyWorksVO myWorksVO);
 
+	public void deletePlayHistory(String play_history_id);
+
+	public void deleteAllMyHistory(String userID);
+
 	public void deleteMyWorks(String works_id);
 
 	public WorksDetailVO getWorksDetailVO(String works_id);

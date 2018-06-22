@@ -346,6 +346,22 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
+	public void deletePlayHistory() throws IOException {
+		worksService.deletePlayHistory(play_history.getPlay_history_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
+	public void deleteAllMyHistory() throws IOException {
+
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		worksService.deleteAllMyHistory(user.getUser_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("1");
+	}
+
 	/**
 	 * 删除单个我的上传作品
 	 * 

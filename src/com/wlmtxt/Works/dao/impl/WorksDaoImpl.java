@@ -407,6 +407,22 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public void deletePlayHistory(String play_history_id) {
+		String hql = "delete from wlmtxt_play_history  where play_history_id = '" + play_history_id + "'";
+		Query query = getSession().createQuery(hql);
+		query.executeUpdate();
+
+	}
+
+	@Override
+	public void deleteAllMyHistory(String userID) {
+		String hql = "delete from wlmtxt_play_history  where play_history_user_id = '" + userID + "'";
+		Query query = getSession().createQuery(hql);
+		query.executeUpdate();
+
+	}
+
+	@Override
 	public void removeCollect(String collect_user_id, String collect_works_id) throws Exception {
 		String hql = "delete from wlmtxt_collect  where collect_user_id = '" + collect_user_id
 				+ "' and collect_works_id='" + collect_works_id + "'";

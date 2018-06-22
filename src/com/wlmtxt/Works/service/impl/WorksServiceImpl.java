@@ -166,6 +166,18 @@ public class WorksServiceImpl implements WorksService {
 	};
 
 	@Override
+	public void deletePlayHistory(String play_history_id) {
+		worksDao.deletePlayHistory(play_history_id);
+
+	}
+
+	@Override
+	public void deleteAllMyHistory(String userID) {
+		worksDao.deleteAllMyHistory(userID);
+
+	}
+
+	@Override
 	public void deleteMyWorks(String works_id) {
 		worksDao.deleteMyWorks(works_id);
 
