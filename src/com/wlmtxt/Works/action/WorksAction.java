@@ -625,6 +625,9 @@ public class WorksAction extends ActionSupport {
 	/**
 	 * 统计用户粉丝数
 	 * 
+	 * 接收，accpet_user.user_id
+	 * 
+	 * 返回，数量
 	 * 
 	 * @date 2018年6月22日	下午4:41:12
 	 * 
@@ -643,7 +646,11 @@ public class WorksAction extends ActionSupport {
 	
 	/**
 	 * 统计我关注的用户数
+	  * 
+	 * 接收，accpet_user.user_id
 	 * 
+	 * 返回，数量
+	 *  
 	 * @date 2018年6月22日	下午4:43:31
 	 * 
 	 * @author gxr
