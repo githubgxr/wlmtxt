@@ -22,12 +22,11 @@
 					<div class="sidebar_user_head">
 						<!--用户头像-->
 						<div class="user_img">
-							<img class="img_user" src="<%=basePath%>img/user.jpg" />
+							<img class="img_user sidebar_img_user" src="<%=basePath%>img/user.jpg" />
 						</div>
 						<!--用户名-->
-						<div class="user_name">熊熊熊</div>
-						<div class="user_signature">
-							你都在愤怒光和热uwnbtghwiognvbhorityunbgyhoitgmb
+						<div class="user_name sidebar_user_name"></div>
+						<div class="user_signature sidebar_user_signature">
 						</div>
 					</div>
 					<!--个性签名-->

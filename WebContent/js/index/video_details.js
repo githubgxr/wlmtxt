@@ -94,7 +94,7 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				
+				alert(detail_response.discussDTOList[numDiss].discuss.discuss_user_id==detail_response.worksDTO.user.user_id);
 				if(detail_response.discussDTOList[numDiss].discuss.discuss_user_id==detail_response.worksDTO.user.user_id){
 					comment_list_str += '<div class="comment_delete">删除</div>';
 				}
