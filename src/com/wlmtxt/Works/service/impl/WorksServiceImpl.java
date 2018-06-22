@@ -379,8 +379,13 @@ public class WorksServiceImpl implements WorksService {
 				worksDTOList.add(worksDTO);
 			}
 		}
-
-		dynamicVO.setWorksDTOList(worksDTOList.subList(0, 9));
+		// if (worksDTOList.size() < 9) {
+		// dynamicVO.setWorksDTOList(worksDTOList.subList(0, worksDTOList.size()
+		// - 1));
+		// } else {
+		// dynamicVO.setWorksDTOList(worksDTOList.subList(0, 9));
+		// }
+		dynamicVO.setWorksDTOList(worksDTOList);
 		//
 		return dynamicVO;
 	}
