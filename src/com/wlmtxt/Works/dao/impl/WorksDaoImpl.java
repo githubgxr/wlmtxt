@@ -441,7 +441,8 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public void deleteDisscuss(String discuss_id) {
-		String hql = "delete from wlmtxt_discuss  where discuss_id = '" + discuss_id + "'";
+		String hql = "delete from wlmtxt_discuss  where discuss_id = '" + discuss_id
+				+ "' OR discuss_father_discuss_id='" + discuss_id + "'";
 		Query query = getSession().createQuery(hql);
 		query.executeUpdate();
 
