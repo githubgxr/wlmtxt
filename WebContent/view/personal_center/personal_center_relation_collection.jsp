@@ -29,7 +29,7 @@
 					
 					<!--主体部分-->
 					<div class="llls_content list_container">
-						<ul id="relation_collection_list_container">
+						<ul id="relation_collection_list_container"  class="relation_list_container">
 							<%-- <li class="list_video_item">
 								<!--视频链接-->
 								<a class="video_list_item_wrap">

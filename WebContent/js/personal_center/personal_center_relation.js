@@ -3,7 +3,7 @@ function personal_center_relation(personal_center_relation_type){
 	xhr.open("POST","/wlmtxt/Works/Works_"+personal_center_relation_type);
 	xhr.send(null);
 	xhr.onreadystatechange=function(){
-		var relation_response=JSON.parse(xhr_day.responseText);
+		var relation_response=JSON.parse(xhr.responseText);
 		for(var i=0;i<relation_response.length;i++){
 			var relation_str='<li class="list_video_item">';
 			/*---视频链接---*/
@@ -36,7 +36,7 @@ function personal_center_relation(personal_center_relation_type){
 			 relation_str+='</div>';
 			 relation_str+='</div>';
 			 relation_str+='</li>';
-			$("#day_rank").append(relation_str);
+			$(".relation_list_container").append(relation_str);
 		}
 	}
 }
