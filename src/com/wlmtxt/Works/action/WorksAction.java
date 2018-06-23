@@ -29,6 +29,7 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.CollectDTO;
+import com.wlmtxt.domain.DTO.DiscussWorkDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
@@ -821,6 +822,22 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(likeDTOList));
+	}
+
+	/**
+	 * 根据当前登录用户获取评论作品列表的DTO
+	 * 
+	 * @throws IOException
+	 */
+	public void listMyDiscussWorkList() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<DiscussWorkDTO> listMyDiscussWorkList = worksService.listMyDiscussWorkList(user.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(listMyDiscussWorkList));
 	}
 
 	/**

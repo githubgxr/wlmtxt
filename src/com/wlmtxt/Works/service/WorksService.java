@@ -13,6 +13,7 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.CollectDTO;
+import com.wlmtxt.domain.DTO.DiscussWorkDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
@@ -137,5 +138,12 @@ public interface WorksService {
 
 	public DynamicVO getDynamicVO(String user_id);
 
+	/**
+	 * 
+	 * @param worksID
+	 * @return
+	 */
 	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID);
+
+	public List<DiscussWorkDTO> listMyDiscussWorkList(String user_id);
 }

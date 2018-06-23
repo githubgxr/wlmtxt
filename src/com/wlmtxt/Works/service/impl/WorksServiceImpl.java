@@ -23,6 +23,7 @@ import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
 import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.DiscussDTO;
+import com.wlmtxt.domain.DTO.DiscussWorkDTO;
 import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
@@ -124,6 +125,23 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public List<DiscussWorkDTO> listMyDiscussWorkList(String user_id) {
+		List<DiscussWorkDTO> listMyDiscussWorkList = new ArrayList<DiscussWorkDTO>();
+		List<wlmtxt_discuss> discussList = listDiscussByUserID(user_id);
+		for (wlmtxt_discuss discuss : discussList) {
+			DiscussWorkDTO discussDTO = new DiscussWorkDTO();
+			discussDTO.setDiscuss(discuss);
+			//
+			WorksDTO worksDTO = getWorksDTOByID(discuss.getDiscuss_id());
+			discussDTO.setWorksDTO(worksDTO);
+			//
+			listMyDiscussWorkList.add(discussDTO);
+		}
+
+		return listMyDiscussWorkList;
+	}
+
+	@Override
 	public List<LikeDTO> listMyLikeList(String user_id) {
 		List<LikeDTO> likeDTOList = new ArrayList<LikeDTO>();
 		List<wlmtxt_like> likeList = listLikeByUserID(user_id);
@@ -143,6 +161,10 @@ public class WorksServiceImpl implements WorksService {
 	@Override
 	public List<wlmtxt_collect> listMycollectList(String user_id) {
 		return worksDao.listMycollectList(user_id);
+	}
+
+	private List<wlmtxt_discuss> listDiscussByUserID(String user_id) {
+		return listDiscussByUserID(user_id);
 	}
 
 	@Override
@@ -471,11 +493,6 @@ public class WorksServiceImpl implements WorksService {
 		return worksDTOList;
 	}
 
-	/*
-	 * TODO(non-Javadoc)
-	 * 
-	 * @see com.wlmtxt.Works.service.WorksService#listWorksByKeyword()
-	 */
 	@Override
 	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID) {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
