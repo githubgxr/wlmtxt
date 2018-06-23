@@ -476,6 +476,7 @@ $("#focus_btn").click(function() {
 			if (xhr.responseText == "1") {
 				console.log("关注或取消成功！");
 				checkFocus();
+				getWorksDetailVO();
 			}
 		}
 	}
@@ -484,5 +485,5 @@ $("#focus_btn").click(function() {
 function toOtherData(other_id){
 	alert(other_id);
 	window.location.href="/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
-		+ detail_response.discussDTOList[numDiss].discuss.discuss_id;
+		+ other_id;
 }
