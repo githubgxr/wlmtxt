@@ -268,7 +268,7 @@ public class WorksDaoImpl implements WorksDao {
 		/*
 		 * 
 		 */
-		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
 				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
@@ -309,7 +309,7 @@ public class WorksDaoImpl implements WorksDao {
 		/*
 		 * 
 		 */
-		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
 				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
@@ -375,7 +375,7 @@ public class WorksDaoImpl implements WorksDao {
 		date2 = calendar2.getTime(); // 这个时间就是日期往后推一天的结果
 		stop_time = sdf.format(date2);
 
-		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
 				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();

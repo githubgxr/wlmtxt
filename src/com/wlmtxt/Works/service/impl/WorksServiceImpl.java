@@ -292,6 +292,9 @@ public class WorksServiceImpl implements WorksService {
 			}
 		}
 		if (worksDTOList.size() < 9) {
+			if (worksDTOList.size() == 0) {
+				return worksDTOList;
+			}
 			return worksDTOList.subList(0, worksDTOList.size() - 1);
 		} else {
 			return worksDTOList.subList(0, 9);
@@ -317,6 +320,9 @@ public class WorksServiceImpl implements WorksService {
 			}
 		}
 		if (worksDTOList.size() < 9) {
+			if (worksDTOList.size() == 0) {
+				return worksDTOList;
+			}
 			return worksDTOList.subList(0, worksDTOList.size() - 1);
 		} else {
 			return worksDTOList.subList(0, 9);
@@ -342,6 +348,9 @@ public class WorksServiceImpl implements WorksService {
 			}
 		}
 		if (worksDTOList.size() < 9) {
+			if (worksDTOList.size() == 0) {
+				return worksDTOList;
+			}
 			return worksDTOList.subList(0, worksDTOList.size() - 1);
 		} else {
 			return worksDTOList.subList(0, 9);
