@@ -29,6 +29,9 @@ function listMyDynamicByPage(pageIndex){
 				 wddt_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+wddt_response.worksDTOList[i].works.works_id+'">';
 				 wddt_str+='<div class="video_cover">';
 				 wddt_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +wddt_response.worksDTOList[i].works.works_cover +'"/>';
+				 wddt_str+=' <div class="category_name">';
+				 wddt_str+=wddt_response.worksDTOList[i].secondMenu.second_menu_name;
+				 wddt_str+='</div>';
 				 wddt_str+='<div class="video_overplay"></div>';
 				 wddt_str+='<div class="video_play"></div>';
 				 wddt_str+='</div>';

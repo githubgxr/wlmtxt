@@ -13,7 +13,9 @@ import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.CollectDTO;
+import com.wlmtxt.domain.DTO.DiscussWorkDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
+import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
@@ -117,11 +119,14 @@ public interface WorksService {
 	 * @param notification_type
 	 * @param notification_content
 	 */
-	public void addNotification(String notification_user_id, String notification_type, String notification_content);
+	public void addNotification(String notification_user_id, String notification_type, String notification_content,
+			String notification_work);
 
 	public int totalFansNum(wlmtxt_user loginUser);
 
 	public int totalFollowingNum(wlmtxt_user loginUser);
+
+	public List<NotificationDTO> listUserNotificationDTO(String user_id);
 
 	public List<wlmtxt_notification> listUserNotification(String user_id);
 
@@ -143,4 +148,6 @@ public interface WorksService {
 	 * @return
 	 */
 	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID);
+
+	public List<DiscussWorkDTO> listMyDiscussWorkList(String user_id);
 }
