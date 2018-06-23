@@ -44,17 +44,17 @@
 						<div class="question-hover-dialog">按照主播获得的送礼人数排名</div>
 					</div> -->
 					<!--数据时间段  -->
-					<div class="exchange-tab">
+					<!-- <div class="exchange-tab">
 						<a data-table="popular" data-time="now" class="active">本日</a> <a
 							data-table="popular" data-time="past">上日</a>
-					</div>
+					</div> -->
 				</div>
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
 					<ul class="ps ps--active-y" id="day_rank"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
-						<li class="rank_list_video_item">
+						<%-- <li class="rank_list_video_item">
 							<!-- 							<div class="rank_video_number" >1</div> --> <a
 							class="video_list_item_wrap">
 								<div class="video_cover">
@@ -80,7 +80,7 @@
 										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
 								</div>
 							</div>
-						</li>
+						</li> --%>
 					</ul>
 				</div>
 
@@ -99,17 +99,17 @@
 						<div class="question-hover-dialog">按照主播获得的送礼人数排名</div>
 					</div> -->
 					<!--数据时间段  -->
-					<div class="exchange-tab">
+					<!-- <div class="exchange-tab">
 						<a data-table="popular" data-time="now" class="active">本周</a> <a
 							data-table="popular" data-time="past">上周</a>
-					</div>
+					</div> -->
 				</div>
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
 					<ul class="ps ps--active-y" id="week_rank"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
-						<li class="rank_list_video_item">
+						<%-- <li class="rank_list_video_item">
 							<!-- 							<div class="rank_video_number" >1</div> --> <a
 							class="video_list_item_wrap">
 								<div class="video_cover">
@@ -135,7 +135,7 @@
 										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
 								</div>
 							</div>
-						</li>
+						</li> --%>
 
 					</ul>
 				</div>
@@ -155,17 +155,17 @@
 						<div class="question-hover-dialog">按照主播获得的送礼人数排名</div>
 					</div> -->
 					<!--数据时间段  -->
-					<div class="exchange-tab">
+					<!-- <div class="exchange-tab">
 						<a data-table="popular" data-time="now" class="active">本月</a> <a
 							data-table="popular" data-time="past">上月</a>
-					</div>
+					</div> -->
 				</div>
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
 					<ul class="ps ps--active-y" id="month_rank"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
-						<li class="rank_list_video_item">
+						<%-- <li class="rank_list_video_item">
 							<!-- 							<div class="rank_video_number" >1</div> --> <a
 							class="video_list_item_wrap">
 								<div class="video_cover">
@@ -191,7 +191,7 @@
 										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
 								</div>
 							</div>
-						</li>
+						</li> --%>
 
 					</ul>
 				</div>
