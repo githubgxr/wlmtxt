@@ -26,8 +26,8 @@
 					<jsp:include page="/personal_center_relation_nav.jsp" flush="true"></jsp:include>
 					<!--主体部分-->
 					<div class="llls_content list_container">
-						<ul id="relation_appreciates_list_container" class="relation_list_container">
-							<li class="list_video_item">
+						<ul id="relation_appreciates_list_container">
+							<%-- <li class="list_video_item">
 								<!--视频链接-->
 								<a class="video_list_item_wrap">
 									<div class="video_cover">
@@ -58,7 +58,7 @@
 								<div class="video_options">
 									<a class="video_delete_btn">取消点赞</a>
 								</div>
-							</li>
+							</li> --%>
 
 						</ul>
 
@@ -98,8 +98,6 @@
 				}
 			});
 		</script>
-		<script type="text/javascript">
-		personal_center_relation("listMyLikeList");
-		</script>
+		<script type="text/javascript" src="<%=basePath%>js/personal_center/personal_center_relation_appreciates.js"></script>
 	</body>
 </html>
