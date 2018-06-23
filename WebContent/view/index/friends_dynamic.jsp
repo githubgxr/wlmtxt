@@ -20,7 +20,7 @@
 <body>
 	<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
-		<div class="wlmtxt_container">
+		<div class="wlmtxt_container" style="width: 600px;margin: 0 calc( ( 100% - 600px ) / 2  );">
 			<!--浏览历史头部-->
 			<div class="llls_header list_header">
 				<i class="header_line" style="float: left;"></i>
