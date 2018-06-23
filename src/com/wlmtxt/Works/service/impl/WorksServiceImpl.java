@@ -113,9 +113,10 @@ public class WorksServiceImpl implements WorksService {
 		List<wlmtxt_collect> collecteList = listMycollectList(user_id);
 		for (wlmtxt_collect collect : collecteList) {
 			CollectDTO collectDTO = new CollectDTO();
+			//
 			collectDTO.setCollect(collect);
 			//
-			WorksDTO worksDTO = getWorksDTOByID(collect.getCollect_id());
+			WorksDTO worksDTO = getWorksDTOByID(collect.getCollect_works_id());
 			collectDTO.setWorksDTO(worksDTO);
 			//
 			collectDTOList.add(collectDTO);
