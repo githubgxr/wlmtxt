@@ -31,10 +31,10 @@
 		</div>
 		<!-- 所有榜 -->
 		<div class="rank-column">
-		
+
 			<!--电影榜  -->
 			<div class="rank-table-content rank-table-movie"
-				style="margin: 20px 25px; float: left; padding: 20px; background-color: #ffffff;border-radius: 5px;">
+				style="margin: 20px 25px; float: left; padding: 20px; background-color: #ffffff; border-radius: 5px;">
 				<!--榜头  -->
 				<div class="rank-table-header">
 					<!--一级分类名  -->
@@ -54,13 +54,11 @@
 				<div class="rank-table-body">
 					<ul class="ps ps--active-y"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">
-
 									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
+									<div class="category_name">分类</div>
 									<div class="video_overplay"></div>
 									<div class="video_play"></div>
 								</div> <!--视频信息-->
@@ -70,7 +68,57 @@
 									<!--浏览量-->
 									<div class="video_number">425</div>
 									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
+
+								</div>
+						</a> <!--视频分类-->
+							<div class="video_label">
+								<div class="video_label_content">
+									<a class="video_label_item">绝地求生</a> <a
+										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								</div>
+							</div>
+						</li>
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
+								<div class="video_cover">
+									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
+									<div class="category_name">分类</div>
+									<div class="video_overplay"></div>
+									<div class="video_play"></div>
+								</div> <!--视频信息-->
+								<div class="video_info">
+									<!--标题-->
+									<div class="video_title">德科恶女合家福好地方好地方</div>
+									<!--浏览量-->
+									<div class="video_number">425</div>
+									<!--用户名-->
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
+
+								</div>
+						</a> <!--视频分类-->
+							<div class="video_label">
+								<div class="video_label_content">
+									<a class="video_label_item">绝地求生</a> <a
+										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								</div>
+							</div>
+						</li>
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
+								<div class="video_cover">
+									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
+									<div class="category_name">分类</div>
+									<div class="video_overplay"></div>
+									<div class="video_play"></div>
+								</div> <!--视频信息-->
+								<div class="video_info">
+									<!--标题-->
+									<div class="video_title">德科恶女合家福好地方好地方</div>
+									<!--浏览量-->
+									<div class="video_number">425</div>
+									<!--用户名-->
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
 
 								</div>
 						</a> <!--视频分类-->
@@ -82,124 +130,15 @@
 							</div>
 						</li>
 
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
 					</ul>
 				</div>
 
 				<!--电影榜  -->
-				
+
 			</div>
-<!--电影榜  -->
+			<!--电影榜  -->
 			<div class="rank-table-content rank-table-movie"
-				style="margin: 20px 25px; float: left; padding: 20px; background-color: #ffffff;border-radius: 5px;">
+				style="margin: 20px 25px; float: left; padding: 20px; background-color: #ffffff; border-radius: 5px;">
 				<!--榜头  -->
 				<div class="rank-table-header">
 					<!--一级分类名  -->
@@ -219,13 +158,11 @@
 				<div class="rank-table-body">
 					<ul class="ps ps--active-y"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">
-
 									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
+									<div class="category_name">分类</div>
 									<div class="video_overplay"></div>
 									<div class="video_play"></div>
 								</div> <!--视频信息-->
@@ -235,7 +172,57 @@
 									<!--浏览量-->
 									<div class="video_number">425</div>
 									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
+
+								</div>
+						</a> <!--视频分类-->
+							<div class="video_label">
+								<div class="video_label_content">
+									<a class="video_label_item">绝地求生</a> <a
+										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								</div>
+							</div>
+						</li>
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
+								<div class="video_cover">
+									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
+									<div class="category_name">分类</div>
+									<div class="video_overplay"></div>
+									<div class="video_play"></div>
+								</div> <!--视频信息-->
+								<div class="video_info">
+									<!--标题-->
+									<div class="video_title">德科恶女合家福好地方好地方</div>
+									<!--浏览量-->
+									<div class="video_number">425</div>
+									<!--用户名-->
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
+
+								</div>
+						</a> <!--视频分类-->
+							<div class="video_label">
+								<div class="video_label_content">
+									<a class="video_label_item">绝地求生</a> <a
+										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								</div>
+							</div>
+						</li>
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
+								<div class="video_cover">
+									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
+									<div class="category_name">分类</div>
+									<div class="video_overplay"></div>
+									<div class="video_play"></div>
+								</div> <!--视频信息-->
+								<div class="video_info">
+									<!--标题-->
+									<div class="video_title">德科恶女合家福好地方好地方</div>
+									<!--浏览量-->
+									<div class="video_number">425</div>
+									<!--用户名-->
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
 
 								</div>
 						</a> <!--视频分类-->
@@ -247,124 +234,15 @@
 							</div>
 						</li>
 
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
 					</ul>
 				</div>
 
 				<!--电影榜  -->
-				
+
 			</div>
 			<!--电影榜  -->
 			<div class="rank-table-content rank-table-movie"
-				style="margin: 20px 25px; float: left; padding: 20px; background-color: #ffffff;border-radius: 5px;">
+				style="margin: 20px 25px; float: left; padding: 20px; background-color: #ffffff; border-radius: 5px;">
 				<!--榜头  -->
 				<div class="rank-table-header">
 					<!--一级分类名  -->
@@ -384,13 +262,11 @@
 				<div class="rank-table-body">
 					<ul class="ps ps--active-y"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">
-
 									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
+									<div class="category_name">分类</div>
 									<div class="video_overplay"></div>
 									<div class="video_play"></div>
 								</div> <!--视频信息-->
@@ -400,7 +276,57 @@
 									<!--浏览量-->
 									<div class="video_number">425</div>
 									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
+
+								</div>
+						</a> <!--视频分类-->
+							<div class="video_label">
+								<div class="video_label_content">
+									<a class="video_label_item">绝地求生</a> <a
+										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								</div>
+							</div>
+						</li>
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
+								<div class="video_cover">
+									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
+									<div class="category_name">分类</div>
+									<div class="video_overplay"></div>
+									<div class="video_play"></div>
+								</div> <!--视频信息-->
+								<div class="video_info">
+									<!--标题-->
+									<div class="video_title">德科恶女合家福好地方好地方</div>
+									<!--浏览量-->
+									<div class="video_number">425</div>
+									<!--用户名-->
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
+
+								</div>
+						</a> <!--视频分类-->
+							<div class="video_label">
+								<div class="video_label_content">
+									<a class="video_label_item">绝地求生</a> <a
+										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								</div>
+							</div>
+						</li>
+						<li class="list_video_item">
+							<!--视频链接--> <a class="video_list_item_wrap">
+								<div class="video_cover">
+									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
+									<div class="category_name">分类</div>
+									<div class="video_overplay"></div>
+									<div class="video_play"></div>
+								</div> <!--视频信息-->
+								<div class="video_info">
+									<!--标题-->
+									<div class="video_title">德科恶女合家福好地方好地方</div>
+									<!--浏览量-->
+									<div class="video_number">425</div>
+									<!--用户名-->
+									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
 
 								</div>
 						</a> <!--视频分类-->
@@ -412,120 +338,11 @@
 							</div>
 						</li>
 
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
-						<li class="rank_list_video_item">
-							<!-- 							<div class="rank_video_number" >1</div> --> <a
-							class="video_list_item_wrap">
-								<div class="video_cover">
-
-									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-
-									<div class="video_overplay"></div>
-									<div class="video_play"></div>
-								</div> <!--视频信息-->
-								<div class="video_info">
-									<!--标题-->
-									<div class="video_title">德科恶女合家福好地方好地方</div>
-									<!--浏览量-->
-									<div class="video_number">425</div>
-									<!--用户名-->
-									<div class="video_username">熊啊熊自己的収点击上课借记卡嗯嗯嗯上课了</div>
-
-								</div>
-						</a> <!--视频分类-->
-							<div class="video_label">
-								<div class="video_label_content">
-									<a class="video_label_item">绝地求生</a> <a
-										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
-								</div>
-							</div>
-						</li>
 					</ul>
 				</div>
 
 				<!--电影榜  -->
-				
+
 			</div>
 
 

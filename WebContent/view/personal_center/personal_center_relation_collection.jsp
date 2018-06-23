@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
 		<link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
 		<link rel="stylesheet" href="<%=basePath%>css/lyq/ywxg_collection.css" />
+		<link rel="stylesheet" href="<%=basePath%>css/xzt.css" />
 	</head>
 	<body>
 		<div class="wlmtxt_main">
@@ -34,6 +35,7 @@
 								<a class="video_list_item_wrap">
 									<div class="video_cover">
 										<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
+										<div class="category_name">分类</div>
 										<div class="video_overplay"></div>
 										<div class="video_play"></div>
 									</div>
@@ -42,7 +44,7 @@
 										<!--标题-->
 										<div class="video_title">德科恶女合家福好地方好地方</div>
 										<!--浏览量-->
-										<div class="video_number">425</div>
+										<div class="video_hot">425</div>
 										<!--用户名-->
 										<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
 
