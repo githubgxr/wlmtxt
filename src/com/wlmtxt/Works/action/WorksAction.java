@@ -119,8 +119,9 @@ public class WorksAction extends ActionSupport {
 			inputStream = new FileInputStream(file);
 		}
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		worksService.addPlayHistoryByFileName(worksName, user.getUser_id());
-
+		if (user != null) {
+			worksService.addPlayHistoryByFileName(worksName, user.getUser_id());
+		}
 		return "getFile";
 	}
 
@@ -177,6 +178,21 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(num + "");
+	}
+
+	/**
+	 * 根据关键词和分类推荐
+	 * 
+	 * @throws IOException
+	 */
+	public void listWorksByKeyword() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorksByKeyword();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
 	}
 
 	/**
@@ -684,7 +700,7 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.countLikeNum(accept_works.getWorks_id());
 		pw.write(num);
 	}
-	
+
 	/**
 	 * 统计用户粉丝数
 	 * 
@@ -692,13 +708,15 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * 返回，数量
 	 * 
-	 * @date 2018年6月22日	下午4:41:12
+	 * @date 2018年6月22日 下午4:41:12
 	 * 
 	 * @author gxr
 	 * 
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void totalFansNum() throws IOException {
+		// wlmtxt_user loginUser = (wlmtxt_user)
+		// ActionContext.getContext().getSession().get("loginResult");
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
@@ -706,19 +724,19 @@ public class WorksAction extends ActionSupport {
 		int num = worksService.totalFansNum(loginUser);
 		pw.write(String.valueOf(num));
 	}
-	
+
 	/**
 	 * 统计我关注的用户数
-	  * 
+	 * 
 	 * 接收，accpet_user.user_id
 	 * 
 	 * 返回，数量
-	 *  
-	 * @date 2018年6月22日	下午4:43:31
+	 * 
+	 * @date 2018年6月22日 下午4:43:31
 	 * 
 	 * @author gxr
 	 * 
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void totalFollowingNum() throws IOException {
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");

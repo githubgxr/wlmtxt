@@ -1,7 +1,8 @@
 function getWorksDetailVO() {
 	checkLogin();
 	// 视频id
-	var video_id = $("#video_id").html();
+	var video_id = $.trim($("#video_id").html());
+
 	console.log("video_id:" + video_id);
 	// 获取视频的详细信息
 	var formData_detail = new FormData();
@@ -39,15 +40,25 @@ function getWorksDetailVO() {
 					"src",
 					"/wlmtxt/Works/Works_getVideo?worksName="
 							+ detail_response.worksDTO.works.works_name);
+
 			$("#detail_video_content").attr(
 					"poster",
 					"/wlmtxt/Works/Works_getImg?imgName="
 							+ detail_response.worksDTO.works.works_cover);
 			// 下载
+			// $("#download_a")
+			// .click(
+			// function() {
+			// window
+			// .location("/wlmtxt/Works/Works_getVideo?worksName="
+			// + detail_response.worksDTO.works.works_name);
+			// });
 			$("#download_a").attr(
 					"href",
 					"/wlmtxt/Works/Works_getVideo?worksName="
 							+ detail_response.worksDTO.works.works_name);
+			$("#download_a").attr("download",
+					"" + detail_response.worksDTO.works.works_name);
 
 			/*------用户*/
 			//获取关注量
@@ -88,25 +99,24 @@ function getWorksDetailVO() {
 			$("#detail_user_bio").html(detail_response.worksDTO.user.user_bio);
 			// 查询是否关注
 			checkFocus();
-			//推荐信息列表
-			var xhr_tj=new XMLHttpRequest();
-			xhr_tj.open("POST","");
+			// 推荐信息列表
+			var xhr_tj = new XMLHttpRequest();
+			xhr_tj.open("POST", "");
 			xhr_tj.send(null);
-			xhr_tj.onreadystatechange=function(){
-				if(xhr_tj.readyState==4&&xhr_tj.status==200){
-					var ti_response=JSON.parse(xhr_tj.responseText);
+			xhr_tj.onreadystatechange = function() {
+				if (xhr_tj.readyState == 4 && xhr_tj.status == 200) {
+					var ti_response = JSON.parse(xhr_tj.responseText);
 					for (var numDiss = 0; numDiss < detail_response.discussDTOList.length; numDiss++) {
-					var tj_str='<div class="tj" style="float: left;">';
-					tj_str+='<img src="<%=basePath%>css/zb/img/4.png" />';
-					tj_str+='<div style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">';
-					tj_str+='</div>';
-					tj_str+='</div>';
-					$("#tj_list").append(tj_str);
+						var tj_str = '<div class="tj" style="float: left;">';
+						tj_str += '<img src="<%=basePath%>css/zb/img/4.png" />';
+						tj_str += '<div style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">';
+						tj_str += '</div>';
+						tj_str += '</div>';
+						$("#tj_list").append(tj_str);
 					}
 				}
 			}
-			
-			
+
 			// 评论
 
 			var comment_list = document.getElementsByClassName("comment_list");
@@ -140,16 +150,17 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				console.log("user_id_detail:"+user_id);
+				console.log("user_id_detail:" + user_id);
 				if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == user_id) {
+					comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
 					comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
 							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
 							+ '">删除</div>';
-				}else{
+
+				} else {
 					comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
 				}
 
-				
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
@@ -177,38 +188,61 @@ function getWorksDetailVO() {
 						}
 					})
 			// 回复评论
-			$(".comment_response_operate").click(function() {
-				var discuss_id=$(this).siblings(".comment_delete").attr("id");
-				$("#mymodal").modal("toggle");
-				$("#check_response_btn").click(function(){
-					if($("#responseComment").val==""){
-						toastr.error("请输入回复内容！");
-						return false;
-					}
-					var formData_response=new FormData();
-					formData_response.append("accpet_discuss.discuss_content",$("#responseComment").val());
-					formData_response.append("accpet_discuss.discuss_father_discuss_id",discuss_id);
-					var xhr_response=new XMLHttpRequest();
-					xhr_response.open("POST","/wlmtxt/Works/Works_discussWorks");
-					xhr_response.send(formData_response);
-					xhr_response.onreadystatechange=function(){
-						if(xhr_response.readyState==4&&xhr_response.status==200){
-							if (xhr_response.responseText == "1") {
+			$(".comment_response_operate")
+					.click(
+							function() {
+								var discuss_id = $(this).siblings(
+										".comment_delete").attr("id");
+								$("#mymodal").modal("toggle");
+								$("#check_response_btn")
+										.click(
+												function() {
+													if ($("#responseComment").val == "") {
+														toastr
+																.error("请输入回复内容！");
+														return false;
+													}
+													var formData_response = new FormData();
+													formData_response
+															.append(
+																	"accpet_discuss.discuss_content",
+																	$(
+																			"#responseComment")
+																			.val());
+													formData_response
+															.append(
+																	"accpet_discuss.discuss_father_discuss_id",
+																	discuss_id);
+													var xhr_response = new XMLHttpRequest();
+													xhr_response
+															.open("POST",
+																	"/wlmtxt/Works/Works_discussWorks");
+													xhr_response
+															.send(formData_response);
+													xhr_response.onreadystatechange = function() {
+														if (xhr_response.readyState == 4
+																&& xhr_response.status == 200) {
+															if (xhr_response.responseText == "1") {
 
-								$("#mymodal").css("display","none");
+																$("#mymodal")
+																		.css(
+																				"display",
+																				"none");
 
-								toastr.success("评论成功！");
+																toastr
+																		.success("评论成功！");
 
-								getWorksDetailVO();
+																getWorksDetailVO();
 
-							} else {
-								toastr.error("评论失败！");
-								return false;
-							}
-						}
-					}
-				});
-			});
+															} else {
+																toastr
+																		.error("评论失败！");
+																return false;
+															}
+														}
+													}
+												});
+							});
 		}
 	}
 
@@ -355,6 +389,7 @@ getWorksDetailVO();
 
 function video_comment_btn_click() {
 	var video_id = $("#video_id").html();
+	video_id = $.trim(video_id);
 	var comment_text = $("#textarea_comment").val();
 	if (comment_text == "") {
 		toastr.error("请输入评论内容！");

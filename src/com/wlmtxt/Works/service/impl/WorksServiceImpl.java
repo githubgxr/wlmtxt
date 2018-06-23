@@ -449,6 +449,26 @@ public class WorksServiceImpl implements WorksService {
 		return worksDTOList;
 	}
 
+	/*
+	 * TODO(non-Javadoc)
+	 * 
+	 * @see com.wlmtxt.Works.service.WorksService#listWorksByKeyword()
+	 */
+	@Override
+	public List<WorksDTO> listWorksByKeyword() {
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		// List<wlmtxt_works> worksList1 = worksDao.listWorksByKeyword();
+		// List<wlmtxt_works> worksList2 = worksDao.listWorksByMenu();
+		// worksList1.addAll(worksList2);
+		//
+		// for (wlmtxt_works works : worksList1) {
+		// WorksDTO worksDTO = new WorksDTO();
+		// worksDTO = getWorksDTOByID(works.getWorks_id());
+		// worksDTOList.add(worksDTO);
+		// }
+		return worksDTOList;
+	}
+
 	@Override
 	public List<WorksDTO> listWorksAll() {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
@@ -720,9 +740,9 @@ public class WorksServiceImpl implements WorksService {
 					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name());
 		} else {
 			// 回复
-			wlmtxt_discuss reply = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
-			addNotification(putWorks.getWorks_user_id(), "5",
-					putMan.getUser_username() + "回复了您的评论" + reply.getDiscuss_content());
+			wlmtxt_discuss discuss = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
+			addNotification(discuss.getDiscuss_user_id(), "5",
+					putMan.getUser_username() + "回复了您的评论" + discuss.getDiscuss_content());
 		}
 
 		/*
