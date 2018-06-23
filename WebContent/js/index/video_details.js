@@ -244,8 +244,9 @@ function getWorksDetailVO() {
 																$("#mymodal").modal("toggle");
 																toastr
 																		.success("回复评论成功！");
-																document.getElementById("responseComment").innerHTML="";
+																
 																getWorksDetailVO();
+																document.getElementById("responseComment").innerHTML="";
 
 															} else {
 																toastr
