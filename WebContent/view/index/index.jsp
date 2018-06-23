@@ -48,9 +48,9 @@
 								style="width: 660px; height: 40px;margin:5px 0;">
 								<!--标题-->
 								<div class="video_title"
-									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+									style="font-size: 12px; margin-left: 5px;width:600px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 660px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -88,7 +88,7 @@
 								<div class="video_title"
 									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 220px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -118,7 +118,7 @@
 								<div class="video_title"
 									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 220px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -345,7 +345,7 @@
 								<div class="video_title"
 									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -375,7 +375,7 @@
 								<div class="video_title"
 									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -405,7 +405,7 @@
 								<div class="video_title"
 									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -435,7 +435,7 @@
 								<div class="video_title"
 									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -465,7 +465,7 @@
 								<div class="video_title"
 									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -495,7 +495,7 @@
 								<div class="video_title"
 									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 								<!--浏览量-->
-								<div class="video_number">425</div>
+								<div class="video_hot">425</div>
 								<!--用户名-->
 								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
 							</div>
@@ -525,43 +525,53 @@
 			<div style="color: #999; padding: 0 20px;">
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star" style="color: #1cd388;"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star" style="color:#1cd388;"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star" style="color: #1cd388;"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star" style="color: #1cd388;"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star" style="color: #1cd388;"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star" style="color: #1cd388;"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
-					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生
+					<div class="video_hot" style="float:right;">425</div>
 				</div>
 			</div>
 		</div>

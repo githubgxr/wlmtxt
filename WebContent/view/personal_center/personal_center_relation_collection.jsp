@@ -30,7 +30,7 @@
 					<!--主体部分-->
 					<div class="llls_content list_container">
 						<ul id="relation_collection_list_container">
-							<%-- <li class="list_video_item">
+							<li class="list_video_item">
 								<!--视频链接-->
 								<a class="video_list_item_wrap">
 									<div class="video_cover">
@@ -62,7 +62,7 @@
 								<div class="video_options">
 									<a class="video_delete_btn">取消收藏</a>
 								</div>
-							</li> --%>
+							</li>
 						</ul>
 
 					</div>

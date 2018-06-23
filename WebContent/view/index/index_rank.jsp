@@ -44,15 +44,15 @@
 						<div class="question-hover-dialog">按照主播获得的送礼人数排名</div>
 					</div> -->
 					<!--数据时间段  -->
-					<!-- <div class="exchange-tab">
+					<div class="exchange-tab">
 						<a data-table="popular" data-time="now" class="active">本日</a> <a
 							data-table="popular" data-time="past">上日</a>
-					</div> -->
+					</div>
 				</div>
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
-					<ul class="ps ps--active-y" id="day_rank"
+					<ul class="ps ps--active-y"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
 						<li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
@@ -148,15 +148,15 @@
 						<div class="question-hover-dialog">按照主播获得的送礼人数排名</div>
 					</div> -->
 					<!--数据时间段  -->
-					<!-- <div class="exchange-tab">
+					<div class="exchange-tab">
 						<a data-table="popular" data-time="now" class="active">本周</a> <a
 							data-table="popular" data-time="past">上周</a>
-					</div> -->
+					</div>
 				</div>
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
-					<ul class="ps ps--active-y" id="week_rank"
+					<ul class="ps ps--active-y"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
 						<li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
@@ -223,6 +223,7 @@
 									<div class="video_number">425</div>
 									<!--用户名-->
 									<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
+
 								</div>
 						</a> <!--视频分类-->
 							<div class="video_label">
@@ -251,15 +252,15 @@
 						<div class="question-hover-dialog">按照主播获得的送礼人数排名</div>
 					</div> -->
 					<!--数据时间段  -->
-					<!-- <div class="exchange-tab">
+					<div class="exchange-tab">
 						<a data-table="popular" data-time="now" class="active">本月</a> <a
 							data-table="popular" data-time="past">上月</a>
-					</div> -->
+					</div>
 				</div>
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
-					<ul class="ps ps--active-y" id="month_rank"
+					<ul class="ps ps--active-y"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
 						<li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
@@ -355,7 +356,6 @@
 
 
 	<jsp:include page="/foot.jsp" flush="true"></jsp:include>
-	<script type="text/javascript" src="<%=basePath%>js/index/index_rank.js"></script>
 </body>
 
 </html>
