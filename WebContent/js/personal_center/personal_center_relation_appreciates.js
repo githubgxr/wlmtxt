@@ -1,4 +1,9 @@
 $(function (){
+	var list_video_item = document.getElementsByClassName("list_video_item");
+	var long = list_video_item.length;
+	for (var num = 0; num < long; num++) {
+		list_video_item[0].parentNode.removeChild(list_video_item[0]);
+	}
 	var xhr=new XMLHttpRequest();
 	xhr.open("POST","/wlmtxt/Works/Works_listMyLikeList");
 	xhr.send(null);

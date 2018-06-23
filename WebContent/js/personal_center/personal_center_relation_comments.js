@@ -1,9 +1,15 @@
 $(function (){
+	var list_video_item = document.getElementsByClassName("list_video_item");
+	var long = list_video_item.length;
+	for (var num = 0; num < long; num++) {
+		list_video_item[0].parentNode.removeChild(list_video_item[0]);
+	}
 	var xhr=new XMLHttpRequest();
 	xhr.open("POST","/wlmtxt/Works/Works_listMyDiscussWorkList");
 	xhr.send(null);
 	xhr.onreadystatechange=function(){
 		var relation_comments_response=JSON.parse(xhr.responseText);
+		
 		for(var i=0;i<relation_comments_response.length;i++){
 			var relation_comments_str='<li class="list_video_item">';
 			/*---视频链接---*/

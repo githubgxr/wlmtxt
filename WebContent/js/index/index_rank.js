@@ -2,6 +2,11 @@ $(function(){
 	listRankByPage();
 });
 function listRankByPage(){
+	var list_video_item = document.getElementsByClassName("list_video_item");
+	var long = list_video_item.length;
+	for (var num = 0; num < long; num++) {
+		list_video_item[0].parentNode.removeChild(list_video_item[0]);
+	}
 	/*------------------日榜------------------*/
 	var xhr_day=new XMLHttpRequest();
 	xhr_day.open("POST","/wlmtxt/Works/Works_listWorks10OrderHotByDay");
@@ -21,6 +26,9 @@ function listRankByPage(){
 				 day_rank_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+day_rank_response[i].works.works_id+'">';
 				 day_rank_str+='<div class="video_cover">';
 				 day_rank_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +day_rank_response[i].works.works_cover +'"/>';
+				 day_rank_str+=' <div class="category_name">';
+				 day_rank_str+=day_rank_response[i].secondMenu.second_menu_name;
+				 day_rank_str+='</div>';
 				 day_rank_str+='<div class="video_overplay"></div>';
 				 day_rank_str+='<div class="video_play"></div>';
 				 day_rank_str+='</div>';
@@ -70,6 +78,9 @@ function listRankByPage(){
 				week_rank_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+week_rank_response[i].works.works_id+'">';
 				week_rank_str+='<div class="video_cover">';
 				week_rank_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +week_rank_response[i].works.works_cover +'"/>';
+				week_rank_str+=' <div class="category_name">';
+				week_rank_str+=week_rank_response[i].secondMenu.second_menu_name;
+				week_rank_str+='</div>';
 				week_rank_str+='<div class="video_overplay"></div>';
 				week_rank_str+='<div class="video_play"></div>';
 				week_rank_str+='</div>';
@@ -119,6 +130,9 @@ function listRankByPage(){
 				month_rank_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+month_rank_response[i].works.works_id+'">';
 				month_rank_str+='<div class="video_cover">';
 				month_rank_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +month_rank_response[i].works.works_cover +'"/>';
+				month_rank_str+=' <div class="category_name">';
+				month_rank_str+=month_rank_response[i].secondMenu.second_menu_name;
+				month_rank_str+='</div>';
 				month_rank_str+='<div class="video_overplay"></div>';
 				month_rank_str+='<div class="video_play"></div>';
 				month_rank_str+='</div>';
