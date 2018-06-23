@@ -33,8 +33,8 @@
 
 					<!--关注量和粉丝量-->
 					<div class="sidebar_user_foot">
-						<div class="user_fans">关注<span class="sidebar_user_focus">0</span></div>
-						<div class="user_fans">粉丝<span class="sidebar_user_fans">0</span></div>
+						<div class="user_fans">关注<span class="sidebar_user_focus"></span></div>
+						<div class="user_fans">粉丝<span class="sidebar_user_fans"></span></div>
 					</div>
 				</div>
 			<div class="sidebar_head">

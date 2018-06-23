@@ -61,6 +61,18 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_works> listWorksByKeywordName(String keyword_name) {
+		String hql = " select works "
+				+ " from wlmtxt_works_keyword works_keyword,wlmtxt_keyword keyword,wlmtxt_works works "
+				+ " where ( works_keyword.works_keyword_id=keyword.keyword_id "
+				+ " and works_keyword.works_keyword_works_id=works_id " + " and keyword.keyword_name='" + keyword_name
+				+ "') " + " order by works.works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_works> workList = query.list();
+		return workList;
+	}
+
+	@Override
 	public List<wlmtxt_works_keyword> listKeyWordByByWorksID(String worksID) {
 		String hql = " from wlmtxt_works_keyword  where works_keyword_works_id='" + worksID
 				+ "' order by works_keyword_gmt_create desc";
@@ -256,7 +268,7 @@ public class WorksDaoImpl implements WorksDao {
 		/*
 		 * 
 		 */
-		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
 				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
@@ -297,7 +309,7 @@ public class WorksDaoImpl implements WorksDao {
 		/*
 		 * 
 		 */
-		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
 				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
@@ -363,7 +375,7 @@ public class WorksDaoImpl implements WorksDao {
 		date2 = calendar2.getTime(); // 这个时间就是日期往后推一天的结果
 		stop_time = sdf.format(date2);
 
-		String hql = " from wlmtxt_works where works_passed='1' where works_gmt_create >= '" + start_time
+		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
 				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
@@ -441,7 +453,8 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public void deleteDisscuss(String discuss_id) {
-		String hql = "delete from wlmtxt_discuss  where discuss_id = '" + discuss_id + "'";
+		String hql = "delete from wlmtxt_discuss  where discuss_id = '" + discuss_id
+				+ "' OR discuss_father_discuss_id='" + discuss_id + "'";
 		Query query = getSession().createQuery(hql);
 		query.executeUpdate();
 

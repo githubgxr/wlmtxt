@@ -142,6 +142,9 @@ img:hover {
 	overflow: hidden;
 	height: 20px;
 }
+.comment_user_name:hover{
+	cursor:pointer;
+}
 .comment_list_content_right{
 	float: right; width: 820px;
 }

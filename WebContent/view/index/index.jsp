@@ -13,11 +13,16 @@
 <title></title>
 <link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
+<!--------------------------------------------------------------------------------->
+<link rel="stylesheet" href="<%=basePath%>css/swiper.min.css">
+<script src="<%=basePath%>js/swiper.min.js"></script>
+<!--------------------------------------------------------------------------------->
 </head>
 
 <body style="margin: 0; padding: 0; background-color: #f6f6f6;">
 	<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 	<!--页面上部主体-->
+	
 	<div
 		style="width: 960px; height: 576px; background-color: #FFFFFF; padding: 20px; margin: 10px 0 0 calc(( 100% - 960px)/2); border-radius: 5px; float: left;">
 		<div
@@ -560,7 +565,6 @@
 				</div>
 			</div>
 		</div>
-
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 
 		<script type="text/javascript">

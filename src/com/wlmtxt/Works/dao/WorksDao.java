@@ -132,7 +132,6 @@ public interface WorksDao {
 
 	void addNotification(wlmtxt_notification notification);
 
-
 	int totalFansNum(String user_id);
 
 	int totalFollowingNum(String user_id);
@@ -149,5 +148,13 @@ public interface WorksDao {
 
 	List<wlmtxt_user> listAttentionUser(String user_id);
 	// List<wlmtxt_works> listWorks10OrderHot();
+
+	/**
+	 * 根据关键词内容获取作品列表
+	 * 
+	 * @param keyword_name
+	 * @return
+	 */
+	List<wlmtxt_works> listWorksByKeywordName(String keyword_name);
 
 }
