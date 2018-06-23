@@ -2,7 +2,6 @@ function getWorksDetailVO() {
 	checkLogin();
 	// 视频id
 	var video_id = $.trim($("#video_id").html());
-
 	console.log("video_id:" + video_id);
 	// 获取视频的详细信息
 	var formData_detail = new FormData();
@@ -134,10 +133,10 @@ function getWorksDetailVO() {
 				/* <!--左边--> */
 				comment_list_str += '<div class="comment_list_content_left">';
 				/* <!--头像--> */
-				comment_list_str += '<img class="user_img comment_user_img" src="/wlmtxt/Works/Works_getImg?imgName='
+				comment_list_str += '<img onclick="toOtherData('+ detail_response.discussDTOList[numDiss].discuss.discuss_id+')" class="user_img comment_user_img to_other_data" src="/wlmtxt/Works/Works_getImg?imgName='
 						+ detail_response.discussDTOList[numDiss].user.user_avatar
 						+ '" />';
-				comment_list_str += '<div class="comment_user_name">'
+				comment_list_str += '<div class="comment_user_name to_other_data">'
 						+ detail_response.discussDTOList[numDiss].user.user_username
 						+ '</div>';
 				comment_list_str += ' </div>';
@@ -162,88 +161,104 @@ function getWorksDetailVO() {
 				}
 
 				comment_list_str += '</div>';
+				//回复
+				if(detail_response.discussDTOList[numDiss].replyDTO.length!==0){
+					for(var res=0;res<detail_response.discussDTOList[numDiss].replyDTO.length;res++){
+						comment_list_str +='<div class="comment_list_content_right" style="margin:10px 0;">';
+						comment_list_str +='<span style="color:#1cd388;">';
+						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].user.user_username;
+						comment_list_str +=':</span>';
+						comment_list_str +='<span>';
+						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_content;
+						comment_list_str +='</span>';
+						comment_list_str +='<span style="color:#bfbfbf;float:right;">';
+						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_gmt_create;
+						comment_list_str +='</span>';
+						comment_list_str +='</div>';
+						
+					}
+					
+				}
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				$("#comment_div").append(comment_list_str);
-
+				
 			}
-			// 删除评论
-			$(".comment_delete_operate").click(
-					function() {
-						var formData_comment_delete = new FormData();
-						formData_comment_delete.append(
-								"accpet_discuss.discuss_id", this.id);
-						var comment_delete_xhr = new XMLHttpRequest();
-						comment_delete_xhr.open("POST",
-								"/wlmtxt/Works/Works_deleteDisscuss");
-						comment_delete_xhr.send(formData_comment_delete);
-						comment_delete_xhr.onreadystatechange = function() {
-							if (comment_delete_xhr.readyState == 4
-									&& comment_delete_xhr.status == 200) {
-								if (comment_delete_xhr.responseText == "1") {
-									toastr.success("删除评论成功！");
-									getWorksDetailVO();
-								}
+		
+		}
+		// 删除评论
+		$(".comment_delete_operate").click(
+				function() {
+					var formData_comment_delete = new FormData();
+					formData_comment_delete.append(
+							"accpet_discuss.discuss_id", this.id);
+					var comment_delete_xhr = new XMLHttpRequest();
+					comment_delete_xhr.open("POST",
+							"/wlmtxt/Works/Works_deleteDisscuss");
+					comment_delete_xhr.send(formData_comment_delete);
+					comment_delete_xhr.onreadystatechange = function() {
+						if (comment_delete_xhr.readyState == 4
+								&& comment_delete_xhr.status == 200) {
+							if (comment_delete_xhr.responseText == "1") {
+								toastr.success("删除评论成功！");
+								getWorksDetailVO();
 							}
 						}
-					})
-			// 回复评论
-			$(".comment_response_operate")
-					.click(
-							function() {
-								var discuss_id = $(this).siblings(
-										".comment_delete").attr("id");
-								$("#mymodal").modal("toggle");
-								$("#check_response_btn")
-										.click(
-												function() {
-													if ($("#responseComment").val == "") {
-														toastr
-																.error("请输入回复内容！");
-														return false;
-													}
-													var formData_response = new FormData();
-													formData_response
-															.append(
-																	"accpet_discuss.discuss_content",
-																	$(
-																			"#responseComment")
-																			.val());
-													formData_response
-															.append(
-																	"accpet_discuss.discuss_father_discuss_id",
-																	discuss_id);
-													var xhr_response = new XMLHttpRequest();
-													xhr_response
-															.open("POST",
-																	"/wlmtxt/Works/Works_discussWorks");
-													xhr_response
-															.send(formData_response);
-													xhr_response.onreadystatechange = function() {
-														if (xhr_response.readyState == 4
-																&& xhr_response.status == 200) {
-															if (xhr_response.responseText == "1") {
+					}
+				})
+		// 回复评论
+		$(".comment_response_operate")
+				.click(
+						function() {
+							var discuss_id = $(this).siblings(
+									".comment_delete").attr("id");
+							$("#mymodal").modal("toggle");
+							$("#check_response_btn")
+									.click(
+											function() {
+												if ($("#responseComment").val == "") {
+													toastr
+															.error("请输入回复内容！");
+													return false;
+												}
+												var formData_response = new FormData();
+												formData_response
+														.append(
+																"accpet_discuss.discuss_content",
+																$(
+																		"#responseComment")
+																		.val());
+												formData_response
+														.append(
+																"accpet_discuss.discuss_father_discuss_id",
+																discuss_id);
+												var xhr_response = new XMLHttpRequest();
+												xhr_response
+														.open("POST",
+																"/wlmtxt/Works/Works_discussWorks");
+												xhr_response
+														.send(formData_response);
+												xhr_response.onreadystatechange = function() {
+													if (xhr_response.readyState == 4
+															&& xhr_response.status == 200) {
+														if (xhr_response.responseText == "1") {
+															document.getElementById("responseComment").innerHTML="";
+															$("#mymodal").modal("toggle");
+															toastr
+																	.success("回复评论成功！");
+															
+															getWorksDetailVO();
+															
 
-																$("#mymodal")
-																		.css(
-																				"display",
-																				"none");
-
-																toastr
-																		.success("评论成功！");
-
-																getWorksDetailVO();
-
-															} else {
-																toastr
-																		.error("评论失败！");
-																return false;
-															}
+														} else {
+															toastr
+																	.error("回复评论失败！");
+															return false;
 														}
 													}
-												});
-							});
-		}
+												}
+											});
+						});
 	}
 
 	/** *********************详情*********************************** */
@@ -463,7 +478,14 @@ $("#focus_btn").click(function() {
 			if (xhr.responseText == "1") {
 				console.log("关注或取消成功！");
 				checkFocus();
+				getWorksDetailVO();
 			}
 		}
 	}
 });
+//跳转到他人页面
+function toOtherData(other_id){
+	alert(other_id);
+	window.location.href="/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
+		+ other_id;
+}

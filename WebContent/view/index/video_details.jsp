@@ -21,7 +21,7 @@
 			<s:property value="accept_works.works_id" />
 		</div>
 		<!--隐藏的div，关注人id  -->
-		<div id="focus_user_id" style="display: none;"></div>
+		<div id="user_id" style="display: none;"></div>
 		<!--顶部-->
 		<div
 			style="float: left; background-color: #ffffff; padding: 0 20px; border-radius: 5px; margin: 20px 0 0 0;">
@@ -85,7 +85,7 @@
 					下载-->
 				<div style="margin: 10px 0 0 0;">
 					<div>
-						<a id="download_a" class="button_code user_operate button_a">
+						<a id="download_a" class="button_code  button_a">
 							<i class="fas fa-download"
 							style="width: 50px; float: left; line-height: 32px; text-align: left; margin: 0 0 0 -10px;">&nbsp;下载</i>
 							<div style="float: left;"></div>
