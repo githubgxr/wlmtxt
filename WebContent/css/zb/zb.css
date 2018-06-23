@@ -1,3 +1,7 @@
+.green_text:HOVER {
+	color: #1cd388;
+	
+}
 /*
  * 用户头像
  */
@@ -142,28 +146,36 @@ img:hover {
 	overflow: hidden;
 	height: 20px;
 }
-.comment_user_name:hover{
-	cursor:pointer;
+
+.comment_user_name:hover {
+	cursor: pointer;
 }
-.comment_list_content_right{
-	float: right; width: 820px;
+
+.comment_list_content_right {
+	float: right;
+	width: 820px;
 }
-.comment_text{
-margin: 0 0 10px 0; min-height: 80px;
+
+.comment_text {
+	margin: 0 0 10px 0;
+	min-height: 80px;
 }
-.comment_time{
-	height:20px;
+
+.comment_time {
+	height: 20px;
 	color: #bfbfbf;
-	float:left;
-	margin:0 50px 0 0;
+	float: left;
+	margin: 0 50px 0 0;
 }
-.comment_delete{
+
+.comment_delete {
 	color: #1cd388;
-	float:right;
-	margin:0 20px 0 0;
-	height:20px;
+	float: right;
+	margin: 0 20px 0 0;
+	height: 20px;
 }
-.comment_delete:hover{
+
+.comment_delete:hover {
 	text-decoration: underline;
-	cursor:pointer;
+	cursor: pointer;
 }
