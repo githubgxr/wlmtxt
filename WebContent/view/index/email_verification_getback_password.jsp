@@ -29,18 +29,23 @@
 			<div class="personal_info_details">
 				<div class="img_wrap_list" style="float:left;width:100%;margin:5px 0;">
 					<span style="float:left;width:160px;text-align: right;line-height: 30px;">新密码：</span>
-					<input type="text" class="input_xzt" id="input_new_password"
-						style="width: 350px;float:left;margin:0 0 0 10px;" placeholder="请输入新密码" />
+					<input type="password" class="input_xzt" id="input_new_password"
+						style="width: 350px;float:left;margin:0 0 0 10px;" placeholder="请输入新密码" oninput="checkPassword()" onblur="checkPassword()"/>
 				</div>
 				<div class="img_wrap_list" style="float:left;width:100%;margin:5px 0;">
 					<span style="float:left;width:160px;text-align: right;line-height: 30px;">确认新密码：</span>
-					<input type="text" class="input_xzt" id="input_new_repassword"
-						style="width: 350px;float:left;margin:0 0 0 10px;" placeholder="请确认新密码" />
+					<input type="password" class="input_xzt" id="input_new_repassword"
+						style="width: 350px;float:left;margin:0 0 0 10px;" placeholder="请确认新密码" oninput="checkRepassword()" onblur="checkRepassword()" />
+				</div>
+				<div class="img_wrap_list" style="float:left;width:100%;margin:5px 0;">
+					
+					<div  class="input_xzt" id="get_password_alert_div"
+						style="width: 350px;float:left;margin:0 0 0 170px;border:none;display:none;color:red;"></div>
 				</div>
 
 			</div>
 			<button id="get_password_check_btn" class="button_a"
-				style="width: 200px; height: 40px; margin: 20px 160px; font-size: 16px;">确认</button>
+				style="width: 200px; height: 40px; margin: 10px 170px; font-size: 16px;">确认</button>
 		</div>
 	</div>
 	<script type="text/javascript"

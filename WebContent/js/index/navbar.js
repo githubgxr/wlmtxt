@@ -559,3 +559,33 @@ function getBackPassword() {
 	}
 
 }
+//登录获取enter监听
+$("#login_div").bind("keydown",function(e){
+        // 兼容FF和IE和Opera    
+    var theEvent = e || window.event;    
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+    if (code == 13) {    
+        //回车执行查询
+            $("#login_button").click();
+        }    
+});
+//注册获取enter监听
+$("#register_div").bind("keydown",function(e){
+        // 兼容FF和IE和Opera    
+    var theEvent = e || window.event;    
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+    if (code == 13) {    
+        //回车执行查询
+            $("#register_button").click();
+        }    
+});
+//忘记密码获取enter监听
+$("#forget_password_div").bind("keydown",function(e){
+        // 兼容FF和IE和Opera    
+    var theEvent = e || window.event;    
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+    if (code == 13) {    
+        //回车执行查询
+            $("#forget_password_button").click();
+        }    
+});

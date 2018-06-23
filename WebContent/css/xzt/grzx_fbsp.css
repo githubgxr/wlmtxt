@@ -41,13 +41,13 @@
 
 #fbsp_main .fbsp_content .img_wrap {
 	width: cal(100% - 200px);
-	margin: 50px;
+	margin: 40px 50px;
 	float: left;
 }
 
 #fbsp_main .fbsp_content .img_wrap .img_wrap_list {
 	width: 100%;
-	margin: 15px 0;
+	margin: 25px 0;
 	float: left;
 }
 
@@ -124,7 +124,7 @@
 	margin-top: 20px;
 	position: relative;
 	width: 182px;
-	height: 142px;
+	/* height: 142px; */
 	overflow: hidden;
 }
 
