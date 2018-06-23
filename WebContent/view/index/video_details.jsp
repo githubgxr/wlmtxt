@@ -242,7 +242,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button id="check_response_btn" class="btn btn-success">确认回复</button>
+					<button id="check_response_btn" class="btn btn-success" onclick="check_response()">确认回复</button>
 				</div>
 			</div>
 		</div>

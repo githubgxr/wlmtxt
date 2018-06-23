@@ -1,3 +1,4 @@
+var discuss_id;
 function getWorksDetailVO() {
 	checkLogin();
 	// 视频id
@@ -60,37 +61,42 @@ function getWorksDetailVO() {
 					"" + detail_response.worksDTO.works.works_name);
 
 			/*------用户*/
-			//获取关注量
-			var formData_focus_num=new FormData();
-			formData_focus_num.append("accpet_user.user_id",detail_response.worksDTO.works.works_user_id);
-			var xhr_focus_num=new XMLHttpRequest();
-			xhr_focus_num.open("POST","/wlmtxt/Works/Works_totalFollowingNum");
+			// 获取关注量
+			var formData_focus_num = new FormData();
+			formData_focus_num.append("accpet_user.user_id",
+					detail_response.worksDTO.works.works_user_id);
+			var xhr_focus_num = new XMLHttpRequest();
+			xhr_focus_num.open("POST", "/wlmtxt/Works/Works_totalFollowingNum");
 			xhr_focus_num.send(formData_focus_num);
-			xhr_focus_num.onreadystatechange=function(){
-				if (xhr_focus_num.readyState == 4 && xhr_focus_num.status == 200) {
+			xhr_focus_num.onreadystatechange = function() {
+				if (xhr_focus_num.readyState == 4
+						&& xhr_focus_num.status == 200) {
 					$("#his_attention").html(xhr_focus_num.responseText);
-						}
-					}
-			//获取粉丝量
-			var formData_fans_num=new FormData();
-			formData_fans_num.append("accpet_user.user_id",detail_response.worksDTO.works.works_user_id);
-			var xhr_fans_num=new XMLHttpRequest();
-			xhr_fans_num.open("POST","/wlmtxt/Works/Works_totalFansNum");
+				}
+			}
+			// 获取粉丝量
+			var formData_fans_num = new FormData();
+			formData_fans_num.append("accpet_user.user_id",
+					detail_response.worksDTO.works.works_user_id);
+			var xhr_fans_num = new XMLHttpRequest();
+			xhr_fans_num.open("POST", "/wlmtxt/Works/Works_totalFansNum");
 			xhr_fans_num.send(formData_focus_num);
-			xhr_fans_num.onreadystatechange=function(){
+			xhr_fans_num.onreadystatechange = function() {
 				if (xhr_fans_num.readyState == 4 && xhr_fans_num.status == 200) {
 					$("#his_fans").html(xhr_fans_num.responseText);
-						}
-					}
+				}
+			}
 			// 头像
 			$("#detail_user_img").attr(
 					"src",
 					"/wlmtxt/Works/Works_getImg?imgName="
 							+ detail_response.worksDTO.user.user_avatar);
-			$("#detail_user_img").click(function(){
-				window.location.href="/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
-					+ detail_response.worksDTO.user.user_id;
-			})
+			$("#detail_user_img")
+					.click(
+							function() {
+								window.location.href = "/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
+										+ detail_response.worksDTO.user.user_id;
+							})
 			// 用户名
 			$("#detail_user_name").html(
 					detail_response.worksDTO.user.user_username);
@@ -133,7 +139,9 @@ function getWorksDetailVO() {
 				/* <!--左边--> */
 				comment_list_str += '<div class="comment_list_content_left">';
 				/* <!--头像--> */
-				comment_list_str += '<img onclick="toOtherData('+ detail_response.discussDTOList[numDiss].discuss.discuss_id+')" class="user_img comment_user_img to_other_data" src="/wlmtxt/Works/Works_getImg?imgName='
+				comment_list_str += '<img onclick="toOtherData('
+						+ detail_response.discussDTOList[numDiss].discuss.discuss_id
+						+ ')" class="user_img comment_user_img to_other_data" src="/wlmtxt/Works/Works_getImg?imgName='
 						+ detail_response.discussDTOList[numDiss].user.user_avatar
 						+ '" />';
 				comment_list_str += '<div class="comment_user_name to_other_data">'
@@ -149,116 +157,45 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				console.log("user_id_detail:" + user_id);
 				if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == user_id) {
-					comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
+					comment_list_str += '<div id="'
+							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
+							+ '" class="comment_delete comment_response_operate" onclick="response_operate(this)">回复</div>';
 					comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
 							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
-							+ '">删除</div>';
+							+ '" onclick="delete_operate(this)">删除</div>';
 
 				} else {
 					comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
 				}
 
 				comment_list_str += '</div>';
-				//回复
-				if(detail_response.discussDTOList[numDiss].replyDTO.length!==0){
-					for(var res=0;res<detail_response.discussDTOList[numDiss].replyDTO.length;res++){
-						comment_list_str +='<div class="comment_list_content_right" style="margin:10px 0;">';
-						comment_list_str +='<span style="color:#1cd388;">';
-						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].user.user_username;
-						comment_list_str +=':</span>';
-						comment_list_str +='<span>';
-						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_content;
-						comment_list_str +='</span>';
-						comment_list_str +='<span style="color:#bfbfbf;float:right;">';
-						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_gmt_create;
-						comment_list_str +='</span>';
-						comment_list_str +='</div>';
-						
+				// 回复
+				if (detail_response.discussDTOList[numDiss].replyDTO.length !== 0) {
+					for (var res = 0; res < detail_response.discussDTOList[numDiss].replyDTO.length; res++) {
+						comment_list_str += '<div class="comment_list_content_right" style="margin:10px 0;">';
+						comment_list_str += '<span style="color:#1cd388;">';
+						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].user.user_username;
+						comment_list_str += ':</span>';
+						comment_list_str += '<span>';
+						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_content;
+						comment_list_str += '</span>';
+						comment_list_str += '<span style="color:#bfbfbf;float:right;">';
+						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_gmt_create;
+						comment_list_str += '</span>';
+						comment_list_str += '</div>';
+
 					}
-					
+
 				}
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				$("#comment_div").append(comment_list_str);
-				
-			}
-		
-		}
-		// 删除评论
-		$(".comment_delete_operate").click(
-				function() {
-					var formData_comment_delete = new FormData();
-					formData_comment_delete.append(
-							"accpet_discuss.discuss_id", this.id);
-					var comment_delete_xhr = new XMLHttpRequest();
-					comment_delete_xhr.open("POST",
-							"/wlmtxt/Works/Works_deleteDisscuss");
-					comment_delete_xhr.send(formData_comment_delete);
-					comment_delete_xhr.onreadystatechange = function() {
-						if (comment_delete_xhr.readyState == 4
-								&& comment_delete_xhr.status == 200) {
-							if (comment_delete_xhr.responseText == "1") {
-								toastr.success("删除评论成功！");
-								getWorksDetailVO();
-							}
-						}
-					}
-				})
-		// 回复评论
-		$(".comment_response_operate")
-				.click(
-						function() {
-							var discuss_id = $(this).siblings(
-									".comment_delete").attr("id");
-							$("#mymodal").modal("toggle");
-							$("#check_response_btn")
-									.click(
-											function() {
-												if ($("#responseComment").val == "") {
-													toastr
-															.error("请输入回复内容！");
-													return false;
-												}
-												var formData_response = new FormData();
-												formData_response
-														.append(
-																"accpet_discuss.discuss_content",
-																$(
-																		"#responseComment")
-																		.val());
-												formData_response
-														.append(
-																"accpet_discuss.discuss_father_discuss_id",
-																discuss_id);
-												var xhr_response = new XMLHttpRequest();
-												xhr_response
-														.open("POST",
-																"/wlmtxt/Works/Works_discussWorks");
-												xhr_response
-														.send(formData_response);
-												xhr_response.onreadystatechange = function() {
-													if (xhr_response.readyState == 4
-															&& xhr_response.status == 200) {
-														if (xhr_response.responseText == "1") {
-															document.getElementById("responseComment").innerHTML="";
-															$("#mymodal").modal("toggle");
-															toastr
-																	.success("回复评论成功！");
-															
-															getWorksDetailVO();
-															
 
-														} else {
-															toastr
-																	.error("回复评论失败！");
-															return false;
-														}
-													}
-												}
-											});
-						});
+			}
+
+		}
+
 	}
 
 	/** *********************详情*********************************** */
@@ -483,9 +420,62 @@ $("#focus_btn").click(function() {
 		}
 	}
 });
-//跳转到他人页面
-function toOtherData(other_id){
-	alert(other_id);
-	window.location.href="/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
-		+ other_id;
+// 跳转到他人页面
+function toOtherData(other_id) {
+	window.location.href = "/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
+			+ other_id;
+}
+// 回复评论
+function response_operate(button) {
+	discuss_id = button.id;
+	$("#mymodal").modal("toggle");
+
+}
+// 确认回复
+function check_response() {
+	if ($("#responseComment").val == "") {
+		toastr.error("请输入回复内容！");
+		return false;
+	}
+	var formData_response = new FormData();
+	formData_response.append("accpet_discuss.discuss_content", $(
+			"#responseComment").val());
+	formData_response.append("accpet_discuss.discuss_father_discuss_id",
+			discuss_id);
+	var xhr_response = new XMLHttpRequest();
+	xhr_response.open("POST", "/wlmtxt/Works/Works_discussWorks");
+	xhr_response.send(formData_response);
+	xhr_response.onreadystatechange = function() {
+		if (xhr_response.readyState == 4 && xhr_response.status == 200) {
+			if (xhr_response.responseText == "1") {
+				document.getElementById("responseComment").innerHTML = "";
+				$("#mymodal").modal("toggle");
+				toastr.success("回复评论成功！");
+
+				getWorksDetailVO();
+
+			} else {
+				toastr.error("回复评论失败！");
+				return false;
+			}
+		}
+	}
+}
+
+// 删除评论
+function delete_operate(button) {
+	var formData_comment_delete = new FormData();
+	formData_comment_delete.append("accpet_discuss.discuss_id", button.id);
+	var comment_delete_xhr = new XMLHttpRequest();
+	comment_delete_xhr.open("POST", "/wlmtxt/Works/Works_deleteDisscuss");
+	comment_delete_xhr.send(formData_comment_delete);
+	comment_delete_xhr.onreadystatechange = function() {
+		if (comment_delete_xhr.readyState == 4
+				&& comment_delete_xhr.status == 200) {
+			if (comment_delete_xhr.responseText == "1") {
+				toastr.success("删除评论成功！");
+				getWorksDetailVO();
+			}
+		}
+	}
 }
