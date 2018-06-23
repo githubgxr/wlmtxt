@@ -27,6 +27,7 @@ import com.wlmtxt.domain.DTO.DiscussWorkDTO;
 import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
+import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.ReplyDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
@@ -205,13 +206,15 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public void addNotification(String notification_user_id, String notification_type, String notification_content) {
+	public void addNotification(String notification_user_id, String notification_type, String notification_content,
+			String notification_work) {
 		wlmtxt_notification notification = new wlmtxt_notification();
 		notification.setNotification_id(TeamUtil.getUuid());
 		//
 		notification.setNotification_user_id(notification_user_id);
 		notification.setNotification_type(notification_type);
 		notification.setNotification_content(notification_content);
+		notification.setNotification_works(notification_work);
 		//
 		String time = TeamUtil.getStringSecond();
 		notification.setNotification_gmt_create(time);
@@ -584,6 +587,24 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public List<NotificationDTO> listUserNotificationDTO(String user_id) {
+		List<NotificationDTO> notificationDTOList = new ArrayList<NotificationDTO>();
+		List<wlmtxt_notification> notificationList = listUserNotification(user_id);
+		for (wlmtxt_notification notification : notificationList) {
+			NotificationDTO notificationDTO = new NotificationDTO();
+			//
+			notificationDTO.setNotification(notification);
+			//
+			WorksDTO worksDTO = getWorksDTOByID(notification.getNotification_id());
+			notificationDTO.setWorksDTO(worksDTO);
+			//
+			notificationDTOList.add(notificationDTO);
+		}
+
+		return notificationDTOList;
+	}
+
+	@Override
 	public List<wlmtxt_notification> listUserNotification(String user_id) {
 		List<wlmtxt_notification> notificationList = worksDao.listUserNotification(user_id);
 
@@ -729,7 +750,7 @@ public class WorksServiceImpl implements WorksService {
 			// 查询作品
 			wlmtxt_works putWorks = worksDao.getWorksByID(works.getWorks_id());
 			addNotification(putWorks.getWorks_user_id(), "3",
-					putMan.getUser_username() + "喜欢了您的作品" + putWorks.getWorks_name());
+					putMan.getUser_username() + "喜欢了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
 			/*
 			 * 
 			 */
@@ -758,7 +779,7 @@ public class WorksServiceImpl implements WorksService {
 			// 查询作品
 			wlmtxt_works putWorks = worksDao.getWorksByID(accept_works.getWorks_id());
 			addNotification(putWorks.getWorks_user_id(), "2",
-					putMan.getUser_username() + "收藏了您的作品" + putWorks.getWorks_name());
+					putMan.getUser_username() + "收藏了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
 			/*
 			 * 
 			 */
@@ -800,12 +821,12 @@ public class WorksServiceImpl implements WorksService {
 		if (putWorks != null) {
 			// 评论
 			addNotification(putWorks.getWorks_user_id(), "4",
-					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name());
+					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
 		} else {
 			// 回复
 			wlmtxt_discuss discuss = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
 			addNotification(discuss.getDiscuss_user_id(), "5",
-					putMan.getUser_username() + "回复了您的评论" + discuss.getDiscuss_content());
+					putMan.getUser_username() + "回复了您的评论" + discuss.getDiscuss_content(), null);
 		}
 
 		/*
