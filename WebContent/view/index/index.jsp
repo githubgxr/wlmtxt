@@ -34,7 +34,7 @@
 							<div class="video_cover">
 								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
 									style="height: 385px; width: 660px;"/>
-								<div class="category_name">分类</div>
+								<div class="category_name" style="font-size:28px;">分类</div>
 								<div class="video_overplay" style="width: 660px; height: 385px;"></div>
 								<div class="video_play"
 									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
