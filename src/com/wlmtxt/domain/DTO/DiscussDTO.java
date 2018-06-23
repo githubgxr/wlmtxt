@@ -9,13 +9,13 @@ public class DiscussDTO {
 
 	wlmtxt_discuss discuss;
 
-	List<wlmtxt_discuss> reply;
+	List<ReplyDTO> replyDTO;
 
 	wlmtxt_user user;
 
 	@Override
 	public String toString() {
-		return "DiscussDTO [discuss=" + discuss + ", reply=" + reply + ", user=" + user + "]";
+		return "DiscussDTO [discuss=" + discuss + ", replyDTO=" + replyDTO + ", user=" + user + "]";
 	}
 
 	public wlmtxt_user getUser() {
@@ -34,12 +34,12 @@ public class DiscussDTO {
 		this.discuss = discuss;
 	}
 
-	public List<wlmtxt_discuss> getReply() {
-		return reply;
+	public List<ReplyDTO> getReplyDTO() {
+		return replyDTO;
 	}
 
-	public void setReply(List<wlmtxt_discuss> reply) {
-		this.reply = reply;
+	public void setReplyDTO(List<ReplyDTO> replyDTO) {
+		this.replyDTO = replyDTO;
 	}
 
 }
