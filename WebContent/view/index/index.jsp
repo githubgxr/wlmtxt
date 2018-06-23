@@ -11,6 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
+<link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
 <!--------------------------------------------------------------------------------->
 <link rel="stylesheet" href="<%=basePath%>css/swiper.min.css">
 <script src="<%=basePath%>js/swiper.min.js"></script>
@@ -22,48 +24,114 @@
 	<!--页面上部主体-->
 	
 	<div
-		style="width: 960px; height: 426px; background-color: #FFFFFF; padding: 20px; margin: 10px 0 0 calc(( 100% - 960px)/2); border-radius: 5px; float: left;">
+		style="width: 960px; height: 576px; background-color: #FFFFFF; padding: 20px; margin: 10px 0 0 calc(( 100% - 960px)/2); border-radius: 5px; float: left;">
 		<div
 			style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px; line-height: 36px;">
 			推荐</div>
 		<!--大推荐-->
 		<div id="dtj"
-			style="background-size:660px 330px ; background-image:url('<%=basePath%>css/zb/img/4.png'); height: 330px; width: 660px; float: left;">
-			<div style="margin: 280px 0 0 0; background-color: #fbfbfb; float: left; opacity: 0.5; width: 100%; height: 50px; line-height: 50px; color: #1cd388; padding: 0 20px;">小猪正在享受高空飞翔的快感</div>
-			<!-- <div style="margin: 10px 0 0 0;">
-					<div>
-						<a id="download_a" class="button_code user_operate button_a" href="/wlmtxt/Works/Works_getVideo?worksName=bd9ae373-9682-4839-b04c-cb2f9965ce64.mp4" download="trailer">
-							<i class="fas fa-download" style="width:50px;float:left;line-height:32px;text-align:left;margin:0 0 0 -10px;">&nbsp;下载</i>
-							<div style="float:left;"></div>
-						</a>
-						<div class="button_code user_operate button_a">
-							<i class="fas fa-download"
-								style="width: 50px; float: left; line-height: 32px; text-align: left; margin: 0 0 0 -10px;">&nbsp;下载</i>
+			style="background-size:660px 385px ; background-image:url('<%=basePath%>css/zb/img/4.png'); height: 330px; width: 660px; float: left;">
+			<ul id="llls_list_container">
+				<li class="index_list_video_item"
+						style="width: 660px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="height: 450px; width: 660px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="height: 385px; width: 660px;"/>
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 660px; height: 385px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								style="width: 660px; height: 40px;margin:5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 660px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label"  style="width: 660px; height: 40px;">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
 						</div>
-						<div class="dz_no user_operate" id="thumbs_number_div" style="float: right;">
-							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number">0</span>
-						</div>
-						<div class="dz_no user_operate" id="collect_number_div" style="float: right; margin: 0 20px;">
-							<i class="fas fa-heart"></i>&nbsp;收藏<span id="collect_number">0</span>
-						</div>
-						<div class="dz_no" id="play_number_div" style="float: right; margin: 0">
-							<i class="fas fa-play-circle"></i>&nbsp;播放<span id="play_number">1</span>
-						</div>
-					</div>
-				</div> -->
+					</li>
+			</ul>
 		</div>
 		<!--小推荐-->
 		<div style="height: 330px; width: 260px; float: right;">
 
 			<div
-				style="  margin: 0 0 20px 0;background-size:240px 155px ; background-image:url('<%=basePath%>css/zb/img/4.png'); height: 155px; width: 240px; float: right;">
-				<div
-					style="margin: 125px 0 0 0; background-color: #fbfbfb; float: right; opacity: 0.5; width: 100%; height: 30px; line-height: 30px; color: #1cd388; padding: 0 20px;">小猪正在享受高空飞翔的快感</div>
-			</div>
-			<div
-				style="background-size:240px 155px ; background-image:url('<%=basePath%>css/zb/img/4.png'); height: 155px; width: 240px; float: right;">
-				<div
-					style="margin: 125px 0 0 0; background-color: #fbfbfb; float: right; opacity: 0.5; width: 100%; height: 30px; line-height: 30px; color: #1cd388; padding: 0 20px;">小猪正在享受高空飞翔的快感</div>
+				style="margin: 0 0 70px 0; background-size: 240px 155px; height: 155px; width: 240px; float: right;">
+				<ul id="llls_list_container">
+					<li class="index_list_video_item"
+						style="width: 240px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="height: 200px; width: 240px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="width: 240px; height: 135px;" />
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 240px; height: 135px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								 style="width: 240px; height: 40px;margin:5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 220px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label"  style="width: 220px; height: 40px;">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
+						</div>
+					</li>
+					<li class="index_list_video_item"
+						style="width: 240px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="height: 200px; width: 240px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="width: 240px; height: 135px;" />
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 240px; height: 135px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								 style="width: 240px; height: 40px;margin:5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 220px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label"  style="width: 220px; height: 40px;">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
+						</div>
+					</li>
+					
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -76,41 +144,172 @@
 				class="fas fa-angle-double-right "></i></span>
 		</div>
 		<div>
-			<!--一个视频-->
-			<div class="tj" style="float: left;">
-				<img src="<%=basePath%>css/zb/img/4.png" />
-				<div
-					style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-					05【千夏】</div>
-			</div>
-			<!--一个视频-->
-			<div class="tj" style="float: left;">
-				<img src="<%=basePath%>css/zb/img/4.png" />
-				<div
-					style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-					05【千夏】</div>
-			</div>
-			<!--一个视频-->
-			<div class="tj" style="float: left;">
-				<img src="<%=basePath%>css/zb/img/4.png" />
-				<div
-					style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-					05【千夏】</div>
-			</div>
-			<!--一个视频-->
-			<div class="tj" style="float: left;">
-				<img src="<%=basePath%>css/zb/img/4.png" />
-				<div
-					style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-					05【千夏】</div>
-			</div>
-			<!--一个视频-->
-			<div class="tj" style="float: left;">
-				<img src="<%=basePath%>css/zb/img/4.png" />
-				<div
-					style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-					05【千夏】</div>
-			</div>
+			<ul id="llls_list_container">
+				<li class="index_list_video_item"
+					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					<!--视频链接--> <a class="video_list_item_wrap"
+					style="width: 160px; height: 160px;">
+						<div class="video_cover">
+							<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+								style="width: 160px; height: 100px;" />
+							<div class="category_name">分类</div>
+							<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+							<div class="video_play"
+								style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+						</div> <!--视频信息-->
+						<div class="video_info"
+							style="width: 160px; height: 40px; margin: 5px 0;">
+							<!--标题-->
+							<div class="video_title"
+								style="font-size: 12px; margin-left: 5px; width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							<!--用户名-->
+							<div class="video_username"
+								style="width: 90px; margin-top: -5px;">宠物女孩</div>
+							<!--发布时间-->
+							<div class="video_time"
+								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
+						</div>
+				</a> <!--视频分类-->
+					<div class="video_label">
+						<div class="video_label_content">
+							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+							<a class="video_label_item">绝地求生</a>
+						</div>
+					</div>
+				</li>
+				<li class="index_list_video_item"
+					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					<!--视频链接--> <a class="video_list_item_wrap"
+					style="width: 160px; height: 160px;">
+						<div class="video_cover">
+							<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+								style="width: 160px; height: 100px;" />
+							<div class="category_name">分类</div>
+							<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+							<div class="video_play"
+								style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+						</div> <!--视频信息-->
+						<div class="video_info"
+							style="width: 160px; height: 40px; margin: 5px 0;">
+							<!--标题-->
+							<div class="video_title"
+								style="font-size: 12px; margin-left: 5px; width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							<!--用户名-->
+							<div class="video_username"
+								style="width: 90px; margin-top: -5px;">宠物女孩</div>
+							<!--发布时间-->
+							<div class="video_time"
+								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
+						</div>
+				</a> <!--视频分类-->
+					<div class="video_label">
+						<div class="video_label_content">
+							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+							<a class="video_label_item">绝地求生</a>
+						</div>
+					</div>
+				</li>
+				
+				<li class="index_list_video_item"
+					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					<!--视频链接--> <a class="video_list_item_wrap"
+					style="width: 160px; height: 160px;">
+						<div class="video_cover">
+							<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+								style="width: 160px; height: 100px;" />
+							<div class="category_name">分类</div>
+							<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+							<div class="video_play"
+								style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+						</div> <!--视频信息-->
+						<div class="video_info"
+							style="width: 160px; height: 40px; margin: 5px 0;">
+							<!--标题-->
+							<div class="video_title"
+								style="font-size: 12px; margin-left: 5px; width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							<!--用户名-->
+							<div class="video_username"
+								style="width: 90px; margin-top: -5px;">宠物女孩</div>
+							<!--发布时间-->
+							<div class="video_time"
+								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
+						</div>
+				</a> <!--视频分类-->
+					<div class="video_label">
+						<div class="video_label_content">
+							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+							<a class="video_label_item">绝地求生</a>
+						</div>
+					</div>
+				</li>
+				
+				<li class="index_list_video_item"
+					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					<!--视频链接--> <a class="video_list_item_wrap"
+					style="width: 160px; height: 160px;">
+						<div class="video_cover">
+							<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+								style="width: 160px; height: 100px;" />
+							<div class="category_name">分类</div>
+							<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+							<div class="video_play"
+								style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+						</div> <!--视频信息-->
+						<div class="video_info"
+							style="width: 160px; height: 40px; margin: 5px 0;">
+							<!--标题-->
+							<div class="video_title"
+								style="font-size: 12px; margin-left: 5px; width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							<!--用户名-->
+							<div class="video_username"
+								style="width: 90px; margin-top: -5px;">宠物女孩</div>
+							<!--发布时间-->
+							<div class="video_time"
+								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
+						</div>
+				</a> <!--视频分类-->
+					<div class="video_label">
+						<div class="video_label_content">
+							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+							<a class="video_label_item">绝地求生</a>
+						</div>
+					</div>
+				</li>
+				
+				<li class="index_list_video_item"
+					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					<!--视频链接--> <a class="video_list_item_wrap"
+					style="width: 160px; height: 160px;">
+						<div class="video_cover">
+							<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+								style="width: 160px; height: 100px;" />
+							<div class="category_name">分类</div>
+							<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+							<div class="video_play"
+								style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+						</div> <!--视频信息-->
+						<div class="video_info"
+							style="width: 160px; height: 40px; margin: 5px 0;">
+							<!--标题-->
+							<div class="video_title"
+								style="font-size: 12px; margin-left: 5px; width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							<!--用户名-->
+							<div class="video_username"
+								style="width: 90px; margin-top: -5px;">宠物女孩</div>
+							<!--发布时间-->
+							<div class="video_time"
+								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
+						</div>
+				</a> <!--视频分类-->
+					<div class="video_label">
+						<div class="video_label_content">
+							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+							<a class="video_label_item">绝地求生</a>
+						</div>
+					</div>
+				</li>
+
+			</ul>
 		</div>
 	</div>
 
@@ -126,56 +325,198 @@
 					class="fas fa-sync-alt"></i>&nbsp;换一批</span>
 			</div>
 			<!--推荐列表-->
-			<div style="height: 320px;">
-				<!--一个视频-->
-				<div class="tj" style="float: left;">
-					<img src="<%=basePath%>css/zb/img/4.png" />
-					<div
-						style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-						05【千夏】</div>
-				</div>
-				<!--一个视频-->
-				<div class="tj" style="float: left;">
-					<img src="<%=basePath%>css/zb/img/4.png" />
-					<div
-						style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-						05【千夏】</div>
-				</div>
-				<!--一个视频-->
-				<div class="tj" style="float: left;">
-					<img src="<%=basePath%>css/zb/img/4.png" />
-					<div
-						style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-						05【千夏】</div>
-				</div>
-				<!--一个视频-->
-				<div class="tj" style="float: left;">
-					<img src="<%=basePath%>css/zb/img/4.png" />
-					<div
-						style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-						05【千夏】</div>
-				</div>
-				<!--一个视频-->
-				<div class="tj" style="float: left;">
-					<img src="<%=basePath%>css/zb/img/4.png" />
-					<div
-						style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-						05【千夏】</div>
-				</div>
-				<!--一个视频-->
-				<div class="tj" style="float: left;">
-					<img src="<%=basePath%>css/zb/img/4.png" />
-					<div
-						style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">【10月】樱花庄的宠物女孩
-						05【千夏】</div>
-				</div>
+			<div style="height: 420px;">
+				<ul id="llls_list_container">
+					<li class="index_list_video_item"
+						style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="width: 160px; height: 160px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="width: 160px; height: 100px;" />
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								style="width: 160px; height: 40px; margin: 5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
+						</div>
+					</li>
+					<li class="index_list_video_item"
+						style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="width: 160px; height: 160px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="width: 160px; height: 100px;" />
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								style="width: 160px; height: 40px; margin: 5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
+						</div>
+					</li>
+					<li class="index_list_video_item"
+						style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="width: 160px; height: 160px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="width: 160px; height: 100px;" />
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								style="width: 160px; height: 40px; margin: 5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
+						</div>
+					</li>
+					<li class="index_list_video_item"
+						style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="width: 160px; height: 160px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="width: 160px; height: 100px;" />
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								style="width: 160px; height: 40px; margin: 5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
+						</div>
+					</li>
+					<li class="index_list_video_item"
+						style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="width: 160px; height: 160px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="width: 160px; height: 100px;" />
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								style="width: 160px; height: 40px; margin: 5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
+						</div>
+					</li>
+					<li class="index_list_video_item"
+						style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+						<!--视频链接--> <a class="video_list_item_wrap"
+						style="width: 160px; height: 160px;">
+							<div class="video_cover">
+								<img class="video_img" src="<%=basePath%>css/zb/img/4.png"
+									style="width: 160px; height: 100px;" />
+								<div class="category_name">分类</div>
+								<div class="video_overplay" style="width: 160px; height: 100px;"></div>
+								<div class="video_play"
+									style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>
+							</div> <!--视频信息-->
+							<div class="video_info"
+								style="width: 160px; height: 40px; margin: 5px 0;">
+								<!--标题-->
+								<div class="video_title"
+									style="font-size: 12px; margin-left: 5px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+								<!--浏览量-->
+								<div class="video_number">425</div>
+								<!--用户名-->
+								<div class="video_username" style="width: 160px;">【10月】樱花庄的宠物女孩05【千夏】</div>
+							</div>
+					</a> <!--视频分类-->
+						<div class="video_label">
+							<div class="video_label_content">
+								<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								<a class="video_label_item">绝地求生</a>
+							</div>
+						</div>
+					</li>
+
+				</ul>
+
 			</div>
 
 		</div>
 		<!--推荐结束-->
 		<!--排行-->
 		<div
-			style="background-color: #ffffff; padding: 20px; border-radius: 5px; width: 340px; margin: 0 0 0 20px; height: 416px; float: left;">
+			style="background-color: #ffffff; padding: 20px; border-radius: 5px; width: 340px; margin: 0 0 0 20px; height: 516px; float: left;">
 			<div
 				style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px; line-height: 36px;">
 				<span>周榜</span> <span class="dz_no" style="float: right;">查看&nbsp;<i
@@ -193,6 +534,14 @@
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
 					<i class="fas fa-star" style="color: #1cd388;"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+				</div>
+				<div
+					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
+				</div>
+				<div
+					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
+					<i class="fas fa-star"></i>&nbsp;&nbsp;不管说什么都在摸鱼的秦先生什么也不知道吗
 				</div>
 				<div
 					style="line-height: 20px; height: 20px; overflow: hidden; margin: 0 0 20px 0;">
