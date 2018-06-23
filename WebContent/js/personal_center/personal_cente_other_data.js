@@ -94,6 +94,7 @@ function listOtherDynamicByPage(pageIndex,other_id){
 				 other_dynamic_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+other_dynamic_response.worksDTOList[i].works.works_id+'">';
 				 other_dynamic_str+='<div class="video_cover">';
 				 other_dynamic_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +other_dynamic_response.worksDTOList[i].works.works_cover +'"/>';
+				 other_dynamic_str+=' <div class="category_name">'+other_dynamic_response.worksDTOList[i].secondMenu.second_menu_name+'</div>';
 				 other_dynamic_str+='<div class="video_overplay"></div>';
 				 other_dynamic_str+='<div class="video_play"></div>';
 				 other_dynamic_str+='</div>';

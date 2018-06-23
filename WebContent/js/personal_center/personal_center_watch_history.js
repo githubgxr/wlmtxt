@@ -23,6 +23,7 @@ function listMyHistoryByPage(){
 				 llls_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+llls_response[i].worksDTO.works.works_id+'">';
 				 llls_str+='<div class="video_cover">';
 				 llls_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +llls_response[i].worksDTO.works.works_cover +'"/>';
+				 llls_str+=' <div class="category_name">'+llls_response[i].worksDTO.secondMenu.second_menu_name+'</div>';
 				 llls_str+='<div class="video_overplay"></div>';
 				 llls_str+='<div class="video_play"></div>';
 				 llls_str+='</div>';
