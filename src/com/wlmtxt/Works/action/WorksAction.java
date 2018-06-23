@@ -181,12 +181,12 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 根据关键词和分类推荐
+	 * 根据关键词和分类推荐 TODO
 	 * 
 	 * @throws IOException
 	 */
-	public void listWorksByKeyword() throws IOException {
-		List<WorksDTO> worksDTOList = worksService.listWorksByKeyword();
+	public void listWorksByKeywordAndMenu() throws IOException {
+		List<WorksDTO> worksDTOList = worksService.listWorksByKeywordAndMenu(accept_works.getWorks_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
