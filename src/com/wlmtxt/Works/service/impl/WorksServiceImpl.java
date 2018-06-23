@@ -317,13 +317,14 @@ public class WorksServiceImpl implements WorksService {
 				}
 			}
 		}
-		if (worksDTOList.size() < 9) {
+		System.out.println(worksDTOList);
+		if (worksDTOList.size() < 10) {
 			if (worksDTOList.size() == 0) {
 				return worksDTOList;
 			}
-			return worksDTOList.subList(0, worksDTOList.size() - 1);
+			return worksDTOList.subList(0, worksDTOList.size());
 		} else {
-			return worksDTOList.subList(0, 9);
+			return worksDTOList.subList(0, 10);
 		}
 	}
 
@@ -345,13 +346,13 @@ public class WorksServiceImpl implements WorksService {
 				}
 			}
 		}
-		if (worksDTOList.size() < 9) {
+		if (worksDTOList.size() < 10) {
 			if (worksDTOList.size() == 0) {
 				return worksDTOList;
 			}
-			return worksDTOList.subList(0, worksDTOList.size() - 1);
+			return worksDTOList.subList(0, worksDTOList.size());
 		} else {
-			return worksDTOList.subList(0, 9);
+			return worksDTOList.subList(0, 10);
 		}
 	}
 
@@ -373,13 +374,13 @@ public class WorksServiceImpl implements WorksService {
 				}
 			}
 		}
-		if (worksDTOList.size() < 9) {
+		if (worksDTOList.size() < 10) {
 			if (worksDTOList.size() == 0) {
 				return worksDTOList;
 			}
-			return worksDTOList.subList(0, worksDTOList.size() - 1);
+			return worksDTOList.subList(0, worksDTOList.size());
 		} else {
-			return worksDTOList.subList(0, 9);
+			return worksDTOList.subList(0, 10);
 		}
 	}
 
