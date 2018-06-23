@@ -349,6 +349,17 @@ a:hover {
 	background: url(../img/play_number.png) 0 5px no-repeat;
 	color: #999;
 }
+.list_video_item .video_info .video_hot {
+	font-size: 13px;
+	line-height: 20px;
+	width: auto;
+	height: 20px;
+	float: right;
+	padding-left: 16px;
+	background: url(../img/fire.png) 0 2px no-repeat;
+	background-size:15px 15px;
+	color: #d81e06;
+}
 
 
 /*视频信息之用户名*/

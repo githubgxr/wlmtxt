@@ -29,7 +29,7 @@ function listRankByPage(){
 				 /*标题*/
 				 day_rank_str+='<div class="video_title">'+day_rank_response[i].works.works_title+'</div>';
 				 /*浏览量*/
-				 day_rank_str+='<div class="video_number">'+day_rank_response[i].hot+'</div>';
+				 day_rank_str+='<div class="video_hot">'+day_rank_response[i].hot+'</div>';
 				 /*用户*/
 				 day_rank_str+='<div class="video_username">'+day_rank_response[i].user.user_username+'</div>';
 				 day_rank_str+='</div>';
@@ -78,7 +78,7 @@ function listRankByPage(){
 				 /*标题*/
 				week_rank_str+='<div class="video_title">'+week_rank_response[i].works.works_title+'</div>';
 				 /*浏览量*/
-				week_rank_str+='<div class="video_number">'+week_rank_response[i].hot+'</div>';
+				week_rank_str+='<div class="video_hot">'+week_rank_response[i].hot+'</div>';
 				 /*用户*/
 				week_rank_str+='<div class="video_username">'+week_rank_response[i].user.user_username+'</div>';
 				week_rank_str+='</div>';
@@ -126,8 +126,8 @@ function listRankByPage(){
 				month_rank_str+='<div class="video_info">';
 				 /*标题*/
 				month_rank_str+='<div class="video_title">'+month_rank_response[i].works.works_title+'</div>';
-				 /*浏览量*/
-				month_rank_str+='<div class="video_number">'+month_rank_response[i].hot+'</div>';
+				 /*热度*/
+				month_rank_str+='<div class="video_hot">'+month_rank_response[i].hot+'</div>';
 				 /*用户*/
 				month_rank_str+='<div class="video_username">'+month_rank_response[i].user.user_username+'</div>';
 				month_rank_str+='</div>';
