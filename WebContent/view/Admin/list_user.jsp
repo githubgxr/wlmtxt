@@ -1,98 +1,94 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
-	String path = request.getContextPath();//当前项目目录
+	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
 <title>用户列表</title>
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
-<!--------------------------------------------------------------------------------->
-<link rel="stylesheet" href="<%=basePath%>css/bootstrap-select.min.css">
-<%-- <link rel="stylesheet" href="<%=basePath%>css/Admin/normalize.css"> --%>
-<%-- <link rel="stylesheet" href="<%=basePath%>css/Admin/style.css"> --%>
-<script type="text/javascript"
-	src="<%=basePath%>js/Admin/list_carousel.js"></script>
-</head>
-<body>
-	<!-- /前代表网站的根地址即域名 -->
-	<jsp:include page="/admin_navbar.jsp" flush="true"></jsp:include>
-	<div
-		style="margin: 50px 0 0 260px; width: calc(100% - 260px); padding: 0 20px;">
-		
-		<div style="width: 100%; float: right; margin: 0 15% 20px 0;">
-			<div style="float: right; margin-right: 130px;"> 
-				<input id="query" type="button" value="搜索" class="btn btn-primary">
-			</div>
-			<div style="float: right; margin-right: 30px;">
-				<input type="text" id="queryTitle" class="form-control" style="width: 300px;"  placeholder="请输入用户名或邮箱">
-			</div>
-		</div>
-		
-		<!-- 内容写在此处 -->
-
-		<!--  -->
-		<table id="tableC"
-			style="width: 70%; margin: 0 auto; text-align: center;"
-			class="table-condensed table-bordered table-hover">
-			<tr>
-				<th>编号</th>
-				<th>用户名</th>
-				<th>邮箱</th>
-				<th>上传权限</th>
-				<th>评论权限</th>
-				<th><input type="checkbox" /></th>
-			</tr>
-			<tr><td>1</td><td>杀手不太冷</td><td>ssbtl@sina.com</td>
-									<td><select><option>有</option><option>无</option><option></option></select></td>
-									<td><select><option>有</option><option>无</option><option></option></select></td>
-									<td><input type="checkbox"  /></td></tr>
-			<tr><td>2</td><td>龙敖地</td><td>lad@sina.com</td>
-									<td><select><option>有</option><option>无</option><option></option></select></td>
-									<td><select><option>有</option><option>无</option><option></option></select></td>
-									<td><input type="checkbox"  /></td></tr>
-			<tr><td>3</td><td>天圣孙</td><td>tss@sina.com</td>
-									<td><select><option>有</option><option>无</option><option></option></select></td>
-									<td><select><option>有</option><option>无</option><option></option></select></td>
-									<td><input type="checkbox"  /></td></tr>
-			<tr><td>4</td><td>背锅侠</td><td>bgx@sina.com</td>
-									<td><select><option>有</option><option>无</option><option></option></select></td>
-									<td><select><option>有</option><option>无</option><option></option></select></td>
-									<td><input type="checkbox"  /></td></tr>						
-		</table>
-		<!--  -->
-		<button class="btn btn-danger"
-			style="float: right; margin: 20px 15% 0 0;" id="delete"
-			onclick="deleteCarousel()">删除用户</button>
-		<!--  -->
-		<div style="margin: 20px auto; width: 400px; text-align: center;">
-			<button class="btn btn-primary" style="" id="lastPage">上一页</button>
-			<button class="btn btn-primary" style="" id="indexPage">首页</button>
-			<button class="btn btn-primary" style="" id="nextPage">下一页</button>
-		</div>
-		
-		<div id="currentPage" style="text-align: center;">
-			第 1 页	
-		</div>
-		<div id="pageCount" style="text-align: center;">
-			共 1页
-		</div>
-
-
-	</div>
-</body>
-<script>
-	// 	$('select').selectpicker('refresh');
-</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-#tableC tr th {
-	padding: 10px !important;
+.table_police tbody tr {
+	text-align: center;
+}
+
+#page_flip span a:hover {
+	cursor: pointer;
 }
 </style>
+</head>
+
+<body>
+	<jsp:include page="/admin_navbar.jsp" flush="true"></jsp:include>
+
+	<div style="margin: 50px 0 0 260px; width: calc(100% - 260px);">
+
+		<div  style="width: 95%; margin: 20px auto;">
+				<!--  -->
+						
+							<div style="height: 34px; width: 100%;">
+								<!-- 检索 -->
+								<div class="input-group" style="width: 300px; float: right;">
+									<input id="input_PoliceSearchText" class="form-control" oninput="searchUsername()" type="text" placeholder="搜索昵称、邮箱" />
+									<span class="input-group-addon" style="border-radius: unset;">
+										<i class="fa fa-search"></i>   
+									</span>
+								</div>
+
+							</div>
+
+							<table id="table_police" class="table table-hover breakcase_table_info"
+								style="text-align: center; margin: 20px 0;">
+								
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>昵称</th>
+										<th>邮箱</th>
+										<th>上传权限</th>
+										<th>评论权限</th>
+										<th></th>
+										<th><label class="fancy-checkbox"> <input
+												id="checkbox_all_select" type="checkbox"
+												onclick="all_select()"> <span></span>
+										</label></th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+								<tfoot>
+									<tr>
+										<td colspan="8" style="font-size: 12px;" class="page_info"><a
+											onclick="firstPage()"><i class="fa fa-angle-double-left">首页</i>
+										</a>&nbsp&nbsp<a onclick="prePage()"><i
+												class="fa fa-angle-left"></i>上一页 </a>&nbsp&nbsp<a
+											onclick="nextPage()">下一页<i class="fa fa-angle-right"></i>
+										</a>&nbsp&nbsp <a onclick="lastPage()">尾页<i
+												class="fa fa-angle-double-right"></i>
+										</a> <br />
+											<p class='admin'></p></td>
+									</tr>
+								</tfoot>
+								
+							</table>
+							
+							<!-- 删除按钮 -->
+							<div style="height: 34px;" id="btn_delete" >
+								<button class="btn btn-danger role_one" onclick="deleteAdmin()"
+									style="float: right; margin: 0 10px;">
+									<i class="fa fa-trash-o"></i> 删除所选
+								</button>
+							</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript"
+		src="<%=basePath%>js/Admin/page_list_user.js"></script>
+</body>
 </html>
