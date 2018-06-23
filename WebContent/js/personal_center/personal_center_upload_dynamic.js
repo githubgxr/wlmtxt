@@ -35,13 +35,19 @@
 // 关键字 
 $(".btn_keyword").click(
 				function() {
+					if($(".div_keyword").length>4){
+						toastr.error("关键字数量已达上限！");
+						$(".input_keyword").val("");
+						return false;
+						
+					}
 					var input_keyword_value = $(".input_keyword").val();
 					if (input_keyword_value != ""
 							&& input_keyword_value != null) {
 						$(".div_box").css("display", "block");
 
 						var str = '<div class="div_keyword">'
-								+ input_keyword_value + '</div>';
+								+ input_keyword_value + '<img class="keyword_delete" src="/wlmtxt/img/keyword_delete.png" style="width:8px;margin:0 0 0 10px;" onclick="keywordDelete(this)"/></div>';
 						if ($(".div_box").html() == "") {
 							$(".div_box").append(str);
 						} else {
@@ -58,11 +64,20 @@ $(".btn_keyword").click(
 								return;
 							}
 						}
+						
 						$(".input_keyword").val("");
 					} else {
 						toastr.error("请输入关键字");
 					}
 				});
+function keywordDelete(img){
+	img.parentNode.parentNode.removeChild(img.parentNode);
+	$(".div_box").css("display","none");
+}
+/*$(".keyword_delete").click(function(){
+	alert($(this));
+	$(this).parent().remove();
+})*/
 //关键字获取enter监听
 $("#input_keyword").bind("keydown",function(e){
         // 兼容FF和IE和Opera    

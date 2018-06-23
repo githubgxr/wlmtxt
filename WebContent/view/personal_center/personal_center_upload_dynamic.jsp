@@ -51,7 +51,7 @@
 							<span>关键字：</span>
 							<div class="upload_selected">
 								<input class="form-control input_xzt input_keyword" type="text" id="input_keyword"
-									placeholder="请输入关键字（按回车结束）" style="width: 550px;" />
+									placeholder="请输入关键字（按回车结束）" style="width: 550px;" maxlength="5"/>
 								<button type="submit" id="btn_keyword" class="btn_keyword" style="display:none;">确认</button>
 								<div class="input_xzt div_box"
 									style="margin-top: 10px; border: 0px; display: none;height:40px;"></div>
@@ -74,7 +74,7 @@
 
 								<input type="file" id="worksfile" class="inputfile"
 								/> 
-								<label for="file">Choose a file</label>
+								<label for="file"><a class="category_a" style="margin:0px;font-weight:normal;width:100px;">+ 添加视频</a></label>
 
 							</div>
 						</div>
