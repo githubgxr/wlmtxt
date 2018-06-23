@@ -471,11 +471,6 @@ public class WorksServiceImpl implements WorksService {
 		return worksDTOList;
 	}
 
-	/*
-	 * TODO(non-Javadoc)
-	 * 
-	 * @see com.wlmtxt.Works.service.WorksService#listWorksByKeyword()
-	 */
 	@Override
 	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID) {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();

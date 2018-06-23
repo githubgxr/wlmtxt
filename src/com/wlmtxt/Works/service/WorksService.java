@@ -137,5 +137,10 @@ public interface WorksService {
 
 	public DynamicVO getDynamicVO(String user_id);
 
+	/**
+	 * 
+	 * @param worksID
+	 * @return
+	 */
 	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID);
 }
