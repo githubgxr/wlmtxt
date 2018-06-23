@@ -17,9 +17,11 @@ import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.User.service.UserService;
+import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.VO.MyFansVO;
+import com.wlmtxt.domain.VO.MyWorksVO;
 
 import util.JavaMail;
 import util.JsonUtils;
@@ -31,6 +33,16 @@ import util.md5;
 public class UserAction extends ActionSupport {
 
 	private UserService userService;
+	
+	private WorksService worksService;
+
+	public WorksService getWorksService() {
+		return worksService;
+	}
+
+	public void setWorksService(WorksService worksService) {
+		this.worksService = worksService;
+	}
 
 	private wlmtxt_user accpet_user;
 	// 上传头像
@@ -43,6 +55,16 @@ public class UserAction extends ActionSupport {
 
 	//
 	private MyFansVO myFansVO;
+	
+	private MyWorksVO myWorksVO;
+
+	public MyWorksVO getMyWorksVO() {
+		return myWorksVO;
+	}
+
+	public void setMyWorksVO(MyWorksVO myWorksVO) {
+		this.myWorksVO = myWorksVO;
+	}
 
 	public MyFansVO getMyFansVO() {
 		return myFansVO;
@@ -219,7 +241,7 @@ public class UserAction extends ActionSupport {
 	}
 
 	/**
-	 * 判断是否已经登录<br>
+	 * 判断是否已经登录，获取用户信息
 	 * 
 	 * @throws IOException
 	 * @throws IllegalAccessException
@@ -240,6 +262,61 @@ public class UserAction extends ActionSupport {
 		} else {
 			pw.write("2");
 		}
+	}
+	
+	/**
+	 * 获取他人信息
+	 * 
+	 * 接收，accpet_user.user_id
+	 * 
+	 * 返回，user-对象信息，2-失败
+	 * 
+	 * @date 2018年6月23日	上午12:53:33
+	 * 
+	 * @author gxr
+	 * 
+	 * @throws IOException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
+	 */
+	public void getUserInfo() throws IOException, IllegalArgumentException, IllegalAccessException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		PrintWriter pw = response.getWriter();
+		if (user != null) {
+			user = userService.get_user_byID(accpet_user.getUser_id());
+			// 对象属性值为null替换为""
+			ReflectUtil.getAllField(user);
+			pw.write(JsonUtils.toJson(user));
+		} else {
+			pw.write("2");
+		}
+	}
+	
+	/**
+	 * 获取他人动态
+	 * 
+	 * 接收，accpet_user.user_id
+	 * 
+	 * 返回，myWokrsVO-我的动态信息
+	 * 
+	 * @date 2018年6月23日	上午12:57:22
+	 * 
+	 * @author gxr
+	 * 
+	 * TODO
+	 * @throws IOException 
+	 */
+	public void getOtherDynamic() throws IOException {
+		wlmtxt_user user = userService.get_user_byID(accpet_user.getUser_id());
+		myWorksVO = worksService.getMyWorksVO(user.getUser_id(), myWorksVO);
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(myWorksVO));
 	}
 
 	/**
@@ -471,7 +548,7 @@ public class UserAction extends ActionSupport {
 	/**
 	 * 取消全部关注的用户
 	 * 
-	 * 返回，1-取关成功，2-取关失败
+	 * 返回，1-取关成功，2-没有我的关注可以取消，3-失败
 	 * 
 	 * @date 2018年6月21日	下午7:47:25
 	 * 
@@ -485,11 +562,17 @@ public class UserAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int result = userService.deleteAllMyFollow(loginUser);
-		if (result > 0) {
-			pw.write("1");
-		} else {
-			pw.write("2");
+		int result;
+		try {
+			result = userService.deleteAllMyFollow(loginUser);
+			if (result > 0) {
+				pw.write("1");
+			} else {
+				pw.write("2");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			pw.write("3");
 		}
 	}
 	

@@ -162,7 +162,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int deleteAllMyFollow(wlmtxt_user loginUser) {
+	public int deleteAllMyFollow(wlmtxt_user loginUser) throws Exception {
 		String hql = "delete from wlmtxt_follow  where follow_active_user_id='"+loginUser.getUser_id()+"'";
 		Query query = getSession().createQuery(hql);
 		return query.executeUpdate();

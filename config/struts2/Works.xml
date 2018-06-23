@@ -24,6 +24,7 @@
 				<param name="bufferSize">1024</param>
 			</result>
 
+		<result name="personal_cente_other_data">/view/personal_center/personal_cente_other_data.jsp</result>
 		</action>
 	</package>
 </struts>
