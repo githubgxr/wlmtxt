@@ -95,6 +95,9 @@
 				}
 			})
 		</script>
+		<script type="text/javascript">
+		personal_center_relation("listMyDiscussWorkList");
+		</script>
 	</body>
 
 </html>

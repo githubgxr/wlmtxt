@@ -97,7 +97,9 @@
 					$(this).addClass("selected");
 				}
 			});
-			personal_center_relation(listMyLikeList);
+		</script>
+		<script type="text/javascript">
+		personal_center_relation("listMyLikeList");
 		</script>
 	</body>
 </html>
