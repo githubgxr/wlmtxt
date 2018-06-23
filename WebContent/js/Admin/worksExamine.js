@@ -92,7 +92,7 @@ function firstPage() {
 		toastr.error('已经是第一页！');
 		return;
 	}
-	query_data['infoVO.currPage'] = 1;
+	query_data['worksVO.currPage'] = 1;
 	get_ListBreakecaseInformationByPageAndSearch(query_data);
 }
 // 上一页
@@ -101,7 +101,7 @@ function prePage() {
 		toastr.error('已经是第一页！');
 		return;
 	}
-	query_data['infoVO.currPage'] = page_infomantion.currPage - 1;
+	query_data['worksVO.currPage'] = page_infomantion.currPage - 1;
 	get_ListBreakecaseInformationByPageAndSearch(query_data);
 }
 // 下一页

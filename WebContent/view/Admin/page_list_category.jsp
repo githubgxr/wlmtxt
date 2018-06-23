@@ -66,8 +66,9 @@
 					
 				</div>
 				<!---------------------------->
+				
 				<s:iterator value="#CL.sonCategoryList" var="SCL">
-					<div style="height: 50px; margin: 0 0 0 80px;">
+					<div style="height: 50px; margin: 0 0 0 80px;" >
 						<span style="line-height: 50px;"><s:property
 								value="#SCL.second_menu_name" /></span>
 						
@@ -259,49 +260,7 @@
 	</div>
 	<!-- -------------------------------------------------------------------------------------------------------------------- -->
 </body>
-<script type="text/javascript">
-	
-$('input').on('ifChanged', function(event){
-	update_category_show(event.target);
-	});
 
-function update_category_show(checkbox){
-	
-	var xhr = false;
-	xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		var message;
-		if (xhr.readyState == 4) {
-			if (xhr.status == 200) {
-				
-				if(xhr.responseText=='success'){
-					toastr.success("修改成功");
-				}else{
- 					toastr.error("修改失败");
-				}
-				
-			} else {
-				toastr.error(xhr.status);
-			}
-		}
-	}
-	
-	xhr.open("POST", "/xxyjsjgcxy/snews/category_update_category_show");
-	
-	if(checkbox.checked){
-		var category_show=1;
-	}else{
-		var category_show=0;
-	}
-	var formData = new FormData();
-	
-	formData.append("category.jsj_snews_category_id",checkbox.id.substring(9));
-	formData.append("category.category_show",category_show);
-	
-	xhr.send(formData);
-}
-
-</script> 
 <script type="text/javascript" src="<%=basePath%>js/Admin/page_list_category.js"></script>
 	
 </html>
