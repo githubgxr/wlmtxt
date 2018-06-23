@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int deleteAllMyFollow(wlmtxt_user loginUser) {
+	public int deleteAllMyFollow(wlmtxt_user loginUser) throws Exception {
 		return userDao.deleteAllMyFollow(loginUser);
 	}
 
@@ -156,12 +156,16 @@ public class UserServiceImpl implements UserService {
 		}
 		wlmtxt_follow follow = new wlmtxt_follow();
 		for (wlmtxt_user user : list) {
-			follow.setFollow_id(TeamUtil.getUuid());
-			follow.setFollow_passive_user_id(user.getUser_id());
-			follow.setFollow_active_user_id(loginUser.getUser_id());
-			follow.setFollow_gmt_create(TeamUtil.getStringSecond());
-			follow.setFollow_gmt_modified(TeamUtil.getStringSecond());
-			userDao.noticeFans(follow);
+			if (isFollowedUser(loginUser.getUser_id(), user.getUser_id())) {
+				
+			} else {
+				follow.setFollow_id(TeamUtil.getUuid());
+				follow.setFollow_passive_user_id(user.getUser_id());
+				follow.setFollow_active_user_id(loginUser.getUser_id());
+				follow.setFollow_gmt_create(TeamUtil.getStringSecond());
+				follow.setFollow_gmt_modified(TeamUtil.getStringSecond());
+				userDao.noticeFans(follow);
+			}
 		}
 	}
 

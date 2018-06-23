@@ -717,10 +717,11 @@ public class WorksAction extends ActionSupport {
 	public void totalFansNum() throws IOException {
 		// wlmtxt_user loginUser = (wlmtxt_user)
 		// ActionContext.getContext().getSession().get("loginResult");
+		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int num = worksService.totalFansNum(accept_user);
+		int num = worksService.totalFansNum(loginUser);
 		pw.write(String.valueOf(num));
 	}
 
@@ -742,7 +743,7 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int num = worksService.totalFollowingNum(accept_user);
+		int num = worksService.totalFollowingNum(loginUser);
 		pw.write(String.valueOf(num));
 	}
 
@@ -982,4 +983,10 @@ public class WorksAction extends ActionSupport {
 		return myWorksVO;
 	}
 
+	/**
+	 * 跳转到他人的动态和资料
+	 */
+	public String personal_cente_other_data() {
+		return "personal_cente_other_data";
+	}
 }
