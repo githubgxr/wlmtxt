@@ -27,6 +27,7 @@ import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.KeyWordDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
+import com.wlmtxt.domain.DTO.ReplyDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
@@ -291,6 +292,9 @@ public class WorksServiceImpl implements WorksService {
 			}
 		}
 		if (worksDTOList.size() < 9) {
+			if (worksDTOList.size() == 0) {
+				return worksDTOList;
+			}
 			return worksDTOList.subList(0, worksDTOList.size() - 1);
 		} else {
 			return worksDTOList.subList(0, 9);
@@ -316,6 +320,9 @@ public class WorksServiceImpl implements WorksService {
 			}
 		}
 		if (worksDTOList.size() < 9) {
+			if (worksDTOList.size() == 0) {
+				return worksDTOList;
+			}
 			return worksDTOList.subList(0, worksDTOList.size() - 1);
 		} else {
 			return worksDTOList.subList(0, 9);
@@ -341,6 +348,9 @@ public class WorksServiceImpl implements WorksService {
 			}
 		}
 		if (worksDTOList.size() < 9) {
+			if (worksDTOList.size() == 0) {
+				return worksDTOList;
+			}
 			return worksDTOList.subList(0, worksDTOList.size() - 1);
 		} else {
 			return worksDTOList.subList(0, 9);
@@ -406,7 +416,19 @@ public class WorksServiceImpl implements WorksService {
 			discussDTO.setDiscuss(discuss);
 			//
 			List<wlmtxt_discuss> replyList = worksDao.getDiscussListByFatherID(discuss.getDiscuss_id());
-			discussDTO.setReply(replyList);
+			List<ReplyDTO> replyDTOList = new ArrayList<ReplyDTO>();
+			for (wlmtxt_discuss reply : replyList) {
+				ReplyDTO replyDTO = new ReplyDTO();
+				//
+				wlmtxt_user user = userService.get_user_byID(reply.getDiscuss_user_id());
+				replyDTO.setUser(user);
+				//
+				replyDTO.setReply(reply);
+				//
+				replyDTOList.add(replyDTO);
+			}
+
+			discussDTO.setReplyDTO(replyDTOList);
 			//
 			wlmtxt_user user = userService.get_user_byID(discuss.getDiscuss_user_id());
 			discussDTO.setUser(user);
@@ -443,6 +465,49 @@ public class WorksServiceImpl implements WorksService {
 		for (wlmtxt_works works : worksList) {
 			WorksDTO worksDTO = new WorksDTO();
 			worksDTO.setWorks(works);
+			worksDTO = getWorksDTOByID(works.getWorks_id());
+			worksDTOList.add(worksDTO);
+		}
+		return worksDTOList;
+	}
+
+	/*
+	 * TODO(non-Javadoc)
+	 * 
+	 * @see com.wlmtxt.Works.service.WorksService#listWorksByKeyword()
+	 */
+	@Override
+	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID) {
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		//
+		// List<KeyWordDTO> keyWordDTOList = new ArrayList<KeyWordDTO>();
+		List<wlmtxt_works_keyword> keyWordList = worksDao.listKeyWordByByWorksID(worksID);
+		List<wlmtxt_works> worksList = new ArrayList<wlmtxt_works>();
+		/*
+		 * 关键词推荐
+		 */
+		for (wlmtxt_works_keyword keyWord : keyWordList) {
+			KeyWordDTO keyWordDTO = new KeyWordDTO();
+			//
+			keyWordDTO.setWorks_keyword(keyWord);
+			// 取出了这个作品的所有关键词列表
+			wlmtxt_keyword word = worksDao.getWordByID(keyWord.getWorks_keyword_keyword_id());
+			// 遍历这个列表查询相同的关键词
+			worksList.addAll(worksDao.listWorksByKeywordName(word.getKeyword_name()));
+			// keyWordDTO.setKeyword(word);
+			// keyWordDTOList.add(keyWordDTO);
+		}
+		//
+		// TODO 按分类补充没写，数量控制没写
+		/*
+		 * 
+		 */
+
+		/*
+		 * 
+		 */
+		for (wlmtxt_works works : worksList) {
+			WorksDTO worksDTO = new WorksDTO();
 			worksDTO = getWorksDTOByID(works.getWorks_id());
 			worksDTOList.add(worksDTO);
 		}
@@ -720,9 +785,9 @@ public class WorksServiceImpl implements WorksService {
 					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name());
 		} else {
 			// 回复
-			wlmtxt_discuss reply = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
-			addNotification(putWorks.getWorks_user_id(), "5",
-					putMan.getUser_username() + "回复了您的评论" + reply.getDiscuss_content());
+			wlmtxt_discuss discuss = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
+			addNotification(discuss.getDiscuss_user_id(), "5",
+					putMan.getUser_username() + "回复了您的评论" + discuss.getDiscuss_content());
 		}
 
 		/*

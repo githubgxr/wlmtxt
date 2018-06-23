@@ -123,7 +123,6 @@ public interface WorksService {
 
 	public int totalFollowingNum(wlmtxt_user loginUser);
 
-
 	public List<wlmtxt_notification> listUserNotification(String user_id);
 
 	public List<LikeDTO> listMyLikeList(String user_id);
@@ -137,4 +136,6 @@ public interface WorksService {
 	public void deleteDisscuss(String discuss_id);
 
 	public DynamicVO getDynamicVO(String user_id);
+
+	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID);
 }

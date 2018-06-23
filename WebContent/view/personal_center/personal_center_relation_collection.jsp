@@ -29,8 +29,8 @@
 					
 					<!--主体部分-->
 					<div class="llls_content list_container">
-						<ul id="llls_list_container">
-							<li class="list_video_item">
+						<ul id="relation_collection_list_container">
+							<%-- <li class="list_video_item">
 								<!--视频链接-->
 								<a class="video_list_item_wrap">
 									<div class="video_cover">
@@ -62,13 +62,13 @@
 								<div class="video_options">
 									<a class="video_delete_btn">取消收藏</a>
 								</div>
-							</li>
+							</li> --%>
 						</ul>
 
 					</div>
 					<!-----翻页----------------------->
-					<div class="page_container">
-						<!-- <div class="page_component_container">
+					<!-- <div class="page_container">
+						<div class="page_component_container">
 							<div class="page_component">
 								<a class="page_prev" href="#">上一页</a>
 								<a class="selected" href="#">1</a>
@@ -83,8 +83,8 @@
 								<input class="page_component_jumptxt" type="text">
 								<a href="#" class="page_component_submit">GO</a>
 							</div>
-						</div> -->
-					</div>
+						</div>
+					</div> -->
 				</div>
 
 			</div>
@@ -92,6 +92,7 @@
 			
 		</div>
 		<div class="my_collection" id="my_collection"  style="display:none;">我的收藏</div>
+		<script type="text/javascript" src="<%=basePath%>js/personal_center/personal_center_relation.js"></script>
 		<script type="text/javascript">
 			var clearfix_a=$(".clearfix a");
 			$.each(clearfix_a,function(i){
@@ -99,8 +100,10 @@
 				if($(".my_collection").html()==clearfix_a_html){
 					$(this).addClass("selected");
 				}
-			})	
-		
+			});
+		</script>
+		<script type="text/javascript">
+		personal_center_relation("listMyCollectList");
 		</script>
 		<script type="text/javascript" src="<%=basePath%>js/personal_center/personal_center_relation_collection.js"></script>
 	</body>

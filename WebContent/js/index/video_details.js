@@ -1,7 +1,7 @@
 function getWorksDetailVO() {
 	checkLogin();
 	// 视频id
-	var video_id = $("#video_id").html();
+	var video_id = $.trim($("#video_id").html());
 	console.log("video_id:" + video_id);
 	// 获取视频的详细信息
 	var formData_detail = new FormData();
@@ -39,22 +39,58 @@ function getWorksDetailVO() {
 					"src",
 					"/wlmtxt/Works/Works_getVideo?worksName="
 							+ detail_response.worksDTO.works.works_name);
+
 			$("#detail_video_content").attr(
 					"poster",
 					"/wlmtxt/Works/Works_getImg?imgName="
 							+ detail_response.worksDTO.works.works_cover);
 			// 下载
+			// $("#download_a")
+			// .click(
+			// function() {
+			// window
+			// .location("/wlmtxt/Works/Works_getVideo?worksName="
+			// + detail_response.worksDTO.works.works_name);
+			// });
 			$("#download_a").attr(
 					"href",
 					"/wlmtxt/Works/Works_getVideo?worksName="
 							+ detail_response.worksDTO.works.works_name);
+			$("#download_a").attr("download",
+					"" + detail_response.worksDTO.works.works_name);
 
 			/*------用户*/
+			//获取关注量
+			var formData_focus_num=new FormData();
+			formData_focus_num.append("accpet_user.user_id",detail_response.worksDTO.works.works_user_id);
+			var xhr_focus_num=new XMLHttpRequest();
+			xhr_focus_num.open("POST","/wlmtxt/Works/Works_totalFollowingNum");
+			xhr_focus_num.send(formData_focus_num);
+			xhr_focus_num.onreadystatechange=function(){
+				if (xhr_focus_num.readyState == 4 && xhr_focus_num.status == 200) {
+					$("#his_attention").html(xhr_focus_num.responseText);
+						}
+					}
+			//获取粉丝量
+			var formData_fans_num=new FormData();
+			formData_fans_num.append("accpet_user.user_id",detail_response.worksDTO.works.works_user_id);
+			var xhr_fans_num=new XMLHttpRequest();
+			xhr_fans_num.open("POST","/wlmtxt/Works/Works_totalFansNum");
+			xhr_fans_num.send(formData_focus_num);
+			xhr_fans_num.onreadystatechange=function(){
+				if (xhr_fans_num.readyState == 4 && xhr_fans_num.status == 200) {
+					$("#his_fans").html(xhr_fans_num.responseText);
+						}
+					}
 			// 头像
 			$("#detail_user_img").attr(
 					"src",
 					"/wlmtxt/Works/Works_getImg?imgName="
 							+ detail_response.worksDTO.user.user_avatar);
+			$("#detail_user_img").click(function(){
+				window.location.href="/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
+					+ detail_response.worksDTO.user.user_id;
+			})
 			// 用户名
 			$("#detail_user_name").html(
 					detail_response.worksDTO.user.user_username);
@@ -62,25 +98,24 @@ function getWorksDetailVO() {
 			$("#detail_user_bio").html(detail_response.worksDTO.user.user_bio);
 			// 查询是否关注
 			checkFocus();
-			//推荐信息列表
-			var xhr_tj=new XMLHttpRequest();
-			xhr_tj.open("POST","");
+			// 推荐信息列表
+			var xhr_tj = new XMLHttpRequest();
+			xhr_tj.open("POST", "");
 			xhr_tj.send(null);
-			xhr_tj.onreadystatechange=function(){
-				if(xhr_tj.readyState==4&&xhr_tj.status==200){
-					var ti_response=JSON.parse(xhr_tj.responseText);
+			xhr_tj.onreadystatechange = function() {
+				if (xhr_tj.readyState == 4 && xhr_tj.status == 200) {
+					var ti_response = JSON.parse(xhr_tj.responseText);
 					for (var numDiss = 0; numDiss < detail_response.discussDTOList.length; numDiss++) {
-					var tj_str='<div class="tj" style="float: left;">';
-					tj_str+='<img src="<%=basePath%>css/zb/img/4.png" />';
-					tj_str+='<div style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">';
-					tj_str+='</div>';
-					tj_str+='</div>';
-					$("#tj_list").append(tj_str);
+						var tj_str = '<div class="tj" style="float: left;">';
+						tj_str += '<img src="<%=basePath%>css/zb/img/4.png" />';
+						tj_str += '<div style="height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;">';
+						tj_str += '</div>';
+						tj_str += '</div>';
+						$("#tj_list").append(tj_str);
 					}
 				}
 			}
-			
-			
+
 			// 评论
 
 			var comment_list = document.getElementsByClassName("comment_list");
@@ -98,10 +133,10 @@ function getWorksDetailVO() {
 				/* <!--左边--> */
 				comment_list_str += '<div class="comment_list_content_left">';
 				/* <!--头像--> */
-				comment_list_str += '<img class="user_img comment_user_img" src="/wlmtxt/Works/Works_getImg?imgName='
+				comment_list_str += '<img onclick="toOtherData('+ detail_response.discussDTOList[numDiss].discuss.discuss_id+')" class="user_img comment_user_img to_other_data" src="/wlmtxt/Works/Works_getImg?imgName='
 						+ detail_response.discussDTOList[numDiss].user.user_avatar
 						+ '" />';
-				comment_list_str += '<div class="comment_user_name">'
+				comment_list_str += '<div class="comment_user_name to_other_data">'
 						+ detail_response.discussDTOList[numDiss].user.user_username
 						+ '</div>';
 				comment_list_str += ' </div>';
@@ -114,76 +149,116 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				console.log("user_id_detail:"+user_id);
+				console.log("user_id_detail:" + user_id);
 				if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == user_id) {
+					comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
 					comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
 							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
 							+ '">删除</div>';
-				}else{
+
+				} else {
 					comment_list_str += '<div class="comment_delete comment_response_operate">回复</div>';
 				}
 
-				
 				comment_list_str += '</div>';
+				//回复
+				if(detail_response.discussDTOList[numDiss].replyDTO.length!==0){
+					for(var res=0;res<detail_response.discussDTOList[numDiss].replyDTO.length;res++){
+						comment_list_str +='<div class="comment_list_content_right" style="margin:10px 0;">';
+						comment_list_str +='<span style="color:#1cd388;">';
+						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].user.user_username;
+						comment_list_str +=':</span>';
+						comment_list_str +='<span>';
+						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_content;
+						comment_list_str +='</span>';
+						comment_list_str +='<span style="color:#bfbfbf;float:right;">';
+						comment_list_str +=detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_gmt_create;
+						comment_list_str +='</span>';
+						comment_list_str +='</div>';
+						
+					}
+					
+				}
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				$("#comment_div").append(comment_list_str);
-
+				
 			}
-			// 删除评论
-			$(".comment_delete_operate").click(
-					function() {
-						var formData_comment_delete = new FormData();
-						formData_comment_delete.append(
-								"accpet_discuss.discuss_id", this.id);
-						var comment_delete_xhr = new XMLHttpRequest();
-						comment_delete_xhr.open("POST",
-								"/wlmtxt/Works/Works_deleteDisscuss");
-						comment_delete_xhr.send(formData_comment_delete);
-						comment_delete_xhr.onreadystatechange = function() {
-							if (comment_delete_xhr.readyState == 4
-									&& comment_delete_xhr.status == 200) {
-								if (comment_delete_xhr.responseText == "1") {
-									toastr.success("删除评论成功！");
-									getWorksDetailVO();
-								}
-							}
-						}
-					})
-			// 回复评论
-			$(".comment_response_operate").click(function() {
-				var discuss_id=$(this).siblings(".comment_delete").attr("id");
-				$("#mymodal").modal("toggle");
-				$("#check_response_btn").click(function(){
-					if($("#responseComment").val==""){
-						toastr.error("请输入回复内容！");
-						return false;
-					}
-					var formData_response=new FormData();
-					formData_response.append("accpet_discuss.discuss_content",$("#responseComment").val());
-					formData_response.append("accpet_discuss.discuss_father_discuss_id",discuss_id);
-					var xhr_response=new XMLHttpRequest();
-					xhr_response.open("POST","/wlmtxt/Works/Works_discussWorks");
-					xhr_response.send(formData_response);
-					xhr_response.onreadystatechange=function(){
-						if(xhr_response.readyState==4&&xhr_response.status==200){
-							if (xhr_response.responseText == "1") {
-
-								$("#mymodal").css("display","none");
-
-								toastr.success("评论成功！");
-
-								getWorksDetailVO();
-
-							} else {
-								toastr.error("评论失败！");
-								return false;
-							}
-						}
-					}
-				});
-			});
+		
 		}
+		// 删除评论
+		$(".comment_delete_operate").click(
+				function() {
+					var formData_comment_delete = new FormData();
+					formData_comment_delete.append(
+							"accpet_discuss.discuss_id", this.id);
+					var comment_delete_xhr = new XMLHttpRequest();
+					comment_delete_xhr.open("POST",
+							"/wlmtxt/Works/Works_deleteDisscuss");
+					comment_delete_xhr.send(formData_comment_delete);
+					comment_delete_xhr.onreadystatechange = function() {
+						if (comment_delete_xhr.readyState == 4
+								&& comment_delete_xhr.status == 200) {
+							if (comment_delete_xhr.responseText == "1") {
+								toastr.success("删除评论成功！");
+								getWorksDetailVO();
+							}
+						}
+					}
+				})
+		// 回复评论
+		$(".comment_response_operate")
+				.click(
+						function() {
+							var discuss_id = $(this).siblings(
+									".comment_delete").attr("id");
+							$("#mymodal").modal("toggle");
+							$("#check_response_btn")
+									.click(
+											function() {
+												if ($("#responseComment").val == "") {
+													toastr
+															.error("请输入回复内容！");
+													return false;
+												}
+												var formData_response = new FormData();
+												formData_response
+														.append(
+																"accpet_discuss.discuss_content",
+																$(
+																		"#responseComment")
+																		.val());
+												formData_response
+														.append(
+																"accpet_discuss.discuss_father_discuss_id",
+																discuss_id);
+												var xhr_response = new XMLHttpRequest();
+												xhr_response
+														.open("POST",
+																"/wlmtxt/Works/Works_discussWorks");
+												xhr_response
+														.send(formData_response);
+												xhr_response.onreadystatechange = function() {
+													if (xhr_response.readyState == 4
+															&& xhr_response.status == 200) {
+														if (xhr_response.responseText == "1") {
+															document.getElementById("responseComment").innerHTML="";
+															$("#mymodal").modal("toggle");
+															toastr
+																	.success("回复评论成功！");
+															
+															getWorksDetailVO();
+															
+
+														} else {
+															toastr
+																	.error("回复评论失败！");
+															return false;
+														}
+													}
+												}
+											});
+						});
 	}
 
 	/** *********************详情*********************************** */
@@ -329,6 +404,7 @@ getWorksDetailVO();
 
 function video_comment_btn_click() {
 	var video_id = $("#video_id").html();
+	video_id = $.trim(video_id);
 	var comment_text = $("#textarea_comment").val();
 	if (comment_text == "") {
 		toastr.error("请输入评论内容！");
@@ -402,7 +478,14 @@ $("#focus_btn").click(function() {
 			if (xhr.responseText == "1") {
 				console.log("关注或取消成功！");
 				checkFocus();
+				getWorksDetailVO();
 			}
 		}
 	}
 });
+//跳转到他人页面
+function toOtherData(other_id){
+	alert(other_id);
+	window.location.href="/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
+		+ other_id;
+}

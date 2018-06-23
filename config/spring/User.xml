@@ -14,6 +14,7 @@
 	</bean>
 	<bean id="userAction" class="com.wlmtxt.User.action.UserAction">
 		<property name="userService" ref="userService"></property>
+		<property name="worksService" ref="worksService"></property>
 	</bean>
 </beans>
 
