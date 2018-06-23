@@ -29,8 +29,10 @@
 					
 					<!--主体部分-->
 					<div class="llls_content list_container">
+
 						<ul id="relation_collection_list_container"  >
 							<%-- <li class="list_video_item">
+
 								<!--视频链接-->
 								<a class="video_list_item_wrap">
 									<div class="video_cover">
@@ -42,11 +44,11 @@
 									<!--视频信息-->
 									<div class="video_info">
 										<!--标题-->
-										<div class="video_title">德科恶女合家福好地方好地方</div>
+										<div class="video_title">【10月】樱花庄的宠物女孩05【千夏】</div>
 										<!--浏览量-->
-										<div class="video_hot">425</div>
+										<div class="video_number">425</div>
 										<!--用户名-->
-										<div class="video_username">发杜师傅女是不是的看法和gewgrgegerbhrtehtrnjr</div>
+										<div class="video_username">【10月】樱花庄的宠物女孩05【千夏】</div>
 
 									</div>
 								</a>
@@ -62,7 +64,7 @@
 								<div class="video_options">
 									<a class="video_delete_btn">取消收藏</a>
 								</div>
-							</li> --%>
+							</li>
 						</ul>
 
 					</div>
