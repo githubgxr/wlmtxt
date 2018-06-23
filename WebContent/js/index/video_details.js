@@ -134,10 +134,10 @@ function getWorksDetailVO() {
 				/* <!--左边--> */
 				comment_list_str += '<div class="comment_list_content_left">';
 				/* <!--头像--> */
-				comment_list_str += '<img class="user_img comment_user_img" src="/wlmtxt/Works/Works_getImg?imgName='
+				comment_list_str += '<img onclick="toOtherData('+ detail_response.discussDTOList[numDiss].discuss.discuss_id+')" class="user_img comment_user_img to_other_data" src="/wlmtxt/Works/Works_getImg?imgName='
 						+ detail_response.discussDTOList[numDiss].user.user_avatar
 						+ '" />';
-				comment_list_str += '<div class="comment_user_name">'
+				comment_list_str += '<div class="comment_user_name to_other_data">'
 						+ detail_response.discussDTOList[numDiss].user.user_username
 						+ '</div>';
 				comment_list_str += ' </div>';
@@ -162,10 +162,28 @@ function getWorksDetailVO() {
 				}
 
 				comment_list_str += '</div>';
+				//回复
+				if(detail_response.discussDTOList[numDiss].reply.length!==0){
+					for(var res=0;res<detail_response.discussDTOList[numDiss].reply.length;res++){
+						comment_list_str +='<div class="comment_list_content_right" style="margin:10px 0;">';
+						comment_list_str +='<span style="color:#1cd388;">';
+						comment_list_str +=detail_response.discussDTOList[numDiss].reply[res].discuss_user_id;
+						comment_list_str +=':</span>';
+						comment_list_str +='<span>';
+						comment_list_str +=detail_response.discussDTOList[numDiss].reply[res].discuss_content;
+						comment_list_str +='</span>';
+						comment_list_str +='<span style="color:#bfbfbf;float:right;">';
+						comment_list_str +=detail_response.discussDTOList[numDiss].reply[res].discuss_gmt_create;
+						comment_list_str +='</span>';
+						comment_list_str +='</div>';
+						
+					}
+					
+				}
 				comment_list_str += '</div>';
 				comment_list_str += '</div>';
 				$("#comment_div").append(comment_list_str);
-
+				
 			}
 			// 删除评论
 			$(".comment_delete_operate").click(
@@ -223,20 +241,15 @@ function getWorksDetailVO() {
 														if (xhr_response.readyState == 4
 																&& xhr_response.status == 200) {
 															if (xhr_response.responseText == "1") {
-
-																$("#mymodal")
-																		.css(
-																				"display",
-																				"none");
-
+																$("#mymodal").modal("toggle");
 																toastr
-																		.success("评论成功！");
-
+																		.success("回复评论成功！");
+																document.getElementById("responseComment").innerHTML="";
 																getWorksDetailVO();
 
 															} else {
 																toastr
-																		.error("评论失败！");
+																		.error("回复评论失败！");
 																return false;
 															}
 														}
@@ -467,3 +480,9 @@ $("#focus_btn").click(function() {
 		}
 	}
 });
+//跳转到他人页面
+function toOtherData(other_id){
+	alert(other_id);
+	window.location.href="/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
+		+ detail_response.discussDTOList[numDiss].discuss.discuss_id;
+}
