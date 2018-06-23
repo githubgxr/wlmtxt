@@ -19,6 +19,7 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DTO.CategoryListDTO;
+import com.wlmtxt.domain.VO.AdminVO;
 
 
 public class AdminAction extends ActionSupport {
@@ -28,11 +29,26 @@ public class AdminAction extends ActionSupport {
 	private wlmtxt_first_menu first_menu;
 	private List<wlmtxt_first_menu> First_menuList ;
 	private wlmtxt_second_menu second_menu;
+	private String adminIDAll;
+	private AdminVO adminVO;
 	public wlmtxt_first_menu getFirst_menu() {
 		return first_menu;
 	}
 	public void setFirst_menu(wlmtxt_first_menu first_menu) {
 		this.first_menu = first_menu;
+	}
+	
+	public String getAdminIDAll() {
+		return adminIDAll;
+	}
+	public void setAdminIDAll(String adminIDAll) {
+		this.adminIDAll = adminIDAll;
+	}
+	public AdminVO getAdminVO() {
+		return adminVO;
+	}
+	public void setAdminVO(AdminVO adminVO) {
+		this.adminVO = adminVO;
 	}
 	public AdminService getAdminService() {
 		return adminService;
@@ -200,8 +216,72 @@ public class AdminAction extends ActionSupport {
 		return "page_list_category";
 	}
 	/*
-	 * 作品审核
+	 * 	 管理员的添加
 	 */
+	public void addAdmin() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		if(adminService.addAdmin(admin)){
+			pw.write("1");
+		}else{
+			pw.write("2");
+		}
+	}
+	
+	/*
+	 * 管理员的修改
+	 */
+	public void updateAdmin() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		System.out.println(admin+"aaaaaaa");
+		if(adminService.updateAdmin(admin)){
+			pw.write("1");
+		}else{
+			pw.write("2");
+		}
+	}
+	/*
+	 * 管理员的删除
+	 */
+	public void deleteAdmin() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		if(adminService.deleteAdmin(adminIDAll)){
+			pw.write("1");
+		}else{
+			pw.write("2");
+		}
+	}
+	/*
+	 * 管理员的查询/分页列表
+	 */
+	public void getAdminListBysearchPage() throws IOException{
+		adminService.getAdminListBysearchPage(adminVO);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		 GsonBuilder gsonBuilder = new GsonBuilder();
+	 	 gsonBuilder.setPrettyPrinting();// 格式化json数据
+	 	 Gson gson = gsonBuilder.create();
+	 	 pw.write(gson.toJson(adminVO));
+	}
+	/*
+	 * 根据id得到管理员信息
+	 */
+	public void getAdminById() throws IOException{
+		admin = adminService.getAdminById(admin.getAdmin_id());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+	 	 gsonBuilder.setPrettyPrinting();// 格式化json数据
+	 	 Gson gson = gsonBuilder.create();
+	 	 pw.write(gson.toJson(admin));
+	}
 	/**
 	 * 跳转登录成功页
 	 * @return

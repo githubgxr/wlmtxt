@@ -1,10 +1,9 @@
 var query_data = {
-	"adminVO.currPage" : "1",
+	"keywordVO.currPage" : "1",
 };
 $(function(){
 	get_ListBreakecaseInformationByPageAndSearch();
 })
-
 //当前页面分页信息
 var page_infomantion = {
 	currPage : 1,
@@ -20,38 +19,28 @@ var page_infomantion = {
 function get_ListBreakecaseInformationByPageAndSearch(){
 	$
 	.post(
-			'/wlmtxt/Admin/Admin_getAdminListBysearchPage',
-			{'adminVO.admin_username':$('#input_PoliceSearchText').val() ,'worksVO.currPage' : 1 },
+			'/wlmtxt/Keyword/Keyword_getKeywordListBysearchPage',
+			{'keywordVO.keyword_name':$('#input_PoliceSearchText').val(),"keywordVO.currPage" : "1"},
 			function(xhr) {
-				var data_list = xhr.wlmtxt_adminList;
+				var data_list = xhr.wlmtxt_keywordList;
 				var str = '';
 				for (var len = 0; len < data_list.length; len++) {
-					if(data_list[len].admin_admin=="1"){
-						var admin_admin = '是'
-					}else{
-						var admin_admin = '否'
-					}
+					
 					str += '<tr>';
 					str += '<td>' + (len + 1) + '</td>';// 序号
-					str += '<td>' + data_list[len].admin_username
-							+ '</td>';// 账号
+					str += '<td>' + data_list[len].keyword_name
+							+ '</td>';// 关键词名
 					str += '<td>'
-							+ admin_admin
-							+ '</td>';// 是否超级管理员
-				
-						str += '<td>'
 						+ '<i id="'
-						+ data_list[len].admin_id
-						+ '" data-toggle="modal" data-target="#updateAdmin" onclick=getAdmin("'+data_list[len].admin_id+'") class="fa fa-pencil-square-o role_one" aria-hidden="true"></i>'
+						+ data_list[len].keyword_id
+						+ '" data-toggle="modal" data-target="#updateKeyword" onclick=getKeyword("'+data_list[len].keyword_id+'") class="fa fa-pencil-square-o role_one" aria-hidden="true"></i>'
 						+ '</td>';
 						
 						str += '<td>'
 							+ '<input  type="checkbox" class="checkbox_select" value="'
-							+ data_list[len].admin_id
+							+ data_list[len].keyword_id
 							+ '" >'
 							+ '</td>';
-						
-						
 						
 						str += '</tr>';
 					
@@ -86,26 +75,19 @@ function get_ListBreakecaseInformationByPageAndSearch(){
 				// $('#newQuery').modal('hide')
 			}, 'json')
 }
-/*
- * 初始密码
- */
 
-function password_show(){
-	$('#password').val('000000');
-}
 /*
- * 添加管理员
+ * 添加关键词
  */
 $('.input_sure').click(
 		function() {
 			var this_modal = $(this);
-			$.post('/wlmtxt/Admin/Admin_addAdmin',
-					$('#addAdmin form').serialize(), function(xhr) {
+			$.post('/wlmtxt/Keyword/Keyword_addKeyword',
+					$('#addKeyword form').serialize(), function(xhr) {
 						if (xhr == 1) {
 							toastr.success('添加成功!');
-							$('#addAdmin').modal('hide');
-							$('#addAdmin input').val("");
-							$('#addAdmin select').val("");
+							$('#addKeyword').modal('hide');
+							$('#addKeyword input').val("");
 							window.location.reload();
 						} else {
 							toastr.error('添加失败!');
@@ -120,7 +102,7 @@ function firstPage() {
 		toastr.error('已经是第一页！');
 		return;
 	}
-	query_data['adminVO.currPage'] = 1;
+	query_data['keywordVO.currPage'] = 1;
 	get_ListBreakecaseInformationByPageAndSearch(query_data);
 }
 // 上一页
@@ -129,7 +111,7 @@ function prePage() {
 		toastr.error('已经是第一页！');
 		return;
 	}
-	query_data['adminVO.currPage'] = page_infomantion.currPage - 1;
+	query_data['keywordVO.currPage'] = page_infomantion.currPage - 1;
 	get_ListBreakecaseInformationByPageAndSearch(query_data);
 }
 // 下一页
@@ -138,7 +120,7 @@ function nextPage() {
 		toastr.error('已经是最后一页！');
 		return;
 	}
-	query_data['adminVO.currPage'] = page_infomantion.currPage + 1;
+	query_data['keywordVO.currPage'] = page_infomantion.currPage + 1;
 	get_ListBreakecaseInformationByPageAndSearch(query_data);
 }
 // 尾页
@@ -147,12 +129,12 @@ function lastPage() {
 		toastr.error('已经是最后一页！');
 		return;
 	}
-	query_data['adminVO.currPage'] = page_infomantion.totalPages;
+	query_data['keywordVO.currPage'] = page_infomantion.totalPages;
 	get_ListBreakecaseInformationByPageAndSearch(query_data);
 }
 // 跳转到n页
 function toPage(object) {
-	query_data['adminVO.currPage'] = $(object).val();
+	query_data['keywordVO.currPage'] = $(object).val();
 	get_ListBreakecaseInformationByPageAndSearch(query_data);
 }
 
@@ -162,35 +144,28 @@ function toPage(object) {
  */
 function searchUsername(query_data){
 	$.post(
-			'/wlmtxt/Admin/Admin_getAdminListBysearchPage',
-			{'adminVO.admin_username':$('#input_PoliceSearchText').val() ,'worksVO.currPage' : 1 },
+			'/wlmtxt/Keyword/Keyword_getKeywordListBysearchPage',
+			{'keywordVO.keyword_name':$('#input_PoliceSearchText').val(),"keywordVO.currPage" : "1"},
 			function(xhr) {
-				var data_list = xhr.wlmtxt_adminList;
+				var data_list = xhr.wlmtxt_keywordList;
 				var str = '';
 				for (var len = 0; len < data_list.length; len++) {
-					if(data_list[len].admin_admin=="1"){
-						var admin_admin = '是'
-					}else{
-						var admin_admin = '否'
-					}
+					
 					str += '<tr>';
 					str += '<td>' + (len + 1) + '</td>';// 序号
-					str += '<td>' + data_list[len].admin_username
-							+ '</td>';// 账号
-					str += '<td>'
-							+ admin_admin
-							+ '</td>';// 是否超级管理员
-				
+					str += '<td>' + data_list[len].keyword_name
+							+ '</td>';// 关键词名
+					
 						str += '<td>'
 							+ '<input type="hidden" value="'
-							+ data_list[len].admin_id
+							+ data_list[len].keyword_id
 							+ '" />'
-						+ '<i  data-toggle="modal" data-target="#updateAdmin" onclick=getAdmin("'+data_list[len].admin_id+'") class="fa fa-pencil-square-o role_one" aria-hidden="true"></i>'
+						+ '<i  data-toggle="modal" data-target="#updateKeyword" onclick=getKeyword("'+data_list[len].keyword_id+'") class="fa fa-pencil-square-o role_one" aria-hidden="true"></i>'
 						+ '</td>';
 						
 						str += '<td>'
 							+ '<input  type="checkbox" class="checkbox_select" value="'
-							+ data_list[len].admin_id
+							+ data_list[len].keyword_id
 							+ '" >'
 							+ '</td>';
 						
@@ -229,10 +204,10 @@ function searchUsername(query_data){
 }
 
 /*
- * 得到管理员信息
+ * 得到关键词信息
  */
 
-function getAdmin(id){
+function getKeyword(id){
 	var xmlhttp;
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -243,38 +218,35 @@ function getAdmin(id){
 	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
 	var fromDate = new FormData();	
-	fromDate.append("admin.admin_id",id);
-	xmlhttp.open("post","/wlmtxt/Admin/Admin_getAdminById",true);
+	fromDate.append("keyword.keyword_id",id);
+	xmlhttp.open("post","/wlmtxt/Keyword/Keyword_getKeywordById",true);
 	xmlhttp.send(fromDate);
 	xmlhttp.onreadystatechange=function()
 	  {
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    {
-	    var admin=xmlhttp.responseText;
-	    admin = JSON.parse(admin);
-	    $('#updateAdmin_username').val(admin.admin_username);
-	    $('#updateAdmin_id').val(admin.admin_id);
-	    $('#updateAdmin_password').val(admin.admin_password);
-	    $('#updateAdmin_admin').val(admin.admin_admin);
+	    var keyword=xmlhttp.responseText;
+	    keyword = JSON.parse(keyword);
+	    $('#updatekeyword_name').val(keyword.keyword_name);
+	    $('#updatekeyword_id').val(keyword.keyword_id);
 	    }
 	  }
 }
 /*
- * 修改管理员信息
+ * 修改关键词信息
  */
 $('.update_input_sure').click(
 		function() {
 			var this_modal = $(this);
-			$.post('/wlmtxt/Admin/Admin_updateAdmin',
-					$('#updateAdmin form').serialize(), function(xhr) {
+			$.post('/wlmtxt/Keyword/Keyword_updateKeyword',
+					$('#updateKeyword form').serialize(), function(xhr) {
 						if (xhr == 1) {
-							toastr.success('添加成功!');
-							$('#updateAdmin').modal('hide');
-							$('#updateAdmin input').val("");
-							$('#updateAdmin select').val("");
+							toastr.success('修改成功!');
+							$('#updateKeyword').modal('hide');
+							$('#updateKeyword input').val("");
 							window.location.reload();
 						} else {
-							toastr.error('添加失败!');
+							toastr.error('修改失败!');
 							return false;
 						}
 					}, 'text')
@@ -282,13 +254,13 @@ $('.update_input_sure').click(
 
 
 /*
- * 删除管理员
+ * 删除关键词
  */  
-function deleteAdmin(){
+function deleteKeyword(){
 	$.confirm({
 		smoothContent : false,
-		title : '删除管理员',
-		content : '此操作将删除所有所选的管理员信息',
+		title : '删除关键词',
+		content : '此操作将删除所有所选的关键词',
 		type : 'red',
 		autoClose : '取消|5000',// 自动关闭
 		buttons : {
@@ -324,9 +296,9 @@ function deleteAdmin(){
 							str=arr.join(",")
 						}
 					}
-					formData.append("adminIDAll",str);
+					formData.append("keywordIDAll",str);
 
-					xhr.open("POST", "/wlmtxt/Admin/Admin_deleteAdmin");
+					xhr.open("POST", "/wlmtxt/Keyword/Keyword_deleteKeyword");
 					xhr.send(formData);
 				}
 			},
@@ -340,7 +312,7 @@ function deleteAdmin(){
  * 选中所有复选框
  */
 function all_select(){
-	var checkbox_all_select = document.getElementById("checkbox_all_select")
+	 var checkbox_all_select = document.getElementById("checkbox_all_select")
 	   var checkbox_select = document.getElementsByClassName("checkbox_select");
 	 if (checkbox_all_select.checked){
 	     //循环设置所有复选框为选中状态

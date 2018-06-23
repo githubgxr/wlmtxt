@@ -595,7 +595,7 @@ public class WorksServiceImpl implements WorksService {
 			//
 			notificationDTO.setNotification(notification);
 			//
-			WorksDTO worksDTO = getWorksDTOByID(notification.getNotification_id());
+			WorksDTO worksDTO = getWorksDTOByID(notification.getNotification_works());
 			notificationDTO.setWorksDTO(worksDTO);
 			//
 			notificationDTOList.add(notificationDTO);

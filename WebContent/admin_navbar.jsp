@@ -34,6 +34,10 @@
 <script type="text/javascript" src="<%=basePath%>js/icheck.js"></script> --%>
 <!--------------------------------------------------------------------------------->
 <!--------------------------------------------------------------------------------->
+<link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
+<script src="<%=basePath%>js/jquery-confirm.js"></script>
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 <link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
 <script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
 <!--------------------------------------------------------------------------------->

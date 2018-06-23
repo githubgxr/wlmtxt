@@ -24,5 +24,26 @@
 	<bean id="worksExamineAction" class="com.wlmtxt.Admin.action.WorksExamineAction">
 		<property name="worksExamineService" ref="worksExamineService"></property>
 	</bean>
+	
+	<bean id="keywordDao" class="com.wlmtxt.Admin.dao.impl.KeywordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="keywordService" class="com.wlmtxt.Admin.service.impl.KeywordServiceImpl">
+		<property name="keywordDao" ref="keywordDao"></property>
+	</bean>
+	<bean id="keywordAction" class="com.wlmtxt.Admin.action.KeywordAction">
+		<property name="keywordService" ref="keywordService"></property>
+	</bean>
+	
+	<bean id="adminUserDao" class="com.wlmtxt.Admin.dao.impl.AdminUserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="adminuserService" class="com.wlmtxt.Admin.service.impl.AdminUserServiceImpl">
+		<property name="adminUserDao" ref="adminUserDao"></property>
+	</bean>
+	<bean id="AdminUserAction" class="com.wlmtxt.Admin.action.AdminUserAction">
+		<property name="adminuserService" ref="adminuserService"></property>
+	</bean>
+	
 </beans>
 

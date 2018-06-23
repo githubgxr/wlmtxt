@@ -54,7 +54,7 @@
 				<div class="rank-table-body">
 					<ul class="ps ps--active-y"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
-					<%-- 	<li class="list_video_item">
+						<%-- 	<li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">
 									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
@@ -108,7 +108,7 @@
 				<div class="rank-table-body">
 					<ul class="ps ps--active-y"
 						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
-					<%-- 	<li class="list_video_item">
+						<%-- 	<li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">
 									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
@@ -208,5 +208,5 @@
 
 	<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 </body>
-
+<script type="text/javascript" src="<%=basePath%>js/index/index_rank.js"></script>
 </html>
