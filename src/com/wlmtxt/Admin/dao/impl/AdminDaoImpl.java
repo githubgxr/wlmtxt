@@ -1,5 +1,6 @@
 package com.wlmtxt.Admin.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +15,8 @@ import com.wlmtxt.domain.DO.wlmtxt_admin;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.VO.AdminVO;
 
 public class AdminDaoImpl implements AdminDao {
 
@@ -71,16 +74,6 @@ public class AdminDaoImpl implements AdminDao {
 
 	}
 
-	@Override
-	public void updateAdmin(wlmtxt_admin admin) {
-		try {
-			Session session=getSession();
-			session.update(admin);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
 
 	@Override
 	public List<wlmtxt_admin> listAdmin() {
@@ -111,7 +104,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<wlmtxt_second_menu> listCategoryByFather(String first_menu_id) {
 		Session session = getSession();
-		String hql = "from wlmtxt_second_menu where second_menu_first_menu_id='"+first_menu_id+"'";
+		String hql = "from wlmtxt_second_menu where second_menu_first_menu_id='"+first_menu_id+"' order by secondd_gmt_modified desc";
 		Query query = session.createQuery(hql);
 		List<wlmtxt_second_menu> secondMenuList = query.list();
 		return secondMenuList;
@@ -120,7 +113,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<wlmtxt_first_menu> listCategory() {
 		Session session = getSession();
-		String hql = "from wlmtxt_first_menu";
+		String hql = "from wlmtxt_first_menu order by first_menu_gmt_modified desc";
 		Query query = session.createQuery(hql);
 		List<wlmtxt_first_menu> fristMenuList = query.list();
 		return fristMenuList;
@@ -137,7 +130,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<wlmtxt_second_menu> getSecond_menuByFirstId(String first_menu_id) {
 		Session session = getSession();
-	    String hql="from wlmtxt_second_menu where second_menu_first_menu_id='"+first_menu_id+"'";
+	    String hql="from wlmtxt_second_menu where second_menu_first_menu_id='"+first_menu_id+"' order by secondd_gmt_modified desc";
 	    Query query = session.createQuery(hql);
 	    List<wlmtxt_second_menu> second_menuList = query.list();
 	    return second_menuList;
@@ -194,4 +187,86 @@ public class AdminDaoImpl implements AdminDao {
 		wlmtxt_second_menu second_menu = (wlmtxt_second_menu) query.uniqueResult();
 		return second_menu;
 	}
+
+	@Override
+	public boolean addAdmin(wlmtxt_admin admin) {
+		try {
+			Session session = getSession();
+			session.save(admin);
+			session.flush();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	
+
+	@Override
+	public boolean updateAdmin(wlmtxt_admin admin) {
+		try {
+			Session session = getSession();
+			System.out.println("admin"+admin);
+			session.update(admin);
+			session.flush();
+			System.out.println(admin+"update");
+			session.clear();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public wlmtxt_admin getAdminById(String admin_id) {
+		Session session = getSession();
+		String hql = "from wlmtxt_admin where admin_id='"+admin_id+"'";
+		Query query= session.createQuery(hql);
+		wlmtxt_admin admin = (wlmtxt_admin) query.uniqueResult();
+		return admin;
+	}
+
+	@Override
+	public int getCountAdminList(AdminVO adminVO) {
+		Session session = getSession();
+		String hql = "select count(*) from wlmtxt_admin where 1=1";
+		if (adminVO.getAdmin_username()!= null
+				&& adminVO.getAdmin_username().trim().length() > 0)
+			hql = hql + " and admin_username like '%" + adminVO.getAdmin_username() + "%'";
+		long count = (long) session.createQuery(hql).uniqueResult();
+		return (int) count;
+	}
+
+	@Override
+	public void getAdminListByPage(AdminVO adminVO) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		List<wlmtxt_admin> adminList = new ArrayList<wlmtxt_admin>();
+		String hql = "from wlmtxt_admin where 1=1 ";
+		if (adminVO.getAdmin_username()!= null
+				&& adminVO.getAdmin_username().trim().length() > 0)
+			hql = hql + " and admin_username like '%" + adminVO.getAdmin_username() + "%'";
+		hql = hql + " order by admin_gmt_modified desc";
+		Query query = session.createQuery(hql);	
+		query.setFirstResult(
+				(adminVO.getCurrPage() - 1) * adminVO.getPageSize());
+		query.setMaxResults(adminVO.getPageSize());
+		adminList = query.list();
+		adminVO.setWlmtxt_adminList(adminList);
+		session.clear();
+	}
+
+	@Override
+	public void deleteAdmin(String admin_id) {
+		Session session = getSession();
+		String hql = "delete from wlmtxt_admin where admin_id='"+admin_id+"'";
+		Query query =session .createQuery(hql);
+		query.executeUpdate();
+		session.flush();
+		session.clear();
+	}
+
+	
 }

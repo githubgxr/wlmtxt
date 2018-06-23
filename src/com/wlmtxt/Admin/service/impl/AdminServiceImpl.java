@@ -4,6 +4,7 @@ package com.wlmtxt.Admin.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import org.hibernate.*;
 
@@ -15,7 +16,7 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DTO.CategoryListDTO;
-
+import com.wlmtxt.domain.VO.AdminVO;
 
 import util.TeamUtil;
 
@@ -65,9 +66,10 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void updateAdmin(wlmtxt_admin admin) {
-
-		adminDao.updateAdmin(admin);
+	public boolean updateAdmin(wlmtxt_admin admin) {
+		admin.setAdmin_gmt_modified(TeamUtil.getStringSecond());
+		System.out.println(admin+"sssssss");
+		return adminDao.updateAdmin(admin);
 	}
 
 	@Override
@@ -165,5 +167,39 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public wlmtxt_second_menu getSecondById(String second_menu_id) {
 		return adminDao.getSecondById(second_menu_id);
+	}
+	@Override
+	public boolean addAdmin(wlmtxt_admin admin) {
+		admin.setAdmin_id(TeamUtil.getUuid());
+		String time = TeamUtil.getStringSecond();
+		admin.setAdmin_gmt_create(time);
+		admin.setAdmin_gmt_modified(time);
+		if(adminDao.addAdmin(admin)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	@Override
+	public void getAdminListBysearchPage(AdminVO adminVO) {
+		int count = adminDao.getCountAdminList(adminVO);
+		adminVO.setTotalCount(count);
+		adminVO.setPageSize(10);
+		adminVO.setTotalPage((int) Math.ceil((double) count / adminVO.getPageSize()));
+		adminDao.getAdminListByPage(adminVO);
+	}
+	@Override
+	public wlmtxt_admin getAdminById(String admin_id) {
+	     
+		return adminDao.getAdminById(admin_id);
+	}
+	@Override
+	public boolean deleteAdmin(String adminIDAll) {
+		String[] arr = adminIDAll.split(",");
+		for(String admin_id : arr){
+			adminDao.deleteAdmin(admin_id);
+		}
+		return true;
 	}
 }
