@@ -52,7 +52,7 @@ function cancelFocus(focus_user_id){
 	var xhrhp=new XMLHttpRequest();
 	xhrhp.open("POST","/wlmtxt/User/User_followUser");
 	var formData=new FormData();
-	formData.append("accpet_user.user_id",focus_user_id);
+	formData.append("accept_user.user_id",focus_user_id);
 	xhrhp.send(formData);
 	xhrhp.onreadystatechange=function(){
 		if(xhrhp.readyState==4&&xhrhp.status==200){
