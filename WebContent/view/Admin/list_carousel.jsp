@@ -11,7 +11,7 @@
 <head>
 
 
-<title>轮播图列表</title>
+<title>用户列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 .table_police tbody tr {
@@ -32,7 +32,11 @@
 		<div  style="width: 95%; margin: 20px auto;">
 				<!--  -->
 						
-							
+							<div style="height: 34px; width: 100%;">
+								
+
+							</div>
+
 							<table id="table_police" class="table table-hover breakcase_table_info"
 								style="text-align: center; margin: 20px 0;">
 								
@@ -40,30 +44,38 @@
 									<tr>
 										<th>序号</th>
 										<th>标题</th>
+										<th>排序值</th>
 										<th>操作</th>
+										<th><label class="fancy-checkbox"> <input
+												id="checkbox_all_select" type="checkbox"
+												onclick="all_select()"> <span></span>
+										</label></th>
 									</tr>
 								</thead>
 								<tbody></tbody>
 								<tfoot>
 									<tr>
-										<td colspan="8" style="font-size: 12px;" class="page_info"><a
-											onclick="firstPage()"><i class="fa fa-angle-double-left">首页</i>
-										</a>&nbsp&nbsp<a onclick="prePage()"><i
-												class="fa fa-angle-left"></i>上一页 </a>&nbsp&nbsp<a
-											onclick="nextPage()">下一页<i class="fa fa-angle-right"></i>
-										</a>&nbsp&nbsp <a onclick="lastPage()">尾页<i
-												class="fa fa-angle-double-right"></i>
-										</a> <br />
-											<p class='admin'></p></td>
+										<td colspan="8"></td>
 									</tr>
 								</tfoot>
 								
 							</table>
-							
-							
+								
+							</table>
+		
+	<!-- ----------------------------------------------------------------------------------------- -->						
+							<!-- 删除按钮 -->
+							<div style="height: 34px;" id="btn_delete" >
+								<button class="btn btn-danger role_one" onclick="deleteRecomment()"
+									style="float: right; margin: 0 10px;">
+									<i class="fa fa-trash-o"></i> 删除所选
+								</button>
+							</div>
 		</div>
 	</div>
+
+
 	<script type="text/javascript"
-		src="<%=basePath%>js/Admin/add_carousel.js"></script>
+		src="<%=basePath%>js/Admin/list_carousel.js"></script>
 </body>
 </html>

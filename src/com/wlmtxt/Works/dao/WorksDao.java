@@ -96,6 +96,12 @@ public interface WorksDao {
 
 	List<wlmtxt_works> listWorksAllByUserId(String user_id);
 
+	List<wlmtxt_works> getWorksByPage(int pageIndex, int pageSize);
+
+	List<wlmtxt_works> getWorksBySecondMenuAndPage(int pageIndex, int pageSize, String SecondMenuID);
+
+	List<wlmtxt_works> getWorksByFirstMenuAndPage(int pageIndex, int pageSize, String FirstMenuID);
+
 	int getLikeNum(String works_id);
 
 	int getCollectNum(String works_id);

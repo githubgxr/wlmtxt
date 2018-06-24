@@ -66,7 +66,7 @@
 						<a href="/wlmtxt/view/personal_center/personal_center_watch_history.jsp"><img src="<%=basePath%>/img/llls1.png" />观看历史</a>
 					</li>
 					<li>
-						<a href="/wlmtxt/view/personal_center/personal_center_relation_collection.jsp"><img src="<%=basePath%>/img/ywxg1.png" />与我相关</a>
+						<a href="/wlmtxt/view/personal_center/personal_center_relation_collection.jsp"><img src="<%=basePath%>/img/ywxg1.png" />我的动作</a>
 					</li>
 					<li>
 						<a href="/wlmtxt/view/personal_center/personal_center_appreciates_notice.jsp"><img src="<%=basePath%>/img/xxtz1.png" />消息中心</a>

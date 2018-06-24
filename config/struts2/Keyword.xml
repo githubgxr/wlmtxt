@@ -6,7 +6,7 @@
 	<package name="Keyword" namespace="/Keyword" extends="struts-default">
 		<action name="Keyword_*" class="com.wlmtxt.Admin.action.KeywordAction"
 			method="{1}">
-		
+		<result name="list_keyword">/view/Admin/list_keyword.jsp</result>
 		</action>
 	</package>
 </struts>

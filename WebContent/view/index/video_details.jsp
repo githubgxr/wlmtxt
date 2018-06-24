@@ -52,17 +52,20 @@
 
 				<div style="float: right; margin: 0 0 0 20px; width: 170px;">
 					<!--用户名-->
-					<div id="detail_user_name" class="to_other_data" style="color: #1cd388;"></div>
+					<div id="detail_user_name" class="to_other_data"
+						style="color: #1cd388;"></div>
 					<!--个人介绍-->
 					<div id="detail_user_bio"
 						style="color: #99a2aa; height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;"></div>
 					<!--关注和粉丝-->
 					<div style="color: #99a2aa;">
 						<div style="width: 85px; float: left;">
-							关注：<span id="his_attention" class="detail_user_focus_num" style="color: #1cd388;"></span>
+							关注：<span id="his_attention" class="detail_user_focus_num"
+								style="color: #1cd388;"></span>
 						</div>
 						<div style="width: 85px; float: right;">
-							粉丝：<span id="his_fans" class="detail_user_fans_num" style="color: #1cd388;"></span>
+							粉丝：<span id="his_fans" class="detail_user_fans_num"
+								style="color: #1cd388;"></span>
 						</div>
 					</div>
 					<div>
@@ -96,15 +99,15 @@
 						</div> -->
 						<div class="dz_no user_operate" id="thumbs_number_div"
 							style="float: right;">
-							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number"></span>
+							<i class="fas fa-thumbs-up"></i>&nbsp;<span id="thumbs_number"></span>
 						</div>
 						<div class="dz_no user_operate" id="collect_number_div"
 							style="float: right; margin: 0 20px;">
-							<i class="fas fa-heart"></i>&nbsp;收藏<span id="collect_number"></span>
+							<i class="fas fa-heart"></i>&nbsp;<span id="collect_number"></span>
 						</div>
-						<div class="dz_no" id="play_number_div"
+						<div class="dz_yes" id="play_number_div"
 							style="float: right; margin: 0">
-							<i class="fas fa-play-circle"></i>&nbsp;播放<span id="play_number"></span>
+							<i class="fas fa-play-circle"></i>&nbsp;<span id="play_number"></span>
 						</div>
 					</div>
 				</div>

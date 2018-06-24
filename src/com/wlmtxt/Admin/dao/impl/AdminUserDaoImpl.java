@@ -10,6 +10,8 @@ import org.hibernate.SessionFactory;
 import com.wlmtxt.Admin.dao.AdminUserDao;
 import com.wlmtxt.domain.DO.wlmtxt_keyword;
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.DTO.AdmindiscussDTO;
+import com.wlmtxt.domain.VO.DiscussVO;
 import com.wlmtxt.domain.VO.UserVO;
 
 public class AdminUserDaoImpl implements AdminUserDao {
@@ -92,5 +94,48 @@ public class AdminUserDaoImpl implements AdminUserDao {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public int getCountdiscussList(DiscussVO discussVO) {
+		Session session = getSession();
+		String hql = "select count(*) from wlmtxt_discuss ,wlmtxt_user where discuss_user_id=user_id and 1=1";
+		if (discussVO.getDiscuss_content()!= null
+				&& discussVO.getDiscuss_content().trim().length() > 0)
+			hql = hql + " and discuss_content like '%" + discussVO.getDiscuss_content() + "%'";
+		if (discussVO.getUser_mail()!= null
+				&& discussVO.getUser_mail().trim().length() > 0)
+			hql = hql + " and user_mail like '%" + discussVO.getUser_mail() + "%'";
+		if (discussVO.getUser_username()!= null
+				&& discussVO.getUser_username().trim().length() > 0)
+			hql = hql + " and user_username like '%" + discussVO.getUser_username() + "%'";
+		long count = (long) session.createQuery(hql).uniqueResult();
+		return (int) count;
+	}
+
+	@Override
+	public void getdiscussListByPage(DiscussVO discussVO) {
+		Session session = getSession();
+		List<AdmindiscussDTO> admindiscussDTOList = new ArrayList<AdmindiscussDTO>();
+		String hql = "from wlmtxt_discuss ,wlmtxt_user where discuss_user_id=user_id and 1=1";
+		if (discussVO.getDiscuss_content()!= null
+				&& discussVO.getDiscuss_content().trim().length() > 0)
+			hql = hql + " and discuss_content like '%" + discussVO.getDiscuss_content() + "%'";
+		if (discussVO.getUser_mail()!= null
+				&& discussVO.getUser_mail().trim().length() > 0)
+			hql = hql + " and user_mail like '%" + discussVO.getUser_mail() + "%'";
+		if (discussVO.getUser_username()!= null
+				&& discussVO.getUser_username().trim().length() > 0)
+			hql = hql + " and user_username like '%" + discussVO.getUser_username() + "%'";
+		hql = hql + " order by discuss_gmt_modified desc";
+		Query query = session.createQuery(hql);	
+		query.setFirstResult(
+				(discussVO.getCurrPage() - 1) * discussVO.getPageSize());
+		query.setMaxResults(discussVO.getPageSize());
+		admindiscussDTOList = query.list();
+		discussVO.setAdmindiscussDTOList(admindiscussDTOList);
+		session.clear();
+		
+		
 	}
 }

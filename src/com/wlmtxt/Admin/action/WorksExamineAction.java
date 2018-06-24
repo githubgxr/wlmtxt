@@ -2,6 +2,7 @@ package com.wlmtxt.Admin.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wlmtxt.Admin.service.WorksExamineService;
 import com.wlmtxt.domain.DO.wlmtxt_recommend;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.RecommendDTO;
 import com.wlmtxt.domain.VO.WorksVO;
 
 public class WorksExamineAction extends ActionSupport {
@@ -25,7 +27,16 @@ public class WorksExamineAction extends ActionSupport {
    private wlmtxt_recommend recommend;
    private String recommendIdAll;
    private int  moveAction;
+   private List<RecommendDTO> recommendDTOList;
    
+public List<RecommendDTO> getRecommendDTOList() {
+	return recommendDTOList;
+}
+
+public void setRecommendDTOList(List<RecommendDTO> recommendDTOList) {
+	this.recommendDTOList = recommendDTOList;
+}
+
 public List<wlmtxt_recommend> getWlmtxt_recommendList() {
 	return wlmtxt_recommendList;
 }
@@ -158,14 +169,16 @@ public void passed() throws IOException{
  * 得到所有轮播图
  */
 public void listrecommend() throws IOException{
-	wlmtxt_recommendList = worksExamineService.listrecommend();
+	
+	recommendDTOList = worksExamineService.listrecommend();
+	System.out.println(recommendDTOList+"jjgifjgijfigjfigjifji");
 	HttpServletResponse response = ServletActionContext.getResponse();
 	response.setContentType("text/html;charset=utf-8");
 	PrintWriter pw = response.getWriter();
 	 GsonBuilder gsonBuilder = new GsonBuilder();
  	 gsonBuilder.setPrettyPrinting();// 格式化json数据
  	 Gson gson = gsonBuilder.create();
- 	 pw.write(gson.toJson(wlmtxt_recommendList));
+ 	 pw.write(gson.toJson(recommendDTOList));
 }
 /*
  * 添加轮播图
@@ -207,4 +220,18 @@ public void moveRecommend() throws IOException{
 	}
 	
 }
+/*
+ * 跳转到添加轮播图
+ */
+public String add_carousel(){
+	return "add_carousel";
+}
+/*
+ * 跳转到轮播图列表
+ * 
+ */
+public String list_carousel(){
+	return  "list_carousel";
+}
+ 
 }

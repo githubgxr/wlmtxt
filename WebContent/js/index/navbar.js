@@ -281,8 +281,8 @@ function login() {
 			$(".log_alert_div").css("display", "none");
 			/* 和后台交互 */
 			var formData = new FormData();
-			formData.append("accpet_user.user_mail", login_email);
-			formData.append("accpet_user.user_password", login_password);
+			formData.append("accept_user.user_mail", login_email);
+			formData.append("accept_user.user_password", login_password);
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "/wlmtxt/User/User_loign");
 			xhr.send(formData);
@@ -325,9 +325,9 @@ function register() {
 	var register_repassword = $("#register_repassword").val();// 确认密码
 	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var formData = new FormData();
-	formData.append("accpet_user.user_username", register_username);
-	formData.append("accpet_user.user_mail", register_email);
-	formData.append("accpet_user.user_password", register_password);
+	formData.append("accept_user.user_username", register_username);
+	formData.append("accept_user.user_mail", register_email);
+	formData.append("accept_user.user_password", register_password);
 	if (register_username == "" || register_username == null) {
 		// 用户名正确
 		$(".log_alert_div").html("请输入用户名！");
@@ -419,7 +419,7 @@ function register() {
 function getBackPassword() {
 	var forget_password_email = $("#forget_password_email").val();// 注册邮箱
 	var formData = new FormData();
-	formData.append("accpet_user.user_mail", forget_password_email);
+	formData.append("accept_user.user_mail", forget_password_email);
 	// 找回密码
 	if (filter.test(forget_password_email)) {
 		$(".log_alert_div").html("");
@@ -506,6 +506,6 @@ $("#forget_password_div").bind("keydown",function(e){
 //跳转至其他人的页面
 function to_other_data(other_id){
 	// 跳转到他人页面
-		window.location.href = "/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
+		window.location.href = "/wlmtxt/Works/Works_personal_cente_other_data?accept_user.user_id="
 				+ other_id;
 }

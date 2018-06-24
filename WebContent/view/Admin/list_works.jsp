@@ -76,17 +76,18 @@
 
 								</tbody>
 								<tfoot>
-									<tr>
-										<td colspan="8" style="font-size: 12px;" class="page_info"><a
-											onclick="firstPage()"><i class="fa fa-angle-double-left">首页</i>
-										</a>&nbsp&nbsp<a onclick="prePage()"><i
-												class="fa fa-angle-left"></i>上一页 </a>&nbsp&nbsp<a
-											onclick="nextPage()">下一页<i class="fa fa-angle-right"></i>
-										</a>&nbsp&nbsp <a onclick="lastPage()">尾页<i
-												class="fa fa-angle-double-right"></i>
-										</a> <br />
-											<p class='info'></p></td>
-									</tr>
+									<td colspan="8"></td>
+<!-- 									<tr> -->
+<!-- 										<td colspan="8" style="font-size: 12px;" class="page_info"><a -->
+<!-- 											onclick="firstPage()"><i class="fa fa-angle-double-left">首页</i> -->
+<!-- 										</a>&nbsp&nbsp<a onclick="prePage()"><i -->
+<!-- 												class="fa fa-angle-left"></i>上一页 </a>&nbsp&nbsp<a -->
+<!-- 											onclick="nextPage()">下一页<i class="fa fa-angle-right"></i> -->
+<!-- 										</a>&nbsp&nbsp <a onclick="lastPage()">尾页<i -->
+<!-- 												class="fa fa-angle-double-right"></i> -->
+<!-- 										</a> <br /> -->
+<!-- 											<p class='info'></p></td> -->
+<!-- 									</tr> -->
 								</tfoot>
 							</table>
 						</div>

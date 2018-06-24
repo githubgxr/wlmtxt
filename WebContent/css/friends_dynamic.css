@@ -14,13 +14,11 @@
 }
 
 .video_options {
-	width: 900px;
 	float: left;
-	margin: 0 10px 10px 10px;
 }
 
 .info_dynamic_name, .info_dynamic_time {
-	width: 845px;
+	width: 505px;
 	height: 25px;
 	float: left;
 	line-height: 25px;
@@ -37,7 +35,7 @@
 }
 
 .info_dynamic_title, .info_dynamic_concise {
-	width: 900px;
+	width: 100%;
 	height: 25px;
 	line-height: 25px;
 	float: left;
@@ -47,7 +45,7 @@
 	/* color:#333; */
 	color: #1cd388;
 	margin: 5px 0 0 0;
-	font-size: 15px;
+	font-size: 18px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

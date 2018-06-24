@@ -45,7 +45,7 @@ public class WorksAction extends ActionSupport {
 	//
 	wlmtxt_user accept_user;
 	wlmtxt_works accept_works;
-	wlmtxt_discuss accpet_discuss;
+	wlmtxt_discuss accept_discuss;
 	wlmtxt_first_menu first_menu;
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
@@ -188,6 +188,34 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void listWorksByKeywordAndMenu() throws IOException {
 		List<WorksDTO> worksDTOList = worksService.listWorksByKeywordAndMenu(accept_works.getWorks_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	public void hotRecommend() throws IOException {
+		List<WorksDTO> worksDTOList = null;
+		worksDTOList = worksService.hotRecommend();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	public void collaborativeFilteringByUser() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<WorksDTO> worksDTOList = null;
+		if (user == null) {
+			worksDTOList = worksService.collaborativeFilteringByUser(null);
+		} else {
+			worksDTOList = worksService.collaborativeFilteringByUser(user.getUser_id());
+		}
+
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -359,8 +387,8 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void discussWorks() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		accpet_discuss.setDiscuss_user_id(user.getUser_id());
-		worksService.discussWorks(accpet_discuss);
+		accept_discuss.setDiscuss_user_id(user.getUser_id());
+		worksService.discussWorks(accept_discuss);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
@@ -374,7 +402,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void deleteDisscuss() throws IOException {
-		worksService.deleteDisscuss(accpet_discuss.getDiscuss_id());
+		worksService.deleteDisscuss(accept_discuss.getDiscuss_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
@@ -424,14 +452,16 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
+	DynamicVO dynamicVO;
+
 	/**
 	 * 获取9条关注者的动态
 	 * 
 	 * @throws IOException
 	 */
-	public void getDynamicVO() throws IOException {
+	public void getFriendsDynamicVO() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		DynamicVO dynamicVO = worksService.getDynamicVO(user.getUser_id());
+		dynamicVO = worksService.getDynamicVO(user.getUser_id(), dynamicVO);
 		/*
 		 * 
 		 */
@@ -467,6 +497,25 @@ public class WorksAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(worksDTOList));
 	}
+
+	// /*
+	// * 分类页VO
+	// */
+	// WorksCategoryVO worksCategoryVO;
+	//
+	// /**
+	// *
+	// * @throws IOException
+	// */
+	// public void getWorksByCategoryPage() throws IOException {
+	// worksCategoryVO = worksService.getWorksByCategoryPage(worksCategoryVO);
+	// GsonBuilder gsonBuilder = new GsonBuilder();
+	// gsonBuilder.setPrettyPrinting();// 格式化json数据
+	// Gson gson = gsonBuilder.create();
+	// HttpServletResponse response = ServletActionContext.getResponse();
+	// response.setContentType("text/html;charset=utf-8");
+	// response.getWriter().write(gson.toJson(worksCategoryVO));
+	// }
 
 	/**
 	 * 根据登陆的的用户，获取他的所有通知
@@ -546,7 +595,6 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void listWorksBySecondMenuID() throws IOException {
-		System.out.println(second_menu.getSecond_menu_id());
 		List<WorksDTO> worksDTOList = worksService.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -716,13 +764,10 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void totalFansNum() throws IOException {
-		// wlmtxt_user loginUser = (wlmtxt_user)
-		// ActionContext.getContext().getSession().get("loginResult");
-		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int num = worksService.totalFansNum(loginUser);
+		int num = worksService.totalFansNum(accept_user);
 		pw.write(String.valueOf(num));
 	}
 
@@ -740,29 +785,11 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void totalFollowingNum() throws IOException {
-		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int num = worksService.totalFollowingNum(loginUser);
+		int num = worksService.totalFollowingNum(accept_user);
 		pw.write(String.valueOf(num));
-	}
-
-	/**
-	 * 个人中心的搜索： 搜索我的动态（作品标题、二级分类）: 接收，option=dynamic, searchword; 返回分类列表
-	 * 我的关注（用户昵称、邮箱）：接收，option=attention， searchword; 返回分类列表
-	 * 我的粉丝（用户昵称、邮箱）：接收，option=fans， searchword; 返回分类列表
-	 * 观看历史（作品标题、二级分类）：接收，option=playhistory， searchword; 返回分类列表
-	 * 与我相关（作品标题、二级分类）：接收，option=relation， searchword; 返回分类列表
-	 * 
-	 * @date 2018年6月21日 下午4:43:04
-	 * 
-	 * @author gxr
-	 * 
-	 *         TODO
-	 */
-	public void search() {
-
 	}
 
 	/**
@@ -880,12 +907,12 @@ public class WorksAction extends ActionSupport {
 		this.accept_works = accept_works;
 	}
 
-	public wlmtxt_discuss getAccpet_discuss() {
-		return accpet_discuss;
+	public wlmtxt_discuss getAccept_discuss() {
+		return accept_discuss;
 	}
 
-	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
-		this.accpet_discuss = accpet_discuss;
+	public void setAccept_discuss(wlmtxt_discuss accept_discuss) {
+		this.accept_discuss = accept_discuss;
 	}
 
 	public wlmtxt_first_menu getFirst_menu() {
@@ -998,6 +1025,14 @@ public class WorksAction extends ActionSupport {
 
 	public MyWorksVO getMyWorksVO() {
 		return myWorksVO;
+	}
+
+	public void setDynamicVO(DynamicVO dynamicVO) {
+		this.dynamicVO = dynamicVO;
+	}
+
+	public DynamicVO getDynamicVO() {
+		return dynamicVO;
 	}
 
 	/**

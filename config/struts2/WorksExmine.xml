@@ -7,6 +7,8 @@
 		<action name="WorksExamine_*" class="com.wlmtxt.Admin.action.WorksExamineAction"
 			method="{1}">
 			<result name="list_works">/view/Admin/list_works.jsp</result>
+			<result name="add_carousel">/view/Admin/add_carousel.jsp</result>
+			<result name="list_carousel">/view/Admin/list_carousel.jsp</result>
 		</action>
 	</package>
 </struts>
