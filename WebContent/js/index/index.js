@@ -1,7 +1,104 @@
 indexListRank();
 collaborativeFilteringByUser();
 hotRecommend();
+listrecommend();
+function listrecommend() {
+	var xhr_week = new XMLHttpRequest();
+	xhr_week.open("POST", "/wlmtxt/WorksExamine/WorksExamine_listrecommend");
+	xhr_week.send(null);
+	xhr_week.onreadystatechange = function() {
+		if (xhr_week.readyState == 4 && xhr_week.status == 200) {
+			var listrecommend = JSON.parse(xhr_week.responseText);
 
+			if (listrecommend[0] != null) {
+				var lbt_1 = '<div id="dtj" style="background-size:660px 385px ; background-image:url(\'\'); height: 330px; width: 660px; float: left;">'
+						+ '<ul id="llls_list_container">'
+						+ '<li class="index_list_video_item" style="width: 660px; margin: 0 20px 10px 0;">'
+						+ '<!--视频链接--> <a class="video_list_item_wrap" style="height: 450px; width: 660px;">'
+						+ '<div class="video_cover">'
+						+ '<img class="video_img" src="<%=basePath%>css/zb/img/4.png" style="height: 385px; width: 660px;" />'
+						+ '<div class="category_name">分类</div>'
+						+ '<div class="video_overplay" style="width: 660px; height: 385px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '</div> <!--视频信息-->'
+						+ '<div class="video_info" style="width: 660px; height: 40px; margin: 5px 0;">'
+						+ '<!--标题-->'
+						+ '<div class="video_title" style="font-size: 12px; margin-left: 5px; width: 600px;">'
+						+ listrecommend[0].works.works_title
+						+ '</div>'
+						+ '<!--浏览量-->'
+						+ '<div class="video_hot">425</div>'
+						+ '<!--用户名-->'
+						+ '<div class="video_username" style="width: 660px;">【10月】樱花庄的宠物女孩05【千夏】</div>'
+						+ '</div>'
+						+ '</a> <!--视频分类-->'
+						+ '<div class="video_label" style="width: 660px; height: 40px;">'
+						+ '<div class="video_label_content">'
+						+ '<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>'
+						+ '<a class="video_label_item">绝地求生</a>'
+						+ '</div>'
+						+ '</div>' + '</li>' + '</ul>' + '</div>';
+				$("#lbt_con").append(lbt_1);
+			}
+			if (listrecommend[1] != null) {
+				var lbt_2 = '<li class="index_list_video_item" style="width: 240px; margin: 0 20px 10px 0;">'
+						+ '<!--视频链接--> <a class="video_list_item_wrap" style="height: 200px; width: 240px;">'
+						+ '<div class="video_cover">'
+						+ '<img class="video_img" src="<%=basePath%>css/zb/img/4.png" style="width: 240px; height: 135px;" />'
+						+ '<div class="category_name">分类</div>'
+						+ '<div class="video_overplay" style="width: 240px; height: 135px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '</div> <!--视频信息-->'
+						+ '<div class="video_info" style="width: 240px; height: 40px; margin: 5px 0;">'
+						+ '<!--标题-->'
+						+ '<div class="video_title" style="font-size: 12px; margin-left: 5px;">'
+						+ listrecommend[1].works.works_title
+						+ '</div>'
+						+ '<!--浏览量-->'
+						+ '<div class="video_hot">425</div>'
+						+ '<!--用户名-->'
+						+ '<div class="video_username" style="width: 220px;">【10月】樱花庄的宠物女孩05【千夏】</div>'
+						+ '</div>'
+						+ '</a> <!--视频分类-->'
+						+ '<div class="video_label" style="width: 220px; height: 40px;">'
+						+ '<div class="video_label_content">'
+						+ '<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>'
+						+ '<a class="video_label_item">绝地求生</a>'
+						+ '</div>'
+						+ '</div>' + '</li>';
+				$("#lbt_little_con").append(lbt_2);
+			}
+			if (listrecommend[2] != null) {
+				var lbt_3 = '<li class="index_list_video_item" style="width: 240px; margin: 0 20px 10px 0;">'
+						+ '<!--视频链接--> <a class="video_list_item_wrap" style="height: 200px; width: 240px;">'
+						+ '<div class="video_cover">'
+						+ '<img class="video_img" src="<%=basePath%>css/zb/img/4.png" style="width: 240px; height: 135px;" />'
+						+ '<div class="category_name">分类</div>'
+						+ '<div class="video_overplay" style="width: 240px; height: 135px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '</div> <!--视频信息-->'
+						+ '<div class="video_info" style="width: 240px; height: 40px; margin: 5px 0;">'
+						+ '<!--标题-->'
+						+ '<div class="video_title" style="font-size: 12px; margin-left: 5px;">'
+						+ listrecommend[2].works.works_title
+						+ '</div>'
+						+ '<!--浏览量-->'
+						+ '<div class="video_hot">425</div>'
+						+ '<!--用户名-->'
+						+ '<div class="video_username" style="width: 220px;">【10月】樱花庄的宠物女孩05【千夏】</div>'
+						+ '</div>'
+						+ '</a> <!--视频分类-->'
+						+ '<div class="video_label" style="width: 220px; height: 40px;">'
+						+ '<div class="video_label_content">'
+						+ '<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>'
+						+ '<a class="video_label_item">绝地求生</a>'
+						+ '</div>'
+						+ '</div>' + '</li>';
+				$("#lbt_little_con").append(lbt_3);
+			}
+		}
+	}
+}
 function hotRecommend() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "/wlmtxt/Works/Works_hotRecommend");
