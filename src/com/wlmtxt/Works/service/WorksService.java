@@ -158,7 +158,7 @@ public interface WorksService {
 	 * @param userID
 	 * @return
 	 */
-	public List<wlmtxt_works> collaborativeFilteringByUser(String userID);
+	public List<WorksDTO> collaborativeFilteringByUser(String userID);
 
 	/**
 	 * 计算用户对某个作品的喜爱值 <br>

@@ -98,7 +98,20 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public List<wlmtxt_works> collaborativeFilteringByUser(String userID) {
+	public List<WorksDTO> collaborativeFilteringByUser(String userID) {
+		if (userID == null) {
+			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
+
+			worksFinallyList = worksDao.listWorksAll();
+			worksFinallyList.subList(0, 5);
+			for (wlmtxt_works works : worksFinallyList) {
+				WorksDTO worksDTO = new WorksDTO();
+				worksDTO = getWorksDTOByID(works.getWorks_id());
+				worksDTOList.add(worksDTO);
+			}
+			return worksDTOList;
+		}
 		// 取出用户信息和作品信息
 		wlmtxt_user curUser = userService.get_user_byID(userID);
 		List<wlmtxt_works> worksAll = worksDao.listWorksAll();
@@ -199,7 +212,18 @@ public class WorksServiceImpl implements WorksService {
 		/*
 		 * 
 		 */
-		return worksFinallyList;
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		for (wlmtxt_works works : worksFinallyList) {
+			WorksDTO worksDTO = new WorksDTO();
+			worksDTO = getWorksDTOByID(works.getWorks_id());
+			worksDTOList.add(worksDTO);
+		}
+
+		/*
+		 * 
+		 */
+
+		return worksDTOList;
 	}
 
 	@Override
