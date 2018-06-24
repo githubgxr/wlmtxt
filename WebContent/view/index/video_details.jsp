@@ -47,22 +47,22 @@
 			<!--用户-->
 			<div style="width: 260px; float: right; margin: 15px 0 0 0;">
 				<!--用户头像-->
-				<img id="detail_user_img" class="user_img" src=""
+				<img id="detail_user_img" class="user_img to_other_data" src=""
 					style="float: left;" />
 
 				<div style="float: right; margin: 0 0 0 20px; width: 170px;">
 					<!--用户名-->
-					<div id="detail_user_name" style="color: #1cd388;"></div>
+					<div id="detail_user_name" class="to_other_data" style="color: #1cd388;"></div>
 					<!--个人介绍-->
 					<div id="detail_user_bio"
 						style="color: #99a2aa; height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;"></div>
 					<!--关注和粉丝-->
 					<div style="color: #99a2aa;">
 						<div style="width: 85px; float: left;">
-							关注：<span id="his_attention" class="user_focus_num" style="color: #1cd388;"></span>
+							关注：<span id="his_attention" class="detail_user_focus_num" style="color: #1cd388;"></span>
 						</div>
 						<div style="width: 85px; float: right;">
-							粉丝：<span id="his_fans" class="user_fans_num" style="color: #1cd388;"></span>
+							粉丝：<span id="his_fans" class="detail_user_fans_num" style="color: #1cd388;"></span>
 						</div>
 					</div>
 					<div>
@@ -154,7 +154,7 @@
 					<span id="discussNum">0</span>&nbsp;评论
 				</div>
 				<!--发表评论-->
-				<div>
+				<div id="comment_operate_div">
 					<textarea class="form-control textarea_pl" id="textarea_comment"
 						style="width: 90%; float: left;"></textarea>
 					<div class="button_pl user_operate" style="float: right;"
@@ -272,12 +272,6 @@
 		src="<%=basePath%>js/index/video_details.js"></script>
 	<script type="text/javascript"
 		src="<%=basePath%>js/index/focus_and_fans_num.js"></script>
-		<script type="text/javascript">
-		//获取关注量
-		getfocusNum($("#user_id").html());
-		//获取粉丝量
-		getfansNum($("#user_id").html());
-		</script>
 </body>
 
 </html>
