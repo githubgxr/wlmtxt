@@ -1,5 +1,37 @@
-
-
+//忘记密码获取enter监听
+$("#get_password_check_div").bind("keydown",function(e){
+        // 兼容FF和IE和Opera    
+    var theEvent = e || window.event;    
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+    if (code == 13) {    
+        //回车执行查询
+            $("#get_password_check_btn").click();
+        }    
+});
+function checkPassword(){
+	var input_new_password = $("#input_new_password").val();
+	if (input_new_password.length < 6 || input_new_password.length > 15) {
+		/* 密码错误 */
+		$("#get_password_alert_div").html("请输入6~15位的密码！");
+		$("#get_password_alert_div").css("display","block");
+		return false;
+	}else{
+		$("#get_password_alert_div").html("");
+		$("#get_password_alert_div").css("display","none");
+	}
+}
+function checkRepassword(){
+	var input_new_password = $("#input_new_password").val();
+	var input_new_repassword = $("#input_new_repassword").val();
+	if (input_new_password !== input_new_repassword) {
+		$("#get_password_alert_div").html("两次密码不一致！");
+		$("#get_password_alert_div").css("display","block");
+		return false;
+	}else{
+		$("#get_password_alert_div").html("");
+		$("#get_password_alert_div").css("display","none");
+	}
+}
 function GetRequest() {
 	var url = location.search; // 获取url中"?"符后的字串
 	var theRequest = new Object();
@@ -23,12 +55,15 @@ document.getElementById("get_password_check_btn").onclick = function() {
 	console.log("input_new_repassword:"+input_new_repassword);
 	if (input_new_password.length < 6 || input_new_password.length > 15) {
 		/* 密码错误 */
-		alert("请输入6~15位的密码！");
+		
+		$("#get_password_alert_div").html("请输入6~15位的密码！");
+		$("#get_password_alert_div").css("display","block");
 		return false;
 	} else {
 		/* 密码正确 */
 		if (input_new_password !== input_new_repassword) {
-			alert("两次密码不一致！");
+			$("#get_password_alert_div").html("两次密码不一致！");
+			$("#get_password_alert_div").css("display","block");
 			return false;
 		} else {
 			var formData = new FormData();

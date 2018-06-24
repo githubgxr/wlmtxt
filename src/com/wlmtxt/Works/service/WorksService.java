@@ -21,21 +21,22 @@ import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
 public interface WorksService {
 
-	public void likWorks(wlmtxt_user user, wlmtxt_works works) throws Exception;
+	public void likWorks(wlmtxt_user user, wlmtxt_works works);
 
-	public void collectWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
+	public void collectWorks(wlmtxt_user user, wlmtxt_works accept_works);
 
-	public void downloadWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
+	public void downloadWorks(wlmtxt_user user, wlmtxt_works accept_works);
 
-	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
+	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works);
 
-	public boolean isLiked(String userID, String worksID) throws Exception;
+	public boolean isLiked(String userID, String worksID);
 
-	public boolean isCollectWorks(String user_id, String works_id) throws Exception;
+	public boolean isCollectWorks(String user_id, String works_id);
 
 	public void saveWorks(wlmtxt_works accept_works, String[] keywords);
 
@@ -140,7 +141,7 @@ public interface WorksService {
 
 	public void deleteDisscuss(String discuss_id);
 
-	public DynamicVO getDynamicVO(String user_id);
+	public DynamicVO getDynamicVO(String user_id, DynamicVO dynamicVO);
 
 	/**
 	 * 
@@ -150,4 +151,32 @@ public interface WorksService {
 	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID);
 
 	public List<DiscussWorkDTO> listMyDiscussWorkList(String user_id);
+
+	/**
+	 * 基于用户的协同过滤 <br>
+	 * 推荐相似用户的喜好
+	 * 
+	 * @param userID
+	 * @return
+	 */
+	public List<WorksDTO> collaborativeFilteringByUser(String userID);
+
+	/**
+	 * 计算用户对某个作品的喜爱值 <br>
+	 * 播放1 点赞3 评论2 收藏4
+	 * 
+	 * @param userID
+	 * @param worksID
+	 * @return
+	 */
+	int userPointWork(String userID, String worksID);
+
+	/**
+	 * 按热度排序前20条后，随机取6条。
+	 * 
+	 * @return
+	 */
+	public List<WorksDTO> hotRecommend();
+
+	public WorksCategoryVO getWorksByCategoryPage(WorksCategoryVO worksCategoryVO);
 }

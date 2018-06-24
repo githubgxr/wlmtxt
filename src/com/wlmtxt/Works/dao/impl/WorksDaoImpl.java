@@ -91,6 +91,14 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_user> userListAll() {
+		String hql = " from wlmtxt_user";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_user> list = query.list();
+		return list;
+	}
+
+	@Override
 	public List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID) {
 		String hql = " from wlmtxt_play_history  where play_history_works_id='" + worksID
 				+ "' order by play_history_gmt_create desc";
@@ -125,7 +133,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public void saveLike(wlmtxt_like like) throws Exception {
+	public void saveLike(wlmtxt_like like) {
 		getSession().save(like);
 	}
 
@@ -162,6 +170,15 @@ public class WorksDaoImpl implements WorksDao {
 		Query query = getSession().createQuery(hql);
 		wlmtxt_second_menu second_menu = (wlmtxt_second_menu) query.uniqueResult();
 		return second_menu;
+	}
+
+	@Override
+	public int countUserPlayWorks(String userID, String worksID) {
+		String hql = "select count(*) from wlmtxt_play_history  where play_history_user_id='" + userID
+				+ "' play_history_works_id='" + worksID + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
 	}
 
 	@Override
@@ -222,6 +239,14 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_discuss> listDiscussByUserID(String user_id) {
+		String hql = " from wlmtxt_discuss  where discuss_user_id='" + user_id + "'  order by discuss_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		List<wlmtxt_discuss> list = query.list();
+		return list;
+	}
+
+	@Override
 	public List<wlmtxt_like> listLikeByUserID(String user_id) {
 		String hql = " from wlmtxt_like  where like_user_id='" + user_id + "'  order by like_gmt_create desc";
 		Query query = getSession().createQuery(hql);
@@ -236,6 +261,38 @@ public class WorksDaoImpl implements WorksDao {
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_notification> notificationList = query.list();
 		return notificationList;
+	}
+
+	@Override
+	public List<wlmtxt_works> getWorksByPage(int pageIndex, int pageSize) {
+		String hql = " from wlmtxt_works  where  works_passed='1' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult((pageIndex - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_works> getWorksBySecondMenuAndPage(int pageIndex, int pageSize, String SecondMenuID) {
+		String hql = " from wlmtxt_works works where  works_passed='1' and works.works_second_menu_id='" + SecondMenuID
+				+ "' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult((pageIndex - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_works> getWorksByFirstMenuAndPage(int pageIndex, int pageSize, String FirstMenuID) {
+		String hql = " from wlmtxt_works works,wlmtxt_second_menu second_menu where  works_passed='1' and works.works_second_menu_id=second_menu.second_menu_id and second_menu.second_menu_first_menu_id='"
+				+ FirstMenuID + "' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult((pageIndex - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
 	}
 
 	@Override
@@ -469,7 +526,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public void removeCollect(String collect_user_id, String collect_works_id) throws Exception {
+	public void removeCollect(String collect_user_id, String collect_works_id) {
 		String hql = "delete from wlmtxt_collect  where collect_user_id = '" + collect_user_id
 				+ "' and collect_works_id='" + collect_works_id + "'";
 		Query query = getSession().createQuery(hql);
@@ -477,7 +534,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public void removeLike(String user_id, String like_works_id) throws Exception {
+	public void removeLike(String user_id, String like_works_id) {
 		String hql = "delete  from wlmtxt_like  where like_user_id = '" + user_id + "' and like_works_id='"
 				+ like_works_id + "'";
 		Query query = getSession().createQuery(hql);
@@ -485,7 +542,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public wlmtxt_collect findCollect(String collect_user_id, String collect_works_id) throws Exception {
+	public wlmtxt_collect findCollect(String collect_user_id, String collect_works_id) {
 		String hql = "from wlmtxt_collect where collect_user_id = '" + collect_user_id + "' and collect_works_id='"
 				+ collect_works_id + "'";
 		Query query = getSession().createQuery(hql);
@@ -499,7 +556,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public wlmtxt_like findLike(String like_user_id, String like_works_id) throws Exception {
+	public wlmtxt_like findLike(String like_user_id, String like_works_id) {
 		String hql = " from wlmtxt_like  where like_user_id = '" + like_user_id + "' and like_works_id='"
 				+ like_works_id + "'";
 		Query query = getSession().createQuery(hql);
@@ -543,13 +600,13 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public void saveCollect(wlmtxt_collect new_collect) throws Exception {
+	public void saveCollect(wlmtxt_collect new_collect) {
 		getSession().save(new_collect);
 	}
 
 	@Override
 	public wlmtxt_download_history findDownloadHistoryBy_download_history_user_id_And_download_history_works_id(
-			String download_history_user_id, String download_history_works_id) throws Exception {
+			String download_history_user_id, String download_history_works_id) {
 		String hql = "from wlmtxt_download_history where download_history_user_id = '" + download_history_user_id
 				+ "' and download_history_works_id='" + download_history_works_id + "'";
 		Query query = getSession().createQuery(hql);
@@ -571,12 +628,12 @@ public class WorksDaoImpl implements WorksDao {
 	 */
 
 	@Override
-	public void saveDownloadHistory(wlmtxt_download_history new_download_history) throws Exception {
+	public void saveDownloadHistory(wlmtxt_download_history new_download_history) {
 		getSession().save(new_download_history);
 	}
 
 	@Override
-	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception {
+	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) {
 	}
 
 	@Override

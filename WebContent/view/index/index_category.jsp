@@ -33,20 +33,16 @@
 		<div class="llls_header list_header" style="margin: 0 0 20px 0;">
 			<div style="float: left;" id="div_img">
 				<img src="<%=basePath%>img/img_back.png" id="img_back"
-					style="width: 30px; height: 30px;display: none;">
+					style="width: 30px; height: 30px; display: none;">
 			</div>
 			<i class="header_line"></i>
 			<h3 style="margin: 4px 0 0 0;" id="category_name"></h3>
 		</div>
 		<div class="llls_content list_container"
 			style="margin: 20px 0 20px 0;">
-			<ul id="llls_list_container" style="height:80%;">
-				<div class="div_more">
-					<span class="span_more">加载更多&nbsp;<i
-					class="fas fa-angle-double-down "></i></span>
-				</div>
+			<ul id="llls_list_container" style="height: 80%;">
 			</ul>
-			
+
 		</div>
 	</div>
 	<!--翻页-->

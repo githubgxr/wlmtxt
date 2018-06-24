@@ -1,72 +1,7 @@
 var if_login = false;
 var user_id = null;
-
-// 查询是否收藏
-function checkCollect() {
-	var collect_xhr = new XMLHttpRequest();
-	collect_xhr.open("POST", "/wlmtxt/User/User_isCollectWorks");
-	collect_xhr.send();
-	collect_xhr.onreadystatechange = function() {
-		if (collect_xhr.readyState == 4 && collect_xhr.status == 200) {
-			if (collect_xhr.responseText == "1") {
-				console.log("已收藏！");
-				$("#collect_number_div").addClass("dz_yes");
-				$("#collect_number_div").removeClass("dz_no");
-				/* $("#collect_number").html(parseInt($collect_number) + 1); */
-			} else {
-				console.log("未收藏！");
-				$("#collect_number_div").addClass("dz_no");
-				$("#collect_number_div").removeClass("dz_yes");
-			}
-		}
-	}
-}
-// 查询是否点赞
-function checkLike() {
-	var like_xhr = new XMLHttpRequest();
-	like_xhr.open("POST", "/wlmtxt/User/User_isLiked");
-	like_xhr.send();
-	like_xhr.onreadystatechange = function() {
-		if (like_xhr.readyState == 4 && like_xhr.status == 200) {
-			if (like_xhr.responseText == "1") {
-				console.log("已点赞！");
-				$("#thumbs_number_div").addClass("dz_yes");
-				$("#thumbs_number_div").removeClass("dz_no");
-				/* $("#collect_number").html(parseInt($collect_number) + 1); */
-			} else {
-				console.log("未点赞！");
-				$("#thumbs_number_div").addClass("dz_no");
-				$("#thumbs_number_div").removeClass("dz_yes");
-			}
-		}
-	}
-}
-//查询是否关注
-function checkFocus() {
-	var focus_xhr = new XMLHttpRequest();
-	focus_xhr.open("POST", "/wlmtxt/User/User_isLiked");
-	focus_xhr.send();
-	focus_xhr.onreadystatechange = function() {
-		if (focus_xhr.readyState == 4 && focus_xhr.status == 200) {
-			if (focus_xhr.responseText == "1") {
-				console.log("已关注！");
-				$("#focus_btn").addClass("has_focus");
-				$("#focus_btn").removeClass("not_focus");
-				/*
-				 * $("#collect_number").html(parseInt($collect_number) +
-				 * 1);
-				 */
-			} else {
-				console.log("未关注！");
-				$("#focus_btn").addClass("not_focus");
-				$("#focus_btn").removeClass("has_focus");
-			}
-		}
-	}
-}
 // 判断是否登录
-window.onload = checkLogin;
-
+checkLogin();
 function checkLogin() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "/wlmtxt/User/User_isLogin");// 判断登录状态
@@ -114,28 +49,7 @@ function checkLogin() {
 						"src",
 						"/wlmtxt/Works/Works_getImg?imgName="
 								+ userInfo.user_avatar);
-				//获取关注量
-				var formData_focus_num=new FormData();
-				formData_focus_num.append("accpet_user.user_id",userInfo.user_id);
-				var xhr_focus_num=new XMLHttpRequest();
-				xhr_focus_num.open("POST","/wlmtxt/Works/Works_totalFollowingNum");
-				xhr_focus_num.send(formData_focus_num);
-				xhr_focus_num.onreadystatechange=function(){
-					if (xhr_focus_num.readyState == 4 && xhr_focus_num.status == 200) {
-						$(".sidebar_user_focus").html(xhr_focus_num.responseText);
-							}
-						}
-				//获取粉丝量
-				var formData_fans_num=new FormData();
-				formData_fans_num.append("accpet_user.user_id",userInfo.user_id);
-				var xhr_fans_num=new XMLHttpRequest();
-				xhr_fans_num.open("POST","/wlmtxt/Works/Works_totalFansNum");
-				xhr_fans_num.send(formData_focus_num);
-				xhr_fans_num.onreadystatechange=function(){
-					if (xhr_fans_num.readyState == 4 && xhr_fans_num.status == 200) {
-						$(".sidebar_user_fans").html(xhr_fans_num.responseText);
-							}
-						}
+				
 				/** *********************个人资料*********************************** */
 				// 用户名
 				$(".div_username").html(userInfo.user_username);
@@ -558,4 +472,40 @@ function getBackPassword() {
 		return false;
 	}
 
+}
+//登录获取enter监听
+$("#login_div").bind("keydown",function(e){
+        // 兼容FF和IE和Opera    
+    var theEvent = e || window.event;    
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+    if (code == 13) {    
+        //回车执行查询
+            $("#login_button").click();
+        }    
+});
+//注册获取enter监听
+$("#register_div").bind("keydown",function(e){
+        // 兼容FF和IE和Opera    
+    var theEvent = e || window.event;    
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+    if (code == 13) {    
+        //回车执行查询
+            $("#register_button").click();
+        }    
+});
+//忘记密码获取enter监听
+$("#forget_password_div").bind("keydown",function(e){
+        // 兼容FF和IE和Opera    
+    var theEvent = e || window.event;    
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+    if (code == 13) {    
+        //回车执行查询
+            $("#forget_password_button").click();
+        }    
+});
+//跳转至其他人的页面
+function to_other_data(other_id){
+	// 跳转到他人页面
+		window.location.href = "/wlmtxt/Works/Works_personal_cente_other_data?accpet_user.user_id="
+				+ other_id;
 }

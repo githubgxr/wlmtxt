@@ -1,5 +1,6 @@
-getDynamicVO();
 var dynamicVO;
+var pageIndex = 1;
+getDynamicVO();
 function getDynamicVO() {
 	var xhr = false;
 	xhr = new XMLHttpRequest();
@@ -44,16 +45,17 @@ function getDynamicVO() {
 							+ '</div>'
 							+ '</div>'
 							+ '<hr style="float: left; width: 100%;" />'
-					$("#llls_list_container").append(new_work);
+					$("#button_div_more").before(new_work);
 				}
-
+				pageIndex++;
 			} else {
 				toastr.error(xhr.status);
 			}
 		}
 	}
 
-	xhr.open("POST", "/wlmtxt/Works/Works_getDynamicVO");
-
-	xhr.send(null);
+	xhr.open("POST", "/wlmtxt/Works/Works_getFriendsDynamicVO");
+	var formData = new FormData();
+	formData.append("dynamicVO.pageIndex", pageIndex);
+	xhr.send(formData);
 }

@@ -21,7 +21,20 @@ public class MyTest {
 	@Test
 	public void ttttt() {
 
-		System.out.println(worksService.getCollectNum("sdafasdf"));
+		worksService.collaborativeFilteringByUser("e9660cab-759b-4d84-a1f0-241c265b3e88");
+
+	}
+
+	@Test
+	public void t22222222222222() {
+
+		int n = 0;
+
+		for (int i = 0; i < 5; i++) {
+			n = (int) (Math.random() * 20);
+			System.out.println(n);
+		}
+
 	}
 
 	/*

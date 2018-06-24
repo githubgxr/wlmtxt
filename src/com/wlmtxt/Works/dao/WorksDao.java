@@ -20,31 +20,31 @@ import com.wlmtxt.domain.VO.MyWorksVO;
 
 public interface WorksDao {
 
-	void saveLike(wlmtxt_like like) throws Exception;
+	void saveLike(wlmtxt_like like);
 
-	wlmtxt_like findLike(String like_user_id, String like_works_id) throws Exception;
+	wlmtxt_like findLike(String like_user_id, String like_works_id);
 
-	void removeLike(String user_id, String like_works_id) throws Exception;
+	void removeLike(String user_id, String like_works_id);
 
-	wlmtxt_collect findCollect(String collect_user_id, String collect_works_id) throws Exception;
+	wlmtxt_collect findCollect(String collect_user_id, String collect_works_id);
 
-	void removeCollect(String collect_user_id, String collect_works_id) throws Exception;
+	void removeCollect(String collect_user_id, String collect_works_id);
 
 	void deletePlayHistory(String play_history_id);
 
-	void saveCollect(wlmtxt_collect new_collect) throws Exception;
+	void saveCollect(wlmtxt_collect new_collect);
 
 	wlmtxt_download_history findDownloadHistoryBy_download_history_user_id_And_download_history_works_id(
-			String download_history_user_id, String download_history_works_id) throws Exception;
+			String download_history_user_id, String download_history_works_id);
 
 	// void
 	// removeDownloadHistoryBy_download_history_user_id_And_download_history_works_id(String
 	// download_history_user_id,
-	// String download_history_works_id) throws Exception;
+	// String download_history_works_id) ;
 
-	void saveDownloadHistory(wlmtxt_download_history new_download_history) throws Exception;
+	void saveDownloadHistory(wlmtxt_download_history new_download_history);
 
-	void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
+	void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works);
 
 	void saveKeyword(wlmtxt_keyword newkeywords);
 
@@ -96,6 +96,12 @@ public interface WorksDao {
 
 	List<wlmtxt_works> listWorksAllByUserId(String user_id);
 
+	List<wlmtxt_works> getWorksByPage(int pageIndex, int pageSize);
+
+	List<wlmtxt_works> getWorksBySecondMenuAndPage(int pageIndex, int pageSize, String SecondMenuID);
+
+	List<wlmtxt_works> getWorksByFirstMenuAndPage(int pageIndex, int pageSize, String FirstMenuID);
+
 	int getLikeNum(String works_id);
 
 	int getCollectNum(String works_id);
@@ -142,6 +148,8 @@ public interface WorksDao {
 
 	List<wlmtxt_like> listLikeByUserID(String user_id);
 
+	List<wlmtxt_discuss> listDiscussByUserID(String user_id);
+
 	List<wlmtxt_collect> listMycollectList(String user_id);
 
 	void deleteDisscuss(String discuss_id);
@@ -156,5 +164,23 @@ public interface WorksDao {
 	 * @return
 	 */
 	List<wlmtxt_works> listWorksByKeywordName(String keyword_name);
+
+	int countUserPlayWorks(String userID, String worksID);
+
+	List<wlmtxt_user> userListAll();
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 
 }
