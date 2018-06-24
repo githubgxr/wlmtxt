@@ -169,4 +169,11 @@ public interface WorksService {
 	 * @return
 	 */
 	int userPointWork(String userID, String worksID);
+
+	/**
+	 * 按热度排序前20条后，随机取6条。
+	 * 
+	 * @return
+	 */
+	public List<WorksDTO> hotRecommend();
 }

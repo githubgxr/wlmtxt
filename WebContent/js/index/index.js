@@ -1,13 +1,24 @@
 indexListRank();
 collaborativeFilteringByUser();
+hotRecommend();
+
+function hotRecommend() {
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "/wlmtxt/Works/Works_hotRecommend");
+	xhr.send(null);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var hotRecommend_response = JSON.parse(xhr.responseText);
+		}
+	}
+}
 function collaborativeFilteringByUser() {
-	var xhr_week = new XMLHttpRequest();
-	xhr_week.open("POST", "/wlmtxt/Works/Works_collaborativeFilteringByUser");
-	xhr_week.send(null);
-	xhr_week.onreadystatechange = function() {
-		if (xhr_week.readyState == 4 && xhr_week.status == 200) {
-			var collaborativeFiltering_response = JSON
-					.parse(xhr_week.responseText);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "/wlmtxt/Works/Works_collaborativeFilteringByUser");
+	xhr.send(null);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var collaborativeFiltering_response = JSON.parse(xhr.responseText);
 
 			/*
 			 * 清空原表数据

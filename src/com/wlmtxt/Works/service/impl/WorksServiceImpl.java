@@ -101,19 +101,17 @@ public class WorksServiceImpl implements WorksService {
 	public List<WorksDTO> collaborativeFilteringByUser(String userID) {
 		if (userID == null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+			List<wlmtxt_works> worksTemporaryList = new ArrayList<wlmtxt_works>();
 			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
-			List<wlmtxt_works> worksFfffffffinallyList = new ArrayList<wlmtxt_works>();
-			worksFinallyList = worksDao.listWorksAll();
-			System.out.println(worksFinallyList.size());
-			int n_n = (worksFinallyList.size() >= 5 ? 5 : worksFinallyList.size());
+			worksTemporaryList = worksDao.listWorksAll();
+			int n_n = (worksTemporaryList.size() >= 5 ? 5 : worksTemporaryList.size());
 			for (int n = 0; n < n_n; n++) {
-				int random = (int) (Math.random() * worksFinallyList.size());
-				System.out.println(n + ":" + random);
-				worksFfffffffinallyList.add(worksFinallyList.get(random));
-				worksFinallyList.remove(random);
+				int random = (int) (Math.random() * worksTemporaryList.size());
+				worksFinallyList.add(worksTemporaryList.get(random));
+				worksTemporaryList.remove(random);
 			}
 
-			for (wlmtxt_works works : worksFfffffffinallyList) {
+			for (wlmtxt_works works : worksFinallyList) {
 				WorksDTO worksDTO = new WorksDTO();
 				worksDTO = getWorksDTOByID(works.getWorks_id());
 				worksDTOList.add(worksDTO);
@@ -232,6 +230,45 @@ public class WorksServiceImpl implements WorksService {
 		 */
 
 		return worksDTOList;
+	}
+
+	// TODO
+	@Override
+	public List<WorksDTO> hotRecommend() {
+		List<WorksDTO> worksDTOTemporaryList = new ArrayList<WorksDTO>();
+		List<wlmtxt_works> worksListAll = worksDao.listWorksAll();
+
+		// 获得DTO
+		for (wlmtxt_works works : worksListAll) {
+			WorksDTO worksDTO = new WorksDTO();
+			worksDTO = getWorksDTOByID(works.getWorks_id());
+			worksDTOTemporaryList.add(worksDTO);
+		}
+		// 热度排序
+		for (int i = 0; i < worksDTOTemporaryList.size() - 1; i++) {
+			for (int j = 0; j < worksDTOTemporaryList.size() - i - 1; j++) {// 比较两个整数
+				if (worksDTOTemporaryList.get(j).getHot() > worksDTOTemporaryList.get(j + 1).getHot()) {
+					WorksDTO temp = worksDTOTemporaryList.get(j);
+					worksDTOTemporaryList.set(j, worksDTOTemporaryList.get(j + 1));
+					worksDTOTemporaryList.set(j + 1, temp);
+				}
+			}
+		}
+		// 取热度最高的前10个
+		if (worksDTOTemporaryList.size() >= 10) {
+			worksDTOTemporaryList = worksDTOTemporaryList.subList(0, 10);
+		}
+
+		// 再随机取六个
+		List<WorksDTO> worksFinallyList = new ArrayList<WorksDTO>();
+		int n_n = (worksDTOTemporaryList.size() >= 6 ? 6 : worksDTOTemporaryList.size());
+		for (int n = 0; n < n_n; n++) {
+			int random = (int) (Math.random() * worksDTOTemporaryList.size());
+			worksFinallyList.add(worksDTOTemporaryList.get(random));
+			worksDTOTemporaryList.remove(random);
+		}
+
+		return worksDTOTemporaryList;
 	}
 
 	@Override
