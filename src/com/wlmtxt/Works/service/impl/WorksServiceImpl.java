@@ -102,10 +102,18 @@ public class WorksServiceImpl implements WorksService {
 		if (userID == null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
-
+			List<wlmtxt_works> worksFfffffffinallyList = new ArrayList<wlmtxt_works>();
 			worksFinallyList = worksDao.listWorksAll();
-			worksFinallyList.subList(0, 5);
-			for (wlmtxt_works works : worksFinallyList) {
+			System.out.println(worksFinallyList.size());
+			int n_n = (worksFinallyList.size() >= 5 ? 5 : worksFinallyList.size());
+			for (int n = 0; n < n_n; n++) {
+				int random = (int) (Math.random() * worksFinallyList.size());
+				System.out.println(n + ":" + random);
+				worksFfffffffinallyList.add(worksFinallyList.get(random));
+				worksFinallyList.remove(random);
+			}
+
+			for (wlmtxt_works works : worksFfffffffinallyList) {
 				WorksDTO worksDTO = new WorksDTO();
 				worksDTO = getWorksDTOByID(works.getWorks_id());
 				worksDTOList.add(worksDTO);
@@ -202,8 +210,8 @@ public class WorksServiceImpl implements WorksService {
 		 * 随机五条
 		 */
 		List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
-
-		for (int n = 0; n < (worksFinallyAllList.size() >= 5 ? 5 : worksFinallyAllList.size()); n++) {
+		int n_n = (worksFinallyAllList.size() >= 5 ? 5 : worksFinallyAllList.size());
+		for (int n = 0; n < n_n; n++) {
 			int random = (int) (Math.random() * worksFinallyAllList.size());
 			worksFinallyList.add(worksFinallyAllList.get(random));
 			worksFinallyAllList.remove(random);

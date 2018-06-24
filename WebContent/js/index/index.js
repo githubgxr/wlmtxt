@@ -1,5 +1,72 @@
 indexListRank();
+collaborativeFilteringByUser();
+function collaborativeFilteringByUser() {
+	var xhr_week = new XMLHttpRequest();
+	xhr_week.open("POST", "/wlmtxt/Works/Works_collaborativeFilteringByUser");
+	xhr_week.send(null);
+	xhr_week.onreadystatechange = function() {
+		if (xhr_week.readyState == 4 && xhr_week.status == 200) {
+			var collaborativeFiltering_response = JSON
+					.parse(xhr_week.responseText);
 
+			/*
+			 * 清空原表数据
+			 */
+			var cnxhCon = document.getElementsByClassName("cnxhCon");
+			var long = cnxhCon.length;
+
+			for (var num = 0; num < long; num++) {
+				cnxhCon[0].parentNode.removeChild(cnxhCon[0]);
+			}
+			/*
+			 * 
+			 */
+			for (var i = 0; i < collaborativeFiltering_response.length; i++) {
+				var collaborativeFiltering = '<li class="cnxhCon index_list_video_item" style="width: 160px; height: 200px; margin: 0 12px 10px 12px;">'
+						+ '<!--视频链接--> <a class="video_list_item_wrap" style="width: 160px; height: 160px;">'
+						+ '<div class="video_cover">'
+						+ '<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName='
+						+ collaborativeFiltering_response[i].works.works_cover
+						+ '" style="width: 160px; height: 100px;" />'
+						+ ((collaborativeFiltering_response[i].secondMenu == null) ? ''
+								: ('<div class="category_name">'
+										+ collaborativeFiltering_response[i].secondMenu.second_menu_name + '</div>'))
+						+ '<div class="video_overplay" style="width: 160px; height: 100px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '</div> <!--视频信息-->'
+						+ '<div class="video_info" style="width: 160px; height: 40px; margin: 5px 0;">'
+						+ '<!--标题-->'
+						+ '<div class="video_title" style="font-size: 12px; margin-left: 5px; width: 160px;">'
+						+ collaborativeFiltering_response[i].works.works_title
+						+ '</div>'
+						+ '<!--用户名-->'
+						+ '<div class="video_username" style="width: 90px; margin-top: -5px;">'
+						+ collaborativeFiltering_response[i].user.user_username
+						+ '</div>'
+						+ '<!--发布时间-->'
+						+ '<div class="video_time" style="width: 70px; margin-top: -5px; float: right;">'
+						+ collaborativeFiltering_response[i].works.works_gmt_create
+								.substr(0, 10)
+						+ '</div>'
+						+ '</div>'
+						+ '</a> <!--视频分类-->'
+						+ '<div class="video_label" style="width: 160px; padding: 0;">'
+						+ '<div id="keyWordDTOListContent" class="video_label_content" style="width: 160px; padding: 0;">'
+						+ '</div>' + '</div>' + '</li>';
+
+				$("#cnxh_list_container").append(collaborativeFiltering);
+				var keyWordDTOList = "";
+				for (var num = 0; num < collaborativeFiltering_response[i].keyWordDTOList.length; num++) {
+					keyWordDTOList = keyWordDTOList
+							+ '<a class="video_label_item">'
+							+ collaborativeFiltering_response[i].keyWordDTOList[num].keyword.keyword_name
+							+ '</a>';
+				}
+				$("#keyWordDTOListContent").append(keyWordDTOList);
+			}
+		}
+	}
+}
 function indexListRank() {
 	var xhr_week = new XMLHttpRequest();
 	xhr_week.open("POST", "/wlmtxt/Works/Works_listWorks10OrderHotByWeek");
