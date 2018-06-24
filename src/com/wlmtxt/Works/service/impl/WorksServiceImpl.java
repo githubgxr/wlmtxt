@@ -1,7 +1,12 @@
 package com.wlmtxt.Works.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.wlmtxt.User.dao.UserDao;
 import com.wlmtxt.User.service.UserService;
@@ -66,6 +71,105 @@ public class WorksServiceImpl implements WorksService {
 
 	public void setWorksDao(WorksDao worksDao) {
 		this.worksDao = worksDao;
+	}
+
+	@Override
+	public int userPointWork(String userID, String worksID) {
+		int point = 0;
+		// 播放加1分，查询有几条历史记录关于此作品
+
+		// 点赞加3分
+		if (isLiked(userID, worksID)) {
+			point = point + 3;
+		}
+		// 评论加2分
+		List<wlmtxt_discuss> discussList = listDiscussByUserID(userID);
+		for (wlmtxt_discuss discuss : discussList) {
+			if (discuss.getDiscuss_father_discuss_id().equals(worksID)) {
+				point = point + 2;
+			}
+		}
+		// 收藏加4分
+		if (isCollectWorks(userID, worksID)) {
+			point = point + 4;
+		}
+		System.out.println("计算用户对作品的喜爱值" + point);
+		return point;
+	}
+
+	@Override
+	public List<wlmtxt_works> collaborativeFilteringByUser(String userID) {
+		// 取出用户信息和作品信息
+		wlmtxt_user curUser = userService.get_user_byID(userID);
+		List<wlmtxt_works> worksAll = worksDao.listWorksAll();
+		/*
+		 * 计算当前用户对所有作品的评分，保存为一个map的list
+		 */
+		Map<String, Integer> myPointMap = new HashMap<String, Integer>();
+		Integer point = 0;
+		for (wlmtxt_works works : worksAll) {
+			point = userPointWork(curUser.getUser_id(), works.getWorks_id());
+			myPointMap.put(works.getWorks_id(), point);
+		}
+		/*
+		 * 计算其他用户对所有作品的评分，保存为一个list
+		 */
+		List<wlmtxt_user> allUserList = worksDao.userListAll();
+		// 二维列表
+		Map<String, Map<String, Integer>> allUserPointMap = new HashMap<String, Map<String, Integer>>();
+		// 遍历所有用户
+		for (wlmtxt_user otherUser : allUserList) {
+			// 排除当前用户
+			if (!otherUser.getUser_id().equals(curUser.getUser_id())) {
+				Map<String, Integer> otherUserPointMap = new HashMap<String, Integer>();
+				for (wlmtxt_works works : worksAll) {
+					point = userPointWork(otherUser.getUser_id(), works.getWorks_id());
+					otherUserPointMap.put(works.getWorks_id(), point);
+				}
+				allUserPointMap.put(otherUser.getUser_id(), otherUserPointMap);
+			}
+
+		}
+		/*
+		 * 欧几里得距离求相似度
+		 */
+		Map<String, Double> similarityDegreeMap = new HashMap<String, Double>();
+		Double similarityDegree = 0.0;
+		for (Map.Entry<String, Map<String, Integer>> otherUser : allUserPointMap.entrySet()) {
+
+			int oneValue = 0;
+			for (Map.Entry<String, Integer> entry : otherUser.getValue().entrySet()) {
+				// 登录用户对遍历的这个作品的喜爱值
+				int curUserLikeValue = myPointMap.get(entry.getKey());
+				// 遍历的用户对遍历的这个作品的喜爱值
+				int otherUserLikeValue = entry.getValue();
+				// 计算单个作品
+				oneValue = oneValue + (int) Math.pow(curUserLikeValue - otherUserLikeValue, 2);
+
+			}
+			// 算出登录用户和当前遍历用户的相似度similarityDegree
+			similarityDegree = Math.pow(oneValue, 0.5);
+			similarityDegreeMap.put(otherUser.getKey(), similarityDegree);
+
+		}
+
+		/*
+		 * 相似度排序
+		 */
+		List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(similarityDegreeMap.entrySet());
+		Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
+			// 升序排序
+			@Override
+			public int compare(Entry<String, Double> o1, Entry<String, Double> o2) {
+				return o2.getValue().compareTo(o1.getValue());
+			}
+		});
+		System.out.println("用户相似度排序：" + similarityDegreeMap);
+
+		/*
+		 * 
+		 */
+		return null;
 	}
 
 	@Override
@@ -166,7 +270,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	private List<wlmtxt_discuss> listDiscussByUserID(String user_id) {
-		return listDiscussByUserID(user_id);
+		return worksDao.listDiscussByUserID(user_id);
 	}
 
 	@Override
@@ -317,13 +421,14 @@ public class WorksServiceImpl implements WorksService {
 				}
 			}
 		}
-		if (worksDTOList.size() < 9) {
+		System.out.println(worksDTOList);
+		if (worksDTOList.size() < 10) {
 			if (worksDTOList.size() == 0) {
 				return worksDTOList;
 			}
-			return worksDTOList.subList(0, worksDTOList.size() - 1);
+			return worksDTOList.subList(0, worksDTOList.size());
 		} else {
-			return worksDTOList.subList(0, 9);
+			return worksDTOList.subList(0, 10);
 		}
 	}
 
@@ -345,13 +450,13 @@ public class WorksServiceImpl implements WorksService {
 				}
 			}
 		}
-		if (worksDTOList.size() < 9) {
+		if (worksDTOList.size() < 10) {
 			if (worksDTOList.size() == 0) {
 				return worksDTOList;
 			}
-			return worksDTOList.subList(0, worksDTOList.size() - 1);
+			return worksDTOList.subList(0, worksDTOList.size());
 		} else {
-			return worksDTOList.subList(0, 9);
+			return worksDTOList.subList(0, 10);
 		}
 	}
 
@@ -373,13 +478,13 @@ public class WorksServiceImpl implements WorksService {
 				}
 			}
 		}
-		if (worksDTOList.size() < 9) {
+		if (worksDTOList.size() < 10) {
 			if (worksDTOList.size() == 0) {
 				return worksDTOList;
 			}
-			return worksDTOList.subList(0, worksDTOList.size() - 1);
+			return worksDTOList.subList(0, worksDTOList.size());
 		} else {
-			return worksDTOList.subList(0, 9);
+			return worksDTOList.subList(0, 10);
 		}
 	}
 
@@ -676,7 +781,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public boolean isCollectWorks(String user_id, String works_id) throws Exception {
+	public boolean isCollectWorks(String user_id, String works_id) {
 		wlmtxt_collect collect = worksDao.findCollect(user_id, works_id);
 		if (collect == null) {
 			return false;
@@ -686,7 +791,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public boolean isLiked(String userID, String worksID) throws Exception {
+	public boolean isLiked(String userID, String worksID) {
 
 		wlmtxt_like like = worksDao.findLike(userID, worksID);
 		if (like == null) {
@@ -730,7 +835,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public void likWorks(wlmtxt_user user, wlmtxt_works works) throws Exception {
+	public void likWorks(wlmtxt_user user, wlmtxt_works works) {
 		// 查询是否有点赞记录
 		wlmtxt_like like = worksDao.findLike(user.getUser_id(), works.getWorks_id());
 		if (like == null) {
@@ -761,7 +866,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public void collectWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception {
+	public void collectWorks(wlmtxt_user user, wlmtxt_works accept_works) {
 		wlmtxt_collect collect = worksDao.findCollect(user.getUser_id(), accept_works.getWorks_id());
 		if (collect == null) {
 			wlmtxt_collect new_collect = new wlmtxt_collect();
@@ -789,7 +894,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public void downloadWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception {
+	public void downloadWorks(wlmtxt_user user, wlmtxt_works accept_works) {
 		String download_history_user_id = user.getUser_id();
 		String download_history_works_id = accept_works.getWorks_id();
 		wlmtxt_download_history new_download_history = new wlmtxt_download_history();
@@ -835,7 +940,7 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception {
+	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) {
 		worksDao.removeDownloadHistory(user, accept_works);
 	}
 
