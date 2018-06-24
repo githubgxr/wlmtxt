@@ -26,16 +26,16 @@ function listMyFansByPage(pageIndex){
 				
 				var myFans='<li class="user_list">';
 				myFans+='<div class="user_list_img_div">';
-				myFans+='<img class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myFans.userlist[i].user_avatar  +'"/>';
+				myFans+='<img  id="'+list_myFans.userlist[i].user_id+'" onclick="to_other_data(this.id)" class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myFans.userlist[i].user_avatar  +'"/>';
 				myFans+='</div>';
 				myFans+='<div class="user_info">';
-				myFans+='<div class="user_name">'+list_myFans.userlist[i].user_username+'</div>';
-				myFans+='<div class="user_operateing" onclick="withFocus(this.id)" id="'+list_myFans.userlist[i].user_id+'">+ 关注</div>';
+				myFans+='<div  id="'+list_myFans.userlist[i].user_id+'" onclick="to_other_data(this.id)" class="user_name">'+list_myFans.userlist[i].user_username+'</div>';
+				myFans+='<div class="user_operateing focus_other" id="'+list_myFans.userlist[i].user_id+'">+ 关注</div>';
 				myFans+='<div class="user_grjj">'+list_myFans.userlist[i].user_bio+'</div>';
 				myFans+='</div>';
 				myFans+='</li>';
 				$(".user_list_ul").append(myFans);
-				console.log(list_myFans.userlist[i].user_bio);
+				checkFocus(list_myFans.userlist[i].user_id);
 			}
 		}
 	}
@@ -51,10 +51,10 @@ function withFocus(focus_user_id){
 	xhrhp.onreadystatechange=function(){
 		if(xhrhp.readyState==4&&xhrhp.status==200){
 			if(xhrhp.responseText=="1"){
-				toastr.success("+关注成功！");
+				toastr.success("关注成功！");
 				listMyFansByPage(1);
 			}else{
-				toastr.error("+关注失败！");
+				toastr.error("关注失败！");
 				return false;
 			}
 		}
@@ -77,6 +77,30 @@ function withFocusAll(){
 			}else{
 				toastr.error("全部关注失败！");
 				return false;
+			}
+		}
+	}
+}
+//查看是否关注
+function checkFocus(focus_user_id) {
+	var formData_check_focus = new FormData();
+	formData_check_focus.append("accpet_user.user_id", focus_user_id);
+	var focus_xhr = new XMLHttpRequest();
+	focus_xhr.open("POST", "/wlmtxt/User/User_isFollowedUser");
+	focus_xhr.send(formData_check_focus);
+	focus_xhr.onreadystatechange = function() {
+		if (focus_xhr.readyState == 4 && focus_xhr.status == 200) {
+			if (focus_xhr.responseText == "1") {
+				console.log("已关注！");
+				$(".focus_other").html("已关注");
+				$(".focus_other").removeClass("user_operateing");
+				$(".focus_other").addClass("not_focus");
+			} else {
+				console.log("未关注！");
+				$(".focus_other").html("+ 关注");
+				$(".focus_other").click(function(){
+					withFocus(focus_user_id);
+				})
 			}
 		}
 	}

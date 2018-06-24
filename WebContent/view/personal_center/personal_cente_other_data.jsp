@@ -38,10 +38,10 @@
 									<img src="<%=basePath%>img/user.jpg" />
 									<div class="user_foot">
 										<div class="user_fans">
-											关注<span id="other_data_focus"></span>
+											关注<span id="other_data_focus" class="user_focus_num"></span>
 										</div>
 										<div class="user_fans">
-											粉丝<span id="other_data_fans"></span>
+											粉丝<span id="other_data_fans" class="user_fans_num"></span>
 										</div>
 									</div>
 								</div>

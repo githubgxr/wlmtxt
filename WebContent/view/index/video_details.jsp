@@ -47,27 +47,27 @@
 			<!--用户-->
 			<div style="width: 260px; float: right; margin: 15px 0 0 0;">
 				<!--用户头像-->
-				<img id="detail_user_img" class="user_img" src=""
+				<img id="detail_user_img" class="user_img to_other_data" src=""
 					style="float: left;" />
 
 				<div style="float: right; margin: 0 0 0 20px; width: 170px;">
 					<!--用户名-->
-					<div id="detail_user_name" style="color: #1cd388;"></div>
+					<div id="detail_user_name" class="to_other_data" style="color: #1cd388;"></div>
 					<!--个人介绍-->
 					<div id="detail_user_bio"
 						style="color: #99a2aa; height: 40px; line-height: 20px; overflow: hidden; margin: 10px 0;"></div>
 					<!--关注和粉丝-->
 					<div style="color: #99a2aa;">
 						<div style="width: 85px; float: left;">
-							关注：<span id="his_attention" style="color: #1cd388;"></span>
+							关注：<span id="his_attention" class="user_focus_num" style="color: #1cd388;"></span>
 						</div>
 						<div style="width: 85px; float: right;">
-							粉丝：<span id="his_fans" style="color: #1cd388;"></span>
+							粉丝：<span id="his_fans" class="user_fans_num" style="color: #1cd388;"></span>
 						</div>
 					</div>
 					<div>
 						<button class="button_a user_operate not_focus" id="focus_btn"
-							style="width: 100%; margin: 10px 0;">+ 关注</button>
+							style="width: 100%; margin: 10px 0; display: none;">+ 关注</button>
 					</div>
 				</div>
 			</div>
@@ -85,8 +85,8 @@
 					下载-->
 				<div style="margin: 10px 0 0 0;">
 					<div>
-						<a id="download_a" class="button_code  button_a">
-							<i class="fas fa-download"
+						<a id="download_a" class="button_code  button_a"> <i
+							class="fas fa-download"
 							style="width: 50px; float: left; line-height: 32px; text-align: left; margin: 0 0 0 -10px;">&nbsp;下载</i>
 							<div style="float: left;"></div>
 						</a>
@@ -117,36 +117,31 @@
 				<div id="tj_list">
 					<!--一个视频-->
 					<ul id="llls_list_container">
-							<li class="list_video_item" style="margin:0 20px;" >
-								<!--视频链接-->
-								<a class="video_list_item_wrap">
-									<div class="video_cover">
-										<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
-										<div class="video_overplay"></div>
-										<div class="video_play"></div>
-									</div>
-									<!--视频信息-->
-									<div class="video_info">
-										<!--标题-->
-										<div class="video_title">【10月】樱花庄的宠物女孩05【千夏】</div>
-										<!--浏览量-->
-										<div class="video_number">425</div>
-										<!--用户名-->
-										<div class="video_username">【10月】樱花庄的宠物女孩05【千夏】</div>
+						<li class="list_video_item" style="margin: 0 20px;">
+							<!--视频链接--> <a class="video_list_item_wrap">
+								<div class="video_cover">
+									<img class="video_img" src="<%=basePath%>css/zb/img/4.png" />
+									<div class="video_overplay"></div>
+									<div class="video_play"></div>
+								</div> <!--视频信息-->
+								<div class="video_info">
+									<!--标题-->
+									<div class="video_title">【10月】樱花庄的宠物女孩05【千夏】</div>
+									<!--浏览量-->
+									<div class="video_number">425</div>
+									<!--用户名-->
+									<div class="video_username">【10月】樱花庄的宠物女孩05【千夏】</div>
 
-									</div>
-								</a>
-
-								<!--视频分类-->
-								<div class="video_label">
-									<div class="video_label_content">
-										<a class="video_label_item">绝地求生</a>
-										<a class="video_label_item">绝地求生</a>
-										<a class="video_label_item">绝地求生</a>
-									</div>
 								</div>
-							</li>
-						</ul>
+						</a> <!--视频分类-->
+							<div class="video_label">
+								<div class="video_label_content">
+									<a class="video_label_item">绝地求生</a> <a
+										class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
+								</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 
@@ -159,7 +154,7 @@
 					<span id="discussNum">0</span>&nbsp;评论
 				</div>
 				<!--发表评论-->
-				<div>
+				<div id="comment_operate_div">
 					<textarea class="form-control textarea_pl" id="textarea_comment"
 						style="width: 90%; float: left;"></textarea>
 					<div class="button_pl user_operate" style="float: right;"
@@ -266,7 +261,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button id="check_response_btn" class="btn btn-success" onclick="check_response()">确认回复</button>
+					<button id="check_response_btn" class="btn btn-success"
+						onclick="check_response()">确认回复</button>
 				</div>
 			</div>
 		</div>
@@ -274,6 +270,8 @@
 	<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	<script type="text/javascript"
 		src="<%=basePath%>js/index/video_details.js"></script>
+	<script type="text/javascript"
+		src="<%=basePath%>js/index/focus_and_fans_num.js"></script>
 </body>
 
 </html>

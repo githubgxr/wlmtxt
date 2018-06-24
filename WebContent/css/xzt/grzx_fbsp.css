@@ -41,13 +41,13 @@
 
 #fbsp_main .fbsp_content .img_wrap {
 	width: cal(100% - 200px);
-	margin: 50px;
+	margin: 40px 50px;
 	float: left;
 }
 
 #fbsp_main .fbsp_content .img_wrap .img_wrap_list {
 	width: 100%;
-	margin: 15px 0;
+	margin: 25px 0;
 	float: left;
 }
 
@@ -124,7 +124,7 @@
 	margin-top: 20px;
 	position: relative;
 	width: 182px;
-	height: 142px;
+	/* height: 142px; */
 	overflow: hidden;
 }
 
@@ -153,15 +153,19 @@
 	height: 100px;
 	opacity: 0; 
 }
+.imgnum #imgfile:hover{
+	cursor:pointer;
+}
 .inputfile {
-    width: 160px;
+  width: 550px;
 	height: 30px;
 	margin-left: 180px;
 	margin-top: 0px;
     opacity: 0; 
     position: absolute; 
 }
-.inputfile + label {
+
+/* .inputfile + label {
     font-size: 1.25em;
     font-weight: 700;
     color: white;
@@ -171,7 +175,7 @@
 .inputfile + label:hover {
     background-color: red;
     cursor:pointer;
-}
+} */
 .inputfile:focus + label {
     outline: 1px dotted #000; 
     outline: -webkit-focus-ring-color auto 5px;
@@ -181,7 +185,17 @@
 	width: 100%;
 	height: 100%;
 }
-
+.div_keyword_content {
+	float: left;
+	height: 25px;
+	line-height: 25px;
+	font-size: 12px;
+	color: #1dd388;
+	border-radius: 200px;
+	padding: 0 10px;
+	margin: 5px 5px 5px 0;
+	background-color: rgba(28, 211, 136, .3);
+}
 .div_keyword {
 	float: left;
 	height: 25px;
@@ -189,8 +203,4 @@
 	text-align: center;
 	font-size: 12px;
 	color: #1dd388;
-	border-radius: 200px;
-	padding: 0 15px;
-	margin: 5px;
-	background-color: rgba(28, 211, 136, .3);
 }

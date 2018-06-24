@@ -156,6 +156,8 @@ li a {
 .category_name{
 	 position: absolute;
 	 color:#ffffff;
+	 font-size:14px;
+	 line-height:26px;
 	 background-color: #1cd388;
 	 z-index: 5;
 	 text-align: center;

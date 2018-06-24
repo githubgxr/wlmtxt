@@ -21,7 +21,7 @@ public class MyTest {
 	@Test
 	public void ttttt() {
 
-		System.out.println(worksService.getCollectNum("sdafasdf"));
+		worksService.collaborativeFilteringByUser("e9660cab-759b-4d84-a1f0-241c265b3e88");
 	}
 
 	/*

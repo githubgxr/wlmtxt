@@ -5,6 +5,7 @@ import java.util.List;
 import com.wlmtxt.domain.DO.wlmtxt_admin;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
+import com.wlmtxt.domain.VO.AdminVO;
 
 public interface AdminDao {
 	
@@ -50,8 +51,9 @@ public interface AdminDao {
 	 * @param admin
 	 * 						匹配admin的id属性更新记录
 	 * @author 王鹏志
+	 * @return 
 	 */	
-	public void updateAdmin (wlmtxt_admin admin);
+	public boolean updateAdmin (wlmtxt_admin admin);
 	
 	/**
 	 * 查询所有管理员，前台分页列表显示
@@ -119,4 +121,30 @@ public interface AdminDao {
     * 根据二级菜单id得到二级菜单
     */
 	public wlmtxt_second_menu getSecondById(String second_menu_id);
+
+    /*
+     * 添加管理员
+     */
+	public boolean addAdmin(wlmtxt_admin admin);
+
+   /*
+    * 删除管理员
+    */
+	public void deleteAdmin(String admin_id);
+   /*
+    * 根据id得到单条记录
+    */
+	public wlmtxt_admin getAdminById(String admin_id);
+    /*
+     * 得到管理员记录数
+     */
+	public int getCountAdminList(AdminVO adminVO);
+/*
+ * 分页管理员
+ */
+	public void getAdminListByPage(AdminVO adminVO);
+
+
+
+
 }

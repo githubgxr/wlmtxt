@@ -25,17 +25,17 @@ import com.wlmtxt.domain.VO.WorksDetailVO;
 
 public interface WorksService {
 
-	public void likWorks(wlmtxt_user user, wlmtxt_works works) throws Exception;
+	public void likWorks(wlmtxt_user user, wlmtxt_works works);
 
-	public void collectWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
+	public void collectWorks(wlmtxt_user user, wlmtxt_works accept_works);
 
-	public void downloadWorks(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
+	public void downloadWorks(wlmtxt_user user, wlmtxt_works accept_works);
 
-	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works) throws Exception;
+	public void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works);
 
-	public boolean isLiked(String userID, String worksID) throws Exception;
+	public boolean isLiked(String userID, String worksID);
 
-	public boolean isCollectWorks(String user_id, String works_id) throws Exception;
+	public boolean isCollectWorks(String user_id, String works_id);
 
 	public void saveWorks(wlmtxt_works accept_works, String[] keywords);
 
@@ -150,4 +150,23 @@ public interface WorksService {
 	public List<WorksDTO> listWorksByKeywordAndMenu(String worksID);
 
 	public List<DiscussWorkDTO> listMyDiscussWorkList(String user_id);
+
+	/**
+	 * 基于用户的协同过滤 <br>
+	 * 推荐相似用户的喜好
+	 * 
+	 * @param userID
+	 * @return
+	 */
+	public List<wlmtxt_works> collaborativeFilteringByUser(String userID);
+
+	/**
+	 * 计算用户对某个作品的喜爱值 <br>
+	 * 播放1 点赞3 评论2 收藏4
+	 * 
+	 * @param userID
+	 * @param worksID
+	 * @return
+	 */
+	int userPointWork(String userID, String worksID);
 }

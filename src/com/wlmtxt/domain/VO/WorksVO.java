@@ -5,7 +5,7 @@ import java.util.List;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 
 public class WorksVO {
-	private int currPage;
+	private int currPage=1;
 	private int totalPage;
 	private int totalCount;
 	private int pageSize;
