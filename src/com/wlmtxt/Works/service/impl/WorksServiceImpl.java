@@ -167,9 +167,39 @@ public class WorksServiceImpl implements WorksService {
 		System.out.println("用户相似度排序：" + similarityDegreeMap);
 
 		/*
+		 * 抓取前二十条作品数据
+		 */
+		List<wlmtxt_works> worksFinallyAllList = new ArrayList<wlmtxt_works>();
+		for (Map.Entry<String, Double> userEntry : similarityDegreeMap.entrySet()) {
+			// 计算单个作品
+			List<wlmtxt_works> worksTemporaryList = worksDao.listWorksAllByUserId(userEntry.getKey());
+
+			//
+			worksFinallyAllList.addAll(worksTemporaryList);
+			//
+			if (worksTemporaryList.size() < 20) {
+				// 如果小于二十条就继续抓
+			} else {
+				// 大于二十条就不抓了
+				break;
+			}
+		}
+		System.out.println(worksFinallyAllList);
+		/*
+		 * 随机五条
+		 */
+		List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
+
+		for (int n = 0; n < (worksFinallyAllList.size() >= 5 ? 5 : worksFinallyAllList.size()); n++) {
+			int random = (int) (Math.random() * worksFinallyAllList.size());
+			worksFinallyList.add(worksFinallyAllList.get(random));
+			worksFinallyAllList.remove(random);
+		}
+
+		/*
 		 * 
 		 */
-		return null;
+		return worksFinallyList;
 	}
 
 	@Override
