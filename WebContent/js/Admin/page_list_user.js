@@ -40,6 +40,9 @@ function get_ListBreakecaseInformationByPageAndSearch(){
 						+ data_list[len].user_discuss
 						+ '</td>';// 
 					str += '<td>'
+						+ '<i  data-toggle="modal" data-target="#updateUser" onclick=getUser("'+data_list[len].user_id+'") class="fa fa-pencil-square-o role_one" aria-hidden="true"></i>'
+						+ '</td>';
+					str += '<td>'
 						+ '<input  type="checkbox" class="checkbox_select" value="'
 						+ data_list[len].user_id
 						+ '" >'
@@ -149,6 +152,9 @@ function searchUsername(query_data){
 						+ data_list[len].user_discuss
 						+ '</td>';// 
 					str += '<td>'
+						+ '<i  data-toggle="modal" data-target="#updateUser" onclick=getUser("'+data_list[len].user_id+'") class="fa fa-pencil-square-o role_one" aria-hidden="true"></i>'
+						+ '</td>';
+					str += '<td>'
 						+ '<input  type="checkbox" class="checkbox_select" value="'
 						+ data_list[len].user_id
 						+ '" >'	
@@ -187,10 +193,10 @@ function searchUsername(query_data){
 }
 
 /*
- * 得到管理员信息
+ * 得到用户信息
  */
 
-function getAdmin(id){
+function getUser(user_id){
 	var xmlhttp;
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -201,38 +207,36 @@ function getAdmin(id){
 	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
 	var fromDate = new FormData();	
-	fromDate.append("admin.admin_id",id);
-	xmlhttp.open("post","/wlmtxt/Admin/Admin_getAdminById",true);
+	fromDate.append("user.user_id",user_id);
+	xmlhttp.open("post","/wlmtxt/AdminUser/AdminUser_getUserById",true);
 	xmlhttp.send(fromDate);
 	xmlhttp.onreadystatechange=function()
 	  {
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    {
-	    var admin=xmlhttp.responseText;
-	    admin = JSON.parse(admin);
-	    $('#updateAdmin_username').val(admin.admin_username);
-	    $('#updateAdmin_id').val(admin.admin_id);
-	    $('#updateAdmin_password').val(admin.admin_password);
-	    $('#updateAdmin_admin').val(admin.admin_admin);
+	    var user=xmlhttp.responseText;
+	    user = JSON.parse(user);
+	    $('#updateuser_upload').val(user.user_upload);
+	    $('#updateuser_discuss').val(user.user_discuss);
+	    $('#updateuser_id').val(user.user_id);
 	    }
 	  }
 }
 /*
- * 修改管理员信息
+ * 修改用户信息
  */
 $('.update_input_sure').click(
 		function() {
 			var this_modal = $(this);
-			$.post('/wlmtxt/Admin/Admin_updateAdmin',
-					$('#updateAdmin form').serialize(), function(xhr) {
+			$.post('/wlmtxt/AdminUser/AdminUser_updateUser_authority',
+					$('#updateUser form').serialize(), function(xhr) {
 						if (xhr == 1) {
-							toastr.success('添加成功!');
-							$('#updateAdmin').modal('hide');
-							$('#updateAdmin input').val("");
-							$('#updateAdmin select').val("");
-							window.location.reload();
+							toastr.success('修改成功!');
+							$('#updateUser').modal('hide');
+							$('#updateUser input').val("");
+							//window.location.reload();
 						} else {
-							toastr.error('添加失败!');
+							toastr.error('修改失败!');
 							return false;
 						}
 					}, 'text')
@@ -240,9 +244,9 @@ $('.update_input_sure').click(
 
 
 /*
- * 删除管理员
+ * 删除用户
  */  
-function deleteAdmin(){
+function deleteUser(){
 	$.confirm({
 		smoothContent : false,
 		title : '删除用户',

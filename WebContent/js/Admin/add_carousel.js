@@ -172,7 +172,7 @@ function searchtitle(){
 var modifi_delete = function(){
 	var type = $(this).text().trim();
 	var id = $(this).siblings('input').val();
-	dis_bnt(id);
+	//dis_bnt(id);
 	if(type=="添加"){
 		var formData = new FormData();
 		formData.append('recommend.recommend_works_id', id);

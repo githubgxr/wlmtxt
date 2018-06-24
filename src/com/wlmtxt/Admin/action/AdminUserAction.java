@@ -93,7 +93,7 @@ public void getUserListBysearchPage() throws IOException{
  	 pw.write(gson.toJson(userVO));
 }
 /*
- * 根据id得到关键词信息
+ * 根据id得到单条记录
  */
 public void getUserById() throws IOException{
 	user = adminuserService.getUserById(user.getUser_id());
@@ -104,6 +104,12 @@ public void getUserById() throws IOException{
  	 gsonBuilder.setPrettyPrinting();// 格式化json数据
  	 Gson gson = gsonBuilder.create();
  	 pw.write(gson.toJson(user));
+}
+/*
+ * 跳转信息管理
+ */
+public String list_user(){
+	return "list_user";
 }
 }
 

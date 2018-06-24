@@ -71,6 +71,7 @@ public wlmtxt_works getWorksById(String works_id) {
 	String hql = "from wlmtxt_works where works_id='"+works_id+"'";
 	Query query = session.createQuery(hql);
 	wlmtxt_works wlmtxt_work  = (wlmtxt_works) query.uniqueResult();
+	session.clear();
 	return wlmtxt_work;
 }
 @Override

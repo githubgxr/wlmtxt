@@ -7,6 +7,7 @@ import com.wlmtxt.Admin.dao.WorksExamineDao;
 import com.wlmtxt.Admin.service.WorksExamineService;
 import com.wlmtxt.domain.DO.wlmtxt_recommend;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.RecommendDTO;
 import com.wlmtxt.domain.VO.WorksVO;
 
 import util.TeamUtil;
@@ -67,9 +68,24 @@ public boolean passed(String works_id, String passed) {
 }
 
 @Override
-public List<wlmtxt_recommend> listrecommend() {
-	
-	return worksExamineDao.listrecommend();
+public List<RecommendDTO> listrecommend() {
+	List<RecommendDTO> recommendDTOList =new  ArrayList<RecommendDTO>();
+	RecommendDTO recommendDTO = new RecommendDTO();
+	List<wlmtxt_recommend> wlmtxt_recommendList = worksExamineDao.listrecommend();
+	System.out.println("aaa"+wlmtxt_recommendList);
+	for(wlmtxt_recommend recommend:wlmtxt_recommendList){
+		System.out.println("ggggggggghhhh"+recommend);
+		wlmtxt_works works	= worksExamineDao.getWorksById(recommend.getRecommend_works_id());
+		recommendDTO.setWorks(works);
+		System.out.println(works);
+		recommendDTO.setRecommend(recommend);
+		System.out.println(recommend);
+		System.out.println(recommendDTO);
+		recommendDTOList.add(recommendDTO);
+		System.out.println("级"+recommendDTOList);
+	}
+	System.out.println("价格"+recommendDTOList);
+	return recommendDTOList;
 }
 
 @Override

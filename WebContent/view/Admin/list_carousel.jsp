@@ -40,14 +40,19 @@
 									<tr>
 										<th>序号</th>
 										<th>标题</th>
+										<th>排序值</th>
 										<th>操作</th>
+										<th><label class="fancy-checkbox"> <input
+												id="checkbox_all_select" type="checkbox"
+												onclick="all_select()"> <span></span>
+										</label></th>
 									</tr>
 								</thead>
 								<tbody></tbody>
 								<tfoot>
 									<tr>
 										<td colspan="8" style="font-size: 12px;" class="page_info"><a
-											onclick="firstPage()"><i class="fa fa-angle-double-left">首页</i>
+						 					onclick="firstPage()"><i class="fa fa-angle-double-left">首页</i>
 										</a>&nbsp&nbsp<a onclick="prePage()"><i
 												class="fa fa-angle-left"></i>上一页 </a>&nbsp&nbsp<a
 											onclick="nextPage()">下一页<i class="fa fa-angle-right"></i>
@@ -64,6 +69,6 @@
 		</div>
 	</div>
 	<script type="text/javascript"
-		src="<%=basePath%>js/Admin/add_carousel.js"></script>
+		src="<%=basePath%>js/Admin/list_carousel.js"></script>
 </body>
 </html>

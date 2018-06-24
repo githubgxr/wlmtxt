@@ -6,7 +6,7 @@
 	<package name="AdminUser" namespace="/AdminUser" extends="struts-default">
 		<action name="AdminUser_*" class="com.wlmtxt.Admin.action.AdminUserAction"
 			method="{1}">
-		
+		<result name="list_user">/view/Admin/list_user.jsp</result>
 		</action>
 	</package>
 </struts>

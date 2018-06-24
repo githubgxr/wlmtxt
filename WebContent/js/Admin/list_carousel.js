@@ -11,17 +11,21 @@ $(function(){
 					
 					str += '<tr>';
 					str += '<td>' + (len + 1) + '</td>';// 序号
-					str += '<td>' + data_list[len]
+					str += '<td>' + data_list[len].works.works_title
 							+ '</td>';// 标题
-					str += '<td>'
-						+ '<i id="'
-						+ data_list[len].keyword_id
-						+ '" data-toggle="modal" data-target="#updateKeyword" onclick=getKeyword("'+data_list[len].keyword_id+'") class="fa fa-pencil-square-o role_one" aria-hidden="true"></i>'
-						+ '</td>';
+					str += '<td>' + data_list[len].recommend.recommend_sort
+					+ '</td>';// 标题
+				    str += '<td>'	
+						+ '<input type="hidden" value="'
+						+ data_list[len].recommend_id
+						+ '" />'
+					+ '<i style="margin-left:6px;" class="fa fa-arrow-circle-up" aria-hidden="true" ></i>'
+					+ '<i style="margin-left:6px;" class="fa fa-arrow-circle-down" aria-hidden="true" ></i>'
+					+ '</td>';
 						
 						str += '<td>'
 							+ '<input  type="checkbox" class="checkbox_select" value="'
-							+ data_list[len].keyword_id
+							+ data_list[len].recommend_id
 							+ '" >'
 							+ '</td>';
 						
