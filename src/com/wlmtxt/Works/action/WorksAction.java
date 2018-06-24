@@ -704,6 +704,7 @@ public class WorksAction extends ActionSupport {
 		} else {
 			worksService.saveWorks(accept_works, null);
 		}
+		System.out.println("accept_works:" + accept_works);
 		// worksService.saveWorks(accept_works, null);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
