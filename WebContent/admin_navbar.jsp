@@ -140,11 +140,11 @@
 					<!--  -->
 					<li><s:if test="page=='page_create_news'">
 							<a
-								href="<%=basePath%>Admin/Admin_list_discuss_page?page=page_create_news"
+								href="<%=basePath%>AdminUser/AdminUser_page_list_discuss"
 								class="active"> 评价管理</a>
 						</s:if> <s:else>
 							<a
-								href="<%=basePath%>Admin/Admin_list_discuss_page?page=page_create_news">
+								href="<%=basePath%>AdminUser/AdminUser_page_list_discuss">
 								评价管理</a>
 						</s:else></li>
 					<!--  -->
