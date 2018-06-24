@@ -59,10 +59,10 @@
 					<!--关注和粉丝-->
 					<div style="color: #99a2aa;">
 						<div style="width: 85px; float: left;">
-							关注：<span id="his_attention" class="user_focus_num" style="color: #1cd388;"></span>
+							关注：<span id="his_attention" class="detail_user_focus_num" style="color: #1cd388;"></span>
 						</div>
 						<div style="width: 85px; float: right;">
-							粉丝：<span id="his_fans" class="user_fans_num" style="color: #1cd388;"></span>
+							粉丝：<span id="his_fans" class="detail_user_fans_num" style="color: #1cd388;"></span>
 						</div>
 					</div>
 					<div>
