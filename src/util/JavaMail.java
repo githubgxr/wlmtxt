@@ -29,7 +29,7 @@ public class JavaMail {
 
 		Transport ts;
 		ts = session.getTransport();
-		ts.connect("1074545235@qq.com", "gbtkijmzbsfwgefa");
+		ts.connect("1074545235@qq.com", "vxvfbeqpewegicjd");
 		ts.sendMessage(message, message.getAllRecipients()); // 向谁发送一封邮件
 		ts.close(); // 断开与服务器的连接
 	}

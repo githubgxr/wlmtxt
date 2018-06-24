@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.wlmtxt.User.dao.UserDao;
-import com.wlmtxt.domain.DO.wlmtxt_collect;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
@@ -77,7 +76,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public wlmtxt_user mailRegisted(wlmtxt_user accpet_user) {
 		String hql = "from wlmtxt_user where user_mail='" + accpet_user.getUser_mail() + "'";
-		Query query = getSession().createQuery(hql);
+		Query query = getSession().createQuery(hql);	
 		wlmtxt_user user = (wlmtxt_user) query.uniqueResult();
 		return user;
 	}
@@ -161,6 +160,46 @@ public class UserDaoImpl implements UserDao {
 		wlmtxt_follow follow = (wlmtxt_follow) query.uniqueResult();
 		return follow;
 	}
+
+	@Override
+	public int deleteAllMyFollow(wlmtxt_user loginUser) throws Exception {
+		String hql = "delete from wlmtxt_follow  where follow_active_user_id='"+loginUser.getUser_id()+"'";
+		Query query = getSession().createQuery(hql);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public List<wlmtxt_follow> listFollowByLogin_user_id(String user_id) {
+		String hql = "from wlmtxt_follow where follow_passive_user_id='"+user_id+"'";
+		Query query = getSession().createQuery(hql);
+		return query.list();
+	}
+
+	@Override
+	public void noticeFans(wlmtxt_follow follow)  throws Exception{
+		getSession().save(follow);
+	}
+
+	@Override
+	public String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user) {
+		String hql = "delete from wlmtxt_follow where follow_active_user_id='"+ loginUser.getUser_id() +"' and follow_passive_user_id='"+accpet_user.getUser_id()+"'";
+		Query query = getSession().createQuery(hql);
+		if (query.executeUpdate() == 1) {
+			return "1";
+		} else {
+			return "2";
+		}
+	}
+
+	@Override
+	public wlmtxt_user myFansByFollow_passive_user_id(String user_id) {
+		String hql = "from wlmtxt_user where user_id='"+user_id+"'";
+		Query query = getSession().createQuery(hql);
+		return (wlmtxt_user) query.uniqueResult();
+	}
+
+	
+//	public void remov
 	
 	/**
 	 * 通过单个作品id得到对应的作品关键词记录list
