@@ -27,25 +27,25 @@
 				<h3 style="margin: 0px; padding: 0px;">好友动态</h3>
 			</div>
 			<!--主体部分-->
-			<div class="llls_content list_container" style="margin: 20px 0px;">
+			<%-- <div class="llls_content list_container" style="margin: 20px 0px;">
 				<div id="llls_list_container">
-<!-- 					<div class="video_options"> -->
-<!-- 						<div class="neck_name user_img_xzt_div"> -->
-<%-- 							<img class="user_img_xzt " src="<%=basePath%>css/zb/img/tx.jpg " /> --%>
-<!-- 						</div> -->
-<!-- 						<div class="info_dynamic_name">王小二</div> -->
-<!-- 						<div class="info_dynamic_time">2018.6.3</div> -->
-<!-- 						<div class="info_dynamic_title">小猪正在享受高空飞翔的快感</div> -->
-<!-- 						<div class="info_dynamic_concise">聪明的小猪觉得天气这么热，聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热</div> -->
-<!-- 						<div class="list_img"> -->
-<%-- 							<img class="video_img" src="<%=basePath%>css/zb/img/4.png" --%>
-<!-- 								style="width: 660px; height: 330px;" /> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<hr style="float: left; width: 100%;" /> -->
+					<div class="video_options">
+						<div class="neck_name user_img_xzt_div">
+							<img class="user_img_xzt " src="<%=basePath%>css/zb/img/tx.jpg " /> 
+						</div>
+						<div class="info_dynamic_name">王小二</div>
+						<div class="info_dynamic_time">2018.6.3</div>
+						<div class="info_dynamic_title">小猪正在享受高空飞翔的快感</div>
+						<div class="info_dynamic_concise">聪明的小猪觉得天气这么热，聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热聪明的小猪觉得天气这么热</div>
+						<div class="list_img">
+							<img class="video_img" src="<%=basePath%>css/zb/img/4.png" 
+								style="width: 660px; height: 330px;" /> 
+						</div>
+					</div>
+					<hr style="float: left; width: 100%;" />
 				</div>
 
-			</div>
+			</div> --%>
 			<!-----翻页----------------------->
 
 		</div>

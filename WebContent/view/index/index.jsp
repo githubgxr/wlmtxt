@@ -140,13 +140,14 @@
 		style="float: left; background-color: #ffffff; padding: 20px; border-radius: 5px; width: 960px; margin: 20px 0 20px calc(( 100% - 960px)/2); float: left;">
 		<div
 			style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px; line-height: 36px;">
-			<span>动态</span> <span class="dz_no" style="float: right;">更多&nbsp;<i
-				class="fas fa-angle-double-right "></i></span>
+			<span>猜你喜欢</span> 
+			<span class="dz_no" style="float: right;">
+			<i class="fas fa-sync-alt"></i>&nbsp;换一批</span>
 		</div>
 		<div>
 			<ul id="llls_list_container">
 				<li class="index_list_video_item"
-					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					style="width: 160px; height: 200px; margin: 0 12px 10px 12px;">
 					<!--视频链接--> <a class="video_list_item_wrap"
 					style="width: 160px; height: 160px;">
 						<div class="video_cover">
@@ -170,15 +171,15 @@
 								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
 						</div>
 				</a> <!--视频分类-->
-					<div class="video_label">
-						<div class="video_label_content">
+					<div class="video_label" style="width:160px;padding:0;">
+						<div class="video_label_content" style="width:160px;padding:0;">
 							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
 							<a class="video_label_item">绝地求生</a>
 						</div>
 					</div>
 				</li>
 				<li class="index_list_video_item"
-					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					style="width: 160px; height: 200px; margin: 0 12px 10px 12px;">
 					<!--视频链接--> <a class="video_list_item_wrap"
 					style="width: 160px; height: 160px;">
 						<div class="video_cover">
@@ -202,16 +203,15 @@
 								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
 						</div>
 				</a> <!--视频分类-->
-					<div class="video_label">
-						<div class="video_label_content">
+					<div class="video_label" style="width:160px;padding:0;">
+						<div class="video_label_content" style="width:160px;padding:0;">
 							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
 							<a class="video_label_item">绝地求生</a>
 						</div>
 					</div>
 				</li>
-
 				<li class="index_list_video_item"
-					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					style="width: 160px; height: 200px; margin: 0 12px 10px 12px;">
 					<!--视频链接--> <a class="video_list_item_wrap"
 					style="width: 160px; height: 160px;">
 						<div class="video_cover">
@@ -235,16 +235,15 @@
 								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
 						</div>
 				</a> <!--视频分类-->
-					<div class="video_label">
-						<div class="video_label_content">
+					<div class="video_label" style="width:160px;padding:0;">
+						<div class="video_label_content" style="width:160px;padding:0;">
 							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
 							<a class="video_label_item">绝地求生</a>
 						</div>
 					</div>
 				</li>
-
 				<li class="index_list_video_item"
-					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					style="width: 160px; height: 200px; margin: 0 12px 10px 12px;">
 					<!--视频链接--> <a class="video_list_item_wrap"
 					style="width: 160px; height: 160px;">
 						<div class="video_cover">
@@ -268,16 +267,15 @@
 								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
 						</div>
 				</a> <!--视频分类-->
-					<div class="video_label">
-						<div class="video_label_content">
+					<div class="video_label" style="width:160px;padding:0;">
+						<div class="video_label_content" style="width:160px;padding:0;">
 							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
 							<a class="video_label_item">绝地求生</a>
 						</div>
 					</div>
 				</li>
-
 				<li class="index_list_video_item"
-					style="width: 160px; height: 200px; margin: 0 20px 10px 0;">
+					style="width: 160px; height: 200px; margin: 0 12px 10px 12px;">
 					<!--视频链接--> <a class="video_list_item_wrap"
 					style="width: 160px; height: 160px;">
 						<div class="video_cover">
@@ -301,13 +299,14 @@
 								style="width: 70px; margin-top: -5px; float: right;">2018-6-13</div>
 						</div>
 				</a> <!--视频分类-->
-					<div class="video_label">
-						<div class="video_label_content">
+					<div class="video_label" style="width:160px;padding:0;">
+						<div class="video_label_content" style="width:160px;padding:0;">
 							<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>
 							<a class="video_label_item">绝地求生</a>
 						</div>
 					</div>
 				</li>
+				
 
 			</ul>
 		</div>

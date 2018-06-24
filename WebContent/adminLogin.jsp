@@ -43,7 +43,7 @@
 
 </head>
 
-<body style="">
+<body>
 	<div class="logo">
 		<div class="header">
 			<%-- 			<img src="<%=basePath%>img/sadmin/logo.png"> --%>
@@ -51,8 +51,14 @@
 		</div>
 		<div class="content">
 			<form action="" method="post">
-				<input type="text" class="userName" id="account" /> <input
-					type="password" id="password" class="passWord" />
+				<div id="div_userName">
+					<label class="label_userName">用户名：</label>
+					<input type="text" class="userName" id="account"  / >
+				</div>
+				<div id="div_password">
+					<label class="label_password">密&nbsp;&nbsp;&nbsp;码：</label>
+					<input type="password" id="password" class="passWord"  />
+				</div>
 				<div class="clear"></div>
 				<div id="login" class="logo-button" onclick="admin_login()">LOGIN</div>
 			</form>
