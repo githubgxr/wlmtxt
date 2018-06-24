@@ -337,10 +337,13 @@ public class WorksServiceImpl implements WorksService {
 			DiscussWorkDTO discussDTO = new DiscussWorkDTO();
 			discussDTO.setDiscuss(discuss);
 			//
-			WorksDTO worksDTO = getWorksDTOByID(discuss.getDiscuss_id());
-			discussDTO.setWorksDTO(worksDTO);
-			//
-			listMyDiscussWorkList.add(discussDTO);
+			// 如果是回复，就不加入
+			if (worksDao.getWorksByID(discuss.getDiscuss_father_discuss_id()) != null) {
+				WorksDTO worksDTO = getWorksDTOByID(discuss.getDiscuss_father_discuss_id());
+				discussDTO.setWorksDTO(worksDTO);
+				//
+				listMyDiscussWorkList.add(discussDTO);
+			}
 		}
 
 		return listMyDiscussWorkList;

@@ -595,7 +595,6 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void listWorksBySecondMenuID() throws IOException {
-		System.out.println(second_menu.getSecond_menu_id());
 		List<WorksDTO> worksDTOList = worksService.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -768,7 +767,6 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		System.out.println(accept_user);
 		int num = worksService.totalFansNum(accept_user);
 		pw.write(String.valueOf(num));
 	}
@@ -790,7 +788,6 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		System.out.println("id:" + accept_user.getUser_id());
 		int num = worksService.totalFollowingNum(accept_user);
 		pw.write(String.valueOf(num));
 	}
