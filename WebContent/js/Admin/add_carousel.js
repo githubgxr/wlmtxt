@@ -58,7 +58,7 @@ function get_ListBreakecaseInformationByPageAndSearch(query_data) {
 						for (var index = 1; index <= xhr.totalPage; index++) {
 							opt += '<option>' + index + '</option>';
 						}
-						$('.info').html(
+						$('.carousel').html(
 								'共 ' + xhr.totalCount + '条信息 当前'
 										+ xhr.currPage + '/' + xhr.totalPage
 										+ '页 ' + xhr.pageSize
@@ -156,7 +156,7 @@ function searchtitle(){
 				for (var index = 1; index <= xhr.totalPage; index++) {
 					opt += '<option>' + index + '</option>';
 				}
-				$('.info').html(
+				$('.carousel').html(
 						'共 ' + xhr.totalCount + '条信息 当前'
 								+ xhr.currPage + '/' + xhr.totalPage
 								+ '页 ' + xhr.pageSize

@@ -234,7 +234,7 @@ $('.update_input_sure').click(
 							toastr.success('修改成功!');
 							$('#updateUser').modal('hide');
 							$('#updateUser input').val("");
-							//window.location.reload();
+							window.location.reload();
 						} else {
 							toastr.error('修改失败!');
 							return false;

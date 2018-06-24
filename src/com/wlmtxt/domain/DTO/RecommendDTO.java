@@ -22,5 +22,9 @@ public void setWorks(wlmtxt_works works) {
 public String toString() {
 	return "RecommendDTO [recommend=" + recommend + ", works=" + works + "]";
 }
+public RecommendDTO() {
+	
+	// TODO Auto-generated constructor stub
+}
 
 }
