@@ -47,7 +47,7 @@ function GetRequest() {
 var Request = new Object();
 Request = GetRequest();
 var user_email;
-user_email = Request["accpet_user.user_mail"];
+user_email = Request["accept_user.user_mail"];
 document.getElementById("get_password_check_btn").onclick = function() {
 	var input_new_password = $("#input_new_password").val();
 	var input_new_repassword = $("#input_new_repassword").val();
@@ -67,8 +67,8 @@ document.getElementById("get_password_check_btn").onclick = function() {
 			return false;
 		} else {
 			var formData = new FormData();
-			formData.append("accpet_user.user_mail", user_email);
-			formData.append("accpet_user.user_password", input_new_password);
+			formData.append("accept_user.user_mail", user_email);
+			formData.append("accept_user.user_password", input_new_password);
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "/wlmtxt/User/User_modifiedPasswordBehindForgetted");
 			xhr.send(formData);

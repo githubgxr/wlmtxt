@@ -45,7 +45,7 @@ public class WorksAction extends ActionSupport {
 	//
 	wlmtxt_user accept_user;
 	wlmtxt_works accept_works;
-	wlmtxt_discuss accpet_discuss;
+	wlmtxt_discuss accept_discuss;
 	wlmtxt_first_menu first_menu;
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
@@ -387,8 +387,8 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void discussWorks() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		accpet_discuss.setDiscuss_user_id(user.getUser_id());
-		worksService.discussWorks(accpet_discuss);
+		accept_discuss.setDiscuss_user_id(user.getUser_id());
+		worksService.discussWorks(accept_discuss);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
@@ -402,7 +402,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void deleteDisscuss() throws IOException {
-		worksService.deleteDisscuss(accpet_discuss.getDiscuss_id());
+		worksService.deleteDisscuss(accept_discuss.getDiscuss_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
@@ -765,11 +765,10 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void totalFansNum() throws IOException {
-		// wlmtxt_user loginUser = (wlmtxt_user)
-		// ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
+		System.out.println(accept_user);
 		int num = worksService.totalFansNum(accept_user);
 		pw.write(String.valueOf(num));
 	}
@@ -791,6 +790,7 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
+		System.out.println("id:" + accept_user.getUser_id());
 		int num = worksService.totalFollowingNum(accept_user);
 		pw.write(String.valueOf(num));
 	}
@@ -910,12 +910,12 @@ public class WorksAction extends ActionSupport {
 		this.accept_works = accept_works;
 	}
 
-	public wlmtxt_discuss getAccpet_discuss() {
-		return accpet_discuss;
+	public wlmtxt_discuss getAccept_discuss() {
+		return accept_discuss;
 	}
 
-	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
-		this.accpet_discuss = accpet_discuss;
+	public void setAccept_discuss(wlmtxt_discuss accept_discuss) {
+		this.accept_discuss = accept_discuss;
 	}
 
 	public wlmtxt_first_menu getFirst_menu() {

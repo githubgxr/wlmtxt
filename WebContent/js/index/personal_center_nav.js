@@ -4,7 +4,7 @@
 				getfansNum("sidebar_user_fans",user_id);
 				/*//获取关注量
 				var formData_focus_num=new FormData();
-				formData_focus_num.append("accpet_user.user_id",userInfo.user_id);
+				formData_focus_num.append("accept_user.user_id",userInfo.user_id);
 				var xhr_focus_num=new XMLHttpRequest();
 				xhr_focus_num.open("POST","/wlmtxt/Works/Works_totalFollowingNum");
 				xhr_focus_num.send(formData_focus_num);
@@ -15,7 +15,7 @@
 						}
 				//获取粉丝量
 				var formData_fans_num=new FormData();
-				formData_fans_num.append("accpet_user.user_id",userInfo.user_id);
+				formData_fans_num.append("accept_user.user_id",userInfo.user_id);
 				var xhr_fans_num=new XMLHttpRequest();
 				xhr_fans_num.open("POST","/wlmtxt/Works/Works_totalFansNum");
 				xhr_fans_num.send(formData_focus_num);
