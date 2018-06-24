@@ -26,11 +26,6 @@
 				<div class="llls_header list_header">
 					<i class="header_line"></i>
 					<h3>观看历史</h3>
-					<div class="list_category">
-						<a class="category_a">星秀星颜</a> <a class="category_a">星秀星颜</a> <a
-							class="category_a">星秀星颜</a> <a class="category_a">星秀星颜</a> <a
-							class="category_a">星秀星颜</a>
-					</div>
 
 					<a class="button_a" onclick="deleteAllMyHistory()">全部清空</a>
 				</div>
