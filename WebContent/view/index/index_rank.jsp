@@ -52,8 +52,8 @@
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
-					<ul class="ps ps--active-y"
-						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
+					<ul id="day_rank" class="ps ps--active-y"
+						style="width: 230px;  float: left; display: inline-block;">
 						<%-- 	<li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">
@@ -87,7 +87,7 @@
 
 			</div>
 			<!--电影榜  -->
-			<div class="rank-table-content rank-table-movie"
+			<div  class="rank-table-content rank-table-movie"
 				style="margin: 20px 25px; float: left; padding: 20px; background-color: #ffffff; border-radius: 5px;">
 				<!--榜头  -->
 				<div class="rank-table-header">
@@ -106,8 +106,8 @@
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
-					<ul class="ps ps--active-y"
-						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
+					<ul id="week_rank" class="ps ps--active-y"
+						style="width: 230px;  float: left; display: inline-block;">
 						<%-- 	<li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">
@@ -161,8 +161,8 @@
 
 				<!-- 榜单内容 -->
 				<div class="rank-table-body">
-					<ul class="ps ps--active-y"
-						style="width: 230px; padding: 10px 0px; float: left; display: inline-block;">
+					<ul id="month_rank" class="ps ps--active-y"
+						style="width: 230px;  float: left; display: inline-block;">
 						<%-- <li class="list_video_item">
 							<!--视频链接--> <a class="video_list_item_wrap">
 								<div class="video_cover">

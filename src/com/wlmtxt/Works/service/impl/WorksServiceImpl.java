@@ -513,14 +513,13 @@ public class WorksServiceImpl implements WorksService {
 		}
 		for (int i = 0; i < worksDTOList.size() - 1; i++) {
 			for (int j = 0; j < worksDTOList.size() - i - 1; j++) {// 比较两个整数
-				if (worksDTOList.get(j).getHot() > worksDTOList.get(j + 1).getHot()) {
+				if (worksDTOList.get(j).getHot() < worksDTOList.get(j + 1).getHot()) {
 					WorksDTO temp = worksDTOList.get(j);
 					worksDTOList.set(j, worksDTOList.get(j + 1));
 					worksDTOList.set(j + 1, temp);
 				}
 			}
 		}
-		System.out.println(worksDTOList);
 		if (worksDTOList.size() < 10) {
 			if (worksDTOList.size() == 0) {
 				return worksDTOList;
@@ -542,7 +541,7 @@ public class WorksServiceImpl implements WorksService {
 		}
 		for (int i = 0; i < worksDTOList.size() - 1; i++) {
 			for (int j = 0; j < worksDTOList.size() - i - 1; j++) {// 比较两个整数
-				if (worksDTOList.get(j).getHot() > worksDTOList.get(j + 1).getHot()) {
+				if (worksDTOList.get(j).getHot() < worksDTOList.get(j + 1).getHot()) {
 					WorksDTO temp = worksDTOList.get(j);
 					worksDTOList.set(j, worksDTOList.get(j + 1));
 					worksDTOList.set(j + 1, temp);
@@ -570,7 +569,7 @@ public class WorksServiceImpl implements WorksService {
 		}
 		for (int i = 0; i < worksDTOList.size() - 1; i++) {
 			for (int j = 0; j < worksDTOList.size() - i - 1; j++) {// 比较两个整数
-				if (worksDTOList.get(j).getHot() > worksDTOList.get(j + 1).getHot()) {
+				if (worksDTOList.get(j).getHot() < worksDTOList.get(j + 1).getHot()) {
 					WorksDTO temp = worksDTOList.get(j);
 					worksDTOList.set(j, worksDTOList.get(j + 1));
 					worksDTOList.set(j + 1, temp);
@@ -629,8 +628,6 @@ public class WorksServiceImpl implements WorksService {
 				endNum = ((dynamicVO.getPageIndex() - 1) * dynamicVO.getPageSize())
 						+ (workList.size() - ((dynamicVO.getPageIndex() - 1) * dynamicVO.getPageSize()));
 			}
-			System.out.println(firstNum);
-			System.out.println(endNum);
 			workList = workList.subList(firstNum, endNum);
 			/*
 			 * 
