@@ -93,7 +93,7 @@
 			<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 			
 		</div>
-		<div class="my_collection" id="my_collection"  style="display:none;">我的收藏</div>
+		<div class="my_collection" id="my_collection"  style="display:none;">我收藏的</div>
 		<script type="text/javascript">
 			var clearfix_a=$(".clearfix a");
 			$.each(clearfix_a,function(i){

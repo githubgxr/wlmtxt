@@ -29,7 +29,7 @@ public class JavaMail {
 
 		Transport ts;
 		ts = session.getTransport();
-		ts.connect("1074545235@qq.com", "gbtkijmzbsfwgefa");
+		ts.connect("1037976812@qq.com", "zhangbin123");
 		ts.sendMessage(message, message.getAllRecipients()); // 向谁发送一封邮件
 		ts.close(); // 断开与服务器的连接
 	}
@@ -37,7 +37,7 @@ public class JavaMail {
 	private static Message createMessage(Session session, String mailcontent, String mailTo)
 			throws AddressException, MessagingException, UnsupportedEncodingException {
 		MimeMessage message = new MimeMessage(session);
-		message.setFrom(new InternetAddress("1074545235@qq.com"));
+		message.setFrom(new InternetAddress("1037976812@qq.com"));
 		message.setRecipient(Message.RecipientType.TO, new InternetAddress(mailTo));
 		// message.setRecipient(Message.RecipientType.TO, new
 		// InternetAddress("guanyangchun@126.com"));
