@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.wlmtxt.Admin.dao.WorksExamineDao;
 import com.wlmtxt.Admin.service.WorksExamineService;
+import com.wlmtxt.Works.dao.WorksDao;
+import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_recommend;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.RecommendDTO;
@@ -14,13 +16,23 @@ import util.TeamUtil;
 
 public class WorksExamineServiceImpl implements WorksExamineService {
 private WorksExamineDao worksExamineDao;
-
+private WorksService worksService;
 public WorksExamineDao getWorksExamineDao() {
 	return worksExamineDao;
 }
 
 public void setWorksExamineDao(WorksExamineDao worksExamineDao) {
 	this.worksExamineDao = worksExamineDao;
+}
+
+
+
+public WorksService getWorksService() {
+	return worksService;
+}
+
+public void setWorksService(WorksService worksService) {
+	this.worksService = worksService;
 }
 
 @Override
@@ -78,6 +90,7 @@ public List<RecommendDTO> listrecommend() {
 		RecommendDTO recommendDTO = new RecommendDTO();
 		recommendDTO.setWorks(works);
 		recommendDTO.setRecommend(recommend);
+		recommendDTO.setWorksDTO(worksService.getWorksDTOByID(works.getWorks_id()));
 		recommendDTOList.add(recommendDTO);
 	}
 	return recommendDTOList;
