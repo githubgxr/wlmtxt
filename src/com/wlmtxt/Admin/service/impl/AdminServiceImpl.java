@@ -184,9 +184,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void getAdminListBysearchPage(AdminVO adminVO) {
 		int count = adminDao.getCountAdminList(adminVO);
-		adminVO.setTotalCount(count);
-		adminVO.setPageSize(10);
-		adminVO.setTotalPage((int) Math.ceil((double) count / adminVO.getPageSize()));
+		//adminVO.setTotalCount(count);
+		//adminVO.setPageSize(10);
+		//adminVO.setTotalPage((int) Math.ceil((double) count / adminVO.getPageSize()));
 		adminDao.getAdminListByPage(adminVO);
 	}
 	@Override

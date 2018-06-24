@@ -91,9 +91,9 @@ public class KeywordDaoImpl implements KeywordDao {
 			hql = hql + " and keyword_name like '%" + keywordVO.getKeyword_name() + "%'";
 		hql = hql + " order by keyword_gmt_modified desc";
 		Query query = session.createQuery(hql);	
-		query.setFirstResult(
-				(keywordVO.getCurrPage() - 1) * keywordVO.getPageSize());
-		query.setMaxResults(keywordVO.getPageSize());
+//		query.setFirstResult(
+//				(keywordVO.getCurrPage() - 1) * keywordVO.getPageSize());
+//		query.setMaxResults(keywordVO.getPageSize());
 		keywordList = query.list();
 		keywordVO.setWlmtxt_keywordList(keywordList);
 		session.clear();

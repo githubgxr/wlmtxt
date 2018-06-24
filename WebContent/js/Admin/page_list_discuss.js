@@ -58,25 +58,25 @@ function get_ListBreakecaseInformationByPageAndSearch(){
 				// -----------------------------------------------------
 
 				// 分页信息存入page_infomantion中
-				page_infomantion.currPage = xhr.currPage; // 当前页数
-				page_infomantion.countRecords = xhr.totalPage; // 总页数
-				page_infomantion.pageSize = xhr.pageSize; // 每页记录数
-				page_infomantion.totalPages = xhr.totalCount; // 总记录数
-				page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
-				page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
-
-				// 分页下的记录信息
-				var opt = '<option value=""></option>';
-				for (var index = 1; index <= xhr.totalPage; index++) {
-					opt += '<option>' + index + '</option>';
-				}
-				$('.discuss').html(
-						'共 ' + xhr.totalCount + '条信息 当前'
-								+ xhr.currPage + '/' + xhr.totalPage
-								+ '页 ' + xhr.pageSize
-								+ '条信息/页&nbsp&nbsp转到第'
-								+ '<select onchange="toPage(this)">'
-								+ opt + '</select> 页');
+//				page_infomantion.currPage = xhr.currPage; // 当前页数
+//				page_infomantion.countRecords = xhr.totalPage; // 总页数
+//				page_infomantion.pageSize = xhr.pageSize; // 每页记录数
+//				page_infomantion.totalPages = xhr.totalCount; // 总记录数
+//				page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
+//				page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
+//
+//				// 分页下的记录信息
+//				var opt = '<option value=""></option>';
+//				for (var index = 1; index <= xhr.totalPage; index++) {
+//					opt += '<option>' + index + '</option>';
+//				}
+//				$('.discuss').html(
+//						'共 ' + xhr.totalCount + '条信息 当前'
+//								+ xhr.currPage + '/' + xhr.totalPage
+//								+ '页 ' + xhr.pageSize
+//								+ '条信息/页&nbsp&nbsp转到第'
+//								+ '<select onchange="toPage(this)">'
+//								+ opt + '</select> 页');
 				// 影藏模态框
 				// $('#newQuery').modal('hide')
 			}, 'json')
@@ -132,7 +132,7 @@ function toPage(object) {
 function searchUsername(query_data){
 	$.post(
 			'/wlmtxt/AdminUser/AdminUser_getdiscussListBysearchPage',
-			{'discussVO.discuss_content':$('#input_PoliceSearchText').val() ,'discussVO.user_mail':$('#input_PoliceSearchText').val(),'discussVO.user_username':$('#input_PoliceSearchText').val(),'discussVO.currPage' : 1 },
+			{'discussVO.discuss_content_user_mail_user_username':$('#input_PoliceSearchText').val() ,'discussVO.currPage' : 1 },
 			function(xhr) {
 				var data_list = xhr.admindiscussDTOList;
 				var str = '';
@@ -165,25 +165,25 @@ function searchUsername(query_data){
 				// -----------------------------------------------------
 
 				// 分页信息存入page_infomantion中
-				page_infomantion.currPage = xhr.currPage; // 当前页数
-				page_infomantion.countRecords = xhr.totalPage; // 总页数
-				page_infomantion.pageSize = xhr.pageSize; // 每页记录数
-				page_infomantion.totalPages = xhr.totalCount; // 总记录数
-				page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
-				page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
-
-				// 分页下的记录信息
-				var opt = '<option value=""></option>';
-				for (var index = 1; index <= xhr.totalPage; index++) {
-					opt += '<option>' + index + '</option>';
-				}
-				$('.admin').html(
-						'共 ' + xhr.totalCount + '条信息 当前'
-								+ xhr.currPage + '/' + xhr.totalPage
-								+ '页 ' + xhr.pageSize
-								+ '条信息/页&nbsp&nbsp转到第'
-								+ '<select onchange="toPage(this)">'
-								+ opt + '</select> 页');
+//				page_infomantion.currPage = xhr.currPage; // 当前页数
+//				page_infomantion.countRecords = xhr.totalPage; // 总页数
+//				page_infomantion.pageSize = xhr.pageSize; // 每页记录数
+//				page_infomantion.totalPages = xhr.totalCount; // 总记录数
+//				page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
+//				page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
+//
+//				// 分页下的记录信息
+//				var opt = '<option value=""></option>';
+//				for (var index = 1; index <= xhr.totalPage; index++) {
+//					opt += '<option>' + index + '</option>';
+//				}
+//				$('.admin').html(
+//						'共 ' + xhr.totalCount + '条信息 当前'
+//								+ xhr.currPage + '/' + xhr.totalPage
+//								+ '页 ' + xhr.pageSize
+//								+ '条信息/页&nbsp&nbsp转到第'
+//								+ '<select onchange="toPage(this)">'
+//								+ opt + '</select> 页');
 				// 影藏模态框
 				// $('#newQuery').modal('hide')
 			}, 'json')

@@ -39,9 +39,9 @@ public void setWorksService(WorksService worksService) {
 public void getworksListThreeByPage(WorksVO worksVO) {
 	
 	int count = worksExamineDao.getCountworksListThree(worksVO);
-	worksVO.setTotalCount(count);
-	worksVO.setPageSize(10);
-	worksVO.setTotalPage((int) Math.ceil((double) count / worksVO.getPageSize()));
+	//worksVO.setTotalCount(count);
+	//worksVO.setPageSize(10);
+	//worksVO.setTotalPage((int) Math.ceil((double) count / worksVO.getPageSize()));
 	worksExamineDao.getworksListThreeByPage(worksVO);
 }
 

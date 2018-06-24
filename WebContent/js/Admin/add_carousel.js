@@ -58,13 +58,13 @@ function get_ListBreakecaseInformationByPageAndSearch(query_data) {
 						for (var index = 1; index <= xhr.totalPage; index++) {
 							opt += '<option>' + index + '</option>';
 						}
-						$('.carousel').html(
-								'共 ' + xhr.totalCount + '条信息 当前'
-										+ xhr.currPage + '/' + xhr.totalPage
-										+ '页 ' + xhr.pageSize
-										+ '条信息/页&nbsp&nbsp转到第'
-										+ '<select onchange="toPage(this)">'
-										+ opt + '</select> 页');
+//						$('.carousel').html(
+//								'共 ' + xhr.totalCount + '条信息 当前'
+//										+ xhr.currPage + '/' + xhr.totalPage
+//										+ '页 ' + xhr.pageSize
+//										+ '条信息/页&nbsp&nbsp转到第'
+//										+ '<select onchange="toPage(this)">'
+//										+ opt + '</select> 页');
 						// 影藏模态框
 						// $('#newQuery').modal('hide')
 					}, 'json')
@@ -156,13 +156,13 @@ function searchtitle(){
 				for (var index = 1; index <= xhr.totalPage; index++) {
 					opt += '<option>' + index + '</option>';
 				}
-				$('.carousel').html(
-						'共 ' + xhr.totalCount + '条信息 当前'
-								+ xhr.currPage + '/' + xhr.totalPage
-								+ '页 ' + xhr.pageSize
-								+ '条信息/页&nbsp&nbsp转到第'
-								+ '<select onchange="toPage(this)">'
-								+ opt + '</select> 页');
+//				$('.carousel').html(
+//						'共 ' + xhr.totalCount + '条信息 当前'
+//								+ xhr.currPage + '/' + xhr.totalPage
+//								+ '页 ' + xhr.pageSize
+//								+ '条信息/页&nbsp&nbsp转到第'
+//								+ '<select onchange="toPage(this)">'
+//								+ opt + '</select> 页');
 				// 影藏模态框
 				// $('#newQuery').modal('hide')
 		}, 'json')
