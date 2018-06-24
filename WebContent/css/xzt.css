@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+
 *,h3{
 	margin:0px;
 	padding:0px;
@@ -151,7 +152,8 @@ a:hover {
 }
 
 .video_label_item:hover {
-	background-color: rgba(28, 211, 136, .3);
+	/* background-color: rgba(28, 211, 136, .3); */
+	cursor:default;
 }
 
 
@@ -459,4 +461,7 @@ a:hover {
 .img_wrap_list .textarea_xzt:focus{
 	border-color: #1cd388;
 	outline: none;
+}
+.to_other_data:hover{
+	cursor:pointer;
 }

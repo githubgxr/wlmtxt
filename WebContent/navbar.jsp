@@ -120,6 +120,7 @@
 	</div>
 
 	<script type="text/javascript" src="<%=basePath%>js/index/navbar.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/index/focus_and_fans_num.js"></script>
 
 </body>
 
