@@ -619,7 +619,7 @@ b{
 }
 .div_more{
 	float:left;
-	width:960px;
+	width:100%;
 	line-height:36px;
 	background-color:#f6f6f6;
 	margin:30px auto;

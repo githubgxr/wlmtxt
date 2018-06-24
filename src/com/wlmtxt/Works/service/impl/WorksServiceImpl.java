@@ -606,28 +606,47 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public DynamicVO getDynamicVO(String user_id) {
-		DynamicVO dynamicVO = new DynamicVO();
+	public DynamicVO getDynamicVO(String user_id, DynamicVO dynamicVO) {
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 		//
 		List<wlmtxt_user> attentionUserList = worksDao.listAttentionUser(user_id);
+		List<wlmtxt_works> workList = new ArrayList<wlmtxt_works>();
 		for (wlmtxt_user user : attentionUserList) {
-			List<wlmtxt_works> workList = worksDao.listWorksAllByUserId(user.getUser_id());
+			workList.addAll(worksDao.listWorksAllByUserId(user.getUser_id()));
+
+		}
+		/*
+		 * service层的分页
+		 */
+		// 总记录数
+		if ((dynamicVO.getPageIndex() - 1) * dynamicVO.getPageSize() < workList.size()) {
+
+			int firstNum = (dynamicVO.getPageIndex() - 1) * dynamicVO.getPageSize();
+			int endNum = 0;
+			if ((dynamicVO.getPageIndex()) * dynamicVO.getPageSize() < workList.size()) {
+				endNum = (dynamicVO.getPageIndex()) * dynamicVO.getPageSize();
+			} else {
+				endNum = ((dynamicVO.getPageIndex() - 1) * dynamicVO.getPageSize())
+						+ (workList.size() - ((dynamicVO.getPageIndex() - 1) * dynamicVO.getPageSize()));
+			}
+			System.out.println(firstNum);
+			System.out.println(endNum);
+			workList = workList.subList(firstNum, endNum);
+			/*
+			 * 
+			 */
 			for (wlmtxt_works works : workList) {
 				WorksDTO worksDTO = new WorksDTO();
 				worksDTO = getWorksDTOByID(works.getWorks_id());
 				worksDTOList.add(worksDTO);
 			}
+			dynamicVO.setWorksDTOList(worksDTOList);
+		} else {
+			dynamicVO.setWorksDTOList(worksDTOList);
 		}
-		// if (worksDTOList.size() < 9) {
-		// dynamicVO.setWorksDTOList(worksDTOList.subList(0, worksDTOList.size()
-		// - 1));
-		// } else {
-		// dynamicVO.setWorksDTOList(worksDTOList.subList(0, 9));
-		// }
-		dynamicVO.setWorksDTOList(worksDTOList);
 		//
 		return dynamicVO;
+
 	}
 
 	@Override

@@ -36,7 +36,6 @@ import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
-import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
 @SuppressWarnings("serial")
@@ -453,14 +452,16 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write("1");
 	}
 
+	DynamicVO dynamicVO;
+
 	/**
 	 * 获取9条关注者的动态
 	 * 
 	 * @throws IOException
 	 */
-	public void getDynamicVO() throws IOException {
+	public void getFriendsDynamicVO() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		DynamicVO dynamicVO = worksService.getDynamicVO(user.getUser_id());
+		dynamicVO = worksService.getDynamicVO(user.getUser_id(), dynamicVO);
 		/*
 		 * 
 		 */
@@ -497,24 +498,24 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write(gson.toJson(worksDTOList));
 	}
 
-	/*
-	 * 分类页VO
-	 */
-	WorksCategoryVO worksCategoryVO;
-
-	/**
-	 * 
-	 * @throws IOException
-	 */
-	public void getWorksByCategoryPage() throws IOException {
-		worksCategoryVO = worksService.getWorksByCategoryPage(worksCategoryVO);
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(worksCategoryVO));
-	}
+	// /*
+	// * 分类页VO
+	// */
+	// WorksCategoryVO worksCategoryVO;
+	//
+	// /**
+	// *
+	// * @throws IOException
+	// */
+	// public void getWorksByCategoryPage() throws IOException {
+	// worksCategoryVO = worksService.getWorksByCategoryPage(worksCategoryVO);
+	// GsonBuilder gsonBuilder = new GsonBuilder();
+	// gsonBuilder.setPrettyPrinting();// 格式化json数据
+	// Gson gson = gsonBuilder.create();
+	// HttpServletResponse response = ServletActionContext.getResponse();
+	// response.setContentType("text/html;charset=utf-8");
+	// response.getWriter().write(gson.toJson(worksCategoryVO));
+	// }
 
 	/**
 	 * 根据登陆的的用户，获取他的所有通知
@@ -1029,12 +1030,12 @@ public class WorksAction extends ActionSupport {
 		return myWorksVO;
 	}
 
-	public WorksCategoryVO getWorksCategoryVO() {
-		return worksCategoryVO;
+	public void setDynamicVO(DynamicVO dynamicVO) {
+		this.dynamicVO = dynamicVO;
 	}
 
-	public void setWorksCategoryVO(WorksCategoryVO worksCategoryVO) {
-		this.worksCategoryVO = worksCategoryVO;
+	public DynamicVO getDynamicVO() {
+		return dynamicVO;
 	}
 
 	/**
