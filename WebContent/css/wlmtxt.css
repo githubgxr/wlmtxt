@@ -617,3 +617,16 @@ b{
 	border-top: 1px solid #eee;
 	float: left;
 }
+.div_more{
+	float:left;
+	width:100%;
+	line-height:36px;
+	background-color:#f6f6f6;
+	margin:30px auto;
+	padding:0 20px;
+	text-align: center;
+	border-radius:3px;"
+}
+.span_more{
+  color: #99a2aa;
+  cursor: pointer;

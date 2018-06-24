@@ -264,6 +264,38 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<wlmtxt_works> getWorksByPage(int pageIndex, int pageSize) {
+		String hql = " from wlmtxt_works  where  works_passed='1' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult((pageIndex - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_works> getWorksBySecondMenuAndPage(int pageIndex, int pageSize, String SecondMenuID) {
+		String hql = " from wlmtxt_works works where  works_passed='1' and works.works_second_menu_id='" + SecondMenuID
+				+ "' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult((pageIndex - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
+	public List<wlmtxt_works> getWorksByFirstMenuAndPage(int pageIndex, int pageSize, String FirstMenuID) {
+		String hql = " from wlmtxt_works works,wlmtxt_second_menu second_menu where  works_passed='1' and works.works_second_menu_id=second_menu.second_menu_id and second_menu.second_menu_first_menu_id='"
+				+ FirstMenuID + "' order by works_gmt_create desc";
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult((pageIndex - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		List<wlmtxt_works> worksList = query.list();
+		return worksList;
+	}
+
+	@Override
 	public List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id) {
 		String hql = " from wlmtxt_works  where works_second_menu_id='" + second_menu_id
 				+ "' and works_passed='1' order by works_gmt_create desc";

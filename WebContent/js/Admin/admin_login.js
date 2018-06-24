@@ -1,8 +1,21 @@
+$(function(){
+	$(".userName").blur(function(){
+		if($(".userName").val()==""||$(".userName")==null){
+			toastr.error('请输入用户名');
+		}
+	});
+	$(".passWord").blur(function(){
+		if($(".passWord").val()==""||$(".passWord")==null){
+		toastr.error('请输入密码');
+		}
+	});
+});
+
 function admin_login(){
 	var account = document.getElementById("account").value;
 	var password = document.getElementById("password").value;
 	if(account==''||password == ''){
-		toastr.warning('含有空信息');
+		toastr.error('含有空信息');
 		return ;
 	}
 	var admin_login = new FormData();

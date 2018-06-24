@@ -21,6 +21,7 @@ import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
 public interface WorksService {
@@ -140,7 +141,7 @@ public interface WorksService {
 
 	public void deleteDisscuss(String discuss_id);
 
-	public DynamicVO getDynamicVO(String user_id);
+	public DynamicVO getDynamicVO(String user_id, DynamicVO dynamicVO);
 
 	/**
 	 * 
@@ -158,7 +159,7 @@ public interface WorksService {
 	 * @param userID
 	 * @return
 	 */
-	public List<wlmtxt_works> collaborativeFilteringByUser(String userID);
+	public List<WorksDTO> collaborativeFilteringByUser(String userID);
 
 	/**
 	 * 计算用户对某个作品的喜爱值 <br>
@@ -169,4 +170,13 @@ public interface WorksService {
 	 * @return
 	 */
 	int userPointWork(String userID, String worksID);
+
+	/**
+	 * 按热度排序前20条后，随机取6条。
+	 * 
+	 * @return
+	 */
+	public List<WorksDTO> hotRecommend();
+
+	public WorksCategoryVO getWorksByCategoryPage(WorksCategoryVO worksCategoryVO);
 }

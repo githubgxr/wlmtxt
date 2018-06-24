@@ -199,10 +199,10 @@ function video_comment_btn_click() {
 	} else {
 		var formData_comment = new FormData();
 		// 评论的作品或者评论
-		formData_comment.append("accpet_discuss.discuss_father_discuss_id",
+		formData_comment.append("accept_discuss.discuss_father_discuss_id",
 				video_id);
 		// 评论内容
-		formData_comment.append("accpet_discuss.discuss_content", comment_text);
+		formData_comment.append("accept_discuss.discuss_content", comment_text);
 
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "/wlmtxt/Works/Works_discussWorks");
@@ -233,7 +233,7 @@ function video_comment_btn_click() {
 function checkFocus() {
 	var formData_check_focus = new FormData();
 	console.log("checkfocus:" + $("#user_id").html());
-	formData_check_focus.append("accpet_user.user_id", $("#user_id").html());
+	formData_check_focus.append("accept_user.user_id", $("#user_id").html());
 	var focus_xhr = new XMLHttpRequest();
 	focus_xhr.open("POST", "/wlmtxt/User/User_isFollowedUser");
 	focus_xhr.send(formData_check_focus);
@@ -257,7 +257,7 @@ function checkFocus() {
 $("#focus_btn").click(function() {
 	console.log("focus:" + $("#user_id").html());
 	var formData_focus = new FormData();
-	formData_focus.append("accpet_user.user_id", $("#user_id").html());
+	formData_focus.append("accept_user.user_id", $("#user_id").html());
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "/wlmtxt/User/User_followUser");
 	xhr.send(formData_focus);
@@ -299,9 +299,9 @@ function check_response() {
 		return false;
 	}
 	var formData_response = new FormData();
-	formData_response.append("accpet_discuss.discuss_content", $(
+	formData_response.append("accept_discuss.discuss_content", $(
 			"#responseComment").val());
-	formData_response.append("accpet_discuss.discuss_father_discuss_id",
+	formData_response.append("accept_discuss.discuss_father_discuss_id",
 			discuss_id);
 	var xhr_response = new XMLHttpRequest();
 	xhr_response.open("POST", "/wlmtxt/Works/Works_discussWorks");
@@ -326,7 +326,7 @@ function check_response() {
 // 删除评论
 function delete_operate(button) {
 	var formData_comment_delete = new FormData();
-	formData_comment_delete.append("accpet_discuss.discuss_id", button.id);
+	formData_comment_delete.append("accept_discuss.discuss_id", button.id);
 	var comment_delete_xhr = new XMLHttpRequest();
 	comment_delete_xhr.open("POST", "/wlmtxt/Works/Works_deleteDisscuss");
 	comment_delete_xhr.send(formData_comment_delete);
