@@ -12,6 +12,7 @@ function listRankByPage() {
 	xhr_day.onreadystatechange = function() {
 		if (xhr_day.readyState == 4 && xhr_day.status == 200) {
 			var day_rank_response = JSON.parse(xhr_day.responseText);
+			console.log("day_rank_response:"+day_rank_response);
 			var long_day = "";
 			if (day_rank_response.length > 5) {
 				long_day = 5;
@@ -74,6 +75,7 @@ function listRankByPage() {
 	xhr_week.onreadystatechange = function() {
 		if (xhr_week.readyState == 4 && xhr_week.status == 200) {
 			var week_rank_response = JSON.parse(xhr_week.responseText);
+			console.log("week_rank_response:"+week_rank_response);
 			var long_week = "";
 			if (week_rank_response.length > 5) {
 				long_week = 5;
@@ -136,6 +138,7 @@ function listRankByPage() {
 	xhr_month.onreadystatechange = function() {
 		if (xhr_month.readyState == 4 && xhr_month.status == 200) {
 			var month_rank_response = JSON.parse(xhr_month.responseText);
+			console.log("month_rank_response:"+month_rank_response);
 			var long_month = "";
 			if (month_rank_response.length > 5) {
 				long_month = 5;

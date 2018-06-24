@@ -46,8 +46,8 @@ $(".btn_keyword").click(
 							&& input_keyword_value != null) {
 						$(".div_box").css("display", "block");
 
-						var str = '<div class="div_keyword">'
-								+ input_keyword_value + '<img class="keyword_delete" src="/wlmtxt/img/keyword_delete.png" style="width:8px;margin:0 0 0 10px;" onclick="keywordDelete(this)"/></div>';
+						var str = '<div class="div_keyword_content"><div class="div_keyword">'
+								+ input_keyword_value + '</div><img class="keyword_delete" src="/wlmtxt/img/keyword_delete.png" style="width:8px;margin:0 0 0 10px;" onclick="keywordDelete(this)"/></div>';
 						if ($(".div_box").html() == "") {
 							$(".div_box").append(str);
 						} else {
@@ -72,7 +72,6 @@ $(".btn_keyword").click(
 				});
 function keywordDelete(img){
 	img.parentNode.parentNode.removeChild(img.parentNode);
-	$(".div_box").css("display","none");
 }
 /*$(".keyword_delete").click(function(){
 	alert($(this));
