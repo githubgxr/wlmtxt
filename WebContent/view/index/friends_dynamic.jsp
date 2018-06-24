@@ -35,6 +35,21 @@
 						<span class="span_more">加载更多&nbsp;<i
 							class="fas fa-angle-double-down "></i></span>
 					</div>
+					<div style="width:560px;">
+						<!-- <div class="button_code user_operate button_a">
+							<i class="fas fa-download"
+								style="width: 50px; float: left; line-height: 32px; text-align: left; margin: 0 0 0 -10px;">&nbsp;下载</i>
+						</div> -->
+						<div class="user_operate dz_yes" id="thumbs_number_div" style="float: right;">
+							<i class="fas fa-thumbs-up"></i>&nbsp;顶<span id="thumbs_number">1</span>
+						</div>
+						<div class="dz_no user_operate" id="collect_number_div" style="float: right; margin: 0 20px;">
+							<i class="fas fa-heart"></i>&nbsp;收藏<span id="collect_number">0</span>
+						</div>
+						<div class="dz_no" id="play_number_div" style="float: right; margin: 0">
+							<i class="fas fa-play-circle"></i>&nbsp;播放<span id="play_number">3</span>
+						</div>
+					</div>
 				</div>
 
 			</div>
