@@ -23,7 +23,9 @@ function listrecommend() {
 						+ listrecommend[0].worksDTO.secondMenu.second_menu_name
 						+ '</div>'
 						+ '<div class="video_overplay" style="width: 660px; height: 385px;"></div>'
-						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;" onclick="window.location=\'/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
+						+ listrecommend[0].worksDTO.works.works_id
+						+ '\'"></div>'
 						+ '</div> <!--视频信息-->'
 						+ '<div class="video_info" style="width: 660px; height: 40px; margin: 5px 0;">'
 						+ '<!--标题-->'
@@ -61,12 +63,14 @@ function listrecommend() {
 						+ '<div class="video_cover">'
 						+ '<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName='
 						+ listrecommend[1].worksDTO.works.works_cover
-						+ '" style="width: 240px; height: 135px;" />'
+						+ '" style="width: 240px; height: 135px;"  />'
 						+ '<div class="category_name">'
 						+ listrecommend[1].worksDTO.secondMenu.second_menu_name
 						+ '</div>'
 						+ '<div class="video_overplay" style="width: 240px; height: 135px;"></div>'
-						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;" onclick="window.location=\'/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
+						+ listrecommend[1].worksDTO.works.works_id
+						+ '\'"></div>'
 						+ '</div> <!--视频信息-->'
 						+ '<div class="video_info" style="width: 240px; height: 40px; margin: 5px 0;">'
 						+ '<!--标题-->'
@@ -105,7 +109,9 @@ function listrecommend() {
 						+ listrecommend[2].worksDTO.secondMenu.second_menu_name
 						+ '</div>'
 						+ '<div class="video_overplay" style="width: 240px; height: 135px;"></div>'
-						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;" onclick="window.location=\'/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
+						+ listrecommend[2].worksDTO.works.works_id
+						+ '\'"></div>'
 						+ '</div> <!--视频信息-->'
 						+ '<div class="video_info" style="width: 240px; height: 40px; margin: 5px 0;">'
 						+ '<!--标题-->'
@@ -166,7 +172,9 @@ function hotRecommend() {
 								: ('<div class="category_name">'
 										+ hotRecommend_response[i].secondMenu.second_menu_name + '</div>'))
 						+ '<div class="video_overplay" style="width: 160px; height: 100px;"></div>'
-						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;" onclick="window.location=\'/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
+						+ hotRecommend_response[i].works.works_id
+						+ '\'"></div>'
 						+ '</div> <!--视频信息-->'
 						+ '<div class="video_info" style="width: 160px; height: 40px; margin: 5px 0;">'
 						+ '<!--标题-->'
@@ -229,7 +237,9 @@ function collaborativeFilteringByUser() {
 								: ('<div class="category_name">'
 										+ collaborativeFiltering_response[i].secondMenu.second_menu_name + '</div>'))
 						+ '<div class="video_overplay" style="width: 160px; height: 100px;"></div>'
-						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;" onclick="window.location=\'/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
+						+ collaborativeFiltering_response[i].works.works_id
+						+ '\'"></div>'
 						+ '</div> <!--视频信息-->'
 						+ '<div class="video_info" style="width: 160px; height: 40px; margin: 5px 0;">'
 						+ '<!--标题-->'
