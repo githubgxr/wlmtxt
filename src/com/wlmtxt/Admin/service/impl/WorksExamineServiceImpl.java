@@ -5,21 +5,34 @@ import java.util.List;
 
 import com.wlmtxt.Admin.dao.WorksExamineDao;
 import com.wlmtxt.Admin.service.WorksExamineService;
+import com.wlmtxt.Works.dao.WorksDao;
+import com.wlmtxt.Works.service.WorksService;
 import com.wlmtxt.domain.DO.wlmtxt_recommend;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.RecommendDTO;
 import com.wlmtxt.domain.VO.WorksVO;
 
 import util.TeamUtil;
 
 public class WorksExamineServiceImpl implements WorksExamineService {
 private WorksExamineDao worksExamineDao;
-
+private WorksService worksService;
 public WorksExamineDao getWorksExamineDao() {
 	return worksExamineDao;
 }
 
 public void setWorksExamineDao(WorksExamineDao worksExamineDao) {
 	this.worksExamineDao = worksExamineDao;
+}
+
+
+
+public WorksService getWorksService() {
+	return worksService;
+}
+
+public void setWorksService(WorksService worksService) {
+	this.worksService = worksService;
 }
 
 @Override
@@ -67,9 +80,20 @@ public boolean passed(String works_id, String passed) {
 }
 
 @Override
-public List<wlmtxt_recommend> listrecommend() {
-	
-	return worksExamineDao.listrecommend();
+public List<RecommendDTO> listrecommend() {
+	List<RecommendDTO> recommendDTOList =new  ArrayList<RecommendDTO>();
+
+	List<wlmtxt_recommend> wlmtxt_recommendList = worksExamineDao.listrecommend();
+	System.out.println("aaa"+wlmtxt_recommendList);
+	for(wlmtxt_recommend recommend:wlmtxt_recommendList){
+ 		wlmtxt_works works	= worksExamineDao.getWorksById(recommend.getRecommend_works_id());
+		RecommendDTO recommendDTO = new RecommendDTO();
+		recommendDTO.setWorks(works);
+		recommendDTO.setRecommend(recommend);
+		recommendDTO.setWorksDTO(worksService.getWorksDTOByID(works.getWorks_id()));
+		recommendDTOList.add(recommendDTO);
+	}
+	return recommendDTOList;
 }
 
 @Override
@@ -97,6 +121,16 @@ public boolean deleteRecommend(String recommendIdAll) {
 	String[] arr = recommendIdAll.split(",");
 	for(String recommend_id : arr){
 		worksExamineDao.deleteAdmin(recommend_id);
+		List<wlmtxt_recommend> recommendList = worksExamineDao.listrecommend();
+		if(recommendList!=null){
+		for(wlmtxt_recommend recommend:recommendList){
+			
+				 int sort = Integer.parseInt(recommend.getRecommend_sort())-1;
+				 String str =""+sort;
+				recommend.setRecommend_sort(str);
+			
+		}
+		}
 	}
 	return true;
 }

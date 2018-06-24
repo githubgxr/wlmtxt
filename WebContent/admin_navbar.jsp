@@ -84,14 +84,14 @@
 
 						<ul class="nav">
 							<li><s:if test="page=='skipToAdd'">
-									<a href="<%=basePath%>Admin/Admin_add_carousel_page" class="active">添加轮播图</a>
+									<a href="<%=basePath%>WorksExamine/WorksExamine_add_carousel" class="active">添加轮播图</a>
 								</s:if> <s:else>
-									<a href="<%=basePath%>Admin/Admin_add_carousel_page">添加轮播图</a>
+									<a href="<%=basePath%>WorksExamine/WorksExamine_add_carousel">添加轮播图</a>
 								</s:else></li>
 							<li><s:if test="page=='skipToDelete'">
-									<a href="<%=basePath%>Admin/Admin_list_carousel_page" class="active">轮播图列表</a>
+									<a href="<%=basePath%>WorksExamine/WorksExamine_list_carousel" class="active">轮播图列表</a>
 								</s:if> <s:else>
-									<a href="<%=basePath%>Admin/Admin_list_carousel_page">轮播图列表</a>
+									<a href="<%=basePath%>WorksExamine/WorksExamine_list_carousel">轮播图列表</a>
 								</s:else></li>
 						</ul>
 			</div>
@@ -130,21 +130,21 @@
 					<!--  -->
 					<li><s:if test="page=='page_create_news'">
 							<a
-								href="<%=basePath%>Admin/Admin_list_user_page?page=page_create_news"
+								href="<%=basePath%>AdminUser/AdminUser_list_user"
 								class="active"> 信息管理</a>
 						</s:if> <s:else>
 							<a
-								href="<%=basePath%>Admin/Admin_list_user_page?page=page_create_news">
+								href="<%=basePath%>AdminUser/AdminUser_list_user">
 								信息管理</a>
 						</s:else></li>
 					<!--  -->
 					<li><s:if test="page=='page_create_news'">
 							<a
-								href="<%=basePath%>Admin/Admin_list_discuss_page?page=page_create_news"
+								href="<%=basePath%>AdminUser/AdminUser_page_list_discuss"
 								class="active"> 评价管理</a>
 						</s:if> <s:else>
 							<a
-								href="<%=basePath%>Admin/Admin_list_discuss_page?page=page_create_news">
+								href="<%=basePath%>AdminUser/AdminUser_page_list_discuss">
 								评价管理</a>
 						</s:else></li>
 					<!--  -->
@@ -152,43 +152,10 @@
 
 
 			<!---------------------------------------------------------------------------------------------------------------------------------->
-			<li><s:if
-					test="page=='page_create_admin'||page=='page_list_admin' ">
-					<a href="#sadmin" data-toggle="collapse" class="active">
-				</s:if> <s:else>
-					<a href="#sadmin" data-toggle="collapse" class="collapsed">
-				</s:else> <i class="lnr lnr lnr-users"></i><span>管理员管理</span> <i
-				class="icon-submenu lnr lnr-chevron-left"></i></a> <s:if
-					test="page=='page_create_admin'||page=='page_list_admin'">
-					<div id="sadmin" class="collapse in">
-				</s:if> <s:else>
-					<div id="sadmin" class="collapse">
-				</s:else>
-				<ul class="nav">
-					<!--  -->
-					<%-- <li><s:if test="page=='page_create_admin'">
-							<a
-								href="<%=basePath%>Admin/Admin_add_admin_page?page=page_create_admin"
-								class="active"> 添加管理员</a>
-						</s:if> <s:else>
-							<a
-								href="<%=basePath%>Admin/Admin_add_admin_page?page=page_create_admin">
-								添加管理员</a>
-						</s:else></li> --%>
-					<!--  -->
-					<li><s:if test="page=='page_list_admin'">
-							<a
-								href="<%=basePath%>Admin/Admin_list_admin_page?page=page_list_admin&page_list_admin.pageIndex=1"
-								class="active">管理员列表</a>
-						</s:if> <s:else>
-							<a
-								href="<%=basePath%>Admin/Admin_list_admin_page?page=page_list_admin&page_list_admin.pageIndex=1">
-								管理员列表</a>
-						</s:else></li>
-					<!--  -->
-				</ul>
-		</div>
-		</li>
+				<li><a
+				href="<%=basePath%>Admin/Admin_list_admin"><i
+					class="lnr lnr lnr-chart-bars"></i><span>管理员管理</span></a></li>
+		
 		
 		<!---------------------------------------------------------------------------------------------------------------------------------->
 		
@@ -205,7 +172,7 @@
 		<!---------------------------------------------------------------------------------------------------------------------------------->			
 					
 		<li><a
-				href="<%=basePath%>Admin/Admin_count_page"><i
+				href="<%=basePath%>Keyword/Keyword_list_keyword"><i
 					class="lnr lnr lnr-chart-bars"></i><span>关键词管理</span></a></li>
 		
 		<!---------------------------------------------------------------------------------------------------------------------------------->

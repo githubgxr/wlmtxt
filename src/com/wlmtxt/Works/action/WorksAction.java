@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -92,31 +93,37 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 */
 
-	public String getImg() throws FileNotFoundException {
+	public String getImg() throws IOException {
 		if (imgName.equals("") || imgName == null) {
 			imgName = "";
 		}
-		File file = new File("C://wlmtxt/img/" + imgName);
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+		String lj = properties.getProperty("lj");
+		File file = new File(lj + "wlmtxt/img/" + imgName);
 		try {
 			inputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			// file = new File(lj+"wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
 		return "getFile";
 	}
 
-	public String getVideo() throws FileNotFoundException {
+	public String getVideo() throws IOException {
 		if (worksName.equals("") || worksName == null) {
 			worksName = "";
 		}
-		File file = new File("C://wlmtxt/video/" + worksName);
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+		String lj = properties.getProperty("lj");
+		File file = new File(lj + "wlmtxt/video/" + worksName);
 		try {
 			inputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			// file = new File(lj+"wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -637,8 +644,10 @@ public class WorksAction extends ActionSupport {
 
 			String fileName = UUID.randomUUID().toString()
 					+ imgfileFileName.substring(imgfileFileName.lastIndexOf("."));
-
-			filePath = "C://wlmtxt/img/" + fileName;
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			String lj = properties.getProperty("lj");
+			filePath = lj + "wlmtxt/img/" + fileName;
 
 			File newFile = new File(filePath);
 
@@ -662,8 +671,10 @@ public class WorksAction extends ActionSupport {
 
 			String fileName = UUID.randomUUID().toString()
 					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
-
-			filePath = "C://wlmtxt/video/" + fileName;
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			String lj = properties.getProperty("lj");
+			filePath = lj + "wlmtxt/video/" + fileName;
 
 			File newFile = new File(filePath);
 

@@ -29,6 +29,7 @@
 			<!-- 登录失败 -->
 			<result name="error">/error.jsp</result>
 			<result name="page_list_category">/view/Admin/page_list_category.jsp</result>
+			<result name="list_admin">/view/Admin/list_admin.jsp</result>
 		</action>
 	</package>
 </struts>

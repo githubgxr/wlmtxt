@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_recommend;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.RecommendDTO;
 import com.wlmtxt.domain.VO.WorksVO;
 
 public interface WorksExamineService {
@@ -22,7 +23,7 @@ public boolean passed(String works_id, String passed);
 /*
  * 得到所有轮播图
  */
-public List<wlmtxt_recommend> listrecommend();
+public List<RecommendDTO> listrecommend();
 /*
  * 添加轮播图
  */

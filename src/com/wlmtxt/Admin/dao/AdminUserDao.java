@@ -1,6 +1,7 @@
 package com.wlmtxt.Admin.dao;
 
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.VO.DiscussVO;
 import com.wlmtxt.domain.VO.UserVO;
 
 public interface AdminUserDao {
@@ -14,5 +15,9 @@ public int getCountUserList(UserVO userVO);
 public void deleteUser(String user_id);
 
 public boolean updateUser_authority(wlmtxt_user old_user);
+
+public int getCountdiscussList(DiscussVO discussVO);
+
+public void getdiscussListByPage(DiscussVO discussVO);
 
 }
