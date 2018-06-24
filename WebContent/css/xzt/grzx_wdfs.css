@@ -108,9 +108,21 @@
 	font-size: 12px;
 	float: right;
 }
+
 .user_list .user_info .user_operateing:hover{
 	cursor: pointer;
 	text-decoration: underline;
+}
+.not_focus{
+	width: 55px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	float: right;
+	color:#bfbfbf;
+}
+.not_focus:hover{
+	text-decoration: none;
 }
 .user_list .user_info .user_grjj{
 	width: 100%;

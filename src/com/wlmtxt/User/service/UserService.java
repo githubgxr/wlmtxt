@@ -6,6 +6,7 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
+import com.wlmtxt.domain.VO.MyFansVO;
 
 public interface UserService {
 
@@ -29,5 +30,15 @@ public interface UserService {
 	wlmtxt_user get_user_byID(String user_id);
 
 	boolean isFollowedUser(String user_id, String user_id2);
+
+	int deleteAllMyFollow(wlmtxt_user loginUser) throws Exception;
+
+	void noticeAllMyFans(wlmtxt_user loginUser) throws Exception;
+
+	void noticeMyFans(wlmtxt_user loginUser, wlmtxt_user accpet_user) throws Exception;
+
+	String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user);
+
+	MyFansVO listMyFansVO(wlmtxt_user loginUser, MyFansVO myFansVO);
 
 }

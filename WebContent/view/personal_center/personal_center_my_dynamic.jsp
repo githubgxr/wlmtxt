@@ -29,13 +29,13 @@
 				<div class="wddt_header list_header">
 					<i class="header_line"></i>
 					<h3>我的动态</h3>
-					<div class="list_category">
-						<a class="category_a">星秀星颜</a> <a class="category_a">星秀星颜</a> <a
-							class="category_a">星秀星颜</a> <a class="category_a">星秀星颜</a> <a
-							class="category_a">星秀星颜</a>
-					</div>
+<!-- 					<div class="list_category"> -->
+<!-- 						<a class="category_a">星秀星颜</a> <a class="category_a">星秀星颜</a> <a -->
+<!-- 							class="category_a">星秀星颜</a> <a class="category_a">星秀星颜</a> <a -->
+<!-- 							class="category_a">星秀星颜</a> -->
+<!-- 					</div> -->
 
-					<a class="button_a">全部清空</a>
+<!-- 					<a id="delete_all_myworks" class="button_a" onclick="deleteAllMyWork()">全部清空</a> -->
 				</div>
 				<!--主体部分-->
 				<div class="wddt_content list_container">
@@ -75,9 +75,9 @@
 
 				</div>
 				<!--翻页-->
-				<div class="page_container">
+				<!-- <div class="page_container">
 					<div class="page_component_container">
-						<!-- <div class="page_component">
+						<div class="page_component">
 							<a class="page_prev" href="#">上一页</a> <a class="selected"
 								href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>
 							<a href="#">5</a> <b>...</b> <a href="#">23</a> <a
@@ -85,9 +85,9 @@
 								class="page_component_jumppage">跳转到：</span> <input
 								class="page_component_jumptxt" type="text"> <a href="#"
 								class="page_component_submit">GO</a>
-						</div> -->
+						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>

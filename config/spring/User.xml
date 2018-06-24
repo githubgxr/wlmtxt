@@ -10,9 +10,11 @@
 	</bean>
 	<bean id="userService" class="com.wlmtxt.User.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
+		<property name="worksDao" ref="worksDao"></property>
 	</bean>
 	<bean id="userAction" class="com.wlmtxt.User.action.UserAction">
 		<property name="userService" ref="userService"></property>
+		<property name="worksService" ref="worksService"></property>
 	</bean>
 </beans>
 

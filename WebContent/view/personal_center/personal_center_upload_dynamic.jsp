@@ -9,26 +9,6 @@
 <html>
 
 <head>
-<!--------------------------------------------------------------------------------->
-<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
-<!--------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------->
-<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
-<script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
-
-<!--------------------------------------------------------------------------------->
-<link rel="stylesheet"
-	href="<%=basePath%><%=basePath%>css/navbar/chartist-custom.css">
-<link rel="stylesheet" href="<%=basePath%>css/navbar/main.css">
-<link rel="stylesheet"
-	href="<%=basePath%>css/navbar/font-awesome.min.css">
-<link rel="stylesheet" href="<%=basePath%>css/navbar/style.css">
-<link rel="stylesheet" href="<%=basePath%>css/table.css">
-<!--------------------------------------------------------------------------------->
-<link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
-<link rel="stylesheet" href="<%=basePath%>css/xzt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_fbsp.css" />
 <!--------------------------------------------------------------------------------->
 <title>发布作品</title>
@@ -70,11 +50,11 @@
 						<div class="img_wrap_list">
 							<span>关键字：</span>
 							<div class="upload_selected">
-								<input class="form-control input_xzt input_keyword" type="text"
-									placeholder="请输入关键字" style="width: 520px;" />
-								<button type="submit" class="btn_keyword">确认</button>
-								<div class="form-control input_xzt div_box"
-									style="padding-top: 10px; border: 0px; display: none;"></div>
+								<input class="form-control input_xzt input_keyword" type="text" id="input_keyword"
+									placeholder="请输入关键字（按回车结束）" style="width: 550px;" maxlength="5"/>
+								<button type="submit" id="btn_keyword" class="btn_keyword" style="display:none;">确认</button>
+								<div class="input_xzt div_box"
+									style="margin-top: 10px; border: 0px; display: none;height:40px;"></div>
 							</div>
 						</div>
 
@@ -94,7 +74,7 @@
 
 								<input type="file" id="worksfile" class="inputfile"
 								/> 
-								<label for="file">Choose a file</label>
+								<label for="file"><a class="category_a" style="margin:0px;font-weight:normal;width:100px;">+ 添加视频</a></label>
 
 							</div>
 						</div>
@@ -159,84 +139,11 @@
 			}
 		}
 	</script> -->
-	
-	<!-- 关键字 -->
-	<script type="text/javascript">
-		$(".btn_keyword").click(
-				function() {
-					var input_keyword_value = $(".input_keyword").val();
-					if (input_keyword_value != ""
-							&& input_keyword_value != null) {
-						$(".div_box").css("display", "block");
-
-						var str = '<div class="div_keyword">'
-								+ input_keyword_value + '</div>';
-						if ($(".div_box").html() == "") {
-							$(".div_box").append(str);
-						} else {
-							var div_keyword = $(".div_keyword");
-							var array = []
-							$.each(div_keyword, function(i) {
-								array.push($(div_keyword[i]).text())
-							})
-							if (($.inArray(input_keyword_value, array)) < 0) {
-								$(".div_box").append(str)
-							} else {
-								toastr.error("请不要输入相同的关键字");
-								$(".input_keyword").val("");
-								return;
-							}
-						}
-						$(".input_keyword").val("");
-					} else {
-						toastr.error("请输入关键字");
-					}
-				});
-	</script>
-	
-	<!-- 上传图片预览 -->
-	<script type="text/javascript">
-		/*上传图片的JS*/
-		function img_click() {
-			document.getElementById("img").click();
-		}
-		function img_change(file) {
-			var imgfile = document.getElementById("imgfile");
-			var reader = new FileReader();
-			reader.onload = function(evt) {
-				var img = document.getElementById("img");
-				img.src = evt.target.result;
-			}
-			reader.readAsDataURL(file.files[0]);
-		}
-	</script>
-	
-	<!-- 选择作品样式修饰 -->
-	<script type="text/javascript">
-	$(".inputfile").each( function(){ 
-		var $input = $(this), 
-		$label = $input.next('label'), 
-		labelVal = $label.html(); 
-		$input.on( 'change', function(e){ 
-			var fileName = ''; 
-			if( this.files && this.files.length > 1 ) 
-				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' )
-				.replace( '{count}', this.files.length ); 
-			else if(e.target.value)
-				fileName = e.target.value.split( '\\' ).pop(); 
-			if( fileName ) 
-				$label.html( fileName ); 
-			else 
-				$label.html( labelVal ); 
-			}); 
-		});
-
-
-	</script>
-</body>
-<script type="text/javascript"
+	<script type="text/javascript"
 	src="<%=basePath%>/js/personal_center/personal_center_upload_dynamic.js">
 	
 </script>
+</body>
+
 
 </html>
