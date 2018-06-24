@@ -140,7 +140,7 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public void deleteMyWorks(String works_id) {
 
-		String hql = "delete from wlmtxt_works  where works_id='" + works_id + "'";
+		String hql = "update from wlmtxt_works set works_deleted='1'  where works_id='" + works_id + "'";
 
 		Query query = getSession().createQuery(hql);
 
