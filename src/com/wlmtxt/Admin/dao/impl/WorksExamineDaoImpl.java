@@ -91,7 +91,7 @@ public boolean passed(wlmtxt_works wlmtxt_work) {
 @Override
 public List<wlmtxt_recommend> listrecommend() {
 		Session session = getSession();
-		String hql = "from wlmtxt_recommend";
+		String hql = "from wlmtxt_recommend order by recommend_sort asc";
 		Query query = session.createQuery(hql);
 		List<wlmtxt_recommend> wlmtxt_recommendList = query.list();
 		session.clear();

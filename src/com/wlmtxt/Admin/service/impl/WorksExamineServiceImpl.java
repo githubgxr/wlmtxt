@@ -109,8 +109,14 @@ public boolean deleteRecommend(String recommendIdAll) {
 	for(String recommend_id : arr){
 		worksExamineDao.deleteAdmin(recommend_id);
 		List<wlmtxt_recommend> recommendList = worksExamineDao.listrecommend();
+		if(recommendList!=null){
 		for(wlmtxt_recommend recommend:recommendList){
 			
+				 int sort = Integer.parseInt(recommend.getRecommend_sort())-1;
+				 String str =""+sort;
+				recommend.setRecommend_sort(str);
+			
+		}
 		}
 	}
 	return true;

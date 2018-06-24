@@ -5,6 +5,7 @@ import com.wlmtxt.Admin.dao.AdminUserDao;
 import com.wlmtxt.Admin.service.AdminUserService;
 
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.VO.DiscussVO;
 import com.wlmtxt.domain.VO.UserVO;
 
 import util.TeamUtil;
@@ -57,6 +58,16 @@ public void getUserListBysearchPage(UserVO userVO) {
 @Override
 public wlmtxt_user getUserById(String user_id) {
 	return adminUserDao.getUserById(user_id);
+}
+
+@Override
+public void getdiscussListBysearchPage(DiscussVO discussVO) {
+	int count = adminUserDao.getCountdiscussList(discussVO);
+	discussVO.setTotalCount(count);
+	discussVO.setPageSize(10);
+	discussVO.setTotalPage((int) Math.ceil((double) count / discussVO.getPageSize()));
+	adminUserDao.getdiscussListByPage(discussVO);
+	
 }
 
 }
