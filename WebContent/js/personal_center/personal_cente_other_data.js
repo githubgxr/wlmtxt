@@ -40,9 +40,9 @@ function otherData(other_id){
 			//简介
 			$("#other_data_bio").html(other_data_response.user_bio);
 			//获取关注量
-			getfocusNum(other_id);
+			getfocusNum("other_data_focus",other_id);
 			//获取粉丝量
-			getfansNum(other_id);
+			getfansNum("other_data_fans",other_id);
 			/*//获取关注量
 			var formData_focus_num=new FormData();
 			formData_focus_num.append("accpet_user.user_id",other_id);

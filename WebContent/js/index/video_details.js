@@ -163,9 +163,9 @@ function getWorksDetailVO() {
 
 			}
 			// 获取关注量
-			getfocusNum($("#user_id").html());
+			getfocusNum("detail_user_focus_num",$("#user_id").html());
 			// 获取粉丝量
-			getfansNum($("#user_id").html());
+			getfansNum("detail_user_fans_num",$("#user_id").html());
 
 		}
 		/** *********************详情*********************************** */
