@@ -21,6 +21,7 @@ import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
 public interface WorksService {
@@ -176,4 +177,6 @@ public interface WorksService {
 	 * @return
 	 */
 	public List<WorksDTO> hotRecommend();
+
+	public WorksCategoryVO getWorksByCategoryPage(WorksCategoryVO worksCategoryVO);
 }

@@ -36,6 +36,7 @@ import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
 @SuppressWarnings("serial")
@@ -494,6 +495,25 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/*
+	 * 分类页VO
+	 */
+	WorksCategoryVO worksCategoryVO;
+
+	/**
+	 * 
+	 * @throws IOException
+	 */
+	public void getWorksByCategoryPage() throws IOException {
+		worksCategoryVO = worksService.getWorksByCategoryPage(worksCategoryVO);
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksCategoryVO));
 	}
 
 	/**
@@ -1007,6 +1027,14 @@ public class WorksAction extends ActionSupport {
 
 	public MyWorksVO getMyWorksVO() {
 		return myWorksVO;
+	}
+
+	public WorksCategoryVO getWorksCategoryVO() {
+		return worksCategoryVO;
+	}
+
+	public void setWorksCategoryVO(WorksCategoryVO worksCategoryVO) {
+		this.worksCategoryVO = worksCategoryVO;
 	}
 
 	/**

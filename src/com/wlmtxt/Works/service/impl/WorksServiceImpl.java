@@ -39,6 +39,7 @@ import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
+import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
 
 import util.TeamUtil;
@@ -232,7 +233,6 @@ public class WorksServiceImpl implements WorksService {
 		return worksDTOList;
 	}
 
-	// TODO
 	@Override
 	public List<WorksDTO> hotRecommend() {
 		List<WorksDTO> worksDTOTemporaryList = new ArrayList<WorksDTO>();
@@ -737,6 +737,42 @@ public class WorksServiceImpl implements WorksService {
 			worksDTOList.add(worksDTO);
 		}
 		return worksDTOList;
+	}
+
+	/**
+	 * TODO
+	 */
+	@Override
+	public WorksCategoryVO getWorksByCategoryPage(WorksCategoryVO WorksCategoryVO) {
+		List<wlmtxt_works> worksList = null;
+		if ("all".equals(WorksCategoryVO.getScreen_category())) {
+			// 所有类别
+			worksList = worksDao.getWorksByPage(WorksCategoryVO.getPageIndex(), WorksCategoryVO.getPageSize());
+		} else {
+			List<wlmtxt_second_menu> secondMenuList = worksDao
+					.listSecondMenuByFather(WorksCategoryVO.getScreen_category());
+			if (secondMenuList == null) {
+				// 说明所传是二级类别
+				worksList = worksDao.getWorksBySecondMenuAndPage(WorksCategoryVO.getPageIndex(),
+						WorksCategoryVO.getPageSize(), WorksCategoryVO.getScreen_category());
+			} else {
+				// 所传是一级类别，
+				worksList = worksDao.getWorksByFirstMenuAndPage(WorksCategoryVO.getPageIndex(),
+						WorksCategoryVO.getPageSize(), WorksCategoryVO.getScreen_category());
+			}
+		}
+
+		/*
+		 * 
+		 */
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		for (wlmtxt_works works : worksList) {
+			WorksDTO worksDTO = new WorksDTO();
+			worksDTO = getWorksDTOByID(works.getWorks_id());
+			worksDTOList.add(worksDTO);
+		}
+		WorksCategoryVO.setWorksDTOList(worksDTOList);
+		return WorksCategoryVO;
 	}
 
 	@Override
