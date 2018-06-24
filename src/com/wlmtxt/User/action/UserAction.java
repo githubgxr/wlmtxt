@@ -93,8 +93,10 @@ public class UserAction extends ActionSupport {
 
 			String fileName = UUID.randomUUID().toString()
 					+ touxiangfileFileName.substring(touxiangfileFileName.lastIndexOf("."));
-
-			filePath = "D://wlmtxt/img/" + fileName;
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			String lj = properties.getProperty("lj");
+			filePath = lj + "wlmtxt/img/" + fileName;
 
 			File newFile = new File(filePath);
 
