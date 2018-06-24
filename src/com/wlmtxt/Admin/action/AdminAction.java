@@ -347,7 +347,11 @@ public class AdminAction extends ActionSupport {
 	public String count_page() {
 		return "count_page";
 	}
-	
-	
+	/*
+	 * 跳转管理员
+	 */
+	public String list_admin(){
+		return "list_admin";
+	}
 	
 }

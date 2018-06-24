@@ -7,6 +7,7 @@ import com.wlmtxt.Admin.dao.WorksExamineDao;
 import com.wlmtxt.Admin.service.WorksExamineService;
 import com.wlmtxt.domain.DO.wlmtxt_recommend;
 import com.wlmtxt.domain.DO.wlmtxt_works;
+import com.wlmtxt.domain.DTO.RecommendDTO;
 import com.wlmtxt.domain.VO.WorksVO;
 
 import util.TeamUtil;
@@ -67,9 +68,19 @@ public boolean passed(String works_id, String passed) {
 }
 
 @Override
-public List<wlmtxt_recommend> listrecommend() {
-	
-	return worksExamineDao.listrecommend();
+public List<RecommendDTO> listrecommend() {
+	List<RecommendDTO> recommendDTOList =new  ArrayList<RecommendDTO>();
+
+	List<wlmtxt_recommend> wlmtxt_recommendList = worksExamineDao.listrecommend();
+	System.out.println("aaa"+wlmtxt_recommendList);
+	for(wlmtxt_recommend recommend:wlmtxt_recommendList){
+ 		wlmtxt_works works	= worksExamineDao.getWorksById(recommend.getRecommend_works_id());
+		RecommendDTO recommendDTO = new RecommendDTO();
+		recommendDTO.setWorks(works);
+		recommendDTO.setRecommend(recommend);
+		recommendDTOList.add(recommendDTO);
+	}
+	return recommendDTOList;
 }
 
 @Override
@@ -97,6 +108,10 @@ public boolean deleteRecommend(String recommendIdAll) {
 	String[] arr = recommendIdAll.split(",");
 	for(String recommend_id : arr){
 		worksExamineDao.deleteAdmin(recommend_id);
+		List<wlmtxt_recommend> recommendList = worksExamineDao.listrecommend();
+		for(wlmtxt_recommend recommend:recommendList){
+			
+		}
 	}
 	return true;
 }

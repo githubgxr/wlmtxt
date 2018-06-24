@@ -117,4 +117,10 @@ public void getKeywordById() throws IOException{
  	 Gson gson = gsonBuilder.create();
  	 pw.write(gson.toJson(keyword));
 }
+/*
+ * 跳转关键词管理
+ */
+public String  list_keyword(){
+	return "list_keyword";
+}
 }

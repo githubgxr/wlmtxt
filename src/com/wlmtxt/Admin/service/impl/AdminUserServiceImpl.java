@@ -27,6 +27,8 @@ public boolean updateUser_authority(wlmtxt_user user) {
 	wlmtxt_user old_user = adminUserDao.getUserById(user.getUser_id());
 	String time = TeamUtil.getStringSecond();
 	old_user.setUser_gmt_modified(time);
+	old_user.setUser_upload(user.getUser_upload());
+	old_user.setUser_discuss(user.getUser_discuss());
 	if(adminUserDao.updateUser_authority(old_user)){
 		return true;
 	}else{

@@ -53,7 +53,7 @@
 										<th>邮箱</th>
 										<th>上传权限</th>
 										<th>评论权限</th>
-										<th></th>
+										<th>操作</th>
 										<th><label class="fancy-checkbox"> <input
 												id="checkbox_all_select" type="checkbox"
 												onclick="all_select()"> <span></span>
@@ -76,10 +76,44 @@
 								</tfoot>
 								
 							</table>
-							
+		<!-------------------------------------------修改用户权限的模态框--------------------------------------------------------->
+	<div class="modal fade" id="updateUser" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" style="width:500px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="modal-title">修改用户权限</h4>
+				</div>
+				<div class="modal-body">
+					<form action="">
+						<div style="width: 80%; margin: auto;" class="panel-body">
+										<span style="float:left;margin:0 0 0 0;line-height:34px;">上传权限</span>
+										<span style="float:left;margin:0 0 0 50px;"><input style="witdh: 80%;" class="form-control"
+										id="updateuser_upload"	name="user.user_upload" type="text"></span>
+										<input type="hidden"  name="user.user_id" id ="updateuser_id">
+						</div>
+						<div style="width: 80%; margin: auto;" class="panel-body">
+										<span style="float:left;margin:0 0 0 0;line-height:34px;">评论权限</span>
+										<span style="float:left;margin:0 0 0 50px;"><input style="witdh: 80%;" class="form-control"
+										id="updateuser_discuss"	name="user.user_discuss" type="text"></span>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary update_input_sure">添加</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- ----------------------------------------------------------------------------------------- -->						
 							<!-- 删除按钮 -->
 							<div style="height: 34px;" id="btn_delete" >
-								<button class="btn btn-danger role_one" onclick="deleteAdmin()"
+								<button class="btn btn-danger role_one" onclick="deleteUser()"
 									style="float: right; margin: 0 10px;">
 									<i class="fa fa-trash-o"></i> 删除所选
 								</button>

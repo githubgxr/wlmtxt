@@ -65,7 +65,7 @@
 										</a>&nbsp&nbsp <a onclick="lastPage()">尾页<i
 												class="fa fa-angle-double-right"></i>
 										</a> <br />
-											<p class='admin'></p></td>
+											<p class='carousel'></p></td>
 									</tr>
 								</tfoot>
 								

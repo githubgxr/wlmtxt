@@ -58,7 +58,7 @@ function get_ListBreakecaseInformationByPageAndSearch(query_data) {
 						for (var index = 1; index <= xhr.totalPage; index++) {
 							opt += '<option>' + index + '</option>';
 						}
-						$('.info').html(
+						$('.carousel').html(
 								'共 ' + xhr.totalCount + '条信息 当前'
 										+ xhr.currPage + '/' + xhr.totalPage
 										+ '页 ' + xhr.pageSize
@@ -156,7 +156,7 @@ function searchtitle(){
 				for (var index = 1; index <= xhr.totalPage; index++) {
 					opt += '<option>' + index + '</option>';
 				}
-				$('.info').html(
+				$('.carousel').html(
 						'共 ' + xhr.totalCount + '条信息 当前'
 								+ xhr.currPage + '/' + xhr.totalPage
 								+ '页 ' + xhr.pageSize
@@ -172,7 +172,7 @@ function searchtitle(){
 var modifi_delete = function(){
 	var type = $(this).text().trim();
 	var id = $(this).siblings('input').val();
-	dis_bnt(id);
+	//dis_bnt(id);
 	if(type=="添加"){
 		var formData = new FormData();
 		formData.append('recommend.recommend_works_id', id);
