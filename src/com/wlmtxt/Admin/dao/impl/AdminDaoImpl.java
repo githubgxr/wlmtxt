@@ -265,4 +265,15 @@ public class AdminDaoImpl implements AdminDao {
 		session.clear();
 	}
 
+	@Override
+	public boolean updatePassword(wlmtxt_admin admin) {
+		try {
+			Session session = getSession();
+			session.update(admin);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

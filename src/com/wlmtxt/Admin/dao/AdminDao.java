@@ -143,6 +143,11 @@ public interface AdminDao {
  * 分页管理员
  */
 	public void getAdminListByPage(AdminVO adminVO);
+   /*
+    * 修改密码
+    */
+
+	public boolean updatePassword(wlmtxt_admin admin);
 
 
 

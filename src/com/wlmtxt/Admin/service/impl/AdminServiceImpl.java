@@ -202,4 +202,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return true;
 	}
+	@Override
+	public boolean updatePassword(wlmtxt_admin admin) {
+		wlmtxt_admin old_admin = adminDao.getAdminById(admin.getAdmin_id());
+		old_admin.setAdmin_password(admin.getAdmin_password());
+		String time = TeamUtil.getStringSecond();
+		old_admin.setAdmin_gmt_modified(time);
+		return adminDao.updatePassword(old_admin);
+	}
 }

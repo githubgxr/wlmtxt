@@ -179,7 +179,7 @@
 		
 		<%-- <s:if test="#session.Admin.admin_account!=null"> --%>
 			<li><a
-				href="<%=basePath%>Admin/Admin_modified_adminPassword_page"><i
+				href="<%=basePath%>Admin/Admin_update_password_page"><i
 					class="lnr lnr lnr-highlight"></i><span>修改个人密码</span></a></li>
 		<%-- </s:if> --%>
 
