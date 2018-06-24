@@ -49,13 +49,13 @@ btn_file.oninput=function(){
 $(".check_btn").click(function(){
 	var formData=new FormData();
 	//用户名
-	formData.append("accpet_user.user_username", $(".input_username").val());
+	formData.append("accept_user.user_username", $(".input_username").val());
 	//邮箱
-	formData.append("accpet_user.user_mail", $(".input_email").val());
+	formData.append("accept_user.user_mail", $(".input_email").val());
 	//性别
-	formData.append("accpet_user.user_sex", $(".input_sex").val());
+	formData.append("accept_user.user_sex", $(".input_sex").val());
 	//简介
-	formData.append("accpet_user.user_bio", $(".input_bio").val());
+	formData.append("accept_user.user_bio", $(".input_bio").val());
 	var xhr=new XMLHttpRequest();
 	xhr.open("POST","/wlmtxt/User/User_modifyPersonalData");
 	xhr.send(formData);
@@ -101,7 +101,7 @@ $(".check_pwd_btn").click(function(){
 	}else{
 		var formData=new FormData();
 		//旧密码
-		formData.append("accpet_user.user_password", $(".old_password").val());
+		formData.append("accept_user.user_password", $(".old_password").val());
 		//新密码
 		formData.append("new_password", $(".new_password").val());
 		var xhr=new XMLHttpRequest();

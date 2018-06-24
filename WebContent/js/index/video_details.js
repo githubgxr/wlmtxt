@@ -120,16 +120,18 @@ function getWorksDetailVO() {
 				comment_list_str += '<div class="comment_time">'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_gmt_create
 						+ '</div>';
-				if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == user_id) {
+				if (user_id != null) {
+					if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == user_id) {
 
-					comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
-							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
-							+ '" onclick="delete_operate(this)">删除</div>';
+						comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
+								+ detail_response.discussDTOList[numDiss].discuss.discuss_id
+								+ '" onclick="delete_operate(this)">删除</div>';
 
-				} else {
-					comment_list_str += '<div id="'
-							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
-							+ '" class="comment_delete comment_response_operate" onclick="response_operate(this)">回复</div>';
+					} else {
+						comment_list_str += '<div id="'
+								+ detail_response.discussDTOList[numDiss].discuss.discuss_id
+								+ '" class="comment_delete comment_response_operate" onclick="response_operate(this)">回复</div>';
+					}
 				}
 
 				comment_list_str += '</div>';
@@ -163,9 +165,9 @@ function getWorksDetailVO() {
 
 			}
 			// 获取关注量
-			getfocusNum("detail_user_focus_num",$("#user_id").html());
+			getfocusNum("detail_user_focus_num", $("#user_id").html());
 			// 获取粉丝量
-			getfansNum("detail_user_fans_num",$("#user_id").html());
+			getfansNum("detail_user_fans_num", $("#user_id").html());
 
 		}
 		/** *********************详情*********************************** */
@@ -267,7 +269,9 @@ $("#focus_btn").click(function() {
 				console.log("关注或取消成功！");
 				checkFocus();
 				// 获取关注量
-				getfocusNum($("#user_id").html());
+				getfocusNum("detail_user_focus_num", $("#user_id").html());
+				// 获取粉丝量
+				getfansNum("detail_user_fans_num", $("#user_id").html());
 			}
 		}
 	}

@@ -19,7 +19,7 @@ function listRankByPage() {
 			} else {
 				long_day = day_rank_response.length;
 			}
-			for (var i = 0; i < day_rank_response.length; i++) {
+			for (var i = 0; i < long_day; i++) {
 				var day_rank_str = '<li class="list_video_item">';
 				/*---视频链接---*/
 				day_rank_str += '<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='

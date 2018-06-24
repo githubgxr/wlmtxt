@@ -614,8 +614,10 @@ public class WorksServiceImpl implements WorksService {
 		List<wlmtxt_user> attentionUserList = worksDao.listAttentionUser(user_id);
 		List<wlmtxt_works> workList = new ArrayList<wlmtxt_works>();
 		for (wlmtxt_user user : attentionUserList) {
-			workList.addAll(worksDao.listWorksAllByUserId(user.getUser_id()));
-
+			// 好友动态应该排除自己
+			if (!user.getUser_id().endsWith(user_id)) {
+				workList.addAll(worksDao.listWorksAllByUserId(user.getUser_id()));
+			}
 		}
 		/*
 		 * service层的分页
