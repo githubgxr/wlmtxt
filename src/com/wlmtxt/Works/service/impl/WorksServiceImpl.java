@@ -93,7 +93,7 @@ public class WorksServiceImpl implements WorksService {
 		if (isCollectWorks(userID, worksID)) {
 			point = point + 4;
 		}
-		System.out.println("计算用户对作品的喜爱值" + point);
+		// System.out.println("计算用户对作品的喜爱值" + point);
 		return point;
 	}
 
@@ -173,7 +173,7 @@ public class WorksServiceImpl implements WorksService {
 		for (Map.Entry<String, Double> userEntry : similarityDegreeMap.entrySet()) {
 			// 计算单个作品
 			List<wlmtxt_works> worksTemporaryList = worksDao.listWorksAllByUserId(userEntry.getKey());
-
+			// System.out.println("单个用户的作品：" + worksTemporaryList);
 			//
 			worksFinallyAllList.addAll(worksTemporaryList);
 			//
@@ -184,7 +184,7 @@ public class WorksServiceImpl implements WorksService {
 				break;
 			}
 		}
-		System.out.println(worksFinallyAllList);
+		// System.out.println(worksFinallyAllList);
 		/*
 		 * 随机五条
 		 */
@@ -1038,13 +1038,13 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public int totalFansNum(wlmtxt_user loginUser) {
-		return worksDao.totalFansNum(loginUser.getUser_id());
+	public int totalFansNum(wlmtxt_user user) {
+		return worksDao.totalFansNum(user.getUser_id());
 	}
 
 	@Override
-	public int totalFollowingNum(wlmtxt_user loginUser) {
-		return worksDao.totalFollowingNum(loginUser.getUser_id());
+	public int totalFollowingNum(wlmtxt_user user) {
+		return worksDao.totalFollowingNum(user.getUser_id());
 	}
 
 }

@@ -718,11 +718,10 @@ public class WorksAction extends ActionSupport {
 	public void totalFansNum() throws IOException {
 		// wlmtxt_user loginUser = (wlmtxt_user)
 		// ActionContext.getContext().getSession().get("loginResult");
-		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int num = worksService.totalFansNum(loginUser);
+		int num = worksService.totalFansNum(accept_user);
 		pw.write(String.valueOf(num));
 	}
 
@@ -740,29 +739,11 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void totalFollowingNum() throws IOException {
-		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		int num = worksService.totalFollowingNum(loginUser);
+		int num = worksService.totalFollowingNum(accept_user);
 		pw.write(String.valueOf(num));
-	}
-
-	/**
-	 * 个人中心的搜索： 搜索我的动态（作品标题、二级分类）: 接收，option=dynamic, searchword; 返回分类列表
-	 * 我的关注（用户昵称、邮箱）：接收，option=attention， searchword; 返回分类列表
-	 * 我的粉丝（用户昵称、邮箱）：接收，option=fans， searchword; 返回分类列表
-	 * 观看历史（作品标题、二级分类）：接收，option=playhistory， searchword; 返回分类列表
-	 * 与我相关（作品标题、二级分类）：接收，option=relation， searchword; 返回分类列表
-	 * 
-	 * @date 2018年6月21日 下午4:43:04
-	 * 
-	 * @author gxr
-	 * 
-	 *         TODO
-	 */
-	public void search() {
-
 	}
 
 	/**
