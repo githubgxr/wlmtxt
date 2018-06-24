@@ -15,7 +15,7 @@ function GetRequest() {
 $(function(){
 	var Request = new Object();
 	Request = GetRequest();
-	var other_id =Request["accpet_user.user_id"];
+	var other_id =Request["accept_user.user_id"];
 	console.log("other_id:"+other_id);
 	otherData(other_id);
 	listOtherDynamicByPage(1,other_id);
@@ -24,7 +24,7 @@ $(function(){
 //他的资料
 function otherData(other_id){
 	var other_data_formData=new FormData();
-	other_data_formData.append("accpet_user.user_id",other_id);
+	other_data_formData.append("accept_user.user_id",other_id);
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "/wlmtxt/User/User_getUserInfo");
 	xhr.send(other_data_formData);
@@ -45,7 +45,7 @@ function otherData(other_id){
 			getfansNum("other_data_fans",other_id);
 			/*//获取关注量
 			var formData_focus_num=new FormData();
-			formData_focus_num.append("accpet_user.user_id",other_id);
+			formData_focus_num.append("accept_user.user_id",other_id);
 			var xhr_focus_num=new XMLHttpRequest();
 			xhr_focus_num.open("POST","/wlmtxt/Works/Works_totalFollowingNum");
 			xhr_focus_num.send(formData_focus_num);
@@ -57,7 +57,7 @@ function otherData(other_id){
 					}
 			//获取粉丝量
 			var formData_fans_num=new FormData();
-			formData_fans_num.append("accpet_user.user_id",other_id);
+			formData_fans_num.append("accept_user.user_id",other_id);
 			var xhr_fans_num=new XMLHttpRequest();
 			xhr_fans_num.open("POST","/wlmtxt/Works/Works_totalFansNum");
 			xhr_fans_num.send(formData_focus_num);
@@ -80,7 +80,7 @@ function listOtherDynamicByPage(pageIndex,other_id){
 	var other_dynamic_xhr=new XMLHttpRequest();
 	var formData=new FormData();
 	formData.append("myWorksVO.pageIndex",pageIndex);
-	formData.append("accpet_user.user_id",other_id);
+	formData.append("accept_user.user_id",other_id);
 	other_dynamic_xhr.open("POST","/wlmtxt/User/User_getOtherDynamic");
 	other_dynamic_xhr.send(formData);
 	other_dynamic_xhr.onreadystatechange=function(){

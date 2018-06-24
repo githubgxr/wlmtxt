@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +46,7 @@ public class WorksAction extends ActionSupport {
 	//
 	wlmtxt_user accept_user;
 	wlmtxt_works accept_works;
-	wlmtxt_discuss accpet_discuss;
+	wlmtxt_discuss accept_discuss;
 	wlmtxt_first_menu first_menu;
 	wlmtxt_second_menu second_menu;
 	wlmtxt_play_history play_history;
@@ -92,31 +93,37 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 */
 
-	public String getImg() throws FileNotFoundException {
+	public String getImg() throws IOException {
 		if (imgName.equals("") || imgName == null) {
 			imgName = "";
 		}
-		File file = new File("C://wlmtxt/img/" + imgName);
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+		String lj = properties.getProperty("lj");
+		File file = new File(lj + "wlmtxt/img/" + imgName);
 		try {
 			inputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			// file = new File(lj+"wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
 		return "getFile";
 	}
 
-	public String getVideo() throws FileNotFoundException {
+	public String getVideo() throws IOException {
 		if (worksName.equals("") || worksName == null) {
 			worksName = "";
 		}
-		File file = new File("C://wlmtxt/video/" + worksName);
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+		String lj = properties.getProperty("lj");
+		File file = new File(lj + "wlmtxt/video/" + worksName);
 		try {
 			inputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			// file = new File("C://wlmtxt/video/NotFound.jpg");
+			// file = new File(lj+"wlmtxt/video/NotFound.jpg");
 			inputStream = new FileInputStream(file);
 		}
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
@@ -387,8 +394,8 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void discussWorks() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		accpet_discuss.setDiscuss_user_id(user.getUser_id());
-		worksService.discussWorks(accpet_discuss);
+		accept_discuss.setDiscuss_user_id(user.getUser_id());
+		worksService.discussWorks(accept_discuss);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
@@ -402,7 +409,7 @@ public class WorksAction extends ActionSupport {
 	}
 
 	public void deleteDisscuss() throws IOException {
-		worksService.deleteDisscuss(accpet_discuss.getDiscuss_id());
+		worksService.deleteDisscuss(accept_discuss.getDiscuss_id());
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("1");
@@ -595,7 +602,6 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void listWorksBySecondMenuID() throws IOException {
-		System.out.println(second_menu.getSecond_menu_id());
 		List<WorksDTO> worksDTOList = worksService.listWorksBySecondMenuID(second_menu.getSecond_menu_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -638,8 +644,10 @@ public class WorksAction extends ActionSupport {
 
 			String fileName = UUID.randomUUID().toString()
 					+ imgfileFileName.substring(imgfileFileName.lastIndexOf("."));
-
-			filePath = "C://wlmtxt/img/" + fileName;
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			String lj = properties.getProperty("lj");
+			filePath = lj + "wlmtxt/img/" + fileName;
 
 			File newFile = new File(filePath);
 
@@ -663,8 +671,10 @@ public class WorksAction extends ActionSupport {
 
 			String fileName = UUID.randomUUID().toString()
 					+ worksfileFileName.substring(worksfileFileName.lastIndexOf("."));
-
-			filePath = "C://wlmtxt/video/" + fileName;
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			String lj = properties.getProperty("lj");
+			filePath = lj + "wlmtxt/video/" + fileName;
 
 			File newFile = new File(filePath);
 
@@ -694,6 +704,7 @@ public class WorksAction extends ActionSupport {
 		} else {
 			worksService.saveWorks(accept_works, null);
 		}
+		System.out.println("accept_works:" + accept_works);
 		// worksService.saveWorks(accept_works, null);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
@@ -765,8 +776,6 @@ public class WorksAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void totalFansNum() throws IOException {
-		// wlmtxt_user loginUser = (wlmtxt_user)
-		// ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
@@ -910,12 +919,12 @@ public class WorksAction extends ActionSupport {
 		this.accept_works = accept_works;
 	}
 
-	public wlmtxt_discuss getAccpet_discuss() {
-		return accpet_discuss;
+	public wlmtxt_discuss getAccept_discuss() {
+		return accept_discuss;
 	}
 
-	public void setAccpet_discuss(wlmtxt_discuss accpet_discuss) {
-		this.accpet_discuss = accpet_discuss;
+	public void setAccept_discuss(wlmtxt_discuss accept_discuss) {
+		this.accept_discuss = accept_discuss;
 	}
 
 	public wlmtxt_first_menu getFirst_menu() {

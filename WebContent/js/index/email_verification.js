@@ -13,14 +13,14 @@ function GetRequest() {
 var Request = new Object();
 Request = GetRequest();
 var user_email,user_password,user_name;
-user_email = Request["accpet_user.user_mail"];
-user_password = Request["accpet_user.user_password"];
-user_name = Request["accpet_user.user_username"];
+user_email = Request["accept_user.user_mail"];
+user_password = Request["accept_user.user_password"];
+user_name = Request["accept_user.user_username"];
 document.getElementById("register_check_btn").onclick=function(){
 	var formData=new FormData();
-	formData.append("accpet_user.user_username", user_name);
-	formData.append("accpet_user.user_mail", user_email);
-	formData.append("accpet_user.user_password", user_password);
+	formData.append("accept_user.user_username", user_name);
+	formData.append("accept_user.user_mail", user_email);
+	formData.append("accept_user.user_password", user_password);
 	var xhr=new XMLHttpRequest();
 	xhr.open("POST","/wlmtxt/User/User_registerUser");
 	xhr.send(formData);

@@ -20,6 +20,7 @@
 	</bean>
 	<bean id="worksExamineService" class="com.wlmtxt.Admin.service.impl.WorksExamineServiceImpl">
 		<property name="worksExamineDao" ref="worksExamineDao"></property>
+		<property name="worksService" ref="worksService"></property>
 	</bean>
 	<bean id="worksExamineAction" class="com.wlmtxt.Admin.action.WorksExamineAction">
 		<property name="worksExamineService" ref="worksExamineService"></property>
