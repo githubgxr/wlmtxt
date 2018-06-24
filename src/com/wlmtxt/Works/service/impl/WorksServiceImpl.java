@@ -268,7 +268,7 @@ public class WorksServiceImpl implements WorksService {
 			worksDTOTemporaryList.remove(random);
 		}
 
-		return worksDTOTemporaryList;
+		return worksFinallyList;
 	}
 
 	@Override

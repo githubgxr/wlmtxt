@@ -9,6 +9,58 @@ function hotRecommend() {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var hotRecommend_response = JSON.parse(xhr.responseText);
+			/*
+			 * 清空原表数据
+			 */
+			var djdzkCon = document.getElementsByClassName("djdzkCon");
+			var long = djdzkCon.length;
+
+			for (var num = 0; num < long; num++) {
+				djdzkCon[0].parentNode.removeChild(djdzkCon[0]);
+			}
+			/*
+			 * 
+			 */
+			for (var i = 0; i < hotRecommend_response.length; i++) {
+				var collaborativeFiltering = '<li  class="djdzkCon index_list_video_item" style="width: 160px; height: 200px; margin: 0 20px 10px 0;">'
+						+ '<!--视频链接--> <a class="video_list_item_wrap" style="width: 160px; height: 160px;">'
+						+ '<div class="video_cover">'
+						+ '<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName='
+						+ hotRecommend_response[i].works.works_cover
+						+ '" style="width: 160px; height: 100px;" />'
+						+ ((hotRecommend_response[i].secondMenu == null) ? ''
+								: ('<div class="category_name">'
+										+ hotRecommend_response[i].secondMenu.second_menu_name + '</div>'))
+						+ '<div class="video_overplay" style="width: 160px; height: 100px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;"></div>'
+						+ '</div> <!--视频信息-->'
+						+ '<div class="video_info" style="width: 160px; height: 40px; margin: 5px 0;">'
+						+ '<!--标题-->'
+						+ '<div class="video_title" style="font-size: 12px; margin-left: 5px;">'
+						+ hotRecommend_response[i].works.works_title
+						+ '</div>'
+						+ '<!--浏览量-->'
+						+ '<div class="video_hot">'
+						+ hotRecommend_response[i].playNum
+						+ '</div>'
+						+ '<!--用户名-->'
+						+ '<div class="video_username" style="width: 160px;">'
+						+ hotRecommend_response[i].user.user_username
+						+ '</div>'
+						+ '</div>'
+						+ '</a> <!--视频分类-->'
+						+ '<div class="video_label">'
+						+ '<div class="video_label_content">';
+
+				for (var num = 0; num < hotRecommend_response[i].keyWordDTOList.length; num++) {
+					collaborativeFiltering = collaborativeFiltering
+							+ '<a class="video_label_item">'
+							+ hotRecommend_response[i].keyWordDTOList[num].keyword.keyword_name
+							+ '</a>';
+				}
+
+				$("#djdzk_llls_list_container").append(collaborativeFiltering);
+			}
 		}
 	}
 }
@@ -62,18 +114,19 @@ function collaborativeFilteringByUser() {
 						+ '</div>'
 						+ '</a> <!--视频分类-->'
 						+ '<div class="video_label" style="width: 160px; padding: 0;">'
-						+ '<div id="keyWordDTOListContent" class="video_label_content" style="width: 160px; padding: 0;">'
-						+ '</div>' + '</div>' + '</li>';
+						+ '<div  class="video_label_content" style="width: 160px; padding: 0;">';
 
-				$("#cnxh_list_container").append(collaborativeFiltering);
-				var keyWordDTOList = "";
 				for (var num = 0; num < collaborativeFiltering_response[i].keyWordDTOList.length; num++) {
-					keyWordDTOList = keyWordDTOList
+					collaborativeFiltering = collaborativeFiltering
 							+ '<a class="video_label_item">'
 							+ collaborativeFiltering_response[i].keyWordDTOList[num].keyword.keyword_name
 							+ '</a>';
 				}
-				$("#keyWordDTOListContent").append(keyWordDTOList);
+
+				collaborativeFiltering = collaborativeFiltering + '</div>'
+						+ '</div>' + '</li>';
+
+				$("#cnxh_list_container").append(collaborativeFiltering);
 			}
 		}
 	}
