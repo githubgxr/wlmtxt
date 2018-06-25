@@ -50,28 +50,6 @@ function get_ListBreakecaseInformationByPageAndSearch(query_data) {
 						$('.btn-xs').click(modifi_delete);
 						// -----------------------------------------------------
 
-						// 分页信息存入page_infomantion中
-						page_infomantion.currPage = xhr.currPage; // 当前页数
-						page_infomantion.countRecords = xhr.totalPage; // 总页数
-						page_infomantion.pageSize = xhr.pageSize; // 每页记录数
-						page_infomantion.totalPages = xhr.totalCount; // 总记录数
-						page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
-						page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
-
-						// 分页下的记录信息
-						var opt = '<option value=""></option>';
-						for (var index = 1; index <= xhr.totalPage; index++) {
-							opt += '<option>' + index + '</option>';
-						}
-//						$('.carousel').html(
-//								'共 ' + xhr.totalCount + '条信息 当前'
-//										+ xhr.currPage + '/' + xhr.totalPage
-//										+ '页 ' + xhr.pageSize
-//										+ '条信息/页&nbsp&nbsp转到第'
-//										+ '<select onchange="toPage(this)">'
-//										+ opt + '</select> 页');
-						// 影藏模态框
-						// $('#newQuery').modal('hide')
 					}, 'json')
 }
 
@@ -117,83 +95,44 @@ function toPage(object) {
 	get_ListBreakecaseInformationByPageAndSearch(query_data);
 }
 
-function searchtitle(){
-	$.post('/wlmtxt/WorksExamine/WorksExamine_worksListThree', {'worksVO.works_passed':1,'worksVO.works_deleted':2,'worksVO.works_title':$('#input_PoliceSearchText').val(),'worksVO.currPage' : 1 },
-			function(xhr) {
-				var data_list = xhr.wlmtxt_worksList;
-				var str = '';
-				for (var len = 0; len < data_list.length; len++) {
-					str += '<tr>';
-					str += '<td>' + (len + 1) + '</td>';// 序号
-					str += '<td>' + data_list[len].works_title
-							+ '</td>';// 标题
-				
-				
-					
-						str += '<td>'
-								+ '<input type="hidden" value="'
-								+ data_list[len].works_id
-								+ '" />'
-								+ '<button type="button" style="margin-left:6px;" class="btn btn-primary btn-xs"><i class="fa fa-plus-square"></i>添加</button>'
-								+ '</td>';
-					
-						str += '</tr>';
-					
-				}
-				// 加载案件列表到表格中
-				$('.breakcase_table_info tbody').html(str); // 操作点击事件
+function searchtitle() {
+	$
+			.post(
+					'/wlmtxt/WorksExamine/WorksExamine_worksListThree',
+					{
+						'worksVO.works_passed' : 1,
+						'worksVO.works_deleted' : 2,
+						'worksVO.works_title' : $('#input_PoliceSearchText')
+								.val(),
+						'worksVO.currPage' : 1
+					},
+					function(xhr) {
+						var data_list = xhr.wlmtxt_worksList;
+						var str = '';
+						for (var len = 0; len < data_list.length; len++) {
+							str += '<tr>';
+							str += '<td>' + (len + 1) + '</td>';// 序号
+							str += '<td>' + data_list[len].works_title
+									+ '</td>';// 标题
 
-				// -----------------------------------------------------
-				// 设置确认、删除点击事件
-				$('.btn-xs').click(modifi_delete);
-				// -----------------------------------------------------
+							str += '<td>'
+									+ '<input type="hidden" value="'
+									+ data_list[len].works_id
+									+ '" />'
+									+ '<button type="button" style="margin-left:6px;" class="btn btn-primary btn-xs"><i class="fa fa-plus-square"></i>添加</button>'
+									+ '</td>';
 
-				// 分页信息存入page_infomantion中
-				page_infomantion.currPage = xhr.currPage; // 当前页数
-				page_infomantion.countRecords = xhr.totalPage; // 总页数
-				page_infomantion.pageSize = xhr.pageSize; // 每页记录数
-				page_infomantion.totalPages = xhr.totalCount; // 总记录数
-				page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
-				page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
+							str += '</tr>';
 
-				// 分页下的记录信息
-				var opt = '<option value=""></option>';
-				for (var index = 1; index <= xhr.totalPage; index++) {
-					opt += '<option>' + index + '</option>';
-				}
-//				$('.carousel').html(
-//						'共 ' + xhr.totalCount + '条信息 当前'
-//								+ xhr.currPage + '/' + xhr.totalPage
-//								+ '页 ' + xhr.pageSize
-//								+ '条信息/页&nbsp&nbsp转到第'
-//								+ '<select onchange="toPage(this)">'
-//								+ opt + '</select> 页');
-				// 影藏模态框
-				// $('#newQuery').modal('hide')
-		}, 'json')
-	}
-
-						// 分页信息存入page_infomantion中
-						page_infomantion.currPage = xhr.currPage; // 当前页数
-						page_infomantion.countRecords = xhr.totalPage; // 总页数
-						page_infomantion.pageSize = xhr.pageSize; // 每页记录数
-						page_infomantion.totalPages = xhr.totalCount; // 总记录数
-						page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
-						page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
-
-						// 分页下的记录信息
-						var opt = '<option value=""></option>';
-						for (var index = 1; index <= xhr.totalPage; index++) {
-							opt += '<option>' + index + '</option>';
 						}
-						$('.carousel').html(
-								'共 ' + xhr.totalCount + '条信息 当前' + xhr.currPage
-										+ '/' + xhr.totalPage + '页 '
-										+ xhr.pageSize + '条信息/页&nbsp&nbsp转到第'
-										+ '<select onchange="toPage(this)">'
-										+ opt + '</select> 页');
-						// 影藏模态框
-						// $('#newQuery').modal('hide')
+						// 加载案件列表到表格中
+						$('.breakcase_table_info tbody').html(str); // 操作点击事件
+
+						// -----------------------------------------------------
+						// 设置确认、删除点击事件
+						$('.btn-xs').click(modifi_delete);
+						// -----------------------------------------------------
+
 					}, 'json')
 }
 
@@ -247,7 +186,7 @@ var modifi_delete = function() {
 	}
 }
 function dis_bnt(id) {
-	
+
 	var formData = new FormData();
 	formData.append('wlmtxt_work.works_id', id);
 	$.ajax({
