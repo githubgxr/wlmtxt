@@ -1214,7 +1214,7 @@ public class WorksServiceImpl implements WorksService {
 			// 查询作品
 			wlmtxt_works putWorks = worksDao.getWorksByID(works.getWorks_id());
 			addNotification(putWorks.getWorks_user_id(), "3",
-					putMan.getUser_username() + "喜欢了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
+					putMan.getUser_username() + "喜欢了您的作品" + putWorks.getWorks_title(), putWorks.getWorks_id());
 			/*
 			 * 
 			 */
@@ -1243,7 +1243,7 @@ public class WorksServiceImpl implements WorksService {
 			// 查询作品
 			wlmtxt_works putWorks = worksDao.getWorksByID(accept_works.getWorks_id());
 			addNotification(putWorks.getWorks_user_id(), "2",
-					putMan.getUser_username() + "收藏了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
+					putMan.getUser_username() + "收藏了您的作品" + putWorks.getWorks_title(), putWorks.getWorks_id());
 			/*
 			 * 
 			 */
@@ -1285,7 +1285,7 @@ public class WorksServiceImpl implements WorksService {
 		if (putWorks != null) {
 			// 评论
 			addNotification(putWorks.getWorks_user_id(), "4",
-					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
+					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_title(), putWorks.getWorks_id());
 		} else {
 			// 回复
 			wlmtxt_discuss discuss = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
