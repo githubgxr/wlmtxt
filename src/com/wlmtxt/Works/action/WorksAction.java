@@ -214,6 +214,13 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write(gson.toJson(worksDTOList));
 	}
 
+	/**
+	 * 基于用户的协同过滤 <br>
+	 * 推荐相似用户的喜好 <br>
+	 * 放在首页的猜你喜欢
+	 * 
+	 * @throws IOException
+	 */
 	public void collaborativeFilteringByUser() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		List<WorksDTO> worksDTOList = null;
@@ -221,6 +228,29 @@ public class WorksAction extends ActionSupport {
 			worksDTOList = worksService.collaborativeFilteringByUser(null);
 		} else {
 			worksDTOList = worksService.collaborativeFilteringByUser(user.getUser_id());
+		}
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	/**
+	 * 基于物品的协同过滤（Slope One） <br>
+	 * 放在详情页的额推荐
+	 * 
+	 * @throws IOException
+	 */
+	public void collaborativeFilteringBySlopeOne() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<WorksDTO> worksDTOList = null;
+		if (user == null) {
+			worksDTOList = worksService.collaborativeFilteringBySlopeOne(accept_works.getWorks_id(), null);
+		} else {
+			worksDTOList = worksService.collaborativeFilteringBySlopeOne(accept_works.getWorks_id(), user.getUser_id());
 		}
 
 		GsonBuilder gsonBuilder = new GsonBuilder();

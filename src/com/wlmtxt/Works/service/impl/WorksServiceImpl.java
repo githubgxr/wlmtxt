@@ -78,7 +78,12 @@ public class WorksServiceImpl implements WorksService {
 	public int userPointWork(String userID, String worksID) {
 		int point = 0;
 		// 播放加1分，查询有几条历史记录关于此作品
-
+		List<wlmtxt_play_history> playHistoryList = listPlayHistoryListByUserID(userID);
+		for (wlmtxt_play_history playHistory : playHistoryList) {
+			if (playHistory.getPlay_history_works_id().equals(worksID)) {
+				point = point + 1;
+			}
+		}
 		// 点赞加3分
 		if (isLiked(userID, worksID)) {
 			point = point + 3;
@@ -98,17 +103,77 @@ public class WorksServiceImpl implements WorksService {
 		return point;
 	}
 
+	public int validUserDevNum(String wroksFirstID, String wroksSecondID, String currentUserID) {
+		int userNum = 0;
+		List<wlmtxt_user> userListAll = worksDao.userListAll();
+		for (wlmtxt_user otherUser : userListAll) {
+			// 跳过当前用户的喜爱值
+			if (otherUser.getUser_id().equals(currentUserID)) {
+				continue;
+			}
+			// 对当前作品的评价
+			int pointFirstWork = userPointWork(otherUser.getUser_id(), wroksFirstID);
+			// 对便利的作品的评价
+			int pointSecondWork = userPointWork(otherUser.getUser_id(), wroksSecondID);
+			// 需要同时对两个作品有评价
+			if (pointFirstWork != 0 && pointSecondWork != 0) {
+				userNum++;
+			} else {
+				continue;
+			}
+
+		}
+		return userNum;
+	}
+
 	@Override
-	public List<WorksDTO> collaborativeFilteringBySlopeOne(String userID) {
+	public Double WorksDev(String wroksFirstID, String wroksSecondID, String currentUserID) {
+		List<wlmtxt_user> userListAll = worksDao.userListAll();
+		// 差异值
+		Double dev = 0.0;
+		// 有效的用户数
+		int userNum = 0;
+
+		for (wlmtxt_user otherUser : userListAll) {
+			// 跳过当前用户的喜爱值
+			if (otherUser.getUser_id().equals(currentUserID)) {
+				continue;
+			}
+			// 对当前作品的评价
+			int pointFirstWork = userPointWork(otherUser.getUser_id(), wroksFirstID);
+			// System.out.println("pointFirstWork:" + pointFirstWork);
+			// 对便利的作品的评价
+			int pointSecondWork = userPointWork(otherUser.getUser_id(), wroksSecondID);
+			// System.out.println("pointSecondWork:" + pointSecondWork);
+			// 需要同时对两个作品有评价
+			if (pointFirstWork != 0 && pointSecondWork != 0) {
+				// 单个差异值为两个作品的评价相减
+				dev = dev + (pointFirstWork - pointSecondWork);
+				userNum++;
+			} else {
+				continue;
+			}
+
+		}
+		// 最终差异值要除以有效用户数
+		dev = dev / userNum;
+		if (userNum == 0) {
+			dev = 0.0;
+		}
+		return dev;
+	}
+
+	@Override
+	public List<WorksDTO> collaborativeFilteringBySlopeOne(String currentWorksID, String currentUserID) {
 		/*
 		 * 如果未登录，则无法进行推荐
 		 */
-		if (userID == null) {
+		if (currentUserID == null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 			List<wlmtxt_works> worksTemporaryList = new ArrayList<wlmtxt_works>();
 			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
 			worksTemporaryList = worksDao.listWorksAll();
-			int n_n = (worksTemporaryList.size() >= 5 ? 5 : worksTemporaryList.size());
+			int n_n = (worksTemporaryList.size() >= 4 ? 4 : worksTemporaryList.size());
 			for (int n = 0; n < n_n; n++) {
 				int random = (int) (Math.random() * worksTemporaryList.size());
 				worksFinallyList.add(worksTemporaryList.get(random));
@@ -122,23 +187,116 @@ public class WorksServiceImpl implements WorksService {
 			}
 			return worksDTOList;
 		}
-		// 取出用户信息和作品信息
-		wlmtxt_user curUser = userService.get_user_byID(userID);
-		List<wlmtxt_works> worksAll = worksDao.listWorksAll();
-		/*
-		 * 计算当前用户对所有作品的评分，保存为一个map的list
-		 */
-		Map<String, Integer> myPointMap = new HashMap<String, Integer>();
-		Integer point = 0;
-		for (wlmtxt_works works : worksAll) {
-			point = userPointWork(curUser.getUser_id(), works.getWorks_id());
-			myPointMap.put(works.getWorks_id(), point);
-		}
 
+		/*
+		 * 预测评价的map
+		 */
+		Map<String, Double> worksForecastPointMap = new HashMap<String, Double>();
+		List<wlmtxt_works> worksAll = worksDao.listWorksAll();
+		for (wlmtxt_works works : worksAll) {
+			if (works.getWorks_id().equals(currentWorksID)) {
+				continue;
+			}
+
+			Double worksForecastPoint = forecastPoint(currentWorksID, currentUserID);
+			worksForecastPointMap.put(works.getWorks_id(), worksForecastPoint);
+		}
+		/*
+		 * 对map进行排序
+		 */
+		List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(
+				worksForecastPointMap.entrySet());
+		Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
+			// 降序排序
+			@Override
+			public int compare(Entry<String, Double> o1, Entry<String, Double> o2) {
+				return o2.getValue().compareTo(o1.getValue());
+			}
+		});
+		System.out.println("预测评价排序" + worksForecastPointMap.size() + "条：" + worksForecastPointMap);
 		/*
 		 * 
 		 */
-		return null;
+		List<wlmtxt_works> worksFinallyAllList = new ArrayList<wlmtxt_works>();
+		for (Map.Entry<String, Double> worksEntry : worksForecastPointMap.entrySet()) {
+			worksFinallyAllList.add(worksDao.getWorksByID(worksEntry.getKey()));
+			//
+			if (worksFinallyAllList.size() < 5) {
+				// 如果小于5条就继续抓
+			} else {
+				// 大于5条就不抓了
+				break;
+			}
+		}
+
+		/*
+		 * 封装DTO
+		 */
+		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		for (wlmtxt_works works : worksFinallyAllList) {
+			WorksDTO worksDTO = new WorksDTO();
+			worksDTO = getWorksDTOByID(works.getWorks_id());
+			worksDTOList.add(worksDTO);
+		}
+		/*
+		 * 
+		 */
+		return worksDTOList;
+	}
+
+	@Override
+	public Double forecastPoint(String currentWorksID, String currentUserID) {
+		// 取出用户信息和作品信息
+		List<wlmtxt_works> worksAll = worksDao.listWorksAll();
+		/*
+		 * 计算此作品与其他作品的差异值，保存为一个map
+		 */
+		Map<String, Double> thisWorksDevMap = new HashMap<String, Double>();
+		Double dev = 0.0;
+		for (wlmtxt_works works : worksAll) {
+			// 跳过此作品
+			if (works.getWorks_id().equals(currentWorksID)) {
+				continue;
+			}
+			// 计算差异值
+			dev = WorksDev(currentWorksID, works.getWorks_id(), currentUserID);
+			thisWorksDevMap.put(works.getWorks_id(), dev);
+		}
+		/*
+		 * 遍历其他作品，用喜爱值加上差异值
+		 */
+		dev = 0.0;
+		Double SO_FZ = 0.0;
+		for (wlmtxt_works works : worksAll) {
+			// 跳过此作品
+			if (works.getWorks_id().equals(currentWorksID)) {
+				continue;
+			}
+			//
+			dev = thisWorksDevMap.get(works.getWorks_id());
+			// 当前用户对这个遍历的作品的评分
+			int currentUserPointOtherWorks = userPointWork(currentUserID, works.getWorks_id());
+			int validUserDevNum = validUserDevNum(currentWorksID, works.getWorks_id(), currentUserID);
+
+			SO_FZ = SO_FZ + (dev + currentUserPointOtherWorks) * validUserDevNum;
+
+		}
+		/*
+		 * 
+		 */
+		int validUserDevNumAll = 0;
+		for (wlmtxt_works works : worksAll) {
+			// 跳过此作品
+			if (works.getWorks_id().equals(currentWorksID)) {
+				continue;
+			}
+			//
+			validUserDevNumAll = validUserDevNumAll
+					+ validUserDevNum(currentWorksID, works.getWorks_id(), currentUserID);
+
+		}
+		Double forecastPoint = SO_FZ / validUserDevNumAll;
+		return forecastPoint;
 	}
 
 	@Override
@@ -224,7 +382,7 @@ public class WorksServiceImpl implements WorksService {
 		 */
 		List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(similarityDegreeMap.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
-			// 升序排序
+			// 降序排序
 			@Override
 			public int compare(Entry<String, Double> o1, Entry<String, Double> o2) {
 				return o2.getValue().compareTo(o1.getValue());

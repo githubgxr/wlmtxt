@@ -167,7 +167,26 @@ public interface WorksService {
 	 * @param userID
 	 * @return
 	 */
-	public List<WorksDTO> collaborativeFilteringBySlopeOne(String userID);
+	public List<WorksDTO> collaborativeFilteringBySlopeOne(String WorksID, String userID);
+
+	/**
+	 * 计算两个物品之间的差值 <br>
+	 * 
+	 * 
+	 * @param wroksFirstID
+	 * @param wroksSecondID
+	 * @return
+	 */
+	public Double WorksDev(String wroksFirstID, String wroksSecondID, String currentUserID);
+
+	/**
+	 * 预测
+	 * 
+	 * @param currentWorksID
+	 * @param currentUserID
+	 * @return
+	 */
+	Double forecastPoint(String currentWorksID, String currentUserID);
 
 	/**
 	 * 计算用户对某个作品的喜爱值 <br>
@@ -177,7 +196,7 @@ public interface WorksService {
 	 * @param worksID
 	 * @return
 	 */
-	int userPointWork(String userID, String worksID);
+	public int userPointWork(String userID, String worksID);
 
 	/**
 	 * 按热度排序前20条后，随机取6条。
@@ -187,4 +206,5 @@ public interface WorksService {
 	public List<WorksDTO> hotRecommend();
 
 	public WorksCategoryVO getWorksByCategoryPage(WorksCategoryVO worksCategoryVO);
+
 }
