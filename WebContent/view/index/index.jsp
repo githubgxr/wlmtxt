@@ -29,15 +29,15 @@
 			style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px; line-height: 36px;">
 			推荐</div>
 		<!--大推荐-->
-		
+
 		<!--小推荐-->
-		<div  style="height: 330px; width: 260px; float: right;">
+		<div style="height: 330px; width: 260px; float: right;">
 
 			<div
 				style="margin: 0 0 70px 0; background-size: 240px 155px; height: 155px; width: 240px; float: right;">
-				<ul id="lbt_little_con" >
-					
-					
+				<ul id="lbt_little_con">
+
+
 
 				</ul>
 			</div>
@@ -76,7 +76,7 @@
 			<!--推荐列表-->
 			<div style="height: 420px;">
 				<ul id="djdzk_llls_list_container">
-					
+
 
 
 				</ul>
@@ -90,7 +90,8 @@
 			style="background-color: #ffffff; padding: 20px; border-radius: 5px; width: 340px; margin: 0 0 0 20px; height: auto; float: left;">
 			<div
 				style="color: #1cd388; margin: 0 0 20px 0; font-size: 18px; line-height: 36px;">
-				<span>周榜</span> <span class="dz_no" style="float: right;">查看&nbsp;<i
+				<span>周榜</span> <span class="dz_no" style="float: right;"
+					onclick="window.location='/wlmtxt/view/index/index_rank.jsp'">查看&nbsp;<i
 					class="fas fa-angle-double-right "></i></span>
 			</div>
 			<div style="color: #999; padding: 0 0px;" id="index_week_rank">

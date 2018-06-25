@@ -54,10 +54,7 @@
 										<th>用户邮箱</th>
 										<th>评论内容</th>
 										<th>评论时间</th>
-										<th><label class="fancy-checkbox"> <input
-												id="checkbox_all_select" type="checkbox"
-												onclick="all_select()"> <span></span>
-										</label></th>
+										
 									</tr>
 								</thead>
 								<tbody></tbody>
@@ -78,13 +75,7 @@
 								
 							</table>
 							
-							<!-- 删除按钮 -->
-							<div style="height: 34px;" id="btn_delete" >
-								<button class="btn btn-danger role_one" onclick="deletediscuss()"
-									style="float: right; margin: 0 10px;">
-									<i class="fa fa-trash-o"></i> 删除所选
-								</button>
-							</div>
+						
 		</div>
 	</div>
 

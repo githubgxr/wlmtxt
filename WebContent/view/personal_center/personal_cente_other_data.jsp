@@ -20,9 +20,9 @@
 	<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 		<div class="wlmtxt_container ">
-			<jsp:include page="/personal_center_nav.jsp" flush="true"></jsp:include>
+			<%-- <jsp:include page="/personal_center_nav.jsp" flush="true"></jsp:include> --%>
 			<!--发布视频-->
-			<div class="main_container">
+			<div class="main_container" style="margin:0 115px;">
 			<div style="display:none;" id="other_id"></div>
 				<!--浏览历史头部-->
 				<div class="tdzl_header list_header">
@@ -74,7 +74,7 @@
 				</div>
 			</div>
 			<!--我的动态-->
-			<div class="main_container">
+			<div class="main_container" style="margin:0 115px;">
 				<div class="tdzl_header list_header">
 					<i class="header_line"></i>
 					<h3>TA的动态</h3>

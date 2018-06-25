@@ -125,6 +125,11 @@ public interface AdminService {
     * 根据id得到管理员信息
     */
 	public wlmtxt_admin getAdminById(String admin_id);
+   /*
+    * 修改密码
+    */
+
+	public boolean updatePassword(wlmtxt_admin admin);
 
 
 	

@@ -1,4 +1,3 @@
-
 function listNoticeByPage(e){
 	var xhr=new XMLHttpRequest();
 	var formData=new FormData();
@@ -15,12 +14,16 @@ function listNoticeByPage(e){
 				appreciateNotice+='<div class="video_options">';
 				
 				/*用户头像*/
-				appreciateNotice+='<div class="neck_name user_img_small">';
-				appreciateNotice+='<img class="user_img_small src="/wlmtxt/Works/Works_getImg?imgName=' +list_appreciateNotice[i].worksDTO.user.user_avatar +'"/>';
+				appreciateNotice+='<div class="neck_name user_img_small to_other_data">';
+				appreciateNotice+='<img id="'
+					+ list_appreciateNotice[i].worksDTO.user.user_id
+					+ '" onclick="to_other_data(this.id)" class="user_img_small" src="/wlmtxt/Works/Works_getImg?imgName=' +list_appreciateNotice[i].worksDTO.user.user_avatar +'"/>';
 				appreciateNotice+='</div>';
 				
 				/*用户名*/
-				appreciateNotice+='<div class="thumd_name" style="color:#1dd388;">'+list_appreciateNotice[i].worksDTO.user.user_username+'</div>';
+				appreciateNotice+='<div class="thumd_name to_other_data" id="'
+					+ list_appreciateNotice[i].worksDTO.user.user_id
+					+ '" onclick="to_other_data(this.id)" style="color:#1dd388;">'+list_appreciateNotice[i].worksDTO.user.user_username+'</div>';
 				
 				/*作品发布时间*/
 				appreciateNotice+='<div class="thumd_time">'+list_appreciateNotice[i].worksDTO.works.works_gmt_create+'</div>';
@@ -32,7 +35,7 @@ function listNoticeByPage(e){
 				appreciateNotice+='<div class="list_li ">';
 				
 				/*作品链接*/
-				appreciateNotice+='<a class="video_list_item_wrap ">';
+				appreciateNotice+='<a class="video_list_item_wrap " href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+list_appreciateNotice[i].worksDTO.works.works_id+'">';
 				appreciateNotice+='<div class="video_cover ">';
 				appreciateNotice+='<img class="video_img " src="/wlmtxt/Works/Works_getImg?imgName=' +list_appreciateNotice[i].worksDTO.works.works_cover +'"/>';
 				appreciateNotice+='<div class="video_overplay "></div>';
@@ -44,20 +47,21 @@ function listNoticeByPage(e){
 				
 				/*作品简介*/
 				appreciateNotice+='<div class="info_container">';
-				appreciateNotice+='<span class="span_name" style="margin-right:10px;">'+list_appreciateNotice[i].worksDTO.user.user_username+":"+'</span>';
-				appreciateNotice+='<span class="span_info">'+list_appreciateNotice[i].worksDTO.works.works_reason+'</span>';
+				appreciateNotice+='<span id="'
+					+ list_appreciateNotice[i].worksDTO.user.user_id
+					+ '" onclick="to_other_data(this.id)"  class="span_name to_other_data" style="margin-right:10px;">'+list_appreciateNotice[i].worksDTO.user.user_username+":"+'</span>';
+				appreciateNotice+='<span class="span_info">'+list_appreciateNotice[i].worksDTO.works.works_title+'</span>';
 				appreciateNotice+='</div>';
 				
 				$(".list_container").append(appreciateNotice);
 				
-				if(list_appreciateNotice[i].notification.notification_type==3){
+				/*if(list_appreciateNotice[i].notification.notification_type==4){
 					console.log(e);
-					/*评论通知*/
 					appreciateNotice='<div class="reply_info ">';
 					appreciateNotice+='<input type="text " placeholder="回复: " />';
 					appreciateNotice+='</div>';
 					
-				}
+				}*/
 				appreciateNotice+='</div>';
 				$(".list_container").append(appreciateNotice);
 				}

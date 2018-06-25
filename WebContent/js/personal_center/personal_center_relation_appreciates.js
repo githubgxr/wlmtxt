@@ -1,4 +1,7 @@
 $(function (){
+	listLike();
+})
+function listLike(){
 	var list_video_item = document.getElementsByClassName("list_video_item");
 	var long = list_video_item.length;
 	for (var num = 0; num < long; num++) {
@@ -42,10 +45,27 @@ $(function (){
 			 relation_like_str+='</div>';
 			 relation_like_str+='</div>';
 			 relation_like_str+=' <div class="video_options">';
-			 relation_like_str+='<a class="video_delete_btn">取消点赞</a>';
+			 relation_like_str+='<a id="'+relation_like_response[i].worksDTO.works.works_id+'" onclick="deleteLike(this.id)" class="video_delete_btn">取消点赞</a>';
 			 relation_like_str+='</div>';
 			 relation_like_str+='</li>';
 			$("#relation_appreciates_list_container").append(relation_like_str);
 		}
 	}
-})
+}
+
+function deleteLike(video_id) {
+	var formData_like = new FormData();
+	formData_like.append("accept_works.works_id", video_id);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "/wlmtxt/Works/Works_likeWorks");
+	xhr.send(formData_like);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			if (xhr.responseText == "1") {
+				console.log("点赞或取消点赞成功！");
+				toastr.success("取消点赞成功！");
+				listLike();
+			}
+		}
+	}
+}

@@ -184,9 +184,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void getAdminListBysearchPage(AdminVO adminVO) {
 		int count = adminDao.getCountAdminList(adminVO);
-		adminVO.setTotalCount(count);
-		adminVO.setPageSize(10);
-		adminVO.setTotalPage((int) Math.ceil((double) count / adminVO.getPageSize()));
+		//adminVO.setTotalCount(count);
+		//adminVO.setPageSize(10);
+		//adminVO.setTotalPage((int) Math.ceil((double) count / adminVO.getPageSize()));
 		adminDao.getAdminListByPage(adminVO);
 	}
 	@Override
@@ -201,5 +201,13 @@ public class AdminServiceImpl implements AdminService {
 			adminDao.deleteAdmin(admin_id);
 		}
 		return true;
+	}
+	@Override
+	public boolean updatePassword(wlmtxt_admin admin) {
+		wlmtxt_admin old_admin = adminDao.getAdminById(admin.getAdmin_id());
+		old_admin.setAdmin_password(admin.getAdmin_password());
+		String time = TeamUtil.getStringSecond();
+		old_admin.setAdmin_gmt_modified(time);
+		return adminDao.updatePassword(old_admin);
 	}
 }

@@ -36,7 +36,7 @@
 								
 								<!-- 检索 -->
 								<div class="input-group" style="width: 300px; float: right;">
-									<input id="input_PoliceSearchText" class="form-control" oninput="searchtitle()" type="text" placeholder="搜索账号" />
+									<input id="input_PoliceSearchText" class="form-control" oninput="searchtitle()" type="text" placeholder="搜索标题" />
 									<span class="input-group-addon" style="border-radius: unset;">
 										<i class="fa fa-search"></i>   
 									</span>

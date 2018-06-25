@@ -1,3 +1,4 @@
+checkLogin();
 /*点击修改个人资料*/
 $(".update_btn").click(function() {
 	$(".personal_info_value").css("display", "none");

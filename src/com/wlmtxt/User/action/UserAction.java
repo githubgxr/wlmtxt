@@ -286,13 +286,16 @@ public class UserAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		PrintWriter pw = response.getWriter();
-		if (user != null) {
-			user = userService.get_user_byID(accept_user.getUser_id());
+		if (accept_user != null) {
+			accept_user = userService.get_user_byID(accept_user.getUser_id());
+			// 对象属性值为null替换为""
+			ReflectUtil.getAllField(accept_user);
+			pw.write(JsonUtils.toJson(accept_user));
+		} else {
+			user = userService.get_user_byID(user.getUser_id());
 			// 对象属性值为null替换为""
 			ReflectUtil.getAllField(user);
 			pw.write(JsonUtils.toJson(user));
-		} else {
-			pw.write("2");
 		}
 	}
 
@@ -503,11 +506,16 @@ public class UserAction extends ActionSupport {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		if (userService.isFollowedUser(user.getUser_id(), accept_user.getUser_id())) {
-			response.getWriter().write("1");
-		} else {
+		if (user == null) {
 			response.getWriter().write("2");
+		} else {
+			if (userService.isFollowedUser(user.getUser_id(), accept_user.getUser_id())) {
+				response.getWriter().write("1");
+			} else {
+				response.getWriter().write("2");
+			}
 		}
+
 	}
 
 	/**

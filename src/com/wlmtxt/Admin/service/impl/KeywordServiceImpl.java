@@ -55,9 +55,9 @@ public boolean deleteKeyword(String keywordIDAll) {
 @Override
 public void getKeywordListBysearchPage(KeywordVO keywordVO) {
 	int count = keywordDao.getCountKeywordList(keywordVO);
-	keywordVO.setTotalCount(count);
-	keywordVO.setPageSize(10);
-	keywordVO.setTotalPage((int) Math.ceil((double) count / keywordVO.getPageSize()));
+	//keywordVO.setTotalCount(count);
+	//keywordVO.setPageSize(10);
+	//keywordVO.setTotalPage((int) Math.ceil((double) count / keywordVO.getPageSize()));
 	keywordDao.getKeywordListByPage(keywordVO);
 }
 

@@ -64,7 +64,7 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_works> listWorksByKeywordName(String keyword_name) {
 		String hql = " select works "
 				+ " from wlmtxt_works_keyword works_keyword,wlmtxt_keyword keyword,wlmtxt_works works "
-				+ " where ( works_keyword.works_keyword_id=keyword.keyword_id "
+				+ " where ( works.works_deleted!='1' and works_keyword.works_keyword_id=keyword.keyword_id "
 				+ " and works_keyword.works_keyword_works_id=works_id " + " and keyword.keyword_name='" + keyword_name
 				+ "') " + " order by works.works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
@@ -140,7 +140,7 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public void deleteMyWorks(String works_id) {
 
-		String hql = "delete from wlmtxt_works  where works_id='" + works_id + "'";
+		String hql = "update from wlmtxt_works set works_deleted='1'  where works_id='" + works_id + "'";
 
 		Query query = getSession().createQuery(hql);
 
@@ -224,7 +224,8 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public int getMyWorksTotalRecords(String user_id) {
-		String hql = "select count(*) from wlmtxt_works  where works_user_id='" + user_id + "' ";
+		String hql = "select count(*) from wlmtxt_works works where works.works_deleted!='1' and works_user_id='"
+				+ user_id + "' ";
 		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
 		return count;
@@ -265,7 +266,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> getWorksByPage(int pageIndex, int pageSize) {
-		String hql = " from wlmtxt_works  where  works_passed='1' order by works_gmt_create desc";
+		String hql = " from wlmtxt_works works where works.works_deleted!='1' and  works_passed='1' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		query.setFirstResult((pageIndex - 1) * pageSize);
 		query.setMaxResults(pageSize);
@@ -275,8 +276,8 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> getWorksBySecondMenuAndPage(int pageIndex, int pageSize, String SecondMenuID) {
-		String hql = " from wlmtxt_works works where  works_passed='1' and works.works_second_menu_id='" + SecondMenuID
-				+ "' order by works_gmt_create desc";
+		String hql = " from wlmtxt_works works where works.works_deleted!='1' and  works_passed='1' and works.works_second_menu_id='"
+				+ SecondMenuID + "' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		query.setFirstResult((pageIndex - 1) * pageSize);
 		query.setMaxResults(pageSize);
@@ -286,7 +287,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> getWorksByFirstMenuAndPage(int pageIndex, int pageSize, String FirstMenuID) {
-		String hql = " from wlmtxt_works works,wlmtxt_second_menu second_menu where  works_passed='1' and works.works_second_menu_id=second_menu.second_menu_id and second_menu.second_menu_first_menu_id='"
+		String hql = " from wlmtxt_works works,wlmtxt_second_menu second_menu where works.works_deleted!='1' and  works_passed='1' and works.works_second_menu_id=second_menu.second_menu_id and second_menu.second_menu_first_menu_id='"
 				+ FirstMenuID + "' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		query.setFirstResult((pageIndex - 1) * pageSize);
@@ -297,8 +298,8 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id) {
-		String hql = " from wlmtxt_works  where works_second_menu_id='" + second_menu_id
-				+ "' and works_passed='1' order by works_gmt_create desc";
+		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_second_menu_id='"
+				+ second_menu_id + "' and works_passed='1' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
@@ -325,8 +326,8 @@ public class WorksDaoImpl implements WorksDao {
 		/*
 		 * 
 		 */
-		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
-				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
+		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1' and works_gmt_create >= '"
+				+ start_time + "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
@@ -366,8 +367,8 @@ public class WorksDaoImpl implements WorksDao {
 		/*
 		 * 
 		 */
-		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
-				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
+		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1' and works_gmt_create >= '"
+				+ start_time + "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
@@ -432,8 +433,8 @@ public class WorksDaoImpl implements WorksDao {
 		date2 = calendar2.getTime(); // 这个时间就是日期往后推一天的结果
 		stop_time = sdf.format(date2);
 
-		String hql = " from wlmtxt_works where works_passed='1' and works_gmt_create >= '" + start_time
-				+ "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
+		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1' and works_gmt_create >= '"
+				+ start_time + "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
@@ -441,7 +442,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> listWorksAll() {
-		String hql = " from wlmtxt_works where works_passed='1'  order by works_gmt_create desc";
+		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;
@@ -458,7 +459,7 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO) {
-		String hql = " from wlmtxt_works  where works_user_id='" + user_id
+		String hql = " from wlmtxt_works works  where works.works_deleted!='1' and works_user_id='" + user_id
 				+ "' and works_passed='1' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		query.setFirstResult((myWorksVO.getPageIndex() - 1) * myWorksVO.getPageSize());
@@ -665,8 +666,8 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public List<wlmtxt_works> listWorksAllByUserId(String user_id) {
-		String hql = "from wlmtxt_works where works_passed='1' and works_deleted='2' and works_user_id='" + user_id
-				+ "' order by works_gmt_create desc";
+		String hql = "from wlmtxt_works works where works.works_deleted!='1' and works_passed='1' and works_deleted='2' and works_user_id='"
+				+ user_id + "' order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
 		return worksList;

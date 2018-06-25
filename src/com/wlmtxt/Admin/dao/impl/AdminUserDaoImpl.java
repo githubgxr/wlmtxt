@@ -39,17 +39,17 @@ public class AdminUserDaoImpl implements AdminUserDao {
 		Session session = getSession();
 		List<wlmtxt_user> userList = new ArrayList<wlmtxt_user>();
 		String hql = "from wlmtxt_user where 1=1 ";
-		if (userVO.getUser_username()!= null
-				&& userVO.getUser_username().trim().length() > 0)
-			hql = hql + " and user_username like '%" + userVO.getUser_username() + "%'";
-		if (userVO.getUser_mail()!= null
-				&& userVO.getUser_mail().trim().length() > 0)
-			hql = hql + " and user_mail like '%" + userVO.getUser_mail() + "%'";
+		if (userVO.getUser_username_user_mail()!= null
+				&& userVO.getUser_username_user_mail().trim().length() > 0)
+			hql = hql + " and user_username like '%" + userVO.getUser_username_user_mail() + "%'or user_mail like '%" + userVO.getUser_username_user_mail() + "%'";
+//		if (userVO.getUser_username_user_mail()!= null
+//				&& userVO.getUser_username_user_mail().trim().length() > 0)
+//			hql = hql + " and user_mail like '%" + userVO.getUser_username_user_mail() + "%'";
 		hql = hql + " order by user_gmt_modified desc";
 		Query query = session.createQuery(hql);	
-		query.setFirstResult(
-				(userVO.getCurrPage() - 1) * userVO.getPageSize());
-		query.setMaxResults(userVO.getPageSize());
+//		query.setFirstResult(
+//				(userVO.getCurrPage() - 1) * userVO.getPageSize());
+//		query.setMaxResults(userVO.getPageSize());
 		userList = query.list();
 		userVO.setWlmtxt_userList(userList);
 		session.clear();
@@ -61,12 +61,12 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	public int getCountUserList(UserVO userVO) {
 		Session session = getSession();
 		String hql = "select count(*) from wlmtxt_user where 1=1";
-		if (userVO.getUser_username()!= null
-				&& userVO.getUser_username().trim().length() > 0)
-			hql = hql + " and user_username like '%" + userVO.getUser_username() + "%'";
-		if (userVO.getUser_mail()!= null
-				&& userVO.getUser_mail().trim().length() > 0)
-			hql = hql + " and user_mail like '%" + userVO.getUser_mail() + "%'";
+		if (userVO.getUser_username_user_mail()!= null
+				&& userVO.getUser_username_user_mail().trim().length() > 0)
+			hql = hql + " and user_username like '%" + userVO.getUser_username_user_mail() + "%'";
+		if (userVO.getUser_username_user_mail()!= null
+				&& userVO.getUser_username_user_mail().trim().length() > 0)
+			hql = hql + " and user_mail like '%" + userVO.getUser_username_user_mail() + "%'";
 			long count = (long) session.createQuery(hql).uniqueResult();
 		return (int) count;
 	}
@@ -100,15 +100,15 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	public int getCountdiscussList(DiscussVO discussVO) {
 		Session session = getSession();
 		String hql = "select count(*) from wlmtxt_discuss ,wlmtxt_user where discuss_user_id=user_id and 1=1";
-		if (discussVO.getDiscuss_content()!= null
-				&& discussVO.getDiscuss_content().trim().length() > 0)
-			hql = hql + " and discuss_content like '%" + discussVO.getDiscuss_content() + "%'";
-		if (discussVO.getUser_mail()!= null
-				&& discussVO.getUser_mail().trim().length() > 0)
-			hql = hql + " and user_mail like '%" + discussVO.getUser_mail() + "%'";
-		if (discussVO.getUser_username()!= null
-				&& discussVO.getUser_username().trim().length() > 0)
-			hql = hql + " and user_username like '%" + discussVO.getUser_username() + "%'";
+		if (discussVO.getDiscuss_content_user_mail_user_username()!= null
+				&& discussVO.getDiscuss_content_user_mail_user_username().trim().length() > 0)
+			hql = hql + " and discuss_content like '%" + discussVO.getDiscuss_content_user_mail_user_username() + "%'";
+		if (discussVO.getDiscuss_content_user_mail_user_username()!= null
+				&& discussVO.getDiscuss_content_user_mail_user_username().trim().length() > 0)
+			hql = hql + " and user_mail like '%" + discussVO.getDiscuss_content_user_mail_user_username() + "%'";
+		if (discussVO.getDiscuss_content_user_mail_user_username()!= null
+				&& discussVO.getDiscuss_content_user_mail_user_username().trim().length() > 0)
+			hql = hql + " and user_username like '%" + discussVO.getDiscuss_content_user_mail_user_username() + "%'";
 		long count = (long) session.createQuery(hql).uniqueResult();
 		return (int) count;
 	}
@@ -117,21 +117,24 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	public void getdiscussListByPage(DiscussVO discussVO) {
 		Session session = getSession();
 		List<AdmindiscussDTO> admindiscussDTOList = new ArrayList<AdmindiscussDTO>();
-		String hql = "from wlmtxt_discuss ,wlmtxt_user where discuss_user_id=user_id and 1=1";
-		if (discussVO.getDiscuss_content()!= null
-				&& discussVO.getDiscuss_content().trim().length() > 0)
-			hql = hql + " and discuss_content like '%" + discussVO.getDiscuss_content() + "%'";
-		if (discussVO.getUser_mail()!= null
-				&& discussVO.getUser_mail().trim().length() > 0)
-			hql = hql + " and user_mail like '%" + discussVO.getUser_mail() + "%'";
-		if (discussVO.getUser_username()!= null
-				&& discussVO.getUser_username().trim().length() > 0)
-			hql = hql + " and user_username like '%" + discussVO.getUser_username() + "%'";
+		String hql = "from wlmtxt_discuss ,wlmtxt_user where  1=1";
+		if (discussVO.getDiscuss_content_user_mail_user_username()!= null
+				&& discussVO.getDiscuss_content_user_mail_user_username().trim().length() > 0)
+			hql = hql + " and discuss_content like '%" + discussVO.getDiscuss_content_user_mail_user_username() 
+			+ "%' and discuss_user_id=user_id or user_mail like '%" + discussVO.getDiscuss_content_user_mail_user_username() + "%'and discuss_user_id=user_id or user_username like '%" + discussVO.getDiscuss_content_user_mail_user_username() + "%'";
+//		if (discussVO.getDiscuss_content_user_mail_user_username()!= null
+//				&& discussVO.getDiscuss_content_user_mail_user_username().trim().length() > 0)
+//			hql = hql + " and user_mail like '%" + discussVO.getDiscuss_content_user_mail_user_username() + "%'";
+//		if (discussVO.getDiscuss_content_user_mail_user_username()!= null
+//				&& discussVO.getDiscuss_content_user_mail_user_username().trim().length() > 0)
+//			hql = hql + " and user_username like '%" + discussVO.getDiscuss_content_user_mail_user_username() + "%'";
+		hql = hql + "and discuss_user_id=user_id ";
 		hql = hql + " order by discuss_gmt_modified desc";
 		Query query = session.createQuery(hql);	
-		query.setFirstResult(
-				(discussVO.getCurrPage() - 1) * discussVO.getPageSize());
-		query.setMaxResults(discussVO.getPageSize());
+//		query.setFirstResult(
+//				(discussVO.getCurrPage() - 1) * discussVO.getPageSize());
+//		query.setMaxResults(discussVO.getPageSize());
+		System.out.println(hql);
 		admindiscussDTOList = query.list();
 		discussVO.setAdmindiscussDTOList(admindiscussDTOList);
 		session.clear();

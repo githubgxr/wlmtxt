@@ -10,9 +10,8 @@ public class DiscussVO {
 	private int totalPage;//总页数
 	private int totalCount;//总记录数
 	private int pageSize;//每页条数
-	private String discuss_content;//
-	private String user_mail;
-	private String user_username;
+	private String discuss_content_user_mail_user_username;//
+	
 	private List<AdmindiscussDTO> admindiscussDTOList;
 	public int getCurrPage() {
 		return currPage;
@@ -38,23 +37,12 @@ public class DiscussVO {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	public String getDiscuss_content() {
-		return discuss_content;
+	
+	public String getDiscuss_content_user_mail_user_username() {
+		return discuss_content_user_mail_user_username;
 	}
-	public void setDiscuss_content(String discuss_content) {
-		this.discuss_content = discuss_content;
-	}
-	public String getUser_mail() {
-		return user_mail;
-	}
-	public void setUser_mail(String user_mail) {
-		this.user_mail = user_mail;
-	}
-	public String getUser_username() {
-		return user_username;
-	}
-	public void setUser_username(String user_username) {
-		this.user_username = user_username;
+	public void setDiscuss_content_user_mail_user_username(String discuss_content_user_mail_user_username) {
+		this.discuss_content_user_mail_user_username = discuss_content_user_mail_user_username;
 	}
 	public List<AdmindiscussDTO> getAdmindiscussDTOList() {
 		return admindiscussDTOList;
@@ -65,8 +53,8 @@ public class DiscussVO {
 	@Override
 	public String toString() {
 		return "DiscussVO [currPage=" + currPage + ", totalPage=" + totalPage + ", totalCount=" + totalCount
-				+ ", pageSize=" + pageSize + ", discuss_content=" + discuss_content + ", user_mail=" + user_mail
-				+ ", user_username=" + user_username + ", admindiscussDTOList=" + admindiscussDTOList + "]";
+				+ ", pageSize=" + pageSize + ", discuss_content_user_mail_user_username="
+				+ discuss_content_user_mail_user_username + ", admindiscussDTOList=" + admindiscussDTOList + "]";
 	}
 	
 }
