@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -8,25 +8,25 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
-		<link rel="stylesheet" href="<%=basePath%>css/lyq/ywxg_comments.css" />
-		<link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
-	</head>
-	<body>
-		<div class="wlmtxt_main">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
+<link rel="stylesheet" href="<%=basePath%>css/lyq/ywxg_comments.css" />
+<link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
+</head>
+<body>
+	<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
-			<div class="wlmtxt_container">
-				<jsp:include page="/personal_center_nav.jsp" flush="true"></jsp:include>
-				<div id="llls_main" class="main_container">
-					<!--浏览历史头部-->
-					<jsp:include page="/personal_center_relation_nav.jsp" flush="true"></jsp:include>
-					<!--主体部分-->
-					<div class="llls_content list_container">
-						<ul id="relation_comments_list_container " >
-							<%-- <li class="list_video_item ">
+		<div class="wlmtxt_container">
+			<jsp:include page="/personal_center_nav.jsp" flush="true"></jsp:include>
+			<div id="llls_main" class="main_container">
+				<!--浏览历史头部-->
+				<jsp:include page="/personal_center_relation_nav.jsp" flush="true"></jsp:include>
+				<!--主体部分-->
+				<div class="llls_content list_container">
+					<ul id="my_relation_comments_container">
+						<%-- <li class="list_video_item ">
 								<!--视频链接-->
 								<a class="video_list_item_wrap ">
 									<div class="video_cover ">
@@ -58,11 +58,11 @@
 									<a class="video_delete_btn ">删除评论</a>
 								</div>
 							</li> --%>
-						</ul>
+					</ul>
 
-					</div>
-					<!-----翻页----------------------->
-					<!-- <div class="page_container ">
+				</div>
+				<!-----翻页----------------------->
+				<!-- <div class="page_container ">
 						<div class="page_component_container ">
 							<div class="page_component ">
 								<a class="page_prev " href="# ">上一页</a>
@@ -80,22 +80,23 @@
 							</div>
 						</div>
 					</div> -->
-				</div>
-
 			</div>
-			<jsp:include page="/foot.jsp" flush="true"></jsp:include>
+
 		</div>
-		<div class="my_comments">我评论的</div>
-		<script type="text/javascript">
-			var clearfix_a=$(".clearfix a");
-			$.each(clearfix_a,function(i){
-				var clearfix_a_html=$(clearfix_a[i]).html();
-				if($(".my_comments").html()==clearfix_a_html){
-					$(this).addClass("selected");
-				}
-			})
-		</script>
-		<script type="text/javascript" src="<%=basePath%>js/personal_center/personal_center_relation_comments.js"></script>
-	</body>
+		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
+	</div>
+	<div class="my_comments">我评论的</div>
+	<script type="text/javascript">
+		var clearfix_a = $(".clearfix a");
+		$.each(clearfix_a, function(i) {
+			var clearfix_a_html = $(clearfix_a[i]).html();
+			if ($(".my_comments").html() == clearfix_a_html) {
+				$(this).addClass("selected");
+			}
+		})
+	</script>
+	<script type="text/javascript"
+		src="<%=basePath%>js/personal_center/personal_center_relation_comments.js"></script>
+</body>
 
 </html>
