@@ -1,4 +1,21 @@
 var discuss_id, video_id;
+getWorksDetailVO();
+collaborativeFilteringBySlopeOne();
+function collaborativeFilteringBySlopeOne() {
+	video_id = $.trim($("#video_id").html());
+	console.log("video_id:" + video_id);
+	var formData = new FormData();
+	formData.append("accept_works.works_id", video_id);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "/wlmtxt/Works/Works_collaborativeFilteringBySlopeOne");
+	xhr.send(formData);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var worksDTOList = JSON.parse(xhr.sponseText);
+
+		}
+	}
+}
 function getWorksDetailVO() {
 	/* checkLogin(); */
 	// 视频id
@@ -190,7 +207,7 @@ function getWorksDetailVO() {
 	}
 
 }
-getWorksDetailVO();
+
 // 评论
 function video_comment_btn_click() {
 	var video_id = $("#video_id").html();
