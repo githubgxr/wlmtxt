@@ -1,4 +1,74 @@
 var discuss_id, video_id;
+getWorksDetailVO();
+collaborativeFilteringBySlopeOne();
+function collaborativeFilteringBySlopeOne() {
+	video_id = $.trim($("#video_id").html());
+	console.log("video_id:" + video_id);
+	var formData = new FormData();
+	formData.append("accept_works.works_id", video_id);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "/wlmtxt/Works/Works_collaborativeFilteringBySlopeOne");
+	xhr.send(formData);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var worksDTOList = JSON.parse(xhr.responseText);
+			/*
+			 * 清空原表数据
+			 */
+			var XGTJ = document.getElementsByClassName("XGTJ");
+			var long = XGTJ.length;
+
+			for (var num = 0; num < long; num++) {
+				XGTJ[0].parentNode.removeChild(XGTJ[0]);
+			}
+			/*
+			 * 
+			 */
+			for (var i = 0; i < worksDTOList.length; i++) {
+				var collaborativeFiltering = '<li class="XGTJ index_list_video_item" style="width: 160px; height: 200px; margin: 0 12px 10px 12px;">'
+						+ '<!--视频链接--> <a class="video_list_item_wrap" style="width: 160px; height: 160px;"><div class="video_cover">'
+						+ '<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName='
+						+ worksDTOList[i].works.works_cover
+						+ '" style="width: 160px; height: 100px;">'
+						+ ((worksDTOList[i].secondMenu == null) ? ''
+								: ('<div class="category_name">'
+										+ worksDTOList[i].secondMenu.second_menu_name + '</div>'))
+						+ '<div class="video_overplay" style="width: 160px; height: 100px;"></div>'
+						+ '<div class="video_play" style="width: 30px; height: 30px; margin: -20px 0 0 -20px;" onclick="window.location=\'/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='
+						+ worksDTOList[i].works.works_id
+						+ '\'"></div>'
+						+ '</div> <!--视频信息-->'
+						+ '<div class="video_info" style="width: 160px; height: 40px; margin: 5px 0;">'
+						+ '<!--标题-->'
+						+ '<div class="video_title" style="font-size: 12px; margin-left: 5px; width: 160px;">'
+						+ worksDTOList[i].works.works_title
+						+ '</div>'
+						+ '<!--用户名-->'
+						+ '<div class="video_username" style="width: 90px; margin-top: -5px;">'
+						+ worksDTOList[i].user.user_username
+						+ '</div>'
+						+ '<!--发布时间-->'
+						+ '<div class="video_time" style="width: 70px; margin-top: -5px; float: right;">'
+						+ worksDTOList[i].works.works_gmt_create.substr(0, 10)
+						+ '</div>'
+						+ '</div></a> <!--视频分类-->'
+						+ '<div class="video_label" style="width: 160px; padding: 0;">'
+						+ '<div class="video_label_content" style="width: 160px; padding: 0;">'
+				for (var num = 0; num < worksDTOList[i].keyWordDTOList.length; num++) {
+					collaborativeFiltering = collaborativeFiltering
+							+ '<a class="video_label_item">'
+							+ worksDTOList[i].keyWordDTOList[num].keyword.keyword_name
+							+ '</a>';
+				}
+
+				collaborativeFiltering = collaborativeFiltering + '</div>'
+						+ '</div>' + '</li>';
+
+				$("#XGTJ_Con").append(collaborativeFiltering);
+			}
+		}
+	}
+}
 function getWorksDetailVO() {
 	/* checkLogin(); */
 	// 视频id
@@ -190,7 +260,7 @@ function getWorksDetailVO() {
 	}
 
 }
-getWorksDetailVO();
+
 // 评论
 function video_comment_btn_click() {
 	var video_id = $("#video_id").html();

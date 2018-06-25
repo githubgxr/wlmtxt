@@ -282,6 +282,19 @@ public class AdminAction extends ActionSupport {
 	 	 Gson gson = gsonBuilder.create();
 	 	 pw.write(gson.toJson(admin));
 	}
+	/*
+	 * 修改密码
+	 */
+	public  void updatePassword() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		if(adminService.updatePassword(admin)){
+			pw.write("1");
+		}else{
+			pw.write("2");
+		}
+	}
 	/**
 	 * 跳转登录成功页
 	 * @return
@@ -292,6 +305,7 @@ public class AdminAction extends ActionSupport {
 	}
 	
 	public String logout() {
+		ActionContext.getContext().getSession().remove("adminLoginResult");
 		return "logout";
 	}
 	/**
@@ -353,5 +367,10 @@ public class AdminAction extends ActionSupport {
 	public String list_admin(){
 		return "list_admin";
 	}
-	
+	/*
+	 * 跳转修改密码
+	 */
+	public String update_password_page(){
+		return "update_password_page";
+	}
 }

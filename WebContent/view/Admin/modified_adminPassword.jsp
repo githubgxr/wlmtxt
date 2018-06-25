@@ -55,28 +55,42 @@
 		</div>
 		<div class="content">
 			<!-- <input type="text" class="userName" id="account" />  -->
-			<input type="password" id="password" class="passWord" />
+			<input type="password"  id="old_password" class="passWord" placeholder="填写原密码"style="outline:none;"/>
+			<div style="margin:0 0 20px; 0"></div>
+			<input type="password" id="new_password" class="passWord" placeholder="填写新密码"/>
+			<div style="margin:0 0 20px; 0"></div>
+			<input type="password" id="confirm_password" class="passWord" placeholder="确认密码"/>
 			<div class="clear"></div>
-			<div id="login" class="logo-button">确认修改</div>
+			<div id="login" class="logo-button" >确认修改</div>
 		</div>
 	</div>
 	<script>
 		var btn = document.querySelector(".logo-button");
 		btn.onclick = check;
+		var session_password ="${adminLoginResult.admin_password}";
+		var session_id = "${adminLoginResult.admin_id}"
 		function check() {
 			btn.style.background = " #0284c4";
 			/* var userName = document.querySelector(".userName").value; */
 			var passWord = document.querySelector(".passWord").value;
-			if (userName.trim() == "" || passWord.trim() == "") {
+			var confirm_password = document.getElementById("confirm_password").value;
+			var new_password = document.getElementById("new_password").value;
+			if (passWord.trim() == "") {
 				toastr.warning("用户名密码不能为空!");
 			} else if (passWord.length > 20) {
 				toastr.warning("密码不能超过20位!");
+			}else if(confirm_password!=new_password){
+				toastr.warning("两次输入密码不一致!");
+			}else{
+				deleteUser(session_id,session_password)
 			}
 		}
+			
+		
 	</script>
 
 
 </body>
 <script type="text/javascript"
-	src="<%=basePath%>/js/Admin/admin_login.js"></script>
+	src="<%=basePath%>/js/Admin/updateAdminPassword.js"></script>
 </html>

@@ -50,27 +50,6 @@ function get_ListBreakecaseInformationByPageAndSearch(query_data) {
 						$('.btn-xs').click(modifi_delete);
 						// -----------------------------------------------------
 
-						// 分页信息存入page_infomantion中
-						page_infomantion.currPage = xhr.currPage; // 当前页数
-						page_infomantion.countRecords = xhr.totalPage; // 总页数
-						page_infomantion.pageSize = xhr.pageSize; // 每页记录数
-						page_infomantion.totalPages = xhr.totalCount; // 总记录数
-						page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
-						page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
-
-						// 分页下的记录信息
-						var opt = '<option value=""></option>';
-						for (var index = 1; index <= xhr.totalPage; index++) {
-							opt += '<option>' + index + '</option>';
-						}
-						$('.carousel').html(
-								'共 ' + xhr.totalCount + '条信息 当前' + xhr.currPage
-										+ '/' + xhr.totalPage + '页 '
-										+ xhr.pageSize + '条信息/页&nbsp&nbsp转到第'
-										+ '<select onchange="toPage(this)">'
-										+ opt + '</select> 页');
-						// 影藏模态框
-						// $('#newQuery').modal('hide')
 					}, 'json')
 }
 
@@ -154,27 +133,6 @@ function searchtitle() {
 						$('.btn-xs').click(modifi_delete);
 						// -----------------------------------------------------
 
-						// 分页信息存入page_infomantion中
-						page_infomantion.currPage = xhr.currPage; // 当前页数
-						page_infomantion.countRecords = xhr.totalPage; // 总页数
-						page_infomantion.pageSize = xhr.pageSize; // 每页记录数
-						page_infomantion.totalPages = xhr.totalCount; // 总记录数
-						page_infomantion.havePrePage = xhr.havePrePage; // 是否有上一页
-						page_infomantion.haveNexPage = xhr.haveNexPage; // 是否有下一页
-
-						// 分页下的记录信息
-						var opt = '<option value=""></option>';
-						for (var index = 1; index <= xhr.totalPage; index++) {
-							opt += '<option>' + index + '</option>';
-						}
-						$('.carousel').html(
-								'共 ' + xhr.totalCount + '条信息 当前' + xhr.currPage
-										+ '/' + xhr.totalPage + '页 '
-										+ xhr.pageSize + '条信息/页&nbsp&nbsp转到第'
-										+ '<select onchange="toPage(this)">'
-										+ opt + '</select> 页');
-						// 影藏模态框
-						// $('#newQuery').modal('hide')
 					}, 'json')
 }
 
@@ -228,7 +186,7 @@ var modifi_delete = function() {
 	}
 }
 function dis_bnt(id) {
-	
+
 	var formData = new FormData();
 	formData.append('wlmtxt_work.works_id', id);
 	$.ajax({

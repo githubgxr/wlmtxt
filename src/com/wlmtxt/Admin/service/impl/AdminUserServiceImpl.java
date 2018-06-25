@@ -48,10 +48,10 @@ public boolean deleteUser(String userIDAll) {
 
 @Override
 public void getUserListBysearchPage(UserVO userVO) {
-	int count = adminUserDao.getCountUserList(userVO);
-	userVO.setTotalCount(count);
-	userVO.setPageSize(10);
-	userVO.setTotalPage((int) Math.ceil((double) count / userVO.getPageSize()));
+	//int count = adminUserDao.getCountUserList(userVO);
+	//userVO.setTotalCount(count);
+	//userVO.setPageSize(10);
+	//userVO.setTotalPage((int) Math.ceil((double) count / userVO.getPageSize()));
 	adminUserDao.getUserListByPage(userVO);
 }
 
@@ -62,10 +62,10 @@ public wlmtxt_user getUserById(String user_id) {
 
 @Override
 public void getdiscussListBysearchPage(DiscussVO discussVO) {
-	int count = adminUserDao.getCountdiscussList(discussVO);
-	discussVO.setTotalCount(count);
-	discussVO.setPageSize(10);
-	discussVO.setTotalPage((int) Math.ceil((double) count / discussVO.getPageSize()));
+	//int count = adminUserDao.getCountdiscussList(discussVO);
+	//discussVO.setTotalCount(count);
+	//discussVO.setPageSize(10);
+	//discussVO.setTotalPage((int) Math.ceil((double) count / discussVO.getPageSize()));
 	adminUserDao.getdiscussListByPage(discussVO);
 	
 }

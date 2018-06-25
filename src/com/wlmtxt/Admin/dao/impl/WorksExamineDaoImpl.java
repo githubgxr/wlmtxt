@@ -56,9 +56,9 @@ public void getworksListThreeByPage(WorksVO worksVO) {
 		hql = hql + " and works_title like'%" + worksVO.getWorks_title() + "%'";
 	hql = hql + " order by works_gmt_modified desc";
 	Query query = session.createQuery(hql);	
-	query.setFirstResult(
-			(worksVO.getCurrPage() - 1) * worksVO.getPageSize());
-	query.setMaxResults(worksVO.getPageSize());
+//	query.setFirstResult(
+//			(worksVO.getCurrPage() - 1) * worksVO.getPageSize());
+//	query.setMaxResults(worksVO.getPageSize());
 	workList = query.list();
 	worksVO.setWlmtxt_worksList(workList);
 	System.out.println(hql);

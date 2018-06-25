@@ -27,7 +27,7 @@ public class MyTest {
 
 	@Test
 	public void sda222222() {
-		worksService.listMyDiscussWorkList("e9660cab-759b-4d84-a1f0-241c265b3e88");
+		worksService.collaborativeFilteringBySlopeOne("5d068897-531b-44f5-b67d-9d2f2c8cf96a", "dfasdfasgfgdsdgdfgdff");
 
 	}
 

@@ -39,9 +39,9 @@ public void setWorksService(WorksService worksService) {
 public void getworksListThreeByPage(WorksVO worksVO) {
 	
 	int count = worksExamineDao.getCountworksListThree(worksVO);
-	worksVO.setTotalCount(count);
-	worksVO.setPageSize(10);
-	worksVO.setTotalPage((int) Math.ceil((double) count / worksVO.getPageSize()));
+	//worksVO.setTotalCount(count);
+	//worksVO.setPageSize(10);
+	//worksVO.setTotalPage((int) Math.ceil((double) count / worksVO.getPageSize()));
 	worksExamineDao.getworksListThreeByPage(worksVO);
 }
 
@@ -61,22 +61,24 @@ public boolean delete(String works_id) {
 
 @Override
 public boolean passed(String works_id, String passed) {
+	boolean flag=false;;
 	wlmtxt_works wlmtxt_work = worksExamineDao.getWorksById(works_id);
 	String time = TeamUtil.getStringSecond();
 	wlmtxt_work.setWorks_gmt_modified(time);
 	if(passed.equals("1")){
-		System.out.println("11111111"+passed);
 		wlmtxt_work.setWorks_passed("1");
+		flag = worksExamineDao.passed(wlmtxt_work);
+		worksService.addNotification(wlmtxt_work.getWorks_user_id(), "1",
+				"审核通过作品" + wlmtxt_work.getWorks_name(), wlmtxt_work.getWorks_id());
+		return flag;
 	}else{
-		System.out.println("2222222222"+passed);
-		
 		wlmtxt_work.setWorks_passed("2");
+		flag = worksExamineDao.passed(wlmtxt_work);
+		worksService.addNotification(wlmtxt_work.getWorks_user_id(), "1",
+				"审核不通过作品" + wlmtxt_work.getWorks_name(), wlmtxt_work.getWorks_id());
+		return flag;
 	}
-	if(worksExamineDao.passed(wlmtxt_work)){
-		return true;
-	}else{
-		return false;
-	}
+	
 }
 
 @Override
@@ -123,13 +125,53 @@ public boolean deleteRecommend(String recommendIdAll) {
 		worksExamineDao.deleteAdmin(recommend_id);
 		List<wlmtxt_recommend> recommendList = worksExamineDao.listrecommend();
 		if(recommendList!=null){
-		for(wlmtxt_recommend recommend:recommendList){
-			
-				 int sort = Integer.parseInt(recommend.getRecommend_sort())-1;
-				 String str =""+sort;
-				recommend.setRecommend_sort(str);
-			
-		}
+			if(recommendList.size()==1){
+				System.out.println("aaaaa+级");
+				for(wlmtxt_recommend recommend:recommendList){
+					if(recommend.getRecommend_sort().equals("2")){
+						System.out.println("bb22");
+						int sort = Integer.parseInt(recommend.getRecommend_sort())-1;
+						 String str =""+sort;
+						 recommend.setRecommend_sort(str);
+						 String time = TeamUtil.getStringSecond();
+						 recommend.setRecommend_gmt_modified(time);
+						 worksExamineDao.updateRecommend(recommend);
+					}else if(recommend.getRecommend_sort().equals("1")){
+						System.out.println("cc+11");
+						int sort = Integer.parseInt(recommend.getRecommend_sort());
+						 String str =""+sort;
+						 recommend.setRecommend_sort(str);
+						 String time = TeamUtil.getStringSecond();
+						 recommend.setRecommend_gmt_modified(time);
+						 worksExamineDao.updateRecommend(recommend);
+					}
+			}	
+			}
+			else if(recommendList.size()==2){
+				int count =0;
+				for(wlmtxt_recommend recommend:recommendList){
+					if(recommend.getRecommend_sort().equals("1")){
+						 count =1;
+					}
+					if(count==1){
+						if(recommend.getRecommend_sort().equals("3")){
+							int sort = Integer.parseInt(recommend.getRecommend_sort())-1;
+							 String str =""+sort;
+							 recommend.setRecommend_sort(str);
+							 String time = TeamUtil.getStringSecond();
+							 recommend.setRecommend_gmt_modified(time);
+							 worksExamineDao.updateRecommend(recommend);
+						}
+					}else if(count==0){
+						int sort = Integer.parseInt(recommend.getRecommend_sort())-1;
+						 String str =""+sort;
+						 recommend.setRecommend_sort(str);
+						 String time = TeamUtil.getStringSecond();
+						 recommend.setRecommend_gmt_modified(time);
+						 worksExamineDao.updateRecommend(recommend);
+					}
+				}
+			}
 		}
 	}
 	return true;

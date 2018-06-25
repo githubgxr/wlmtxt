@@ -97,8 +97,10 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<wlmtxt_second_menu> listCategoryByFather(String first_menu_id) {
 		Session session = getSession();
+
 		String hql = "from wlmtxt_second_menu where second_menu_first_menu_id='" + first_menu_id
 				+ "' order by second_menu_gmt_modified desc";
+
 		Query query = session.createQuery(hql);
 		List<wlmtxt_second_menu> secondMenuList = query.list();
 		return secondMenuList;
@@ -124,11 +126,13 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<wlmtxt_second_menu> getSecond_menuByFirstId(String first_menu_id) {
 		Session session = getSession();
+
 		String hql = "from wlmtxt_second_menu where second_menu_first_menu_id='" + first_menu_id
 				+ "' order by second_menu_gmt_modified desc";
 		Query query = session.createQuery(hql);
 		List<wlmtxt_second_menu> second_menuList = query.list();
 		return second_menuList;
+
 	}
 
 	@Override
@@ -240,9 +244,12 @@ public class AdminDaoImpl implements AdminDao {
 		if (adminVO.getAdmin_username() != null && adminVO.getAdmin_username().trim().length() > 0)
 			hql = hql + " and admin_username like '%" + adminVO.getAdmin_username() + "%'";
 		hql = hql + " order by admin_gmt_modified desc";
-		Query query = session.createQuery(hql);
-		query.setFirstResult((adminVO.getCurrPage() - 1) * adminVO.getPageSize());
-		query.setMaxResults(adminVO.getPageSize());
+
+		Query query = session.createQuery(hql);	
+//		query.setFirstResult(
+//				(adminVO.getCurrPage() - 1) * adminVO.getPageSize());
+//		query.setMaxResults(adminVO.getPageSize());
+
 		adminList = query.list();
 		adminVO.setWlmtxt_adminList(adminList);
 		session.clear();
@@ -258,4 +265,15 @@ public class AdminDaoImpl implements AdminDao {
 		session.clear();
 	}
 
+	@Override
+	public boolean updatePassword(wlmtxt_admin admin) {
+		try {
+			Session session = getSession();
+			session.update(admin);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
