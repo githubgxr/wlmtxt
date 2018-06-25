@@ -76,7 +76,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public wlmtxt_user mailRegisted(wlmtxt_user accpet_user) {
 		String hql = "from wlmtxt_user where user_mail='" + accpet_user.getUser_mail() + "'";
-		Query query = getSession().createQuery(hql);	
+		Query query = getSession().createQuery(hql);
 		wlmtxt_user user = (wlmtxt_user) query.uniqueResult();
 		return user;
 	}
@@ -109,7 +109,7 @@ public class UserDaoImpl implements UserDao {
 		} catch (Exception e) {
 			return "2";
 		}
-		
+
 	}
 
 	/**
@@ -119,7 +119,8 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public List<wlmtxt_works> listMyWorks(String user_id) {
-		String hql = "from wlmtxt_works where works_user_id='"+user_id+"' and works_passed='1' and works_deleted='2'";
+		String hql = "from wlmtxt_works where works_user_id='" + user_id
+				+ "' and works_passed='1' and works_deleted='2'";
 		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> listWorks = query.list();
 		return listWorks;
@@ -130,15 +131,17 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public List<wlmtxt_works_keyword> listMyKeyword(List<wlmtxt_works> listWorks) {
-//		String hql = "from wlmtxt_works_keyword where works_keyword_works_id='"++"' and works_passed='1' and works_deleted='2'";
-//		Query query = getSession().createQuery(hql);
-//		List<wlmtxt_works_keyword> listWorksKeyword = query.list();
+		// String hql = "from wlmtxt_works_keyword where
+		// works_keyword_works_id='"++"' and works_passed='1' and
+		// works_deleted='2'";
+		// Query query = getSession().createQuery(hql);
+		// List<wlmtxt_works_keyword> listWorksKeyword = query.list();
 		return null;
 	}
 
 	@Override
 	public wlmtxt_second_menu findSecondMenu_single_works_id(wlmtxt_works works) {
-		String hql = "from wlmtxt_second_menu where second_menu_id='"+works.getWorks_second_menu_id()+"'";
+		String hql = "from wlmtxt_second_menu where second_menu_id='" + works.getWorks_second_menu_id() + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_second_menu secondMenu_by_single_id = (wlmtxt_second_menu) query.uniqueResult();
 		return secondMenu_by_single_id;
@@ -150,12 +153,22 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	@Override
+	public wlmtxt_follow getFollowBy_A_Follow_B(String userID, String user_id) {
+		String hql = "from wlmtxt_follow where follow_passive_user_id = '" + user_id + "' and follow_active_user_id='"
+				+ userID + "'";
+		Query query = getSession().createQuery(hql);
+		wlmtxt_follow follow = (wlmtxt_follow) query.uniqueResult();
+		return follow;
+	}
+
 	/**
 	 * 查询关注用户
 	 */
 	@Override
 	public wlmtxt_follow findFollowBy_user_id(String active_user_id, String passive_user_id) {
-		String hql = "from wlmtxt_follow where follow_passive_user_id = '" + passive_user_id + "' and follow_active_user_id='" + active_user_id + "'";
+		String hql = "from wlmtxt_follow where follow_passive_user_id = '" + passive_user_id
+				+ "' and follow_active_user_id='" + active_user_id + "'";
 		Query query = getSession().createQuery(hql);
 		wlmtxt_follow follow = (wlmtxt_follow) query.uniqueResult();
 		return follow;
@@ -163,26 +176,27 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int deleteAllMyFollow(wlmtxt_user loginUser) throws Exception {
-		String hql = "delete from wlmtxt_follow  where follow_active_user_id='"+loginUser.getUser_id()+"'";
+		String hql = "delete from wlmtxt_follow  where follow_active_user_id='" + loginUser.getUser_id() + "'";
 		Query query = getSession().createQuery(hql);
 		return query.executeUpdate();
 	}
 
 	@Override
-	public List<wlmtxt_follow> listFollowByLogin_user_id(String user_id) {
-		String hql = "from wlmtxt_follow where follow_passive_user_id='"+user_id+"'";
+	public List<wlmtxt_follow> listFollowByPassiveID(String user_id) {
+		String hql = "from wlmtxt_follow where follow_passive_user_id='" + user_id + "'";
 		Query query = getSession().createQuery(hql);
 		return query.list();
 	}
 
 	@Override
-	public void noticeFans(wlmtxt_follow follow)  throws Exception{
+	public void noticeFans(wlmtxt_follow follow) throws Exception {
 		getSession().save(follow);
 	}
 
 	@Override
 	public String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user) {
-		String hql = "delete from wlmtxt_follow where follow_active_user_id='"+ loginUser.getUser_id() +"' and follow_passive_user_id='"+accpet_user.getUser_id()+"'";
+		String hql = "delete from wlmtxt_follow where follow_active_user_id='" + loginUser.getUser_id()
+				+ "' and follow_passive_user_id='" + accpet_user.getUser_id() + "'";
 		Query query = getSession().createQuery(hql);
 		if (query.executeUpdate() == 1) {
 			return "1";
@@ -192,26 +206,27 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public wlmtxt_user myFansByFollow_passive_user_id(String user_id) {
-		String hql = "from wlmtxt_user where user_id='"+user_id+"'";
+	public wlmtxt_user getUserByUserID(String user_id) {
+		String hql = "from wlmtxt_user where user_id='" + user_id + "'";
 		Query query = getSession().createQuery(hql);
 		return (wlmtxt_user) query.uniqueResult();
 	}
 
-	
-//	public void remov
-	
+	// public void remov
+
 	/**
 	 * 通过单个作品id得到对应的作品关键词记录list
+	 * 
 	 * @param works_keyword
 	 * @return
 	 */
-	/*@Override
-	public List<wlmtxt_works_keyword> listWorksKeyword_by_works_id(wlmtxt_works works) {
-		String hql = "from wlmtxt_works_keyword where works_keyword_works_id='"+works.getWorks_id()+"'";
-		Query query = getSession().createQuery(hql);
-		List<wlmtxt_works_keyword> listWorksKeyword_by_single_id = query.list();
-		return listWorksKeyword_by_single_id;
-	}*/
+	/*
+	 * @Override public List<wlmtxt_works_keyword>
+	 * listWorksKeyword_by_works_id(wlmtxt_works works) { String hql =
+	 * "from wlmtxt_works_keyword where works_keyword_works_id='"
+	 * +works.getWorks_id()+"'"; Query query = getSession().createQuery(hql);
+	 * List<wlmtxt_works_keyword> listWorksKeyword_by_single_id = query.list();
+	 * return listWorksKeyword_by_single_id; }
+	 */
 
 }

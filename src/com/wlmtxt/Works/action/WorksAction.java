@@ -30,6 +30,7 @@ import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.DiscussWorkDTO;
+import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
@@ -836,9 +837,9 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * @throws IOException
 	 */
-	public void listMyAttentionVO() throws IOException {
+	public void listMyAttentionDTO() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		myAttentionVO = worksService.listMyAttentionVO(user.getUser_id(), myAttentionVO);
+		List<FollowDTO> followDTOList = worksService.listMyAttentionDTO(user.getUser_id());
 		System.out.println(myAttentionVO.toString());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据

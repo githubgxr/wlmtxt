@@ -673,7 +673,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public List<wlmtxt_follow> listMyWorksByUserId(String user_id) {
+	public List<wlmtxt_follow> listFollowByActiveID(String user_id) {
 		String hql = " from wlmtxt_follow  where follow_active_user_id='" + user_id
 				+ "' order by follow_gmt_create desc";
 		Query query = getSession().createQuery(hql);

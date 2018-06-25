@@ -105,7 +105,7 @@ public interface WorksDao {
 
 	int getCollectNum(String works_id);
 
-	List<wlmtxt_follow> listMyWorksByUserId(String user_id);
+	List<wlmtxt_follow> listFollowByActiveID(String user_id);
 
 	int getMyAttentionTotalRecords(String user_id);
 
