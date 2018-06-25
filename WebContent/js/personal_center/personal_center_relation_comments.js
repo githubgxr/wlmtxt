@@ -8,6 +8,7 @@ $(function() {
 	xhr.open("POST", "/wlmtxt/Works/Works_listMyDiscussWorkList");
 	xhr.send(null);
 	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
 		var relation_comments_response = JSON.parse(xhr.responseText);
 		for (var i = 0; i < relation_comments_response.length; i++) {
 			var relation_comments_str = '<li class="list_video_item">';
@@ -60,6 +61,6 @@ $(function() {
 			relation_comments_str += '</li>';
 			$("#relation_comments_list_container")
 					.append(relation_comments_str);
-		}
+		}}
 	}
 })
