@@ -30,12 +30,17 @@ function listMyFansByPage(pageIndex){
 				myFans+='</div>';
 				myFans+='<div class="user_info">';
 				myFans+='<div  id="'+list_myFans[i].user.user_id+'" onclick="to_other_data(this.id)" class="user_name">'+list_myFans[i].user.user_username+'</div>';
-				myFans+='<div class="user_operateing focus_other" id="'+list_myFans[i].user.user_id+'">+ 关注</div>';
+			console.log(i+":list_myFans[i].mutualFollow:"+list_myFans[i].mutualFollow);
+				if(list_myFans[i].mutualFollow=="1"){
+					myFans+='<div class="user_operateing focus_other" id="'+list_myFans[i].user.user_id+'">+ 关注</div>';
+			}else{
+				myFans+='<div class="not_focus focus_other" id="'+list_myFans[i].user.user_id+'">已关注</div>';
+			}
+				/*myFans+='<div class="user_operateing focus_other" id="'+list_myFans[i].user.user_id+'">+ 关注</div>';*/
 				myFans+='<div class="user_grjj">'+list_myFans[i].user.user_bio+'</div>';
 				myFans+='</div>';
 				myFans+='</li>';
 				$(".user_list_ul").append(myFans);
-				checkFocus(list_myFans[i].user.user_id);
 			}
 		}
 	}
@@ -77,30 +82,6 @@ function withFocusAll(){
 			}else{
 				toastr.error("全部关注失败！");
 				return false;
-			}
-		}
-	}
-}
-//查看是否关注
-function checkFocus(focus_user_id) {
-	var formData_check_focus = new FormData();
-	formData_check_focus.append("accept_user.user_id", focus_user_id);
-	var focus_xhr = new XMLHttpRequest();
-	focus_xhr.open("POST", "/wlmtxt/User/User_isFollowedUser");
-	focus_xhr.send(formData_check_focus);
-	focus_xhr.onreadystatechange = function() {
-		if (focus_xhr.readyState == 4 && focus_xhr.status == 200) {
-			if (focus_xhr.responseText == "1") {
-				console.log("已关注！");
-				$(".focus_other").html("已关注");
-				$(".focus_other").removeClass("user_operateing");
-				$(".focus_other").addClass("not_focus");
-			} else {
-				console.log("未关注！");
-				$(".focus_other").html("+ 关注");
-				$(".focus_other").click(function(){
-					withFocus(focus_user_id);
-				})
 			}
 		}
 	}
