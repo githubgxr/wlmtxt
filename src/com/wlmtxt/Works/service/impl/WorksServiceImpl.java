@@ -100,12 +100,52 @@ public class WorksServiceImpl implements WorksService {
 
 	@Override
 	public List<WorksDTO> collaborativeFilteringBySlopeOne(String userID) {
-		// TODO Auto-generated method stub
+		/*
+		 * 如果未登录，则无法进行推荐
+		 */
+		if (userID == null) {
+			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+			List<wlmtxt_works> worksTemporaryList = new ArrayList<wlmtxt_works>();
+			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
+			worksTemporaryList = worksDao.listWorksAll();
+			int n_n = (worksTemporaryList.size() >= 5 ? 5 : worksTemporaryList.size());
+			for (int n = 0; n < n_n; n++) {
+				int random = (int) (Math.random() * worksTemporaryList.size());
+				worksFinallyList.add(worksTemporaryList.get(random));
+				worksTemporaryList.remove(random);
+			}
+
+			for (wlmtxt_works works : worksFinallyList) {
+				WorksDTO worksDTO = new WorksDTO();
+				worksDTO = getWorksDTOByID(works.getWorks_id());
+				worksDTOList.add(worksDTO);
+			}
+			return worksDTOList;
+		}
+		// 取出用户信息和作品信息
+		wlmtxt_user curUser = userService.get_user_byID(userID);
+		List<wlmtxt_works> worksAll = worksDao.listWorksAll();
+		/*
+		 * 计算当前用户对所有作品的评分，保存为一个map的list
+		 */
+		Map<String, Integer> myPointMap = new HashMap<String, Integer>();
+		Integer point = 0;
+		for (wlmtxt_works works : worksAll) {
+			point = userPointWork(curUser.getUser_id(), works.getWorks_id());
+			myPointMap.put(works.getWorks_id(), point);
+		}
+
+		/*
+		 * 
+		 */
 		return null;
 	}
 
 	@Override
 	public List<WorksDTO> collaborativeFilteringByUser(String userID) {
+		/*
+		 * 如果未登录，则无法进行推荐
+		 */
 		if (userID == null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 			List<wlmtxt_works> worksTemporaryList = new ArrayList<wlmtxt_works>();

@@ -291,13 +291,11 @@ public class UserAction extends ActionSupport {
 			// 对象属性值为null替换为""
 			ReflectUtil.getAllField(accept_user);
 			pw.write(JsonUtils.toJson(accept_user));
-		} else if (user != null) {
+		} else {
 			user = userService.get_user_byID(user.getUser_id());
 			// 对象属性值为null替换为""
 			ReflectUtil.getAllField(user);
 			pw.write(JsonUtils.toJson(user));
-		} else {
-			pw.write("2");
 		}
 	}
 
