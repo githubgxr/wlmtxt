@@ -42,18 +42,15 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public void addPlayHistoryByFileName(wlmtxt_play_history history) {
-		Session session = getSession();
-		session.save(history);
+		getSession().save(history);
 	}
 
 	@Override
 	public wlmtxt_keyword getWordByID(String works_keyword_keyword_id) {
 		String hql = " from wlmtxt_keyword  where keyword_id='" + works_keyword_keyword_id
 				+ "' order by keyword_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_keyword> keywordList = query.list();
-		session.clear();
 
 		if (keywordList.size() == 0) {
 			return null;
@@ -69,10 +66,8 @@ public class WorksDaoImpl implements WorksDao {
 				+ " where ( works.works_deleted!='1' and works_keyword.works_keyword_id=keyword.keyword_id "
 				+ " and works_keyword.works_keyword_works_id=works_id " + " and keyword.keyword_name='" + keyword_name
 				+ "') " + " order by works.works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> workList = query.list();
-		session.clear();
 		return workList;
 	}
 
@@ -80,10 +75,8 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_works_keyword> listKeyWordByByWorksID(String worksID) {
 		String hql = " from wlmtxt_works_keyword  where works_keyword_works_id='" + worksID
 				+ "' order by works_keyword_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works_keyword> keywordList = query.list();
-		session.clear();
 		return keywordList;
 	}
 
@@ -91,20 +84,16 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID) {
 		String hql = " from wlmtxt_play_history  where play_history_user_id='" + userID
 				+ "' order by play_history_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_play_history> historyList = query.list();
-		session.clear();
 		return historyList;
 	}
 
 	@Override
 	public List<wlmtxt_user> userListAll() {
 		String hql = " from wlmtxt_user";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_user> list = query.list();
-		session.clear();
 		return list;
 	}
 
@@ -112,10 +101,8 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID) {
 		String hql = " from wlmtxt_play_history  where play_history_works_id='" + worksID
 				+ "' order by play_history_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_play_history> historyList = query.list();
-		session.clear();
 		return historyList;
 	}
 
@@ -123,37 +110,30 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_discuss> getDiscussListByFatherID(String works_id) {
 		String hql = " from wlmtxt_discuss  where discuss_father_discuss_id='" + works_id
 				+ "' order by discuss_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_discuss> discussList = query.list();
-		session.clear();
 		return discussList;
 	}
 
 	@Override
 	public wlmtxt_works getWorksByFileName(String fileName) {
 		String hql = "from wlmtxt_works where works_name = '" + fileName + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		wlmtxt_works works = (wlmtxt_works) query.uniqueResult();
-		session.clear();
 		return works;
 	}
 
 	@Override
 	public wlmtxt_works getWorksByID(String works_id) {
 		String hql = "from wlmtxt_works where works_id = '" + works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		wlmtxt_works works = (wlmtxt_works) query.uniqueResult();
-		session.clear();
 		return works;
 	}
 
 	@Override
 	public void saveLike(wlmtxt_like like) {
-		Session session = getSession();
-		session.save(like);
+		getSession().save(like);
 	}
 
 	@Override
@@ -161,8 +141,7 @@ public class WorksDaoImpl implements WorksDao {
 
 		String hql = "update from wlmtxt_works set works_deleted='1'  where works_id='" + works_id + "'";
 
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 
 		query.executeUpdate();
 
@@ -171,30 +150,24 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public wlmtxt_discuss getDiscussByID(String discuss_id) {
 		String hql = "from wlmtxt_discuss  where discuss_id ='" + discuss_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		wlmtxt_discuss discuss = (wlmtxt_discuss) query.uniqueResult();
-		session.clear();
 		return discuss;
 	}
 
 	@Override
 	public wlmtxt_first_menu getFirstMenuByID(String second_menu_first_menu_id) {
 		String hql = "from wlmtxt_first_menu  where first_menu_id ='" + second_menu_first_menu_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		wlmtxt_first_menu first_menu = (wlmtxt_first_menu) query.uniqueResult();
-		session.clear();
 		return first_menu;
 	}
 
 	@Override
 	public wlmtxt_second_menu getSecondMenuByID(String works_second_menu_id) {
 		String hql = "from wlmtxt_second_menu  where second_menu_id ='" + works_second_menu_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		wlmtxt_second_menu second_menu = (wlmtxt_second_menu) query.uniqueResult();
-		session.clear();
 		return second_menu;
 	}
 
@@ -202,40 +175,32 @@ public class WorksDaoImpl implements WorksDao {
 	public int countUserPlayWorks(String userID, String worksID) {
 		String hql = "select count(*) from wlmtxt_play_history  where play_history_user_id='" + userID
 				+ "' play_history_works_id='" + worksID + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
 	@Override
 	public int getLikeNum(String works_id) {
 		String hql = "select count(*) from wlmtxt_like  where like_works_id='" + works_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
 	@Override
 	public int getDiscussNum(String works_id) {
 		String hql = "select count(*) from wlmtxt_discuss  where discuss_father_discuss_id='" + works_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
 	@Override
 	public int getPlayNum(String works_id) {
 		String hql = "select count(*) from wlmtxt_play_history  where play_history_works_id='" + works_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
@@ -243,20 +208,16 @@ public class WorksDaoImpl implements WorksDao {
 	public int getPlayHistoryNumByFileName(String fileName) {
 		String hql = "select count(history) from wlmtxt_works works,wlmtxt_play_history history where works.works_name='"
 				+ fileName + "' and  history.play_history_works_id=works.works_id";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
 	@Override
 	public int getCollectNum(String works_id) {
 		String hql = "select count(*) from wlmtxt_collect  where collect_works_id='" + works_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
@@ -264,40 +225,32 @@ public class WorksDaoImpl implements WorksDao {
 	public int getMyWorksTotalRecords(String user_id) {
 		String hql = "select count(*) from wlmtxt_works works where works.works_deleted!='1' and works_user_id='"
 				+ user_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
 	@Override
 	public List<wlmtxt_collect> listMycollectList(String user_id) {
 		String hql = " from wlmtxt_collect  where collect_user_id='" + user_id + "'  order by collect_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_collect> collectList = query.list();
-		session.clear();
 		return collectList;
 	}
 
 	@Override
 	public List<wlmtxt_discuss> listDiscussByUserID(String user_id) {
 		String hql = " from wlmtxt_discuss  where discuss_user_id='" + user_id + "'  order by discuss_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_discuss> list = query.list();
-		session.clear();
 		return list;
 	}
 
 	@Override
 	public List<wlmtxt_like> listLikeByUserID(String user_id) {
 		String hql = " from wlmtxt_like  where like_user_id='" + user_id + "'  order by like_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_like> likeList = query.list();
-		session.clear();
 		return likeList;
 	}
 
@@ -305,22 +258,18 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_notification> listUserNotification(String user_id) {
 		String hql = " from wlmtxt_notification  where notification_user_id='" + user_id
 				+ "'  order by notification_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_notification> notificationList = query.list();
-		session.clear();
 		return notificationList;
 	}
 
 	@Override
 	public List<wlmtxt_works> getWorksByPage(int pageIndex, int pageSize) {
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and  works_passed='1' order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.setFirstResult((pageIndex - 1) * pageSize);
 		query.setMaxResults(pageSize);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
@@ -328,12 +277,10 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_works> getWorksBySecondMenuAndPage(int pageIndex, int pageSize, String SecondMenuID) {
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and  works_passed='1' and works.works_second_menu_id='"
 				+ SecondMenuID + "' order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.setFirstResult((pageIndex - 1) * pageSize);
 		query.setMaxResults(pageSize);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
@@ -341,12 +288,10 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_works> getWorksByFirstMenuAndPage(int pageIndex, int pageSize, String FirstMenuID) {
 		String hql = " from wlmtxt_works works,wlmtxt_second_menu second_menu where works.works_deleted!='1' and  works_passed='1' and works.works_second_menu_id=second_menu.second_menu_id and second_menu.second_menu_first_menu_id='"
 				+ FirstMenuID + "' order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.setFirstResult((pageIndex - 1) * pageSize);
 		query.setMaxResults(pageSize);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
@@ -354,10 +299,8 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id) {
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_second_menu_id='"
 				+ second_menu_id + "' and works_passed='1' order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
@@ -384,10 +327,8 @@ public class WorksDaoImpl implements WorksDao {
 		 */
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1' and works_gmt_create >= '"
 				+ start_time + "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
@@ -427,10 +368,8 @@ public class WorksDaoImpl implements WorksDao {
 		 */
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1' and works_gmt_create >= '"
 				+ start_time + "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
@@ -495,20 +434,16 @@ public class WorksDaoImpl implements WorksDao {
 
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1' and works_gmt_create >= '"
 				+ start_time + "' and works_gmt_create < '" + stop_time + "'  order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
 	@Override
 	public List<wlmtxt_works> listWorksAll() {
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1'  order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
@@ -516,10 +451,8 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_user> listAttentionUser(String user_id) {
 		String hql = "select user from wlmtxt_user user,wlmtxt_follow follow where follow.follow_active_user_id='"
 				+ user_id + "' and follow.follow_passive_user_id=user.user_id order by follow.follow_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_user> userList = query.list();
-		session.clear();
 		return userList;
 	}
 
@@ -527,61 +460,50 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO) {
 		String hql = " from wlmtxt_works works  where works.works_deleted!='1' and works_user_id='" + user_id
 				+ "' and works_passed='1' order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.setFirstResult((myWorksVO.getPageIndex() - 1) * myWorksVO.getPageSize());
 		query.setMaxResults(myWorksVO.getPageSize());
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
 	@Override
 	public List<wlmtxt_second_menu> listSecondMenuByFirstMenuID(String first_menu_id) {
 		String hql = " from wlmtxt_second_menu  where second_menu_first_menu_id='" + first_menu_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_second_menu> secondMenuList = query.list();
-		session.clear();
 		return secondMenuList;
 	}
 
 	@Override
 	public List<wlmtxt_second_menu> listSecondMenuByFather(String second_menu_first_menu_id) {
 		String hql = " from wlmtxt_second_menu  where second_menu_first_menu_id='" + second_menu_first_menu_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_second_menu> secondMenuList = query.list();
-		session.clear();
 		return secondMenuList;
 	}
 
 	@Override
 	public List<wlmtxt_second_menu> listSecondMenu() {
 		String hql = " from wlmtxt_second_menu  ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 
 		List<wlmtxt_second_menu> secondMenuList = query.list();
-		session.clear();
 		return secondMenuList;
 	}
 
 	@Override
 	public List<wlmtxt_first_menu> listFirstMenu() {
 		String hql = " from wlmtxt_first_menu  ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_first_menu> firstMenuList = query.list();
-		session.clear();
 		return firstMenuList;
 	}
 
 	@Override
 	public void deletePlayHistory(String play_history_id) {
 		String hql = "delete from wlmtxt_play_history  where play_history_id = '" + play_history_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.executeUpdate();
 
 	}
@@ -590,8 +512,7 @@ public class WorksDaoImpl implements WorksDao {
 	public void deleteDisscuss(String discuss_id) {
 		String hql = "delete from wlmtxt_discuss  where discuss_id = '" + discuss_id
 				+ "' OR discuss_father_discuss_id='" + discuss_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.executeUpdate();
 
 	}
@@ -599,8 +520,7 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public void deleteAllMyHistory(String userID) {
 		String hql = "delete from wlmtxt_play_history  where play_history_user_id = '" + userID + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.executeUpdate();
 
 	}
@@ -609,8 +529,7 @@ public class WorksDaoImpl implements WorksDao {
 	public void removeCollect(String collect_user_id, String collect_works_id) {
 		String hql = "delete from wlmtxt_collect  where collect_user_id = '" + collect_user_id
 				+ "' and collect_works_id='" + collect_works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.executeUpdate();
 	}
 
@@ -618,8 +537,7 @@ public class WorksDaoImpl implements WorksDao {
 	public void removeLike(String user_id, String like_works_id) {
 		String hql = "delete  from wlmtxt_like  where like_user_id = '" + user_id + "' and like_works_id='"
 				+ like_works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.executeUpdate();
 	}
 
@@ -627,10 +545,9 @@ public class WorksDaoImpl implements WorksDao {
 	public wlmtxt_collect findCollect(String collect_user_id, String collect_works_id) {
 		String hql = "from wlmtxt_collect where collect_user_id = '" + collect_user_id + "' and collect_works_id='"
 				+ collect_works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_collect> collect = query.list();
-		session.clear();
+
 		if (collect.size() == 0) {
 			return null;
 		} else {
@@ -642,10 +559,9 @@ public class WorksDaoImpl implements WorksDao {
 	public wlmtxt_like findLike(String like_user_id, String like_works_id) {
 		String hql = " from wlmtxt_like  where like_user_id = '" + like_user_id + "' and like_works_id='"
 				+ like_works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_like> like = query.list();
-		session.clear();
+
 		if (like.size() == 0) {
 			return null;
 		} else {
@@ -656,42 +572,36 @@ public class WorksDaoImpl implements WorksDao {
 
 	@Override
 	public void saveDiscuss(wlmtxt_discuss accpet_discuss) {
-		Session session = getSession();
-		session.save(accpet_discuss);
+		getSession().save(accpet_discuss);
 
 	}
 
 	@Override
 	public void addNotification(wlmtxt_notification notification) {
-		Session session = getSession();
-		session.save(notification);
+		getSession().save(notification);
 
 	}
 
 	@Override
 	public void saveWorks(wlmtxt_works accept_works) {
-		Session session = getSession();
-		session.save(accept_works);
+		getSession().save(accept_works);
 
 	}
 
 	@Override
 	public void saveKeyword(wlmtxt_keyword newkeywords) {
-		Session session = getSession();
-		session.save(newkeywords);
+		getSession().save(newkeywords);
 
 	}
 
 	@Override
 	public void saveWord(wlmtxt_works_keyword works_keyword) {
-		Session session = getSession();
-		session.save(works_keyword);
+		getSession().save(works_keyword);
 	}
 
 	@Override
 	public void saveCollect(wlmtxt_collect new_collect) {
-		Session session = getSession();
-		session.save(new_collect);
+		getSession().save(new_collect);
 	}
 
 	@Override
@@ -699,10 +609,8 @@ public class WorksDaoImpl implements WorksDao {
 			String download_history_user_id, String download_history_works_id) {
 		String hql = "from wlmtxt_download_history where download_history_user_id = '" + download_history_user_id
 				+ "' and download_history_works_id='" + download_history_works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		wlmtxt_download_history download_history = (wlmtxt_download_history) query.uniqueResult();
-		session.clear();
 		return download_history;
 	}
 
@@ -713,16 +621,15 @@ public class WorksDaoImpl implements WorksDao {
 	 * Exception { String hql =
 	 * "delete from wlmtxt_download_history where download_history_user_id = '"
 	 * +download_history_user_id+"' and download_history_works_id='"
-	 * +download_history_works_id+"'"; Query query = session.createQuery(hql);
-	 * int i = query.executeUpdate(); if (i > 0) {
-	 * System.out.println("删除下载历史成功"); } else { System.out.println("删除下载历史失败");
-	 * } }
+	 * +download_history_works_id+"'"; Query query =
+	 * getSession().createQuery(hql); int i = query.executeUpdate(); if (i > 0)
+	 * { System.out.println("删除下载历史成功"); } else {
+	 * System.out.println("删除下载历史失败"); } }
 	 */
 
 	@Override
 	public void saveDownloadHistory(wlmtxt_download_history new_download_history) {
-		Session session = getSession();
-		session.save(new_download_history);
+		getSession().save(new_download_history);
 	}
 
 	@Override
@@ -732,33 +639,27 @@ public class WorksDaoImpl implements WorksDao {
 	@Override
 	public int totalPlayNum(String works_id) {
 		String hql = "from wlmtxt_play_history where play_history_works_id = '" + works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_play_history> listPlayHistory = query.list();
 		int num = listPlayHistory.size();
-		session.clear();
 		return num;
 	}
 
 	@Override
 	public int countCollectNum(String works_id) {
 		String hql = "from wlmtxt_collect where collect_works_id = '" + works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_collect> listCollect = query.list();
 		int num = listCollect.size();
-		session.clear();
 		return num;
 	}
 
 	@Override
 	public int countLikeNum(String works_id) {
 		String hql = "from wlmtxt_like where like_works_id = '" + works_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_like> list = query.list();
 		int num = list.size();
-		session.clear();
 		return num;
 	}
 
@@ -766,10 +667,8 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_works> listWorksAllByUserId(String user_id) {
 		String hql = "from wlmtxt_works works where works.works_deleted!='1' and works_passed='1' and works_deleted='2' and works_user_id='"
 				+ user_id + "' order by works_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_works> worksList = query.list();
-		session.clear();
 		return worksList;
 	}
 
@@ -777,20 +676,16 @@ public class WorksDaoImpl implements WorksDao {
 	public List<wlmtxt_follow> listFollowByActiveID(String user_id) {
 		String hql = " from wlmtxt_follow  where follow_active_user_id='" + user_id
 				+ "' order by follow_gmt_create desc";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		List<wlmtxt_follow> list = query.list();
-		session.clear();
 		return list;
 	}
 
 	@Override
 	public int getMyAttentionTotalRecords(String user_id) {
 		String hql = "select count(*) from wlmtxt_follow  where follow_active_user_id='" + user_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
@@ -798,30 +693,24 @@ public class WorksDaoImpl implements WorksDao {
 	public wlmtxt_follow findFollowByActiveUserId(String loginUser_id, String follow_passive_user_id) {
 		String hql = "from wlmtxt_follow where follow_active_user_id='" + follow_passive_user_id
 				+ "' and follow_passive_user_id='" + loginUser_id + "'";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		wlmtxt_follow result = (wlmtxt_follow) query.uniqueResult();
-		session.clear();
 		return result;
 	}
 
 	@Override
 	public int totalFansNum(String user_id) {
 		String hql = "select count(*) from wlmtxt_follow  where follow_passive_user_id='" + user_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
 	@Override
 	public int totalFollowingNum(String user_id) {
 		String hql = "select count(*) from wlmtxt_follow  where follow_active_user_id='" + user_id + "' ";
-		Session session = getSession();
-		Query query = session.createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
-		session.clear();
 		return count;
 	}
 
