@@ -189,12 +189,11 @@ public class UserServiceImpl implements UserService {
 		List<FollowDTO> followDTOList = new ArrayList<FollowDTO>();
 		//
 		List<wlmtxt_follow> listFollow = userDao.listFollowByPassiveID(userID);
-		List<wlmtxt_user> userList = new ArrayList<wlmtxt_user>();
 		for (wlmtxt_follow follow : listFollow) {
 			FollowDTO followDTO = new FollowDTO();
 			//
 			wlmtxt_user user = userDao.getUserByUserID(follow.getFollow_active_user_id());
-			userList.add(user);
+			followDTO.setUser(user);
 			// 判断有无关注这个用户
 			wlmtxt_follow mutualFollow = userDao.getFollowBy_A_Follow_B(userID, user.getUser_id());
 			if (mutualFollow != null) {

@@ -840,13 +840,12 @@ public class WorksAction extends ActionSupport {
 	public void listMyAttentionDTO() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		List<FollowDTO> followDTOList = worksService.listMyAttentionDTO(user.getUser_id());
-		System.out.println(myAttentionVO.toString());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(myAttentionVO));
+		response.getWriter().write(gson.toJson(followDTOList));
 	}
 
 	/**
