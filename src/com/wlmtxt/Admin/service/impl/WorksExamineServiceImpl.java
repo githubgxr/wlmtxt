@@ -61,22 +61,24 @@ public boolean delete(String works_id) {
 
 @Override
 public boolean passed(String works_id, String passed) {
+	boolean flag=false;;
 	wlmtxt_works wlmtxt_work = worksExamineDao.getWorksById(works_id);
 	String time = TeamUtil.getStringSecond();
 	wlmtxt_work.setWorks_gmt_modified(time);
 	if(passed.equals("1")){
-		System.out.println("11111111"+passed);
 		wlmtxt_work.setWorks_passed("1");
+		flag = worksExamineDao.passed(wlmtxt_work);
+		worksService.addNotification(wlmtxt_work.getWorks_user_id(), "1",
+				"审核通过作品" + wlmtxt_work.getWorks_name(), wlmtxt_work.getWorks_id());
+		return flag;
 	}else{
-		System.out.println("2222222222"+passed);
-		
 		wlmtxt_work.setWorks_passed("2");
+		flag = worksExamineDao.passed(wlmtxt_work);
+		worksService.addNotification(wlmtxt_work.getWorks_user_id(), "1",
+				"审核不通过作品" + wlmtxt_work.getWorks_name(), wlmtxt_work.getWorks_id());
+		return flag;
 	}
-	if(worksExamineDao.passed(wlmtxt_work)){
-		return true;
-	}else{
-		return false;
-	}
+	
 }
 
 @Override

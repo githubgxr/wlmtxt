@@ -40,11 +40,7 @@ function get_ListBreakecaseInformationByPageAndSearch(){
 					
 						
 						
-						str += '<td>'
-							+ '<input  type="checkbox" class="checkbox_select" value="'
-							+ data_list[len][0].discuss_id	
-							+ '" >'
-							+ '</td>';
+						
 						
 						
 						
@@ -149,11 +145,6 @@ function searchUsername(query_data){
 					str += '<td>' + data_list[len][0].discuss_gmt_modified	
 					+ '</td>';// 评论时间
 					
-					str += '<td>'
-						+ '<input  type="checkbox" class="checkbox_select" value="'
-						+ data_list[len][0].discuss_id	
-						+ '" >'
-						+ '</td>';
 						
 						
 						str += '</tr>';
@@ -191,77 +182,6 @@ function searchUsername(query_data){
 
 
 
-/*
- * 删除评论
- */  
-function deletediscuss(){
-	$.confirm({
-		smoothContent : false,
-		title : '删除评论',
-		content : '此操作将删除所有所选的评论信息',
-		type : 'red',
-		autoClose : '取消|5000',// 自动关闭
-		buttons : {
-			删除 : {
-				btnClass : 'btn-red',
-				action : function() {
-					var xhr = false;
-					xhr = new XMLHttpRequest();
-					xhr.onreadystatechange = function() {
-						if (xhr.readyState == 4) {
-							if (xhr.status == 200) {
-								if (xhr.responseText == "1") {
-									toastr.success("删除成功");
-									window.location.reload();
-								} else {
-									toastr.error("删除失败");
-								}
-							} else {
-								toastr.error(xhr.status);
-							}
-						}
-					}
-					var checkbox_select = document
-							.getElementsByClassName("checkbox_select");
-					
-
-					var formData = new FormData();
-					var arr=new Array();
-					var str=null;
-					for (var num = 0; num < checkbox_select.length; num++) {
-						if (checkbox_select[num].checked) {
-							arr.push(checkbox_select[num].value);
-							str=arr.join(",")
-						}
-					}
-					formData.append("adminIDAll",str);
-
-					xhr.open("POST", "/wlmtxt/Admin/Admin_deleteAdmin");
-					xhr.send(formData);
-				}
-			},
-			取消 : function() {
-			}
-		}
-	});
-
-}
-/*
- * 选中所有复选框
- */
-function all_select(){
-	var checkbox_all_select = document.getElementById("checkbox_all_select")
-	   var checkbox_select = document.getElementsByClassName("checkbox_select");
-	 if (checkbox_all_select.checked){
-	     //循环设置所有复选框为选中状态
-	     for(var i = 0; i < checkbox_select.length; i++)
-	    	 checkbox_select[i].checked = true;
-	  }else{//取消obj选中状态，则全不选
-	     //循环设置所有复选框为未选中状态
-	     for(var i = 0; i < checkbox_select.length; i++)
-	    	 checkbox_select[i].checked = false;
-	  }
-}
 
 
 
