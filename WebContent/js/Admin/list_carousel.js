@@ -42,7 +42,7 @@ $(function(){
 			}, 'json')
 })
 function move(id,moveaction){
-	alert("a")
+	
 	var xmlhttp;
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -133,7 +133,7 @@ function deleteRecomment(){
 							if (xhr.status == 200) {
 								if (xhr.responseText == "1") {
 									toastr.success("删除成功");
-									//window.location.reload();
+									window.location.reload();
 								} else {
 									toastr.error("删除失败");
 								}

@@ -12,8 +12,8 @@ public class UserVO {
 	private int totalPage;//总页数
 	private int totalCount;//总记录数
 	private int pageSize;//每页条数
-	private String user_username;//昵称	
-	private String user_mail;
+	private String user_username_user_mail;//昵称	
+	
 	private List<wlmtxt_user> wlmtxt_userList;
 	public int getCurrPage() {
 		return currPage;
@@ -39,17 +39,12 @@ public class UserVO {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	public String getUser_username() {
-		return user_username;
+	
+	public String getUser_username_user_mail() {
+		return user_username_user_mail;
 	}
-	public void setUser_username(String user_username) {
-		this.user_username = user_username;
-	}
-	public String getUser_mail() {
-		return user_mail;
-	}
-	public void setUser_mail(String user_mail) {
-		this.user_mail = user_mail;
+	public void setUser_username_user_mail(String user_username_user_mail) {
+		this.user_username_user_mail = user_username_user_mail;
 	}
 	public List<wlmtxt_user> getWlmtxt_userList() {
 		return wlmtxt_userList;
@@ -60,9 +55,10 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [currPage=" + currPage + ", totalPage=" + totalPage + ", totalCount=" + totalCount
-				+ ", pageSize=" + pageSize + ", user_username=" + user_username + ", user_mail=" + user_mail
+				+ ", pageSize=" + pageSize + ", user_username_user_mail=" + user_username_user_mail
 				+ ", wlmtxt_userList=" + wlmtxt_userList + "]";
 	}
+	
 	
 
 	
