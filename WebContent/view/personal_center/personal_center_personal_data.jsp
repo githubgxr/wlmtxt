@@ -77,15 +77,15 @@
 								<div class="update_pwd_container">
 									<div class="img_wrap_list">
 										<span>旧密码：</span>
-										<input type="text" class="input_xzt pwd old_password" style="width:400px;"  placeholder="请输入旧密码" value="" />
+										<input type="password" class="input_xzt pwd old_password" style="width:400px;"  placeholder="请输入旧密码" value="" />
 									</div>
 									<div class="img_wrap_list">
 										<span>新密码：</span>
-										<input type="text" class="input_xzt pwd new_password" style="width:400px;"  placeholder="请输入新密码" value="" />
+										<input type="password" class="input_xzt pwd new_password" style="width:400px;"  placeholder="请输入新密码" value="" />
 									</div>
 									<div class="img_wrap_list">
 										<span>确认新密码：</span>
-										<input type="text" class="input_xzt pwd new_repassword" style="width:400px;" placeholder="请确认新密码" value="" />
+										<input type="password" class="input_xzt pwd new_repassword" style="width:400px;" placeholder="请确认新密码" value="" />
 									</div>
 									<a class="button_a check_pwd_btn">确认修改密码</a>
 								</div>
