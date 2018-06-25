@@ -22,20 +22,20 @@ function listMyAttentionByPage(pageIndex){
 		if(xhr.readyState==4 && xhr.status==200){
 			var list_myAttention=JSON.parse(xhr.responseText);
 
-			for(var i=0;i<list_myAttention.followDTO.length;i++){
+			for(var i=0;i<list_myAttention.length;i++){
 				
 				var myAttention='<li class="user_list">';
 				myAttention+='<div class="user_list_img_div">';
 				/*用户头像*/
-				myAttention+='<img class="user_img" id="'+list_myAttention.followDTO[i].user.user_id+'" onclick="to_other_data(this.id)" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myAttention.followDTO[i].user.user_avatar +'"/>';
+				myAttention+='<img class="user_img" id="'+list_myAttention[i].user.user_id+'" onclick="to_other_data(this.id)" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myAttention[i].user.user_avatar +'"/>';
 				myAttention+='</div>';
 				myAttention+='<div class="user_info">';
 				/*用户名*/
-				myAttention+='<div  id="'+list_myAttention.followDTO[i].user.user_id+'" onclick="to_other_data(this.id)" class="user_name">'+list_myAttention.followDTO[i].user.user_username+'</div>';
+				myAttention+='<div  id="'+list_myAttention[i].user.user_id+'" onclick="to_other_data(this.id)" class="user_name">'+list_myAttention[i].user.user_username+'</div>';
 				/*取消关注*/
-				myAttention+='<div class="user_operateing" onclick="cancelFocus(this.id)" id="'+list_myAttention.followDTO[i].user.user_id+'">取消关注</div>';
+				myAttention+='<div class="user_operateing" onclick="cancelFocus(this.id)" id="'+list_myAttention[i].user.user_id+'">取消关注</div>';
 				/*个性签名*/
-				myAttention+='<div class="user_grjj">'+list_myAttention.followDTO[i].user.user_bio+'</div>';
+				myAttention+='<div class="user_grjj">'+list_myAttention[i].user.user_bio+'</div>';
 				myAttention+='</div>';
 				myAttention+='</li>';
 				$(".user_list_ul").append(myAttention);

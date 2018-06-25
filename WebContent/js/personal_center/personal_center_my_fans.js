@@ -22,20 +22,20 @@ function listMyFansByPage(pageIndex){
 		if(xhr.readyState==4 && xhr.status==200){
 			
 			var list_myFans=JSON.parse(xhr.responseText);
-			for(var i=0;i<list_myFans.userlist.length;i++){
+			for(var i=0;i<list_myFans.length;i++){
 				
 				var myFans='<li class="user_list">';
 				myFans+='<div class="user_list_img_div">';
-				myFans+='<img  id="'+list_myFans.userlist[i].user_id+'" onclick="to_other_data(this.id)" class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myFans.userlist[i].user_avatar  +'"/>';
+				myFans+='<img  id="'+list_myFans[i].user.user_id+'" onclick="to_other_data(this.id)" class="user_img" src="/wlmtxt/Works/Works_getImg?imgName=' +list_myFans[i].user.user_avatar  +'"/>';
 				myFans+='</div>';
 				myFans+='<div class="user_info">';
-				myFans+='<div  id="'+list_myFans.userlist[i].user_id+'" onclick="to_other_data(this.id)" class="user_name">'+list_myFans.userlist[i].user_username+'</div>';
-				myFans+='<div class="user_operateing focus_other" id="'+list_myFans.userlist[i].user_id+'">+ 关注</div>';
-				myFans+='<div class="user_grjj">'+list_myFans.userlist[i].user_bio+'</div>';
+				myFans+='<div  id="'+list_myFans[i].user.user_id+'" onclick="to_other_data(this.id)" class="user_name">'+list_myFans[i].user.user_username+'</div>';
+				myFans+='<div class="user_operateing focus_other" id="'+list_myFans[i].user.user_id+'">+ 关注</div>';
+				myFans+='<div class="user_grjj">'+list_myFans[i].user.user_bio+'</div>';
 				myFans+='</div>';
 				myFans+='</li>';
 				$(".user_list_ul").append(myFans);
-				checkFocus(list_myFans.userlist[i].user_id);
+				checkFocus(list_myFans[i].user.user_id);
 			}
 		}
 	}
