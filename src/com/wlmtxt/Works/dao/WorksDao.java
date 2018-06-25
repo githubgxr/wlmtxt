@@ -15,7 +15,6 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
-import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 
 public interface WorksDao {
@@ -106,7 +105,7 @@ public interface WorksDao {
 
 	int getCollectNum(String works_id);
 
-	List<wlmtxt_follow> listMyWorksByUserId(String user_id, MyAttentionVO myAttentionVO);
+	List<wlmtxt_follow> listMyWorksByUserId(String user_id);
 
 	int getMyAttentionTotalRecords(String user_id);
 

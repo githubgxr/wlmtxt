@@ -1332,24 +1332,10 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public MyAttentionVO listMyAttentionVO(String loginUser_id, MyAttentionVO myAttentionVO) {
+	public MyAttentionVO listMyAttentionVO(String loginUser_id) {
 		List<FollowDTO> DTOList = new ArrayList<FollowDTO>();
 
-		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(loginUser_id, myAttentionVO);
-
-		int i = worksDao.getMyAttentionTotalRecords(loginUser_id);
-		myAttentionVO.setTotalRecords(i);
-		myAttentionVO.setTotalPages(((i - 1) / myAttentionVO.getPageSize()) + 1);
-		if (myAttentionVO.getPageIndex() <= 1) {
-			myAttentionVO.setHavePrePage(false);
-		} else {
-			myAttentionVO.setHavePrePage(true);
-		}
-		if (myAttentionVO.getPageIndex() >= myAttentionVO.getTotalPages()) {
-			myAttentionVO.setHaveNextPage(false);
-		} else {
-			myAttentionVO.setHaveNextPage(true);
-		}
+		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(loginUser_id);
 
 		for (wlmtxt_follow follow : list) {
 			FollowDTO followDTO = new FollowDTO();

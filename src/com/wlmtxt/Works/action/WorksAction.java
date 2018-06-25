@@ -838,7 +838,6 @@ public class WorksAction extends ActionSupport {
 	 */
 	public void listMyAttentionVO() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		System.out.println("worksaction:" + myAttentionVO.toString());
 		myAttentionVO = worksService.listMyAttentionVO(user.getUser_id(), myAttentionVO);
 		System.out.println(myAttentionVO.toString());
 		GsonBuilder gsonBuilder = new GsonBuilder();
