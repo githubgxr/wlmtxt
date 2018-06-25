@@ -1,4 +1,7 @@
 $(function (){
+	listCollection();
+});
+function listCollection(){
 	var list_video_item = document.getElementsByClassName("list_video_item");
 	var long = list_video_item.length;
 	for (var num = 0; num < long; num++) {
@@ -42,10 +45,27 @@ $(function (){
 			 relation_collection_str+='</div>';
 			 relation_collection_str+='</div>';
 			 relation_collection_str+=' <div class="video_options">';
-			 relation_collection_str+='<a class="video_delete_btn">取消收藏</a>';
+			 relation_collection_str+='<a id="'+relation_collection_response[i].worksDTO.works.works_id+'" onclick="deleteCollection(this.id)" class="video_delete_btn">取消收藏</a>';
 			 relation_collection_str+='</div>';
 			 relation_collection_str+='</li>';
 			$("#relation_collection_list_container").append(relation_collection_str);
 		}
 	}
-})
+}
+function deleteCollection(video_id) {
+	// 收藏
+	var formData_collect = new FormData();
+	formData_collect.append("accept_works.works_id", video_id);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "/wlmtxt/Works/Works_collectWorks");
+	xhr.send(formData_collect);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			if (xhr.responseText == "1") {
+				console.log("收藏或取消收藏成功！");
+				toastr.success("取消收藏成功！");
+				listCollection();
+			}
+		}
+	}
+}
