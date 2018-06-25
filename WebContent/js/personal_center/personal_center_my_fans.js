@@ -16,7 +16,7 @@ function listMyFansByPage(pageIndex){
 	var xhr=new XMLHttpRequest();
 	var formData=new FormData();
 	formData.append("myFansVO.pageIndex",pageIndex);
-	xhr.open("POST","/wlmtxt/User/User_listMyFansVO");
+	xhr.open("POST","/wlmtxt/User/User_listMyFansDTO");
 	xhr.send(formData);
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){

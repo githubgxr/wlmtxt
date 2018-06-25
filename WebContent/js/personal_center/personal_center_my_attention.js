@@ -16,7 +16,7 @@ function listMyAttentionByPage(pageIndex){
 	var xhr=new XMLHttpRequest();
 	var formData=new FormData();
 	formData.append("myAttentionVO.pageIndex",pageIndex);
-	xhr.open("POST","/wlmtxt/Works/Works_listMyAttentionVO");
+	xhr.open("POST","/wlmtxt/Works/Works_listMyAttentionDTO");
 	xhr.send(formData);
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
