@@ -173,7 +173,7 @@ public class WorksServiceImpl implements WorksService {
 			List<wlmtxt_works> worksTemporaryList = new ArrayList<wlmtxt_works>();
 			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
 			worksTemporaryList = worksDao.listWorksAll();
-			int n_n = (worksTemporaryList.size() >= 4 ? 4 : worksTemporaryList.size());
+			int n_n = (worksTemporaryList.size() >= 5 ? 5 : worksTemporaryList.size());
 			for (int n = 0; n < n_n; n++) {
 				int random = (int) (Math.random() * worksTemporaryList.size());
 				worksFinallyList.add(worksTemporaryList.get(random));

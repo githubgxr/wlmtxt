@@ -506,11 +506,16 @@ public class UserAction extends ActionSupport {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		if (userService.isFollowedUser(user.getUser_id(), accept_user.getUser_id())) {
-			response.getWriter().write("1");
-		} else {
+		if (user == null) {
 			response.getWriter().write("2");
+		} else {
+			if (userService.isFollowedUser(user.getUser_id(), accept_user.getUser_id())) {
+				response.getWriter().write("1");
+			} else {
+				response.getWriter().write("2");
+			}
 		}
+
 	}
 
 	/**

@@ -147,8 +147,12 @@ public class WorksAction extends ActionSupport {
 
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		if (worksService.isLiked(user.getUser_id(), accept_works.getWorks_id())) {
-			response.getWriter().write("1");
+		if (user != null) {
+			if (worksService.isLiked(user.getUser_id(), accept_works.getWorks_id())) {
+				response.getWriter().write("1");
+			} else {
+				response.getWriter().write("2");
+			}
 		} else {
 			response.getWriter().write("2");
 		}
@@ -188,20 +192,21 @@ public class WorksAction extends ActionSupport {
 		response.getWriter().write(num + "");
 	}
 
-	/**
-	 * 根据关键词和分类推荐 TODO
-	 * 
-	 * @throws IOException
-	 */
-	public void listWorksByKeywordAndMenu() throws IOException {
-		List<WorksDTO> worksDTOList = worksService.listWorksByKeywordAndMenu(accept_works.getWorks_id());
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(worksDTOList));
-	}
+	// /**
+	// * 根据关键词和分类推荐
+	// *
+	// * @throws IOException
+	// */
+	// public void listWorksByKeywordAndMenu() throws IOException {
+	// List<WorksDTO> worksDTOList =
+	// worksService.listWorksByKeywordAndMenu(accept_works.getWorks_id());
+	// GsonBuilder gsonBuilder = new GsonBuilder();
+	// gsonBuilder.setPrettyPrinting();// 格式化json数据
+	// Gson gson = gsonBuilder.create();
+	// HttpServletResponse response = ServletActionContext.getResponse();
+	// response.setContentType("text/html;charset=utf-8");
+	// response.getWriter().write(gson.toJson(worksDTOList));
+	// }
 
 	public void hotRecommend() throws IOException {
 		List<WorksDTO> worksDTOList = null;
@@ -347,13 +352,6 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 我点赞的列表
-	 */
-	public void listLke() {
-		// TODO
-	}
-
-	/**
 	 * 查询是否已收藏<br>
 	 * 接收accept_works.works_id
 	 * 
@@ -365,11 +363,16 @@ public class WorksAction extends ActionSupport {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		if (worksService.isCollectWorks(user.getUser_id(), accept_works.getWorks_id())) {
-			response.getWriter().write("1");
+		if (user != null) {
+			if (worksService.isCollectWorks(user.getUser_id(), accept_works.getWorks_id())) {
+				response.getWriter().write("1");
+			} else {
+				response.getWriter().write("2");
+			}
 		} else {
 			response.getWriter().write("2");
 		}
+
 	}
 
 	/**
@@ -389,13 +392,6 @@ public class WorksAction extends ActionSupport {
 	}
 
 	/**
-	 * 我收藏的列表
-	 */
-	public void listCollect() {
-		// TODO
-	}
-
-	/**
 	 * 删除下载历史,wlmtxt_download_history.download_history_id、
 	 * wlmtxt_download_history.download_history_gmt_create
 	 */
@@ -404,21 +400,13 @@ public class WorksAction extends ActionSupport {
 		try {
 			worksService.removeDownloadHistory(user, accept_works);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * 我的下载历史列表 TODO
-	 */
-	public void listDownloadWorks() {
-
-	}
-
-	/**
 	 * 评论，接收discuss.discuee_father_discuss_id父评论id：顶级评论则接收作品id，评论的回复评论则为上级评论id）
-	 * TODO
+	 * 
 	 * 
 	 * @throws IOException
 	 */
@@ -845,7 +833,7 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * @author gxr
 	 * 
-	 *         XXX 待测试
+	 * 
 	 * @throws IOException
 	 */
 	public void listMyAttentionVO() throws IOException {
