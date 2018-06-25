@@ -69,7 +69,6 @@
 		btn.onclick = check;
 		var session_password ="${adminLoginResult.admin_password}";
 		var session_id = "${adminLoginResult.admin_id}"
-		alert(session_password)
 		function check() {
 			btn.style.background = " #0284c4";
 			/* var userName = document.querySelector(".userName").value; */
