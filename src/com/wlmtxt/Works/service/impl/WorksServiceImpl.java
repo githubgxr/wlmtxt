@@ -99,6 +99,12 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
+	public List<WorksDTO> collaborativeFilteringBySlopeOne(String userID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<WorksDTO> collaborativeFilteringByUser(String userID) {
 		if (userID == null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();

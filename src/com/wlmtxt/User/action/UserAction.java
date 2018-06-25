@@ -286,8 +286,13 @@ public class UserAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		PrintWriter pw = response.getWriter();
-		if (user != null) {
-			user = userService.get_user_byID(accept_user.getUser_id());
+		if (accept_user != null) {
+			accept_user = userService.get_user_byID(accept_user.getUser_id());
+			// 对象属性值为null替换为""
+			ReflectUtil.getAllField(accept_user);
+			pw.write(JsonUtils.toJson(accept_user));
+		} else if (user != null) {
+			user = userService.get_user_byID(user.getUser_id());
 			// 对象属性值为null替换为""
 			ReflectUtil.getAllField(user);
 			pw.write(JsonUtils.toJson(user));

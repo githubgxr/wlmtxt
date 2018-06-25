@@ -162,6 +162,14 @@ public interface WorksService {
 	public List<WorksDTO> collaborativeFilteringByUser(String userID);
 
 	/**
+	 * 基于物品的协同过滤（Slope One）
+	 * 
+	 * @param userID
+	 * @return
+	 */
+	public List<WorksDTO> collaborativeFilteringBySlopeOne(String userID);
+
+	/**
 	 * 计算用户对某个作品的喜爱值 <br>
 	 * 播放1 点赞3 评论2 收藏4
 	 * 
