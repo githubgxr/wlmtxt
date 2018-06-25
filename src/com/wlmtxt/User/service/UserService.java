@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.DTO.FollowDTO;
 
 public interface UserService {
 
@@ -36,6 +37,6 @@ public interface UserService {
 
 	String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user);
 
-	List<wlmtxt_user> listMyFans(String userID);
+	List<FollowDTO> listMyFansDTO(String userID);
 
 }

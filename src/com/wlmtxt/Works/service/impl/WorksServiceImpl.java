@@ -37,7 +37,6 @@ import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.ReplyDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
-import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -1332,25 +1331,23 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public MyAttentionVO listMyAttentionVO(String loginUser_id) {
-		List<FollowDTO> DTOList = new ArrayList<FollowDTO>();
+	public List<FollowDTO> listMyAttentionDTO(String user_id) {
+		List<FollowDTO> followDTOList = new ArrayList<FollowDTO>();
 
-		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(loginUser_id);
+		List<wlmtxt_follow> followList = worksDao.listFollowByActiveID(user_id);
 
-		for (wlmtxt_follow follow : list) {
+		for (wlmtxt_follow follow : followList) {
 			FollowDTO followDTO = new FollowDTO();
-			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(loginUser_id,
-					follow.getFollow_passive_user_id());
+			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(user_id, follow.getFollow_passive_user_id());
 			if (mutualFollow != null) {
 				followDTO.setMutualFollow("1");
 			} else {
 				followDTO.setMutualFollow("2");
 			}
 			followDTO.setUser(userDao.get_user_byID(follow.getFollow_passive_user_id()));
-			DTOList.add(followDTO);
+			followDTOList.add(followDTO);
 		}
-		myAttentionVO.setFollowDTO(DTOList);
-		return myAttentionVO;
+		return followDTOList;
 	}
 
 	@Override

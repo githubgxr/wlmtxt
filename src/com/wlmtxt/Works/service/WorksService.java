@@ -14,12 +14,12 @@ import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.DiscussWorkDTO;
+import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
-import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -80,7 +80,7 @@ public interface WorksService {
 
 	public int getDiscussNum(String works_id);
 
-	public MyAttentionVO listMyAttentionVO(String user_id, MyAttentionVO myAttentionVO);
+	public List<FollowDTO> listMyAttentionDTO(String user_id);
 
 	public void addPlayHistoryByFileName(String fileName, String userID);
 
