@@ -36,11 +36,10 @@ function get_ListBreakecaseInformationByPageAndSearch() {
 						
 							if (data_list[len].works_deleted==2) {
 								str += '<td>'
-										+ '<input type="hidden" value="'
-										+ data_list[len].works_id
-										+ '" />'
-										+ '<button type="button" style="margin-left:6px;" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>删除</button>'
-										+ '</td>';
+									+ '<input  type="checkbox" class="checkbox_select" value="'
+									+ data_list[len].works_id
+									+ '" >'
+									+ '</td>';
 							if(data_list[len].works_passed==3){
 								str += '<td>'
 									+ '<input type="hidden" value="'
@@ -148,11 +147,10 @@ $("select#passed").change(
 					
 						if (data_list[len].works_deleted==2) {
 							str += '<td>'
-									+ '<input type="hidden" value="'
-									+ data_list[len].works_id
-									+ '" />'
-									+ '<button type="button" style="margin-left:6px;" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>删除</button>'
-									+ '</td>';
+								+ '<input  type="checkbox" class="checkbox_select" value="'
+								+ data_list[len].works_id
+								+ '" >'
+								+ '</td>';
 						if(data_list[len].works_passed==3){
 							str += '<td>'
 								+ '<input type="hidden" value="'
@@ -218,11 +216,10 @@ $("select#delete").change(
 					
 						if (data_list[len].works_deleted==2) {
 							str += '<td>'
-									+ '<input type="hidden" value="'
-									+ data_list[len].works_id
-									+ '" />'
-									+ '<button type="button" style="margin-left:6px;" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>删除</button>'
-									+ '</td>';
+								+ '<input  type="checkbox" class="checkbox_select" value="'
+								+ data_list[len].works_id
+								+ '" >'
+								+ '</td>';
 						if(data_list[len].works_passed==3){
 							str += '<td>'
 								+ '<input type="hidden" value="'
@@ -285,11 +282,10 @@ function get_ListCaseSearch(){
 				
 					if (data_list[len].works_deleted==2) {
 						str += '<td>'
-								+ '<input type="hidden" value="'
-								+ data_list[len].works_id
-								+ '" />'
-								+ '<button type="button" style="margin-left:6px;" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>删除</button>'
-								+ '</td>';
+							+ '<input  type="checkbox" class="checkbox_select" value="'
+							+ data_list[len].works_id
+							+ '" >'
+							+ '</td>';
 					if(data_list[len].works_passed==3){
 						str += '<td>'
 							+ '<input type="hidden" value="'
@@ -338,47 +334,7 @@ function get_ListCaseSearch(){
 var modifi_delete = function(){
 	var type = $(this).text().trim();
 	var id = $(this).siblings('input').val();
-	if(type=="删除"){
-		var formData = new FormData();
-		formData.append('wlmtxt_work.works_id', id);
-		$.confirm({
-			title : '确定删除?',
-			smoothContent : false,
-			content : false,
-			autoClose : 'cancelAction|10000',
-			buttons : {
-				deleteUser : {
-					btnClass : 'btn-danger',
-					text : '确认',
-					action : function() {
-						$.ajax({
-							url : '/wlmtxt/WorksExamine/WorksExamine_delete',
-							type : 'post',
-							data : formData,
-							processData : false,
-							contentType : false,
-							dataType : 'text',
-							success : function(data) {
-
-								if (data == "1") {
-									toastr.success("删除成功！");
-									// 获取对应option中的value值
-									window.location.reload();
-									// get_ListBreakecaseInformationByPageAndSearch(query_data);
-								} else {
-									toastr.error("删除失败！");
-								}
-							}
-						});
-					}
-				},
-				cancelAction : {
-					btnClass : 'btn-blue',
-					text : '取消',
-				}
-			}
-		});
-	}else if(type=="通过"){
+	 if(type=="通过"){
 		var formData = new FormData();
 		formData.append('wlmtxt_work.works_id', id);
 		formData.append('passed', "1");
@@ -462,4 +418,77 @@ var modifi_delete = function(){
 		});
 	}
 	
+}
+
+/*
+ * 删除作品
+ */  
+function deleteWorks(){
+	$.confirm({
+		smoothContent : false,
+		title : '删除作品',
+		content : '此操作将删除所有所选的作品信息',
+		type : 'red',
+		autoClose : '取消|5000',// 自动关闭
+		buttons : {
+			删除 : {
+				btnClass : 'btn-red',
+				action : function() {
+					var xhr = false;
+					xhr = new XMLHttpRequest();
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4) {
+							if (xhr.status == 200) {
+								if (xhr.responseText == "1") {
+									toastr.success("删除成功");
+									window.location.reload();
+								} else {
+									toastr.error("删除失败");
+								}
+							} else {
+								toastr.error(xhr.status);
+							}
+						}
+					}
+					var checkbox_select = document
+							.getElementsByClassName("checkbox_select");
+					
+
+					var formData = new FormData();
+					var arr=new Array();
+					var str=null;
+					for (var num = 0; num < checkbox_select.length; num++) {
+						if (checkbox_select[num].checked) {
+							arr.push(checkbox_select[num].value);
+							str=arr.join(",")
+						}
+					}
+					formData.append("worksIdAll",str);
+
+					xhr.open("POST", "/wlmtxt/WorksExamine/WorksExamine_delete");
+					xhr.send(formData);
+				}
+			},
+			取消 : function() {
+			}
+		}
+	});
+
+}
+
+/*
+ * 选中所有复选框
+ */
+function all_select(){
+	var checkbox_all_select = document.getElementById("checkbox_all_select")
+	   var checkbox_select = document.getElementsByClassName("checkbox_select");
+	 if (checkbox_all_select.checked){
+	     //循环设置所有复选框为选中状态
+	     for(var i = 0; i < checkbox_select.length; i++)
+	    	 checkbox_select[i].checked = true;
+	  }else{//取消obj选中状态，则全不选
+	     //循环设置所有复选框为未选中状态
+	     for(var i = 0; i < checkbox_select.length; i++)
+	    	 checkbox_select[i].checked = false;
+	  }
 }
