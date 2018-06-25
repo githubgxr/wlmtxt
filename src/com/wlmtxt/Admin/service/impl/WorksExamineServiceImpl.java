@@ -36,7 +36,7 @@ public class WorksExamineServiceImpl implements WorksExamineService {
 	@Override
 	public void getworksListThreeByPage(WorksVO worksVO) {
 
-		int count = worksExamineDao.getCountworksListThree(worksVO);
+		// int count = worksExamineDao.getCountworksListThree(worksVO);
 		// worksVO.setTotalCount(count);
 		// worksVO.setPageSize(10);
 		// worksVO.setTotalPage((int) Math.ceil((double) count /
@@ -45,17 +45,22 @@ public class WorksExamineServiceImpl implements WorksExamineService {
 	}
 
 	@Override
-	public boolean delete(String works_id) {
-		wlmtxt_works wlmtxt_work = worksExamineDao.getWorksById(works_id);
-		wlmtxt_work.setWorks_deleted("1");
-		String time = TeamUtil.getStringSecond();
-		wlmtxt_work.setWorks_gmt_modified(time);
-		if (worksExamineDao.delete(wlmtxt_work)) {
-			return true;
-		} else {
-			return false;
+	public boolean delete(String worksIdAll) {
+		boolean flag = false;
+		String[] arr = worksIdAll.split(",");
+		for (String works_id : arr) {
+			wlmtxt_works wlmtxt_work = worksExamineDao.getWorksById(works_id);
+			wlmtxt_work.setWorks_deleted("1");
+			String time = TeamUtil.getStringSecond();
+			wlmtxt_work.setWorks_gmt_modified(time);
+			if (worksExamineDao.delete(wlmtxt_work)) {
+				flag = true;
+				return flag;
+			} else {
+				return false;
+			}
 		}
-
+		return true;
 	}
 
 	@Override
