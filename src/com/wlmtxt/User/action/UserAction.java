@@ -626,21 +626,16 @@ public class UserAction extends ActionSupport {
 	 * 
 	 * @throws IOException
 	 */
-	public void listMyFansVO() throws IOException {
+	public void listMyFans() throws IOException {
 		wlmtxt_user loginUser = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter pw = response.getWriter();
-		myFansVO = userService.listMyFansVO(loginUser, myFansVO);
-		if (myFansVO != null) {
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			gsonBuilder.setPrettyPrinting();// 格式化json数据
-			Gson gson = gsonBuilder.create();
-			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().write(gson.toJson(myFansVO));
-		} else {
-			pw.write("2");
-		}
+		List<wlmtxt_user> userList = userService.listMyFans(loginUser.getUser_id());
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(userList));
 	}
 
 	/**
