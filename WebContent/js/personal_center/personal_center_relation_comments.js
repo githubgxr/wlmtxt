@@ -9,7 +9,6 @@ $(function (){
 	xhr.send(null);
 	xhr.onreadystatechange=function(){
 		var relation_comments_response=JSON.parse(xhr.responseText);
-		
 		for(var i=0;i<relation_comments_response.length;i++){
 			var relation_comments_str='<li class="list_video_item">';
 			/*---视频链接---*/

@@ -52,6 +52,7 @@ function checkLogin() {
 				
 				/** *********************个人资料*********************************** */
 				// 用户名
+				console.log("username:"+userInfo.user_username)
 				$(".div_username").html(userInfo.user_username);
 				$(".input_username").val(userInfo.user_username);
 				// 密码
