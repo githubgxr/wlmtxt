@@ -76,13 +76,13 @@
 		</div>
 		<!--退出提示  -->
 	<div class="modal" id="myquitmodal" style="display: none;">
-		<div class="modal-dialog" style="width:300px;">
+		<div class="modal-dialog" style="width:350px;">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title">提示：</h3>
+					<h4 class="modal-title">提示：</h4>
 				</div>
-				<div class="modal-body" style="text-align:center;">
-					    <h4>您确认要退出吗？</h4>  
+				<div class="modal-body" >
+					    <h4 style="text-align:center;">您确认要退出吗？</h4>  
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

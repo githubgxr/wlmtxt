@@ -27,7 +27,7 @@
 				<div class="wdfs_header list_header">
 					<i class="header_line"></i>
 					<h3>我的粉丝</h3>
-					<a class="button_a" style="float: right;" onclick="withFocusAll()">全部关注</a>
+					<a id="fans_btn" class="button_a" style="float: right;display:none;" onclick="withFocusAll()">全部关注</a>
 				</div>
 				<!--主体部分-->
 				<div class="wdfs_content">

@@ -5,7 +5,7 @@ $(function() {
 	listMyFansByPage(1);
 });
 function listMyFansByPage(pageIndex) {
-	//获取关注量
+	// 获取关注量
 	getfocusNum("sidebar_user_focus", user_id);
 	// 获取粉丝量
 	getfansNum("sidebar_user_fans", user_id);
@@ -26,38 +26,44 @@ function listMyFansByPage(pageIndex) {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 
 			var list_myFans = JSON.parse(xhr.responseText);
-			for (var i = 0; i < list_myFans.length; i++) {
+			if (list_myFans.length > 0) {
+				$("#fans_btn").css("display","block");
+				for (var i = 0; i < list_myFans.length; i++) {
 
-				var myFans = '<li class="user_list">';
-				myFans += '<div class="user_list_img_div">';
-				myFans += '<img  id="'
-						+ list_myFans[i].user.user_id
-						+ '" onclick="to_other_data(this.id)" class="user_img" src="/wlmtxt/Works/Works_getImg?imgName='
-						+ list_myFans[i].user.user_avatar + '"/>';
-				myFans += '</div>';
-				myFans += '<div class="user_info">';
-				myFans += '<div  id="'
-						+ list_myFans[i].user.user_id
-						+ '" onclick="to_other_data(this.id)" class="user_name">'
-						+ list_myFans[i].user.user_username + '</div>';
-				console.log(i + ":list_myFans[i].mutualFollow:"
-						+ list_myFans[i].mutualFollow);
-				if (list_myFans[i].mutualFollow == "2") {
-					myFans += '<div class="user_operateing focus_other" onclick="withFocus(this.id)" id="'
-							+ list_myFans[i].user.user_id + '">+ 关注</div>';
-				} else {
-					myFans += '<div class="not_focus focus_other" id="'
-							+ list_myFans[i].user.user_id + '">已关注</div>';
+					var myFans = '<li class="user_list">';
+					myFans += '<div class="user_list_img_div">';
+					myFans += '<img  id="'
+							+ list_myFans[i].user.user_id
+							+ '" onclick="to_other_data(this.id)" class="user_img" src="/wlmtxt/Works/Works_getImg?imgName='
+							+ list_myFans[i].user.user_avatar + '"/>';
+					myFans += '</div>';
+					myFans += '<div class="user_info">';
+					myFans += '<div  id="'
+							+ list_myFans[i].user.user_id
+							+ '" onclick="to_other_data(this.id)" class="user_name">'
+							+ list_myFans[i].user.user_username + '</div>';
+					console.log(i + ":list_myFans[i].mutualFollow:"
+							+ list_myFans[i].mutualFollow);
+					if (list_myFans[i].mutualFollow == "2") {
+						myFans += '<div class="user_operateing focus_other" onclick="withFocus(this.id)" id="'
+								+ list_myFans[i].user.user_id + '">+ 关注</div>';
+					} else {
+						myFans += '<div class="not_focus focus_other" id="'
+								+ list_myFans[i].user.user_id + '">已关注</div>';
+					}
+					/*
+					 * myFans+='<div class="user_operateing focus_other"
+					 * id="'+list_myFans[i].user.user_id+'">+ 关注</div>';
+					 */
+					myFans += '<div class="user_grjj">'
+							+ list_myFans[i].user.user_bio + '</div>';
+					myFans += '</div>';
+					myFans += '</li>';
+					$(".user_list_ul").append(myFans);
 				}
-				/*
-				 * myFans+='<div class="user_operateing focus_other"
-				 * id="'+list_myFans[i].user.user_id+'">+ 关注</div>';
-				 */
-				myFans += '<div class="user_grjj">'
-						+ list_myFans[i].user.user_bio + '</div>';
-				myFans += '</div>';
-				myFans += '</li>';
-				$(".user_list_ul").append(myFans);
+
+			} else {
+				$("#fans_btn").css("display", "none");
 			}
 		}
 	}
