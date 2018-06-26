@@ -5,7 +5,11 @@ $(function(){
 	listMyAttentionByPage(1);
 });
 function listMyAttentionByPage(pageIndex){
-	
+	//获取关注量
+	getfocusNum("sidebar_user_focus", user_id);
+	// 获取粉丝量
+	getfansNum("sidebar_user_fans", user_id);
+
 	/*移除之前的数据*/
 	var user_list = document.getElementsByClassName("user_list");
 	var long = user_list.length;

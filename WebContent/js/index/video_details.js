@@ -175,7 +175,7 @@ function getWorksDetailVO() {
 						+ '" class="user_img comment_user_img to_other_data" src="/wlmtxt/Works/Works_getImg?imgName='
 						+ detail_response.discussDTOList[numDiss].user.user_avatar
 						+ '" onclick="to_other_data(this.id)"/>';
-				comment_list_str += '<div class="comment_user_name to_other_data" id="'
+				comment_list_str += '<div style="width:100%;text-align:center;" class="comment_user_name to_other_data" onclick="to_other_data(this.id)" id="'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_user_id
 						+ '">'
 						+ detail_response.discussDTOList[numDiss].user.user_username
@@ -211,7 +211,9 @@ function getWorksDetailVO() {
 				if (detail_response.discussDTOList[numDiss].replyDTO.length !== 0) {
 					for (var res = 0; res < detail_response.discussDTOList[numDiss].replyDTO.length; res++) {
 						comment_list_str += '<div class="comment_list_content_right" style="margin:10px 0;">';
-						comment_list_str += '<span style="color:#1cd388;">';
+						comment_list_str += '<span onclick="to_other_data(this.id)" id="'
+							+ detail_response.discussDTOList[numDiss].replyDTO[res].user.user_id
+							+ '" style="color:#1cd388;" class="to_other_data" >';
 						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].user.user_username;
 						comment_list_str += ':</span>';
 						comment_list_str += '<span>';
