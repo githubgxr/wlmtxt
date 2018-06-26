@@ -71,8 +71,19 @@ function getDynamicVO() {
 						$("#button_div_more").before(new_work);
 					}
 				} else {
-					button_div_more.style.display="none";
-					$("#llls_list_container").html('<img src="/wlmtxt/img/no_message_bg.png" style="width:250px;height:250px;margin:30px 155px 0px 155px;float:left;"/><div style="color:#99a2aa;font-size：16px;text-align:center;margin:0 0 50px 0;">还没有好友动态哦，快去关注好友吧！</div>');
+
+					/*
+					 * 清空原表数据
+					 */
+					var video_options = document
+							.getElementsByClassName("video_options");
+					if (!video_options.length > 0) {
+						$("#llls_list_container")
+								.html(
+										'<img src="/wlmtxt/img/no_message_bg.png" style="width:250px;height:250px;margin:30px 155px 0px 155px;float:left;"/><div style="color:#99a2aa;font-size：16px;text-align:center;margin:0 0 50px 0;">还没有好友动态哦，快去关注好友吧！</div>');
+					}
+					button_div_more.style.display = "none";
+
 				}
 				pageIndex++;
 			} else {

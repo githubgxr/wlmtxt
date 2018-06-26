@@ -102,7 +102,7 @@ public class WorksServiceImpl implements WorksService {
 		/*
 		 * 如果未登录，则无法进行推荐
 		 */
-		if (currentUserID == null || currentUserID != null) {
+		if (currentUserID == null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 			List<String> worksTemporaryList;
 			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
@@ -208,7 +208,7 @@ public class WorksServiceImpl implements WorksService {
 		/*
 		 * 如果未登录，则无法进行推荐
 		 */
-		if (userID == null || userID != null) {
+		if (userID == null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 			List<String> worksTemporaryList = new ArrayList<String>();
 			List<String> worksFinallyList = new ArrayList<String>();
