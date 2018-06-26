@@ -92,9 +92,12 @@
 			</div>
 		</div>
 	</div>
-		<script type="text/javascript"
-		src="<%=basePath%>js/index/personal_center_nav.js"></script>
 	<script type="text/javascript">
+	//获取关注量
+	getfocusNum("sidebar_user_focus", user_id);
+	// 获取粉丝量
+	getfansNum("sidebar_user_fans", user_id);
+
 	document.getElementById("login_out").onclick=function(){
 		$("#myquitmodal").modal("toggle");
 	}
