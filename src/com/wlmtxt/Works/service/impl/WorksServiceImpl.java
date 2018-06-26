@@ -208,11 +208,11 @@ public class WorksServiceImpl implements WorksService {
 		/*
 		 * 如果未登录，则无法进行推荐
 		 */
-		if (userID == null) {
+		if (userID == null || userID != null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
-			List<wlmtxt_works> worksTemporaryList = new ArrayList<wlmtxt_works>();
-			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
-			worksTemporaryList = worksDao.listWorksAll();
+			List<String> worksTemporaryList = new ArrayList<String>();
+			List<String> worksFinallyList = new ArrayList<String>();
+			worksTemporaryList = worksDao.listWorksIDAll();
 			int n_n = (worksTemporaryList.size() >= 5 ? 5 : worksTemporaryList.size());
 			for (int n = 0; n < n_n; n++) {
 				int random = (int) (Math.random() * worksTemporaryList.size());
@@ -220,11 +220,19 @@ public class WorksServiceImpl implements WorksService {
 				worksTemporaryList.remove(random);
 			}
 
-			for (wlmtxt_works works : worksFinallyList) {
+			for (String works : worksFinallyList) {
 				WorksDTO worksDTO = new WorksDTO();
-				worksDTO = getWorksDTOByID(works.getWorks_id());
+				worksDTO = getWorksDTOByID(works);
 				worksDTOList.add(worksDTO);
 			}
+			/*
+			 * TODO
+			 */
+			long stopTime = System.currentTimeMillis();
+			LOGGER.error("collaborativeFilteringByUser运行时间：" + (stopTime - startTime) + "毫秒");
+			/*
+			 * 
+			*/
 			return worksDTOList;
 		}
 		// 取出用户信息和作品信息
