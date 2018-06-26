@@ -86,7 +86,7 @@
 			<div class="login_div" id="register_div" style="display: none;">
 				<!-- 用户名 -->
 				<input type="text" class="form-control log_email reg_username"
-					id="register_username" placeholder="请输入用户名" oninput="checkUsername()" onblur="checkUsername() "/>
+					id="register_username" placeholder="请输入用户名" maxlength="15" oninput="checkUsername()" onblur="checkUsername() "/>
 				<!-- 邮箱 -->
 				<input type="text" class="form-control log_email"
 					placeholder="请输入邮箱" id="register_email" oninput="checkEmailRegister()" onblur="checkEmailRegister()" />

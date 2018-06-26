@@ -252,8 +252,9 @@ function checkRepassword() {
 /* 用户名 */
 function checkUsername() {
 	var register_username = $("#register_username").val();// 用户名
-	if (register_username == "" || register_username == null) {
-		$(".log_alert_div").html("您的用户名不能为空！");
+	var re = new RegExp(/^[a-zA-Z0-9]{3,15}$/); // ^表示开始 $表示结束
+	if (!re.test(register_username)) {
+		$(".log_alert_div").html("请输入3~15位的用户名，只能由数字和字母组成！");
 		$(".log_alert_div").css("display", "block");
 		return false;
 	} else {
@@ -325,13 +326,14 @@ function register() {
 	var register_password = $("#register_password").val();// 密码
 	var register_repassword = $("#register_repassword").val();// 确认密码
 	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var re = new RegExp(/^[a-zA-Z0-9]{3,15}$/); // ^表示开始 $表示结束
 	var formData = new FormData();
 	formData.append("accept_user.user_username", register_username);
 	formData.append("accept_user.user_mail", register_email);
 	formData.append("accept_user.user_password", register_password);
-	if (register_username == "" || register_username == null) {
-		// 用户名正确
-		$(".log_alert_div").html("请输入用户名！");
+	
+	if (!re.test(register_username)) {
+		$(".log_alert_div").html("请输入3~15位的用户名，只能由数字和字母组成！");
 		$(".log_alert_div").css("display", "block");
 		return false;
 	} else {
