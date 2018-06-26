@@ -1,5 +1,7 @@
 var if_login = false;
 var user_id = null;
+var user_avatar=null;
+var user_username=null;
 // 判断是否登录
 checkLogin();
 function checkLogin() {
@@ -38,6 +40,8 @@ function checkLogin() {
 				/* $(".comment_delete").css("display","block"); */
 				var userInfo = JSON.parse(xhr.responseText);
 				user_id = userInfo.user_id;
+				user_avatar=userInfo.user_avatar;
+				user_username=userInfo.user_username;
 				console.log("已登录！");
 				console.log("user_mail:" + userInfo.user_mail);
 				$(".login_show").css("display", "block");

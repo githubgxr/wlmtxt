@@ -31,7 +31,7 @@
 				<!--主体部分-->
 				<div class="wdgz_content">
 					<div class="user_list_container">
-						<ul class="user_list_ul">
+						<ul class="user_list_ul" style="margin:0px;">
 							<%--  <li class="user_list">
 								<div class="user_list_img_div">
 									<img class="user_img" src="<%=basePath%>css/zb/img/tx.jpg" />

@@ -13,13 +13,11 @@ function listNoticeByPage(e){
 				var appreciateNotice='<div class="llls_list_container">';
 				appreciateNotice+='<div class="video_options">';
 				if(e==1){
-					/*用户头像*/
-					appreciateNotice+='<div class="user_img_small_div">';
-					appreciateNotice+='<img class="" src="/wlmtxt/img/user.jpg"/>';
-					appreciateNotice+='</div>';
-					
 					/*用户名*/
 					appreciateNotice+='<div class="thumd_name" style="color:#1dd388;">系统通知</div>';
+					/*作品发布时间*/
+					appreciateNotice+='<div class="thumd_time">'+list_appreciateNotice[i].worksDTO.works.works_gmt_create+'</div>';
+					appreciateNotice+='</div>';
 					
 				}else{
 					/*用户头像*/
@@ -33,12 +31,13 @@ function listNoticeByPage(e){
 					appreciateNotice+='<div class="thumd_name to_other_data" id="'
 						+ list_appreciateNotice[i].worksDTO.user.user_id
 						+ '" onclick="to_other_data(this.id)" style="color:#1dd388;">'+list_appreciateNotice[i].worksDTO.user.user_username+'</div>';
+					/*作品发布时间*/
+					appreciateNotice+='<div class="thumd_time">'+list_appreciateNotice[i].worksDTO.works.works_gmt_create+'</div>';
+					appreciateNotice+='</div>';
 					
 				}
 				
-				/*作品发布时间*/
-				appreciateNotice+='<div class="thumd_time">'+list_appreciateNotice[i].worksDTO.works.works_gmt_create+'</div>';
-				appreciateNotice+='</div>';
+				
 				
 				/*通知信息*/
 				appreciateNotice+='<div class="info_concise">'+list_appreciateNotice[i].notification.notification_content+'</div>';
