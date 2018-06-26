@@ -182,4 +182,8 @@ public interface WorksDao {
 	 * 
 	 */
 
+	int getDiscussCountByUserIDAndWorkID(String userID, String worksID);
+
+	List<String> userIDListAll();
+
 }

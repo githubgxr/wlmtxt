@@ -19,6 +19,7 @@ import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
+import com.wlmtxt.domain.DTO.sf.DevDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksCategoryVO;
@@ -177,7 +178,7 @@ public interface WorksService {
 	 * @param wroksSecondID
 	 * @return
 	 */
-	public Double WorksDev(String wroksFirstID, String wroksSecondID, String currentUserID);
+	public DevDTO devWorks(String wroksFirstID, String wroksSecondID, String currentUserID);
 
 	/**
 	 * 预测

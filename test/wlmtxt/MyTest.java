@@ -26,6 +26,16 @@ public class MyTest {
 	}
 
 	@Test
+	public void collaborativeFilteringBySlopeOne() {
+		worksService.collaborativeFilteringBySlopeOne("asaffd45df45asd4sfddd", "8dassdfdfdg54fsa");
+	}
+
+	@Test
+	public void forecastPoint() {
+		worksService.forecastPoint("asaffd45df45asd4sfddd", "8dassdfdfdg54fsa");
+	}
+
+	@Test
 	public void sda222222() {
 		worksService.collaborativeFilteringBySlopeOne("5d068897-531b-44f5-b67d-9d2f2c8cf96a", "dfasdfasgfgdsdgdfgdff");
 
