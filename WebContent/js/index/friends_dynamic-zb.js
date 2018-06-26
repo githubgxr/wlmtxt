@@ -14,7 +14,7 @@ function getDynamicVO() {
 				var llls_list_container = document
 						.getElementById("llls_list_container");
 				for (var num = 0; num < dynamicVO.worksDTOList.length; num++) {
-					var new_work = '<div class="video_options" style="margin:0;width:100%;">'
+					var new_work = '<div class="video_options" style="padding:20px 0 0 0;">'
 							+ '<div class="neck_name user_img_xzt_div">'
 							+ '<img id="'
 							+ dynamicVO.worksDTOList[num].user.user_id
@@ -63,7 +63,7 @@ function getDynamicVO() {
 							+ '</div>'
 							+ '</div>'
 							+ '</div>'
-							+ '<hr style="float: left; width: 100%;" />'
+							+ '<hr style="float: left; width: 100%;margin:5px 0px;" />'
 					$("#button_div_more").before(new_work);
 				}
 				pageIndex++;

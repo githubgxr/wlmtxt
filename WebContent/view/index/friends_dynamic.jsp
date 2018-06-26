@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=basePath%>css/xzt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
 <link rel="stylesheet" href="<%=basePath%>css/zb/zb.css" />
-<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx_dztz.css" />
+<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx.css" />
 <link rel="stylesheet" href="<%=basePath%>css/friends_dynamic.css" />
 </head>
 <body>

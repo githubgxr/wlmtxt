@@ -14,14 +14,14 @@
 <link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
 <link rel="stylesheet" href="<%=basePath%>css/zb/zb.css" />
-<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx_sxtz.css" />
+<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx.css" />
 </head>
 <body>
 	<div class="wlmtxt_main">
 		<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
 		<div class="wlmtxt_container">
 			<jsp:include page="/personal_center_nav.jsp" flush="true"></jsp:include>
-			<div id="llls_main" class="main_container">
+			<div id="llls_main" class="main_container" style="margin-bottom:30px;">
 				<!--浏览历史头部-->
 				<jsp:include page="/personal_center_notice_nav.jsp" flush="true"></jsp:include>
 				<!--主体部分-->
@@ -56,25 +56,6 @@
 							</div>
 						</div>
 						 --%>
-				</div>
-				<!-----翻页----------------------->
-				<div class="page_container " style="margin: 10px auto">
-					<!-- <div class="page_component_container ">
-							<div class="page_component ">
-								<a class="page_prev " href="# ">上一页</a>
-								<a class="selected " href="# ">1</a>
-								<a href="# ">2</a>
-								<a href="# ">3</a>
-								<a href="# ">4</a>
-								<a href="# ">5</a>
-								<b>...</b>
-								<a href="# ">23</a>
-								<a class="page_next " href="# ">上一页</a>
-								<span class="page_component_jumppage ">跳转到：</span>
-								<input class="page_component_jumptxt " type="text ">
-								<a href="# " class="page_component_submit ">GO</a>
-							</div>
-						</div> -->
 				</div>
 			</div>
 		</div>
