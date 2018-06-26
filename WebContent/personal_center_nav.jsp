@@ -50,9 +50,6 @@
 					<li>
 						<a href="/wlmtxt/view/personal_center/personal_center_my_dynamic.jsp"><img src="<%=basePath%>/img/dt3.png" />我的动态</a>
 					</li>
-					<%-- <li>
-						<a href="/wlmtxt/view/personal_center/personal_center_my_dynamic.jsp"><img src="<%=basePath%>/img/scsp.png" />发布动态</a>
-					</li> --%>
 					<li>
 						<a href="/wlmtxt/view/personal_center/personal_center_personal_data.jsp"><img src="<%=basePath%>/img/grzl3.png" />个人资料</a>
 					</li>
@@ -72,13 +69,39 @@
 						<a href="/wlmtxt/view/personal_center/personal_center_appreciates_notice.jsp"><img src="<%=basePath%>/img/xxtz1.png" />消息中心</a>
 					</li>
 					<li>
-						<a class="login_out" id="login_out" href="/wlmtxt/User/User_logout"><img src="<%=basePath%>/img/tcdl3.png" />退出登录</a>
+						<a class="login_out" id="login_out"><img src="<%=basePath%>/img/tcdl3.png" />退出登录</a>
 					</li>
 				</ul>
 			</div>
 		</div>
+		<!--退出提示  -->
+	<div class="modal" id="myquitmodal" style="display: none;">
+		<div class="modal-dialog" style="width:300px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">提示：</h3>
+				</div>
+				<div class="modal-body" style="text-align:center;">
+					    <h4>您确认要退出吗？</h4>  
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button id="check_response_btn" class="btn btn-success"
+						onclick="check_quit()">确认退出</button>
+				</div>
+			</div>
+		</div>
+	</div>
 		<script type="text/javascript"
 		src="<%=basePath%>js/index/personal_center_nav.js"></script>
+	<script type="text/javascript">
+	document.getElementById("login_out").onclick=function(){
+		$("#myquitmodal").modal("toggle");
+	}
+	function check_quit(){
+		window.location.href="/wlmtxt/User/User_logout";
+	}
+	</script>
 	</body>
 
 </html>
