@@ -61,7 +61,7 @@
 			</div>
 			<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 		</div>
-		<div class="audit_notice">审核通知</div>
+		<div class="audit_notice" style="display: none;">审核通知</div>
 		<script type="text/javascript">
 			var clearfix_a=$(".clearfix a");
 			$.each(clearfix_a,function(i){

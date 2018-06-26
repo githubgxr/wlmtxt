@@ -66,7 +66,7 @@ function listNoticeByPage(e){
 				}
 				$(".list_container").append('<div style="width:100%;height:50px;float:left;"></div>');
 			}else{
-				$("#llls_main").append('<img src="/wlmtxt/img/no_message_bg.png" style="width:250px;height:250px;margin:30px 240px 0px 240px;float:left;"/><div style="color:#99a2aa;font-size：16px;text-align:center;margin:0 0 50px 0;">该内容还没有通知消息哦！</div>');
+				$(".llls_content ").html('<img src="/wlmtxt/img/no_message_bg.png" style="width:250px;height:250px;margin:30px 240px 0px 240px;float:left;"/><div style="color:#99a2aa;font-size：16px;text-align:center;margin:0 0 50px 0;">该内容还没有通知消息哦！</div>');
 			}
 			
 		}

@@ -63,7 +63,7 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	<div class="comments_notice">评论通知</div>
+	<div class="comments_notice" style="display: none;">评论通知</div>
 	<script type="text/javascript">
 		var clearfix_a = $(".clearfix a");
 		$.each(clearfix_a, function(i) {

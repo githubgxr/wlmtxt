@@ -58,7 +58,7 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	<div class="appreciates_notice">点赞通知</div>
+	<div class="appreciates_notice" style="display: none;">点赞通知</div>
 	<script type="text/javascript">
 		var clearfix_a = $(".clearfix a");
 		$.each(clearfix_a, function(i) {
