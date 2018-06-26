@@ -70,6 +70,7 @@ function collaborativeFilteringBySlopeOne() {
 	}
 }
 function getWorksDetailVO() {
+	document.getElementById("responseComment").value = "";
 	/* checkLogin(); */
 	// 视频id
 	video_id = $.trim($("#video_id").html());
@@ -387,7 +388,7 @@ function check_response() {
 	xhr_response.onreadystatechange = function() {
 		if (xhr_response.readyState == 4 && xhr_response.status == 200) {
 			if (xhr_response.responseText == "1") {
-				document.getElementById("responseComment").innerHTML = "";
+				
 				$("#mymodal").modal("toggle");
 				toastr.success("回复评论成功！");
 
