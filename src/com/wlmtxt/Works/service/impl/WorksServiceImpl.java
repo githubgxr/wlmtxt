@@ -1033,6 +1033,9 @@ public class WorksServiceImpl implements WorksService {
 			WorksDTO worksDTO = getWorksDTOByID(notification.getNotification_works());
 			notificationDTO.setWorksDTO(worksDTO);
 			//
+			wlmtxt_user user = userService.get_user_byID(notification.getNotification_user_id());
+			notificationDTO.setUser(user);
+			//
 			notificationDTOList.add(notificationDTO);
 		}
 
