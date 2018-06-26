@@ -132,7 +132,9 @@ public class WorksServiceImpl implements WorksService {
 			if (worksID.equals(currentWorksID)) {
 				continue;
 			}
-
+			if (worksDao.isPlayHistoryByWorksAndUser(worksID, currentUserID)) {
+				continue;
+			}
 			Double worksForecastPoint = forecastPoint(currentWorksID, currentUserID);
 			worksForecastPointMap.put(worksID, worksForecastPoint);
 		}

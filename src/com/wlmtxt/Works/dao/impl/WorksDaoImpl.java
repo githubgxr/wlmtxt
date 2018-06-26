@@ -739,4 +739,16 @@ public class WorksDaoImpl implements WorksDao {
 		return count;
 	}
 
+	@Override
+	public boolean isPlayHistoryByWorksAndUser(String worksID, String currentUserID) {
+		String hql = "select count(*) from wlmtxt_play_history  where play_history_works_id='" + worksID
+				+ "' and play_history_user_id ='" + currentUserID + "'";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		if (count > 0) {
+			return true;
+		}
+		return false;
+
+	}
 }

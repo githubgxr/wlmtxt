@@ -188,4 +188,6 @@ public interface WorksDao {
 	 * 
 	 */
 
+	boolean isPlayHistoryByWorksAndUser(String worksID, String currentUserID);
+
 }
