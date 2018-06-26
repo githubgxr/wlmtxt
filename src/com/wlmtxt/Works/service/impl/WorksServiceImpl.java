@@ -102,24 +102,31 @@ public class WorksServiceImpl implements WorksService {
 		/*
 		 * 如果未登录，则无法进行推荐
 		 */
-		if (currentUserID == null) {
+		if (currentUserID == null || currentUserID != null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 			List<String> worksTemporaryList;
 			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
 			worksTemporaryList = worksDao.listWorksIDAll();
 			int n_n = (worksTemporaryList.size() >= 5 ? 5 : worksTemporaryList.size());
-
+			int random = 0;
 			for (int n = 0; n < n_n; n++) {
-				int random = (int) (Math.random() * worksTemporaryList.size());
+				random = (int) (Math.random() * worksTemporaryList.size());
 				worksFinallyList.add(worksDao.getWorksByID(worksTemporaryList.get(random)));
 				worksTemporaryList.remove(random);
 			}
-
+			WorksDTO worksDTO;
 			for (wlmtxt_works works : worksFinallyList) {
-				WorksDTO worksDTO = new WorksDTO();
 				worksDTO = getWorksDTOByID(works.getWorks_id());
 				worksDTOList.add(worksDTO);
 			}
+			/*
+			 *
+			 */
+			long stopTime = System.currentTimeMillis();
+			LOGGER.error("collaborativeFilteringBySlopeOne运行时间：" + (stopTime - startTime) + "毫秒");
+			/*
+			 * 
+			*/
 			return worksDTOList;
 		}
 
@@ -128,6 +135,7 @@ public class WorksServiceImpl implements WorksService {
 		 */
 		Map<String, Double> worksForecastPointMap = new HashMap<String, Double>();
 		List<String> worksAll = worksDao.listWorksIDAll();
+		Double worksForecastPoint;
 		for (String worksID : worksAll) {
 			if (worksID.equals(currentWorksID)) {
 				continue;
@@ -135,7 +143,8 @@ public class WorksServiceImpl implements WorksService {
 			if (worksDao.isPlayHistoryByWorksAndUser(worksID, currentUserID)) {
 				continue;
 			}
-			Double worksForecastPoint = forecastPoint(currentWorksID, currentUserID);
+			// 预测评价
+			worksForecastPoint = forecastPoint(currentWorksID, currentUserID);
 			worksForecastPointMap.put(worksID, worksForecastPoint);
 		}
 		/*
@@ -171,8 +180,8 @@ public class WorksServiceImpl implements WorksService {
 		 * 封装DTO
 		 */
 		List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
+		WorksDTO worksDTO;
 		for (wlmtxt_works works : worksFinallyAllList) {
-			WorksDTO worksDTO = new WorksDTO();
 			worksDTO = getWorksDTOByID(works.getWorks_id());
 			worksDTOList.add(worksDTO);
 		}
@@ -220,15 +229,15 @@ public class WorksServiceImpl implements WorksService {
 		}
 		// 取出用户信息和作品信息
 		wlmtxt_user curUser = userService.get_user_byID(userID);
-		List<wlmtxt_works> worksAll = worksDao.listWorksAll();
+		List<String> worksIDAll = worksDao.listWorksIDAll();
 		/*
 		 * 计算当前用户对所有作品的评分，保存为一个map的list
 		 */
 		Map<String, Integer> myPointMap = new HashMap<String, Integer>();
 		Integer point = 0;
-		for (wlmtxt_works works : worksAll) {
-			point = userPointWork(curUser.getUser_id(), works.getWorks_id());
-			myPointMap.put(works.getWorks_id(), point);
+		for (String worksID : worksIDAll) {
+			point = userPointWork(curUser.getUser_id(), worksID);
+			myPointMap.put(worksID, point);
 		}
 		/*
 		 * 计算其他用户对所有作品的评分，保存为一个list
@@ -241,9 +250,9 @@ public class WorksServiceImpl implements WorksService {
 			// 排除当前用户
 			if (!otherUserID.equals(curUser.getUser_id())) {
 				Map<String, Integer> otherUserPointMap = new HashMap<String, Integer>();
-				for (wlmtxt_works works : worksAll) {
-					point = userPointWork(otherUserID, works.getWorks_id());
-					otherUserPointMap.put(works.getWorks_id(), point);
+				for (String worksID : worksIDAll) {
+					point = userPointWork(otherUserID, worksID);
+					otherUserPointMap.put(worksID, point);
 				}
 				allUserPointMap.put(otherUserID, otherUserPointMap);
 			}
@@ -326,8 +335,13 @@ public class WorksServiceImpl implements WorksService {
 		}
 
 		/*
-		 * 
+		 * TODO
 		 */
+		long stopTime = System.currentTimeMillis();
+		LOGGER.error("collaborativeFilteringByUser运行时间：" + (stopTime - startTime) + "毫秒");
+		/*
+		 * 
+		*/
 
 		return worksDTOList;
 	}
@@ -462,7 +476,7 @@ public class WorksServiceImpl implements WorksService {
 		/*
 		 * 
 		 */
-		long startTime = System.currentTimeMillis();
+		// long startTime = System.currentTimeMillis();
 		/*
 		 * 
 		 */
@@ -475,21 +489,24 @@ public class WorksServiceImpl implements WorksService {
 		Double dev = 0.0;
 		Double SO_FZ = 0.0;
 		int validUserDevNumAll = 0;
+		DevDTO devDTO;
+		int currentUserPointOtherWorks;
+		int validUserDevNum;
 		for (String worksID : worksIDAll) {
 			// 跳过此作品
 			if (worksID.equals(currentWorksID)) {
 				continue;
 			}
 			// WorksDev()计算差异值
-			DevDTO devDTO = devWorks(currentWorksID, worksID, currentUserID);
+			devDTO = devWorks(currentWorksID, worksID, currentUserID);
 			dev = devDTO.dev;
 			// thisWorksDevMap.put(works.getWorks_id(), dev);
 			/*
 			 * 遍历其他作品，用喜爱值加上差异值
 			 */
 			// 当前用户对这个遍历的作品的评分
-			int currentUserPointOtherWorks = userPointWork(currentUserID, worksID);
-			int validUserDevNum = devDTO.validUserDevNum;
+			currentUserPointOtherWorks = userPointWork(currentUserID, worksID);
+			validUserDevNum = devDTO.validUserDevNum;
 			SO_FZ = SO_FZ + (dev + currentUserPointOtherWorks) * validUserDevNum;
 			/*
 			 * 
@@ -510,7 +527,7 @@ public class WorksServiceImpl implements WorksService {
 		/*
 		 *
 		 */
-		long stopTime = System.currentTimeMillis();
+		// long stopTime = System.currentTimeMillis();
 		// LOGGER.error("结束时间：" + dateformat.format(stopTime));
 		// LOGGER.error("forecastPoint：" + forecastPoint + "；运行时间：" + (stopTime
 		// - startTime) + "毫秒");
@@ -1372,18 +1389,19 @@ public class WorksServiceImpl implements WorksService {
 		Double dev = 0.0;
 		// 有效的用户数
 		int validUserDevNum = 0;
-
+		int pointFirstWork;
+		int pointSecondWork;
 		for (String otherUserID : userIDListAll) {
 			// 跳过当前用户的喜爱值
 			if (otherUserID.equals(currentUserID)) {
 				continue;
 			}
 			// 对当前作品的评价
-			int pointFirstWork = userPointWork(otherUserID, wroksFirstID);
+			pointFirstWork = userPointWork(otherUserID, wroksFirstID);
 			// System.out.println("pointFirstWork:" + pointFirstWork);
 			if (pointFirstWork != 0) {
 				// 对便利的作品的评价
-				int pointSecondWork = userPointWork(otherUserID, wroksSecondID);
+				pointSecondWork = userPointWork(otherUserID, wroksSecondID);
 				// System.out.println("pointSecondWork:" + pointSecondWork);
 				// 需要同时对两个作品有评价
 				if (pointSecondWork != 0) {
