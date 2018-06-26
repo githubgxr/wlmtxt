@@ -37,7 +37,6 @@ import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.ReplyDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
-import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 import com.wlmtxt.domain.VO.WorksCategoryVO;
 import com.wlmtxt.domain.VO.WorksDetailVO;
@@ -451,7 +450,7 @@ public class WorksServiceImpl implements WorksService {
 		// 热度排序
 		for (int i = 0; i < worksDTOTemporaryList.size() - 1; i++) {
 			for (int j = 0; j < worksDTOTemporaryList.size() - i - 1; j++) {// 比较两个整数
-				if (worksDTOTemporaryList.get(j).getHot() > worksDTOTemporaryList.get(j + 1).getHot()) {
+				if (worksDTOTemporaryList.get(j).getHot() < worksDTOTemporaryList.get(j + 1).getHot()) {
 					WorksDTO temp = worksDTOTemporaryList.get(j);
 					worksDTOTemporaryList.set(j, worksDTOTemporaryList.get(j + 1));
 					worksDTOTemporaryList.set(j + 1, temp);
@@ -1215,7 +1214,7 @@ public class WorksServiceImpl implements WorksService {
 			// 查询作品
 			wlmtxt_works putWorks = worksDao.getWorksByID(works.getWorks_id());
 			addNotification(putWorks.getWorks_user_id(), "3",
-					putMan.getUser_username() + "喜欢了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
+					putMan.getUser_username() + "喜欢了您的作品" + putWorks.getWorks_title(), putWorks.getWorks_id());
 			/*
 			 * 
 			 */
@@ -1244,7 +1243,7 @@ public class WorksServiceImpl implements WorksService {
 			// 查询作品
 			wlmtxt_works putWorks = worksDao.getWorksByID(accept_works.getWorks_id());
 			addNotification(putWorks.getWorks_user_id(), "2",
-					putMan.getUser_username() + "收藏了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
+					putMan.getUser_username() + "收藏了您的作品" + putWorks.getWorks_title(), putWorks.getWorks_id());
 			/*
 			 * 
 			 */
@@ -1286,7 +1285,7 @@ public class WorksServiceImpl implements WorksService {
 		if (putWorks != null) {
 			// 评论
 			addNotification(putWorks.getWorks_user_id(), "4",
-					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_name(), putWorks.getWorks_id());
+					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_title(), putWorks.getWorks_id());
 		} else {
 			// 回复
 			wlmtxt_discuss discuss = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
@@ -1332,39 +1331,23 @@ public class WorksServiceImpl implements WorksService {
 	}
 
 	@Override
-	public MyAttentionVO listMyAttentionVO(String loginUser_id, MyAttentionVO myAttentionVO) {
-		List<FollowDTO> DTOList = new ArrayList<FollowDTO>();
+	public List<FollowDTO> listMyAttentionDTO(String user_id) {
+		List<FollowDTO> followDTOList = new ArrayList<FollowDTO>();
 
-		List<wlmtxt_follow> list = worksDao.listMyWorksByUserId(loginUser_id, myAttentionVO);
+		List<wlmtxt_follow> followList = worksDao.listFollowByActiveID(user_id);
 
-		int i = worksDao.getMyAttentionTotalRecords(loginUser_id);
-		myAttentionVO.setTotalRecords(i);
-		myAttentionVO.setTotalPages(((i - 1) / myAttentionVO.getPageSize()) + 1);
-		if (myAttentionVO.getPageIndex() <= 1) {
-			myAttentionVO.setHavePrePage(false);
-		} else {
-			myAttentionVO.setHavePrePage(true);
-		}
-		if (myAttentionVO.getPageIndex() >= myAttentionVO.getTotalPages()) {
-			myAttentionVO.setHaveNextPage(false);
-		} else {
-			myAttentionVO.setHaveNextPage(true);
-		}
-
-		for (wlmtxt_follow follow : list) {
+		for (wlmtxt_follow follow : followList) {
 			FollowDTO followDTO = new FollowDTO();
-			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(loginUser_id,
-					follow.getFollow_passive_user_id());
+			wlmtxt_follow mutualFollow = worksDao.findFollowByActiveUserId(user_id, follow.getFollow_passive_user_id());
 			if (mutualFollow != null) {
 				followDTO.setMutualFollow("1");
 			} else {
 				followDTO.setMutualFollow("2");
 			}
 			followDTO.setUser(userDao.get_user_byID(follow.getFollow_passive_user_id()));
-			DTOList.add(followDTO);
+			followDTOList.add(followDTO);
 		}
-		myAttentionVO.setFollowDTO(DTOList);
-		return myAttentionVO;
+		return followDTOList;
 	}
 
 	@Override

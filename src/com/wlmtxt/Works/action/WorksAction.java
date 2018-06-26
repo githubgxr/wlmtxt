@@ -30,6 +30,7 @@ import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryDTO;
 import com.wlmtxt.domain.DTO.CollectDTO;
 import com.wlmtxt.domain.DTO.DiscussWorkDTO;
+import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
@@ -255,12 +256,13 @@ public class WorksAction extends ActionSupport {
 		if (user == null) {
 			worksDTOList = worksService.collaborativeFilteringBySlopeOne(accept_works.getWorks_id(), null);
 		} else {
-			worksDTOList = worksService.collaborativeFilteringBySlopeOne(accept_works.getWorks_id(), user.getUser_id());
+			worksDTOList = worksService.collaborativeFilteringBySlopeOne(accept_works.getWorks_id(), null);
 		}
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
+		//
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(worksDTOList));
@@ -836,17 +838,15 @@ public class WorksAction extends ActionSupport {
 	 * 
 	 * @throws IOException
 	 */
-	public void listMyAttentionVO() throws IOException {
+	public void listMyAttentionDTO() throws IOException {
 		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
-		System.out.println("worksaction:" + myAttentionVO.toString());
-		myAttentionVO = worksService.listMyAttentionVO(user.getUser_id(), myAttentionVO);
-		System.out.println(myAttentionVO.toString());
+		List<FollowDTO> followDTOList = worksService.listMyAttentionDTO(user.getUser_id());
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write(gson.toJson(myAttentionVO));
+		response.getWriter().write(gson.toJson(followDTOList));
 	}
 
 	/**

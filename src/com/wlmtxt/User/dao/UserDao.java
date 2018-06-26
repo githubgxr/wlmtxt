@@ -33,19 +33,22 @@ public interface UserDao {
 
 	wlmtxt_first_menu findFirstMenu_single_second_menu_id(wlmtxt_second_menu second_menu);
 
-//	List<wlmtxt_works_keyword> listWorksKeyword_by_works_id(wlmtxt_works works);
+	// List<wlmtxt_works_keyword> listWorksKeyword_by_works_id(wlmtxt_works
+	// works);
 	wlmtxt_user get_user_byID(String user_id);
 
 	wlmtxt_follow findFollowBy_user_id(String active_user_id, String passive_user_id);
 
 	int deleteAllMyFollow(wlmtxt_user loginUser) throws Exception;
 
-	List<wlmtxt_follow> listFollowByLogin_user_id(String user_id);
+	List<wlmtxt_follow> listFollowByPassiveID(String user_id);
 
 	void noticeFans(wlmtxt_follow follow) throws Exception;
 
 	String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user);
 
-	wlmtxt_user myFansByFollow_passive_user_id(String user_id);
+	wlmtxt_user getUserByUserID(String user_id);
+
+	wlmtxt_follow getFollowBy_A_Follow_B(String userID, String user_id);
 
 }

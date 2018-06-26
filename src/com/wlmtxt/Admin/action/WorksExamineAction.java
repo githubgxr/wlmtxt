@@ -28,13 +28,23 @@ public class WorksExamineAction extends ActionSupport {
    private String recommendIdAll;
    private int  moveAction;
    private List<RecommendDTO> recommendDTOList;
-   
+   private String worksIdAll;
 public List<RecommendDTO> getRecommendDTOList() {
 	return recommendDTOList;
 }
 
 public void setRecommendDTOList(List<RecommendDTO> recommendDTOList) {
 	this.recommendDTOList = recommendDTOList;
+}
+
+
+
+public String getWorksIdAll() {
+	return worksIdAll;
+}
+
+public void setWorksIdAll(String worksIdAll) {
+	this.worksIdAll = worksIdAll;
 }
 
 public List<wlmtxt_recommend> getWlmtxt_recommendList() {
@@ -144,7 +154,8 @@ public void delete() throws IOException{
 	HttpServletResponse response = ServletActionContext.getResponse();
 	response.setContentType("text/html;charset=utf-8");
 	PrintWriter pw = response.getWriter();
-	if(worksExamineService.delete(wlmtxt_work.getWorks_id())){
+	System.out.println("aa"+worksIdAll);
+	if(worksExamineService.delete(worksIdAll)){
 		pw.write("1");
 	}else{
 		pw.write("2");

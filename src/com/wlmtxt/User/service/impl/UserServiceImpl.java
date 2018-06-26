@@ -12,14 +12,13 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.FollowDTO;
-import com.wlmtxt.domain.VO.MyFansVO;
 
 import util.TeamUtil;
 
 public class UserServiceImpl implements UserService {
 
 	private UserDao userDao;
-	
+
 	private WorksDao worksDao;
 
 	public WorksDao getWorksDao() {
@@ -148,16 +147,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void noticeAllMyFans(wlmtxt_user loginUser) throws Exception {
-		List<wlmtxt_follow> followList = userDao.listFollowByLogin_user_id(loginUser.getUser_id());
+		List<wlmtxt_follow> followList = userDao.listFollowByPassiveID(loginUser.getUser_id());
 		List<wlmtxt_user> list = new ArrayList<wlmtxt_user>();
 		for (wlmtxt_follow follow : followList) {
-			wlmtxt_user follower = userDao.myFansByFollow_passive_user_id(follow.getFollow_active_user_id());
+			wlmtxt_user follower = userDao.getUserByUserID(follow.getFollow_active_user_id());
 			list.add(follower);
 		}
 		wlmtxt_follow follow = new wlmtxt_follow();
 		for (wlmtxt_user user : list) {
 			if (isFollowedUser(loginUser.getUser_id(), user.getUser_id())) {
-				
+
 			} else {
 				follow.setFollow_id(TeamUtil.getUuid());
 				follow.setFollow_passive_user_id(user.getUser_id());
@@ -185,44 +184,28 @@ public class UserServiceImpl implements UserService {
 		return userDao.removeFollow(loginUser, accpet_user);
 	}
 
-	@Override 
-	public MyFansVO listMyFansVO(wlmtxt_user loginUser, MyFansVO myFansVO) {
-		List<wlmtxt_follow> listFollow = userDao.listFollowByLogin_user_id(loginUser.getUser_id());
-		wlmtxt_user user_follower = new wlmtxt_user();
-		List<wlmtxt_user> listFollower = new ArrayList<wlmtxt_user>();
+	@Override
+	public List<FollowDTO> listMyFansDTO(String userID) {
+		List<FollowDTO> followDTOList = new ArrayList<FollowDTO>();
+		//
+		List<wlmtxt_follow> listFollow = userDao.listFollowByPassiveID(userID);
 		for (wlmtxt_follow follow : listFollow) {
-			user_follower = userDao.myFansByFollow_passive_user_id(follow.getFollow_active_user_id());
-			listFollower.add(user_follower);
-		}
-		
-		int i =worksDao.totalFansNum(loginUser.getUser_id());
-		myFansVO.setTotalRecords(i);
-		myFansVO.setTotalPages(((i - 1) / myFansVO.getPageSize()) + 1);
-		if (myFansVO.getPageIndex() <= 1) {
-			myFansVO.setHavePrePage(false);
-		} else {
-			myFansVO.setHavePrePage(true);
-		}
-		if (myFansVO.getPageIndex() >= myFansVO.getTotalPages()) {
-			myFansVO.setHaveNextPage(false);
-		} else {
-			myFansVO.setHaveNextPage(true);
+			FollowDTO followDTO = new FollowDTO();
+			//
+			wlmtxt_user user = userDao.getUserByUserID(follow.getFollow_active_user_id());
+			followDTO.setUser(user);
+			// 判断有无关注这个用户
+			wlmtxt_follow mutualFollow = userDao.getFollowBy_A_Follow_B(userID, user.getUser_id());
+			if (mutualFollow != null) {
+				followDTO.setMutualFollow("1");
+			} else {
+				followDTO.setMutualFollow("2");
+			}
+
+			followDTOList.add(followDTO);
 		}
 
-		myFansVO.setUserlist(listFollower);
-		return myFansVO;
+		return followDTOList;
 	}
 
-	/*
-	 * @Override public List<wlmtxt_works_keyword> listSecondOfMyWorks(String
-	 * user_id) { List<wlmtxt_works> listWorks = userDao.listMyWorks(user_id);
-	 * List<wlmtxt_works_keyword> listWorksKeyword = new
-	 * ArrayList<wlmtxt_works_keyword>(); for (int i = 0; i < listWorks.size();
-	 * i++) { List<wlmtxt_works_keyword> listWorksKeyword_single_works_id =
-	 * userDao.listWorksKeyword_by_works_id(listWorks.get(i)); // for (int j =
-	 * 0; j < listWorksKeyword_single_works_id.size(); j++) { //
-	 * listWorksKeyword.add(listWorksKeyword_single_works_id.get(j)); // }
-	 * listWorksKeyword.addAll(listWorksKeyword_single_works_id); } return
-	 * listWorksKeyword; }
-	 */
 }

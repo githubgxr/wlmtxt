@@ -3,10 +3,8 @@ package com.wlmtxt.User.service;
 import java.util.List;
 
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
-import com.wlmtxt.domain.DO.wlmtxt_follow;
 import com.wlmtxt.domain.DO.wlmtxt_user;
-import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
-import com.wlmtxt.domain.VO.MyFansVO;
+import com.wlmtxt.domain.DTO.FollowDTO;
 
 public interface UserService {
 
@@ -26,7 +24,7 @@ public interface UserService {
 
 	List<wlmtxt_first_menu> listFirstMenu(String user_id);
 
-//	List<wlmtxt_works_keyword> listSecondOfMyWorks(String user_id);
+	// List<wlmtxt_works_keyword> listSecondOfMyWorks(String user_id);
 	wlmtxt_user get_user_byID(String user_id);
 
 	boolean isFollowedUser(String user_id, String user_id2);
@@ -39,6 +37,6 @@ public interface UserService {
 
 	String removeFollow(wlmtxt_user loginUser, wlmtxt_user accpet_user);
 
-	MyFansVO listMyFansVO(wlmtxt_user loginUser, MyFansVO myFansVO);
+	List<FollowDTO> listMyFansDTO(String userID);
 
 }

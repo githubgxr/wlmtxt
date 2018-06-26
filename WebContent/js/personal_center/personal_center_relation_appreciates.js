@@ -11,6 +11,7 @@ function listLike(){
 	xhr.open("POST","/wlmtxt/Works/Works_listMyLikeList");
 	xhr.send(null);
 	xhr.onreadystatechange=function(){
+		if (xhr.readyState == 4 && xhr.status == 200) {
 		var relation_like_response=JSON.parse(xhr.responseText);
 		for(var i=0;i<relation_like_response.length;i++){
 			var relation_like_str='<li class="list_video_item">';
@@ -49,7 +50,7 @@ function listLike(){
 			 relation_like_str+='</div>';
 			 relation_like_str+='</li>';
 			$("#relation_appreciates_list_container").append(relation_like_str);
-		}
+		}}
 	}
 }
 

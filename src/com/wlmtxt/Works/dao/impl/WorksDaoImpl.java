@@ -24,7 +24,6 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DO.wlmtxt_works_keyword;
-import com.wlmtxt.domain.VO.MyAttentionVO;
 import com.wlmtxt.domain.VO.MyWorksVO;
 
 import util.TeamUtil;
@@ -674,12 +673,10 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public List<wlmtxt_follow> listMyWorksByUserId(String user_id, MyAttentionVO myWorksVO) {
+	public List<wlmtxt_follow> listFollowByActiveID(String user_id) {
 		String hql = " from wlmtxt_follow  where follow_active_user_id='" + user_id
 				+ "' order by follow_gmt_create desc";
 		Query query = getSession().createQuery(hql);
-		query.setFirstResult((myWorksVO.getPageIndex() - 1) * myWorksVO.getPageSize());
-		query.setMaxResults(myWorksVO.getPageSize());
 		List<wlmtxt_follow> list = query.list();
 		return list;
 	}
