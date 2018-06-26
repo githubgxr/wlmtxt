@@ -136,10 +136,8 @@ public class WorksServiceImpl implements WorksService {
 		Map<String, Double> worksForecastPointMap = new HashMap<String, Double>();
 		List<String> worksAll = worksDao.listWorksIDAll();
 		Double worksForecastPoint;
+		worksAll.remove(currentWorksID);
 		for (String worksID : worksAll) {
-			if (worksID.equals(currentWorksID)) {
-				continue;
-			}
 			if (worksDao.isPlayHistoryByWorksAndUser(worksID, currentUserID)) {
 				continue;
 			}
@@ -500,11 +498,9 @@ public class WorksServiceImpl implements WorksService {
 		DevDTO devDTO;
 		int currentUserPointOtherWorks;
 		int validUserDevNum;
+		worksIDAll.remove(currentWorksID);
 		for (String worksID : worksIDAll) {
 			// 跳过此作品
-			if (worksID.equals(currentWorksID)) {
-				continue;
-			}
 			// WorksDev()计算差异值
 			devDTO = devWorks(currentWorksID, worksID, currentUserID);
 			dev = devDTO.dev;
@@ -1399,11 +1395,9 @@ public class WorksServiceImpl implements WorksService {
 		int validUserDevNum = 0;
 		int pointFirstWork;
 		int pointSecondWork;
+		userIDListAll.remove(currentUserID);
 		for (String otherUserID : userIDListAll) {
 			// 跳过当前用户的喜爱值
-			if (otherUserID.equals(currentUserID)) {
-				continue;
-			}
 			// 对当前作品的评价
 			pointFirstWork = userPointWork(otherUserID, wroksFirstID);
 			// System.out.println("pointFirstWork:" + pointFirstWork);
