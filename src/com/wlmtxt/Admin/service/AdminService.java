@@ -7,6 +7,7 @@ import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DTO.CategoryListDTO;
 import com.wlmtxt.domain.VO.AdminVO;
+import com.wlmtxt.domain.VO.CountVO;
 
 public interface AdminService {
 	/**
@@ -130,6 +131,11 @@ public interface AdminService {
     */
 
 	public boolean updatePassword(wlmtxt_admin admin);
+   /*
+    * 统计
+    */
+
+	public void count(CountVO countVO);
 
 
 	

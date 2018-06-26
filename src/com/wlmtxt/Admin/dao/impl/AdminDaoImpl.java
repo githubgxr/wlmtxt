@@ -11,7 +11,10 @@ import com.wlmtxt.Admin.dao.AdminDao;
 import com.wlmtxt.domain.DO.wlmtxt_admin;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
+import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.VO.AdminVO;
+import com.wlmtxt.domain.VO.CountVO;
 
 public class AdminDaoImpl implements AdminDao {
 
@@ -237,7 +240,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public void getAdminListByPage(AdminVO adminVO) {
-		// TODO Auto-generated method stub
+	
 		Session session = getSession();
 		List<wlmtxt_admin> adminList = new ArrayList<wlmtxt_admin>();
 		String hql = "from wlmtxt_admin where 1=1 ";
@@ -276,4 +279,126 @@ public class AdminDaoImpl implements AdminDao {
 			return false;
 		}
 	}
+
+	@Override
+	public int count(CountVO countVO) {
+		Session session = getSession();
+		String start_time = "";
+		String stop_time = "";
+		
+		String hql = " select count(*) from wlmtxt_user where 1=1 ";
+				
+		if(countVO.getStart_time()!=null && countVO.getStart_time().length()>0) {
+			start_time=countVO.getStart_time();
+		}
+		if(countVO.getStop_time()!=null && countVO.getStop_time().length()>0) {
+			stop_time=countVO.getStop_time();
+		}
+			hql+=" and user_gmt_modified between str_to_date('"+start_time+"', '%Y-%m-%d %H:%i:%s') and str_to_date('"+stop_time+"', '%Y-%m-%d %H:%i:%s')";
+		
+		long count = (long) session.createQuery(hql).uniqueResult();
+		
+		session.clear();
+		return (int) count;
+	}
+
+	@Override
+	public int countWorks(CountVO countVO) {
+		Session session = getSession();
+		String start_time = "";
+		String stop_time = "";
+		Long i;
+		String hql = "select count(*) from  wlmtxt_works where 1=1 ";
+				
+		if(countVO.getStart_time()!=null && countVO.getStart_time().length()>0) {
+			start_time=countVO.getStart_time();
+		}
+		if(countVO.getStop_time()!=null && countVO.getStop_time().length()>0) {
+			stop_time=countVO.getStop_time();
+		}
+			hql+=" and works_gmt_modified between str_to_date('"+start_time+"', '%Y-%m-%d %H:%i:%s') and str_to_date('"+stop_time+"', '%Y-%m-%d %H:%i:%s')";
+		Query query=session.createQuery(hql);
+		
+		i=(Long) query.uniqueResult();
+		session.clear();
+		System.out.println(i);
+		return i.intValue();
+	}
+
+	@Override
+	public int countWorksHistory(CountVO countVO) {
+		Session session = getSession();
+		String start_time = "";
+		String stop_time = "";
+		Long i;
+		String hql = "select count(*) from wlmtxt_play_history where 1=1 ";
+				
+		if(countVO.getStart_time()!=null && countVO.getStart_time().length()>0) {
+			start_time=countVO.getStart_time();
+		}
+		if(countVO.getStop_time()!=null && countVO.getStop_time().length()>0) {
+			stop_time=countVO.getStop_time();
+		}
+			hql+=" and play_history_gmt_modified between str_to_date('"+start_time+"', '%Y-%m-%d %H:%i:%s') and str_to_date('"+stop_time+"', '%Y-%m-%d %H:%i:%s')";
+		Query query=session.createQuery(hql);
+		
+		i=(Long) query.uniqueResult();
+		session.clear();
+		System.out.println(i);
+		return i.intValue();
+	}
+
+	@Override
+	public List<wlmtxt_second_menu> getwlmtxt_second_menuAll() {
+		Session session = getSession();
+		String hql = "from wlmtxt_second_menu order by second_menu_gmt_modified desc";
+		Query query = session.createQuery(hql);
+		List<wlmtxt_second_menu> wlmtxt_second_menuList = query.list();
+		return wlmtxt_second_menuList;
+	}
+
+	@Override
+	public List<wlmtxt_works> getworksBysecone_menu_id(CountVO countVO, wlmtxt_second_menu second_menu) {
+		Session session = getSession();
+		String start_time = "";
+		String stop_time = "";
+		Long i;
+		String hql = "from wlmtxt_works where works_second_menu_id='"+second_menu.getSecond_menu_id()+"' ";
+				
+		if(countVO.getStart_time()!=null && countVO.getStart_time().length()>0) {
+			start_time=countVO.getStart_time();
+		}
+		if(countVO.getStop_time()!=null && countVO.getStop_time().length()>0) {
+			stop_time=countVO.getStop_time();
+		}
+			hql+=" and works_gmt_modified between str_to_date('"+start_time+"', '%Y-%m-%d %H:%i:%s') and str_to_date('"+stop_time+"', '%Y-%m-%d %H:%i:%s')";
+		Query query=session.createQuery(hql);
+		List<wlmtxt_works> wlmtxt_worksList = query.list();
+		session.clear();
+		return wlmtxt_worksList;
+	}
+
+	@Override
+	public int gethistoryByworkid(CountVO countVO, wlmtxt_works work) {
+		Session session = getSession();
+		String start_time = "";
+		String stop_time = "";
+		Long i;
+		String hql = "select count(*) from wlmtxt_play_history where play_history_works_id='"+work.getWorks_id()+"' ";
+				
+		if(countVO.getStart_time()!=null && countVO.getStart_time().length()>0) {
+			start_time=countVO.getStart_time();
+		}
+		if(countVO.getStop_time()!=null && countVO.getStop_time().length()>0) {
+			stop_time=countVO.getStop_time();
+		}
+			hql+=" and play_history_gmt_modified between str_to_date('"+start_time+"', '%Y-%m-%d %H:%i:%s') and str_to_date('"+stop_time+"', '%Y-%m-%d %H:%i:%s')";
+		Query query=session.createQuery(hql);
+		
+		i=(Long) query.uniqueResult();
+		session.clear();
+		System.out.println(i);
+		return i.intValue();
+	}
+
 }
