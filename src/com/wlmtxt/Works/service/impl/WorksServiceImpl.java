@@ -450,7 +450,7 @@ public class WorksServiceImpl implements WorksService {
 		// 热度排序
 		for (int i = 0; i < worksDTOTemporaryList.size() - 1; i++) {
 			for (int j = 0; j < worksDTOTemporaryList.size() - i - 1; j++) {// 比较两个整数
-				if (worksDTOTemporaryList.get(j).getHot() > worksDTOTemporaryList.get(j + 1).getHot()) {
+				if (worksDTOTemporaryList.get(j).getHot() < worksDTOTemporaryList.get(j + 1).getHot()) {
 					WorksDTO temp = worksDTOTemporaryList.get(j);
 					worksDTOTemporaryList.set(j, worksDTOTemporaryList.get(j + 1));
 					worksDTOTemporaryList.set(j + 1, temp);
