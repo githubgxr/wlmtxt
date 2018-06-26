@@ -64,6 +64,7 @@ function listMyFansByPage(pageIndex) {
 
 			} else {
 				$("#fans_btn").css("display", "none");
+				$("#wdgz_main").append('<img src="/wlmtxt/img/no_message_bg.png" style="width:250px;height:250px;margin:30px 240px 0px 240px;float:left;"/><div style="color:#99a2aa;font-size：16px;text-align:center;margin:0 0 50px 0;">还没有粉丝哦，快去找好友关注吧！</div>');
 			}
 		}
 	}

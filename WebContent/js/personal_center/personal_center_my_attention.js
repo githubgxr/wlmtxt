@@ -57,6 +57,7 @@ function listMyAttentionByPage(pageIndex) {
 				}
 			} else {
 				$("#focus_btn").css("display", "none");
+				$("#wdgz_main").append('<img src="/wlmtxt/img/no_message_bg.png" style="width:250px;height:250px;margin:30px 240px 0px 240px;float:left;"/><div style="color:#99a2aa;font-size：16px;text-align:center;margin:0 0 50px 0;">还没有关注人哦，快去关注好友吧！</div>');
 			}
 		}
 	}

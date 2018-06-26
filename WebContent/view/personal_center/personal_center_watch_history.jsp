@@ -27,7 +27,7 @@
 					<i class="header_line"></i>
 					<h3>观看历史</h3>
 
-					<a class="button_a" onclick="deleteAllMyHistory()">全部清空</a>
+					<a id="history_delete_all" style="display:none;" class="button_a" onclick="deleteAllMyHistory()">全部清空</a>
 				</div>
 				<!--主体部分-->
 				<div class="llls_content list_container">
