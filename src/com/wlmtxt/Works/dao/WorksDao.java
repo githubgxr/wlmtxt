@@ -19,107 +19,45 @@ import com.wlmtxt.domain.VO.MyWorksVO;
 
 public interface WorksDao {
 
-	void saveLike(wlmtxt_like like);
+	void addNotification(wlmtxt_notification notification);
 
-	wlmtxt_like findLike(String like_user_id, String like_works_id);
+	void addPlayHistoryByFileName(wlmtxt_play_history history);
 
-	void removeLike(String user_id, String like_works_id);
+	int countCollectNum(String works_id);
 
-	wlmtxt_collect findCollect(String collect_user_id, String collect_works_id);
+	int countLikeNum(String works_id);
 
-	void removeCollect(String collect_user_id, String collect_works_id);
+	int countUserPlayWorks(String userID, String worksID);
 
-	void deletePlayHistory(String play_history_id);
+	void deleteAllMyHistory(String userID);
 
-	void saveCollect(wlmtxt_collect new_collect);
+	void deleteDisscuss(String discuss_id);
 
-	wlmtxt_download_history findDownloadHistoryBy_download_history_user_id_And_download_history_works_id(
-			String download_history_user_id, String download_history_works_id);
+	void deleteMyWorks(String works_id);
 
 	// void
 	// removeDownloadHistoryBy_download_history_user_id_And_download_history_works_id(String
 	// download_history_user_id,
 	// String download_history_works_id) ;
 
-	void saveDownloadHistory(wlmtxt_download_history new_download_history);
+	void deletePlayHistory(String play_history_id);
 
-	void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works);
+	wlmtxt_collect findCollect(String collect_user_id, String collect_works_id);
 
-	void saveKeyword(wlmtxt_keyword newkeywords);
-
-	void saveWord(wlmtxt_works_keyword works_keyword);
-
-	void saveWorks(wlmtxt_works accept_works);
-
-	List<wlmtxt_first_menu> listFirstMenu();
-
-	List<wlmtxt_second_menu> listSecondMenu();
-
-	List<wlmtxt_second_menu> listSecondMenuByFirstMenuID(String first_menu_id);
-
-	wlmtxt_second_menu getSecondMenuByID(String works_second_menu_id);
-
-	wlmtxt_first_menu getFirstMenuByID(String second_menu_first_menu_id);
-
-	List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO);
-
-	int getMyWorksTotalRecords(String user_id);
-
-	void deleteMyWorks(String works_id);
-
-	void deleteAllMyHistory(String userID);
-
-	wlmtxt_works getWorksByID(String works_id);
-
-	wlmtxt_works getWorksByFileName(String fileName);
-
-	List<wlmtxt_discuss> getDiscussListByFatherID(String works_id);
-
-	void saveDiscuss(wlmtxt_discuss accpet_discuss);
-
-	List<wlmtxt_works> listWorksAll();
-
-	List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id);
-
-	List<wlmtxt_second_menu> listSecondMenuByFather(String second_menu_first_menu_id);
-
-	int totalPlayNum(String works_id);
-
-	int countCollectNum(String works_id);
-
-	int countLikeNum(String works_id);
-
-	List<wlmtxt_works_keyword> listKeyWordByByWorksID(String worksID);
-
-	wlmtxt_keyword getWordByID(String works_keyword_keyword_id);
-
-	List<wlmtxt_works> listWorksAllByUserId(String user_id);
-
-	List<wlmtxt_works> getWorksByPage(int pageIndex, int pageSize);
-
-	List<wlmtxt_works> getWorksBySecondMenuAndPage(int pageIndex, int pageSize, String SecondMenuID);
-
-	List<wlmtxt_works> getWorksByFirstMenuAndPage(int pageIndex, int pageSize, String FirstMenuID);
-
-	int getLikeNum(String works_id);
-
-	int getCollectNum(String works_id);
-
-	List<wlmtxt_follow> listFollowByActiveID(String user_id);
-
-	int getMyAttentionTotalRecords(String user_id);
+	wlmtxt_download_history findDownloadHistoryBy_download_history_user_id_And_download_history_works_id(
+			String download_history_user_id, String download_history_works_id);
 
 	wlmtxt_follow findFollowByActiveUserId(String user_id, String follow_passive_user_id);
 
-	int getPlayHistoryNumByFileName(String fileName);
+	wlmtxt_like findLike(String like_user_id, String like_works_id);
 
-	int getPlayNum(String works_id);
+	int getCollectNum(String works_id);
 
-	void addPlayHistoryByFileName(wlmtxt_play_history history);
+	wlmtxt_discuss getDiscussByID(String discuss_id);
 
-	List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID);
+	int getDiscussCountByUserIDAndWorkID(String userID, String worksID);
 
-	List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID);
+	List<wlmtxt_discuss> getDiscussListByFatherID(String works_id);
 
 	/**
 	 * 获取评论的数量
@@ -129,32 +67,68 @@ public interface WorksDao {
 	 */
 	int getDiscussNum(String works_id);
 
-	List<wlmtxt_works> listWorksByDay();
+	wlmtxt_first_menu getFirstMenuByID(String second_menu_first_menu_id);
 
-	List<wlmtxt_works> listWorksByMonth();
+	int getLikeNum(String works_id);
 
-	List<wlmtxt_works> listWorksByWeek();
+	int getMyAttentionTotalRecords(String user_id);
 
-	void addNotification(wlmtxt_notification notification);
+	int getMyWorksTotalRecords(String user_id);
 
-	int totalFansNum(String user_id);
+	int getPlayHistoryNumByFileName(String fileName);
 
-	int totalFollowingNum(String user_id);
+	int getPlayNum(String works_id);
 
-	wlmtxt_discuss getDiscussByID(String discuss_id);
+	wlmtxt_second_menu getSecondMenuByID(String works_second_menu_id);
 
-	List<wlmtxt_notification> listUserNotification(String user_id);
+	wlmtxt_keyword getWordByID(String works_keyword_keyword_id);
 
-	List<wlmtxt_like> listLikeByUserID(String user_id);
+	wlmtxt_works getWorksByFileName(String fileName);
 
-	List<wlmtxt_discuss> listDiscussByUserID(String user_id);
+	List<wlmtxt_works> getWorksByFirstMenuAndPage(int pageIndex, int pageSize, String FirstMenuID);
 
-	List<wlmtxt_collect> listMycollectList(String user_id);
+	wlmtxt_works getWorksByID(String works_id);
 
-	void deleteDisscuss(String discuss_id);
+	List<wlmtxt_works> getWorksByPage(int pageIndex, int pageSize);
+
+	List<wlmtxt_works> getWorksBySecondMenuAndPage(int pageIndex, int pageSize, String SecondMenuID);
 
 	List<wlmtxt_user> listAttentionUser(String user_id);
 	// List<wlmtxt_works> listWorks10OrderHot();
+
+	List<wlmtxt_discuss> listDiscussByUserID(String user_id);
+
+	List<wlmtxt_first_menu> listFirstMenu();
+
+	List<wlmtxt_follow> listFollowByActiveID(String user_id);
+
+	List<wlmtxt_works_keyword> listKeyWordByByWorksID(String worksID);
+
+	List<wlmtxt_like> listLikeByUserID(String user_id);
+
+	List<wlmtxt_collect> listMycollectList(String user_id);
+
+	List<wlmtxt_works> listMyWorksByUserIDAndNum(String user_id, MyWorksVO myWorksVO);
+
+	List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID);
+
+	List<wlmtxt_play_history> listPlayHistoryListByUserID(String userID);
+
+	List<wlmtxt_second_menu> listSecondMenu();
+
+	List<wlmtxt_second_menu> listSecondMenuByFather(String second_menu_first_menu_id);
+
+	List<wlmtxt_second_menu> listSecondMenuByFirstMenuID(String first_menu_id);
+
+	List<String> listUserIDAll();
+
+	List<wlmtxt_notification> listUserNotification(String user_id);
+
+	List<wlmtxt_works> listWorksAll();
+
+	List<wlmtxt_works> listWorksAllByUserId(String user_id);
+
+	List<wlmtxt_works> listWorksByDay();
 
 	/**
 	 * 根据关键词内容获取作品列表
@@ -164,7 +138,39 @@ public interface WorksDao {
 	 */
 	List<wlmtxt_works> listWorksByKeywordName(String keyword_name);
 
-	int countUserPlayWorks(String userID, String worksID);
+	List<wlmtxt_works> listWorksByMonth();
+
+	List<wlmtxt_works> listWorksBySecondMenuID(String second_menu_id);
+
+	List<wlmtxt_works> listWorksByWeek();
+
+	List<String> listWorksIDAll();
+
+	void removeCollect(String collect_user_id, String collect_works_id);
+
+	void removeDownloadHistory(wlmtxt_user user, wlmtxt_works accept_works);
+
+	void removeLike(String user_id, String like_works_id);
+
+	void saveCollect(wlmtxt_collect new_collect);
+
+	void saveDiscuss(wlmtxt_discuss accpet_discuss);
+
+	void saveDownloadHistory(wlmtxt_download_history new_download_history);
+
+	void saveKeyword(wlmtxt_keyword newkeywords);
+
+	void saveLike(wlmtxt_like like);
+
+	void saveWord(wlmtxt_works_keyword works_keyword);
+
+	void saveWorks(wlmtxt_works accept_works);
+
+	int totalFansNum(String user_id);
+
+	int totalFollowingNum(String user_id);
+
+	int totalPlayNum(String works_id);
 
 	List<wlmtxt_user> userListAll();
 	/*
@@ -181,9 +187,5 @@ public interface WorksDao {
 	 * 
 	 * 
 	 */
-
-	int getDiscussCountByUserIDAndWorkID(String userID, String worksID);
-
-	List<String> userIDListAll();
 
 }

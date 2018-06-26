@@ -98,7 +98,7 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
-	public List<String> userIDListAll() {
+	public List<String> listUserIDAll() {
 		String hql = "select user_id from wlmtxt_user";
 		Query query = getSession().createQuery(hql);
 		List<String> list = query.list();
@@ -457,11 +457,19 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<String> listWorksIDAll() {
+		String hql = "select works_id from wlmtxt_works works where works.works_deleted!='1' and works_passed='1'";
+		Query query = getSession().createQuery(hql);
+		List<String> list = query.list();
+		return list;
+	}
+
+	@Override
 	public List<wlmtxt_works> listWorksAll() {
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
-		List<wlmtxt_works> worksList = query.list();
-		return worksList;
+		List<wlmtxt_works> list = query.list();
+		return list;
 	}
 
 	@Override
