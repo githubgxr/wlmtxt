@@ -1,5 +1,4 @@
 /*导航是210px宽度，总宽度960px*/
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -9,9 +8,7 @@
 #llls_main {
 	width: 730px;
 	height: auto;
-	
 }
-
 
 /*头部*/
 
@@ -20,7 +17,6 @@
 	height: 35px;
 	float: left;
 }*/
-
 #llls_main .llls_header .header_line {
 	float: left;
 }
@@ -37,18 +33,117 @@
 	margin: 0 14px 0 0;
 }
 
-
 /*主体*/
-
 #llls_main .llls_content {
 	width: 100%;
 	height: auto;
 	float: left;
 }
 
-
-
-#llls_list_container{
+#llls_list_container {
 	width: 100%;
 	overflow: hidden;
+}
+
+/*时间轴*/
+.history_list {
+	width: 100%;
+	float: left;
+}
+
+.history_list_time_div {
+	/* 	width: 150px; */
+	height: 170px;
+	float: left;
+	margin: 0 20px 0 0;
+}
+
+.history_list_time {
+	position: relative;
+	float: left;
+	width: 40px;
+	height: 170px;
+	border-right: solid 1px #e5e9ef;
+}
+
+.history_list_time .history_round_icon {
+	position: absolute;
+	right: -5px;
+	top: 70px;
+	border: 5px dashed #e5e9ef;
+	border-right-width: 5px;
+	border-left-style: dashed;
+	border-top-color: rgb(229, 233, 239);
+	border-bottom-color: rgb(229, 233, 239);
+	border-right-width: 0;
+	border-left-style: solid;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+}
+
+.history_list_time_text {
+	width: auto;
+	height: 150px;
+	line-height: 150px;
+	margin: 0 0px 0 20px;
+	float: left;
+}
+
+.history_video_info {
+	width: 250px;
+	height: 130px;
+	float: left;
+	margin: 20px 10px 20px 20px;
+}
+.history_video_info .history_video_title{
+	width:100%;
+	height:45px;
+	line-height:20px;
+	float:left;
+	font-size:14px;
+	color:#333;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin:10px 0 10px 0;
+}
+.history_video_info .history_video_title:hover{
+	cursor:pointer;
+	color:#1cd388;
+}
+.history_video_info .history_user_info{
+	width:100%;
+	float:left;
+	height:35px;
+	margin:25px 0 0 0;
+	
+}
+.history_user_info img{
+	width: 35px;
+	height: 35px;
+	float: left;
+	border-radius: 50%;
+	margin:0 10px 0 0;
+}
+.history_user_info .history_user_username{
+	width:150px;
+	height: 35px;
+	float: left;
+	line-height:40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color:#1cd388;
+}
+.history_user_info .history_delete{
+	width:30px;
+	height:35px;
+	line-height:40px;
+	float:left;
+	color:#1cd388;
+	margin:0 0 0 10px;
+}
+.history_user_info .history_delete:hover{
+	cursor:pointer;
+	color:#1cd388;
+	text-decoration: underline;
 }

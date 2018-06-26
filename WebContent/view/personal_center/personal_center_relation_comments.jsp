@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/lyq/ywxg_comments.css" />
 <link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
+<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx.css" />
 </head>
 <body>
 	<div class="wlmtxt_main">
@@ -24,9 +25,11 @@
 				<!--浏览历史头部-->
 				<jsp:include page="/personal_center_relation_nav.jsp" flush="true"></jsp:include>
 				<!--主体部分-->
-				<div class="llls_content list_container">
+				<div class="llls_content list_container" style="margin-bottom:30px;">
+				</div>
+				<%-- <div class="llls_content list_container">
 					<ul id="my_relation_comments_container">
-						<%-- <li class="list_video_item ">
+						<li class="list_video_item ">
 								<!--视频链接-->
 								<a class="video_list_item_wrap ">
 									<div class="video_cover ">
@@ -57,10 +60,10 @@
 								<div class="video_options ">
 									<a class="video_delete_btn ">删除评论</a>
 								</div>
-							</li> --%>
+							</li>
 					</ul>
 
-				</div>
+				</div> --%>
 				<!-----翻页----------------------->
 				<!-- <div class="page_container ">
 						<div class="page_component_container ">
@@ -85,7 +88,7 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	<div class="my_comments">我评论的</div>
+	<div class="my_comments" style="display:none;">我评论的</div>
 	<script type="text/javascript">
 		var clearfix_a = $(".clearfix a");
 		$.each(clearfix_a, function(i) {

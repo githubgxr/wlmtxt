@@ -70,6 +70,7 @@ function collaborativeFilteringBySlopeOne() {
 	}
 }
 function getWorksDetailVO() {
+	document.getElementById("responseComment").value = "";
 	/* checkLogin(); */
 	// 视频id
 	video_id = $.trim($("#video_id").html());
@@ -175,7 +176,7 @@ function getWorksDetailVO() {
 						+ '" class="user_img comment_user_img to_other_data" src="/wlmtxt/Works/Works_getImg?imgName='
 						+ detail_response.discussDTOList[numDiss].user.user_avatar
 						+ '" onclick="to_other_data(this.id)"/>';
-				comment_list_str += '<div class="comment_user_name to_other_data" id="'
+				comment_list_str += '<div style="width:100%;text-align:center;" class="comment_user_name to_other_data" onclick="to_other_data(this.id)" id="'
 						+ detail_response.discussDTOList[numDiss].discuss.discuss_user_id
 						+ '">'
 						+ detail_response.discussDTOList[numDiss].user.user_username
@@ -192,7 +193,9 @@ function getWorksDetailVO() {
 						+ '</div>';
 				if (user_id != null) {
 					if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == user_id) {
-
+						comment_list_str += '<div id="'
+							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
+							+ '" class="comment_delete comment_response_operate" onclick="response_operate(this)">回复</div>';
 						comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
 								+ detail_response.discussDTOList[numDiss].discuss.discuss_id
 								+ '" onclick="delete_operate(this)">删除</div>';
@@ -209,21 +212,23 @@ function getWorksDetailVO() {
 				if (detail_response.discussDTOList[numDiss].replyDTO.length !== 0) {
 					for (var res = 0; res < detail_response.discussDTOList[numDiss].replyDTO.length; res++) {
 						comment_list_str += '<div class="comment_list_content_right" style="margin:10px 0;">';
-						comment_list_str += '<span style="color:#1cd388;">';
+						comment_list_str += '<span onclick="to_other_data(this.id)" id="'
+							+ detail_response.discussDTOList[numDiss].replyDTO[res].user.user_id
+							+ '" style="color:#1cd388;" class="to_other_data" >';
 						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].user.user_username;
 						comment_list_str += ':</span>';
 						comment_list_str += '<span>';
 						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_content;
 						comment_list_str += '</span>';
 
+						comment_list_str += '<div style="float:right"><span style="color:#bfbfbf;float:right;margin:0 10px;">';
+						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_gmt_create;
+						comment_list_str += '</span>';
 						if (detail_response.discussDTOList[numDiss].replyDTO[res].user.user_id == user_id) {
 							comment_list_str += '<span style="style="color:#bfbfbf;float:right;" class="comment_delete comment_delete_operate" id="'
 									+ detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_id
-									+ '" onclick="delete_operate(this)">删除</span>';
+									+ '" onclick="delete_operate(this)">删除</span></div>';
 						}
-						comment_list_str += '<span style="color:#bfbfbf;float:right;margin:0 10px;">';
-						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_gmt_create;
-						comment_list_str += '</span>';
 						comment_list_str += '</div>';
 
 					}
@@ -383,7 +388,7 @@ function check_response() {
 	xhr_response.onreadystatechange = function() {
 		if (xhr_response.readyState == 4 && xhr_response.status == 200) {
 			if (xhr_response.responseText == "1") {
-				document.getElementById("responseComment").innerHTML = "";
+				
 				$("#mymodal").modal("toggle");
 				toastr.success("回复评论成功！");
 

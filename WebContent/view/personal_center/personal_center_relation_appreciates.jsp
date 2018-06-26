@@ -91,7 +91,7 @@
 			<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 		</div>
 		
-		<div class="my_appreciates">我点赞的</div>
+		<div class="my_appreciates" style="display:none;">我点赞的</div>
 		<script type="text/javascript">
 			var clearfix_a=$(".clearfix a");
 			$.each(clearfix_a,function(i){
