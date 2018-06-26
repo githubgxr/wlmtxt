@@ -88,7 +88,7 @@
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	<div class="my_comments">我评论的</div>
+	<div class="my_comments" style="display:none;">我评论的</div>
 	<script type="text/javascript">
 		var clearfix_a = $(".clearfix a");
 		$.each(clearfix_a, function(i) {
