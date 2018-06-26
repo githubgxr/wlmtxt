@@ -192,7 +192,9 @@ function getWorksDetailVO() {
 						+ '</div>';
 				if (user_id != null) {
 					if (detail_response.discussDTOList[numDiss].discuss.discuss_user_id == user_id) {
-
+						comment_list_str += '<div id="'
+							+ detail_response.discussDTOList[numDiss].discuss.discuss_id
+							+ '" class="comment_delete comment_response_operate" onclick="response_operate(this)">回复</div>';
 						comment_list_str += '<div class="comment_delete comment_delete_operate" id="'
 								+ detail_response.discussDTOList[numDiss].discuss.discuss_id
 								+ '" onclick="delete_operate(this)">删除</div>';
@@ -216,14 +218,14 @@ function getWorksDetailVO() {
 						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_content;
 						comment_list_str += '</span>';
 
+						comment_list_str += '<div style="float:right"><span style="color:#bfbfbf;float:right;margin:0 10px;">';
+						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_gmt_create;
+						comment_list_str += '</span>';
 						if (detail_response.discussDTOList[numDiss].replyDTO[res].user.user_id == user_id) {
 							comment_list_str += '<span style="style="color:#bfbfbf;float:right;" class="comment_delete comment_delete_operate" id="'
 									+ detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_id
-									+ '" onclick="delete_operate(this)">删除</span>';
+									+ '" onclick="delete_operate(this)">删除</span></div>';
 						}
-						comment_list_str += '<span style="color:#bfbfbf;float:right;margin:0 10px;">';
-						comment_list_str += detail_response.discussDTOList[numDiss].replyDTO[res].reply.discuss_gmt_create;
-						comment_list_str += '</span>';
 						comment_list_str += '</div>';
 
 					}

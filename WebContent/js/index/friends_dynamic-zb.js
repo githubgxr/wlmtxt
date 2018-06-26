@@ -16,11 +16,15 @@ function getDynamicVO() {
 				for (var num = 0; num < dynamicVO.worksDTOList.length; num++) {
 					var new_work = '<div class="video_options" style="margin:0;width:100%;">'
 							+ '<div class="neck_name user_img_xzt_div">'
-							+ '<img class="user_img_xzt " src="/wlmtxt/Works/Works_getImg?imgName='
+							+ '<img id="'
+							+ dynamicVO.worksDTOList[num].user.user_id
+							+ '" onclick="to_other_data(this.id)" class="user_img_xzt to_other_data" src="/wlmtxt/Works/Works_getImg?imgName='
 							+ dynamicVO.worksDTOList[num].user.user_avatar
 							+ '" />'
 							+ '</div>'
-							+ '<div class="info_dynamic_name">'
+							+ '<div onclick="to_other_data(this.id)" id="'
+							+ dynamicVO.worksDTOList[num].user.user_id
+							+ '" class="info_dynamic_name to_other_data">'
 							+ dynamicVO.worksDTOList[num].user.user_username
 							+ '</div>'
 							+ '<div class="info_dynamic_time">'
