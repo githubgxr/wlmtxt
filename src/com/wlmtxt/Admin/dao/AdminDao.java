@@ -5,7 +5,9 @@ import java.util.List;
 import com.wlmtxt.domain.DO.wlmtxt_admin;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
+import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.VO.AdminVO;
+import com.wlmtxt.domain.VO.CountVO;
 
 public interface AdminDao {
 	
@@ -148,6 +150,26 @@ public interface AdminDao {
     */
 
 	public boolean updatePassword(wlmtxt_admin admin);
+
+    /*
+     * 统计
+     */
+	public int count(CountVO countVO);
+
+
+	public int countWorks(CountVO countVO);
+
+
+	public int countWorksHistory(CountVO countVO);
+
+
+	public List<wlmtxt_second_menu> getwlmtxt_second_menuAll();
+
+
+	public List<wlmtxt_works> getworksBysecone_menu_id(CountVO countVO, wlmtxt_second_menu second_menu);
+
+
+	public int gethistoryByworkid(CountVO countVO, wlmtxt_works work);
 
 
 
