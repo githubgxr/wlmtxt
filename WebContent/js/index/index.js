@@ -183,7 +183,7 @@ function hotRecommend() {
 						+ '</div>'
 						+ '<!--浏览量-->'
 						+ '<div class="video_hot">'
-						+ hotRecommend_response[i].playNum
+						+ hotRecommend_response[i].hot
 						+ '</div>'
 						+ '<!--用户名-->'
 						+ '<div class="video_username" style="width: 160px;">'
