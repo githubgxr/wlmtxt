@@ -31,6 +31,11 @@ function otherData(other_id){
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var other_data_response=JSON.parse(xhr.responseText);
+			//头像
+			$("#other_user_img").attr(
+					"src",
+					"/wlmtxt/Works/Works_getImg?imgName="
+							+ other_data_response.user_avatar);
 			//昵称
 			$("#other_data_username").html(other_data_response.user_username);
 			//账号
@@ -43,30 +48,6 @@ function otherData(other_id){
 			getfocusNum("other_data_focus",other_id);
 			//获取粉丝量
 			getfansNum("other_data_fans",other_id);
-			/*//获取关注量
-			var formData_focus_num=new FormData();
-			formData_focus_num.append("accept_user.user_id",other_id);
-			var xhr_focus_num=new XMLHttpRequest();
-			xhr_focus_num.open("POST","/wlmtxt/Works/Works_totalFollowingNum");
-			xhr_focus_num.send(formData_focus_num);
-			xhr_focus_num.onreadystatechange=function(){
-				if (xhr_focus_num.readyState == 4 && xhr_focus_num.status == 200) {
-					//他的关注
-					$("#other_data_focus").html(xhr_focus_num.responseText);
-						}
-					}
-			//获取粉丝量
-			var formData_fans_num=new FormData();
-			formData_fans_num.append("accept_user.user_id",other_id);
-			var xhr_fans_num=new XMLHttpRequest();
-			xhr_fans_num.open("POST","/wlmtxt/Works/Works_totalFansNum");
-			xhr_fans_num.send(formData_focus_num);
-			xhr_fans_num.onreadystatechange=function(){
-				if (xhr_fans_num.readyState == 4 && xhr_fans_num.status == 200) {
-					$("#other_data_fans").html(xhr_fans_num.responseText);
-						}
-					}
-			}*/
 		}
 	}
 }

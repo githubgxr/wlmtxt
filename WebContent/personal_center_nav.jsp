@@ -39,11 +39,11 @@
 				</div>
 			<div class="sidebar_head">
 				
-				<!--搜索-->
+				<%-- <!--搜索-->
 				<div class="sidebar_search">
 					<input type="text" placeholder="搜索我的动态" />
 					<img src="<%=basePath%>/img/search.png" />
-				</div>
+				</div> --%>
 			</div>
 			<div class="sidebar_nav">
 				<ul>
