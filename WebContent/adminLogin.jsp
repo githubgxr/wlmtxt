@@ -60,7 +60,7 @@
 					<input type="password" id="password" class="passWord"  />
 				</div>
 				<div class="clear"></div>
-				<div id="login" class="logo-button" onclick="admin_login()">LOGIN</div>
+				<div id="login" class="logo-button" onclick="admin_login()" >LOGIN</div>
 			</form>
 		</div>
 	</div>
@@ -68,6 +68,14 @@
 
 
 </body>
+ <script type="text/javascript">
+ $(".logo").keydown(function() {//给输入框绑定按键事件
+     var e = window.event 
+     if ((e.keyCode || e.which) == 13) {
+    	 admin_login();
+}
+  })
+    </script>
 <script type="text/javascript"
 	src="<%=basePath%>/js/Admin/admin_login.js"></script>
 </html>

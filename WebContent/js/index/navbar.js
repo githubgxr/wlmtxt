@@ -1,5 +1,7 @@
 var if_login = false;
 var user_id = null;
+var user_avatar=null;
+var user_username=null;
 // 判断是否登录
 checkLogin();
 function checkLogin() {
@@ -14,11 +16,11 @@ function checkLogin() {
 				console.log("if_login：" + if_login);
 				// 点击头像栏显示登录注册
 				$(".img_user").attr("src", "/wlmtxt/img/user.jpg");
-				$("#user_img").click(function() {
+				document.getElementById("user_img").onclick = function() {
 					show_login_div();
-				});
-				//关于评论
-				$(".comment_delete").css("display","none");
+				}
+				// 关于评论
+				$(".comment_delete").css("display", "none");
 
 				/* 登录前 */
 				/* 未登录时点击用户操作的关注、点赞、收藏等出现登录框 */
@@ -30,17 +32,16 @@ function checkLogin() {
 				if_login = true;
 				console.log("if_login：" + if_login);
 				/* 登录后 */
-				
 				removeTest();
-				$("#user_img")
-						.click(
-								function() {
-									window.location.href = "/wlmtxt/view/personal_center/personal_center_personal_data.jsp";
-								});
-				//关于评论
-				/*$(".comment_delete").css("display","block");*/
+				document.getElementById("user_img").onclick = function() {
+					window.location.href = "/wlmtxt/view/personal_center/personal_center_personal_data.jsp";
+				}
+				// 关于评论
+				/* $(".comment_delete").css("display","block"); */
 				var userInfo = JSON.parse(xhr.responseText);
 				user_id = userInfo.user_id;
+				user_avatar=userInfo.user_avatar;
+				user_username=userInfo.user_username;
 				console.log("已登录！");
 				console.log("user_mail:" + userInfo.user_mail);
 				$(".login_show").css("display", "block");
@@ -49,10 +50,14 @@ function checkLogin() {
 						"src",
 						"/wlmtxt/Works/Works_getImg?imgName="
 								+ userInfo.user_avatar);
-				
+				//获取关注量
+				getfocusNum("sidebar_user_focus", user_id);
+				// 获取粉丝量
+				getfansNum("sidebar_user_fans", user_id);
+
 				/** *********************个人资料*********************************** */
 				// 用户名
-				console.log("username:"+userInfo.user_username)
+				console.log("username:" + userInfo.user_username)
 				$(".div_username").html(userInfo.user_username);
 				$(".input_username").val(userInfo.user_username);
 				// 密码
@@ -72,7 +77,10 @@ function checkLogin() {
 				/*------------个人中心导航----------------*/
 				$(".sidebar_user_name").html(userInfo.user_username);
 				$(".sidebar_user_signature").html(userInfo.user_bio);
-				$(".sidebar_img_user").attr("src","/wlmtxt/Works/Works_getImg?imgName="	+ userInfo.user_avatar);
+				$(".sidebar_img_user").attr(
+						"src",
+						"/wlmtxt/Works/Works_getImg?imgName="
+								+ userInfo.user_avatar);
 			}
 		}
 	}
@@ -252,8 +260,9 @@ function checkRepassword() {
 /* 用户名 */
 function checkUsername() {
 	var register_username = $("#register_username").val();// 用户名
-	if (register_username == "" || register_username == null) {
-		$(".log_alert_div").html("您的用户名不能为空！");
+	var re = new RegExp(/^[a-zA-Z0-9]{3,15}$/); // ^表示开始 $表示结束
+	if (!re.test(register_username)) {
+		$(".log_alert_div").html("请输入3~15位的用户名，只能由数字和字母组成！");
 		$(".log_alert_div").css("display", "block");
 		return false;
 	} else {
@@ -299,7 +308,7 @@ function login() {
 						 * "/wlmtxt/view/index/index.jsp";
 						 */
 						// 执行登录成功操作
-						window.location.href="/wlmtxt/User/User_skipToIndexPage";
+						window.location.href = "/wlmtxt/User/User_skipToIndexPage";
 						checkLogin();
 					} else {
 						/* 登录失败 */
@@ -325,13 +334,14 @@ function register() {
 	var register_password = $("#register_password").val();// 密码
 	var register_repassword = $("#register_repassword").val();// 确认密码
 	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var re = new RegExp(/^[a-zA-Z0-9]{3,15}$/); // ^表示开始 $表示结束
 	var formData = new FormData();
 	formData.append("accept_user.user_username", register_username);
 	formData.append("accept_user.user_mail", register_email);
 	formData.append("accept_user.user_password", register_password);
-	if (register_username == "" || register_username == null) {
-		// 用户名正确
-		$(".log_alert_div").html("请输入用户名！");
+	
+	if (!re.test(register_username)) {
+		$(".log_alert_div").html("请输入3~15位的用户名，只能由数字和字母组成！");
 		$(".log_alert_div").css("display", "block");
 		return false;
 	} else {
@@ -474,39 +484,39 @@ function getBackPassword() {
 	}
 
 }
-//登录获取enter监听
-$("#login_div").bind("keydown",function(e){
-        // 兼容FF和IE和Opera    
-    var theEvent = e || window.event;    
-    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
-    if (code == 13) {    
-        //回车执行查询
-            $("#login_button").click();
-        }    
+// 登录获取enter监听
+$("#login_div").bind("keydown", function(e) {
+	// 兼容FF和IE和Opera
+	var theEvent = e || window.event;
+	var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+	if (code == 13) {
+		// 回车执行查询
+		$("#login_button").click();
+	}
 });
-//注册获取enter监听
-$("#register_div").bind("keydown",function(e){
-        // 兼容FF和IE和Opera    
-    var theEvent = e || window.event;    
-    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
-    if (code == 13) {    
-        //回车执行查询
-            $("#register_button").click();
-        }    
+// 注册获取enter监听
+$("#register_div").bind("keydown", function(e) {
+	// 兼容FF和IE和Opera
+	var theEvent = e || window.event;
+	var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+	if (code == 13) {
+		// 回车执行查询
+		$("#register_button").click();
+	}
 });
-//忘记密码获取enter监听
-$("#forget_password_div").bind("keydown",function(e){
-        // 兼容FF和IE和Opera    
-    var theEvent = e || window.event;    
-    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
-    if (code == 13) {    
-        //回车执行查询
-            $("#forget_password_button").click();
-        }    
+// 忘记密码获取enter监听
+$("#forget_password_div").bind("keydown", function(e) {
+	// 兼容FF和IE和Opera
+	var theEvent = e || window.event;
+	var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+	if (code == 13) {
+		// 回车执行查询
+		$("#forget_password_button").click();
+	}
 });
-//跳转至其他人的页面
-function to_other_data(other_id){
+// 跳转至其他人的页面
+function to_other_data(other_id) {
 	// 跳转到他人页面
-		window.location.href = "/wlmtxt/Works/Works_personal_cente_other_data?accept_user.user_id="
-				+ other_id;
+	window.location.href = "/wlmtxt/Works/Works_personal_cente_other_data?accept_user.user_id="
+			+ other_id;
 }

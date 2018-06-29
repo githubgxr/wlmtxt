@@ -15,8 +15,11 @@ import com.wlmtxt.domain.DO.wlmtxt_admin;
 import com.wlmtxt.domain.DO.wlmtxt_first_menu;
 import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
+import com.wlmtxt.domain.DO.wlmtxt_works;
 import com.wlmtxt.domain.DTO.CategoryListDTO;
+import com.wlmtxt.domain.DTO.CountDTO;
 import com.wlmtxt.domain.VO.AdminVO;
+import com.wlmtxt.domain.VO.CountVO;
 
 import util.TeamUtil;
 
@@ -209,5 +212,33 @@ public class AdminServiceImpl implements AdminService {
 		String time = TeamUtil.getStringSecond();
 		old_admin.setAdmin_gmt_modified(time);
 		return adminDao.updatePassword(old_admin);
+	}
+	@Override
+	public void count(CountVO countVO) {
+		
+	int user = 	adminDao.count(countVO);
+	int works = adminDao.countWorks(countVO);
+	int workshistory = adminDao.countWorksHistory(countVO);
+	List<CountDTO> CountDTOList = new ArrayList<CountDTO>();
+	List<wlmtxt_second_menu> wlmtxt_second_menuList = adminDao.getwlmtxt_second_menuAll();
+	System.out.println("二级菜单"+wlmtxt_second_menuList);
+	for(wlmtxt_second_menu second_menu : wlmtxt_second_menuList){
+		System.out.println("进来看");
+		 List<wlmtxt_works> worksList = adminDao.getworksBysecone_menu_id(countVO,second_menu);
+		 System.out.println("作品"+worksList);
+		 CountDTO countDTO = new CountDTO();
+		 for(wlmtxt_works work : worksList){
+			int historycount = adminDao.gethistoryByworkid(countVO,work);
+			System.out.println("历史"+historycount);
+			countDTO.setHistory(historycount);
+		}
+		 countDTO.setSecond_menu(second_menu);
+		 countDTO.setWorks(worksList.size());
+		 CountDTOList.add(countDTO);
+	}
+	countVO.setCountDTOList(CountDTOList);
+	countVO.setWlmtxt_play_historyList(workshistory);
+	countVO.setWlmtxt_worksList(works);
+	countVO.setWlmtxt_userList(user);	
 	}
 }

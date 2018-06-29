@@ -40,7 +40,7 @@
 						</div>
 						<div class="img_wrap_list">
 							<span>视频标题：</span> <input class="form-control input_xzt"
-								id="input_title" type="text" placeholder="请输入标题" />
+								id="input_title" type="text" maxlength="20" placeholder="请输入标题" />
 						</div>
 						<div class="img_wrap_list">
 							<span>作品描述：</span>

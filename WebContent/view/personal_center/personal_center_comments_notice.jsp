@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=basePath%>css/wlmtxt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
 <link rel="stylesheet" href="<%=basePath%>css/zb/zb.css" />
-<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx_pltz.css" />
+<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx.css" />
 </head>
 
 <body>
@@ -26,8 +26,8 @@
 				<!--浏览历史头部-->
 				<jsp:include page="/personal_center_notice_nav.jsp" flush="true"></jsp:include>
 				<!--主体部分-->
-				<div class="llls_content list_container" style="margin-bottom: 10px">
-					<%-- <div id="llls_list_container">
+				<div class="llls_content list_container" style="margin-bottom:30px;">
+					<%-- <div id="llls_list_container" >
 						<div class="video_options">
 							<div class="neck_name user_img_small">
 								<img class="user_img_small "
@@ -59,30 +59,11 @@
 					</div> --%>
 
 				</div>
-				<!-----翻页----------------------->
-				<div class="page_container " style="margin: 10px auto">
-					<!-- <div class="page_component_container ">
-							<div class="page_component ">
-								<a class="page_prev " href="# ">上一页</a>
-								<a class="selected " href="# ">1</a>
-								<a href="# ">2</a>
-								<a href="# ">3</a>
-								<a href="# ">4</a>
-								<a href="# ">5</a>
-								<b>...</b>
-								<a href="# ">23</a>
-								<a class="page_next " href="# ">上一页</a>
-								<span class="page_component_jumppage ">跳转到：</span>
-								<input class="page_component_jumptxt " type="text ">
-								<a href="# " class="page_component_submit ">GO</a>
-							</div>
-						</div> -->
-				</div>
 			</div>
 		</div>
 		<jsp:include page="/foot.jsp" flush="true"></jsp:include>
 	</div>
-	<div class="comments_notice">评论通知</div>
+	<div class="comments_notice" style="display: none;">评论通知</div>
 	<script type="text/javascript">
 		var clearfix_a = $(".clearfix a");
 		$.each(clearfix_a, function(i) {

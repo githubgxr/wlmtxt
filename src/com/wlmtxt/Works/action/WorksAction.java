@@ -256,7 +256,7 @@ public class WorksAction extends ActionSupport {
 		if (user == null) {
 			worksDTOList = worksService.collaborativeFilteringBySlopeOne(accept_works.getWorks_id(), null);
 		} else {
-			worksDTOList = worksService.collaborativeFilteringBySlopeOne(accept_works.getWorks_id(), null);
+			worksDTOList = worksService.collaborativeFilteringBySlopeOne(accept_works.getWorks_id(), user.getUser_id());
 		}
 
 		GsonBuilder gsonBuilder = new GsonBuilder();

@@ -19,10 +19,19 @@ public class MyTest {
 	WorksDao worksDao;
 
 	@Test
-	public void ttttt() {
+	public void collaborativeFilteringByUser() {
+		worksService.collaborativeFilteringByUser("asaffd45df45asd4sfddd");
 
-		worksService.collaborativeFilteringByUser("e9660cab-759b-4d84-a1f0-241c265b3e88");
+	}
 
+	@Test
+	public void collaborativeFilteringBySlopeOne() {
+		worksService.collaborativeFilteringBySlopeOne("asaffd45df45asd4sfddd", "8dassdfdfdg54fsa");
+	}
+
+	@Test
+	public void forecastPoint() {
+		worksService.forecastPoint("asaffd45df45asd4sfddd", "8dassdfdfdg54fsa");
 	}
 
 	@Test
