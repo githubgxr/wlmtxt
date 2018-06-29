@@ -118,7 +118,7 @@
 		<script type="text/javascript"
 		src="<%=basePath%>js/personal_center/personal_center_realtion_notice.js"></script>
 	<script type="text/javascript">
-		listNoticeByPage(1);
+		listNoticeByPage(4);
 	</script>
 	</body>
 </html>
