@@ -35,7 +35,7 @@
 						<div class="personal_info">
 							<div class="personal_pic">
 								<div class="user_img_div">
-									<img src="<%=basePath%>img/user.jpg" />
+									<img id="other_user_img" src="<%=basePath%>img/user.jpg" />
 									<div class="user_foot">
 										<div class="user_fans">
 											关注<span id="other_data_focus" class="other_data_focus"></span>

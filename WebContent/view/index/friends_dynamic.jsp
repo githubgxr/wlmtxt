@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=basePath%>css/xzt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/xzt/grzx_llls.css" />
 <link rel="stylesheet" href="<%=basePath%>css/zb/zb.css" />
-<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx_dztz.css" />
+<link rel="stylesheet" href="<%=basePath%>css/lyq/xxzx.css" />
 <link rel="stylesheet" href="<%=basePath%>css/friends_dynamic.css" />
 </head>
 <body>
@@ -31,8 +31,8 @@
 			<div class="llls_content list_container" style="margin: 20px 0px;">
 				<div id="llls_list_container">
 					<div id="button_div_more" class="div_more"
-						style="text-align: center;" onclick="getDynamicVO()">
-						<span class="span_more">加载更多&nbsp;<i
+						style="text-align: center;display:none;" onclick="getDynamicVO()">
+						<span class="span_more" style="color:#1cd388;">加载更多&nbsp;<i
 							class="fas fa-angle-double-down "></i></span>
 					</div>
 					<div style="width:560px;">

@@ -17,47 +17,50 @@ function listMyHistoryByPage(){
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
 			var llls_response=JSON.parse(xhr.responseText);
-			for(var i=0;i<llls_response.length;i++){
-				var llls_str='<li class="list_video_item">';
-				/*---视频链接---*/
-				 llls_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+llls_response[i].worksDTO.works.works_id+'">';
-				 llls_str+='<div class="video_cover">';
-				 llls_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +llls_response[i].worksDTO.works.works_cover +'"/>';
-				 llls_str+=' <div class="category_name">'+llls_response[i].worksDTO.secondMenu.second_menu_name+'</div>';
-				 llls_str+='<div class="video_overplay"></div>';
-				 llls_str+='<div class="video_play"></div>';
-				 llls_str+='</div>';
-				 /*视频信息*/
-				 llls_str+='<div class="video_info">';
-				 /*标题*/
-				 llls_str+='<div class="video_title">'+llls_response[i].worksDTO.works.works_title+'</div>';
-				 /*浏览量*/
-				 llls_str+='<div class="video_number">'+llls_response[i].worksDTO.playNum+'</div>';
-				 /*用户*/
-				 llls_str+='<div class="video_username">'+llls_response[i].worksDTO.user.user_username+'</div>';
-				 llls_str+='</div>';
-				 llls_str+='</a>';
-				 
-				 /*---视频分类---*/
-				 llls_str+='<div class="video_label">';
-				 llls_str+='<div id="video_label_content" class="video_label_content">';
-			/*	 llls_str+='<a class="video_label_item">绝地求生</a>';
-				 llls_str+='<a class="video_label_item">绝地求生</a> <a class="video_label_item">绝地求生</a>';*/
-				
-				 for(var num=0;num<llls_response[i].worksDTO.keyWordDTOList.length;num++){
-					 llls_str+='<a class="video_label_item">'+llls_response[i].worksDTO.keyWordDTOList[num].keyword.keyword_name+'</a>';
-				 }
-				 llls_str+='</div>';
-				 llls_str+='</div>';
-				 /*---删除---*/
-				 llls_str+='<div class="video_options">';
-				 llls_str+='<a class="video_delete_btn" onclick="deletePlayHistory(this.id)" id="'+llls_response[i].playHistory.play_history_id+'">删除</a>';
-				 llls_str+='</div>';
-				 llls_str+='</li>';
-				$("#llls_list_container").append(llls_str);
+			if(llls_response.length>0){
+				$("#llls_list_container").html('<div id="llls_list_container_div" style="width:100%;float:left;margin:30px 0;" ></div>');
+				$("#history_delete_all").css("display", "block");
+				for(var i=0;i<llls_response.length;i++){
+					var llls_str='<li class="history_list">';
+					/*<!--左边日期  -->*/
+					llls_str+='<div class="history_list_time_div">';
+					llls_str+='<div class="history_list_time">';
+					llls_str+='<i class="history_round_icon"></i>';
+					llls_str+='</div>';
+					llls_str+='<div class="history_list_time_text">'+llls_response[i].playHistory.play_history_gmt_create+'</div>';
 
-				
+					llls_str+='</div>';
+					llls_str+='<div class="list_video_item" style="float: left; margin: 20px 0;">';
+					llls_str+='<div class="list_li" style="float: left;">';
+						/*	<!--视频链接-->*/
+					llls_str+='<a class="video_list_item_wrap" href="/wlmtxt/Works/Works_videoDetailsPage?accept_works.works_id='+llls_response[i].worksDTO.works.works_id+'">';
+					llls_str+='<div class="video_cover ">';
+					llls_str+='<img class="video_img" src="/wlmtxt/Works/Works_getImg?imgName=' +llls_response[i].worksDTO.works.works_cover +'"/>';
+					llls_str+='<div class="video_overplay "></div>';
+					llls_str+='<div class="video_play "></div>';
+					llls_str+='</div>';
+					llls_str+='</a>';
+					llls_str+='</div>';
+					llls_str+='</div>';
+					/**/
+					llls_str+='<div class="history_video_info">';
+					llls_str+='<div class="history_video_title">'+llls_response[i].worksDTO.works.works_title+'</div>';
+					llls_str+='<div class="history_user_info">';
+					llls_str+='<img id="'+llls_response[i].worksDTO.user.user_id+'" onclick="to_other_data(this.id)" style="width: 35px; height: 35px"  src="/wlmtxt/Works/Works_getImg?imgName=' +llls_response[i].worksDTO.user.user_avatar +'"/>';
+					llls_str+='<div id="'+llls_response[i].worksDTO.user.user_id+'" onclick="to_other_data(this.id)" class="history_user_username to_other_data">'+llls_response[i].worksDTO.user.user_username+'</div>';
+					llls_str+='	<div class="history_delete" onclick="deletePlayHistory(this.id)" id="'+llls_response[i].playHistory.play_history_id+'">删除</div>';
+					llls_str+='</div>';
+					llls_str+='</div>';
+					llls_str+='</li>';
+					$("#llls_list_container_div").append(llls_str);
+
+					
+				}
+			}else{
+				$("#history_delete_all").css("display", "none");
+				$(".llls_content").append('<img src="/wlmtxt/img/no_message_bg.png" style="width:250px;height:250px;margin:30px 240px 0px 240px;float:left;"/><div style="color:#99a2aa;font-size：16px;text-align:center;margin:0 0 50px 0;">还没有观看历史哦，快去看视频吧！</div>');
 			}
+		
 		}
 	}
 }
@@ -92,7 +95,7 @@ function deletePlayHistory(video_delete_btn_id){
 			if(xhr_delete_all.readyState==4&&xhr_delete_all.status==200){
 				if(xhr_delete_all.responseText=="1"){
 					toastr.success("清除全部成功！");
-					listMyHistoryByPage(1);
+					listMyHistoryByPage();
 				}else{
 					toastr.error("清除全部失败！");
 					return false;

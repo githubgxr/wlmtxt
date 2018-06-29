@@ -98,6 +98,14 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<String> listUserIDAll() {
+		String hql = "select user_id from wlmtxt_user";
+		Query query = getSession().createQuery(hql);
+		List<String> list = query.list();
+		return list;
+	}
+
+	@Override
 	public List<wlmtxt_play_history> listPlayHistoryByWorksID(String worksID) {
 		String hql = " from wlmtxt_play_history  where play_history_works_id='" + worksID
 				+ "' order by play_history_gmt_create desc";
@@ -172,9 +180,18 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public int getDiscussCountByUserIDAndWorkID(String userID, String worksID) {
+		String hql = "select count(*) from wlmtxt_discuss  where discuss_user_id='" + userID
+				+ "' and discuss_father_discuss_id='" + worksID + "' ";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
 	public int countUserPlayWorks(String userID, String worksID) {
 		String hql = "select count(*) from wlmtxt_play_history  where play_history_user_id='" + userID
-				+ "' play_history_works_id='" + worksID + "' ";
+				+ "' and play_history_works_id='" + worksID + "' ";
 		Query query = getSession().createQuery(hql);
 		int count = ((Number) query.uniqueResult()).intValue();
 		return count;
@@ -440,11 +457,19 @@ public class WorksDaoImpl implements WorksDao {
 	}
 
 	@Override
+	public List<String> listWorksIDAll() {
+		String hql = "select works_id from wlmtxt_works works where works.works_deleted!='1' and works_passed='1'";
+		Query query = getSession().createQuery(hql);
+		List<String> list = query.list();
+		return list;
+	}
+
+	@Override
 	public List<wlmtxt_works> listWorksAll() {
 		String hql = " from wlmtxt_works works where works.works_deleted!='1' and works_passed='1'  order by works_gmt_create desc";
 		Query query = getSession().createQuery(hql);
-		List<wlmtxt_works> worksList = query.list();
-		return worksList;
+		List<wlmtxt_works> list = query.list();
+		return list;
 	}
 
 	@Override
@@ -714,4 +739,16 @@ public class WorksDaoImpl implements WorksDao {
 		return count;
 	}
 
+	@Override
+	public boolean isPlayHistoryByWorksAndUser(String worksID, String currentUserID) {
+		String hql = "select count(*) from wlmtxt_play_history  where play_history_works_id='" + worksID
+				+ "' and play_history_user_id ='" + currentUserID + "'";
+		Query query = getSession().createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		if (count > 0) {
+			return true;
+		}
+		return false;
+
+	}
 }

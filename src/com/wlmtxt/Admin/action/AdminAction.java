@@ -20,6 +20,7 @@ import com.wlmtxt.domain.DO.wlmtxt_second_menu;
 import com.wlmtxt.domain.DO.wlmtxt_user;
 import com.wlmtxt.domain.DTO.CategoryListDTO;
 import com.wlmtxt.domain.VO.AdminVO;
+import com.wlmtxt.domain.VO.CountVO;
 
 
 public class AdminAction extends ActionSupport {
@@ -31,6 +32,7 @@ public class AdminAction extends ActionSupport {
 	private wlmtxt_second_menu second_menu;
 	private String adminIDAll;
 	private AdminVO adminVO;
+	private  CountVO countVO;
 	public wlmtxt_first_menu getFirst_menu() {
 		return first_menu;
 	}
@@ -76,6 +78,13 @@ public class AdminAction extends ActionSupport {
 	}
 	public void setSecond_menu(wlmtxt_second_menu second_menu) {
 		this.second_menu = second_menu;
+	}
+	
+	public CountVO getCountVO() {
+		return countVO;
+	}
+	public void setCountVO(CountVO countVO) {
+		this.countVO = countVO;
 	}
 	/*
 	 * 管理员登录
@@ -215,6 +224,19 @@ public class AdminAction extends ActionSupport {
 		ActionContext.getContext().getValueStack().set("categoryListDTO", categoryListDTO);
 		return "page_list_category";
 	}
+	/*
+	 * 统计
+	 */
+  public void count() throws IOException{
+	  adminService.count(countVO);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		 GsonBuilder gsonBuilder = new GsonBuilder();
+	 	 gsonBuilder.setPrettyPrinting();// 格式化json数据
+	 	 Gson gson = gsonBuilder.create();
+	 	 pw.write(gson.toJson(countVO));
+  }
 	/*
 	 * 	 管理员的添加
 	 */
@@ -372,5 +394,12 @@ public class AdminAction extends ActionSupport {
 	 */
 	public String update_password_page(){
 		return "update_password_page";
+	}
+	/*
+	 * 跳转统计页面
+	 */
+	public String countpage(){
+		
+		return "count_page";
 	}
 }
