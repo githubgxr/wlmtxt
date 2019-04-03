@@ -34,6 +34,7 @@ import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
+import com.wlmtxt.domain.DTO.UserChartsDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
 import com.wlmtxt.domain.VO.MyAttentionVO;
@@ -218,6 +219,19 @@ public class WorksAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(gson.toJson(worksDTOList));
+	}
+
+	public void getUserChartsByUser() throws IOException {
+		wlmtxt_user user = (wlmtxt_user) ActionContext.getContext().getSession().get("loginResult");
+		List<UserChartsDTO> UserChartsDTOList = worksService.getUserChartsByUser(user);
+		//
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		//
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(gson.toJson(UserChartsDTOList));
 	}
 
 	/**

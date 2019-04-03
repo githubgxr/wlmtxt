@@ -18,6 +18,7 @@ import com.wlmtxt.domain.DTO.FollowDTO;
 import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
+import com.wlmtxt.domain.DTO.UserChartsDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.DTO.sf.DevDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
@@ -207,5 +208,7 @@ public interface WorksService {
 	 * @return
 	 */
 	public int userPointWork(String userID, String worksID);
+
+	public List<UserChartsDTO> getUserChartsByUser(wlmtxt_user user);
 
 }

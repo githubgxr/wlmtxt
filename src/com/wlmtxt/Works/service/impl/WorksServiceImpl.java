@@ -39,6 +39,7 @@ import com.wlmtxt.domain.DTO.LikeDTO;
 import com.wlmtxt.domain.DTO.NotificationDTO;
 import com.wlmtxt.domain.DTO.PlayHistoryDTO;
 import com.wlmtxt.domain.DTO.ReplyDTO;
+import com.wlmtxt.domain.DTO.UserChartsDTO;
 import com.wlmtxt.domain.DTO.WorksDTO;
 import com.wlmtxt.domain.DTO.sf.DevDTO;
 import com.wlmtxt.domain.VO.DynamicVO;
@@ -101,8 +102,10 @@ public class WorksServiceImpl implements WorksService {
 		*/
 		/*
 		 * 如果未登录，则无法进行推荐
+		 * 
+		 * 这里不管等不等于空都不推荐
 		 */
-		if (currentUserID == null) {
+		if (currentUserID == null || currentUserID != null) {
 			List<WorksDTO> worksDTOList = new ArrayList<WorksDTO>();
 			List<String> worksTemporaryList;
 			List<wlmtxt_works> worksFinallyList = new ArrayList<wlmtxt_works>();
@@ -192,6 +195,100 @@ public class WorksServiceImpl implements WorksService {
 		 * 
 		*/
 		return worksDTOList;
+	}
+
+	@Override
+	public List<UserChartsDTO> getUserChartsByUser(wlmtxt_user user) {
+
+		// 取出用户信息和作品信息
+		wlmtxt_user curUser = userService.get_user_byID(user.getUser_id());
+		List<String> worksIDAll = worksDao.listWorksIDAll();
+		/*
+		 * 计算当前用户对所有作品的评分，保存为一个map的list
+		 */
+		Map<String, Integer> myPointMap = new HashMap<String, Integer>();
+		Integer point = 0;
+		for (String worksID : worksIDAll) {
+			point = userPointWork(curUser.getUser_id(), worksID);
+			myPointMap.put(worksID, point);
+		}
+		/*
+		 * 计算其他用户对所有作品的评分，保存为一个list
+		 */
+		List<String> allUserList = worksDao.listUserIDAll();
+		// 二维列表
+		Map<String, Map<String, Integer>> allUserPointMap = new HashMap<String, Map<String, Integer>>();
+		// 遍历所有用户
+		for (String otherUserID : allUserList) {
+			// 排除当前用户
+			if (!otherUserID.equals(curUser.getUser_id())) {
+				Map<String, Integer> otherUserPointMap = new HashMap<String, Integer>();
+				for (String worksID : worksIDAll) {
+					point = userPointWork(otherUserID, worksID);
+					otherUserPointMap.put(worksID, point);
+				}
+				allUserPointMap.put(otherUserID, otherUserPointMap);
+			}
+
+		}
+		/*
+		 * 欧几里得距离求相似度
+		 */
+		Map<String, Double> similarityDegreeMap = new HashMap<String, Double>();
+		Double similarityDegree = 0.0;
+		for (Map.Entry<String, Map<String, Integer>> otherUser : allUserPointMap.entrySet()) {
+
+			int oneValue = 0;
+			for (Map.Entry<String, Integer> entry : otherUser.getValue().entrySet()) {
+				// 登录用户对遍历的这个作品的喜爱值
+				int curUserLikeValue = myPointMap.get(entry.getKey());
+				// 遍历的用户对遍历的这个作品的喜爱值
+				int otherUserLikeValue = entry.getValue();
+				// 计算单个作品
+				oneValue = oneValue + (int) Math.pow(curUserLikeValue - otherUserLikeValue, 2);
+
+			}
+			// 算出登录用户和当前遍历用户的相似度similarityDegree
+			similarityDegree = Math.pow(oneValue, 0.5);
+			similarityDegreeMap.put(otherUser.getKey(), similarityDegree);
+
+		}
+
+		/*
+		 * 相似度排序
+		 */
+		List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(similarityDegreeMap.entrySet());
+		Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
+			// 降序排序
+			@Override
+			public int compare(Entry<String, Double> o1, Entry<String, Double> o2) {
+				return o2.getValue().compareTo(o1.getValue());
+			}
+		});
+		System.out.println("用户相似度排序：" + similarityDegreeMap);
+		/*
+		 * 
+		 */
+		list = list.subList(0, 10);
+
+		List<UserChartsDTO> userChartsDTOList = new ArrayList<UserChartsDTO>();
+		UserChartsDTO userChartsDTO;
+		int i = 0;
+		for (Map.Entry<String, Double> userEntry : similarityDegreeMap.entrySet()) {
+			if (i > 9) {
+				break;
+			}
+			userChartsDTO = new UserChartsDTO();
+			//
+			userChartsDTO.setPoint(userEntry.getValue());
+			userChartsDTO.setUser(userDao.get_user_byID(userEntry.getKey()));
+			//
+			userChartsDTOList.add(userChartsDTO);
+			//
+			i++;
+		}
+
+		return userChartsDTOList;
 	}
 
 	@Override
@@ -446,9 +543,11 @@ public class WorksServiceImpl implements WorksService {
 					putMan.getUser_username() + "评论了您的作品" + putWorks.getWorks_title(), putWorks.getWorks_id());
 		} else {
 			// 回复
-			wlmtxt_discuss discuss = worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
-			addNotification(discuss.getDiscuss_user_id(), "5",
-					putMan.getUser_username() + "回复了您的评论" + discuss.getDiscuss_content(), null);
+			// wlmtxt_discuss discuss =
+			// worksDao.getDiscussByID(accpet_discuss.getDiscuss_father_discuss_id());
+			// addNotification(discuss.getDiscuss_user_id(), "5",
+			// putMan.getUser_username() + "回复了您的评论" +
+			// discuss.getDiscuss_content(), null);
 		}
 
 		/*
